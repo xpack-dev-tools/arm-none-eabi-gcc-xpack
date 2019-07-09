@@ -1,0 +1,30 @@
+{
+  "name": "arm-none-eabi-gcc-xpack",
+  "version": "0.0.1",
+  "description": "A binary xPack with the ARM Embedded GCC toolchain",
+  "main": "",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/xpack-dev-tools/arm-none-eabi-gcc-xpack.git"
+  },
+  "bugs": {
+    "url": "https://github.com/xpack-dev-tools/arm-none-eabi-gcc-xpack/issues"
+  },
+  "homepage": "https://github.com/xpack-dev-tools/arm-none-eabi-gcc-xpack",
+  "keywords": [
+    "xpack"
+  ],
+  "author": {
+    "name": "Liviu Ionescu",
+    "email": "ilg@livius.net",
+    "url": "http://liviusdotnet.wordpress.com"
+  },
+  "license": "MIT",
+  "config": {},
+  "dependencies": {},
+  "devDependencies": {},
+  "xpack": {}
+}
