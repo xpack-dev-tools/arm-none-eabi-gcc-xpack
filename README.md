@@ -1,2 +1,2 @@
-# arm-none-eabi-gcc-xpack
-A binary xPack with the ARM Embedded GCC toolchain.
+This project does not use the `master` branch, please
+switch to the `xpack` branch to get the project files.
