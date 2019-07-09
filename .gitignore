@@ -59,3 +59,14 @@ typings/
 
 # next.js build output
 .next
+
+# xpm
+xpacks/
+
+# Windows
+Thumbs.db
+
+# macOS
+.DS_Store
+
+# end
