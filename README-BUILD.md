@@ -1,47 +1,57 @@
-# GNU MCU Eclipse ARM Embedded GCC - the build scripts
+# How to build the xPack GNU ARM Embedded GCC?
+
+## Introduction
+
+This project includes the scripts and additional files required to 
+build and publish the
+[xPack GNU ARM Embedded GCC](https://xpack.github.io/qemu-arm/) binaries.
+
+The build scripts use the
+[xPack Build Box (XBB)](https://github.com/xpack/xpack-build-box), 
+a set of elaborate build environments based on GCC 7.4 (Docker containers
+for GNU/Linux and Windows or a custom folder for MacOS).
 
 These are the scripts and additional files required to build the 
-[GNU MCU Eclipse ARM Embedded GCC](https://github.com/gnu-mcu-eclipse/arm-none-eabi-gcc).
+[xPack GNU ARM Embedded GCC](https://github.com/xpack-dev-tools/arm-none-eabi-gcc).
 
-## Prerequisites
+## Repository URLs
 
-The prerequisites are common to all binary builds. Please follow the 
-instructions in the separate 
-[Prerequisites for building binaries](https://gnu-mcu-eclipse.github.io/developer/build-binaries-prerequisites-xbb/) 
-page and return when ready.
+The build scripts use ARM archives; occasionally, to avoid bugs, original
+repositories are used:
+
+- `git://sourceware.org/git/binutils-gdb.git`
 
 ## Download the build scripts repo
 
-The build script is available from GitHub and can be 
-[viewed online](https://github.com/gnu-mcu-eclipse/arm-none-eabi-gcc-build/blob/master/scripts/build.sh).
+The build scripts are available in the `scripts` folder of the 
+[`xpack-dev-tools/arm-none-eabi-gcc-xpack`](https://github.com/xpack-dev-tools/arm-none-eabi-gcc-xpack) 
+Git repo.
 
-To download it, clone the 
-[gnu-mcu-eclipse/arm-none-eabi-gcc-build](https://github.com/gnu-mcu-eclipse/arm-none-eabi-gcc-build) 
-Git repo, including submodules. 
-
-```console
-$ curl -L https://github.com/gnu-mcu-eclipse/arm-none-eabi-gcc-build/raw/master/scripts/git-clone.sh | bash
-```
-
-which issues the following two commands:
+To download them, the following shortcut is available: 
 
 ```console
-$ rm -rf ~/Downloads/arm-none-eabi-gcc-build.git
-$ git clone --recurse-submodules https://github.com/gnu-mcu-eclipse/arm-none-eabi-gcc-build.git \
-  ~/Downloads/arm-none-eabi-gcc-build.git
+$ curl -L https://github.com/xpack-dev-tools/arm-none-eabi-gcc-xpack/raw/xpack/scripts/git-clone.sh | bash
 ```
 
-## Check for newer submodule
+This small script issues the following two commands:
 
-The script uses a submodule helper. If you cloned the repo previously, 
-with SourceTree, check if there are any newer commits for the submodule.
+```console
+$ rm -rf ~/Downloads/arm-none-eabi-gcc-xpack.git
+$ git clone --recurse-submodules https://github.com/xpack-dev-tools/arm-none-eabi-gcc-xpack.git \
+  ~/Downloads/arm-none-eabi-gcc-xpack.git
+```
 
-## Check the script
+> Note: the repository uses submodules; for a successful build it is 
+> mandatory to recurse the submodules.
 
-The script creates a temporary build `Work/arm-none-eabi-gcc-${version}` 
-folder in the user home. Although not recommended, if for any reasons you 
-need to change this, you can redefine `WORK_FOLDER_PATH` variable before 
-invoking the script.
+## The `Work` folder
+
+The script creates a temporary build `Work/qemu-arm-${version}` folder in 
+the user home. Although not recommended, if for any reasons you need to 
+change the location of the `Work` folder, 
+you can redefine `WORK_FOLDER_PATH` variable before invoking the script.
+
+## Customizations
 
 There are many other settings that can be redefined via
 environment variables. If necessary,
@@ -50,42 +60,16 @@ either passed to Docker or sourced to shell. The Docker syntax
 **is not** identical to shell, so some files may
 not be accepted by bash.
 
-## Preload the Docker images
+### Prerequisites
 
-Docker does not require to explicitly download new images, but does this 
-automatically at first use.
-
-However, since the images used for this build are relatively large, it is 
-recommended to load them explicitly before starting the build:
-
-```console
-$ bash ~/Downloads/arm-none-eabi-gcc-build.git/scripts/build.sh preload-images
-```
-
-The result should look similar to:
-
-```console
-$ docker images
-REPOSITORY          TAG                 IMAGE ID            CREATED             SIZE
-ilegeul/centos      6-xbb-v2.1          3644716694e8        2 weeks ago         2.99GB
-ilegeul/centos32    6-xbb-v2.1          921d03805e50        2 weeks ago         2.91GB
-hello-world         latest              f2a91732366c        2 months ago        1.85kB
-```
-
-## Remove unused Docker space
-
-This is mostly useful after failed builds, during development, when
-dangling images may be left by Docker.
-
-To remove unused files:
-
-```console
-$ docker system prune --force
-```
+The prerequisites are common to all binary builds. Please follow the 
+instructions from the separate 
+[Prerequisites for building xPack binaries](https://xpack.github.io/xbb/prerequisites/) 
+page and return when ready.
 
 ## Update git repos
 
-The GNU MCU Eclipse ARM Embedded GCC distribution follows the official 
+The xPack GNU ARM Embedded GCC distribution follows the official 
 [ARM](https://developer.arm.com/open-source/gnu-toolchain/gnu-rm) 
 distributions, and it is planned to make a new release after each future 
 ARM release.
@@ -111,28 +95,37 @@ To prepare a new release:
 - if newer libraries are used, check if they are available from the local git
   cache project.
 
-## Update CHANGELOG.txt
+### Update `README.md`
 
-Check `arm-none-eabi-gcc-build.git/CHANGELOG.txt` and add the new release.
+If necessary, update the main `README.md` with informations related to the
+build. Information related to the new version should not be included here,
+but in the version specific file (below).
 
-## Update the README-out.md
+### Create `README-<version>.md`
 
-There should be no changes, but better check.
+In the `scripts` folder create a copy of the previous one and update the
+Git commit and possible other details.
+
+## Update `CHANGELOG.md`
+
+Check `CHANGELOG.md` and add the new release.
 
 ## Build
 
-Although it is perfectly possible to build all binaries in a single step on 
-a macOS system, due to Docker specifics, it is faster to build the GNU/Linux 
-and Windows binaries on a GNU/Linux system and the macOS binary separately.
+Although it is perfectly possible to build all binaries in a single step 
+on a macOS system, due to Docker specifics, it is faster to build the 
+GNU/Linux and Windows binaries on a GNU/Linux system and the macOS binary 
+separately.
 
 ### Build the GNU/Linux and Windows binaries
 
 The current platform for GNU/Linux and Windows production builds is an 
-Ubuntu 18 LTS VirtualBox image running on a macMini with 16 GB of RAM 
-and a fast SSD.
+Ubuntu Server 18 LTS, running on an Intel NUC8i7BEH mini PC with 32 GB of RAM 
+and 512 GB of fast M.2 SSD.
 
-If the virtual machine runs on a macOS, to be sure it does not go
-to sleep, run a `caffeinate bash`.
+```console
+$ ssh ilg-xbb-linux.local
+```
 
 Before starting a multi-platform build, check if Docker is started:
 
@@ -140,14 +133,57 @@ Before starting a multi-platform build, check if Docker is started:
 $ docker info
 ```
 
+Before running a build for the first time, it is recommended to preload the
+docker images.
+
+```console
+$ bash ~/Downloads/arm-none-eabi-gcc-xpack.git/scripts/build.sh preload-images
+```
+
+The result should look similar to:
+
+```console
+$ docker images
+REPOSITORY TAG IMAGE ID CREATED SIZE
+REPOSITORY          TAG                 IMAGE ID            CREATED             SIZE
+ilegeul/centos32    6-xbb-v2.2          956eb2963946        5 weeks ago         3.03GB
+ilegeul/centos      6-xbb-v2.2          6b1234f2ac44        5 weeks ago         3.12GB
+hello-world         latest              fce289e99eb9        5 months ago        1.84kB
+```
+
+It is also recommended to Remove unused Docker space. This is mostly useful 
+after failed builds, during development, when dangling images may be left 
+by Docker.
+
+To remove unused files:
+
+```console
+$ docker system prune --force
+```
+
+To download the build scripts:
+
+```console
+$ curl -L https://github.com/xpack-dev-tools/arm-none-eabi-gcc-xpack/raw/xpack/scripts/git-clone.sh | bash
+```
+
 To build both the 32/64-bit Windows and GNU/Linux versions, use `--all`; to 
 build selectively, use `--linux64 --win64` or `--linux32 --win32` (GNU/Linux 
 can be built alone; Windows also requires the GNU/Linux build).
 
+Since the build takes a while, use `screen` to isolate the build session
+from unexpected events, like a broken
+network connection or a computer entering sleep.
+
 ```console
-$ sudo rm -rf "${HOME}/Work"/arm-none-eabi-gcc-*
-$ bash ~/Downloads/arm-none-eabi-gcc-build.git/scripts/build.sh --all
+$ screen -S arm
+
+$ sudo rm -rf ~/Work/arm-none-eabi-gcc-*
+$ bash ~/Downloads/arm-none-eabi-gcc-xpack.git/scripts/build.sh --all
 ```
+
+To detach from the session, use `Ctrl-a` `Ctrl-d`; to reattach use
+`screen -r arm`; to kill the session use `Ctrl-a` `Ctrl-\` and confirm.
 
 Several hours later, the output of the build script is a set of 4 files and 
 their SHA signatures, created in the `deploy` folder:
@@ -165,29 +201,27 @@ total 350108
 -rw-r--r-- 1 ilg ilg       134 Apr  1 08:21 gnu-mcu-eclipse-arm-none-eabi-gcc-7.2.1-1.1-20180401-0515-win64.zip.sha
 ```
 
-To copy the files from the build machine to the current development machine, 
-open the `deploy` folder in a terminal and use `scp`:
+To copy the files from the build machine to the current development 
+machine, either use NFS to mount the entire folder, or open the `deploy` 
+folder in a terminal and use `scp`:
 
 ```console
-$ cd deploy
-$ scp * ilg@ilg-mbp.local:Downloads/gme-binaries/arm
+$ cd ~/Work/arm-none-eabi-gcc-*/deploy
+$ scp * ilg@ilg-mbp.local:Downloads/xpack-binaries/arm
 ```
 
 ### Build the macOS binary
 
-The current platform for macOS production builds is a macOS 10.10.5 VirtualBox 
-image running on the same macMini with 16 GB of RAM and a fast SSD.
+The current platform for macOS production builds is a macOS 10.10.5 
+VirtualBox image running on the same macMini with 16 GB of RAM and a 
+fast SSD.
 
-To build the latest macOS version, with the same timestamp as the previous 
-build:
+To build the latest macOS version:
 
 ```console
-$ sudo rm -rf "${HOME}/Work"/arm-none-eabi-gcc-*
-$ caffeinate bash ~/Downloads/arm-none-eabi-gcc-build.git/scripts/build.sh --osx --date YYYYMMDD-HHMM
+$ sudo rm -rf ~/Work/arm-none-eabi-gcc-*
+$ caffeinate bash ~/Downloads/arm-none-eabi-gcc-xpack.git/scripts/build.sh --osx
 ```
-
-For consistency reasons, the date should be the same as the GNU/Linux and 
-Windows builds.
 
 Several hours later, the output of the build script is a compressed archive 
 and its SHA signature, created in the `deploy` folder:
@@ -199,12 +233,13 @@ total 216064
 -rw-r--r--  1 ilg  staff        134 Jul 24 16:35 gnu-mcu-eclipse-arm-none-eabi-gcc-7.3.1-1.1-20180724-0637-macos.tgz.sha
 ```
 
-To copy the files from the build machine to the current development machine, 
-open the `deploy` folder in a terminal and use `scp`:
+To copy the files from the build machine to the current development 
+machine, either use NFS to mount the entire folder, or open the `deploy` 
+folder in a terminal and use `scp`:
 
 ```console
-$ cd deploy
-$ scp * ilg@ilg-mbp.local:Downloads/gme-binaries/arm
+$ cd ~/Work/arm-none-eabi-gcc-*/deploy
+$ scp * ilg@ilg-mbp.local:Downloads/xpack-binaries/arm
 ```
 
 ## Subsequent runs
@@ -227,13 +262,13 @@ equivalent to `--linux64 --win64`.
 To remove most build files, use:
 
 ```console
-$ bash ~/Downloads/arm-none-eabi-gcc-build.git/scripts/build.sh clean
+$ bash ~/Downloads/arm-none-eabi-gcc-xpack.git/scripts/build.sh clean
 ```
 
 To also remove the repository and the output files, use:
 
 ```console
-$ bash ~/Downloads/arm-none-eabi-gcc-build.git/scripts/build.sh cleanall
+$ bash ~/Downloads/arm-none-eabi-gcc-xpack.git/scripts/build.sh cleanall
 ```
 
 For production builds it is recommended to completely remove the build folder.
@@ -264,26 +299,26 @@ build folder, it might be necessary to run a recursive `chown`.
 
 ## Install
 
-The procedure to install GNU MCU Eclipse ARM Embedded GCC is platform 
+The procedure to install xPack GNU ARM Embedded GCC is platform 
 specific, but relatively straight forward (a .zip archive on Windows, 
 a compressed tar archive on macOS and GNU/Linux).
 
 A portable method is to use [`xpm`](https://www.npmjs.com/package/xpm):
 
 ```console
-$ xpm install --global @gnu-mcu-eclipse/arm-none-eabi-gcc
+$ xpm install --global @xpack-dev-tools/arm-none-eabi-gcc
 ```
 
 More details are available on the 
-[How to install the ARM toolchain?](https://gnu-mcu-eclipse.github.io/toolchain/arm/install/) 
+[How to install the ARM toolchain?](https://xpack.github.io/arm-none-eabi-gcc/install/) 
 page.
 
 After install, the package should create a structure like this (only the 
 first two depth levels are shown):
 
 ```console
-$ tree -L 2 /Users/ilg/opt/gnu-mcu-eclipse/arm-none-eabi-gcc/8.2.1-1.1-20190102-1122 
-/Users/ilg/opt/gnu-mcu-eclipse/arm-none-eabi-gcc/8.2.1-1.1-20190102-1122
+$ tree -L 2 /Users/ilg/opt/xPacks/arm-none-eabi-gcc/8.2.1-1.1 
+/Users/ilg/opt/gnu-mcu-eclipse/arm-none-eabi-gcc/8.2.1-1.1
 ├── README.md
 ├── arm-none-eabi
 │   ├── bin
@@ -322,8 +357,8 @@ $ tree -L 2 /Users/ilg/opt/gnu-mcu-eclipse/arm-none-eabi-gcc/8.2.1-1.1-20190102-
 │   ├── arm-none-eabi-size
 │   ├── arm-none-eabi-strings
 │   └── arm-none-eabi-strip
-├── gnu-mcu-eclipse
-│   ├── CHANGELOG.txt
+├── distro-info
+│   ├── CHANGELOG.md
 │   ├── arm-readme.txt
 │   ├── arm-release.txt
 │   ├── licenses
@@ -361,8 +396,8 @@ program from the final location. For example on macOS the output should
 look like:
 
 ```console
-$ /Users/ilg/Library/xPacks/\@gnu-mcu-eclipse/arm-none-eabi-gcc/7.2.1-1.1/.content/bin/arm-none-eabi-gcc --version
-arm-none-eabi-gcc (GNU MCU Eclipse ARM Embedded GCC, 64-bit) 7.2.1 20170904 (release) [ARM/embedded-7-branch revision 255204]
+$ /Users/ilg/Library/xPacks/\@xpack-dev-tools/arm-none-eabi-gcc/7.2.1-1.1/.content/bin/arm-none-eabi-gcc --version
+arm-none-eabi-gcc (xPack GNU ARM Embedded GCC, 64-bit) 7.2.1 20170904 (release) [ARM/embedded-7-branch revision 255204]
 ```
 
 ## Pitfalls
