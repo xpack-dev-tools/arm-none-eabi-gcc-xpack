@@ -1,6 +1,6 @@
 {
-  "name": "arm-none-eabi-gcc-xpack",
-  "version": "0.0.1",
+  "name": "@xpack-dev-tools/arm-none-eabi-gcc",
+  "version": "8.2.1-1.7.1",
   "description": "A binary xPack with the ARM Embedded GCC toolchain",
   "main": "",
   "scripts": {
@@ -15,7 +15,11 @@
   },
   "homepage": "https://github.com/xpack-dev-tools/arm-none-eabi-gcc-xpack",
   "keywords": [
-    "xpack"
+    "xpack",
+    "gcc",
+    "arm",
+    "toolchain",
+    "embedded"
   ],
   "author": {
     "name": "Liviu Ionescu",
@@ -26,5 +30,65 @@
   "config": {},
   "dependencies": {},
   "devDependencies": {},
-  "xpack": {}
+  "xpack": {
+    "binaries": {
+      "destination": "./.content",
+      "baseUrl": "https://github.com/gnu-mcu-eclipse/arm-none-eabi-gcc/releases/download/v8.2.1-1.7/",
+      "skip": 3,
+      "platforms": {
+        "darwin-x64": {
+          "sha256": "d6a162d33449282757573adab2aca8cc615d3e67a79c414dd2f6ee0c250d3a3a",
+          "fileName": "gnu-mcu-eclipse-arm-none-eabi-gcc-8.2.1-1.7-20190524-0603-macos.tgz"
+        },
+        "linux-x86": {
+          "sha256": "c832d4b8d7b91b6702f7188f0be30643b41991ce9ec91f4e67d821628898b564",
+          "fileName": "gnu-mcu-eclipse-arm-none-eabi-gcc-8.2.1-1.7-20190524-0603-centos32.tgz"
+        },
+        "linux-x64": {
+          "sha256": "f15d9dd829262c0947a417da2626c2d4d6bd5ca7628ad7f3277d350b7986fa6c",
+          "fileName": "gnu-mcu-eclipse-arm-none-eabi-gcc-8.2.1-1.7-20190524-0603-centos64.tgz"
+        },
+        "win32-x86": {
+          "sha256": "9aa2da08fe265d31fd8291b8f4c7f20dbc3b1599d2d0c37a62c1ff28f637e43c",
+          "fileName": "gnu-mcu-eclipse-arm-none-eabi-gcc-8.2.1-1.7-20190524-0603-win32.zip"
+        },
+        "win32-x64": {
+          "sha256": "7200a0d4a5bb99f6ee51b37c56716b83ffc9eb03ae5355e4a464f2d59910d214",
+          "fileName": "gnu-mcu-eclipse-arm-none-eabi-gcc-8.2.1-1.7-20190524-0603-win64.zip"
+        }
+      }
+    },
+    "bin": {
+      "arm-none-eabi-addr2line": "./.content/bin/arm-none-eabi-addr2line",
+      "arm-none-eabi-ar": "./.content/bin/arm-none-eabi-ar",
+      "arm-none-eabi-as": "./.content/bin/arm-none-eabi-as",
+      "arm-none-eabi-c++": "./.content/bin/arm-none-eabi-c++",
+      "arm-none-eabi-c++filt": "./.content/bin/arm-none-eabi-c++filt",
+      "arm-none-eabi-cpp": "./.content/bin/arm-none-eabi-cpp",
+      "arm-none-eabi-elfedit": "./.content/bin/arm-none-eabi-elfedit",
+      "arm-none-eabi-g++": "./.content/bin/arm-none-eabi-g++",
+      "arm-none-eabi-gcc": "./.content/bin/arm-none-eabi-gcc",
+      "arm-none-eabi-gcc-ar": "./.content/bin/arm-none-eabi-gcc-ar",
+      "arm-none-eabi-gcc-nm": "./.content/bin/arm-none-eabi-gcc-nm",
+      "arm-none-eabi-gcc-ranlib": "./.content/bin/arm-none-eabi-gcc-ranlib",
+      "arm-none-eabi-gcov": "./.content/bin/arm-none-eabi-gcov",
+      "arm-none-eabi-gcov-dump": "./.content/bin/arm-none-eabi-gcov-dump",
+      "arm-none-eabi-gcov-tool": "./.content/bin/arm-none-eabi-gcov-tool",
+      "arm-none-eabi-gdb": "./.content/bin/arm-none-eabi-gdb",
+      "arm-none-eabi-gdb-add-index": "./.content/bin/arm-none-eabi-gdb-add-index",
+      "arm-none-eabi-gdb-add-index-py": "./.content/bin/arm-none-eabi-gdb-add-index-py",
+      "arm-none-eabi-gdb-py": "./.content/bin/arm-none-eabi-gdb-py",
+      "arm-none-eabi-gprof": "./.content/bin/arm-none-eabi-gprof",
+      "arm-none-eabi-ld": "./.content/bin/arm-none-eabi-ld",
+      "arm-none-eabi-ld.bfd": "./.content/bin/arm-none-eabi-ld.bfd",
+      "arm-none-eabi-nm": "./.content/bin/arm-none-eabi-nm",
+      "arm-none-eabi-objcopy": "./.content/bin/arm-none-eabi-objcopy",
+      "arm-none-eabi-objdump": "./.content/bin/arm-none-eabi-objdump",
+      "arm-none-eabi-ranlib": "./.content/bin/arm-none-eabi-ranlib",
+      "arm-none-eabi-readelf": "./.content/bin/arm-none-eabi-readelf",
+      "arm-none-eabi-size": "./.content/bin/arm-none-eabi-size",
+      "arm-none-eabi-strings": "./.content/bin/arm-none-eabi-strings",
+      "arm-none-eabi-strip": "./.content/bin/arm-none-eabi-strip"
+    }
+  }
 }
