@@ -4,15 +4,12 @@
 
 This project includes the scripts and additional files required to 
 build and publish the
-[xPack GNU ARM Embedded GCC](https://xpack.github.io/qemu-arm/) binaries.
+[xPack GNU ARM Embedded GCC](https://xpack.github.io/arm-none-eabi-gcc/) binaries.
 
 The build scripts use the
 [xPack Build Box (XBB)](https://github.com/xpack/xpack-build-box), 
 a set of elaborate build environments based on GCC 7.4 (Docker containers
 for GNU/Linux and Windows or a custom folder for MacOS).
-
-These are the scripts and additional files required to build the 
-[xPack GNU ARM Embedded GCC](https://github.com/xpack-dev-tools/arm-none-eabi-gcc).
 
 ## Repository URLs
 
@@ -46,9 +43,9 @@ $ git clone --recurse-submodules https://github.com/xpack-dev-tools/arm-none-eab
 
 ## The `Work` folder
 
-The script creates a temporary build `Work/qemu-arm-${version}` folder in 
-the user home. Although not recommended, if for any reasons you need to 
-change the location of the `Work` folder, 
+The script creates a temporary build `Work/arm-none-eabi-gcc-${version}` 
+folder in the user home. Although not recommended, if for any reasons 
+you need to change the location of the `Work` folder, 
 you can redefine `WORK_FOLDER_PATH` variable before invoking the script.
 
 ## Customizations
