@@ -65,7 +65,7 @@ host_detect
 # Array where the remaining args will be stored.
 declare -a rest
 
-help_message="    bash $0 [--win32] [--win64] [--linux32] [--linux64] [--osx] [--all] [clean|cleanlibs|cleanall|preload-images] [--env-file file] [--date YYYYmmdd-HHMM] [--disable-strip] [--without-pdf] [--with-html] [--disable-multilib] [--develop] [--debug] [--use-gits] [--jobs N] [--help]"
+help_message="    bash $0 [--win32] [--win64] [--linux32] [--linux64] [--osx] [--all] [clean|cleanlibs|cleanall|preload-images] [--env-file file] [--disable-strip] [--without-pdf] [--with-html] [--disable-multilib] [--develop] [--debug] [--use-gits] [--jobs N] [--help]"
 host_options "${help_message}" $@
 
 host_common
@@ -220,9 +220,6 @@ host_show_sha
 host_stop_timer
 
 host_notify_completed
-
-echo
-echo "Use --date ${DISTRIBUTION_FILE_DATE} if needed for a related build."
 
 # Completed successfully.
 exit 0
