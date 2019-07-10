@@ -1,6 +1,6 @@
 # -----------------------------------------------------------------------------
-# This file is part of the GNU MCU Eclipse distribution.
-#   (https://gnu-mcu-eclipse.github.io)
+# This file is part of the xPacks distribution.
+#   (https://xpacks.github.io)
 # Copyright (c) 2019 Liviu Ionescu.
 #
 # Permission to use, copy, modify, and/or distribute this software 
@@ -1407,7 +1407,7 @@ function copy_distro_files()
     echo "Copying distro files..."
 
     cd "${BUILD_GIT_PATH}"
-    install -v -c -m 644 "${README_OUT_FILE_NAME}" \
+    install -v -c -m 644 "${scripts/README_OUT_FILE_NAME}" \
       "${APP_PREFIX}/README.md"
   )
 }

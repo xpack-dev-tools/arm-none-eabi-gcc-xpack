@@ -1,6 +1,6 @@
 # -----------------------------------------------------------------------------
-# This file is part of the GNU MCU Eclipse distribution.
-#   (https://gnu-mcu-eclipse.github.io)
+# This file is part of the xPacks distribution.
+#   (https://xpacks.github.io)
 # Copyright (c) 2019 Liviu Ionescu.
 #
 # Permission to use, copy, modify, and/or distribute this software 
@@ -29,7 +29,7 @@ DISTRO_TOP_FOLDER=${DISTRO_TOP_FOLDER:-"xPacks"}
 # Use the new xPack naming convention.
 HAS_NAME_ARCH="y"
 
-BRANDING=${BRANDING:-"${DISTRO_UC_NAME} ARM Embedded GCC"}
+BRANDING=${BRANDING:-"${DISTRO_UC_NAME} ${APP_NAME}"}
 
 GCC_TARGET=${GCC_TARGET:-"arm-none-eabi"}
 
