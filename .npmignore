@@ -1,0 +1,16 @@
+.DS_Store
+.git/
+.github/
+.gitignore
+.gitmodules
+
+.vscode/
+
+patches/
+pkgconfig/
+scripts/
+
+README-*
+*.tgz
+CHANGELOG.*
+LICENSE-*
