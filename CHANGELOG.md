@@ -5,6 +5,12 @@ Releases in reverse chronological order.
 ### 2019-07-10
 
 - v8.2.1-1.8 released
+- v7.3.1-1.1 re-released
+- v6.3.1-1.1 re-released
+
+___
+
+## Historical GNU MCU Eclipse change log
 
 ### 2019-05-24
 

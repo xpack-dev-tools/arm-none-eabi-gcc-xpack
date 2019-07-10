@@ -391,6 +391,10 @@ then
 
   PYTHON_WIN_VERSION="2.7.13"
 
+  BINUTILS_PATCH="binutils-2.30.patch"
+
+  README_OUT_FILE_NAME="README-${RELEASE_VERSION}.md"
+
 elif [[ "${RELEASE_VERSION}" =~ 7\.2\.1-* ]]
 then
 

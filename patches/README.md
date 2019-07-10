@@ -26,3 +26,7 @@ To add `install-strip` to `readline/Makefile.in`.
 ## binutils-2.31.patch
 
 To fix the objcopy bug that used 64-bit addresses on 32-bit builds.
+
+## binutils-2.30.patch & binutils-2.28.patch
+
+Add `install-strip:` to `readline/Makefile.in`.

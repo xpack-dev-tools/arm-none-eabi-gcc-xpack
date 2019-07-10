@@ -1,0 +1,10 @@
+--- readline/Makefile.in	2016-04-28 20:56:16.000000000 +0300
++++ readline/Makefile-patched.in	2019-04-18 21:31:14.000000000 +0300
+@@ -220,6 +220,7 @@
+ ## so it doesn't depend on us installing it on the system.
+ 
+ install:
++install-strip:
+ 
+ #install:	$(INSTALL_TARGETS)
+ 

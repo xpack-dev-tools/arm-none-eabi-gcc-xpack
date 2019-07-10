@@ -299,6 +299,7 @@ build folder, it might be necessary to run a recursive `chown`.
 Set the release explicitly in the environment:
 
 ```console
+$ RELEASE_VERSION=7.3.1-1.1 bash ~/Downloads/arm-none-eabi-gcc-xpack.git/scripts/build.sh --all
 $ RELEASE_VERSION=6.3.1-1.1 bash ~/Downloads/arm-none-eabi-gcc-xpack.git/scripts/build.sh --all
 ```
 
