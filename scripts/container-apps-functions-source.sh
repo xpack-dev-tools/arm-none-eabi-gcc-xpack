@@ -1407,7 +1407,7 @@ function copy_distro_files()
     echo "Copying distro files..."
 
     cd "${BUILD_GIT_PATH}"
-    install -v -c -m 644 "${scripts/README_OUT_FILE_NAME}" \
+    install -v -c -m 644 "scripts/${README_OUT_FILE_NAME}" \
       "${APP_PREFIX}/README.md"
   )
 }
