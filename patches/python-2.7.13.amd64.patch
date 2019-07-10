@@ -1,0 +1,11 @@
+--- pyconfig.h	2016-06-26 02:46:30.000000000 +0300
++++ pyconfig-patched.h	2018-02-14 13:35:21.000000000 +0200
+@@ -282,7 +282,7 @@
+ #endif
+ 
+ #define COMPILER "[gcc]"
+-#define hypot _hypot
++// #define hypot _hypot
+ #define PY_LONG_LONG long long
+ #define PY_LLONG_MIN LLONG_MIN
+ #define PY_LLONG_MAX LLONG_MAX

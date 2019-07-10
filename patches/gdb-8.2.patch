@@ -1,0 +1,96 @@
+--- gdb/arch/arm-get-next-pcs.c
++++ gdb/arch/arm-get-next-pcs-patched.c
+@@ -49,7 +49,7 @@ static std::vector<CORE_ADDR>
+ thumb_deal_with_atomic_sequence_raw (struct arm_get_next_pcs *self)
+ {
+   int byte_order_for_code = self->byte_order_for_code;
+-  CORE_ADDR breaks[2] = {-1, -1};
++  CORE_ADDR breaks[2] = {(CORE_ADDR)-1, (CORE_ADDR)-1};
+   CORE_ADDR pc = regcache_read_pc (self->regcache);
+   CORE_ADDR loc = pc;
+   unsigned short insn1, insn2;
+@@ -187,7 +187,7 @@ static std::vector<CORE_ADDR>
+ arm_deal_with_atomic_sequence_raw (struct arm_get_next_pcs *self)
+ {
+   int byte_order_for_code = self->byte_order_for_code;
+-  CORE_ADDR breaks[2] = {-1, -1};
++  CORE_ADDR breaks[2] = {(CORE_ADDR)-1, (CORE_ADDR)-1};
+   CORE_ADDR pc = regcache_read_pc (self->regcache);
+   CORE_ADDR loc = pc;
+   unsigned int insn;
+--- gdb/completer.c
++++ gdb/completer-patched.c
+@@ -2032,7 +2032,7 @@ completion_tracker::build_completion_result (const char *text,
+       /* We don't rely on readline appending the quote char as
+ 	 delimiter as then readline wouldn't append the ' ' after the
+ 	 completion.  */
+-      char buf[2] = { quote_char () };
++      char buf[2] = { (char)quote_char () };
+ 
+       match_list[0] = reconcat (match_list[0], match_list[0],
+ 				buf, (char *) NULL);
+--- gdb/dtrace-probe.c
++++ gdb/dtrace-probe-patched.c
+@@ -77,6 +77,8 @@ struct dtrace_probe_enabler
+ class dtrace_static_probe_ops : public static_probe_ops
+ {
+ public:
++  dtrace_static_probe_ops() {}; // GNU MCU Eclipse
++  
+   /* See probe.h.  */
+   bool is_linespec (const char **linespecp) const override;
+ 
+--- gdb/linespec.c
++++ gdb/linespec-patched.c
+@@ -2896,7 +2896,7 @@ complete_linespec_component (linespec_parser *parser,
+ 	     new "quote" char.  */
+ 	  if (tracker.quote_char ())
+ 	    {
+-	      char quote_char_str[2] = { tracker.quote_char () };
++	      char quote_char_str[2] = { (char)tracker.quote_char () };
+ 
+ 	      fn = reconcat (fn, fn, quote_char_str, (char *) NULL);
+ 	      tracker.set_quote_char (':');
+--- gdb/probe.c
++++ gdb/probe-patched.c
+@@ -43,6 +43,8 @@
+ class any_static_probe_ops : public static_probe_ops
+ {
+ public:
++  any_static_probe_ops() {}; // GNU MCU Eclipse
++  
+   /* See probe.h.  */
+   bool is_linespec (const char **linespecp) const override;
+ 
+--- gdb/record-btrace.c
++++ gdb/record-btrace-patched.c
+@@ -144,7 +144,7 @@ static record_btrace_target record_btrace_ops;
+ 
+ /* Token associated with a new-thread observer enabling branch tracing
+    for the new thread.  */
+-static const gdb::observers::token record_btrace_thread_observer_token;
++static const gdb::observers::token record_btrace_thread_observer_token{};
+ 
+ /* Memory access types used in set/show record btrace replay-memory-access.  */
+ static const char replay_memory_access_read_only[] = "read-only";
+--- gdb/stap-probe.c
++++ gdb/stap-probe-patched.c
+@@ -102,6 +102,7 @@ struct stap_probe_arg
+ class stap_static_probe_ops : public static_probe_ops
+ {
+ public:
++  stap_static_probe_ops() {}; // GNU MCU Eclipse
+   /* See probe.h.  */
+   bool is_linespec (const char **linespecp) const override;
+ 
+--- gdb/tui/tui-hooks.c
++++ gdb/tui/tui-hooks-patched.c
+@@ -205,7 +205,7 @@ tui_normal_stop (struct bpstats *bs, int print_frame)
+ 
+ /* Token associated with observers registered while TUI hooks are
+    installed.  */
+-static const gdb::observers::token tui_observers_token;
++static const gdb::observers::token tui_observers_token {};
+ 
+ /* Attach or detach a single observer, according to ATTACH.  */
+ 
