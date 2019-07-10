@@ -466,6 +466,10 @@ then
 
   PYTHON_WIN_VERSION="2.7.13"
 
+  BINUTILS_PATCH="binutils-2.28.patch"
+
+  README_OUT_FILE_NAME="README-${RELEASE_VERSION}.md"
+
 else
   echo "Unsupported version ${RELEASE_VERSION}."
   exit 1

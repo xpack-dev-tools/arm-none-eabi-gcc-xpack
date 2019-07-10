@@ -294,6 +294,14 @@ However, for an interrupted build, this step is skipped, and files in
 the install folder will remain owned by root. Thus, before removing the 
 build folder, it might be necessary to run a recursive `chown`.
 
+### Rebuild previous releases
+
+Set the release explicitly in the environment:
+
+```console
+$ RELEASE_VERSION=6.3.1-1.1 bash ~/Downloads/arm-none-eabi-gcc-xpack.git/scripts/build.sh --all
+```
+
 ## Install
 
 The procedure to install xPack GNU ARM Embedded GCC is platform 
