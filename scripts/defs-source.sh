@@ -16,20 +16,18 @@
 # -----------------------------------------------------------------------------
 
 # Used to display the application name.
-APP_NAME=${APP_NAME:-"ARM Embedded GCC"}
+APP_NAME=${APP_NAME:-"GNU ARM Embedded GCC"}
 
 # Used as part of file/folder paths.
 APP_UC_NAME=${APP_UC_NAME:-"ARM Embedded GCC"}
 APP_LC_NAME=${APP_LC_NAME:-"arm-none-eabi-gcc"}
 
-# TODO: rename to xPacks/xpacks.
-# Upper case used on Windows.
-DISTRO_UC_NAME=${DISTRO_UC_NAME:-"GNU MCU Eclipse"}
-# Lower case used on macOS and GNU/Linux.
-DISTRO_LC_NAME=${DISTRO_LC_NAME:-"gnu-mcu-eclipse"}
+DISTRO_UC_NAME=${DISTRO_UC_NAME:-"xPack"}
+DISTRO_LC_NAME=${DISTRO_LC_NAME:-"xpack"}
+DISTRO_TOP_FOLDER=${DISTRO_TOP_FOLDER:-"xPacks"}
 
-# TODO: remove it.
-DISTRO_INFO_NAME=${DISTRO_INFO_NAME:-"${DISTRO_LC_NAME}"}
+# Use the new xPack naming convention.
+HAS_NAME_ARCH="y"
 
 BRANDING=${BRANDING:-"${DISTRO_UC_NAME} ARM Embedded GCC"}
 
