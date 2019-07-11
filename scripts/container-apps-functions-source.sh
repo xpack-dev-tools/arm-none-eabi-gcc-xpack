@@ -36,11 +36,9 @@ function download_gdb()
         "${GDB_GIT_COMMIT}" "${GDB_SRC_FOLDER_NAME}"
       cd "${GDB_SRC_FOLDER_NAME}"
       do_patch "${GDB_PATCH}"
-    elif [ -n "${GDB_ARCHIVE_URL}" ]
-    then
+    else
       extract "${GCC_COMBO_FOLDER_NAME}/src/gdb.tar.bz2" \
         "${GDB_SRC_FOLDER_NAME}" "${GDB_PATCH}"
-
     fi
   fi
 }

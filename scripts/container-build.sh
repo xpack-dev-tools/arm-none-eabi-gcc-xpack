@@ -225,6 +225,8 @@ PYTHON3_VERSION=""
 # Redefine to actual URL if the build should use the Git sources.
 # Also be sure GDB_GIT_BRANCH and GDB_GIT_COMMIT are defined
 GDB_GIT_URL=""
+# Defined for completeness, not yet used by download_gdb().
+GDB_ARCHIVE_URL=""
 
 MULTILIB_FLAGS=""
 GETTEXT_VERSION=""
