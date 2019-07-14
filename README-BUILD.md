@@ -406,6 +406,19 @@ $ /Users/ilg/Library/xPacks/\@xpack-dev-tools/arm-none-eabi-gcc/7.2.1-1.1/.conte
 arm-none-eabi-gcc (xPack GNU ARM Embedded GCC, 64-bit) 7.2.1 20170904 (release) [ARM/embedded-7-branch revision 255204]
 ```
 
+## Files cache
+
+The XBB build scripts use a local cache such that files are downloaded only
+during the first run, later runs being able to use the cached files.
+
+However, occasionally some servers may not be available, and the builds
+may fail.
+
+The workaround is to manually download the files from an alternate
+location (like 
+https://github.com/xpack-dev-tools/files-cache/tree/master/libs),
+place them in the XBB cache (`Work/cache`) and restart the build.
+
 ## Pitfalls
 
 ### Parallel build
