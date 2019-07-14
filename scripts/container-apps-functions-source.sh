@@ -1,6 +1,6 @@
 # -----------------------------------------------------------------------------
 # This file is part of the xPacks distribution.
-#   (https://xpacks.github.io)
+#   (https://xpack.github.io)
 # Copyright (c) 2019 Liviu Ionescu.
 #
 # Permission to use, copy, modify, and/or distribute this software 
