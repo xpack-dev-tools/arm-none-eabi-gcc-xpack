@@ -406,6 +406,16 @@ $ /Users/ilg/Library/xPacks/\@xpack-dev-tools/arm-none-eabi-gcc/7.2.1-1.1/.conte
 arm-none-eabi-gcc (xPack GNU ARM Embedded GCC, 64-bit) 7.2.1 20170904 (release) [ARM/embedded-7-branch revision 255204]
 ```
 
+## Previous versions
+
+Although not guaranteed to work, previous versions can be re-built by
+explicitly specifying the version:
+
+```console
+$ RELEASE_VERSION=6.3.1-1.1 bash ~/Downloads/arm-none-eabi-gcc-xpack.git/scripts/build.sh
+$ RELEASE_VERSION=7.3.1-1.1 bash ~/Downloads/arm-none-eabi-gcc-xpack.git/scripts/build.sh
+```
+
 ## Files cache
 
 The XBB build scripts use a local cache such that files are downloaded only
