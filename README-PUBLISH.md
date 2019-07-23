@@ -17,7 +17,7 @@ recreate the archives with the correct file.
 
 The `VERSION` file should refer to the actual release.
 
-### Push the build script git
+### Push the build scripts
 
 In this Git repo:
 
@@ -28,7 +28,7 @@ In this Git repo:
 ### Run the build scripts
 
 When everything is ready, follow the instructions from the 
-[build](https://github.com/xpack-dev-tools/arm-none-eabi-gcc-xpack/blob/xpack/README.md) 
+[build](https://github.com/xpack-dev-tools/arm-none-eabi-gcc-xpack/blob/xpack/README-BUILD.md) 
 page.
 
 ## Test
@@ -102,16 +102,16 @@ Copy/paste the build report at the end of the post as:
 The SHA-256 hashes for the files are:
 
 4fe99c9122c7f2f84a998640d9b3d3d890a2ae47cbd5469813a3ad015e69bbd7
-gnu-mcu-eclipse-arm-none-eabi-gcc-8.2.1-1.8-20180401-0515-centos32.tar.xz
+xpack-arm-none-eabi-gcc-8.2.1-1.8-linux-x32.tar.xz
 
 ed6c727b859eed4fcb55aa14bdafd329f71b087877d2eb7438abfec2bb533227
-gnu-mcu-eclipse-arm-none-eabi-gcc-8.2.1-1.8-20180401-0515-centos64.tar.xz
+xpack-arm-none-eabi-gcc-8.2.1-1.8-linux-x64.tar.xz
 
 578c4525187c498ec0b8255ac46d4177ed3b51b115cb6ca4cd379baa6b70db7a
-gnu-mcu-eclipse-arm-none-eabi-gcc-8.2.1-1.8-20180401-0515-win32.zip
+xpack-arm-none-eabi-gcc-8.2.1-1.8-win32-x32.zip
 
 fd9573d0b9e89d87b9bf7f237955bbeba206a93c6cecc2fc3996458798d7a05b
-gnu-mcu-eclipse-arm-none-eabi-gcc-8.2.1-1.8-20180401-0515-win64.zip
+xpack-arm-none-eabi-gcc-8.2.1-1.8-win32-x64.zip
 ```
 
 If you missed this, `cat` the content of the `.sha` files:
@@ -128,7 +128,7 @@ like **xPack GNU ARM Embedded GCC v8.2.1-1.8 released**
 - wait for the GitHub Pages build to complete
 - remember the post URL, since it must be updated in the release page
 
-## Publish on the npmjs server
+## Publish on the npmjs.com server
 
 - open [GitHub Releases](https://github.com/xpack-dev-tools/arm-none-eabi-gcc-xpack/releases) 
   and select the latest release
@@ -152,7 +152,7 @@ On all available platforms:
 - install the new xPack release
 
 ```console
-$ xpm install --global @xpack-dev-tools/arm-none-eabi-gcc
+$ xpm install --global @xpack-dev-tools/arm-none-eabi-gcc@latest
 ```
 
 - double check version, to be sure it is the latest release (sometimes 
@@ -167,10 +167,6 @@ $ xpm install --global @xpack-dev-tools/arm-none-eabi-gcc
 - go to the [GitHub Releases](https://github.com/xpack-dev-tools/arm-none-eabi-gcc-xpack/releases) page
 - update the link behind the badge with the blog URL
 - add a link to the Web page `[Continue reading »]()`; use an same blog URL
-- copy/paste the **Easy install** section
-- update the current release version
-- copy/paste the **Download analytics** section
-- update the current release version
 - **disable** the **pre-release** button
 - click the **Update Release** button
 
@@ -178,6 +174,6 @@ $ xpm install --global @xpack-dev-tools/arm-none-eabi-gcc
 
 - in a separate browser windows, open [TweetDeck](https://tweetdeck.twitter.com/)
 - using the `@xpack_project` account
-- paste the release name like **xPack QEMU ARM v2.8.0-7.1 released**
+- paste the release name like **xPack GNU ARM Embedded GCC v8.2.1-1.8 released**
 - paste the link to the Github release
 - click the **Tweet** button

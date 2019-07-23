@@ -13,11 +13,11 @@ binary [xPack](https://www.npmjs.com/package/@xpack-dev-tools/arm-none-eabi-gcc)
 and can be conveniently installed with [xpm](https://www.npmjs.com/package/xpm):
 
 ```console
-$ xpm install --global @xpack-dev-tools/arm-none-eabi-gcc
+$ xpm install --global @xpack-dev-tools/arm-none-eabi-gcc@8.2.1-1.8
 ```
 
 For more details on how to install the toolchain, please see 
-[How to install the ARM toolchain?](http://gnu-mcu-eclipse.github.io/toolchain/arm/install/) page.
+[How to install the ARM toolchain?](http://xpack.github.io/arm-none-eabi-gcc/install/) page.
 
 ## Compliance
 
@@ -89,7 +89,7 @@ The original PDF documentation is available in the `share/doc` folder.
 
 ## More info
 
-For more info and support, please see the xPack project site:
+For more info, please see the xPack project site:
 
   http://xpack.github.io/arm-none-eabi-gcc/
 

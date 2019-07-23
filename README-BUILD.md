@@ -68,7 +68,7 @@ page and return when ready.
 
 The xPack GNU ARM Embedded GCC distribution follows the official 
 [ARM](https://developer.arm.com/open-source/gnu-toolchain/gnu-rm) 
-distributions, and it is planned to make a new release after each future 
+distribution, and it is planned to make a new release after each future 
 ARM release.
 
 Currently the build procedure uses the _Source Invariant_ archive and 
@@ -85,17 +85,17 @@ To prepare a new release:
 - check differences from the previous version;
 - determine the GCC version (like `7.2.1`) and update the `scripts/VERSION` 
   file; the format is `7.2.1-1.1`. The fourth digit is the number of the 
-  ARM release of the same GCC version, and the fifth digit is the GNU MCU 
-  Eclipse release number of this version.
+  ARM release of the same GCC version, and the fifth digit is the xPack 
+  GNU ARM Embedded GCC release number of this version.
 - add a new set of definitions in the `scripts/container-build.sh`, with 
   the versions of various components;
 - if newer libraries are used, check if they are available from the local git
   cache project.
 
-### Update `README.md`
+### Check `README.md`
 
-If necessary, update the main `README.md` with informations related to the
-build. Information related to the new version should not be included here,
+Normally `README.md` should not need changes, but better check. 
+Information related to the new version should not be included here,
 but in the version specific file (below).
 
 ### Create `README-<version>.md`
@@ -188,14 +188,14 @@ their SHA signatures, created in the `deploy` folder:
 ```console
 $ ls -l deploy
 total 350108
--rw-r--r-- 1 ilg ilg  61981364 Apr  1 08:27 gnu-mcu-eclipse-arm-none-eabi-gcc-7.2.1-1.1-20180401-0515-centos32.tar.xz
--rw-r--r-- 1 ilg ilg       140 Apr  1 08:27 gnu-mcu-eclipse-arm-none-eabi-gcc-7.2.1-1.1-20180401-0515-centos32.tar.xz.sha
--rw-r--r-- 1 ilg ilg  61144048 Apr  1 08:19 gnu-mcu-eclipse-arm-none-eabi-gcc-7.2.1-1.1-20180401-0515-centos64.tar.xz
--rw-r--r-- 1 ilg ilg       140 Apr  1 08:19 gnu-mcu-eclipse-arm-none-eabi-gcc-7.2.1-1.1-20180401-0515-centos64.tar.xz.sha
--rw-r--r-- 1 ilg ilg 112105889 Apr  1 08:29 gnu-mcu-eclipse-arm-none-eabi-gcc-7.2.1-1.1-20180401-0515-win32.zip
--rw-r--r-- 1 ilg ilg       134 Apr  1 08:29 gnu-mcu-eclipse-arm-none-eabi-gcc-7.2.1-1.1-20180401-0515-win32.zip.sha
--rw-r--r-- 1 ilg ilg 123181226 Apr  1 08:21 gnu-mcu-eclipse-arm-none-eabi-gcc-7.2.1-1.1-20180401-0515-win64.zip
--rw-r--r-- 1 ilg ilg       134 Apr  1 08:21 gnu-mcu-eclipse-arm-none-eabi-gcc-7.2.1-1.1-20180401-0515-win64.zip.sha
+-rw-r--r-- 1 ilg ilg  61981364 Apr  1 08:27 xpack-arm-none-eabi-gcc-8.2.1-1.8-linux-x32.tgz
+-rw-r--r-- 1 ilg ilg       140 Apr  1 08:27 xpack-arm-none-eabi-gcc-8.2.1-1.8-linux-x32.tgz.sha
+-rw-r--r-- 1 ilg ilg  61144048 Apr  1 08:19 xpack-arm-none-eabi-gcc-8.2.1-1.8-linux-x64.tgz
+-rw-r--r-- 1 ilg ilg       140 Apr  1 08:19 xpack-arm-none-eabi-gcc-8.2.1-1.8-linux-x64.tgz.sha
+-rw-r--r-- 1 ilg ilg 112105889 Apr  1 08:29 xpack-arm-none-eabi-gcc-8.2.1-1.8-win32.zip
+-rw-r--r-- 1 ilg ilg       134 Apr  1 08:29 xpack-arm-none-eabi-gcc-8.2.1-1.8-win32.zip.sha
+-rw-r--r-- 1 ilg ilg 123181226 Apr  1 08:21 xpack-arm-none-eabi-gcc-8.2.1-1.8-win64.zip
+-rw-r--r-- 1 ilg ilg       134 Apr  1 08:21 xpack-arm-none-eabi-gcc-8.2.1-1.8-win64.zip.sha
 ```
 
 To copy the files from the build machine to the current development 
@@ -226,8 +226,8 @@ and its SHA signature, created in the `deploy` folder:
 ```console
 $ ls -l deploy
 total 216064
--rw-r--r--  1 ilg  staff  110620198 Jul 24 16:35 gnu-mcu-eclipse-arm-none-eabi-gcc-7.3.1-1.1-20180724-0637-macos.tgz
--rw-r--r--  1 ilg  staff        134 Jul 24 16:35 gnu-mcu-eclipse-arm-none-eabi-gcc-7.3.1-1.1-20180724-0637-macos.tgz.sha
+-rw-r--r--  1 ilg  staff  110620198 Jul 24 16:35 xpack-arm-none-eabi-gcc-8.2.1-1.8-darwin-x64.tgz
+-rw-r--r--  1 ilg  staff        134 Jul 24 16:35 xpack-arm-none-eabi-gcc-8.2.1-1.8-darwin-x64.sha
 ```
 
 To copy the files from the build machine to the current development 
@@ -301,6 +301,7 @@ Set the release explicitly in the environment:
 ```console
 $ RELEASE_VERSION=7.3.1-1.1 bash ~/Downloads/arm-none-eabi-gcc-xpack.git/scripts/build.sh --all
 $ RELEASE_VERSION=6.3.1-1.1 bash ~/Downloads/arm-none-eabi-gcc-xpack.git/scripts/build.sh --all
+$ RELEASE_VERSION=8.2.1-1.8 bash ~/Downloads/arm-none-eabi-gcc-xpack.git/scripts/build.sh --all
 ```
 
 ## Install
@@ -312,7 +313,7 @@ a compressed tar archive on macOS and GNU/Linux).
 A portable method is to use [`xpm`](https://www.npmjs.com/package/xpm):
 
 ```console
-$ xpm install --global @xpack-dev-tools/arm-none-eabi-gcc
+$ xpm install --global @xpack-dev-tools/arm-none-eabi-gcc@latest
 ```
 
 More details are available on the 
@@ -323,8 +324,8 @@ After install, the package should create a structure like this (only the
 first two depth levels are shown):
 
 ```console
-$ tree -L 2 /Users/ilg/opt/xPacks/arm-none-eabi-gcc/8.2.1-1.1 
-/Users/ilg/opt/gnu-mcu-eclipse/arm-none-eabi-gcc/8.2.1-1.1
+$ tree -L 2 /Users/ilg/opt/xPacks/arm-none-eabi-gcc/8.2.1-1.8 
+/Users/ilg/opt/xPacks/arm-none-eabi-gcc/8.2.1-1.8
 ├── README.md
 ├── arm-none-eabi
 │   ├── bin
@@ -402,8 +403,8 @@ program from the final location. For example on macOS the output should
 look like:
 
 ```console
-$ /Users/ilg/Library/xPacks/\@xpack-dev-tools/arm-none-eabi-gcc/7.2.1-1.1/.content/bin/arm-none-eabi-gcc --version
-arm-none-eabi-gcc (xPack GNU ARM Embedded GCC, 64-bit) 7.2.1 20170904 (release) [ARM/embedded-7-branch revision 255204]
+$ /Users/ilg/Library/xPacks/\@xpack-dev-tools/arm-none-eabi-gcc/8.2.1-1.8/.content/bin/arm-none-eabi-gcc --version
+arm-none-eabi-gcc (xPack GNU ARM Embedded GCC, 64-bit) 8.2.1 20170904 (release) [ARM/embedded-7-branch revision 255204]
 ```
 
 ## Previous versions
@@ -414,6 +415,7 @@ explicitly specifying the version:
 ```console
 $ RELEASE_VERSION=6.3.1-1.1 bash ~/Downloads/arm-none-eabi-gcc-xpack.git/scripts/build.sh
 $ RELEASE_VERSION=7.3.1-1.1 bash ~/Downloads/arm-none-eabi-gcc-xpack.git/scripts/build.sh
+$ RELEASE_VERSION=8.2.1-1.8 bash ~/Downloads/arm-none-eabi-gcc-xpack.git/scripts/build.sh
 ```
 
 ## Files cache

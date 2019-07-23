@@ -17,7 +17,7 @@ $ xpm install --global @xpack-dev-tools/arm-none-eabi-gcc@6.3.1-1.1.1
 ```
 
 For more details on how to install the toolchain, please see 
-[How to install the ARM toolchain?](http://gnu-mcu-eclipse.github.io/toolchain/arm/install/) page.
+[How to install the ARM toolchain?](http://xpack.github.io/arm-none-eabi-gcc/install/) page.
 
 ## Compliance
 
