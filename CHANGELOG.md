@@ -2,10 +2,8 @@
 
 Releases in reverse chronological order.
 
-### 2019-07-10
+### 2019-07-23
 
-- v8.2.1-1.8 released
-- v7.3.1-1.1 re-released
 - v6.3.1-1.1 re-released
 
 ___
@@ -70,4 +68,3 @@ ___
 
 - v6.3.1-1.1-20180331 released
 - based on ARM `gcc-arm-none-eabi-6-2017-q2-update`
-
