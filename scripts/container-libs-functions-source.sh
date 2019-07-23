@@ -29,8 +29,7 @@ function do_zlib()
 
   ZLIB_FOLDER_NAME="zlib-${ZLIB_VERSION}"
   local zlib_archive="${ZLIB_FOLDER_NAME}.tar.gz"
-  # local zlib_url="http://zlib.net/fossils/${zlib_archive}"
-  local zlib_url="https://github.com/gnu-mcu-eclipse/files/raw/master/libs/${zlib_archive}"
+  local zlib_url="http://zlib.net/fossils/${zlib_archive}"
 
   local zlib_stamp_file_path="${INSTALL_FOLDER_PATH}/stamp-zlib-${ZLIB_VERSION}-installed"
   if [ ! -f "${zlib_stamp_file_path}" ]
@@ -123,8 +122,7 @@ function do_gmp()
 
   GMP_FOLDER_NAME="gmp-${GMP_VERSION}"
   local gmp_archive="${GMP_FOLDER_NAME}.tar.xz"
-  # local gmp_url="https://gmplib.org/download/gmp/${gmp_archive}"
-  local gmp_url="https://github.com/gnu-mcu-eclipse/files/raw/master/libs/${gmp_archive}"
+  local gmp_url="https://gmplib.org/download/gmp/${gmp_archive}"
 
   local gmp_stamp_file_path="${INSTALL_FOLDER_PATH}/stamp-gmp-${GMP_VERSION}-installed"
   if [ ! -f "${gmp_stamp_file_path}" ]
@@ -206,8 +204,7 @@ function do_mpfr()
 
   MPFR_FOLDER_NAME="mpfr-${MPFR_VERSION}"
   local mpfr_archive="${MPFR_FOLDER_NAME}.tar.xz"
-  # local mpfr_url="http://www.mpfr.org/${MPFR_FOLDER_NAME}/${mpfr_archive}"
-  local mpfr_url="https://github.com/gnu-mcu-eclipse/files/raw/master/libs/${mpfr_archive}"
+  local mpfr_url="http://www.mpfr.org/${MPFR_FOLDER_NAME}/${mpfr_archive}"
 
   local mpfr_stamp_file_path="${INSTALL_FOLDER_PATH}/stamp-mpfr-${MPFR_VERSION}-installed"
   if [ ! -f "${mpfr_stamp_file_path}" ]
@@ -360,8 +357,7 @@ function do_isl()
     isl_archive="${ISL_FOLDER_NAME}.tar.gz"
   fi
 
-  # local isl_url="http://isl.gforge.inria.fr/${isl_archive}"
-  local isl_url="https://github.com/gnu-mcu-eclipse/files/raw/master/libs/${isl_archive}"
+  local isl_url="http://isl.gforge.inria.fr/${isl_archive}"
 
   local isl_stamp_file_path="${INSTALL_FOLDER_PATH}/stamp-isl-${ISL_VERSION}-installed"
   if [ ! -f "${isl_stamp_file_path}" ]
@@ -430,8 +426,7 @@ function do_libelf()
 
   LIBELF_FOLDER_NAME="libelf-${LIBELF_VERSION}"
   local libelf_archive="${LIBELF_FOLDER_NAME}.tar.gz"
-  # local libelf_url="http://www.mr511.de/software/${libelf_archive}"
-  local libelf_url="https://github.com/gnu-mcu-eclipse/files/raw/master/libs/${libelf_archive}"
+  local libelf_url="http://www.mr511.de/software/${libelf_archive}"
 
   local libelf_stamp_file_path="${INSTALL_FOLDER_PATH}/stamp-libelf-${LIBELF_VERSION}-installed"
   if [ ! -f "${libelf_stamp_file_path}" ]
@@ -653,8 +648,7 @@ function do_xz()
 
   XZ_FOLDER_NAME="xz-${XZ_VERSION}"
   local xz_archive="${XZ_FOLDER_NAME}.tar.xz"
-  # local xz_url="https://sourceforge.net/projects/lzmautils/files/${xz_archive}"
-  local xz_url="https://github.com/gnu-mcu-eclipse/files/raw/master/libs/${xz_archive}"
+  local xz_url="https://sourceforge.net/projects/lzmautils/files/${xz_archive}"
 
   local xz_stamp_file_path="${INSTALL_FOLDER_PATH}/stamp-xz-${XZ_VERSION}-installed"
   if [ ! -f "${xz_stamp_file_path}" ]
