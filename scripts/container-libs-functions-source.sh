@@ -426,7 +426,10 @@ function do_libelf()
 
   LIBELF_FOLDER_NAME="libelf-${LIBELF_VERSION}"
   local libelf_archive="${LIBELF_FOLDER_NAME}.tar.gz"
-  local libelf_url="http://www.mr511.de/software/${libelf_archive}"
+
+  # local libelf_url="http://www.mr511.de/software/${libelf_archive}"
+  # The original site seems unavailable, use a mirror.
+  local libelf_url="https://fossies.org/linux/misc/old/${libelf_archive}"
 
   local libelf_stamp_file_path="${INSTALL_FOLDER_PATH}/stamp-libelf-${LIBELF_VERSION}-installed"
   if [ ! -f "${libelf_stamp_file_path}" ]
