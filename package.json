@@ -1,7 +1,7 @@
 {
   "name": "@xpack-dev-tools/arm-none-eabi-gcc",
-  "version": "8.2.1-1.7.1",
-  "description": "A binary xPack with the ARM Embedded GCC toolchain",
+  "version": "6.3.1-1.1.1",
+  "description": "A binary xPack with the GNU ARM Embedded GCC toolchain",
   "main": "",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
@@ -33,28 +33,28 @@
   "xpack": {
     "binaries": {
       "destination": "./.content",
-      "baseUrl": "https://github.com/gnu-mcu-eclipse/arm-none-eabi-gcc/releases/download/v8.2.1-1.7/",
+      "baseUrl": "https://github.com/xpack-dev-tools/arm-none-eabi-gcc-xpack/releases/download/v8.2.1-1.7/",
       "skip": 3,
       "platforms": {
         "darwin-x64": {
           "sha256": "d6a162d33449282757573adab2aca8cc615d3e67a79c414dd2f6ee0c250d3a3a",
-          "fileName": "gnu-mcu-eclipse-arm-none-eabi-gcc-8.2.1-1.7-20190524-0603-macos.tgz"
+          "fileName": "xpack-arm-none-eabi-gcc-6.3.1-1.1-darwin-x64.tgz"
         },
         "linux-x86": {
           "sha256": "c832d4b8d7b91b6702f7188f0be30643b41991ce9ec91f4e67d821628898b564",
-          "fileName": "gnu-mcu-eclipse-arm-none-eabi-gcc-8.2.1-1.7-20190524-0603-centos32.tgz"
+          "fileName": "xpack-arm-none-eabi-gcc-6.3.1-1.1-linux-x32.tgz"
         },
         "linux-x64": {
           "sha256": "f15d9dd829262c0947a417da2626c2d4d6bd5ca7628ad7f3277d350b7986fa6c",
-          "fileName": "gnu-mcu-eclipse-arm-none-eabi-gcc-8.2.1-1.7-20190524-0603-centos64.tgz"
+          "fileName": "xpack-arm-none-eabi-gcc-6.3.1-1.1-linux-x64.tgz"
         },
         "win32-x86": {
           "sha256": "9aa2da08fe265d31fd8291b8f4c7f20dbc3b1599d2d0c37a62c1ff28f637e43c",
-          "fileName": "gnu-mcu-eclipse-arm-none-eabi-gcc-8.2.1-1.7-20190524-0603-win32.zip"
+          "fileName": "xpack-arm-none-eabi-gcc-6.3.1-1.1-win32-x32.zip"
         },
         "win32-x64": {
           "sha256": "7200a0d4a5bb99f6ee51b37c56716b83ffc9eb03ae5355e4a464f2d59910d214",
-          "fileName": "gnu-mcu-eclipse-arm-none-eabi-gcc-8.2.1-1.7-20190524-0603-win64.zip"
+          "fileName": "xpack-arm-none-eabi-gcc-6.3.1-1.1-win32-x64.zip"
         }
       }
     },
