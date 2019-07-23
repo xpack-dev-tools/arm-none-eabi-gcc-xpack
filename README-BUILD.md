@@ -18,7 +18,7 @@ repositories are used:
 
 - `git://sourceware.org/git/binutils-gdb.git`
 
-## Download the build scripts repo
+## Download the build scripts
 
 The build scripts are available in the `scripts` folder of the 
 [`xpack-dev-tools/arm-none-eabi-gcc-xpack`](https://github.com/xpack-dev-tools/arm-none-eabi-gcc-xpack) 
@@ -57,6 +57,8 @@ either passed to Docker or sourced to shell. The Docker syntax
 **is not** identical to shell, so some files may
 not be accepted by bash.
 
+## How to build distributions
+
 ### Prerequisites
 
 The prerequisites are common to all binary builds. Please follow the 
@@ -83,8 +85,8 @@ To prepare a new release:
   (except the PDF);
 - commit with a message like **8-2018-q4-major**; also add a tag;
 - check differences from the previous version;
-- determine the GCC version (like `7.2.1`) and update the `scripts/VERSION` 
-  file; the format is `7.2.1-1.1`. The fourth digit is the number of the 
+- determine the GCC version (like `8.2.1`) and update the `scripts/VERSION` 
+  file; the format is `8.2.1-1.8`. The fourth digit is the number of the 
   ARM release of the same GCC version, and the fifth digit is the xPack 
   GNU ARM Embedded GCC release number of this version.
 - add a new set of definitions in the `scripts/container-build.sh`, with 
@@ -213,12 +215,22 @@ The current platform for macOS production builds is a macOS 10.10.5
 VirtualBox image running on the same macMini with 16 GB of RAM and a 
 fast SSD.
 
+```console
+$ ssh ilg-xbb-mac.local
+```
+
 To build the latest macOS version:
 
 ```console
+$ screen -S arm
+
 $ sudo rm -rf ~/Work/arm-none-eabi-gcc-*
 $ caffeinate bash ~/Downloads/arm-none-eabi-gcc-xpack.git/scripts/build.sh --osx
 ```
+
+To detach from the session, use `Ctrl-a` `Ctrl-d`; to reattach use
+`screen -r openocd`; to kill the session use `Ctrl-a` `Ctrl-\` or 
+`Ctrl-a` `Ctrl-k` and confirm.
 
 Several hours later, the output of the build script is a compressed archive 
 and its SHA signature, created in the `deploy` folder:
@@ -296,36 +308,38 @@ build folder, it might be necessary to run a recursive `chown`.
 
 ### Rebuild previous releases
 
-Set the release explicitly in the environment:
+Although not guaranteed to work, previous versions can be re-built by
+explicitly specifying the version:
 
 ```console
-$ RELEASE_VERSION=7.3.1-1.1 bash ~/Downloads/arm-none-eabi-gcc-xpack.git/scripts/build.sh --all
-$ RELEASE_VERSION=6.3.1-1.1 bash ~/Downloads/arm-none-eabi-gcc-xpack.git/scripts/build.sh --all
+$ RELEASE_VERSION=6.3.1-1.2 bash ~/Downloads/arm-none-eabi-gcc-xpack.git/scripts/build.sh --all
+$ RELEASE_VERSION=7.3.1-1.2 bash ~/Downloads/arm-none-eabi-gcc-xpack.git/scripts/build.sh --all
 $ RELEASE_VERSION=8.2.1-1.8 bash ~/Downloads/arm-none-eabi-gcc-xpack.git/scripts/build.sh --all
 ```
 
-## Install
+## Test
 
-The procedure to install xPack GNU ARM Embedded GCC is platform 
-specific, but relatively straight forward (a .zip archive on Windows, 
-a compressed tar archive on macOS and GNU/Linux).
+A simple test is performed by the script at the end, by launching the 
+executables to check if all shared/dynamic libraries are correctly used.
 
-A portable method is to use [`xpm`](https://www.npmjs.com/package/xpm):
+For a true test you need to unpack the archive in a temporary location 
+(like `~/Downloads`) and then run the 
+program from there. For example on macOS the output should 
+look like:
 
 ```console
-$ xpm install --global @xpack-dev-tools/arm-none-eabi-gcc@latest
+$ /Users/ilg/Downloads/xPacks/arm-none-eabi-gcc/8.2.1-1.8/bin/arm-none-eabi-gcc --version
+arm-none-eabi-gcc (xPack GNU ARM Embedded GCC, 64-bit) 8.2.1 20170904 (release) [ARM/embedded-7-branch revision 255204]
 ```
 
-More details are available on the 
-[How to install the ARM toolchain?](https://xpack.github.io/arm-none-eabi-gcc/install/) 
-page.
+## Installed folders
 
 After install, the package should create a structure like this (only the 
 first two depth levels are shown):
 
 ```console
-$ tree -L 2 /Users/ilg/opt/xPacks/arm-none-eabi-gcc/8.2.1-1.8 
-/Users/ilg/opt/xPacks/arm-none-eabi-gcc/8.2.1-1.8
+$ tree -L 2 /Users/ilg/Library/xPacks/\@xpack-dev-tools/arm-none-eabi-gcc/8.2.1-1.8/.content/ 
+/Users/ilg/Library/xPacks/\@xpack-dev-tools/arm-none-eabi-gcc/8.2.1-1.8/.content/
 ├── README.md
 ├── arm-none-eabi
 │   ├── bin
@@ -392,31 +406,6 @@ No other files are installed in any system folders or other locations.
 
 The binaries are distributed as portable archives; thus they do not 
 need to run a setup and do not require an uninstall.
-
-## Test
-
-A simple test is performed by the script at the end, by launching the 
-executables to check if all shared/dynamic libraries are correctly used.
-
-For a true test you need to first install the package and then run the 
-program from the final location. For example on macOS the output should 
-look like:
-
-```console
-$ /Users/ilg/Library/xPacks/\@xpack-dev-tools/arm-none-eabi-gcc/8.2.1-1.8/.content/bin/arm-none-eabi-gcc --version
-arm-none-eabi-gcc (xPack GNU ARM Embedded GCC, 64-bit) 8.2.1 20170904 (release) [ARM/embedded-7-branch revision 255204]
-```
-
-## Previous versions
-
-Although not guaranteed to work, previous versions can be re-built by
-explicitly specifying the version:
-
-```console
-$ RELEASE_VERSION=6.3.1-1.1 bash ~/Downloads/arm-none-eabi-gcc-xpack.git/scripts/build.sh
-$ RELEASE_VERSION=7.3.1-1.1 bash ~/Downloads/arm-none-eabi-gcc-xpack.git/scripts/build.sh
-$ RELEASE_VERSION=8.2.1-1.8 bash ~/Downloads/arm-none-eabi-gcc-xpack.git/scripts/build.sh
-```
 
 ## Files cache
 
