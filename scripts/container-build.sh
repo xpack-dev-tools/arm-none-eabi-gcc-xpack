@@ -41,7 +41,7 @@ script_folder_name="$(basename "${script_folder_path}")"
 # =============================================================================
 
 # Inner script to run inside Docker containers to build the 
-# GNU MCU Eclipse ARM Embedded GCC distribution packages.
+# xPack GNU ARM Embedded GCC distribution packages.
 
 # For native builds, it runs on the host (macOS build cases,
 # and development builds for GNU/Linux).
