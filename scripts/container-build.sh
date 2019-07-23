@@ -483,6 +483,14 @@ fi
 
 # -----------------------------------------------------------------------------
 
+if [ ! -f "${BUILD_GIT_PATH}/scripts/${README_OUT_FILE_NAME}" ]
+then
+  echo "Missing ${README_OUT_FILE_NAME}, quit."
+  exit 1
+fi
+
+# -----------------------------------------------------------------------------
+
 # No versioning here, the inner archives use simple names.
 BINUTILS_SRC_FOLDER_NAME=${BINUTILS_SRC_FOLDER_NAME:-"binutils"}
 
