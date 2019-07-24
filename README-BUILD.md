@@ -182,7 +182,7 @@ $ bash ~/Downloads/arm-none-eabi-gcc-xpack.git/scripts/build.sh --all
 ```
 
 To detach from the session, use `Ctrl-a` `Ctrl-d`; to reattach use
-`screen -r arm`; to kill the session use `Ctrl-a` `Ctrl-\` and confirm.
+`screen -r arm`; to kill the session use `Ctrl-a` `Ctrl-k` and confirm.
 
 Several hours later, the output of the build script is a set of 4 files and 
 their SHA signatures, created in the `deploy` folder:
@@ -229,8 +229,7 @@ $ caffeinate bash ~/Downloads/arm-none-eabi-gcc-xpack.git/scripts/build.sh --osx
 ```
 
 To detach from the session, use `Ctrl-a` `Ctrl-d`; to reattach use
-`screen -r openocd`; to kill the session use `Ctrl-a` `Ctrl-\` or 
-`Ctrl-a` `Ctrl-k` and confirm.
+`screen -r openocd`; to kill the session use `Ctrl-a` `Ctrl-k` and confirm.
 
 Several hours later, the output of the build script is a compressed archive 
 and its SHA signature, created in the `deploy` folder:
