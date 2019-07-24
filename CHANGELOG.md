@@ -2,9 +2,9 @@
 
 Releases in reverse chronological order.
 
-### 2019-07-23
+### 2019-07-24
 
-- v6.3.1-1.1 re-released
+- v7.3.1-1.2 re-released
 
 ___
 
