@@ -311,7 +311,6 @@ Although not guaranteed to work, previous versions can be re-built by
 explicitly specifying the version:
 
 ```console
-$ RELEASE_VERSION=6.3.1-1.2 bash ~/Downloads/arm-none-eabi-gcc-xpack.git/scripts/build.sh --all
 $ RELEASE_VERSION=7.3.1-1.2 bash ~/Downloads/arm-none-eabi-gcc-xpack.git/scripts/build.sh --all
 $ RELEASE_VERSION=8.2.1-1.8 bash ~/Downloads/arm-none-eabi-gcc-xpack.git/scripts/build.sh --all
 ```
