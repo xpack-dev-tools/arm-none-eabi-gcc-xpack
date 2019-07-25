@@ -393,7 +393,8 @@ then
 
   PYTHON_WIN_VERSION="2.7.13"
 
-  BINUTILS_PATCH="binutils-2.30.patch"
+  BINUTILS_PATCH="binutils-${BINUTILS_VERSION}.patch"
+  GDB_PATCH="gdb-${GDB_VERSION}.patch"
 
   README_OUT_FILE_NAME="README-${RELEASE_VERSION}.md"
 

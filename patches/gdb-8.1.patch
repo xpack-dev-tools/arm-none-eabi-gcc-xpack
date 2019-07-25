@@ -1,0 +1,33 @@
+--- gdb/dtrace-probe.c	2017-11-25 12:29:31.000000000 +0200
++++ gdb/dtrace-probe-patched.c	2018-02-09 23:26:55.000000000 +0200
+@@ -77,6 +77,8 @@
+ class dtrace_static_probe_ops : public static_probe_ops
+ {
+ public:
++  dtrace_static_probe_ops() {}; // GNU MCU Eclipse
++  
+   /* See probe.h.  */
+   bool is_linespec (const char **linespecp) const override;
+ 
+--- gdb/probe.c	2017-11-25 12:29:31.000000000 +0200
++++ gdb/probe-patched.c	2018-02-09 23:28:04.000000000 +0200
+@@ -43,6 +43,8 @@
+ class any_static_probe_ops : public static_probe_ops
+ {
+ public:
++  any_static_probe_ops() {}; // GNU MCU Eclipse
++  
+   /* See probe.h.  */
+   bool is_linespec (const char **linespecp) const override;
+ 
+--- gdb/stap-probe.c	2017-11-25 12:29:31.000000000 +0200
++++ gdb/stap-probe-patched.c	2018-02-09 23:28:42.000000000 +0200
+@@ -102,6 +102,8 @@
+ class stap_static_probe_ops : public static_probe_ops
+ {
+ public:
++  stap_static_probe_ops() {}; // GNU MCU Eclipse
++  
+   /* See probe.h.  */
+   bool is_linespec (const char **linespecp) const override;
+ 
