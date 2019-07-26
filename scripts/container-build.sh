@@ -398,6 +398,8 @@ then
 
   README_OUT_FILE_NAME="README-${RELEASE_VERSION}.md"
 
+  FIX_LTO_PLUGIN="y"
+
 elif [[ "${RELEASE_VERSION}" =~ 7\.2\.1-* ]]
 then
 
