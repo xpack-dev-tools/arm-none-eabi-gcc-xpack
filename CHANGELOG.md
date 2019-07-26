@@ -4,7 +4,8 @@ Releases in reverse chronological order.
 
 ### 2019-07-26
 
-- v7.3.1-1.2 re-released
+- v7.3.1-1.2 released
+- v7.3.1-1.2.1 published on npmjs.com
 
 ___
 
