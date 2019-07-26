@@ -41,18 +41,22 @@ For this, on each platform:
 - unpack the archive in `Downloads`, and rename the version folder,
   by replacing a dash with a space; this will test paths with spaces;
   on Windows the current paths always use spaces, so renaming is not needed;
-- clone the build repo from https://github.com/xpack-dev-tools/arm-none-eabi-gcc-xpack.git
-  locally; on Windows use the Git console;
+- clone this repo locally; on Windows use the Git console;
+```
+$ git clone --recurse-submodules https://github.com/xpack-dev-tools/arm-none-eabi-gcc-xpack.git \
+  ~/Downloads/arm-none-eabi-gcc-xpack.git
+```
 - in a separate workspace, Import -> General -> Existing Projects into Workspace
   the Eclipse projects available in the 
   `tests/eclipse` folder of the build repo; more details in the 
   [README.md](https://github.com/xpack-dev-tools/arm-none-eabi-gcc-xpack/blob/xpack/tests/eclipse/README.md)
 - define the **Workspace ARM Toolchain path** to use the `Downloads` 
   temporary location
-- to test the compiler: for all projects
-  - remove all build folders 
-  - build all configs
-- to test the debugger: for all QEMU debug configurations
+- to test the compiler: for all projects (start with `arm-f4b-fs-lib`)
+  - remove all build folders, or **Clean all**
+  - build all configs, or **Build all**
+- to test the debugger: for all QEMU debug configurations (start with
+  `arm-f4b-fs-debug-lto-qemu`)
   - start the QEMU debug session, 
   - single step a few lines (Step Over)
   - start continuous run (Resume)
