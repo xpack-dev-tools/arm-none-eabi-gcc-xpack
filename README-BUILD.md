@@ -189,15 +189,15 @@ their SHA signatures, created in the `deploy` folder:
 
 ```console
 $ ls -l deploy
-total 350108
--rw-r--r-- 1 ilg ilg  61981364 Apr  1 08:27 xpack-arm-none-eabi-gcc-8.2.1-1.8-linux-x32.tgz
--rw-r--r-- 1 ilg ilg       140 Apr  1 08:27 xpack-arm-none-eabi-gcc-8.2.1-1.8-linux-x32.tgz.sha
--rw-r--r-- 1 ilg ilg  61144048 Apr  1 08:19 xpack-arm-none-eabi-gcc-8.2.1-1.8-linux-x64.tgz
--rw-r--r-- 1 ilg ilg       140 Apr  1 08:19 xpack-arm-none-eabi-gcc-8.2.1-1.8-linux-x64.tgz.sha
--rw-r--r-- 1 ilg ilg 112105889 Apr  1 08:29 xpack-arm-none-eabi-gcc-8.2.1-1.8-win32.zip
--rw-r--r-- 1 ilg ilg       134 Apr  1 08:29 xpack-arm-none-eabi-gcc-8.2.1-1.8-win32.zip.sha
--rw-r--r-- 1 ilg ilg 123181226 Apr  1 08:21 xpack-arm-none-eabi-gcc-8.2.1-1.8-win64.zip
--rw-r--r-- 1 ilg ilg       134 Apr  1 08:21 xpack-arm-none-eabi-gcc-8.2.1-1.8-win64.zip.sha
+total 487380
+-rw-r--r-- 1 ilg ilg 115361011 Jul 26 11:57 xpack-arm-none-eabi-gcc-8.2.1-1.8-linux-x32.tgz
+-rw-r--r-- 1 ilg ilg       114 Jul 26 11:57 xpack-arm-none-eabi-gcc-8.2.1-1.8-linux-x32.tgz.sha
+-rw-r--r-- 1 ilg ilg 113706069 Jul 26 11:55 xpack-arm-none-eabi-gcc-8.2.1-1.8-linux-x64.tgz
+-rw-r--r-- 1 ilg ilg       114 Jul 26 11:55 xpack-arm-none-eabi-gcc-8.2.1-1.8-linux-x64.tgz.sha
+-rw-r--r-- 1 ilg ilg 130202357 Jul 26 11:58 xpack-arm-none-eabi-gcc-8.2.1-1.8-win32-x32.zip
+-rw-r--r-- 1 ilg ilg       114 Jul 26 11:58 xpack-arm-none-eabi-gcc-8.2.1-1.8-win32-x32.zip.sha
+-rw-r--r-- 1 ilg ilg 139768099 Jul 26 11:56 xpack-arm-none-eabi-gcc-8.2.1-1.8-win32-x64.zip
+-rw-r--r-- 1 ilg ilg       114 Jul 26 11:56 xpack-arm-none-eabi-gcc-8.2.1-1.8-win32-x64.zip.sha
 ```
 
 To copy the files from the build machine to the current development 
@@ -236,9 +236,9 @@ and its SHA signature, created in the `deploy` folder:
 
 ```console
 $ ls -l deploy
-total 216064
--rw-r--r--  1 ilg  staff  110620198 Jul 24 16:35 xpack-arm-none-eabi-gcc-8.2.1-1.8-darwin-x64.tgz
--rw-r--r--  1 ilg  staff        134 Jul 24 16:35 xpack-arm-none-eabi-gcc-8.2.1-1.8-darwin-x64.sha
+total 215648
+-rw-r--r--  1 ilg  staff  110404277 Jul 26 13:29 xpack-arm-none-eabi-gcc-8.2.1-1.8-darwin-x64.tgz
+-rw-r--r--  1 ilg  staff        115 Jul 26 13:29 xpack-arm-none-eabi-gcc-8.2.1-1.8-darwin-x64.tgz.sha
 ```
 
 To copy the files from the build machine to the current development 
