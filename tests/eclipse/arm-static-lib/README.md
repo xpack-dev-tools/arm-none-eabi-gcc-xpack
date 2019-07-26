@@ -30,7 +30,7 @@ Finished building target: libstatic-lib-lto.a
 ```
 
 If the LTO plugin is not available, `arm-none-eabi-ar` complains, but, 
-suprisingly, the build does not fail.
+surprisingly, the build does not fail.
 
 ```
 Building target: libarm-static-lib.a
