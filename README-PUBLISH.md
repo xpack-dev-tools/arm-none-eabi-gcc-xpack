@@ -138,6 +138,7 @@ like **xPack GNU ARM Embedded GCC v8.2.1-1.8 released**
   and select the latest release
 - update the `baseUrl:` with the file URLs (including the tag/version)
 - from the release, copy the SHA & file names
+- check the executable names
 - commit all changes, use a message like `package.json: update urls for 8.2.1-1.8 release` (without `v`)
 - update `CHANGELOG.md`; commit with a message like 
   _CHANGELOG: prepare npm v8.2.1-1.8.1_
