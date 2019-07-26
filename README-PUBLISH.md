@@ -73,7 +73,7 @@ $ git clone --recurse-submodules https://github.com/xpack-dev-tools/arm-none-eab
 - name the release like **xPack GNU ARM Embedded GCC v8.2.1-1.8** 
 (mind the dash)
 - as description
-  - add a downloads badge like `[![Github Releases (by Release)](https://img.shields.io/github/downloads/xpack-dev-tools/arm-none-eabi-gcc-xpack/v8.2.1-1.8/total.svg)]()`; use empty URL for now
+  - add a downloads badge like `![Github Releases (by Release)](https://img.shields.io/github/downloads/xpack-dev-tools/arm-none-eabi-gcc-xpack/v8.2.1-1.8/total.svg)`
   - draft a short paragraph explaining what are the main changes
 - **attach binaries** and SHA (drag and drop from the archives folder will do it)
 - **enable** the **pre-release** button
@@ -147,33 +147,28 @@ like **xPack GNU ARM Embedded GCC v8.2.1-1.8 released**
 - push all changes to GitHub
 - `npm publish` (use `--access public` when publishing for the first time)
 
-## Test the xPack
+## Test npm binaries
 
-At minimum, test only if the URLs and SHA sums are correct, but for 
-extra safety also rerun the tests.
-
-On all available platforms:
-
-- install the new xPack release
+Install the binaries on all platforms.
 
 ```console
 $ xpm install --global @xpack-dev-tools/arm-none-eabi-gcc@latest
 ```
 
-- double check version, to be sure it is the latest release (sometimes 
-  the NPM server needs some time to propagate the changes)
-- in Eclipse, disable the Workspace ARM Toolchains path (**Restore Defaults**)
-- in Eclipse, select the Global ARM Toolchains path to the new xPack release
-- remove the toolchain temporarily installed in `Downloads`
-- rerun all build and debug tests, as before
-
 ## Create a final GitHub release
 
 - go to the [GitHub Releases](https://github.com/xpack-dev-tools/arm-none-eabi-gcc-xpack/releases) page
-- update the link behind the badge with the blog URL
+- check the download counter, it should match the number of tests
 - add a link to the Web page `[Continue reading »]()`; use an same blog URL
 - **disable** the **pre-release** button
 - click the **Update Release** button
+
+## Tag this release
+
+In this repo
+
+- add a tag like `v8.2.1-1.8`
+- push it to origin
 
 ## Share on Twitter
 
