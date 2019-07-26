@@ -1,81 +1,27 @@
 # Simple toolchain use tests
 
-## f4b-fs
+## arm-f4b-fs
 
-Freestanding blinky for STM32F4DISCOVERY. (POSIX does not pass
-the link with LTO).
+Freestanding blinky for STM32F4DISCOVERY, with and without LTO.
 
-### Compiler test
-
-Build all three configurations:
-
-- Debug
-- Debug-lto
-- Release
-- Release-lto
-
-The results should look like:
-
-```
-Invoking: GNU ARM Cross Print Size
-arm-none-eabi-size --format=berkeley "f4b-fs.elf"
-   text	   data	    bss	    dec	    hex	filename
-   8759	    164	    496	   9419	   24cb	f4b-fs.elf
-Finished building: f4b-fs.siz
-
-Invoking: GNU ARM Cross Print Size
-arm-none-eabi-size --format=berkeley "f4b-fs.elf"
-   text	   data	    bss	    dec	    hex	filename
-   8716	    164	    496	   9376	   24a0	f4b-fs.elf
-Finished building: f4b-fs.siz
+Compiler and debugger (QEMU & OpenOCD) test.
 
 
-Invoking: GNU ARM Cross Print Size
-arm-none-eabi-size --format=berkeley "f4b-fs.elf"
-   text	   data	    bss	    dec	    hex	filename
-   3724	     56	    332	   4112	   1010	f4b-fs.elf
-Finished building: f4b-fs.siz
+## arm-static-lib
 
-Invoking: GNU ARM Cross Print Size
-arm-none-eabi-size --format=berkeley "f4b-fs.elf"
-   text	   data	    bss	    dec	    hex	filename
-   2188	     48	    328	   2564	    a04	f4b-fs.elf
-Finished building: f4b-fs.siz
-```
+Simple static library with and without LTO. 
 
-### Debugger test
 
-Run the `f4b-fs-debug-qemu` launcher.
+## arm exe spaces
 
-If the physical board is available, run the `f4b-fs-debug-oocd.launch` too.
+## arm static lib spaces
 
-## static-lib-lto
+## arm exe obj spaces
 
-Very simple static library with LTO. Tests if the `lto-plugin` is in the
-expected location.
+## arm exe lib spaces
 
-### Compiler test
-
-Build both configurations:
-
-- Debug
-- Release
-
-The result should look like:
-
-```
-make all 
-Building file: ../lib.c
-Invoking: GNU ARM Cross C Compiler
-arm-none-eabi-gcc -mcpu=cortex-m3 -mthumb -O0 -fmessage-length=0 -fsigned-char -ffunction-sections -fdata-sections  -g3 -std=gnu11 -MMD -MP -MF"lib.d" -MT"lib.o" -c -o "lib.o" "../lib.c"
-Finished building: ../lib.c
- 
-Building target: libstatic-lib-lto.a
-Invoking: GNU ARM Cross Archiver
-arm-none-eabi-ar -r  "libstatic-lib-lto.a"  ./lib.o   
-arm-none-eabi-ar: creating libstatic-lib-lto.a
-Finished building target: libstatic-lib-lto.a
-```
+- fails on macOS
+  
 
 ## Debugger diagnosis
 
