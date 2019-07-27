@@ -253,108 +253,62 @@ fi
 README_OUT_FILE_NAME="README-out.md"
 
 # Keep them in sync with combo archive content.
-if [[ "${RELEASE_VERSION}" =~ 8\.2\.1-* ]]
+if [[ "${RELEASE_VERSION}" =~ 8\.3\.1-* ]]
 then
 
-  # https://developer.arm.com/-/media/Files/downloads/gnu-rm/8-2018q4/gcc-arm-none-eabi-8-2018-q4-major-src.tar.bz2
-
+  # https://developer.arm.com/-/media/Files/downloads/gnu-rm/8-2019q3/RC1.1/gcc-arm-none-eabi-8-2019-q3-update-src.tar.bz2
   GCC_COMBO_VERSION_MAJOR="8"
-  GCC_COMBO_VERSION_YEAR="2018"
-  GCC_COMBO_VERSION_QUARTER="q4"
-  GCC_COMBO_VERSION_KIND="major"
+  GCC_COMBO_VERSION_YEAR="2019"
+  GCC_COMBO_VERSION_QUARTER="q3"
+  GCC_COMBO_VERSION_KIND="update"
+  GCC_COMBO_VERSION_SUBFOLDER="/RC1.1"
 
   GCC_COMBO_VERSION="${GCC_COMBO_VERSION_MAJOR}-${GCC_COMBO_VERSION_YEAR}-${GCC_COMBO_VERSION_QUARTER}-${GCC_COMBO_VERSION_KIND}"
   GCC_COMBO_FOLDER_NAME="gcc-arm-none-eabi-${GCC_COMBO_VERSION}"
   GCC_COMBO_ARCHIVE="${GCC_COMBO_FOLDER_NAME}-src.tar.bz2"
 
-  GCC_COMBO_URL="https://developer.arm.com/-/media/Files/downloads/gnu-rm/${GCC_COMBO_VERSION_MAJOR}-${GCC_COMBO_VERSION_YEAR}${GCC_COMBO_VERSION_QUARTER}/${GCC_COMBO_ARCHIVE}"
+  GCC_COMBO_URL="https://developer.arm.com/-/media/Files/downloads/gnu-rm/${GCC_COMBO_VERSION_MAJOR}-${GCC_COMBO_VERSION_YEAR}${GCC_COMBO_VERSION_QUARTER}${GCC_COMBO_VERSION_SUBFOLDER}/${GCC_COMBO_ARCHIVE}"
 
   MULTILIB_FLAGS="--with-multilib-list=rmprofile"
 
-  BINUTILS_VERSION="2.31"
-  # From gcc/BASE_VER. svn 267074 from LAST_UPDATED and /release.txt
-  GCC_VERSION="8.2.1"
-  # git: df6915f029ac9acd2b479ea898388cbd7dda4974 from /release.txt.
-  NEWLIB_VERSION="3.0.0"
-  # git: fe554d200d1befdc3bddc9e14f8593ea3446c351 from /release.txt
-  GDB_VERSION="8.2"
+  # From /release.txt
+  BINUTILS_VERSION="2.32"
+
+  # From gcc/BASE_VER. svn 273027 from LAST_UPDATED and /release.txt
+  GCC_VERSION="8.3.1"
+
+  # git: fff17ad73f6ae6b75ef293e17a837f23f6134753 from /release.txt.
+  # VERSION from configure, comment in NEWS.
+  NEWLIB_VERSION="3.1.0"
+
+  # git: 66263c8cdba32ef18ae0dfabde0867b9b850c441 from /release.txt
+  GDB_VERSION="8.3"
 
   ZLIB_VERSION="1.2.8"
   GMP_VERSION="6.1.0"
   MPFR_VERSION="3.1.4"
   MPC_VERSION="1.0.3"
-  ISL_VERSION="0.18"
+
+  # ARM uses 0.15, not 0.18
+  ISL_VERSION="0.15"
+
   LIBELF_VERSION="0.8.13"
   EXPAT_VERSION="2.1.1"
   LIBICONV_VERSION="1.14"
   XZ_VERSION="5.2.3"
+  GETTEXT_VERSION="0.19.8.1"
 
   PYTHON_WIN_VERSION="2.7.13"
 
-  # Except the initial release, all other must be patched.
-  if [ "${RELEASE_VERSION}" != "8.2.1-1.1" ]
-  then
-    # For version 8.2.1-1.2 and up.
+  FIX_LTO_PLUGIN="y"
 
-    BINUTILS_PATCH="binutils-2.31.patch"
-  fi
+  README_OUT_FILE_NAME="README-${RELEASE_VERSION}.md"
 
-  if [[ ! "${RELEASE_VERSION}" =~ 8\.2\.1-1\.[12] ]]
-  then
-    # For version 8.2.1-1.3 and up.
+  WITH_GDB_PY3="y" 
+  PYTHON3_VERSION="3.7.2"
 
-    FIX_LTO_PLUGIN="y"
-    HAS_WINPTHREAD="y"
-
-    # Use a more recnt GDB to avoid
-    # https://sourceware.org/bugzilla/show_bug.cgi?id=24145
-
-    GDB_GIT_URL="git://sourceware.org/git/binutils-gdb.git"
-    GDB_GIT_BRANCH="master"
-    # Latest commit from 2019-01-29.
-    GDB_GIT_COMMIT="ad0f979c9df2cc3fba1f120c5e7f39e35591ed07"
-    GDB_SRC_FOLDER_NAME="gdb-${GDB_VERSION}.git"
-
-    README_OUT_FILE_NAME="README-${RELEASE_VERSION}.md"
-  fi
-
-  if [[ ! "${RELEASE_VERSION}" =~ 8\.2\.1-1\.[123] ]]
-  then
-    # For version 8.2.1-1.4 and up.
-
-    GCC_PATCH="gcc-8.2.1.patch"
-
-    HAS_WINPTHREAD=""
-  fi
-
-  if [[ ! "${RELEASE_VERSION}" =~ 8\.2\.1-1\.[1234] ]]
-  then
-    # For version 8.2.1-1.5 and up.
-
-    # GDB 8.2 with Python3 not yet functional on Windows.
-    # GDB does not know the Python3 API when compiled with mingw.
-    if [ "${TARGET_PLATFORM}" != "win32" ]
-    then
-      WITH_GDB_PY3="y" 
-      PYTHON3_VERSION="3.7.2"
-    fi
-
-    GETTEXT_VERSION="0.19.8.1"
-  fi
-
-  if [[ ! "${RELEASE_VERSION}" =~ 8\.2\.1-1\.[12345] ]]
-  then
-    # For version 8.2.1-1.6 and up.
-
-    GDB_VERSION="8.3.50"
-    GDB_GIT_URL="git://sourceware.org/git/binutils-gdb.git"
-    GDB_GIT_BRANCH="master"
-    # Latest commit from 2019-05-09.
-    GDB_GIT_COMMIT="bda678b9e5e4a343a9bb2b0fd20cf52035bad78e"
-    GDB_SRC_FOLDER_NAME="gdb-${GDB_VERSION}.git"
-
-    # GDB_PATCH="gdb-${GDB_VERSION}.patch"
-  fi
+  BINUTILS_PATCH="binutils-${BINUTILS_VERSION}.patch"
+  # GDB_PATCH="gdb-${GDB_VERSION}.patch"
 
 elif [[ "${RELEASE_VERSION}" =~ 7\.3\.1-* ]]
 then
@@ -399,85 +353,6 @@ then
   README_OUT_FILE_NAME="README-${RELEASE_VERSION}.md"
 
   FIX_LTO_PLUGIN="y"
-
-elif [[ "${RELEASE_VERSION}" =~ 7\.2\.1-* ]]
-then
-
-  # https://developer.arm.com/-/media/Files/downloads/gnu-rm/7-2017q4/gcc-arm-none-eabi-7-2017-q4-major-src.tar.bz2
-
-  GCC_COMBO_VERSION_MAJOR="7"
-  GCC_COMBO_VERSION_YEAR="2017"
-  GCC_COMBO_VERSION_QUARTER="q4"
-  GCC_COMBO_VERSION_KIND="major"
-
-  GCC_COMBO_VERSION="${GCC_COMBO_VERSION_MAJOR}-${GCC_COMBO_VERSION_YEAR}-${GCC_COMBO_VERSION_QUARTER}-${GCC_COMBO_VERSION_KIND}"
-  GCC_COMBO_FOLDER_NAME="gcc-arm-none-eabi-${GCC_COMBO_VERSION}"
-  GCC_COMBO_ARCHIVE="${GCC_COMBO_FOLDER_NAME}-src.tar.bz2"
-
-  GCC_COMBO_URL="https://developer.arm.com/-/media/Files/downloads/gnu-rm/${GCC_COMBO_VERSION_MAJOR}-${GCC_COMBO_VERSION_YEAR}${GCC_COMBO_VERSION_QUARTER}/${GCC_COMBO_ARCHIVE}"
-
-  MULTILIB_FLAGS="--with-multilib-list=rmprofile"
-
-  BINUTILS_VERSION="2.29"
-  # From gcc/BASE_VER; svn: 255204.
-  GCC_VERSION="7.2.1"
-  # git: 76bd5cab331a873ac422fdcb7ba5fe79abea94f0, 28 Nov 2017.
-  NEWLIB_VERSION="2.9.1"
-  GDB_VERSION="8.0"
-
-  ZLIB_VERSION="1.2.8"
-  GMP_VERSION="6.1.0"
-  MPFR_VERSION="3.1.4"
-  MPC_VERSION="1.0.3"
-  ISL_VERSION="0.15"
-  LIBELF_VERSION="0.8.13"
-  EXPAT_VERSION="2.1.1"
-  LIBICONV_VERSION="1.14"
-  XZ_VERSION="5.2.3"
-
-  PYTHON_WIN_VERSION="2.7.13"
-
-  GDB_PATCH="gdb-${GDB_VERSION}.patch"
-
-elif [[ "${RELEASE_VERSION}" =~ 6\.3\.1-* ]]
-then
-
-  # https://developer.arm.com/-/media/Files/downloads/gnu-rm/6-2017q2/gcc-arm-none-eabi-6-2017-q2-update-src.tar.bz2
-
-  GCC_COMBO_VERSION_MAJOR="6"
-  GCC_COMBO_VERSION_YEAR="2017"
-  GCC_COMBO_VERSION_QUARTER="q2"
-  GCC_COMBO_VERSION_KIND="update"
-
-  GCC_COMBO_VERSION="${GCC_COMBO_VERSION_MAJOR}-${GCC_COMBO_VERSION_YEAR}-${GCC_COMBO_VERSION_QUARTER}-${GCC_COMBO_VERSION_KIND}"
-  GCC_COMBO_FOLDER_NAME="gcc-arm-none-eabi-${GCC_COMBO_VERSION}"
-  GCC_COMBO_ARCHIVE="${GCC_COMBO_FOLDER_NAME}-src.tar.bz2"
-
-  GCC_COMBO_URL="https://developer.arm.com/-/media/Files/downloads/gnu-rm/${GCC_COMBO_VERSION_MAJOR}-${GCC_COMBO_VERSION_YEAR}${GCC_COMBO_VERSION_QUARTER}/${GCC_COMBO_ARCHIVE}"
-
-  MULTILIB_FLAGS="--with-multilib-list=rmprofile"
-  BINUTILS_VERSION="2.28"
-  # From gcc/BASE_VER; svn: 249437.
-  GCC_VERSION="6.3.1"
-  # git: 0d79b021a4ec4e6b9aa1a9f6db0e29a137005ce7, 14 June 2017.
-  NEWLIB_VERSION="2.8.0"
-  GDB_VERSION="7.12"
-
-  ZLIB_VERSION="1.2.8"
-  GMP_VERSION="6.1.0"
-  MPFR_VERSION="3.1.4"
-  MPC_VERSION="1.0.3"
-  ISL_VERSION="0.15"
-  LIBELF_VERSION="0.8.13"
-  EXPAT_VERSION="2.1.1"
-  LIBICONV_VERSION="1.14"
-  XZ_VERSION="5.2.3"
-
-  PYTHON_WIN_VERSION="2.7.13"
-
-  BINUTILS_PATCH="binutils-2.28.patch"
-
-  README_OUT_FILE_NAME="README-${RELEASE_VERSION}.md"
 
 else
   echo "Unsupported version ${RELEASE_VERSION}."

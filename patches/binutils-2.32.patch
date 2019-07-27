@@ -1,0 +1,10 @@
+--- readline/Makefile.in	2019-04-16 20:10:40.000000000 +0300
++++ readline/Makefile-patched.in	2019-04-16 20:20:11.000000000 +0300
+@@ -219,6 +219,7 @@
+ ## readline along with GDB. GDB links statically against readline,
+ ## so it doesn't depend on us installing it on the system.
+ 
++install-strip:
+ install:
+ 
+ #install:	$(INSTALL_TARGETS)
