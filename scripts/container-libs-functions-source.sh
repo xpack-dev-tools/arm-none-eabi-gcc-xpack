@@ -315,8 +315,6 @@ function do_mpc()
             --build=${BUILD} \
             --host=${HOST} \
             --target=${TARGET} \
-            \
-            --disable-nls
             
           cp "config.log" "${LOGS_FOLDER_PATH}/config-mpc-log.txt"
         ) 2>&1 | tee "${LOGS_FOLDER_PATH}/configure-mpc-output.txt"
@@ -392,8 +390,6 @@ function do_isl()
             --build=${BUILD} \
             --host=${HOST} \
             --target=${TARGET} \
-            \
-            --disable-nls
             
           cp "config.log" "${LOGS_FOLDER_PATH}/config-isl-log.txt"
         ) 2>&1 | tee "${LOGS_FOLDER_PATH}/configure-isl-output.txt"
@@ -542,8 +538,6 @@ function do_expat()
             --build=${BUILD} \
             --host=${HOST} \
             --target=${TARGET} \
-            \
-            --disable-nls
             
           cp "config.log" "${LOGS_FOLDER_PATH}/config-expat-log.txt"
         ) 2>&1 | tee "${LOGS_FOLDER_PATH}/configure-expat-output.txt"
