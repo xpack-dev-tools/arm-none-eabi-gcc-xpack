@@ -118,5 +118,7 @@ corresponding licenses are available in the installed
 [![npm](https://img.shields.io/npm/dm/@xpack-dev-tools/arm-none-eabi-gcc.svg)](https://www.npmjs.com/package/@xpack-dev-tools/arm-none-eabi-gcc/)
   - all releases [![npm](https://img.shields.io/npm/dt/@xpack-dev-tools/arm-none-eabi-gcc.svg)](https://www.npmjs.com/package/@xpack-dev-tools/arm-none-eabi-gcc/)
   
-Credit to [Shields IO](https://shields.io) and [Somsubhra/github-release-stats](https://github.com/Somsubhra/github-release-stats).
+Credit to [Shields IO](https://shields.io) for the badges and to 
+[Somsubhra/github-release-stats](https://github.com/Somsubhra/github-release-stats) 
+for the individual file counters.
 
