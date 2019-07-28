@@ -249,8 +249,8 @@ then
   LTO_PLUGIN_BFD_PATH="lib/bfd-plugins/liblto_plugin-0.dll"
 fi
 
-# Redfine it to a version based name and create new files.
-README_OUT_FILE_NAME="README-out.md"
+README_OUT_FILE_NAME="README-${RELEASE_VERSION}.md"
+FIX_LTO_PLUGIN="y"
 
 # Keep them in sync with combo archive content.
 if [[ "${RELEASE_VERSION}" =~ 8\.3\.1-* ]]
@@ -300,10 +300,6 @@ then
 
   PYTHON_WIN_VERSION="2.7.13"
 
-  FIX_LTO_PLUGIN="y"
-
-  README_OUT_FILE_NAME="README-${RELEASE_VERSION}.md"
-
   WITH_GDB_PY3="y" 
   PYTHON3_VERSION="3.7.2"
 
@@ -349,10 +345,6 @@ then
 
   BINUTILS_PATCH="binutils-${BINUTILS_VERSION}.patch"
   GDB_PATCH="gdb-${GDB_VERSION}.patch"
-
-  README_OUT_FILE_NAME="README-${RELEASE_VERSION}.md"
-
-  FIX_LTO_PLUGIN="y"
 
 else
   echo "Unsupported version ${RELEASE_VERSION}."
@@ -407,7 +399,6 @@ then
   export PYTHON3_WIN_EMBED_FOLDER_NAME
   export PYTHON3_SRC_FOLDER_NAME="Python-${PYTHON3_VERSION}"
   export PYTHON3_FOLDER_NAME="Python-${PYTHON3_VERSION}"
-
 fi
 
 
