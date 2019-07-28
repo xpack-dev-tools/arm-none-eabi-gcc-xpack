@@ -116,6 +116,7 @@ function download_python3_win()
       echo "Folder ${PYTHON3_WIN_EMBED_FOLDER_NAME} already present."
     fi
       
+    cd "${SOURCES_FOLDER_PATH}/${PYTHON3_WIN_EMBED_FOLDER_NAME}"
     echo "Copying python${PYTHON3_VERSION_MAJOR}${PYTHON3_VERSION_MINOR}.dll..."
     # From here it'll be copied as dependency.
     mkdir -p "${LIBS_INSTALL_FOLDER_PATH}/bin/"
