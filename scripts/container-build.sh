@@ -300,8 +300,13 @@ then
 
   PYTHON_WIN_VERSION="2.7.13"
 
-  WITH_GDB_PY3="y" 
-  PYTHON3_VERSION="3.7.2"
+  # GDB 8.3 with Python3 not yet functional on Windows.
+  # GDB does not know the Python3 API when compiled with mingw.
+  if [ "${TARGET_PLATFORM}" != "win32" ]
+  then
+    WITH_GDB_PY3="y" 
+    PYTHON3_VERSION="3.7.2"
+  fi
 
   BINUTILS_PATCH="binutils-${BINUTILS_VERSION}.patch"
   # GDB_PATCH="gdb-${GDB_VERSION}.patch"
