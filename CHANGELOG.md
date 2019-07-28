@@ -2,6 +2,10 @@
 
 Releases in reverse chronological order.
 
+### 2019-07-29
+
+- v8.3.1-1.1 released
+
 ### 2019-07-26
 
 - v7.3.1-1.2 released
