@@ -54,7 +54,8 @@ $ git clone --recurse-submodules https://github.com/xpack-dev-tools/arm-none-eab
   temporary location
 - to test the compiler: for all projects (start with `arm-f4b-fs-lib`)
   - remove all build folders, or **Clean all**
-  - build all configs, or **Build all**
+  - build all configs, with the hammer, not with **Build all**, to be sure 
+    errors are not missed
 - to test the debugger: for all QEMU debug configurations (start with
   `arm-f4b-fs-debug-lto-qemu`)
   - start the QEMU debug session, 
