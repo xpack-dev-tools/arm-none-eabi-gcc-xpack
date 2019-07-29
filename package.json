@@ -33,28 +33,28 @@
   "xpack": {
     "binaries": {
       "destination": "./.content",
-      "baseUrl": "https://github.com/xpack-dev-tools/arm-none-eabi-gcc-xpack/releases/download/v7.3.1-1.2/",
+      "baseUrl": "https://github.com/xpack-dev-tools/arm-none-eabi-gcc-xpack/releases/download/v8.3.1-1.1/",
       "skip": 3,
       "platforms": {
         "darwin-x64": {
-          "sha256": "b852c2f8aa48a0d5ea6d7c5afea8ee825c1df7f7cf7492825519223b0bb7a9f2",
-          "fileName": "xpack-arm-none-eabi-gcc-7.3.1-1.2-darwin-x64.tgz"
+          "sha256": "61cdc9d05d6a666b2df45ad2dcd5aa5d7eccf1ffb865420c35704a1917812eb2",
+          "fileName": "xpack-arm-none-eabi-gcc-8.3.1-1.1-darwin-x64.tgz"
         },
         "linux-x86": {
-          "sha256": "eda39f5866598881a63e07eff622c3b442f3cc4b166f8ebda29ffb30a08280c9",
-          "fileName": "xpack-arm-none-eabi-gcc-7.3.1-1.2-linux-x32.tgz"
+          "sha256": "266f5ebde79ce4d5a91232af22707dad076fdcf35031042b498fae1ae09989d7",
+          "fileName": "xpack-arm-none-eabi-gcc-8.3.1-1.1-linux-x32.tgz"
         },
         "linux-x64": {
-          "sha256": "c5c76a218f9b847c51d354c0f994de0cac5e7568a3b58e0ca04ce3d36f4eab0e",
-          "fileName": "xpack-arm-none-eabi-gcc-7.3.1-1.2-linux-x64.tgz"
+          "sha256": "2e49bdb076ed96cdde2b8320d9496875eccd7eb83d2af0dc378e02dd17aedec4",
+          "fileName": "xpack-arm-none-eabi-gcc-8.3.1-1.1-linux-x64.tgz"
         },
         "win32-x86": {
-          "sha256": "d6d5613f032060ccfaa43757a1f56a01308c5b879630b9d21742adbd8ae40d57",
-          "fileName": "xpack-arm-none-eabi-gcc-7.3.1-1.2-win32-x32.zip"
+          "sha256": "3854e4683d3977f27573610cf6badd0f0433ddc37ed0d922757cf1ff708be405",
+          "fileName": "xpack-arm-none-eabi-gcc-8.3.1-1.1-win32-x32.zip"
         },
         "win32-x64": {
-          "sha256": "b5501d197ba19724783e42a454c260f9a73ab9a759279aea72bf353dd5301afc",
-          "fileName": "xpack-arm-none-eabi-gcc-7.3.1-1.2-win32-x64.zip"
+          "sha256": "39e1e553edcae83856882b8587a7f8b6d5c9f8fc11f10247b0e2af3321481fdb",
+          "fileName": "xpack-arm-none-eabi-gcc-8.3.1-1.1-win32-x64.zip"
         }
       }
     },
@@ -75,6 +75,8 @@
       "arm-none-eabi-gcov-dump": "./.content/bin/arm-none-eabi-gcov-dump",
       "arm-none-eabi-gcov-tool": "./.content/bin/arm-none-eabi-gcov-tool",
       "arm-none-eabi-gdb": "./.content/bin/arm-none-eabi-gdb",
+      "arm-none-eabi-gdb-add-index": "./.content/bin/arm-none-eabi-gdb-add-index",
+      "arm-none-eabi-gdb-add-index-py": "./.content/bin/arm-none-eabi-gdb-add-index-py",
       "arm-none-eabi-gdb-py": "./.content/bin/arm-none-eabi-gdb-py",
       "arm-none-eabi-gprof": "./.content/bin/arm-none-eabi-gprof",
       "arm-none-eabi-ld": "./.content/bin/arm-none-eabi-ld",
