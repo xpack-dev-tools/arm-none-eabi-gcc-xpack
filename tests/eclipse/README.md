@@ -11,6 +11,10 @@ Compiler and debugger (QEMU & OpenOCD) test.
 
 Simple static library with and without LTO. 
 
+## arm-f4b-fs-lib
+
+Same as above, but including a static library.
+
 
 ## arm exe spaces
 
