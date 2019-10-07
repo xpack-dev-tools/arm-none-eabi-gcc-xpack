@@ -98,7 +98,7 @@ on the way. Refer to them as:
 
 - **[Issue:\[#1\]\(...\)]**.
 
-## Update the SHA sums
+### Update the SHA sums
 
 Copy/paste the build report at the end of the post as:
 
@@ -145,6 +145,7 @@ like **xPack GNU ARM Embedded GCC v8.2.1-1.8 released**
   _CHANGELOG: prepare npm v8.2.1-1.8.1_
 - `npm version 8.2.1-1.8.1`; the first 5 numbers are the same as the 
   GitHub release; the sixth number is the npm specific version
+- `npm pack` and check the content of the archive
 - push all changes to GitHub
 - `npm publish` (use `--access public` when publishing for the first time)
 
@@ -163,13 +164,6 @@ $ xpm install --global @xpack-dev-tools/arm-none-eabi-gcc@latest
 - add a link to the Web page `[Continue reading »]()`; use an same blog URL
 - **disable** the **pre-release** button
 - click the **Update Release** button
-
-## Tag this release
-
-In this repo
-
-- add a tag like `v8.2.1-1.8`
-- push it to origin
 
 ## Share on Twitter
 
