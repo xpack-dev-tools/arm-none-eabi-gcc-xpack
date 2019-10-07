@@ -249,9 +249,13 @@ then
   LTO_PLUGIN_BFD_PATH="lib/bfd-plugins/liblto_plugin-0.dll"
 fi
 
-README_OUT_FILE_NAME="README-${RELEASE_VERSION}.md"
 FIX_LTO_PLUGIN="y"
 
+# -----------------------------------------------------------------------------
+
+README_OUT_FILE_NAME="README-${RELEASE_VERSION}.md"
+
+# In reverse chronological order.
 # Keep them in sync with combo archive content.
 if [[ "${RELEASE_VERSION}" =~ 8\.3\.1-* ]]
 then
