@@ -6,11 +6,11 @@ Before starting the build, perform some checks.
 
 ### Check the `CHANGELOG.md` file
 
-Open the `CHANGELOG.txt` file and check if 
+Open the `CHANGELOG.txt` file and check if
 all new entries are in.
 
-Note: if you missed to update the `CHANGELOG.md` before starting the build, 
-edit the file and rerun the build, it should take only a few minutes to 
+Note: if you missed to update the `CHANGELOG.md` before starting the build,
+edit the file and rerun the build, it should take only a few minutes to
 recreate the archives with the correct file.
 
 ### Check the version
@@ -27,13 +27,13 @@ In this Git repo:
 
 ### Run the build scripts
 
-When everything is ready, follow the instructions from the 
-[build](https://github.com/xpack-dev-tools/arm-none-eabi-gcc-xpack/blob/xpack/README-BUILD.md) 
+When everything is ready, follow the instructions from the
+[build](https://github.com/xpack-dev-tools/arm-none-eabi-gcc-xpack/blob/xpack/README-BUILD.md)
 page.
 
 ## Test
 
-Install the binaries on all supported platforms and check if they are 
+Install the binaries on all supported platforms and check if they are
 functional.
 
 For this, on each platform:
@@ -47,18 +47,18 @@ $ git clone --recurse-submodules https://github.com/xpack-dev-tools/arm-none-eab
   ~/Downloads/arm-none-eabi-gcc-xpack.git
 ```
 - in a separate workspace, Import -> General -> Existing Projects into Workspace
-  the Eclipse projects available in the 
-  `tests/eclipse` folder of the build repo; more details in the 
+  the Eclipse projects available in the
+  `tests/eclipse` folder of the build repo; more details in the
   [README.md](https://github.com/xpack-dev-tools/arm-none-eabi-gcc-xpack/blob/xpack/tests/eclipse/README.md)
-- define the **Workspace ARM Toolchain path** to use the `Downloads` 
+- define the **Workspace ARM Toolchain path** to use the `Downloads`
   temporary location
 - to test the compiler: for all projects (start with `arm-f4b-fs-lib`)
   - remove all build folders, or **Clean all**
-  - build all configs, with the hammer, not with **Build all**, to be sure 
+  - build all configs, with the hammer, not with **Build all**, to be sure
     errors are not missed
 - to test the debugger: for all QEMU debug configurations (start with
   `arm-f4b-fs-debug-lto-qemu`)
-  - start the QEMU debug session, 
+  - start the QEMU debug session,
   - single step a few lines (Step Over)
   - start continuous run (Resume)
   - halt (Suspend)
@@ -71,7 +71,7 @@ $ git clone --recurse-submodules https://github.com/xpack-dev-tools/arm-none-eab
 - go to the [GitHub Releases](https://github.com/xpack-dev-tools/arm-none-eabi-gcc-xpack/releases) page
 - click **Draft a new release**
 - name the tag like **v8.2.1-1.8** (mind the dash in the middle!)
-- name the release like **xPack GNU ARM Embedded GCC v8.2.1-1.8** 
+- name the release like **xPack GNU ARM Embedded GCC v8.2.1-1.8**
 (mind the dash)
 - as description
   - add a downloads badge like `![Github Releases (by Release)](https://img.shields.io/github/downloads/xpack-dev-tools/arm-none-eabi-gcc-xpack/v8.2.1-1.8/total.svg)`
@@ -80,20 +80,20 @@ $ git clone --recurse-submodules https://github.com/xpack-dev-tools/arm-none-eab
 - **enable** the **pre-release** button
 - click the **Publish Release** button
 
-Note: at this moment the system should send a notification to all clients 
+Note: at this moment the system should send a notification to all clients
 watching this project.
 
-## Prepare a new blog post 
+## Prepare a new blog post
 
 In the `xpack.github.io` web Git:
 
 - add a new file to `_posts/arm-none-eabi-gcc/releases`
 - name the file like `2018-04-01-arm-none-eabi-gcc-v8-2-1-1-8-released.md`
 - name the post like: **xPack GNU ARM Embedded GCC v8.2.1-1.8 released**
-- as `download_url` use the tagged URL like `https://github.com/xpack-dev-tools/arm-none-eabi-gcc-xpack/releases/tag/v8.2.1-1.8/` 
+- as `download_url` use the tagged URL like `https://github.com/xpack-dev-tools/arm-none-eabi-gcc-xpack/releases/tag/v8.2.1-1.8/`
 - update the `date:` field with the current date
 
-If any, close [issues](https://github.com/xpack-dev-tools/arm-none-eabi-gcc-xpack/issues) 
+If any, close [issues](https://github.com/xpack-dev-tools/arm-none-eabi-gcc-xpack/issues)
 on the way. Refer to them as:
 
 - **[Issue:\[#1\]\(...\)]**.
@@ -128,22 +128,22 @@ $ cat *.sha
 
 ## Update the Web
 
-- commit the `xpack.github.io` web Git; use a message 
+- commit the `xpack.github.io` web Git; use a message
 like **xPack GNU ARM Embedded GCC v8.2.1-1.8 released**
 - wait for the GitHub Pages build to complete
 - remember the post URL, since it must be updated in the release page
 
 ## Publish on the npmjs.com server
 
-- open [GitHub Releases](https://github.com/xpack-dev-tools/arm-none-eabi-gcc-xpack/releases) 
+- open [GitHub Releases](https://github.com/xpack-dev-tools/arm-none-eabi-gcc-xpack/releases)
   and select the latest release
 - update the `baseUrl:` with the file URLs (including the tag/version)
 - from the release, copy the SHA & file names
 - check the executable names
 - commit all changes, use a message like `package.json: update urls for 8.2.1-1.8 release` (without `v`)
-- update `CHANGELOG.md`; commit with a message like 
+- update `CHANGELOG.md`; commit with a message like
   _CHANGELOG: prepare npm v8.2.1-1.8.1_
-- `npm version 8.2.1-1.8.1`; the first 5 numbers are the same as the 
+- `npm version 8.2.1-1.8.1`; the first 5 numbers are the same as the
   GitHub release; the sixth number is the npm specific version
 - `npm pack` and check the content of the archive
 - push all changes to GitHub

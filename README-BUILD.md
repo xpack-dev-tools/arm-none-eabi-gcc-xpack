@@ -2,12 +2,12 @@
 
 ## Introduction
 
-This project includes the scripts and additional files required to 
+This project includes the scripts and additional files required to
 build and publish the
 [xPack GNU ARM Embedded GCC](https://xpack.github.io/arm-none-eabi-gcc/) binaries.
 
 The build scripts use the
-[xPack Build Box (XBB)](https://github.com/xpack/xpack-build-box), 
+[xPack Build Box (XBB)](https://github.com/xpack/xpack-build-box),
 a set of elaborate build environments based on GCC 7.4 (Docker containers
 for GNU/Linux and Windows or a custom folder for MacOS).
 
@@ -20,11 +20,11 @@ repositories are used:
 
 ## Download the build scripts
 
-The build scripts are available in the `scripts` folder of the 
-[`xpack-dev-tools/arm-none-eabi-gcc-xpack`](https://github.com/xpack-dev-tools/arm-none-eabi-gcc-xpack) 
+The build scripts are available in the `scripts` folder of the
+[`xpack-dev-tools/arm-none-eabi-gcc-xpack`](https://github.com/xpack-dev-tools/arm-none-eabi-gcc-xpack)
 Git repo.
 
-To download them, the following shortcut is available: 
+To download them, the following shortcut is available:
 
 ```console
 $ curl -L https://github.com/xpack-dev-tools/arm-none-eabi-gcc-xpack/raw/xpack/scripts/git-clone.sh | bash
@@ -38,14 +38,14 @@ $ git clone --recurse-submodules https://github.com/xpack-dev-tools/arm-none-eab
   ~/Downloads/arm-none-eabi-gcc-xpack.git
 ```
 
-> Note: the repository uses submodules; for a successful build it is 
+> Note: the repository uses submodules; for a successful build it is
 > mandatory to recurse the submodules.
 
 ## The `Work` folder
 
-The script creates a temporary build `Work/arm-none-eabi-gcc-${version}` 
-folder in the user home. Although not recommended, if for any reasons 
-you need to change the location of the `Work` folder, 
+The script creates a temporary build `Work/arm-none-eabi-gcc-${version}`
+folder in the user home. Although not recommended, if for any reasons
+you need to change the location of the `Work` folder,
 you can redefine `WORK_FOLDER_PATH` variable before invoking the script.
 
 ## Customizations
@@ -53,7 +53,7 @@ you can redefine `WORK_FOLDER_PATH` variable before invoking the script.
 There are many other settings that can be redefined via
 environment variables. If necessary,
 place them in a file and pass it via `--env-file`. This file is
-either passed to Docker or sourced to shell. The Docker syntax 
+either passed to Docker or sourced to shell. The Docker syntax
 **is not** identical to shell, so some files may
 not be accepted by bash.
 
@@ -61,19 +61,19 @@ not be accepted by bash.
 
 ### Prerequisites
 
-The prerequisites are common to all binary builds. Please follow the 
-instructions from the separate 
-[Prerequisites for building xPack binaries](https://xpack.github.io/xbb/prerequisites/) 
+The prerequisites are common to all binary builds. Please follow the
+instructions from the separate
+[Prerequisites for building xPack binaries](https://xpack.github.io/xbb/prerequisites/)
 page and return when ready.
 
 ## Update git repos
 
-The xPack GNU ARM Embedded GCC distribution follows the official 
-[ARM](https://developer.arm.com/open-source/gnu-toolchain/gnu-rm) 
-distribution, and it is planned to make a new release after each future 
+The xPack GNU ARM Embedded GCC distribution follows the official
+[ARM](https://developer.arm.com/open-source/gnu-toolchain/gnu-rm)
+distribution, and it is planned to make a new release after each future
 ARM release.
 
-Currently the build procedure uses the _Source Invariant_ archive and 
+Currently the build procedure uses the _Source Invariant_ archive and
 the configure options are the same as in the ARM build scripts.
 
 ## Prepare release
@@ -81,22 +81,22 @@ the configure options are the same as in the ARM build scripts.
 To prepare a new release:
 
 - download the new _Source Invariant_ archive
-- copy/paste the files and override the `arm-gcc-original-scripts.git` files 
+- copy/paste the files and override the `arm-gcc-original-scripts.git` files
   (except the PDF);
 - commit with a message like **8-2018-q4-major**; also add a tag;
 - check differences from the previous version;
-- determine the GCC version (like `8.2.1`) and update the `scripts/VERSION` 
-  file; the format is `8.2.1-1.8`. The fourth digit is the number of the 
-  ARM release of the same GCC version, and the fifth digit is the xPack 
+- determine the GCC version (like `8.2.1`) and update the `scripts/VERSION`
+  file; the format is `8.2.1-1.8`. The fourth digit is the number of the
+  ARM release of the same GCC version, and the fifth digit is the xPack
   GNU ARM Embedded GCC release number of this version.
-- add a new set of definitions in the `scripts/container-build.sh`, with 
+- add a new set of definitions in the `scripts/container-build.sh`, with
   the versions of various components;
 - if newer libraries are used, check if they are available from the local git
   cache project.
 
 ### Check `README.md`
 
-Normally `README.md` should not need changes, but better check. 
+Normally `README.md` should not need changes, but better check.
 Information related to the new version should not be included here,
 but in the version specific file (below).
 
@@ -111,15 +111,15 @@ Check `CHANGELOG.md` and add the new release.
 
 ## Build
 
-Although it is perfectly possible to build all binaries in a single step 
-on a macOS system, due to Docker specifics, it is faster to build the 
-GNU/Linux and Windows binaries on a GNU/Linux system and the macOS binary 
+Although it is perfectly possible to build all binaries in a single step
+on a macOS system, due to Docker specifics, it is faster to build the
+GNU/Linux and Windows binaries on a GNU/Linux system and the macOS binary
 separately.
 
 ### Build the GNU/Linux and Windows binaries
 
-The current platform for GNU/Linux and Windows production builds is an 
-Ubuntu Server 18 LTS, running on an Intel NUC8i7BEH mini PC with 32 GB of RAM 
+The current platform for GNU/Linux and Windows production builds is an
+Ubuntu Server 18 LTS, running on an Intel NUC8i7BEH mini PC with 32 GB of RAM
 and 512 GB of fast M.2 SSD.
 
 ```console
@@ -150,8 +150,8 @@ ilegeul/centos      6-xbb-v2.2          6b1234f2ac44        5 weeks ago         
 hello-world         latest              fce289e99eb9        5 months ago        1.84kB
 ```
 
-It is also recommended to Remove unused Docker space. This is mostly useful 
-after failed builds, during development, when dangling images may be left 
+It is also recommended to Remove unused Docker space. This is mostly useful
+after failed builds, during development, when dangling images may be left
 by Docker.
 
 To remove unused files:
@@ -166,8 +166,8 @@ To download the build scripts:
 $ curl -L https://github.com/xpack-dev-tools/arm-none-eabi-gcc-xpack/raw/xpack/scripts/git-clone.sh | bash
 ```
 
-To build both the 32/64-bit Windows and GNU/Linux versions, use `--all`; to 
-build selectively, use `--linux64 --win64` or `--linux32 --win32` (GNU/Linux 
+To build both the 32/64-bit Windows and GNU/Linux versions, use `--all`; to
+build selectively, use `--linux64 --win64` or `--linux32 --win32` (GNU/Linux
 can be built alone; Windows also requires the GNU/Linux build).
 
 Since the build takes a while, use `screen` to isolate the build session
@@ -184,7 +184,7 @@ $ bash ~/Downloads/arm-none-eabi-gcc-xpack.git/scripts/build.sh --all
 To detach from the session, use `Ctrl-a` `Ctrl-d`; to reattach use
 `screen -r arm`; to kill the session use `Ctrl-a` `Ctrl-k` and confirm.
 
-Several hours later, the output of the build script is a set of 4 files and 
+Several hours later, the output of the build script is a set of 4 files and
 their SHA signatures, created in the `deploy` folder:
 
 ```console
@@ -200,8 +200,8 @@ total 487380
 -rw-r--r-- 1 ilg ilg       114 Jul 26 11:56 xpack-arm-none-eabi-gcc-8.2.1-1.8-win32-x64.zip.sha
 ```
 
-To copy the files from the build machine to the current development 
-machine, either use NFS to mount the entire folder, or open the `deploy` 
+To copy the files from the build machine to the current development
+machine, either use NFS to mount the entire folder, or open the `deploy`
 folder in a terminal and use `scp`:
 
 ```console
@@ -211,8 +211,8 @@ $ scp * ilg@ilg-mbp.local:Downloads/xpack-binaries/arm
 
 ### Build the macOS binary
 
-The current platform for macOS production builds is a macOS 10.10.5 
-VirtualBox image running on the same macMini with 16 GB of RAM and a 
+The current platform for macOS production builds is a macOS 10.10.5
+VirtualBox image running on the same macMini with 16 GB of RAM and a
 fast SSD.
 
 ```console
@@ -231,7 +231,7 @@ $ caffeinate bash ~/Downloads/arm-none-eabi-gcc-xpack.git/scripts/build.sh --osx
 To detach from the session, use `Ctrl-a` `Ctrl-d`; to reattach use
 `screen -r openocd`; to kill the session use `Ctrl-a` `Ctrl-k` and confirm.
 
-Several hours later, the output of the build script is a compressed archive 
+Several hours later, the output of the build script is a compressed archive
 and its SHA signature, created in the `deploy` folder:
 
 ```console
@@ -241,8 +241,8 @@ total 215648
 -rw-r--r--  1 ilg  staff        115 Jul 26 13:29 xpack-arm-none-eabi-gcc-8.2.1-1.8-darwin-x64.tgz.sha
 ```
 
-To copy the files from the build machine to the current development 
-machine, either use NFS to mount the entire folder, or open the `deploy` 
+To copy the files from the build machine to the current development
+machine, either use NFS to mount the entire folder, or open the `deploy`
 folder in a terminal and use `scp`:
 
 ```console
@@ -260,9 +260,9 @@ Instead of `--all`, you can use any combination of:
 --win32 --win64 --linux32 --linux64
 ```
 
-Please note that, due to the specifics of the GCC build process, the 
-Windows build requires the corresponding GNU/Linux build, so `--win32` 
-alone is equivalent to `--linux32 --win32` and `--win64` alone is 
+Please note that, due to the specifics of the GCC build process, the
+Windows build requires the corresponding GNU/Linux build, so `--win32`
+alone is equivalent to `--linux32 --win32` and `--win64` alone is
 equivalent to `--linux64 --win64`.
 
 ### clean
@@ -283,26 +283,26 @@ For production builds it is recommended to completely remove the build folder.
 
 ### --develop
 
-For performance reasons, the actual build folders are internal to each 
-Docker run, and are not persistent. This gives the best speed, but has 
+For performance reasons, the actual build folders are internal to each
+Docker run, and are not persistent. This gives the best speed, but has
 the disadvantage that interrupted builds cannot be resumed.
 
-For development builds, it is possible to define the build folders in the 
+For development builds, it is possible to define the build folders in the
 host file system, and resume an interrupted build.
 
 ### --debug
 
-For development builds, it is also possible to create everything 
+For development builds, it is also possible to create everything
 with `-g -O0` and be able to run debug sessions.
 
 ### Interrupted builds
 
-The Docker scripts run with root privileges. This is generally not a 
-problem, since at the end of the script the output files are reassigned 
+The Docker scripts run with root privileges. This is generally not a
+problem, since at the end of the script the output files are reassigned
 to the actual user.
 
-However, for an interrupted build, this step is skipped, and files in 
-the install folder will remain owned by root. Thus, before removing the 
+However, for an interrupted build, this step is skipped, and files in
+the install folder will remain owned by root. Thus, before removing the
 build folder, it might be necessary to run a recursive `chown`.
 
 ### Rebuild previous releases
@@ -317,12 +317,12 @@ $ RELEASE_VERSION=8.3.1-1.1 bash ~/Downloads/arm-none-eabi-gcc-xpack.git/scripts
 
 ## Test
 
-A simple test is performed by the script at the end, by launching the 
+A simple test is performed by the script at the end, by launching the
 executables to check if all shared/dynamic libraries are correctly used.
 
-For a true test you need to unpack the archive in a temporary location 
-(like `~/Downloads`) and then run the 
-program from there. For example on macOS the output should 
+For a true test you need to unpack the archive in a temporary location
+(like `~/Downloads`) and then run the
+program from there. For example on macOS the output should
 look like:
 
 ```console
@@ -332,11 +332,11 @@ arm-none-eabi-gcc (xPack GNU ARM Embedded GCC, 64-bit) 8.2.1 20170904 (release) 
 
 ## Installed folders
 
-After install, the package should create a structure like this (only the 
+After install, the package should create a structure like this (only the
 first two depth levels are shown):
 
 ```console
-$ tree -L 2 /Users/ilg/Library/xPacks/\@xpack-dev-tools/arm-none-eabi-gcc/8.2.1-1.8/.content/ 
+$ tree -L 2 /Users/ilg/Library/xPacks/\@xpack-dev-tools/arm-none-eabi-gcc/8.2.1-1.8/.content/
 /Users/ilg/Library/xPacks/\@xpack-dev-tools/arm-none-eabi-gcc/8.2.1-1.8/.content/
 ├── README.md
 ├── arm-none-eabi
@@ -402,7 +402,7 @@ No other files are installed in any system folders or other locations.
 
 ## Uninstall
 
-The binaries are distributed as portable archives; thus they do not 
+The binaries are distributed as portable archives; thus they do not
 need to run a setup and do not require an uninstall.
 
 ## Files cache
@@ -414,7 +414,7 @@ However, occasionally some servers may not be available, and the builds
 may fail.
 
 The workaround is to manually download the files from an alternate
-location (like 
+location (like
 https://github.com/xpack-dev-tools/files-cache/tree/master/libs),
 place them in the XBB cache (`Work/cache`) and restart the build.
 
@@ -431,19 +431,19 @@ occasionally parallel build are disabled.
 GDB uses a complex and custom logic to unwind the stack when processing
 exceptions; macOS also uses a custom logic to organize memory and process
 exceptions; the result is that when compiling GDB with GCC on older macOS
-systems (like 10.10), some details do not match and the resulting GDB 
-crashes with an assertion on the first `set language` command (most 
+systems (like 10.10), some details do not match and the resulting GDB
+crashes with an assertion on the first `set language` command (most
 probably many other commands).
 
-The workaround was to compile GDB with Apple clang, which resulted in 
+The workaround was to compile GDB with Apple clang, which resulted in
 functional binaries, even on the old macOS 10.10.
 
 ## More build details
 
-The build process is split into several scripts. The build starts on the 
-host, with `build.sh`, which runs `container-build.sh` several times, 
-once for each target, in one of the two docker containers. Both scripts 
-include several other helper scripts. The entire process is quite complex, 
-and an attempt to explain its functionality in a few words would not 
-be realistic. Thus, the authoritative source of details remains the source 
+The build process is split into several scripts. The build starts on the
+host, with `build.sh`, which runs `container-build.sh` several times,
+once for each target, in one of the two docker containers. Both scripts
+include several other helper scripts. The entire process is quite complex,
+and an attempt to explain its functionality in a few words would not
+be realistic. Thus, the authoritative source of details remains the source
 code.
