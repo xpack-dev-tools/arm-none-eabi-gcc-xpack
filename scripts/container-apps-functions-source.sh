@@ -807,7 +807,9 @@ function do_gcc_final()
           # --libexecdir="${APP_PREFIX}/lib" \
 
           # --enable-lto make it explicit, ARM uses the default.
-
+          # --with-native-system-header-dir is needed to locate stdio.h, to
+          # prevent -Dinhibit_libc, which will skip some functionality, 
+          # like libgcov.
           if [ "$1" == "" ]
           then
 
@@ -844,6 +846,7 @@ function do_gcc_final()
               --with-headers=yes \
               --with-python-dir="share/gcc-${GCC_TARGET}" \
               --with-sysroot="${APP_PREFIX}/${GCC_TARGET}" \
+              --with-native-system-header-dir="/include" \
               ${MULTILIB_FLAGS} \
               \
               --disable-rpath \
@@ -880,6 +883,7 @@ function do_gcc_final()
               --with-headers=yes \
               --with-python-dir="share/gcc-${GCC_TARGET}" \
               --with-sysroot="${APP_PREFIX_NANO}/${GCC_TARGET}" \
+              --with-native-system-header-dir="/include" \
               ${MULTILIB_FLAGS} \
               \
               --disable-rpath \
