@@ -2,6 +2,14 @@
 
 Releases in reverse chronological order.
 
+### 2019-10-10
+
+- v8.3.1-2.1 released
+
+### 2019-10-07
+
+- [#1] fix no-op libgcov (--with-native-system-header-dir)
+
 ### 2019-07-29
 
 - v8.3.1-1.1 released
