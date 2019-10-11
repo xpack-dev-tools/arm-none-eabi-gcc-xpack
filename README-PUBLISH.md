@@ -170,5 +170,5 @@ $ xpm install --global @xpack-dev-tools/arm-none-eabi-gcc@latest
 - in a separate browser windows, open [TweetDeck](https://tweetdeck.twitter.com/)
 - using the `@xpack_project` account
 - paste the release name like **xPack GNU Arm Embedded GCC v8.2.1-1.8 released**
-- paste the link to the Github release
+- paste the link to the Web page release
 - click the **Tweet** button
