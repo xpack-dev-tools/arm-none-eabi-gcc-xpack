@@ -1,16 +1,16 @@
 [![npm (scoped)](https://img.shields.io/npm/v/@xpack-dev-tools/arm-none-eabi-gcc.svg)](https://www.npmjs.com/package/@xpack-dev-tools/arm-none-eabi-gcc)
 [![npm](https://img.shields.io/npm/dt/@xpack-dev-tools/arm-none-eabi-gcc.svg)](https://www.npmjs.com/package/@xpack-dev-tools/arm-none-eabi-gcc/)
 
-# The xPack GNU ARM Embedded GCC
+# The xPack GNU Arm Embedded GCC
 
 This open source project is hosted on GitHub as
 [`xpack-dev-tools/arm-none-eabi-gcc-xpack`](https://github.com/xpack-dev-tools/arm-none-eabi-gcc-xpack)
 and provides the platform specific binaries for the
-[xPack GNU ARM Embedded GCC](https://xpack.github.io/arm-none-eabi-gcc/).
+[xPack GNU Arm Embedded GCC](https://xpack.github.io/arm-none-eabi-gcc/).
 
 This distribution plans to follow the official
 [GNU Arm Embedded Toolchain](https://developer.arm.com/open-source/gnu-toolchain/gnu-rm)
-distribution, by ARM.
+distribution, by Arm.
 
 The binaries can be installed automatically as **binary xPacks** or manually as
 **portable archives**.
@@ -21,12 +21,12 @@ the build scripts.
 ## User info
 
 This section is intended as a shortcut for those who plan
-to use the GNU ARM Embedded GCC binaries. For full details please read the
-[xPack GNU ARM Embedded GCC](https://xpack.github.io/arm-none-eabi-gcc/) pages.
+to use the GNU Arm Embedded GCC binaries. For full details please read the
+[xPack GNU Arm Embedded GCC](https://xpack.github.io/arm-none-eabi-gcc/) pages.
 
 ### Easy install
 
-The easiest way to install GNU ARM Embedded GCC is using the **binary xPack**, available as
+The easiest way to install GNU Arm Embedded GCC is using the **binary xPack**, available as
 [`@xpack-dev-tools/arm-none-eabi-gcc`](https://www.npmjs.com/package/@xpack-dev-tools/arm-none-eabi-gcc)
 from the [`npmjs.com`](https://www.npmjs.com) registry.
 
@@ -74,7 +74,7 @@ subfolders.)
 
 ### Manual install
 
-For all platforms, the **xPack GNU ARM Embedded GCC** binaries are released as portable
+For all platforms, the **xPack GNU Arm Embedded GCC** binaries are released as portable
 archives that can be installed in any location.
 
 The archives can be downloaded from the

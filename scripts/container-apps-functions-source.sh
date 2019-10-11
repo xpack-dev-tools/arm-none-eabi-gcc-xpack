@@ -350,7 +350,7 @@ function do_gcc_first()
 
           # --enable-checking=no ???
 
-          # --enable-lto make it explicit, ARM uses the default.
+          # --enable-lto make it explicit, Arm uses the default.
 
           # Prefer an explicit libexec folder.
           # --libexecdir="${APP_PREFIX}/lib" 
@@ -499,7 +499,7 @@ function do_newlib()
           if [ "$1" == "" ]
           then
 
-            # Extra options to ARM distribution:
+            # Extra options to Arm distribution:
             # --enable-newlib-io-long-long
             # --enable-newlib-io-c99-formats
             bash ${DEBUG} "${SOURCES_FOLDER_PATH}/${NEWLIB_SRC_FOLDER_NAME}/configure" \
@@ -806,7 +806,7 @@ function do_gcc_final()
           # Prefer an explicit libexec folder.
           # --libexecdir="${APP_PREFIX}/lib" \
 
-          # --enable-lto make it explicit, ARM uses the default.
+          # --enable-lto make it explicit, Arm uses the default.
           # --with-native-system-header-dir is needed to locate stdio.h, to
           # prevent -Dinhibit_libc, which will skip some functionality, 
           # like libgcov.
@@ -1396,7 +1396,7 @@ function copy_distro_files()
     copy_build_files
 
     echo
-    echo "Copying ARM files..."
+    echo "Copying Arm files..."
 
     cd "${SOURCES_FOLDER_PATH}/${GCC_COMBO_FOLDER_NAME}"
 

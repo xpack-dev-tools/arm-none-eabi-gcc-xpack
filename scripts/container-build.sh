@@ -41,12 +41,12 @@ script_folder_name="$(basename "${script_folder_path}")"
 # =============================================================================
 
 # Inner script to run inside Docker containers to build the 
-# xPack GNU ARM Embedded GCC distribution packages.
+# xPack GNU Arm Embedded GCC distribution packages.
 
 # For native builds, it runs on the host (macOS build cases,
 # and development builds for GNU/Linux).
 
-# Credits: GNU Tools for Arm Embedded Processors, version 7, by ARM.
+# Credits: GNU Tools for Arm Embedded Processors, version 7, by Arm.
 
 # -----------------------------------------------------------------------------
 
@@ -293,7 +293,7 @@ then
   MPFR_VERSION="3.1.4"
   MPC_VERSION="1.0.3"
 
-  # ARM uses 0.15, not 0.18
+  # Arm uses 0.15, not 0.18
   ISL_VERSION="0.15"
 
   LIBELF_VERSION="0.8.13"
@@ -417,7 +417,7 @@ echo
 echo "Here we go..."
 echo
 
-# Download the combo package from ARM.
+# Download the combo package from Arm.
 download_gcc_combo
 
 if [ "${TARGET_PLATFORM}" == "win32" ]
@@ -457,7 +457,7 @@ fi
 
 # -----------------------------------------------------------------------------
 
-# The task descriptions are from the ARM build script.
+# The task descriptions are from the Arm build script.
 
 # Task [III-0] /$HOST_NATIVE/binutils/
 # Task [IV-1] /$HOST_MINGW/binutils/

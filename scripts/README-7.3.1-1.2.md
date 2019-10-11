@@ -1,14 +1,14 @@
-# xPack GNU ARM Embedded GCC
+# xPack GNU Arm Embedded GCC
 
 This is the **xPack** version of the 
 [GNU Arm Embedded Toolchain](https://developer.arm.com/open-source/gnu-toolchain/gnu-rm).
 
 For details, see 
-[The xPack GNU ARM Embedded GCC](https://xpack.github.io/arm-none-eabi-gcc/) pages.
+[The xPack GNU Arm Embedded GCC](https://xpack.github.io/arm-none-eabi-gcc/) pages.
 
 ## Easy install
 
-The **xPack ARM Embedded GCC** toolchain is also available as a 
+The **xPack Arm Embedded GCC** toolchain is also available as a 
 binary [xPack](https://www.npmjs.com/package/@xpack-dev-tools/arm-none-eabi-gcc) 
 and can be conveniently installed with [xpm](https://www.npmjs.com/package/xpm):
 
@@ -17,19 +17,19 @@ $ xpm install --global @xpack-dev-tools/arm-none-eabi-gcc@7.3.1-1.2.1
 ```
 
 For more details on how to install the toolchain, please see 
-[How to install the ARM toolchain?](http://xpack.github.io/arm-none-eabi-gcc/install/) page.
+[How to install the Arm toolchain?](http://xpack.github.io/arm-none-eabi-gcc/install/) page.
 
 ## Compliance
 
-This release closely follows the official ARM distribution, as described 
-in the original ARM release text files:
+This release closely follows the official Arm distribution, as described 
+in the original Arm release text files:
 
 - `distro-info/arm-readme.txt`
 - `distro-info/arm-release.txt`
 
 ## Changes
 
-Compared to the ARM distribution, the build procedure is more or less the 
+Compared to the Arm distribution, the build procedure is more or less the 
 same and there should be no functional differences.
 
 ## Compatibility

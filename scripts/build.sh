@@ -40,7 +40,7 @@ script_folder_name="$(basename "${script_folder_path}")"
 
 # =============================================================================
 
-# Script to build the xPack GNU ARM Embeded GCC distribution packages.
+# Script to build the xPack GNU Arm Embeded GCC distribution packages.
 #
 # Developed on macOS 10.13 High Sierra, but intended to run on
 # macOS 10.10 Yosemite and CentOS 6 XBB. 
@@ -48,7 +48,7 @@ script_folder_name="$(basename "${script_folder_path}")"
 # -----------------------------------------------------------------------------
 
 echo
-echo "xPack GNU ARM Embedded GCC distribution build script."
+echo "xPack GNU Arm Embedded GCC distribution build script."
 
 host_functions_script_path="${script_folder_path}/helper/host-functions-source.sh"
 echo

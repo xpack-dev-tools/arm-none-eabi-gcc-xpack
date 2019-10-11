@@ -16,7 +16,7 @@
 # -----------------------------------------------------------------------------
 
 # Used to display the application name.
-APP_NAME=${APP_NAME:-"GNU ARM Embedded GCC"}
+APP_NAME=${APP_NAME:-"GNU Arm Embedded GCC"}
 
 # Used as part of file/folder paths.
 APP_UC_NAME=${APP_UC_NAME:-"ARM Embedded GCC"}

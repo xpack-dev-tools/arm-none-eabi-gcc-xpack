@@ -72,7 +72,7 @@ A typical session looks like:
 5^done
 (gdb) 
 6-gdb-version
-~"GNU gdb (GNU MCU Eclipse ARM Embedded GCC, 64-bit) 8.1.0.20180315-git\n"
+~"GNU gdb (GNU MCU Eclipse Arm Embedded GCC, 64-bit) 8.1.0.20180315-git\n"
 ~"Copyright (C) 2018 Free Software Foundation, Inc.\n"
 ~"License GPLv3+: GNU GPL version 3 or later <http://gnu.org/licenses/gpl.html>\nThis is fre\
 e software: you are free to change and redistribute it.\nThere is NO WARRANTY, to the extent permitt\

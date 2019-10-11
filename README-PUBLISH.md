@@ -1,4 +1,4 @@
-# How to publish the xPack GNU ARM Embedded GCC binaries?
+# How to publish the xPack GNU Arm Embedded GCC binaries?
 
 ## Build
 
@@ -50,7 +50,7 @@ $ git clone --recurse-submodules https://github.com/xpack-dev-tools/arm-none-eab
   the Eclipse projects available in the
   `tests/eclipse` folder of the build repo; more details in the
   [README.md](https://github.com/xpack-dev-tools/arm-none-eabi-gcc-xpack/blob/xpack/tests/eclipse/README.md)
-- define the **Workspace ARM Toolchain path** to use the `Downloads`
+- define the **Workspace Arm Toolchain path** to use the `Downloads`
   temporary location
 - to test the compiler: for all projects (start with `arm-f4b-fs-lib`)
   - remove all build folders, or **Clean all**
@@ -71,7 +71,7 @@ $ git clone --recurse-submodules https://github.com/xpack-dev-tools/arm-none-eab
 - go to the [GitHub Releases](https://github.com/xpack-dev-tools/arm-none-eabi-gcc-xpack/releases) page
 - click **Draft a new release**
 - name the tag like **v8.2.1-1.8** (mind the dash in the middle!)
-- name the release like **xPack GNU ARM Embedded GCC v8.2.1-1.8**
+- name the release like **xPack GNU Arm Embedded GCC v8.2.1-1.8**
 (mind the dash)
 - as description
   - add a downloads badge like `![Github Releases (by Release)](https://img.shields.io/github/downloads/xpack-dev-tools/arm-none-eabi-gcc-xpack/v8.2.1-1.8/total.svg)`
@@ -89,7 +89,7 @@ In the `xpack.github.io` web Git:
 
 - add a new file to `_posts/arm-none-eabi-gcc/releases`
 - name the file like `2018-04-01-arm-none-eabi-gcc-v8-2-1-1-8-released.md`
-- name the post like: **xPack GNU ARM Embedded GCC v8.2.1-1.8 released**
+- name the post like: **xPack GNU Arm Embedded GCC v8.2.1-1.8 released**
 - as `download_url` use the tagged URL like `https://github.com/xpack-dev-tools/arm-none-eabi-gcc-xpack/releases/tag/v8.2.1-1.8/`
 - update the `date:` field with the current date
 
@@ -129,7 +129,7 @@ $ cat *.sha
 ## Update the Web
 
 - commit the `xpack.github.io` web Git; use a message
-like **xPack GNU ARM Embedded GCC v8.2.1-1.8 released**
+like **xPack GNU Arm Embedded GCC v8.2.1-1.8 released**
 - wait for the GitHub Pages build to complete
 - remember the post URL, since it must be updated in the release page
 
@@ -169,6 +169,6 @@ $ xpm install --global @xpack-dev-tools/arm-none-eabi-gcc@latest
 
 - in a separate browser windows, open [TweetDeck](https://tweetdeck.twitter.com/)
 - using the `@xpack_project` account
-- paste the release name like **xPack GNU ARM Embedded GCC v8.2.1-1.8 released**
+- paste the release name like **xPack GNU Arm Embedded GCC v8.2.1-1.8 released**
 - paste the link to the Github release
 - click the **Tweet** button

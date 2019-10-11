@@ -1,7 +1,7 @@
 {
   "name": "@xpack-dev-tools/arm-none-eabi-gcc",
   "version": "8.3.1-1.1.1",
-  "description": "A binary xPack with the GNU ARM Embedded GCC toolchain",
+  "description": "A binary xPack with the GNU Arm Embedded GCC toolchain",
   "main": "",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"

@@ -1,10 +1,10 @@
-# How to build the xPack GNU ARM Embedded GCC?
+# How to build the xPack GNU Arm Embedded GCC?
 
 ## Introduction
 
 This project includes the scripts and additional files required to
 build and publish the
-[xPack GNU ARM Embedded GCC](https://xpack.github.io/arm-none-eabi-gcc/) binaries.
+[xPack GNU Arm Embedded GCC](https://xpack.github.io/arm-none-eabi-gcc/) binaries.
 
 The build scripts use the
 [xPack Build Box (XBB)](https://github.com/xpack/xpack-build-box),
@@ -13,7 +13,7 @@ for GNU/Linux and Windows or a custom folder for MacOS).
 
 ## Repository URLs
 
-The build scripts use ARM archives; occasionally, to avoid bugs, original
+The build scripts use Arm archives; occasionally, to avoid bugs, original
 repositories are used:
 
 - `git://sourceware.org/git/binutils-gdb.git`
@@ -68,13 +68,13 @@ page and return when ready.
 
 ## Update git repos
 
-The xPack GNU ARM Embedded GCC distribution follows the official
-[ARM](https://developer.arm.com/open-source/gnu-toolchain/gnu-rm)
+The xPack GNU Arm Embedded GCC distribution follows the official
+[Arm](https://developer.arm.com/open-source/gnu-toolchain/gnu-rm)
 distribution, and it is planned to make a new release after each future
-ARM release.
+Arm release.
 
 Currently the build procedure uses the _Source Invariant_ archive and
-the configure options are the same as in the ARM build scripts.
+the configure options are the same as in the Arm build scripts.
 
 ## Prepare release
 
@@ -87,8 +87,8 @@ To prepare a new release:
 - check differences from the previous version;
 - determine the GCC version (like `8.2.1`) and update the `scripts/VERSION`
   file; the format is `8.2.1-1.8`. The fourth digit is the number of the
-  ARM release of the same GCC version, and the fifth digit is the xPack
-  GNU ARM Embedded GCC release number of this version.
+  Arm release of the same GCC version, and the fifth digit is the xPack
+  GNU Arm Embedded GCC release number of this version.
 - add a new set of definitions in the `scripts/container-build.sh`, with
   the versions of various components;
 - if newer libraries are used, check if they are available from the local git
@@ -327,7 +327,7 @@ look like:
 
 ```console
 $ /Users/ilg/Downloads/xPacks/arm-none-eabi-gcc/8.2.1-1.8/bin/arm-none-eabi-gcc --version
-arm-none-eabi-gcc (xPack GNU ARM Embedded GCC, 64-bit) 8.2.1 20170904 (release) [ARM/embedded-7-branch revision 255204]
+arm-none-eabi-gcc (xPack GNU Arm Embedded GCC, 64-bit) 8.2.1 20170904 (release) [ARM/embedded-7-branch revision 255204]
 ```
 
 ## Installed folders
