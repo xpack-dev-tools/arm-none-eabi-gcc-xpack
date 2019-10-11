@@ -206,7 +206,7 @@ folder in a terminal and use `scp`:
 
 ```console
 $ cd ~/Work/arm-none-eabi-gcc-*/deploy
-$ scp * ilg@ilg-mbp.local:Downloads/xpack-binaries/arm
+$ scp * ilg@ilg-wks.local:Downloads/xpack-binaries/arm
 ```
 
 ### Build the macOS binary
@@ -247,7 +247,7 @@ folder in a terminal and use `scp`:
 
 ```console
 $ cd ~/Work/arm-none-eabi-gcc-*/deploy
-$ scp * ilg@ilg-mbp.local:Downloads/xpack-binaries/arm
+$ scp * ilg@ilg-wks.local:Downloads/xpack-binaries/arm
 ```
 
 ## Subsequent runs
@@ -424,7 +424,7 @@ place them in the XBB cache (`Work/cache`) and restart the build.
 
 For various reasons, parallel builds for some components
 fail with errors like 'vfork: insufficient resources'. Thus,
-occasionally parallel build are disabled.
+occasionally parallel builds are disabled.
 
 ### Building GDB on macOS
 

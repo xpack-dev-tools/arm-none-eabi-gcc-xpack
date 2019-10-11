@@ -38,7 +38,7 @@ functional.
 
 For this, on each platform:
 
-- unpack the archive in `Downloads`, and rename the version folder,
+- unpack the archive in `Downloads`, and **rename the version folder**,
   by replacing a dash with a space; this will test paths with spaces;
   on Windows the current paths always use spaces, so renaming is not needed;
 - clone this repo locally; on Windows use the Git console;
@@ -46,7 +46,7 @@ For this, on each platform:
 $ git clone --recurse-submodules https://github.com/xpack-dev-tools/arm-none-eabi-gcc-xpack.git \
   ~/Downloads/arm-none-eabi-gcc-xpack.git
 ```
-- in a separate workspace, Import -> General -> Existing Projects into Workspace
+- in a separate workspace, Import → General → Existing Projects into Workspace
   the Eclipse projects available in the
   `tests/eclipse` folder of the build repo; more details in the
   [README.md](https://github.com/xpack-dev-tools/arm-none-eabi-gcc-xpack/blob/xpack/tests/eclipse/README.md)
@@ -122,7 +122,7 @@ xpack-arm-none-eabi-gcc-8.2.1-1.8-win32-x64.zip
 If you missed this, `cat` the content of the `.sha` files:
 
 ```console
-$ cd deploy
+$ cd ~Downloads/xpack-binaries/arm
 $ cat *.sha
 ```
 
