@@ -33,28 +33,28 @@
   "xpack": {
     "binaries": {
       "destination": "./.content",
-      "baseUrl": "https://github.com/xpack-dev-tools/arm-none-eabi-gcc-xpack/releases/download/v8.3.1-1.1/",
+      "baseUrl": "https://github.com/xpack-dev-tools/arm-none-eabi-gcc-xpack/releases/download/v8.3.1-1.2/",
       "skip": 3,
       "platforms": {
         "darwin-x64": {
-          "sha256": "61cdc9d05d6a666b2df45ad2dcd5aa5d7eccf1ffb865420c35704a1917812eb2",
-          "fileName": "xpack-arm-none-eabi-gcc-8.3.1-1.1-darwin-x64.tgz"
+          "sha256": "f0192ac5ec9bb5ac0c2e8590c110b0265e81ee92f8912961827cccc693827d13",
+          "fileName": "xpack-arm-none-eabi-gcc-8.3.1-1.2-darwin-x64.tgz"
         },
         "linux-x86": {
-          "sha256": "266f5ebde79ce4d5a91232af22707dad076fdcf35031042b498fae1ae09989d7",
-          "fileName": "xpack-arm-none-eabi-gcc-8.3.1-1.1-linux-x32.tgz"
+          "sha256": "d49ed1e2eb40c0ec73c7ea3f38216da0445d420bdfd25fef2bffaed3fe75d845",
+          "fileName": "xpack-arm-none-eabi-gcc-8.3.1-1.2-linux-x32.tgz"
         },
         "linux-x64": {
-          "sha256": "2e49bdb076ed96cdde2b8320d9496875eccd7eb83d2af0dc378e02dd17aedec4",
-          "fileName": "xpack-arm-none-eabi-gcc-8.3.1-1.1-linux-x64.tgz"
+          "sha256": "a5e76ad1b89a1cf0ef5be5be5e8de862452f388e041d59dede237c5b27a15c5b",
+          "fileName": "xpack-arm-none-eabi-gcc-8.3.1-1.2-linux-x64.tgz"
         },
         "win32-x86": {
-          "sha256": "3854e4683d3977f27573610cf6badd0f0433ddc37ed0d922757cf1ff708be405",
-          "fileName": "xpack-arm-none-eabi-gcc-8.3.1-1.1-win32-x32.zip"
+          "sha256": "d6eab345b254b331036856416da1591f4f8bd633a2718b72d93324468240aadf",
+          "fileName": "xpack-arm-none-eabi-gcc-8.3.1-1.2-win32-x32.zip"
         },
         "win32-x64": {
-          "sha256": "39e1e553edcae83856882b8587a7f8b6d5c9f8fc11f10247b0e2af3321481fdb",
-          "fileName": "xpack-arm-none-eabi-gcc-8.3.1-1.1-win32-x64.zip"
+          "sha256": "5d89caf249c7f048b6549bf1a6f88d2736aacfa5e23eaa16a03fd32ab87ffbdf",
+          "fileName": "xpack-arm-none-eabi-gcc-8.3.1-1.2-win32-x64.zip"
         }
       }
     },
