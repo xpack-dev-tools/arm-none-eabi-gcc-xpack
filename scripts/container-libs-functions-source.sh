@@ -80,6 +80,7 @@ function do_zlib()
 
           # Build.
           make -j ${JOBS}
+
           make install
         ) 2>&1 | tee "${LOGS_FOLDER_PATH}/make-zlib-output.txt"
       else    
@@ -178,8 +179,10 @@ function do_gmp()
         echo "Running gmp make..."
 
         # Build.
-        # make -j ${JOBS}
-        make
+        # Parallel builds may fail.
+        make -j ${JOBS}
+        # make
+
         make install-strip
       ) 2>&1 | tee "${LOGS_FOLDER_PATH}/make-gmp-output.txt"
     )
@@ -251,9 +254,10 @@ function do_mpfr()
         echo "Running mpfr make..."
 
         # Build.
-        # Parallel builds fail.
-        # make -j ${JOBS}
-        make 
+        # Parallel builds may fail.
+        make -j ${JOBS}
+        # make
+
         make install-strip
       ) 2>&1 | tee "${LOGS_FOLDER_PATH}/make-mpfr-output.txt"
     )
@@ -326,6 +330,7 @@ function do_mpc()
 
         # Build.
         make -j ${JOBS}
+
         make install-strip
       ) 2>&1 | tee "${LOGS_FOLDER_PATH}/make-mpc-output.txt"
     )
@@ -400,8 +405,10 @@ function do_isl()
         echo "Running isl make..."
 
         # Build.
-        # make -j ${JOBS}
-        make
+        # Parallel builds may fail.
+        make -j ${JOBS}
+        # make
+
         make install-strip
       ) 2>&1 | tee "${LOGS_FOLDER_PATH}/make-isl-output.txt"
 
@@ -473,6 +480,7 @@ function do_libelf()
 
         # Build.
         make -j ${JOBS}
+
         make install
       ) 2>&1 | tee "${LOGS_FOLDER_PATH}/make-libelf-output.txt"
     )
@@ -549,6 +557,7 @@ function do_expat()
 
         # Build.
         make -j ${JOBS}
+
         make install
       ) 2>&1 | tee "${LOGS_FOLDER_PATH}/make-expat-output.txt"
     )
@@ -623,6 +632,7 @@ function do_libiconv()
 
         # Build.
         make -j ${JOBS}
+
         make install-strip
       ) 2>&1 | tee "${LOGS_FOLDER_PATH}/make-libiconv-output.txt"
     )
@@ -694,6 +704,7 @@ function do_xz()
 
         # Build.
         make -j ${JOBS}
+
         make install-strip
       ) 2>&1 | tee "${LOGS_FOLDER_PATH}/make-xz-output.txt"
     )

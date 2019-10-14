@@ -242,6 +242,7 @@ function do_binutils()
         echo
         echo "Running binutils make..."
       
+        # Build
         make -j ${JOBS} 
 
         if [ "${WITH_STRIP}" == "y" ]
@@ -402,9 +403,10 @@ function do_gcc_first()
         echo "Running gcc first stage make..."
 
         # No need to make 'all', 'all-gcc' is enough to compile the libraries.
-        # Parallel builds fail.
-        # make -j ${JOBS} all-gcc
-        make all-gcc
+        # Parallel builds may fail.
+        make -j ${JOBS} all-gcc
+        # make all-gcc
+
         # No -strip available here.
         make install-gcc
 
@@ -562,13 +564,9 @@ function do_newlib()
         echo
         echo "Running newlib$1 make..."
 
-        # Parallel build failed on CentOS XBB
-        if [ "${TARGET_PLATFORM}" == "darwin" ]
-        then
-          make -j ${JOBS}
-        else
-          make
-        fi 
+        # Parallel builds may fail.
+        make -j ${JOBS}
+        # make
 
         # Top make fails with install-strip due to libgloss make.
         make install
@@ -606,7 +604,7 @@ function do_newlib()
           if [ "${WITH_HTML}" == "y" ]
           then
 
-            make -j ${JOBS} html
+            make html
 
             install -v -d "${APP_PREFIX_DOC}/html"
 
@@ -908,9 +906,9 @@ function do_gcc_final()
           # This is a workaround. Better approach is have a t-* to set this flag via
           # CRTSTUFF_T_CFLAGS
 
-          # Parallel builds fail.
-          # make -j ${JOBS} INHIBIT_LIBC_CFLAGS="-DUSE_TM_CLONE_REGISTRY=0"
-          make INHIBIT_LIBC_CFLAGS="-DUSE_TM_CLONE_REGISTRY=0"
+          # Parallel builds may fail.
+          make -j ${JOBS} INHIBIT_LIBC_CFLAGS="-DUSE_TM_CLONE_REGISTRY=0"
+          # make INHIBIT_LIBC_CFLAGS="-DUSE_TM_CLONE_REGISTRY=0"
 
           if [ "${WITH_STRIP}" == "y" ]
           then
@@ -949,8 +947,9 @@ function do_gcc_final()
 
           # For Windows build only the GCC binaries, the libraries were copied 
           # from the Linux build.
-          # make -j ${JOBS} all-gcc
-          make all-gcc
+          # Parallel builds may fail.
+          make -j ${JOBS} all-gcc
+          # make all-gcc
 
           # No -strip here.
           make install-gcc
@@ -1174,9 +1173,9 @@ function do_gdb()
         echo
         echo "Running gdb$1 make..."
 
-        # Parallel builds fail.
-        # make -j ${JOBS}
-        make 
+        # Parallel builds may fail.
+        make -j ${JOBS}
+        # make 
 
         # install-strip fails, not only because of readline has no install-strip
         # but even after patching it tries to strip a non elf file
