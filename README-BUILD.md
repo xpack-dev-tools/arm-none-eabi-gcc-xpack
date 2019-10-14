@@ -178,7 +178,7 @@ network connection or a computer entering sleep.
 $ screen -S arm
 
 $ sudo rm -rf ~/Work/arm-none-eabi-gcc-*
-$ bash ~/Downloads/arm-none-eabi-gcc-xpack.git/scripts/build.sh --all
+$ bash ~/Downloads/arm-none-eabi-gcc-xpack.git/scripts/build.sh --all --jobs 4
 ```
 
 To detach from the session, use `Ctrl-a` `Ctrl-d`; to reattach use
@@ -225,7 +225,7 @@ To build the latest macOS version:
 $ screen -S arm
 
 $ sudo rm -rf ~/Work/arm-none-eabi-gcc-*
-$ caffeinate bash ~/Downloads/arm-none-eabi-gcc-xpack.git/scripts/build.sh --osx
+$ caffeinate bash ~/Downloads/arm-none-eabi-gcc-xpack.git/scripts/build.sh --osx --jobs 4
 ```
 
 To detach from the session, use `Ctrl-a` `Ctrl-d`; to reattach use
@@ -295,6 +295,17 @@ host file system, and resume an interrupted build.
 For development builds, it is also possible to create everything
 with `-g -O0` and be able to run debug sessions.
 
+### --jobs
+
+By default, the build steps use a single job at a time, but for
+recent CPUs with multiple cores it is possible to run multiple jobs
+in parallel. 
+
+The setting applies to all steps.
+
+Warning: Parallel builds require large system resources and occasionally 
+may crash the build.
+
 ### Interrupted builds
 
 The Docker scripts run with root privileges. This is generally not a
@@ -311,8 +322,8 @@ Although not guaranteed to work, previous versions can be re-built by
 explicitly specifying the version:
 
 ```console
-$ RELEASE_VERSION=7.3.1-1.2 bash ~/Downloads/arm-none-eabi-gcc-xpack.git/scripts/build.sh --all
-$ RELEASE_VERSION=8.3.1-1.1 bash ~/Downloads/arm-none-eabi-gcc-xpack.git/scripts/build.sh --all
+$ RELEASE_VERSION=7.3.1-1.2 bash ~/Downloads/arm-none-eabi-gcc-xpack.git/scripts/build.sh --all --jobs 4
+$ RELEASE_VERSION=8.3.1-1.1 bash ~/Downloads/arm-none-eabi-gcc-xpack.git/scripts/build.sh --all --jobs 4
 ```
 
 ## Test
