@@ -242,7 +242,7 @@ function do_binutils()
         echo
         echo "Running binutils make..."
       
-        # Build
+        # Build.
         make -j ${JOBS} 
 
         if [ "${WITH_STRIP}" == "y" ]
