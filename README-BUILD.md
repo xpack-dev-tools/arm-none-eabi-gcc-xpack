@@ -299,11 +299,11 @@ with `-g -O0` and be able to run debug sessions.
 
 By default, the build steps use a single job at a time, but for
 recent CPUs with multiple cores it is possible to run multiple jobs
-in parallel. 
+in parallel.
 
 The setting applies to all steps.
 
-Warning: Parallel builds require large system resources and occasionally 
+Warning: Parallel builds require significant system resources and occasionally
 may crash the build.
 
 ### Interrupted builds
