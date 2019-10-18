@@ -221,6 +221,7 @@ BINUTILS_GIT_URL=""
 WITH_GDB_PY="y"
 WITH_GDB_PY3=""
 PYTHON3_VERSION=""
+USE_PLATFORM_PYTHON=""
 
 # Redefine to actual URL if the build should use the Git sources.
 # Also be sure GDB_GIT_BRANCH and GDB_GIT_COMMIT are defined
@@ -310,6 +311,15 @@ then
   then
     WITH_GDB_PY3="y" 
     PYTHON3_VERSION="3.7.2"
+  fi
+
+  if [ "${RELEASE_VERSION}" != "8.3.1-1.1" \
+    -a "${RELEASE_VERSION}" != "8.3.1-1.2" ]
+  then
+    if [ "${TARGET_PLATFORM}" == "darwin" ]
+    then
+      USE_PLATFORM_PYTHON="y"
+    fi
   fi
 
   BINUTILS_PATCH="binutils-${BINUTILS_VERSION}.patch"

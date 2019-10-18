@@ -1064,6 +1064,8 @@ function do_gdb()
       mkdir -p "${BUILD_FOLDER_PATH}/${gdb_folder_name}"
       cd "${BUILD_FOLDER_PATH}/${gdb_folder_name}"
 
+      local platform_python2=$(which python)
+
       xbb_activate
       xbb_activate_installed_dev
 
@@ -1107,6 +1109,9 @@ function do_gdb()
         if [ "${TARGET_PLATFORM}" == "win32" ]
         then
           extra_python_opts="--with-python=${SOURCES_FOLDER_PATH}/${GCC_COMBO_FOLDER_NAME}/python-config.sh"
+        elif [ "USE_PLATFORM_PYTHON" == "y" ]
+        then
+          extra_python_opts="--with-python=${platform_python2}"
         else
           extra_python_opts="--with-python=$(which python2)"
         fi
