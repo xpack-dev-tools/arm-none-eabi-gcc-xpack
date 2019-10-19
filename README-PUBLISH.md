@@ -65,6 +65,10 @@ $ git clone --recurse-submodules https://github.com/xpack-dev-tools/arm-none-eab
   - start (Resume)
   - stop (Terminate)
   - (don't miss the LTO cases, since in the past they had problems)
+- to test the Python debugger, start it with `--version`; on Windows, to test with different versions, set the path with:
+```
+C:\Users\ilg>set PYTHONHOME=C:\Python27.16
+```
 
 ## Create a new GitHub pre-release
 
