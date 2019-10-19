@@ -27,7 +27,7 @@ Git repo.
 To download them, the following shortcut is available:
 
 ```console
-$ curl -L https://github.com/xpack-dev-tools/arm-none-eabi-gcc-xpack/raw/xpack/scripts/git-clone.sh | bash
+$ curl --fail -L https://github.com/xpack-dev-tools/arm-none-eabi-gcc-xpack/raw/xpack/scripts/git-clone.sh | bash
 ```
 
 This small script issues the following two commands:
@@ -163,7 +163,7 @@ $ docker system prune --force
 To download the build scripts:
 
 ```console
-$ curl -L https://github.com/xpack-dev-tools/arm-none-eabi-gcc-xpack/raw/xpack/scripts/git-clone.sh | bash
+$ curl --fail -L https://github.com/xpack-dev-tools/arm-none-eabi-gcc-xpack/raw/xpack/scripts/git-clone.sh | bash
 ```
 
 To build both the 32/64-bit Windows and GNU/Linux versions, use `--all`; to
