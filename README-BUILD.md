@@ -154,6 +154,12 @@ It is also recommended to Remove unused Docker space. This is mostly useful
 after failed builds, during development, when dangling images may be left
 by Docker.
 
+To check the content of Docker image:
+
+```console
+$ docker run --interactive --tty ilegeul/centos:6-xbb-v2.2
+```
+
 To remove unused files:
 
 ```console
