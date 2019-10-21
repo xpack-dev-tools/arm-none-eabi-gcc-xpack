@@ -1064,7 +1064,24 @@ function do_gdb()
       mkdir -p "${BUILD_FOLDER_PATH}/${gdb_folder_name}"
       cd "${BUILD_FOLDER_PATH}/${gdb_folder_name}"
 
-      local platform_python2=$(which python)
+      local platform_python2
+      if [ -x "/usr/bin/python2.7" ]
+      then
+        platform_python2="/usr/bin/python2.7"
+      elif [ -x "/usr/bin/python2.6" ]
+      then
+        platform_python2="/usr/bin/python2.6"
+      else
+        platform_python2="$(which python)"
+      fi
+
+      local platform_python3
+      if [ -x "/usr/bin/python3.6" ]
+      then
+        platform_python3="/usr/bin/python3.6"
+      else
+        platform_python3="$(which python3)"
+      fi
 
       xbb_activate
       xbb_activate_installed_dev
@@ -1109,7 +1126,7 @@ function do_gdb()
         if [ "${TARGET_PLATFORM}" == "win32" ]
         then
           extra_python_opts="--with-python=${SOURCES_FOLDER_PATH}/${GCC_COMBO_FOLDER_NAME}/python-config.sh"
-        elif [ "USE_PLATFORM_PYTHON" == "y" ]
+        elif [ "${USE_PLATFORM_PYTHON}" == "y" ]
         then
           extra_python_opts="--with-python=${platform_python2}"
         else
@@ -1120,6 +1137,9 @@ function do_gdb()
         if [ "${TARGET_PLATFORM}" == "win32" ]
         then
           extra_python_opts="--with-python=${BUILD_GIT_PATH}/patches/python3-config.sh"
+        elif [ "${USE_PLATFORM_PYTHON3}" == "y" ]
+        then
+          extra_python_opts="--with-python=${platform_python3}"
         else
           extra_python_opts="--with-python=$(which python3)"
         fi

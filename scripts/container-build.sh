@@ -222,6 +222,7 @@ WITH_GDB_PY="y"
 WITH_GDB_PY3=""
 PYTHON3_VERSION=""
 USE_PLATFORM_PYTHON=""
+USE_PLATFORM_PYTHON3=""
 
 # Redefine to actual URL if the build should use the Git sources.
 # Also be sure GDB_GIT_BRANCH and GDB_GIT_COMMIT are defined
