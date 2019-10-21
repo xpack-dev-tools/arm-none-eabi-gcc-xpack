@@ -1072,7 +1072,9 @@ function do_gdb()
       then
         platform_python2="/usr/bin/python2.6"
       else
+        set +e
         platform_python2="$(which python)"
+        set -e
       fi
 
       local platform_python3
@@ -1080,7 +1082,9 @@ function do_gdb()
       then
         platform_python3="/usr/bin/python3.6"
       else
+        set +e
         platform_python3="$(which python3)"
+        set -e
       fi
 
       xbb_activate
