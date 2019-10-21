@@ -2,6 +2,15 @@
 
 Releases in reverse chronological order.
 
+### 2019-10-22
+
+- v8.3.1-1.3 prepared
+
+### 2019-10-16
+
+- [#4] fix Windows gdb-py, by removing the python27.dll
+- [#3] fix macOS gdb-py, by using the Apple Python during the build
+
 ### 2019-10-11
 
 - v8.3.1-1.2 released
