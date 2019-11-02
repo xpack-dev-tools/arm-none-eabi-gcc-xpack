@@ -179,3 +179,8 @@ $ xpm install --global @xpack-dev-tools/arm-none-eabi-gcc@latest
 - paste the release name like **xPack GNU Arm Embedded GCC v8.2.1-1.8 released**
 - paste the link to the Web page release
 - click the **Tweet** button
+
+## Announce to Arm community
+
+Add a new topic in the **GNU Toolchain forum** category of the
+[Arm Developer Community](https://community.arm.com/developer/tools-software/oss-platforms/f/gnu-toolchain-forum)
