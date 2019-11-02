@@ -136,6 +136,7 @@ $ cat *.sha
 
 - commit the `xpack.github.io` web Git; use a message
 like **xPack GNU Arm Embedded GCC v8.2.1-1.8 released**
+- adjust timestamps
 - wait for the GitHub Pages build to complete
 - remember the post URL, since it must be updated in the release page
 
