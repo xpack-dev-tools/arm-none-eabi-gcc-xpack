@@ -36,13 +36,13 @@ page.
 Install the binaries on all supported platforms and check if they are
 functional.
 
-For this, on each platform:
+For this, on each platform (Mac, GNU/Linux 64/32, Windows 64/32):
 
-- unpack the archive in `Downloads`, and **rename the version folder**,
-  by replacing a dash with a space; this will test paths with spaces;
+- - unpack the archive in `Desktop` or in `Downloads`, and rename the version
+  folder, by replacing a dash with a space; this will test paths with spaces;
   on Windows the current paths always use spaces, so renaming is not needed;
 - clone this repo locally; on Windows use the Git console;
-```
+```console
 $ git clone --recurse-submodules https://github.com/xpack-dev-tools/arm-none-eabi-gcc-xpack.git \
   ~/Downloads/arm-none-eabi-gcc-xpack.git
 ```
@@ -72,6 +72,8 @@ C:\Users\ilg>set PYTHONHOME=C:\Python27.16
 
 ## Create a new GitHub pre-release
 
+- in `CHANGELOG.md`, add release date
+- commit and push the repo
 - go to the [GitHub Releases](https://github.com/xpack-dev-tools/arm-none-eabi-gcc-xpack/releases) page
 - click **Draft a new release**
 - name the tag like **v8.2.1-1.8** (mind the dash in the middle!)

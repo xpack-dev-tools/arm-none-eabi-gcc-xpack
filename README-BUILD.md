@@ -132,6 +132,12 @@ Before starting a multi-platform build, check if Docker is started:
 $ docker info
 ```
 
+Eventually run the test image:
+
+```console
+$ docker run hello-world
+```
+
 Before running a build for the first time, it is recommended to preload the
 docker images.
 
@@ -154,7 +160,7 @@ It is also recommended to Remove unused Docker space. This is mostly useful
 after failed builds, during development, when dangling images may be left
 by Docker.
 
-To check the content of Docker image:
+To check the content of a Docker image:
 
 ```console
 $ docker run --interactive --tty ilegeul/centos:6-xbb-v2.2
@@ -184,7 +190,7 @@ network connection or a computer entering sleep.
 $ screen -S arm
 
 $ sudo rm -rf ~/Work/arm-none-eabi-gcc-*
-$ bash ~/Downloads/arm-none-eabi-gcc-xpack.git/scripts/build.sh --all --jobs 4
+$ bash ~/Downloads/arm-none-eabi-gcc-xpack.git/scripts/build.sh --all --jobs 8
 ```
 
 To detach from the session, use `Ctrl-a` `Ctrl-d`; to reattach use
@@ -224,6 +230,11 @@ fast SSD.
 ```console
 $ ssh ilg-xbb-mac.local
 ```
+To download them, the following shortcut is available:
+
+```console
+$ curl --fail -L https://github.com/xpack-dev-tools/arm-none-eabi-gcc-xpack/raw/xpack/scripts/git-clone.sh | bash
+```
 
 To build the latest macOS version:
 
@@ -231,7 +242,7 @@ To build the latest macOS version:
 $ screen -S arm
 
 $ sudo rm -rf ~/Work/arm-none-eabi-gcc-*
-$ caffeinate bash ~/Downloads/arm-none-eabi-gcc-xpack.git/scripts/build.sh --osx --jobs 4
+$ caffeinate bash ~/Downloads/arm-none-eabi-gcc-xpack.git/scripts/build.sh --osx --jobs 8
 ```
 
 To detach from the session, use `Ctrl-a` `Ctrl-d`; to reattach use
@@ -255,6 +266,21 @@ folder in a terminal and use `scp`:
 $ cd ~/Work/arm-none-eabi-gcc-*/deploy
 $ scp * ilg@ilg-wks.local:Downloads/xpack-binaries/arm
 ```
+
+## Run a test build on macOS
+
+Before starting the builds on the dedicated machines, run a quick test on
+the local development workstation.
+
+```console
+$ caffeinate bash ~/Downloads/arm-none-eabi-gcc-xpack.git/scripts/build.sh --osx --disable-multilib --develop --jobs 12
+```
+
+This should check the commit IDs and the tag names in all the refered
+repositories, and the build scripts.
+
+It is _quick_ because it does not build the multilibs. Even so, on a
+fast machine, it takes about one hour.
 
 ## Subsequent runs
 
@@ -328,9 +354,15 @@ Although not guaranteed to work, previous versions can be re-built by
 explicitly specifying the version:
 
 ```console
-$ RELEASE_VERSION=7.3.1-1.2 bash ~/Downloads/arm-none-eabi-gcc-xpack.git/scripts/build.sh --all --jobs 4
-$ RELEASE_VERSION=8.3.1-1.1 bash ~/Downloads/arm-none-eabi-gcc-xpack.git/scripts/build.sh --all --jobs 4
+$ RELEASE_VERSION=7.3.1-1.2 bash ~/Downloads/arm-none-eabi-gcc-xpack.git/scripts/build.sh --all --jobs 8
+$ RELEASE_VERSION=8.3.1-1.1 bash ~/Downloads/arm-none-eabi-gcc-xpack.git/scripts/build.sh --all --jobs 8
 ```
+
+> Note: This procedure builds a previous release but in the context of
+the latest build environment, which might be different from the one used
+at the time of the release, so the result may be slightly different; to
+obtain exactly the same result, use the commit tagged with the desired
+release.
 
 ## Test
 

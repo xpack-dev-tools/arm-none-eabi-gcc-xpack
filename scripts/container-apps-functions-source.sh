@@ -43,6 +43,8 @@ function download_gdb()
   fi
 }
 
+# -----------------------------------------------------------------------------
+
 function download_python_win() 
 {
   # https://www.python.org/downloads/release/python-2714/
@@ -145,6 +147,8 @@ function download_python3_win()
   fi
 }
 
+# -----------------------------------------------------------------------------
+
 function download_binutils() 
 {
   if [ ! -d "${SOURCES_FOLDER_PATH}/${BINUTILS_SRC_FOLDER_NAME}" ]
@@ -167,6 +171,8 @@ function download_binutils()
     )
   fi
 }
+
+# -----------------------------------------------------------------------------
 
 function do_binutils()
 {
