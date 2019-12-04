@@ -469,11 +469,11 @@ place them in the XBB cache (`Work/cache`) and restart the build.
 
 ## Pitfalls
 
-### Parallel build
+### Parallel builds
 
-For various reasons, parallel builds for some components
-fail with errors like 'vfork: insufficient resources'. Thus,
-occasionally parallel builds are disabled.
+For various reasons, in some environments, parallel builds for
+some components fail. Reduce the number of parallel jobs until
+the build passes.
 
 ### Building GDB on macOS
 

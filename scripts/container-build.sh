@@ -262,7 +262,70 @@ README_OUT_FILE_NAME="README-${RELEASE_VERSION}.md"
 
 # In reverse chronological order.
 # Keep them in sync with combo archive content.
-if [[ "${RELEASE_VERSION}" =~ 8\.3\.1-* ]]
+# https://developer.arm.com/tools-and-software/open-source-software/developer-tools/gnu-toolchain/gnu-rm/downloads
+if [[ "${RELEASE_VERSION}" =~ 9\.2\.1-* ]]
+then
+
+  # https://developer.arm.com/-/media/Files/downloads/gnu-rm/9-2019q4/gcc-arm-none-eabi-9-2019-q4-major-src.tar.bz2
+  GCC_COMBO_VERSION_MAJOR="9"
+  GCC_COMBO_VERSION_YEAR="2019"
+  GCC_COMBO_VERSION_QUARTER="q4"
+  GCC_COMBO_VERSION_KIND="major"
+  GCC_COMBO_VERSION_SUBFOLDER=""
+
+  GCC_COMBO_VERSION="${GCC_COMBO_VERSION_MAJOR}-${GCC_COMBO_VERSION_YEAR}-${GCC_COMBO_VERSION_QUARTER}-${GCC_COMBO_VERSION_KIND}"
+  GCC_COMBO_FOLDER_NAME="gcc-arm-none-eabi-${GCC_COMBO_VERSION}"
+  GCC_COMBO_ARCHIVE="${GCC_COMBO_FOLDER_NAME}-src.tar.bz2"
+
+  GCC_COMBO_URL="https://developer.arm.com/-/media/Files/downloads/gnu-rm/${GCC_COMBO_VERSION_MAJOR}-${GCC_COMBO_VERSION_YEAR}${GCC_COMBO_VERSION_QUARTER}${GCC_COMBO_VERSION_SUBFOLDER}/${GCC_COMBO_ARCHIVE}"
+
+  MULTILIB_FLAGS="--with-multilib-list=rmprofile"
+
+  # From /release.txt
+  BINUTILS_VERSION="2.32"
+
+  # From gcc/BASE_VER. 
+  # gcc/LAST_UPDATED: Wed Oct 30 01:03:41 UTC 2019 (revision 277599)
+  GCC_VERSION="9.2.1"
+
+  # git: 572687310059534b2da9428ca19df992509c8a5d from /release.txt.
+  # VERSION from configure, comment in NEWS.
+  NEWLIB_VERSION="3.1.0"
+
+  # git: e908e11a4f74ab6a06aef8c302a03b2a0dbc4d83 from /release.txt
+  GDB_VERSION="8.3"
+
+  ZLIB_VERSION="1.2.8"
+  GMP_VERSION="6.1.0"
+  MPFR_VERSION="3.1.4"
+  MPC_VERSION="1.0.3"
+
+  ISL_VERSION="0.18"
+
+  LIBELF_VERSION="0.8.13"
+  EXPAT_VERSION="2.1.1"
+  LIBICONV_VERSION="1.15"
+  XZ_VERSION="5.2.3"
+  GETTEXT_VERSION="0.19.8.1"
+
+  PYTHON_WIN_VERSION="2.7.7"
+
+  # GDB 8.3 with Python3 not yet functional on Windows.
+  # GDB does not know the Python3 API when compiled with mingw.
+  if [ "${TARGET_PLATFORM}" != "win32" ]
+  then
+    WITH_GDB_PY3="y" 
+    PYTHON3_VERSION="3.7.2"
+  fi
+
+  USE_PLATFORM_PYTHON="y"
+  USE_SINGLE_FOLDER="y"
+  USE_TAR_GZ="y"
+
+  BINUTILS_PATCH="binutils-${BINUTILS_VERSION}.patch"
+  # GDB_PATCH="gdb-${GDB_VERSION}.patch"
+
+elif [[ "${RELEASE_VERSION}" =~ 8\.3\.1-* ]]
 then
 
   # https://developer.arm.com/-/media/Files/downloads/gnu-rm/8-2019q3/RC1.1/gcc-arm-none-eabi-8-2019-q3-update-src.tar.bz2
