@@ -323,7 +323,6 @@ then
     if [ "${TARGET_PLATFORM}" == "darwin" ]
     then
       USE_PLATFORM_PYTHON="y"
-      USE_TAR_GZ="y"
     fi
   fi
 
@@ -334,6 +333,7 @@ then
     # Versions 1.4 and up use the new linearised content, without
     # multiple folders.
     USE_SINGLE_FOLDER="y"
+    USE_TAR_GZ="y"
   fi
 
   BINUTILS_PATCH="binutils-${BINUTILS_VERSION}.patch"
