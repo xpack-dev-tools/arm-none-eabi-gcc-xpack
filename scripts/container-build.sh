@@ -233,7 +233,8 @@ GDB_ARCHIVE_URL=""
 MULTILIB_FLAGS=""
 GETTEXT_VERSION=""
 
-HAS_SINGLE_FOLDER=""
+USE_SINGLE_FOLDER=""
+USE_TAR_GZ=""
 
 # -----------------------------------------------------------------------------
 
@@ -322,6 +323,7 @@ then
     if [ "${TARGET_PLATFORM}" == "darwin" ]
     then
       USE_PLATFORM_PYTHON="y"
+      USE_TAR_GZ="y"
     fi
   fi
 
@@ -331,7 +333,7 @@ then
   then
     # Versions 1.4 and up use the new linearised content, without
     # multiple folders.
-    HAS_SINGLE_FOLDER="y"
+    USE_SINGLE_FOLDER="y"
   fi
 
   BINUTILS_PATCH="binutils-${BINUTILS_VERSION}.patch"
