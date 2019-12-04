@@ -2,6 +2,10 @@
 
 Releases in reverse chronological order.
 
+### 2019-12-04
+
+- v8.3.1-1.4 released, as a repack of 1.3 with linsingle folder content
+
 ### 2019-11-02
 
 - v8.3.1-1.3 released

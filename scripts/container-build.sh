@@ -233,6 +233,8 @@ GDB_ARCHIVE_URL=""
 MULTILIB_FLAGS=""
 GETTEXT_VERSION=""
 
+HAS_SINGLE_FOLDER=""
+
 # -----------------------------------------------------------------------------
 
 # Redefine to "y" to create the LTO plugin links.
@@ -321,6 +323,15 @@ then
     then
       USE_PLATFORM_PYTHON="y"
     fi
+  fi
+
+  if [ "${RELEASE_VERSION}" != "8.3.1-1.1" \
+    -a "${RELEASE_VERSION}" != "8.3.1-1.2" \
+    -a "${RELEASE_VERSION}" != "8.3.1-1.3" ]
+  then
+    # Versions 1.4 and up use the new linearised content, without
+    # multiple folders.
+    HAS_SINGLE_FOLDER="y"
   fi
 
   BINUTILS_PATCH="binutils-${BINUTILS_VERSION}.patch"
