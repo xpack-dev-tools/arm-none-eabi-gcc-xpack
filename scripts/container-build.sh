@@ -318,7 +318,10 @@ then
     PYTHON3_VERSION="3.7.2"
   fi
 
-  USE_PLATFORM_PYTHON="y"
+  if [ "${TARGET_PLATFORM}" == "darwin" ]
+  then
+    USE_PLATFORM_PYTHON="y"
+  fi
   USE_SINGLE_FOLDER="y"
   USE_TAR_GZ="y"
 
