@@ -514,7 +514,7 @@ download_gcc_combo
 if [ "${TARGET_PLATFORM}" == "win32" ]
 then
   # The Windows GDB needs some headers from the Python distribution.
-  if [ "${WITH_GDB_PY3}" == "y" ]
+  if [ "${WITH_GDB_PY}" == "y" ]
   then
     download_python_win
   fi
