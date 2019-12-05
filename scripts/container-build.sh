@@ -308,7 +308,8 @@ then
   XZ_VERSION="5.2.3"
   GETTEXT_VERSION="0.19.8.1"
 
-  PYTHON_WIN_VERSION="2.7.7"
+  # Arm uses 2.7.7
+  PYTHON_WIN_VERSION="2.7.13"
 
   # GDB 8.3 with Python3 not yet functional on Windows.
   # GDB does not know the Python3 API when compiled with mingw.
