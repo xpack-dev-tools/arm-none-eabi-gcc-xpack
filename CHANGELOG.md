@@ -2,6 +2,11 @@
 
 Releases in reverse chronological order.
 
+### 2019-12-11
+
+- v9.2.1-1.2 prepared
+- add support for native builds and arm64/armv7l targets
+
 ### 2019-12-06
 
 - v8.3.1-1.4.1 published on npmjs.com
