@@ -112,3 +112,19 @@ function host_custom_options()
     fi
   fi
 }
+
+# -----------------------------------------------------------------------------
+
+function add_linux_install_path()
+{
+  # Verify that the compiler is there.
+  "${WORK_FOLDER_PATH}/${LINUX_INSTALL_PATH}/bin/${GCC_TARGET}-gcc" --version
+
+  export PATH="${WORK_FOLDER_PATH}/${LINUX_INSTALL_PATH}/bin:${PATH}"
+  echo ${PATH}
+
+  export LD_LIBRARY_PATH="${WORK_FOLDER_PATH}/${LINUX_INSTALL_PATH}/bin:${LD_LIBRARY_PATH}"
+  echo ${LD_LIBRARY_PATH}
+}
+
+# -----------------------------------------------------------------------------
