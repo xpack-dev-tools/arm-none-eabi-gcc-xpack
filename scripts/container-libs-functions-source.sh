@@ -146,8 +146,11 @@ function do_gmp()
 
       # ABI is mandatory, otherwise configure fails on 32-bit.
       # (see https://gmplib.org/manual/ABI-and-ISA.html)
-      export ABI="${TARGET_BITS}"
-        
+      if [ "${TARGET_ARCH}" == "x64" -o "${TARGET_ARCH}" == "x32" ]
+      then
+        export ABI="${TARGET_BITS}"
+      fi
+
       if [ ! -f "config.status" ]
       then 
         (
