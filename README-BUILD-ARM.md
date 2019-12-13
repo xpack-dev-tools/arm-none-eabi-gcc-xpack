@@ -64,9 +64,10 @@ The main tool needed while building the binaries is the GCC 7.4 compiler,
 which, for Ubuntu 16, is available via the special repositories:
 
 ```console
-$ sudo apt-get install -y software-properties-common
-$ sudo add-apt-repository ppa:ubuntu-toolchain-r/test
-$ sudo apt update
+$ sudo apt-get install --yes software-properties-common
+$ sudo add-apt-repository --yes ppa:ubuntu-toolchain-r/test
+$ sudo apt update --yes
+$ sudo apt upgrade --yes
 
 $ sudo apt install --yes \
 git \
