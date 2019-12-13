@@ -206,7 +206,7 @@ network connection or a computer entering sleep.
 ```console
 $ screen -S arm
 
-$ sudo rm -rf ~/Work/arm-none-eabi-gcc-*
+$ rm -rf ~/Work/arm-none-eabi-gcc-*
 $ /usr/bin/time bash ~/Downloads/arm-none-eabi-gcc-xpack.git/scripts/build-native.sh --jobs 4
 ```
 
