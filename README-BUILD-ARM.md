@@ -103,8 +103,10 @@ $ gcc-7 --version
 gcc-7 (Ubuntu 7.4.0-1ubuntu1~16.04~ppa1) 7.4.0
 ```
 
+Check if the system libraries version is 2.23.
+
 ```console
-ldd --version
+$ ldd --version
 ldd (Ubuntu GLIBC 2.23-0ubuntu11) 2.23
 ```
 
