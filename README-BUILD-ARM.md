@@ -103,7 +103,7 @@ $ gcc-7 --version
 gcc-7 (Ubuntu 7.4.0-1ubuntu1~16.04~ppa1) 7.4.0
 ```
 
-Other versions are:
+With this setup, the versions of the major tools are:
 
 ```console
 $ git --version
