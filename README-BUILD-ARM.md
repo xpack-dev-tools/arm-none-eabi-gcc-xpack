@@ -86,12 +86,9 @@ dos2unix \
 flex \
 perl \
 cmake \
-python python3 \
+python libpython-dev \
+python3 libpython3-dev \
 g++-7
-
-$ sudo apt install --yes \
-libpython-dev \
-libpython3-dev 
 
 $ sudo apt install --yes \
 texlive \
