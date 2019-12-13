@@ -202,7 +202,7 @@ network connection or a computer entering sleep.
 $ screen -S arm
 
 $ sudo rm -rf ~/Work/arm-none-eabi-gcc-*
-$ bash ~/Downloads/arm-none-eabi-gcc-xpack.git/scripts/build-native.sh --jobs 4
+$ /usr/bin/time bash ~/Downloads/arm-none-eabi-gcc-xpack.git/scripts/build-native.sh --jobs 4
 ```
 
 To detach from the session, use `Ctrl-a` `Ctrl-d`; to reattach use
@@ -216,6 +216,14 @@ $ ls -l deploy
 total 487380
 -rw-r--r-- 1 ilg ilg 115361011 Jul 26 11:57 xpack-arm-none-eabi-gcc-9.2.1-1.2-linux-arm64.tgz
 -rw-r--r-- 1 ilg ilg       114 Jul 26 11:57 xpack-arm-none-eabi-gcc-9.2.1-1.2-linux-arm64.tgz.sha
+```
+
+The `/usr/bin/time` is useful to get a short report on the resources used
+by the build, like time and memory.
+
+```console
+60856.18user 10517.07system 7:34:51elapsed 261%CPU (0avgtext+0avgdata 681076maxresident)k
+189520inputs+15266392outputs (531major+320166700minor)pagefaults 0swaps
 ```
 
 ## Subsequent runs
