@@ -23,7 +23,7 @@ function host_custom_options()
   DO_BUILD_WIN=""
   IS_DEBUG=""
   IS_DEVELOP=""
-  WITH_STRIP=""
+  WITH_STRIP="y"
   IS_NATIVE="y"
 
   WITHOUT_MULTILIB=""
@@ -89,6 +89,11 @@ function host_custom_options()
 
       --with-html)
         WITH_HTML="y"
+        ;;
+
+      --disable-strip)
+        WITH_STRIP="n"
+        shift
         ;;
 
       *)
