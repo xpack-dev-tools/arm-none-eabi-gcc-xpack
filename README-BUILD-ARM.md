@@ -231,6 +231,15 @@ by the build, like time and memory.
 189520inputs+15266392outputs (531major+320166700minor)pagefaults 0swaps
 ```
 
+To copy the files from the build machine to the current development
+machine, either use NFS to mount the entire folder, or open the `deploy`
+folder in a terminal and use `scp`:
+
+```console
+$ cd ~/Work/arm-none-eabi-gcc-*/deploy
+$ scp * ilg@ilg-wks.local:Downloads/xpack-binaries/arm
+```
+
 ## Subsequent runs
 
 The script accepts several command line options and can be resumed 
