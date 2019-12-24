@@ -1,4 +1,4 @@
-name: CI
+name: Test Binaries
 
 on: repository_dispatch
 
@@ -10,7 +10,10 @@ jobs:
     steps:
     - uses: actions/checkout@v1
     - name: Show environment
-      run: env && pwd && ls -l
+      run: |
+        env
+        pwd
+        ls -l
     - name: Run a one-line script
       run: echo Testing...
     
