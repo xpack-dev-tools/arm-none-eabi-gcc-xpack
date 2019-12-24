@@ -34,5 +34,44 @@ script_folder_name="$(basename "${script_folder_path}")"
 
 # =============================================================================
 
-echo Testing...
+function run_app()
+{
+  # Does not include the .exe extension.
+  local app_path=$1
+  shift
+
+  echo
+  echo "${app_path} $@"
+  "${app_path}" $@
+}
+
+# =============================================================================
+
+mkdir -p $HOME/test
+cd $HOME/test
+
+APP_PREFIX=xpack-arm-none-eabi-gcc-9.2.1-1.1
+GCC_TARGET=arm-none-eabi
+
+curl -L --fail -o ${APP_PREFIX}-linux-x64.tar.gz \
+https://github.com/xpack-dev-tools/arm-none-eabi-gcc-xpack/releases/download/v9.2.1-1.1/${${APP_PREFIX}}-linux-x64.tar.gz
+tar xf ${APP_PREFIX}-linux-x64.tar.gz
+
+APP_PREFIX=xpack-arm-none-eabi-gcc-9.2.1-1.1
+GCC_TARGET=arm-none-eabi
+
+# Test if binutils start properly.
+run_app "${APP_PREFIX}/bin/${GCC_TARGET}-ar" --version
+run_app "${APP_PREFIX}/bin/${GCC_TARGET}-as" --version
+run_app "${APP_PREFIX}/bin/${GCC_TARGET}-ld" --version
+run_app "${APP_PREFIX}/bin/${GCC_TARGET}-nm" --version
+run_app "${APP_PREFIX}/bin/${GCC_TARGET}-objcopy" --version
+run_app "${APP_PREFIX}/bin/${GCC_TARGET}-objdump" --version
+run_app "${APP_PREFIX}/bin/${GCC_TARGET}-ranlib" --version
+run_app "${APP_PREFIX}/bin/${GCC_TARGET}-size" --version
+run_app "${APP_PREFIX}/bin/${GCC_TARGET}-strings" --version
+run_app "${APP_PREFIX}/bin/${GCC_TARGET}-strip" --version
+
 exit 0
+
+# -----------------------------------------------------------------------------
