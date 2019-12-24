@@ -156,13 +156,14 @@ function run_gdb()
 
 # =============================================================================
 
-mkdir -p $HOME/test
-cd $HOME/test
+TEST_FOLDER="$HOME/test"
+APP_FOLDER_NAME="xpack-arm-none-eabi-gcc-9.2.1-1.1"
 
-APP_FOLDER_NAME=xpack-arm-none-eabi-gcc-9.2.1-1.1
-
-APP_PREFIX=$HOME/test${APP_FOLDER_NAME}
+APP_PREFIX="${TEST_FOLDER}/${APP_FOLDER_NAME}"
 GCC_TARGET=arm-none-eabi
+
+mkdir -p "${TEST_FOLDER}"
+cd "${TEST_FOLDER}"
 
 echo
 echo "Downloading ${APP_FOLDER_NAME}-linux-x64.tar.gz..."
