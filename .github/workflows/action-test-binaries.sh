@@ -53,14 +53,17 @@ cd $HOME/test
 APP_PREFIX=xpack-arm-none-eabi-gcc-9.2.1-1.1
 GCC_TARGET=arm-none-eabi
 
+echo
+echo "Downloading ${APP_PREFIX}-linux-x64.tar.gz..."
 curl -L --fail -o ${APP_PREFIX}-linux-x64.tar.gz \
-https://github.com/xpack-dev-tools/arm-none-eabi-gcc-xpack/releases/download/v9.2.1-1.1/${APP_PREFIX}-linux-x64.tar.gz
+  https://github.com/xpack-dev-tools/arm-none-eabi-gcc-xpack/releases/download/v9.2.1-1.1/${APP_PREFIX}-linux-x64.tar.gz
+
+echo "Extracting ${APP_PREFIX}-linux-x64.tar.gz..."
 tar xf ${APP_PREFIX}-linux-x64.tar.gz
 
-APP_PREFIX=xpack-arm-none-eabi-gcc-9.2.1-1.1
-GCC_TARGET=arm-none-eabi
+echo
+echo "Testing if binutils start properly..."
 
-# Test if binutils start properly.
 run_app "${APP_PREFIX}/bin/${GCC_TARGET}-ar" --version
 run_app "${APP_PREFIX}/bin/${GCC_TARGET}-as" --version
 run_app "${APP_PREFIX}/bin/${GCC_TARGET}-ld" --version
@@ -71,6 +74,9 @@ run_app "${APP_PREFIX}/bin/${GCC_TARGET}-ranlib" --version
 run_app "${APP_PREFIX}/bin/${GCC_TARGET}-size" --version
 run_app "${APP_PREFIX}/bin/${GCC_TARGET}-strings" --version
 run_app "${APP_PREFIX}/bin/${GCC_TARGET}-strip" --version
+
+echo
+echo "Done."
 
 exit 0
 
