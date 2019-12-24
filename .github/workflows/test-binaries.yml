@@ -10,11 +10,7 @@ jobs:
     steps:
     - uses: actions/checkout@v1
     - name: Show environment
-      run: |
-        env
-        ls -l
-        ls -l scripts
-        ls -l .github/workflows
+      run: env
     - name: Run the test script
       run: bash .github/workflows/action-test-binaries.sh
     
