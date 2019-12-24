@@ -183,8 +183,10 @@ run_binutils
 run_gcc
 
 run_gdb
-run_gdb "-py"
-run_gdb "-py3"
+
+# gdb-py not functional on Ubuntu. 
+# run_gdb "-py"
+# run_gdb "-py3"
 
 echo
 echo "Done."
