@@ -159,16 +159,18 @@ function run_gdb()
 mkdir -p $HOME/test
 cd $HOME/test
 
-APP_PREFIX=xpack-arm-none-eabi-gcc-9.2.1-1.1
+APP_FOLDER_NAME=xpack-arm-none-eabi-gcc-9.2.1-1.1
+
+APP_PREFIX=$HOME/test${APP_FOLDER_NAME}
 GCC_TARGET=arm-none-eabi
 
 echo
-echo "Downloading ${APP_PREFIX}-linux-x64.tar.gz..."
-curl -L --fail -o ${APP_PREFIX}-linux-x64.tar.gz \
-  https://github.com/xpack-dev-tools/arm-none-eabi-gcc-xpack/releases/download/v9.2.1-1.1/${APP_PREFIX}-linux-x64.tar.gz
+echo "Downloading ${APP_FOLDER_NAME}-linux-x64.tar.gz..."
+curl -L --fail -o ${APP_FOLDER_NAME}-linux-x64.tar.gz \
+  https://github.com/xpack-dev-tools/arm-none-eabi-gcc-xpack/releases/download/v9.2.1-1.1/${APP_FOLDER_NAME}-linux-x64.tar.gz
 
-echo "Extracting ${APP_PREFIX}-linux-x64.tar.gz..."
-tar xf ${APP_PREFIX}-linux-x64.tar.gz
+echo "Extracting ${APP_FOLDER_NAME}-linux-x64.tar.gz..."
+tar xf ${APP_FOLDER_NAME}-linux-x64.tar.gz
 
 TARGET_PLATFORM=linux
 TARGET_ARCH=x64
