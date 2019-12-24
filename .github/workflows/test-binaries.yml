@@ -12,8 +12,8 @@ jobs:
     - name: Show environment
       run: |
         env
-        pwd
         ls -l
+        ls -l scripts
     - name: Run a one-line script
       run: echo Testing...
     
