@@ -14,6 +14,7 @@ jobs:
         env
         ls -l
         ls -l scripts
-    - name: Run a one-line script
-      run: echo Testing...
+        .github/workflows
+    - name: Run the test script
+      run: bash .github/workflows/action-test-binaries.sh
     
