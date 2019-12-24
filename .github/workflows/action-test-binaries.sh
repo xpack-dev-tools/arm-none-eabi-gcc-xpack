@@ -134,26 +134,24 @@ function run_gdb()
   fi
 
   # error while loading shared libraries: /Host/home/ilg/Work/arm-none-eabi-gcc-8.2.1-1.5/linux-x32/install/arm-none-eabi-gcc/bin/libpython3.7m.so.1.0: unsupported version 0 of Verneed record
-  if [ "${suffix}" == "-py3" -a "${TARGET_PLATFORM}" == "linux" -a "${TARGET_ARCH}" == "x32" ]
-  then
-    return 0
-  fi
+  # if [ "${suffix}" == "-py3" -a "${TARGET_PLATFORM}" == "linux" -a "${TARGET_ARCH}" == "x32" ]
+  # then
+  #   return 0
+  # fi
 
-  (
-    # Required by gdb-py to access the python shared library.
-    xbb_activate_installed_bin
+  echo
+  echo "Testing if gdb${suffix} starts properly..."
 
-    run_app "${APP_PREFIX}/bin/${GCC_TARGET}-gdb${suffix}" --version
-    run_app "${APP_PREFIX}/bin/${GCC_TARGET}-gdb${suffix}" --config
+  run_app "${APP_PREFIX}/bin/${GCC_TARGET}-gdb${suffix}" --version
+  run_app "${APP_PREFIX}/bin/${GCC_TARGET}-gdb${suffix}" --config
 
-    # This command is known to fail with 'Abort trap: 6' (SIGABRT)
-    run_app "${APP_PREFIX}/bin/${GCC_TARGET}-gdb${suffix}" \
-      --nh \
-      --nx \
-      -ex='show language' \
-      -ex='set language auto' \
-      -ex='quit'
-  )
+  # This command is known to fail with 'Abort trap: 6' (SIGABRT)
+  run_app "${APP_PREFIX}/bin/${GCC_TARGET}-gdb${suffix}" \
+    --nh \
+    --nx \
+    -ex='show language' \
+    -ex='set language auto' \
+    -ex='quit'
 }
 
 # =============================================================================
