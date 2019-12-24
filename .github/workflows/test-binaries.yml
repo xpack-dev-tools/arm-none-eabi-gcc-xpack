@@ -9,6 +9,8 @@ jobs:
 
     steps:
     - uses: actions/checkout@v1
+    - name: Show environment
+      run: env && pwd && ls -l
     - name: Run a one-line script
       run: echo Testing...
     
