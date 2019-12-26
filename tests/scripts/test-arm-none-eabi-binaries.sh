@@ -245,7 +245,7 @@ function run_gdb()
 if [ $# -lt 1 ]
 then
   echo "Usage: bash tests/scripts/test-binaries.sh [--skip-gdb-py] [--skip-gdb-py3] <archive-url>"
-  echo "Archive name like: xpack-arm-none-eabi-gcc-9.2.1-1.1-linux-x64.tar.gz"
+  echo "Archive name is like: xpack-arm-none-eabi-gcc-9.2.1-1.1-linux-x64.tar.gz"
   exit 1
 fi
 
