@@ -202,6 +202,24 @@ function run_gdb()
   echo
   echo "Testing if gdb${suffix} starts properly..."
 
+  case "${suffix}" in
+    -py)
+      echo
+      python --version
+      python -c 'import sys; print sys.path'
+      ;;
+    --py3)
+      echo
+      python3 --version
+      python3 -c 'import sys; print(sys.path)'
+      ;;
+    *)
+      echo "Unsupported gdb-${suffix}"
+      exit 1
+      ;;
+  esac
+
+  echo
   run_app "${app_absolute_path}/bin/${gcc_target}-gdb${suffix}" --version
   run_app "${app_absolute_path}/bin/${gcc_target}-gdb${suffix}" --config
 
@@ -272,10 +290,10 @@ validate
 mkdir -p "/tmp/cache"
 cd "/tmp/cache"
 
-echo
-echo "Downloading ${archive_name}..."
 if [ ! -f "${archive_name}" ]
 then
+  echo
+  echo "Downloading ${archive_name}..."
   curl -L --fail -o "${archive_name}" ${url}
 fi
 
