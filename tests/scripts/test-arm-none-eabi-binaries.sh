@@ -295,8 +295,10 @@ validate
 echo
 echo "Test the ${archive_name} binaries on ${host_platform} ${host_machine}."
 
-mkdir -p "/tmp/cache"
-cd "/tmp/cache"
+work_absolute_path="${HOME}/Work"
+cache_absolute_path="${work_absolute_path}/cache"
+mkdir -p "${work_absolute_path}/cache"
+cd "${work_absolute_path}/cache"
 
 if [ ! -f "${archive_name}" ]
 then
@@ -305,7 +307,7 @@ then
   curl -L --fail -o "${archive_name}" ${url}
 fi
 
-test_absolute_path="$(mktemp /tmp/test-arm-none-eabi-gcc-XXXXX)"
+test_absolute_path="${work_absolute_path}/test-arm-none-eabi-gcc"
 
 rm -rf "${test_absolute_path}"
 mkdir -p "${test_absolute_path}"
@@ -313,7 +315,7 @@ cd "${test_absolute_path}"
 
 echo
 echo "Extracting ${archive_name}..."
-tar xf "/tmp/cache/${archive_name}"
+tar xf "${work_absolute_path}/cache/${archive_name}"
 
 TARGET_PLATFORM=${archive_platform}
 TARGET_ARCH=${archive_arch}
