@@ -203,6 +203,8 @@ function run_gdb()
   echo "Testing if gdb${suffix} starts properly..."
 
   case "${suffix}" in
+    '')
+      ;;
     -py)
       echo
       python --version
@@ -282,10 +284,10 @@ archive_platform=$(echo ${archive_name} | sed -e "s/\(xpack-${gcc_target}-gcc-[0
 archive_arch=$(echo ${archive_name} | sed -e "s/\(xpack-${gcc_target}-gcc-[0-9.]*-[0-9.]*\)-\([a-z]*\)-\([a-z0-9]*\).*/\3/")
 # echo ${archive_folder_name} ${archive_platform} ${archive_arch}
 
-has_gdb_py="y"
-has_gdb_py3="y"
-
 validate
+
+echo
+echo "Test the ${archive_name} binaries on ${host_platform} ${host_machine}."
 
 mkdir -p "/tmp/cache"
 cd "/tmp/cache"
@@ -303,6 +305,7 @@ rm -rf "${test_absolute_path}"
 mkdir -p "${test_absolute_path}"
 cd "${test_absolute_path}"
 
+echo
 echo "Extracting ${archive_name}..."
 tar xf "/tmp/cache/${archive_name}"
 
