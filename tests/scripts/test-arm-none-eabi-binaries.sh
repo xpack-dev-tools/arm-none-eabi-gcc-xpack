@@ -207,10 +207,16 @@ function run_gdb()
       ;;
     -py)
       echo
-      python --version
-      python -c 'import sys; print sys.path'
+      if [ "${host_platform}" == "darwin" ]
+      then
+        python --version
+        python -c 'import sys; print sys.path'
+      else
+        python2 --version
+        python2 -c 'import sys; print sys.path'
+      fi
       ;;
-    --py3)
+    -py3)
       echo
       python3 --version
       python3 -c 'import sys; print(sys.path)'
