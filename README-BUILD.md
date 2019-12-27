@@ -41,6 +41,13 @@ $ git clone --recurse-submodules https://github.com/xpack-dev-tools/arm-none-eab
 > Note: the repository uses submodules; for a successful build it is
 > mandatory to recurse the submodules.
 
+For development purposes, there is a shortcut to clone the `xpack-develop`
+branch:
+
+```console
+$ curl --fail -L https://github.com/xpack-dev-tools/arm-none-eabi-gcc-xpack/raw/xpack/scripts/git-clone-develop.sh | bash
+```
+
 ## The `Work` folder
 
 The script creates a temporary build `Work/arm-none-eabi-gcc-${version}`
