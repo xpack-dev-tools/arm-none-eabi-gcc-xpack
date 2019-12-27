@@ -65,8 +65,7 @@ source "${defines_script_path}"
 
 host_detect
 
-# docker_linux64_image="ilegeul/centos:6-xbb-v2"
-# docker_linux32_image="ilegeul/centos32:6-xbb-v2"
+docker_images
 
 # -----------------------------------------------------------------------------
 
