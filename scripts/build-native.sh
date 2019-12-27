@@ -73,6 +73,8 @@ source "${defines_script_path}"
 
 host_detect
 
+docker_images
+
 # -----------------------------------------------------------------------------
 
 help_message="    bash $0 [--win] [--disable-multilib] [--disable-strip] [--without-pdf] [--with-html] [--debug] [--develop] [--jobs N] [--help] [clean|cleanlibs|cleanall]"
