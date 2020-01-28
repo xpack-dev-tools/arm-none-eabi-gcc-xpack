@@ -150,7 +150,15 @@ function prepare_versions()
     USE_TAR_GZ="y"
 
     BINUTILS_PATCH="binutils-${BINUTILS_VERSION}.patch"
-    # GDB_PATCH="gdb-${GDB_VERSION}.patch"
+
+    if [ "${RELEASE_VERSION}" != "9.2.1-1.1" ]
+    then
+      if [ "${TARGET_PLATFORM}" == "darwin" ]
+      then
+        USE_PLATFORM_PYTHON3="y"
+      fi
+      GDB_PATCH="gdb-${GDB_VERSION}.patch"
+    fi
 
   elif [[ "${RELEASE_VERSION}" =~ 8\.3\.1-* ]]
   then
