@@ -1071,7 +1071,10 @@ function do_gdb()
       cd "${BUILD_FOLDER_PATH}/${gdb_folder_name}"
 
       local platform_python2
-      if [ -x "/usr/bin/python2.7" ]
+      if [ -x "/Library/Frameworks/Python.framework/Versions/2.7/bin/python" ]
+      then
+        platform_python2="/Library/Frameworks/Python.framework/Versions/2.7/bin/python2"
+      elif [ -x "/usr/bin/python2.7" ]
       then
         platform_python2="/usr/bin/python2.7"
       elif [ -x "/usr/bin/python2.6" ]
@@ -1084,7 +1087,13 @@ function do_gdb()
       fi
 
       local platform_python3
-      if [ -x "/usr/bin/python3.6" ]
+      if [ -x "/Library/Frameworks/Python.framework/Versions/3.7/bin/python3" ]
+      then
+        platform_python3="/Library/Frameworks/Python.framework/Versions/3.7/bin/python3"
+      elif [ -x "/usr/bin/python3.7" ]
+      then
+        platform_python3="/usr/bin/python3.7"
+      elif [ -x "/usr/bin/python3.6" ]
       then
         platform_python3="/usr/bin/python3.6"
       else
@@ -1094,6 +1103,8 @@ function do_gdb()
       fi
 
       xbb_activate
+      # To pick up the python lib from XBB
+      xbb_activate_dev
       xbb_activate_installed_dev
 
       if [ "${TARGET_PLATFORM}" == "win32" ]
@@ -1155,6 +1166,13 @@ function do_gdb()
         fi
       fi
 
+      # python -c 'from distutils import sysconfig;print(sysconfig.PREFIX)'
+      # python -c 'from distutils import sysconfig;print(sysconfig.EXEC_PREFIX)'
+
+      # Default PYTHONHOME on macOS
+      # /Library/Frameworks/Python.framework/Versions/2.7
+      # /Library/Frameworks/Python.framework/Versions/3.7
+      
       if [ ! -f "config.status" ]
       then
         (
