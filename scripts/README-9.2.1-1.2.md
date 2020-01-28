@@ -49,8 +49,19 @@ compatible with most recent systems.
   folder on macOS 10.10.5; GDB cannot be compiled with GCC, so Apple
   clang was used.
 
-Partial support for Python3 was added to GDB for GNU/Linux and macOS;
-not yet available on Windows ([24469](https://sourceware.org/bugzilla/show_bug.cgi?id=24469)).
+## Python
+
+Support for Python scripting was added to GDB. This distribution provides 
+two separate binaries,
+`arm-none-eabi-gdb-py` with Python 2.7 support, and `arm-none-eabi-gdb-py3` with
+support for Python 3.7.
+
+Note: Support for Python3 is not yet available on Windows 
+([24469](https://sourceware.org/bugzilla/show_bug.cgi?id=24469)).
+
+Mode details on the prerequisites of running GDB with Python support are
+available from
+[GDB with Python support](https://xpack.github.io/arm-none-eabi-gcc/python/).
 
 ## Build
 
