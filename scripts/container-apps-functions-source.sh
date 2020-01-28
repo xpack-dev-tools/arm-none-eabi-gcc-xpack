@@ -1120,7 +1120,7 @@ function do_gdb()
       export CPPFLAGS="${XBB_CPPFLAGS}" 
       export LDFLAGS="${XBB_LDFLAGS_APP}"
       # libiconv is used by Python3.
-      export LIBS="-liconv"
+      # export LIBS="-liconv"
 
       if [ "${TARGET_PLATFORM}" == "darwin" ]
       then
