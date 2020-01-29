@@ -63,6 +63,10 @@ common_helper_functions_script_path="${script_folder_path}/helper/common-functio
 echo "Common helper functions source script: \"${common_helper_functions_script_path}\"."
 source "${common_helper_functions_script_path}"
 
+common_functions_script_path="${script_folder_path}/common-functions-source.sh"
+echo "Common functions source script: \"${common_functions_script_path}\"."
+source "${common_functions_script_path}"
+
 container_functions_script_path="${script_folder_path}/helper/container-functions-source.sh"
 echo "Container helper functions source script: \"${container_functions_script_path}\"."
 source "${container_functions_script_path}"
