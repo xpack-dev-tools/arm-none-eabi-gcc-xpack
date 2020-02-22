@@ -39,15 +39,41 @@ The binaries were built using
 of build environments based on slightly older distributions, that should be
 compatible with most recent systems.
 
-- Intel GNU/Linux: all binaries were built with GCC 7.4, running in a CentOS 6
-  Docker container
-- Arm GNU/Linux: all binaries were built with GCC 7.4, running in on Ubuntu
+- Intel GNU/Linux: all binaries were built with GCC 9.2, running in an
+  Ubuntu 12.04 LTS Docker container
+- Arm GNU/Linux: all binaries were built with GCC 9.2, running in on Ubuntu
   16.04.6 LTS
-- Windows: all binaries were built with mingw-w64 GCC 7.4, running in a
-  CentOS 6 Docker container
-- macOS: most binaries were built with GCC 7.4, running in a separate
+- Windows: all binaries were built with mingw-w64 GCC 9.2, running in a
+  Ubuntu 12.04 LTS Docker container
+- macOS: most binaries were built with GCC 9.2, running in a separate
   folder on macOS 10.10.5; GDB cannot be compiled with GCC, so Apple
   clang was used.
+
+## Shared libraries
+
+On all platforms the packages are standalone, and expect only the standard
+C/C++ runtime to be present on the host.
+
+All dependencies that are build as shared libraries are copied locally in the
+same folder as the executable.
+
+### `rpath`
+
+On GNU/Linux the binaries are adjusted to use a relative run path:
+
+```
+$ readelf -d library.so | grep runpath
+ 0x000000000000001d (RUNPATH)            Library runpath: [$ORIGIN]
+```
+
+Please note that in the GNU ld.so search strategy, the `DT_RUNPATH` has
+lower priority than `LD_LIBRARY_PATH`, so if this later one is set
+in the environment, it might interfere with the xPack binaries.
+
+### `@executable_path`
+
+Similarly, on macOS, the dynamic libraries are adjusted with `otool` to use a
+relative path.
 
 ## Python
 

@@ -996,7 +996,7 @@ function do_gcc_final()
 function run_gcc()
 {
   (
-    xbb_activate
+    xbb_activate_installed_bin
 
     run_app "${APP_PREFIX}/bin/${GCC_TARGET}-gcc" --help
     run_app "${APP_PREFIX}/bin/${GCC_TARGET}-gcc" -dumpversion
