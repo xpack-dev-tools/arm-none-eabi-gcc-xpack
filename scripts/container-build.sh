@@ -67,14 +67,6 @@ common_functions_script_path="${script_folder_path}/common-functions-source.sh"
 echo "Common functions source script: \"${common_functions_script_path}\"."
 source "${common_functions_script_path}"
 
-container_functions_script_path="${script_folder_path}/helper/container-functions-source.sh"
-echo "Container helper functions source script: \"${container_functions_script_path}\"."
-source "${container_functions_script_path}"
-
-common_versions_script_path="${script_folder_path}/common-versions-source.sh"
-echo "Common versions source script: \"${common_versions_script_path}\"."
-source "${common_versions_script_path}"
-
 container_libs_functions_script_path="${script_folder_path}/${CONTAINER_LIBS_FUNCTIONS_SCRIPT_NAME}"
 echo "Container lib functions source script: \"${container_libs_functions_script_path}\"."
 source "${container_libs_functions_script_path}"
