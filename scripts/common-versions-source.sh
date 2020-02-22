@@ -158,6 +158,7 @@ function prepare_versions()
         USE_PLATFORM_PYTHON3="y"
       fi
       GDB_PATCH="gdb-${GDB_VERSION}.patch"
+      USE_SINGLE_FOLDER_PATH="y"
     fi
 
   elif [[ "${RELEASE_VERSION}" =~ 8\.3\.1-* ]]
