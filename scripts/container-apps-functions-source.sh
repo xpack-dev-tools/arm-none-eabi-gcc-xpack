@@ -1104,7 +1104,7 @@ function do_gdb()
 
       xbb_activate
       # To pick up the python lib from XBB
-      xbb_activate_dev
+      # xbb_activate_dev
       xbb_activate_installed_dev
 
       if [ "${TARGET_PLATFORM}" == "win32" ]
