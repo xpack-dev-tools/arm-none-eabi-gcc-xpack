@@ -251,13 +251,9 @@ function do_binutils()
         # Build.
         make -j ${JOBS} 
 
-        if [ "${WITH_STRIP}" == "y" ]
-        then
-          # For -strip, readline needs a patch.
-          make install-strip
-        else
-          make install
-        fi
+        # Avoid strip here, it may interfere with patchelf.
+        # make install-strip
+        make install
 
         (
           xbb_activate_tex
@@ -916,12 +912,9 @@ function do_gcc_final()
           make -j ${JOBS} INHIBIT_LIBC_CFLAGS="-DUSE_TM_CLONE_REGISTRY=0"
           # make INHIBIT_LIBC_CFLAGS="-DUSE_TM_CLONE_REGISTRY=0"
 
-          if [ "${WITH_STRIP}" == "y" ]
-          then
-            make install-strip
-          else
-            make install
-          fi
+          # Avoid strip here, it may interfere with patchelf.
+          # make install-strip
+          make install
 
           if [ "$1" == "-nano" ]
           then

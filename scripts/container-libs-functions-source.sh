@@ -814,12 +814,11 @@ function do_gettext()
 
         # Build.
         make -j ${JOBS}
-        if [ "${WITH_STRIP}" == "y" ]
-        then
-          make install-strip
-        else
-          make install
-        fi
+
+        # Avoid strip here, it may interfere with patchelf.
+        # make install-strip
+        make install
+
       ) 2>&1 | tee "${LOGS_FOLDER_PATH}/make-gettext-output.txt"
     )
 
