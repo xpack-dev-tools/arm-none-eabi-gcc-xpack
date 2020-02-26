@@ -227,7 +227,7 @@ do_isl
 # More libraries.
 do_libelf
 do_expat
-do_libiconv
+# do_libiconv
 do_xz
 
 if [ ! -z "${GETTEXT_VERSION}" ]
