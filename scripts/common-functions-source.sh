@@ -138,8 +138,8 @@ function add_linux_install_path()
   export PATH="${WORK_FOLDER_PATH}/${LINUX_INSTALL_PATH}/bin:${PATH}"
   echo ${PATH}
 
-  export LD_LIBRARY_PATH="${WORK_FOLDER_PATH}/${LINUX_INSTALL_PATH}/bin:${LD_LIBRARY_PATH}"
-  echo ${LD_LIBRARY_PATH}
+  # export LD_LIBRARY_PATH="${WORK_FOLDER_PATH}/${LINUX_INSTALL_PATH}/bin:${LD_LIBRARY_PATH}"
+  # echo ${LD_LIBRARY_PATH}
 }
 
 # -----------------------------------------------------------------------------
