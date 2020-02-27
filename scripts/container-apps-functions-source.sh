@@ -1125,6 +1125,12 @@ function do_gdb()
       export LDFLAGS="${XBB_LDFLAGS_APP}"
       # libiconv is used by Python3.
       # export LIBS="-liconv"
+      if [ "${TARGET_PLATFORM}" == "win32" ]
+      then
+        # Workaround for undefined reference to `__strcpy_chk' in GCC 9.
+        # https://sourceforge.net/p/mingw-w64/bugs/818/
+        export LIBS="-lssp"
+      fi
 
       if [ "${TARGET_PLATFORM}" == "darwin" ]
       then
