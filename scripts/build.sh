@@ -65,6 +65,7 @@ source "${defines_script_path}"
 
 host_detect
 
+# For clarity, explicitly define the docker images here.
 docker_linux64_image=${docker_linux64_image:-"ilegeul/ubuntu:amd64-12.04-xbb-v3.1"}
 docker_linux32_image=${docker_linux32_image:-"ilegeul/ubuntu:i386-12.04-xbb-v3.1"}
 docker_linux_arm64_image=${docker_linux_arm64_image:-"ilegeul/ubuntu:arm64-16.04-xbb-v3.1"}
