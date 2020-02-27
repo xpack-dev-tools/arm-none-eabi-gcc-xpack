@@ -209,10 +209,7 @@ tidy_up
 
 # Task [III-9] /$HOST_NATIVE/strip_host_objects/
 # Task [IV-6] /$HOST_MINGW/strip_host_objects/
-if [ "${WITH_STRIP}" == "y" ]
-then
-  strip_binaries
-fi
+strip_binaries
 
 # Must be done after gcc 2 make install, otherwise some wrong links
 # are created in libexec.
@@ -220,7 +217,7 @@ fi
 # damages the binaries.
 prepare_app_folder_libraries
 
-if [ "${WITH_STRIP}" == "y" -a "${TARGET_PLATFORM}" != "win32" ]
+if [ "${TARGET_PLATFORM}" != "win32" ]
 then
   # Task [III-10] /$HOST_NATIVE/strip_target_objects/
   strip_libs
