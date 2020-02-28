@@ -1279,6 +1279,28 @@ function run_gdb()
     # Required by gdb-py to access the python shared library.
     xbb_activate_installed_bin
 
+    # The original Python in Ubunutu XBB is too old and the test fails.
+    # Use the XBB modern Python.
+    if [ "${suffix}" == "-py" ]
+    then
+      echo
+      python --version
+
+      if [ "${TARGET_PLATFORM}" == "linux" ]
+      then
+        export PYTHONHOME="${XBB_FOLDER_PATH}"
+      fi
+    elif [ "${suffix}" == "-py3" ]
+    then
+      echo
+      python3 --version
+
+      if [ "${TARGET_PLATFORM}" == "linux" ]
+      then
+        export PYTHONHOME="${XBB_FOLDER_PATH}"
+      fi
+    fi
+
     run_app "${APP_PREFIX}/bin/${GCC_TARGET}-gdb${suffix}" --version
     run_app "${APP_PREFIX}/bin/${GCC_TARGET}-gdb${suffix}" --config
 
