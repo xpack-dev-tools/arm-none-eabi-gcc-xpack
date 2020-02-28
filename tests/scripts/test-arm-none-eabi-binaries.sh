@@ -208,27 +208,18 @@ function run_gdb()
         ;;
       -py)
         echo
-        if [ "${host_platform}" == "darwin" ]
-        then
-          python --version
-          python -c 'import sys; print sys.path'
+        python2.7 --version
+        python2.7 -c 'import sys; print sys.path'
 
-          export PYTHONHOME="$(python -c 'from distutils import sysconfig;print(sysconfig.PREFIX)')"
-          echo "PYTHONHOME=${PYTHONHOME}"
-        else
-          python2 --version
-          python2 -c 'import sys; print sys.path'
-
-          export PYTHONHOME="$(python2 -c 'from distutils import sysconfig;print(sysconfig.PREFIX)')"
-          echo "PYTHONHOME=${PYTHONHOME}"
-        fi
+        export PYTHONHOME="$(python2.7 -c 'from distutils import sysconfig;print(sysconfig.PREFIX)')"
+        echo "PYTHONHOME=${PYTHONHOME}"
         ;;
       -py3)
         echo
-        python3 --version
-        python3 -c 'import sys; print(sys.path)'
+        python3.7 --version
+        python3.7 -c 'import sys; print(sys.path)'
 
-        export PYTHONHOME="$(python3 -c 'from distutils import sysconfig;print(sysconfig.PREFIX)')"
+        export PYTHONHOME="$(python3.7 -c 'from distutils import sysconfig;print(sysconfig.PREFIX)')"
         echo "PYTHONHOME=${PYTHONHOME}"
         ;;
       *)
