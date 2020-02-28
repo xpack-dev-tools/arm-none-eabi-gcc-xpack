@@ -199,45 +199,56 @@ function run_gdb()
     suffix="$1"
   fi
 
-  echo
-  echo "Testing if gdb${suffix} starts properly..."
+  (
+    echo
+    echo "Testing if gdb${suffix} starts properly..."
 
-  case "${suffix}" in
-    '')
-      ;;
-    -py)
-      echo
-      if [ "${host_platform}" == "darwin" ]
-      then
-        python --version
-        python -c 'import sys; print sys.path'
-      else
-        python2 --version
-        python2 -c 'import sys; print sys.path'
-      fi
-      ;;
-    -py3)
-      echo
-      python3 --version
-      python3 -c 'import sys; print(sys.path)'
-      ;;
-    *)
-      echo "Unsupported gdb-${suffix}"
-      exit 1
-      ;;
-  esac
+    case "${suffix}" in
+      '')
+        ;;
+      -py)
+        echo
+        if [ "${host_platform}" == "darwin" ]
+        then
+          python --version
+          python -c 'import sys; print sys.path'
 
-  echo
-  run_app "${app_absolute_path}/bin/${gcc_target}-gdb${suffix}" --version
-  run_app "${app_absolute_path}/bin/${gcc_target}-gdb${suffix}" --config
+          export PYTHONHOME="$(python -c 'from distutils import sysconfig;print(sysconfig.PREFIX)')"
+          echo "PYTHONHOME=${PYTHONHOME}"
+        else
+          python2 --version
+          python2 -c 'import sys; print sys.path'
 
-  # This command is known to fail with 'Abort trap: 6' (SIGABRT)
-  run_app "${app_absolute_path}/bin/${gcc_target}-gdb${suffix}" \
-    --nh \
-    --nx \
-    -ex='show language' \
-    -ex='set language auto' \
-    -ex='quit'
+          export PYTHONHOME="$(python2 -c 'from distutils import sysconfig;print(sysconfig.PREFIX)')"
+          echo "PYTHONHOME=${PYTHONHOME}"
+        fi
+        ;;
+      -py3)
+        echo
+        python3 --version
+        python3 -c 'import sys; print(sys.path)'
+
+        export PYTHONHOME="$(python3 -c 'from distutils import sysconfig;print(sysconfig.PREFIX)')"
+        echo "PYTHONHOME=${PYTHONHOME}"
+        ;;
+      *)
+        echo "Unsupported gdb-${suffix}"
+        exit 1
+        ;;
+    esac
+
+    echo
+    run_app "${app_absolute_path}/bin/${gcc_target}-gdb${suffix}" --version
+    run_app "${app_absolute_path}/bin/${gcc_target}-gdb${suffix}" --config
+
+    # This command is known to fail with 'Abort trap: 6' (SIGABRT)
+    run_app "${app_absolute_path}/bin/${gcc_target}-gdb${suffix}" \
+      --nh \
+      --nx \
+      -ex='show language' \
+      -ex='set language auto' \
+      -ex='quit'
+  )
 }
 
 # =============================================================================
