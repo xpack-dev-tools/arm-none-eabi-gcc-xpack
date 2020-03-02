@@ -28,7 +28,7 @@ gdb-py3 crashes
 ### macOS
 
 ```
-bash ~/Downloads/test-arm-none-eabi-binaries.sh --skip-gdb-py3 https://github.com/xpack-dev-tools/arm-none-eabi-gcc-xpack/releases/download/v9.2.1-1.1/xpack-arm-none-eabi-gcc-9.2.1-1.1-darwin-x64.tar.gz
+bash ~/Downloads/arm-none-eabi-gcc-xpack.git/tests/scripts/test-arm-none-eabi-binaries.sh https://github.com/xpack-dev-tools/pre-releases/releases/download/experimental/xpack-arm-none-eabi-gcc-9.2.1-1.2-darwin-x64.tar.gz
 ```
 
 ok
