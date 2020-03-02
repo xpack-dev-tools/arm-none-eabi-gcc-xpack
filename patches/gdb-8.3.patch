@@ -35,8 +35,8 @@
      if opt == '--prefix':
 -        print (to_unix_path(sysconfig.PREFIX))
 +        if platform.system() == 'Linux':
-+            sys.stderr.write ("%s -> [%s]\n" % (opt, '/usr'))
-+            print ('/usr')
++            sys.stderr.write ("%s -> [%s]\n" % (opt, '/usr/local'))
++            print ('/usr/local')
 +        else:
 +            sys.stderr.write ("%s -> [%s]\n" % (opt, to_unix_path(sysconfig.PREFIX)))
 +            print (to_unix_path(sysconfig.PREFIX))
@@ -44,8 +44,8 @@
      elif opt == '--exec-prefix':
 -        print (to_unix_path(sysconfig.EXEC_PREFIX))
 +        if platform.system() == 'Linux':
-+            sys.stderr.write ("%s -> [%s]\n" % (opt, '/usr'))
-+            print ('/usr')
++            sys.stderr.write ("%s -> [%s]\n" % (opt, '/usr/local'))
++            print ('/usr/local')
 +        else:
 +            sys.stderr.write ("%s -> [%s]\n" % (opt, to_unix_path(sysconfig.EXEC_PREFIX)))
 +            print (to_unix_path(sysconfig.EXEC_PREFIX))
