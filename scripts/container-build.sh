@@ -335,6 +335,9 @@ fix_ownership
 # Final checks.
 # To keep everything as pristine as possible, run tests
 # only after the archive is packed.
+
+prime_wine
+
 run_binutils
 run_gcc
 run_gdb
