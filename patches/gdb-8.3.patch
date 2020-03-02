@@ -66,7 +66,7 @@
 -        print (to_unix_path(' '.join(libs)))
 +        tmp = to_unix_path(' '.join(libs))
 +        # Hack, the official python cannot be compiled on macOS with relative paths.
-+        tmp = tmp.replace(' Python.framework/Versions/2.7/Python', ' /Library/Frameworks/Python.framework/Versions/2.7/Python')
++        tmp = tmp.replace(' Python.framework/Versions/2.7/Python', ' /System/Library/Frameworks/Python.framework/Versions/2.7/Python')
 +        tmp = tmp.replace(' Python.framework/Versions/3.7/Python', ' /Library/Frameworks/Python.framework/Versions/3.7/Python')
 +        tmp = tmp.replace(' Python.framework/Versions/3.8/Python', ' /Library/Frameworks/Python.framework/Versions/3.8/Python')
 +        sys.stderr.write ("%s -> [%s]\n" % (opt, tmp))
