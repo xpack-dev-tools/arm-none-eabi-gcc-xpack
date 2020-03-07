@@ -96,6 +96,8 @@ WITH_PDF="y"
 WITH_HTML="n"
 WITH_NEWLIB_LTO="n"
 WITH_LIBS_LTO="n"
+WITH_TESTS="y"
+
 IS_DEVELOP=""
 IS_DEBUG=""
 LINUX_INSTALL_PATH=""
@@ -109,6 +111,11 @@ do
 
     --disable-strip)
       WITH_STRIP="n"
+      shift
+      ;;
+
+    --disable-tests)
+      WITH_TESTS="n"
       shift
       ;;
 
