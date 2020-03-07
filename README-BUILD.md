@@ -157,10 +157,10 @@ The result should look similar to:
 ```console
 $ docker images
 REPOSITORY TAG IMAGE ID CREATED SIZE
-REPOSITORY          TAG                 IMAGE ID            CREATED             SIZE
-ilegeul/centos32    6-xbb-v2.2          956eb2963946        5 weeks ago         3.03GB
-ilegeul/centos      6-xbb-v2.2          6b1234f2ac44        5 weeks ago         3.12GB
-hello-world         latest              fce289e99eb9        5 months ago        1.84kB
+REPOSITORY          TAG                   IMAGE ID            CREATED             SIZE
+ilegeul/ubuntu      i386-12.04-xbb-v3.1   b78e41b9305f        16 hours ago        3.65GB
+ilegeul/ubuntu      amd64-12.04-xbb-v3.1  6f90ce85a148        18 hours ago        4.02GB
+hello-world         latest                fce289e99eb9        14 months ago        1.84kB
 ```
 
 It is also recommended to Remove unused Docker space. This is mostly useful
@@ -170,7 +170,7 @@ by Docker.
 To check the content of a Docker image:
 
 ```console
-$ docker run --interactive --tty ilegeul/centos:6-xbb-v2.2
+$ docker run --interactive --tty ilegeul/ubuntu:amd64-12.04-xbb-v3.1
 ```
 
 To remove unused files:
