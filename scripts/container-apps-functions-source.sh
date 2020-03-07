@@ -251,6 +251,11 @@ function do_binutils()
         # Build.
         make -j ${JOBS} 
 
+        if [ "${WITH_TESTS}" == "y" ]
+        then
+          make check
+        fi
+      
         # Avoid strip here, it may interfere with patchelf.
         # make install-strip
         make install

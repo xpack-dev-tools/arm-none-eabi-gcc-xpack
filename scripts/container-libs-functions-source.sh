@@ -81,6 +81,11 @@ function do_zlib()
           # Build.
           make -j ${JOBS}
 
+          if [ "${WITH_TESTS}" == "y" ]
+          then
+            make test
+          fi
+
           make install
         ) 2>&1 | tee "${LOGS_FOLDER_PATH}/make-zlib-output.txt"
       else    
@@ -186,6 +191,11 @@ function do_gmp()
         make -j ${JOBS}
         # make
 
+        if [ "${WITH_TESTS}" == "y" ]
+        then
+          make check
+        fi
+
         make install-strip
       ) 2>&1 | tee "${LOGS_FOLDER_PATH}/make-gmp-output.txt"
     )
@@ -261,6 +271,11 @@ function do_mpfr()
         make -j ${JOBS}
         # make
 
+        if [ "${WITH_TESTS}" == "y" ]
+        then
+          make check
+        fi
+
         make install-strip
       ) 2>&1 | tee "${LOGS_FOLDER_PATH}/make-mpfr-output.txt"
     )
@@ -333,6 +348,11 @@ function do_mpc()
 
         # Build.
         make -j ${JOBS}
+
+        if [ "${WITH_TESTS}" == "y" ]
+        then
+          make check
+        fi
 
         make install-strip
       ) 2>&1 | tee "${LOGS_FOLDER_PATH}/make-mpc-output.txt"
@@ -412,6 +432,11 @@ function do_isl()
         make -j ${JOBS}
         # make
 
+        if [ "${WITH_TESTS}" == "y" ]
+        then
+          make check
+        fi
+
         make install-strip
       ) 2>&1 | tee "${LOGS_FOLDER_PATH}/make-isl-output.txt"
 
@@ -483,6 +508,11 @@ function do_libelf()
 
         # Build.
         make -j ${JOBS}
+
+        if [ "${WITH_TESTS}" == "y" ]
+        then
+          make check
+        fi
 
         make install
       ) 2>&1 | tee "${LOGS_FOLDER_PATH}/make-libelf-output.txt"
@@ -561,6 +591,11 @@ function do_expat()
         # Build.
         make -j ${JOBS}
 
+        if [ "${WITH_TESTS}" == "y" ]
+        then
+          make check
+        fi
+
         make install
       ) 2>&1 | tee "${LOGS_FOLDER_PATH}/make-expat-output.txt"
     )
@@ -636,6 +671,11 @@ function do_libiconv()
         # Build.
         make -j ${JOBS}
 
+        if [ "${WITH_TESTS}" == "y" ]
+        then
+          make check
+        fi
+
         make install-strip
       ) 2>&1 | tee "${LOGS_FOLDER_PATH}/make-libiconv-output.txt"
     )
@@ -707,6 +747,11 @@ function do_xz()
 
         # Build.
         make -j ${JOBS}
+
+        if [ "${WITH_TESTS}" == "y" ]
+        then
+          make check
+        fi
 
         make install-strip
       ) 2>&1 | tee "${LOGS_FOLDER_PATH}/make-xz-output.txt"
@@ -814,6 +859,11 @@ function do_gettext()
 
         # Build.
         make -j ${JOBS}
+
+        if [ "${WITH_TESTS}" == "y" ]
+        then
+          make check # || true
+        fi
 
         # Avoid strip here, it may interfere with patchelf.
         # make install-strip

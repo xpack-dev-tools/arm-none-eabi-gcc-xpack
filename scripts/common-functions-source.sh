@@ -42,6 +42,8 @@ function host_custom_options()
   WITH_NEWLIB_LTO="n"
   WITH_LIBS_LTO="n"
 
+  WITH_TESTS="y"
+
   JOBS="1"
 
   while [ $# -gt 0 ]
@@ -103,6 +105,11 @@ function host_custom_options()
 
       --disable-strip)
         WITH_STRIP="n"
+        shift
+        ;;
+
+      --disable-tests)
+        WITH_TESTS="n"
         shift
         ;;
 
