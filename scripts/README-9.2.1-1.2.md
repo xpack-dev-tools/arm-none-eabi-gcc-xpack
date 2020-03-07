@@ -61,7 +61,7 @@ same folder as the executable.
 
 On GNU/Linux the binaries are adjusted to use a relative run path:
 
-```
+```console
 $ readelf -d library.so | grep runpath
  0x000000000000001d (RUNPATH)            Library runpath: [$ORIGIN]
 ```
@@ -77,7 +77,7 @@ relative path.
 
 ## Python
 
-Support for Python scripting was added to GDB. This distribution provides 
+Support for Python scripting was added to GDB. This distribution provides
 two separate binaries,
 `arm-none-eabi-gdb-py` with Python 2.7 support, and `arm-none-eabi-gdb-py3` with
 support for Python 3.7.
@@ -111,5 +111,3 @@ For more info, please see the xPack project site:
 Thank you for using open source software,
 
 Liviu Ionescu
-
-
