@@ -227,7 +227,12 @@ do_isl
 # More libraries.
 do_libelf
 do_expat
-# do_libiconv
+
+if [ "${TARGET_PLATFORM}" == "darwin" ]
+then
+  do_libiconv
+fi
+
 do_xz
 
 if [ ! -z "${GETTEXT_VERSION}" ]
