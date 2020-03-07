@@ -1054,6 +1054,9 @@ __EOF__
 # $1="" or $1="-py" or $1="-py3"
 function do_gdb()
 {
+  # GDB Text User Interface
+  # https://ftp.gnu.org/old-gnu/Manuals/gdb/html_chapter/gdb_19.html#SEC197
+
   local gdb_folder_name="gdb-${GDB_VERSION}$1"
   local gdb_stamp_file_path="${INSTALL_FOLDER_PATH}/stamp-gdb$1-${GDB_VERSION}-installed"
 
@@ -1220,7 +1223,8 @@ function do_gdb()
             --with-system-zlib \
             --without-guile \
             --without-babeltrace \
-            --without-libunwind-ia64
+            --without-libunwind-ia64 \
+            --enable-tui \
 
           cp "config.log" "${LOGS_FOLDER_PATH}/config-gdb$1-log.txt"
         ) 2>&1 | tee "${LOGS_FOLDER_PATH}/configure-gdb$1-output.txt"
