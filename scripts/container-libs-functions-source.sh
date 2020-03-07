@@ -18,14 +18,14 @@ function do_zlib()
 {
   # http://zlib.net
   # http://zlib.net/fossils/
+
+  # https://archlinuxarm.org/packages/aarch64/zlib/files/PKGBUILD
   # https://aur.archlinux.org/cgit/aur.git/tree/PKGBUILD?h=zlib-static
   # https://aur.archlinux.org/cgit/aur.git/tree/PKGBUILD?h=zlib-git
   # https://aur.archlinux.org/cgit/aur.git/tree/PKGBUILD?h=mingw-w64-zlib
 
-  # 2013-04-28
-  # ZLIB_VERSION="1.2.8"
-  # 2017-01-15
-  # ZLIB_VERSION="1.2.11"
+  # 2013-04-28 "1.2.8"
+  # 2017-01-15 "1.2.11"
 
   ZLIB_FOLDER_NAME="zlib-${ZLIB_VERSION}"
   local zlib_archive="${ZLIB_FOLDER_NAME}.tar.gz"
@@ -119,12 +119,13 @@ function do_gmp()
 {
   # https://gmplib.org
   # https://gmplib.org/download/gmp/
+
+  # https://archlinuxarm.org/packages/aarch64/gmp/files/PKGBUILD
   # https://aur.archlinux.org/cgit/aur.git/tree/PKGBUILD?h=gmp-hg
 
-  # 01-Nov-2015
-  # GMP_VERSION="6.1.0"
-  # 16-Dec-2016
-  # GMP_VERSION="6.1.2"
+  # 01-Nov-2015 "6.1.0"
+  # 16-Dec-2016 "6.1.2"
+  # 17-Jan-2020 "6.2.0"
 
   GMP_FOLDER_NAME="gmp-${GMP_VERSION}"
   local gmp_archive="${GMP_FOLDER_NAME}.tar.xz"
@@ -211,12 +212,13 @@ function do_mpfr()
 {
   # http://www.mpfr.org
   # http://www.mpfr.org/history.html
+
+  # https://archlinuxarm.org/packages/aarch64/mpfr/files/PKGBUILD
   # https://git.archlinux.org/svntogit/packages.git/tree/trunk/PKGBUILD?h=packages/mpfr
 
-  # 6 March 2016
-  # MPFR_VERSION="3.1.4"
-  # 7 September 2017
-  # MPFR_VERSION="3.1.6"
+  # 6 March 2016 "3.1.4"
+  # 7 September 2017 "3.1.6"
+  # 31 January 2019 "4.0.2" may fail mpc
 
   MPFR_FOLDER_NAME="mpfr-${MPFR_VERSION}"
   local mpfr_archive="${MPFR_FOLDER_NAME}.tar.xz"
@@ -290,10 +292,12 @@ function do_mpc()
 {
   # http://www.multiprecision.org/
   # ftp://ftp.gnu.org/gnu/mpc
+
+  # https://archlinuxarm.org/packages/aarch64/mpc/files/PKGBUILD
   # https://git.archlinux.org/svntogit/packages.git/tree/trunk/PKGBUILD?h=packages/libmpc
 
-  # 20 Feb 2015
-  # MPC_VERSION="1.0.3"
+  # 20 Feb 2015 "1.0.3"
+  # 2018-01-11 "1.1.0"
 
   MPC_FOLDER_NAME="mpc-${MPC_VERSION}"
   local mpc_archive="${MPC_FOLDER_NAME}.tar.gz"
@@ -367,14 +371,14 @@ function do_mpc()
 function do_isl()
 {
   # http://isl.gforge.inria.fr
+
   # https://aur.archlinux.org/cgit/aur.git/tree/PKGBUILD?h=isl
 
-  # 2015-06-12
-  # ISL_VERSION="0.15"
-  # 2016-01-15
-  # ISL_VERSION="0.16.1"
-  # 2016-12-20
-  # ISL_VERSION="0.18"
+  # 2015-06-12 "0.15"
+  # 2016-01-15 "0.16.1"
+  # 2016-12-20 "0.18"
+  # 2019-03-26 "0.21"
+  # 2020-01-16 "0.22"
 
   ISL_FOLDER_NAME="isl-${ISL_VERSION}"
   local isl_archive="${ISL_FOLDER_NAME}.tar.xz"
@@ -450,10 +454,16 @@ function do_isl()
 
 function do_libelf()
 {
-  # http://www.mr511.de/
+  # http://www.mr511.de/ (?Deprecated?)
   # http://www.mr511.de/software/
+  # https://sourceware.org/elfutils/
+  # ftp://sourceware.org/pub/elfutils//0.178/elfutils-0.178.tar.bz2
 
-  # LIBELF_VERSION="0.8.13"
+  # https://archlinuxarm.org/packages/aarch64/libelf/files/PKGBUILD
+
+  # LIBELF_VERSION="0.8.13" (deprecated)
+  # 26 Nov 2019, 0.178
+
 
   LIBELF_FOLDER_NAME="libelf-${LIBELF_VERSION}"
   local libelf_archive="${LIBELF_FOLDER_NAME}.tar.gz"
@@ -529,12 +539,13 @@ function do_expat()
 {
   # https://libexpat.github.io
   # https://github.com/libexpat/libexpat/releases
+
+  # https://archlinuxarm.org/packages/aarch64/expat/files/PKGBUILD
   # https://aur.archlinux.org/cgit/aur.git/tree/PKGBUILD?h=expat-git
 
-  # Oct 21, 2017
-  # EXPAT_VERSION="2.1.1"
-  # Nov 1, 2017
-  # EXPAT_VERSION="2.2.5"
+  # Oct 21, 2017 "2.1.1"
+  # Nov 1, 2017 "2.2.5"
+  # 26 Sep 2019 "2.2.9"
 
   EXPAT_FOLDER_NAME="expat-${EXPAT_VERSION}"
   local expat_archive="${EXPAT_FOLDER_NAME}.tar.bz2"
@@ -613,10 +624,9 @@ function do_libiconv()
   # https://ftp.gnu.org/pub/gnu/libiconv/
   # https://aur.archlinux.org/cgit/aur.git/tree/PKGBUILD?h=libiconv
 
-  # 2011-08-07
-  # LIBICONV_VERSION="1.14"
-  # 2017-02-02
-  # LIBICONV_VERSION="1.15"
+  # 2011-08-07 1.14"
+  # 2017-02-02 "1.15"
+  # 2019-04-26 "1.16"
 
   LIBICONV_FOLDER_NAME="libiconv-${LIBICONV_VERSION}"
   local libiconv_archive="${LIBICONV_FOLDER_NAME}.tar.gz"
@@ -691,10 +701,12 @@ function do_xz()
 {
   # https://tukaani.org/xz/
   # https://sourceforge.net/projects/lzmautils/files/
+
+  # https://archlinuxarm.org/packages/aarch64/xz/files/PKGBUILD
   # https://aur.archlinux.org/cgit/aur.git/tree/PKGBUILD?h=xz-git
 
-  # 2016-12-30
-  # XZ_VERSION="5.2.3"
+  # 2016-12-30 "5.2.3"
+  # 2018-04-29 "5.2.4"
 
   XZ_FOLDER_NAME="xz-${XZ_VERSION}"
   local xz_archive="${XZ_FOLDER_NAME}.tar.xz"
@@ -769,11 +781,14 @@ function do_gettext()
 {
   # https://www.gnu.org/software/gettext/
   # http://ftp.gnu.org/pub/gnu/gettext/
+
+  # https://archlinuxarm.org/packages/aarch64/gettext/files/PKGBUILD
   # https://aur.archlinux.org/cgit/aur.git/tree/PKGBUILD?h=gettext-git
   # https://aur.archlinux.org/cgit/aur.git/tree/PKGBUILD?h=mingw-w64-gettext
 
   # GETTEXT_VERSION="0.19.5.1"
-  # GETTEXT_VERSION="0.19.8.1" # 2016-06-11
+  # 2016-06-11 "0.19.8.1"
+  # 2019-05-12 "0.20.1"
 
   GETTEXT_SRC_FOLDER_NAME="gettext-${GETTEXT_VERSION}"
   GETTEXT_FOLDER_NAME="${GETTEXT_SRC_FOLDER_NAME}"
