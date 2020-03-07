@@ -1,6 +1,19 @@
---- readline/Makefile.in	2019-04-16 20:10:40.000000000 +0300
-+++ readline/Makefile-patched.in	2019-04-16 20:20:11.000000000 +0300
-@@ -219,6 +219,7 @@
+diff -ru binutils/bfd/Makefile.in binutils-patched/bfd/Makefile.in
+--- bfd/Makefile.in	2020-03-07 16:41:23.000000000 +0200
++++ bfd/Makefile.in	2020-03-07 16:43:39.000000000 +0200
+@@ -2087,7 +2087,7 @@
+ 	fi ;\
+ 	$(SED) -e "s,@bfd_version@,$$bfd_version," \
+ 	    -e "s,@bfd_version_string@,$$bfd_version_string," \
+-	    -e "s,@bfd_version_package@,$$bfd_version_package," \
++	    -e "s|@bfd_version_package@|$$bfd_version_package|" \
+ 	    -e "s,@report_bugs_to@,$$report_bugs_to," \
+ 	    < $(srcdir)/version.h > $@; \
+ 	echo "$${bfd_soversion}" > libtool-soversion
+diff -ru binutils/readline/Makefile.in binutils-patched/readline/Makefile.in
+--- readline/Makefile.in	2020-03-07 16:45:23.000000000 +0200
++++ readline/Makefile.in	2020-03-07 16:45:10.000000000 +0200
+@@ -236,6 +236,7 @@
  ## readline along with GDB. GDB links statically against readline,
  ## so it doesn't depend on us installing it on the system.
  

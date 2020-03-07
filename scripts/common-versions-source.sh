@@ -18,8 +18,10 @@ function prepare_versions()
   APP_PREFIX_NANO="${INSTALL_FOLDER_PATH}/${APP_LC_NAME}-nano"
 
   # The \x2C is a comma in hex; without this trick the regular expression
-  # that processes this string in the Makefile, silently fails and the 
+  # that processes this string in bfd/Makefile, silently fails and the 
   # bfdver.h file remains empty.
+  # XBB v3.1 update: newer tools expand the unicode and bfd/Makefile.in needs
+  # a patch to avoid the comma separator.
   BRANDING="${BRANDING}\x2C ${TARGET_BITS}-bit"
 
   CFLAGS_OPTIMIZATIONS_FOR_TARGET="-ffunction-sections -fdata-sections -O2"

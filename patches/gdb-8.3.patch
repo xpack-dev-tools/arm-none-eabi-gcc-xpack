@@ -1,3 +1,14 @@
+--- bfd/Makefile.in	2020-03-07 16:41:23.000000000 +0200
++++ bfd/Makefile.in	2020-03-07 16:43:39.000000000 +0200
+@@ -2080,7 +2080,7 @@
+ 	fi ;\
+ 	$(SED) -e "s,@bfd_version@,$$bfd_version," \
+ 	    -e "s,@bfd_version_string@,$$bfd_version_string," \
+-	    -e "s,@bfd_version_package@,$$bfd_version_package," \
++	    -e "s|@bfd_version_package@|$$bfd_version_package|" \
+ 	    -e "s,@report_bugs_to@,$$report_bugs_to," \
+ 	    < $(srcdir)/version.h > $@; \
+ 	echo "$${bfd_soversion}" > libtool-soversion
 --- gdb/python/lib/gdb/command/prompt.py	2019-10-26 03:03:38.000000000 +0300
 +++ gdb/python/lib/gdb/command/prompt-patched.py	2020-01-27 18:09:25.000000000 +0200
 @@ -45,7 +45,7 @@
