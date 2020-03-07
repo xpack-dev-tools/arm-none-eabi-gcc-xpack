@@ -1108,6 +1108,14 @@ function do_gdb()
       # xbb_activate_dev
       xbb_activate_installed_dev
 
+      if [ "${TARGET_PLATFORM}" == "darwin" ]
+      then
+        # When compiled with GCC-7 it fails to run, due to
+        # some problems with exceptions unwind.
+        export CC=clang
+        export CXX=clang++
+      fi
+
       if [ "${TARGET_PLATFORM}" == "win32" ]
       then
         # Definition required by python-config.sh.
@@ -1138,14 +1146,6 @@ function do_gdb()
         # Workaround for undefined reference to `__strcpy_chk' in GCC 9.
         # https://sourceforge.net/p/mingw-w64/bugs/818/
         export LIBS="-lssp"
-      fi
-
-      if [ "${TARGET_PLATFORM}" == "darwin" ]
-      then
-        # When compiled with GCC-7 it fails to run, due to
-        # some problems with exceptions unwind.
-        export CC=clang
-        export CXX=clang++
       fi
 
       local extra_python_opts="--with-python=no"
@@ -1179,7 +1179,7 @@ function do_gdb()
       # Default PYTHONHOME on macOS
       # /Library/Frameworks/Python.framework/Versions/2.7
       # /Library/Frameworks/Python.framework/Versions/3.7
-      
+
       if [ ! -f "config.status" ]
       then
         (
