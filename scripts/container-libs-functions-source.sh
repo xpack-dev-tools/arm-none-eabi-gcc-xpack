@@ -878,3 +878,87 @@ function do_gettext()
     echo "Library gettext already installed."
   fi
 }
+
+function do_ncurses()
+{
+  # https://invisible-island.net/ncurses/
+  # ftp://ftp.invisible-island.net//pub/ncurses/ncurses-6.2.tar.gz
+
+  # https://archlinuxarm.org/packages/aarch64/ncurses/files/PKGBUILD
+
+  # 27 Jan 2018, "6.1"
+  # 12 Feb 2020, "6.2"
+
+  NCURSES_FOLDER_NAME="ncurses-${NCURSES_VERSION}"
+  local ncurses_archive="${NCURSES_FOLDER_NAME}.tar.gz"
+  local ncurses_url="ftp://ftp.invisible-island.net//pub/ncurses/${ncurses_archive}"
+
+  local ncurses_stamp_file_path="${INSTALL_FOLDER_PATH}/stamp-ncurses-${NCURSES_VERSION}-installed"
+  if [ ! -f "${ncurses_stamp_file_path}" ]
+  then
+
+    cd "${SOURCES_FOLDER_PATH}"
+
+    download_and_extract "${ncurses_url}" "${ncurses_archive}" "${NCURSES_FOLDER_NAME}"
+
+    (
+      mkdir -p "${LIBS_BUILD_FOLDER_PATH}/${NCURSES_FOLDER_NAME}"
+      cd "${LIBS_BUILD_FOLDER_PATH}/${NCURSES_FOLDER_NAME}"
+
+      xbb_activate
+      xbb_activate_installed_dev
+
+      export CFLAGS="${XBB_CFLAGS}"
+      export CPPFLAGS="${XBB_CPPFLAGS}"
+      export LDFLAGS="${XBB_LDFLAGS_LIB}"
+
+      if [ ! -f "config.status" ]
+      then 
+        (
+          echo
+          echo "Running ncurses configure..."
+
+          bash "${SOURCES_FOLDER_PATH}/${NCURSES_FOLDER_NAME}/configure" --help
+
+          bash ${DEBUG} "${SOURCES_FOLDER_PATH}/${NCURSES_FOLDER_NAME}/configure" \
+            --prefix="${LIBS_INSTALL_FOLDER_PATH}" \
+            \
+            --build=${BUILD} \
+            --host=${HOST} \
+            --target=${TARGET} \
+            \
+            --with-shared \
+            --with-normal \
+            --without-debug \
+            --without-ada \
+            --enable-widec \
+            --enable-pc-files \
+            --with-cxx-binding \
+            --with-cxx-shared \
+            --with-manpage-format=normal \
+
+          cp "config.log" "${LOGS_FOLDER_PATH}/config-ncurses-log.txt"
+        ) 2>&1 | tee "${LOGS_FOLDER_PATH}/configure-ncurses-output.txt"
+      fi
+
+      (
+        echo
+        echo "Running ncurses make..."
+
+        # Build.
+        make -j ${JOBS}
+
+        # The test-programs are interactive
+        # make check
+
+        # make install-strip
+        make install
+      ) 2>&1 | tee "${LOGS_FOLDER_PATH}/make-ncurses-output.txt"
+    )
+
+    touch "${ncurses_stamp_file_path}"
+
+  else
+    echo "Library ncurses already installed."
+  fi
+}

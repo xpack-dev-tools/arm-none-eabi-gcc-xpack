@@ -235,6 +235,11 @@ then
   do_gettext
 fi
 
+if [ ! -z "${NCURSES_VERSION}" ]
+then
+  do_ncurses
+fi
+
 # -----------------------------------------------------------------------------
 
 # The task descriptions are from the Arm build script.

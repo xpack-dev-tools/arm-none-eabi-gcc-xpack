@@ -61,6 +61,8 @@ function prepare_versions()
   USE_SINGLE_FOLDER=""
   USE_TAR_GZ=""
 
+  NCURSES_VERSION=""
+
   # -----------------------------------------------------------------------------
 
   # Redefine to "y" to create the LTO plugin links.
@@ -161,6 +163,8 @@ function prepare_versions()
       fi
       GDB_PATCH="gdb-${GDB_VERSION}.patch"
       USE_SINGLE_FOLDER_PATH="y"
+
+      NCURSES_VERSION="6.2"
     fi
 
   elif [[ "${RELEASE_VERSION}" =~ 8\.3\.1-* ]]
