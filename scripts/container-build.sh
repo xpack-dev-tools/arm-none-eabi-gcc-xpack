@@ -195,6 +195,11 @@ prepare_xbb_extras
 
 prepare_versions
 
+if [ "${TARGET_PLATFORM}" == "win32" ]
+then
+  export WITH_TESTS="n"
+fi
+
 # -----------------------------------------------------------------------------
 
 echo
