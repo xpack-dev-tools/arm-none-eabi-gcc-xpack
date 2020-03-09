@@ -1,10 +1,20 @@
 # Scripts to test the toolchain
 
+https://github.com/xpack-dev-tools/pre-releases/releases
+
 ## test-arm-none-eabi-binaries.sh
 
+The test script is part of the arm-none-eabi-gcc xPack:
+
 ```
-mkdir -p ~/Downloads
-curl -L --fail -o ~/Downloads/test-arm-none-eabi-binaries.sh https://github.com/xpack-dev-tools/arm-none-eabi-gcc-xpack/raw/xpack/tests/scripts/test-arm-none-eabi-binaries.sh
+rm -rf ~/Downloads/arm-none-eabi-gcc-xpack.git
+git clone --recurse-submodules -b xpack-develop https://github.com/xpack-dev-tools/arm-none-eabi-gcc-xpack.git  ~/Downloads/arm-none-eabi-gcc-xpack.git
+```
+
+To force a new download:
+
+```console
+rm ~/Work/cache/xpack-arm-none-eabi-gcc-9.2.1-1.2-darwin-x64.tar.gz
 ```
 
 ### arm64
