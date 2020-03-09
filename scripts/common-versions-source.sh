@@ -159,7 +159,8 @@ function prepare_versions()
     then
       if [ "${TARGET_PLATFORM}" == "darwin" ]
       then
-        USE_PLATFORM_PYTHON3="y"
+        USE_PLATFORM_PYTHON="n"
+        USE_PLATFORM_PYTHON3="n"
       fi
       GDB_PATCH="gdb-${GDB_VERSION}.patch"
       USE_SINGLE_FOLDER_PATH="y"
