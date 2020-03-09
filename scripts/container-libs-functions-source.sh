@@ -949,7 +949,7 @@ function do_ncurses()
             --with-cxx-binding \
             --with-cxx-shared \
             --with-manpage-format=normal \
-            --with-pkg-config-libdir="${LIBS_INSTALL_FOLDER_PATH}/lib/pkgconfig"
+            --with-pkg-config-libdir="${LIBS_INSTALL_FOLDER_PATH}/lib/pkgconfig" \
             --without-debug \
             --without-ada \
             \
