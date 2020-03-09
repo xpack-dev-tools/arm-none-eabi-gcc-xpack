@@ -165,7 +165,10 @@ function prepare_versions()
       GDB_PATCH="gdb-${GDB_VERSION}.patch"
       USE_SINGLE_FOLDER_PATH="y"
 
-      NCURSES_VERSION="6.2"
+      if [ "${TARGET_PLATFORM}" != "win32" ]
+      then
+        NCURSES_VERSION="6.2"
+      fi
     fi
 
   elif [[ "${RELEASE_VERSION}" =~ 8\.3\.1-* ]]
