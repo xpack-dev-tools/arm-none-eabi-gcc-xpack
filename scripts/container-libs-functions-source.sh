@@ -146,8 +146,9 @@ function do_gmp()
       xbb_activate
       xbb_activate_installed_dev
 
-      export CFLAGS="-Wno-unused-value -Wno-empty-translation-unit -Wno-tautological-compare -Wno-overflow"
       export CPPFLAGS="${XBB_CPPFLAGS}"
+      export CFLAGS="-Wno-unused-value -Wno-empty-translation-unit -Wno-tautological-compare -Wno-overflow"
+      export CXXFLAGS="${XBB_CXXFLAGS}"
       export LDFLAGS="${XBB_LDFLAGS_LIB}"
 
       # ABI is mandatory, otherwise configure fails on 32-bit.
@@ -239,8 +240,9 @@ function do_mpfr()
       xbb_activate
       xbb_activate_installed_dev
 
-      export CFLAGS="${XBB_CFLAGS}"
       export CPPFLAGS="${XBB_CPPFLAGS}"
+      export CFLAGS="${XBB_CFLAGS}"
+      export CXXFLAGS="${XBB_CXXFLAGS}"
       export LDFLAGS="${XBB_LDFLAGS_LIB}"
 
       if [ ! -f "config.status" ]
@@ -323,8 +325,9 @@ function do_mpc()
       xbb_activate
       xbb_activate_installed_dev
 
-      export CFLAGS="${XBB_CFLAGS} -Wno-unused-value -Wno-empty-translation-unit -Wno-tautological-compare"
       export CPPFLAGS="${XBB_CPPFLAGS}"
+      export CFLAGS="${XBB_CFLAGS} -Wno-unused-value -Wno-empty-translation-unit -Wno-tautological-compare"
+      export CXXFLAGS="${XBB_CXXFLAGS}"
       export LDFLAGS="${XBB_LDFLAGS_LIB}"
 
       if [ ! -f "config.status" ]
@@ -404,8 +407,9 @@ function do_isl()
       xbb_activate
       xbb_activate_installed_dev
 
-      export CFLAGS="${XBB_CFLAGS} -Wno-dangling-else -Wno-header-guard"
       export CPPFLAGS="${XBB_CPPFLAGS}"
+      export CFLAGS="${XBB_CFLAGS} -Wno-dangling-else -Wno-header-guard"
+      export CXXFLAGS="${XBB_CXXFLAGS}"
       export LDFLAGS="${XBB_LDFLAGS_LIB}"
 
       if [ ! -f "config.status" ]
@@ -487,8 +491,9 @@ function do_libelf()
       xbb_activate
       xbb_activate_installed_dev
 
-      export CFLAGS="${XBB_CFLAGS} -Wno-tautological-compare"
       export CPPFLAGS="${XBB_CPPFLAGS}"
+      export CFLAGS="${XBB_CFLAGS} -Wno-tautological-compare"
+      export CXXFLAGS="${XBB_CXXFLAGS}"
       export LDFLAGS="${XBB_LDFLAGS_LIB}"
 
       if [ ! -f "config.status" ]
@@ -572,8 +577,9 @@ function do_expat()
       xbb_activate
       xbb_activate_installed_dev
 
-      export CFLAGS="${XBB_CFLAGS}"
       export CPPFLAGS="${XBB_CPPFLAGS}"
+      export CFLAGS="${XBB_CFLAGS}"
+      export CXXFLAGS="${XBB_CXXFLAGS}"
       export LDFLAGS="${XBB_LDFLAGS_LIB}"
 
       if [ ! -f "config.status" ]
@@ -647,10 +653,11 @@ function do_libiconv()
       xbb_activate
       xbb_activate_installed_dev
 
+      export CPPFLAGS="${XBB_CPPFLAGS}"
       # -fgnu89-inline fixes "undefined reference to `aliases2_lookup'"
       #  https://savannah.gnu.org/bugs/?47953
       export CFLAGS="${XBB_CFLAGS} -fgnu89-inline -Wno-tautological-compare -Wno-parentheses-equality -Wno-static-in-inline -Wno-pointer-to-int-cast"
-      export CPPFLAGS="${XBB_CPPFLAGS}"
+      export CXXFLAGS="${XBB_CXXFLAGS}"
       export LDFLAGS="${XBB_LDFLAGS_LIB}"
 
       if [ ! -f "config.status" ]
@@ -727,8 +734,9 @@ function do_xz()
       xbb_activate
       xbb_activate_installed_dev
 
-      export CFLAGS="${XBB_CFLAGS} -Wno-implicit-fallthrough"
       export CPPFLAGS="${XBB_CPPFLAGS}"
+      export CFLAGS="${XBB_CFLAGS} -Wno-implicit-fallthrough"
+      export CXXFLAGS="${XBB_CXXFLAGS}"
       export LDFLAGS="${XBB_LDFLAGS_LIB}"
 
       if [ ! -f "config.status" ]
@@ -811,13 +819,13 @@ function do_gettext()
       xbb_activate
       xbb_activate_installed_dev
 
+      export CPPFLAGS="${XBB_CPPFLAGS}"
       export CFLAGS="${XBB_CFLAGS}"
       if [ "${TARGET_PLATFORM}" != "darwin" ]
       then
         export CFLAGS="${CFLAGS} -Wno-discarded-qualifiers -Wno-incompatible-pointer-types -Wno-attributes -Wno-unknown-warning-option"
       fi
-      
-      export CPPFLAGS="${XBB_CPPFLAGS}"
+      export CXXFLAGS="${XBB_CXXFLAGS}"
       export LDFLAGS="${XBB_LDFLAGS_LIB}"
       
       if [ ! -f "config.status" ]
@@ -924,8 +932,9 @@ function do_ncurses()
       xbb_activate
       xbb_activate_installed_dev
 
-      export CFLAGS="${XBB_CFLAGS}"
       export CPPFLAGS="${XBB_CPPFLAGS}"
+      export CFLAGS="${XBB_CFLAGS}"
+      export CXXFLAGS="${XBB_CXXFLAGS}"
       export LDFLAGS="${XBB_LDFLAGS_LIB}"
 
       if [ ! -f "config.status" ]
