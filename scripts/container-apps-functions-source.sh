@@ -1259,6 +1259,12 @@ function do_gdb()
         fi
       fi
 
+      local tui_option="--enable-tui"
+      if [ "${TARGET_PLATFORM}" == "win32" ]
+      then
+        tui_option="--disable-tui"
+      fi
+
       export GCC_WARN_CFLAGS
       export GCC_WARN_CXXFLAGS
 
@@ -1322,7 +1328,7 @@ function do_gdb()
             --without-guile \
             --without-babeltrace \
             --without-libunwind-ia64 \
-            --enable-tui \
+            ${tui_option} \
 
           cp "config.log" "${LOGS_FOLDER_PATH}/config-gdb$1-log.txt"
         ) 2>&1 | tee "${LOGS_FOLDER_PATH}/configure-gdb$1-output.txt"
