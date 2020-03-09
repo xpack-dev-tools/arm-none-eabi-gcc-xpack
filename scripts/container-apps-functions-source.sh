@@ -286,6 +286,17 @@ function do_binutils()
         # object files: cannot compile".
         copy_dir "${APP_PREFIX}" "${APP_PREFIX_NANO}"
 
+        show_libs "${APP_PREFIX}/bin/${GCC_TARGET}-ar"
+        show_libs "${APP_PREFIX}/bin/${GCC_TARGET}-as"
+        show_libs "${APP_PREFIX}/bin/${GCC_TARGET}-ld"
+        show_libs "${APP_PREFIX}/bin/${GCC_TARGET}-nm"
+        show_libs "${APP_PREFIX}/bin/${GCC_TARGET}-objcopy"
+        show_libs "${APP_PREFIX}/bin/${GCC_TARGET}-objdump"
+        show_libs "${APP_PREFIX}/bin/${GCC_TARGET}-ranlib"
+        show_libs "${APP_PREFIX}/bin/${GCC_TARGET}-size"
+        show_libs "${APP_PREFIX}/bin/${GCC_TARGET}-strings"
+        show_libs "${APP_PREFIX}/bin/${GCC_TARGET}-strip"
+
       ) 2>&1 | tee "${LOGS_FOLDER_PATH}/make-binutils-output.txt"
     )
 
@@ -299,6 +310,17 @@ function run_binutils()
 {
   (
     xbb_activate_installed_bin
+
+    show_libs "${APP_PREFIX}/bin/${GCC_TARGET}-ar"
+    show_libs "${APP_PREFIX}/bin/${GCC_TARGET}-as"
+    show_libs "${APP_PREFIX}/bin/${GCC_TARGET}-ld"
+    show_libs "${APP_PREFIX}/bin/${GCC_TARGET}-nm"
+    show_libs "${APP_PREFIX}/bin/${GCC_TARGET}-objcopy"
+    show_libs "${APP_PREFIX}/bin/${GCC_TARGET}-objdump"
+    show_libs "${APP_PREFIX}/bin/${GCC_TARGET}-ranlib"
+    show_libs "${APP_PREFIX}/bin/${GCC_TARGET}-size"
+    show_libs "${APP_PREFIX}/bin/${GCC_TARGET}-strings"
+    show_libs "${APP_PREFIX}/bin/${GCC_TARGET}-strip"
 
     run_app "${APP_PREFIX}/bin/${GCC_TARGET}-ar" --version
     run_app "${APP_PREFIX}/bin/${GCC_TARGET}-as" --version
@@ -1022,6 +1044,14 @@ function run_gcc()
   (
     xbb_activate_installed_bin
 
+    show_libs "${APP_PREFIX}/bin/${GCC_TARGET}-gcc"
+    show_libs "${APP_PREFIX}/bin/${GCC_TARGET}-g++"
+    show_libs "${APP_PREFIX}/libexec/gcc/${GCC_TARGET}/${GCC_VERSION}/cc1"
+    show_libs "${APP_PREFIX}/libexec/gcc/${GCC_TARGET}/${GCC_VERSION}/cc1plus"
+    show_libs "${APP_PREFIX}/libexec/gcc/${GCC_TARGET}/${GCC_VERSION}/collect2"
+    show_libs "${APP_PREFIX}/libexec/gcc/${GCC_TARGET}/${GCC_VERSION}/lto-wrapper"
+    show_libs "${APP_PREFIX}/libexec/gcc/${GCC_TARGET}/${GCC_VERSION}/lto1"
+
     run_app "${APP_PREFIX}/bin/${GCC_TARGET}-gcc" --help
     run_app "${APP_PREFIX}/bin/${GCC_TARGET}-gcc" -dumpversion
     run_app "${APP_PREFIX}/bin/${GCC_TARGET}-gcc" -dumpmachine
@@ -1200,7 +1230,10 @@ function do_gdb()
           if [ "${TARGET_PLATFORM}" == "darwin" ]
           then
             # Use the custom path, 2.7 will be removed from future macOS.
-            export CONFIG_PYTHON_PREFIX="/Library/Frameworks/Python.framework/Versions/2.7"
+            CONFIG_PYTHON_PREFIX="/Library/Frameworks/Python.framework/Versions/2.7"
+          elif [ "${TARGET_PLATFORM}" == "linux" ]
+          then
+            CONFIG_PYTHON_PREFIX="/usr/local"
           fi
         fi
       elif [ "$1" == "-py3" ]
@@ -1219,6 +1252,9 @@ function do_gdb()
           if [ "${TARGET_PLATFORM}" == "darwin" ]
           then
             CONFIG_PYTHON_PREFIX="/Library/Frameworks/Python.framework/Versions/3.7"
+          elif [ "${TARGET_PLATFORM}" == "linux" ]
+          then
+            CONFIG_PYTHON_PREFIX="/usr/local"
           fi
         fi
       fi
@@ -1323,6 +1359,9 @@ function do_gdb()
             fi
           )
         fi
+
+        show_libs "${APP_PREFIX}/bin/${GCC_TARGET}-gdb$1"
+
       ) 2>&1 | tee "${LOGS_FOLDER_PATH}/make-gdb$1-output.txt"
     )
 
@@ -1349,6 +1388,8 @@ function run_gdb()
   (
     # Required by gdb-py to access the python shared library.
     xbb_activate_installed_bin
+
+    show_libs "${APP_PREFIX}/bin/${GCC_TARGET}-gdb${suffix}"
 
     # The original Python in Ubunutu XBB is too old and the test fails.
     # Use the XBB modern Python.
