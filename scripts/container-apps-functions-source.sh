@@ -1131,22 +1131,31 @@ function do_gdb()
         GCC_WARN_CFLAGS+=" -Wno-maybe-uninitialized -Wno-int-in-bool-context -Wno-misleading-indentation"
       fi
 
-      export GCC_WARN_CFLAGS
-      export GCC_WARN_CXXFLAGS
+      CPPFLAGS="${XBB_CPPFLAGS}" 
 
-      export CFLAGS="${XBB_CFLAGS} ${GCC_WARN_CFLAGS}"
-      export CXXFLAGS="${XBB_CXXFLAGS} ${GCC_WARN_CXXFLAGS}"
+      CFLAGS="${XBB_CFLAGS} ${GCC_WARN_CFLAGS}"
+      CXXFLAGS="${XBB_CXXFLAGS} ${GCC_WARN_CXXFLAGS}"
           
-      export CPPFLAGS="${XBB_CPPFLAGS}" 
-      export LDFLAGS="${XBB_LDFLAGS_APP}"
+      LDFLAGS="${XBB_LDFLAGS_APP}"
+      LIBS=""
+
       # libiconv is used by Python3.
       # export LIBS="-liconv"
       if [ "${TARGET_PLATFORM}" == "win32" ]
       then
         # Workaround for undefined reference to `__strcpy_chk' in GCC 9.
         # https://sourceforge.net/p/mingw-w64/bugs/818/
-        export LIBS="-lssp"
+        LIBS+=" -lssp"
       fi
+
+      if [ "${TARGET_PLATFORM}" == "darwin" ]
+      then
+        # Pick some system libraries from XBB, to avoid rebuilding them here.
+        CPPFLAGS+=" -I${XBB_FOLDER_PATH}/include" 
+        LDFLAGS+=" -L${XBB_FOLDER_PATH}/lib"
+      fi
+
+      CONFIG_PYTHON_PREFIX=""
 
       local extra_python_opts="--with-python=no"
       if [ "$1" == "-py" ]
@@ -1154,30 +1163,56 @@ function do_gdb()
         if [ "${TARGET_PLATFORM}" == "win32" ]
         then
           extra_python_opts="--with-python=${SOURCES_FOLDER_PATH}/${GCC_COMBO_FOLDER_NAME}/python-config.sh"
-        elif [ "${USE_PLATFORM_PYTHON}" == "y" ]
-        then
-          extra_python_opts="--with-python=${platform_python2}"
         else
-          extra_python_opts="--with-python=$(which python2)"
+          if [ "${USE_PLATFORM_PYTHON}" == "y" ]
+          then
+            extra_python_opts="--with-python=${platform_python2}"
+          else
+            extra_python_opts="--with-python=$(which python2)"
+          fi
+          
+          if [ "${TARGET_PLATFORM}" == "darwin" ]
+          then
+            export XBB_PYTHON_PREFIX="/System/Library/Frameworks/Python.framework/Versions/2.7"
+          fi
         fi
       elif [ "$1" == "-py3" ]
       then
         if [ "${TARGET_PLATFORM}" == "win32" ]
         then
           extra_python_opts="--with-python=${BUILD_GIT_PATH}/patches/python3-config.sh"
-        elif [ "${USE_PLATFORM_PYTHON3}" == "y" ]
-        then
-          extra_python_opts="--with-python=${platform_python3}"
         else
-          extra_python_opts="--with-python=$(which python3)"
+          if [ "${USE_PLATFORM_PYTHON3}" == "y" ]
+          then
+            extra_python_opts="--with-python=${platform_python3}"
+          else
+            extra_python_opts="--with-python=$(which python3)"
+          fi
+
+          if [ "${TARGET_PLATFORM}" == "darwin" ]
+          then
+            CONFIG_PYTHON_PREFIX="/Library/Frameworks/Python.framework/Versions/3.7"
+          fi
         fi
       fi
+
+      export GCC_WARN_CFLAGS
+      export GCC_WARN_CXXFLAGS
+
+      export CPPFLAGS
+      export CFLAGS
+      export CXXFLAGS
+          
+      export LDFLAGS
+      export LIBS
+
+      export CONFIG_PYTHON_PREFIX
 
       # python -c 'from distutils import sysconfig;print(sysconfig.PREFIX)'
       # python -c 'from distutils import sysconfig;print(sysconfig.EXEC_PREFIX)'
 
       # Default PYTHONHOME on macOS
-      # /Library/Frameworks/Python.framework/Versions/2.7
+      # /System/Library/Frameworks/Python.framework/Versions/2.7
       # /Library/Frameworks/Python.framework/Versions/3.7
 
       if [ ! -f "config.status" ]
@@ -1185,7 +1220,7 @@ function do_gdb()
         (
           echo
           echo "Running gdb$1 configure..."
-      
+   
           bash "${SOURCES_FOLDER_PATH}/${GDB_SRC_FOLDER_NAME}/gdb/configure" --help
 
           # Note that all components are disabled, except GDB.
