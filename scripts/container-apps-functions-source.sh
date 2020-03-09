@@ -1199,7 +1199,8 @@ function do_gdb()
           
           if [ "${TARGET_PLATFORM}" == "darwin" ]
           then
-            export XBB_PYTHON_PREFIX="/System/Library/Frameworks/Python.framework/Versions/2.7"
+            # Use the custom path, 2.7 will be removed from future macOS.
+            export XBB_PYTHON_PREFIX="/Library/Frameworks/Python.framework/Versions/2.7"
           fi
         fi
       elif [ "$1" == "-py3" ]
