@@ -319,6 +319,8 @@ echo
 echo "Extracting ${archive_name}..."
 tar xf "${work_absolute_path}/cache/${archive_name}"
 
+ls -lL "${test_absolute_path}"/xpack-arm-none-eabi-gcc*
+
 TARGET_PLATFORM=${archive_platform}
 TARGET_ARCH=${archive_arch}
 
