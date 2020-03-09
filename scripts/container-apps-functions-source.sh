@@ -1461,6 +1461,8 @@ function strip_libs()
 function copy_distro_files()
 {
   (
+    set +u
+
     xbb_activate
 
     rm -rf "${APP_PREFIX}/${DISTRO_INFO_NAME}"
