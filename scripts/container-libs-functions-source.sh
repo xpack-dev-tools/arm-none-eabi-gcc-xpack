@@ -894,6 +894,7 @@ function do_gettext()
   fi
 }
 
+# Not functional on windows.
 function do_ncurses()
 {
   # https://invisible-island.net/ncurses/
@@ -925,6 +926,7 @@ function do_ncurses()
 
       export CFLAGS="${XBB_CFLAGS}"
       export CPPFLAGS="${XBB_CPPFLAGS}"
+      export CXXCPP="${XBB_CPPFLAGS}"
       export LDFLAGS="${XBB_LDFLAGS_LIB}"
 
       if [ ! -f "config.status" ]
@@ -935,26 +937,64 @@ function do_ncurses()
 
           bash "${SOURCES_FOLDER_PATH}/${NCURSES_FOLDER_NAME}/configure" --help
 
-          # Without --with-pkg-config-libdir= it'll try to write the .pc files in the
-          # xbb folder, probbaly by using the dirname of pkg-config.
-          bash ${DEBUG} "${SOURCES_FOLDER_PATH}/${NCURSES_FOLDER_NAME}/configure" \
-            --prefix="${LIBS_INSTALL_FOLDER_PATH}" \
-            \
-            --build=${BUILD} \
-            --host=${HOST} \
-            --target=${TARGET} \
-            \
-            --with-shared \
-            --with-normal \
-            --with-cxx-binding \
-            --with-cxx-shared \
-            --with-manpage-format=normal \
-            --with-pkg-config-libdir="${LIBS_INSTALL_FOLDER_PATH}/lib/pkgconfig" \
-            --without-debug \
-            --without-ada \
-            \
-            --enable-widec \
-            --enable-pc-files \
+          # Not functional on windows.
+          if [ "${TARGET_PLATFORM}" == "win32" ]
+          then
+
+            # Without --with-pkg-config-libdir= it'll try to write the .pc files in the
+            # xbb folder, probbaly by using the dirname of pkg-config.
+            bash ${DEBUG} "${SOURCES_FOLDER_PATH}/${NCURSES_FOLDER_NAME}/configure" \
+              --prefix="${LIBS_INSTALL_FOLDER_PATH}" \
+              \
+              --build=${BUILD} \
+              --host=${HOST} \
+              --target=${TARGET} \
+              \
+              --with-shared \
+              --with-normal \
+              --with-cxx \
+              --with-cxx-binding \
+              --with-cxx-shared \
+              --with-prog \
+              --with-manpage-format=normal \
+              --with-pkg-config-libdir="${LIBS_INSTALL_FOLDER_PATH}/lib/pkgconfig" \
+              --without-ada \
+              --without-debug \
+              --with-build-cc=gcc-9
+              \
+              --enable-assertions \
+              --enable-sp-funcs \
+              --enable-term-driver \
+              --enable-interop \
+              --enable-pc-files \
+              --disable-termcap \
+              --disable-home-terminfo \
+
+          else
+
+            # Without --with-pkg-config-libdir= it'll try to write the .pc files in the
+            # xbb folder, probbaly by using the dirname of pkg-config.
+            bash ${DEBUG} "${SOURCES_FOLDER_PATH}/${NCURSES_FOLDER_NAME}/configure" \
+              --prefix="${LIBS_INSTALL_FOLDER_PATH}" \
+              \
+              --build=${BUILD} \
+              --host=${HOST} \
+              --target=${TARGET} \
+              \
+              --with-shared \
+              --with-normal \
+              --with-cxx \
+              --with-cxx-binding \
+              --with-cxx-shared \
+              --with-manpage-format=normal \
+              --with-pkg-config-libdir="${LIBS_INSTALL_FOLDER_PATH}/lib/pkgconfig" \
+              --without-debug \
+              --without-ada \
+              \
+              --enable-widec \
+              --enable-pc-files \
+
+          fi
 
           cp "config.log" "${LOGS_FOLDER_PATH}/config-ncurses-log.txt"
         ) 2>&1 | tee "${LOGS_FOLDER_PATH}/configure-ncurses-output.txt"
