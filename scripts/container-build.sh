@@ -232,7 +232,11 @@ do_mpc
 do_isl
 
 # More libraries.
-do_libelf
+if [ "${TARGET_PLATFORM}" != "darwin" ]
+then
+  do_libelf
+fi
+
 do_expat
 
 if [ "${TARGET_PLATFORM}" == "darwin" ]
