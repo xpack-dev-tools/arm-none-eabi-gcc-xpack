@@ -935,6 +935,8 @@ function do_ncurses()
 
           bash "${SOURCES_FOLDER_PATH}/${NCURSES_FOLDER_NAME}/configure" --help
 
+          # Without --with-pkg-config-libdir= it'll try to write the .pc files in the
+          # xbb folder, probbaly by using the dirname of pkg-config.
           bash ${DEBUG} "${SOURCES_FOLDER_PATH}/${NCURSES_FOLDER_NAME}/configure" \
             --prefix="${LIBS_INSTALL_FOLDER_PATH}" \
             \
@@ -944,13 +946,15 @@ function do_ncurses()
             \
             --with-shared \
             --with-normal \
-            --without-debug \
-            --without-ada \
-            --enable-widec \
-            --enable-pc-files \
             --with-cxx-binding \
             --with-cxx-shared \
             --with-manpage-format=normal \
+            --with-pkg-config-libdir="${LIBS_INSTALL_FOLDER_PATH}/lib/pkgconfig"
+            --without-debug \
+            --without-ada \
+            \
+            --enable-widec \
+            --enable-pc-files \
 
           cp "config.log" "${LOGS_FOLDER_PATH}/config-ncurses-log.txt"
         ) 2>&1 | tee "${LOGS_FOLDER_PATH}/configure-ncurses-output.txt"
