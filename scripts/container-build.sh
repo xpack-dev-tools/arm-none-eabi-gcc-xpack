@@ -237,7 +237,7 @@ do_mpc
 do_isl
 
 # More libraries.
-if [ "${TARGET_PLATFORM}" != "darwin" ]
+if false # [ "${TARGET_PLATFORM}" != "darwin" ]
 then
   do_libelf
 fi
