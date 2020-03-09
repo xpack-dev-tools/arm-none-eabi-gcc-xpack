@@ -926,7 +926,6 @@ function do_ncurses()
 
       export CFLAGS="${XBB_CFLAGS}"
       export CPPFLAGS="${XBB_CPPFLAGS}"
-      export CXXCPP="${XBB_CPPFLAGS}"
       export LDFLAGS="${XBB_LDFLAGS_LIB}"
 
       if [ ! -f "config.status" ]
