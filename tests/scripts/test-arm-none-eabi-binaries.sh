@@ -223,13 +223,24 @@ function run_gdb()
   fi
 
   (
-    echo
-    echo "Testing if gdb${suffix} starts properly..."
-
     case "${suffix}" in
       '')
+        echo
+        echo "Testing if gdb${suffix} starts properly..."
         ;;
       -py)
+        set +e
+        local which_python="$(which python2.7 2>/dev/null)"
+        if [ -z "${which_python}" ]
+        then
+          echo
+          echo ">>> No python2.7 installed, skipping gdb_py test."
+          return
+        fi
+        set -e
+
+        echo
+        echo "Testing if gdb${suffix} starts properly..."
         echo
         python2.7 --version
         python2.7 -c 'import sys; print sys.path'
@@ -238,6 +249,18 @@ function run_gdb()
         echo "PYTHONHOME=${PYTHONHOME}"
         ;;
       -py3)
+        set +e
+        local which_python="$(which python3.7 2>/dev/null)"
+        if [ -z "${which_python}" ]
+        then
+          echo
+          echo ">>> No python3.7 installed, skipping gdb_py3 test."
+          return
+        fi
+        set -e
+
+        echo
+        echo "Testing if gdb${suffix} starts properly..."
         echo
         python3.7 --version
         python3.7 -c 'import sys; print(sys.path)'
@@ -245,6 +268,7 @@ function run_gdb()
         export PYTHONHOME="$(python3.7 -c 'from distutils import sysconfig;print(sysconfig.PREFIX)')"
         echo "PYTHONHOME=${PYTHONHOME}"
         ;;
+
       *)
         echo "Unsupported gdb-${suffix}"
         exit 1
