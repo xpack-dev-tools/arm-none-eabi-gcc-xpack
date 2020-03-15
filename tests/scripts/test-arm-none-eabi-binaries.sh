@@ -40,7 +40,7 @@ function validate()
   host_machine=$(uname -m | tr '[:upper:]' '[:lower:]')
   # echo ${host_platform} ${host_machine}
 
-  if [ "${host_platform}" != "${archive_platform}" ]
+  if [ "${host_platform}" != "${archive_platform}" ] && [[ "${host_platform}" != mingw64_nt* ]]
   then
     echo "The ${archive_name} can only be tested on ${archive_platform}, not ${host_platform}."
     exit 1
@@ -92,6 +92,29 @@ function validate()
           exit 1
           ;;
       esac
+      ;;
+    win32)
+      case "${archive_arch}" in
+        x64)
+          if [ "${host_machine}" != "x86_64" ]
+          then
+            echo "Testing ${archive_arch} not supported on ${host_machine}."
+            exit 1
+          fi
+          ;;
+        x32)
+          if [ "${host_machine}" != "i386" -a "${host_machine}" != "i586" -a "${host_machine}" != "i686" -a "${host_machine}" != "x86_64" ]
+          then
+            echo "Testing ${archive_arch} not supported on ${host_machine}."
+            exit 1
+          fi
+          ;;
+        *)
+          echo "Testing ${archive_arch} not supported."
+          exit 1
+          ;;
+      esac
+
       ;;
     *)
       echo "Testing ${archive_platform} not supported."
@@ -288,8 +311,8 @@ archive_name=$(basename ${url})
 gcc_target=arm-none-eabi
 
 archive_folder_name=$(echo ${archive_name} | sed -e "s/\(xpack-${gcc_target}-gcc-[0-9.]*-[0-9.]*\)-.*/\1/")
-archive_platform=$(echo ${archive_name} | sed -e "s/\(xpack-${gcc_target}-gcc-[0-9.]*-[0-9.]*\)-\([a-z]*\)-.*/\2/")
-archive_arch=$(echo ${archive_name} | sed -e "s/\(xpack-${gcc_target}-gcc-[0-9.]*-[0-9.]*\)-\([a-z]*\)-\([a-z0-9]*\).*/\3/")
+archive_platform=$(echo ${archive_name} | sed -e "s/\(xpack-${gcc_target}-gcc-[0-9.]*-[0-9.]*\)-\([a-z0-9]*\)-.*/\2/")
+archive_arch=$(echo ${archive_name} | sed -e "s/\(xpack-${gcc_target}-gcc-[0-9.]*-[0-9.]*\)-\([a-z0-9]*\)-\([a-z0-9]*\).*/\3/")
 # echo ${archive_folder_name} ${archive_platform} ${archive_arch}
 
 validate
@@ -317,7 +340,12 @@ cd "${test_absolute_path}"
 
 echo
 echo "Extracting ${archive_name}..."
-tar xf "${work_absolute_path}/cache/${archive_name}"
+if [[ "${archive_name}" == *.zip ]]
+then
+  unzip -q "${work_absolute_path}/cache/${archive_name}"
+else 
+  tar xf "${work_absolute_path}/cache/${archive_name}"
+fi
 
 ls -lL "${test_absolute_path}"/xpack-arm-none-eabi-gcc*
 
