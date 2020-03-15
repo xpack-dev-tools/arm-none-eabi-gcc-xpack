@@ -258,23 +258,31 @@ function run_gdb()
         echo "Testing if gdb${suffix} starts properly..."
         ;;
       -py)
+        local python_name
+        if [ "${archive_platform}" == "win32" ]
+        then
+          python_name="python"
+        else       
+          python_name="python2.7"
+        fi
+
+        local which_python
         set +e
-        local which_python="$(which python2.7 2>/dev/null)"
+        which_python="$(which ${python_name} 2>/dev/null)"
         if [ -z "${which_python}" ]
         then
           echo
-          echo ">>> No python2.7 installed, skipping gdb_py test."
+          echo ">>> No ${python_name} installed, skipping gdb_py test."
           return
         fi
         set -e
-
         echo
         echo "Testing if gdb${suffix} starts properly..."
         echo
-        python2.7 --version
-        python2.7 -c 'import sys; print sys.path'
+        ${python_name} --version
+        ${python_name} -c 'import sys; print sys.path'
 
-        export PYTHONHOME="$(python2.7 -c 'from distutils import sysconfig;print(sysconfig.PREFIX)')"
+        export PYTHONHOME="$(${python_name} -c 'from distutils import sysconfig;print(sysconfig.PREFIX)')"
         echo "PYTHONHOME=${PYTHONHOME}"
         ;;
       -py3)
@@ -304,6 +312,7 @@ function run_gdb()
         ;;
     esac
 
+    # rm -rf "${app_absolute_path}/bin/python27.dll"
     show_libs "${app_absolute_path}/bin/${gcc_target}-gdb${suffix}"
 
     echo
