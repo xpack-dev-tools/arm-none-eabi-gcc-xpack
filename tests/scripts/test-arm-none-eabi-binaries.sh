@@ -57,7 +57,7 @@ function validate()
           fi
           ;;
         x32)
-          if [ "${host_machine}" != "i386" -a "${host_machine}" != "x86_64" ]
+          if [ "${host_machine}" != "i386" -a "${host_machine}" != "i586" -a "${host_machine}" != "i686" -a "${host_machine}" != "x86_64" ]
           then
             echo "Testing ${archive_arch} not supported on ${host_machine}."
             exit 1
