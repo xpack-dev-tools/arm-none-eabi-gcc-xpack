@@ -123,6 +123,21 @@ function validate()
   esac
 }
 
+function show_libs()
+{
+  # Does not include the .exe extension.
+  local app_path=$1
+  shift
+  if [ "${archive_platform}" == "win32" ]
+  then
+    app_path+='.exe'
+  fi
+
+  echo
+  echo "ldd ${app_path}"
+  ldd "${app_path}" 2>&1
+}
+
 function run_app()
 {
   # Does not include the .exe extension.
@@ -138,6 +153,17 @@ function run_binutils()
 {
   echo
   echo "Testing if binutils start properly..."
+
+  show_libs "${app_absolute_path}/bin/${gcc_target}-ar"
+  show_libs "${app_absolute_path}/bin/${gcc_target}-as"
+  show_libs "${app_absolute_path}/bin/${gcc_target}-ld"
+  show_libs "${app_absolute_path}/bin/${gcc_target}-nm"
+  show_libs "${app_absolute_path}/bin/${gcc_target}-objcopy"
+  show_libs "${app_absolute_path}/bin/${gcc_target}-objdump"
+  show_libs "${app_absolute_path}/bin/${gcc_target}-ranlib"
+  show_libs "${app_absolute_path}/bin/${gcc_target}-size"
+  show_libs "${app_absolute_path}/bin/${gcc_target}-strings"
+  show_libs "${app_absolute_path}/bin/${gcc_target}-strip"
 
   run_app "${app_absolute_path}/bin/${gcc_target}-ar" --version
   run_app "${app_absolute_path}/bin/${gcc_target}-as" --version
@@ -155,6 +181,9 @@ function run_gcc()
 {
   echo
   echo "Testing if gcc starts properly..."
+
+  show_libs "${app_absolute_path}/bin/${gcc_target}-gcc"
+  show_libs "${app_absolute_path}/bin/${gcc_target}-g++"
 
   run_app "${app_absolute_path}/bin/${gcc_target}-gcc" --help
   run_app "${app_absolute_path}/bin/${gcc_target}-gcc" -dumpversion
@@ -274,6 +303,8 @@ function run_gdb()
         exit 1
         ;;
     esac
+
+    show_libs "${app_absolute_path}/bin/${gcc_target}-gdb${suffix}"
 
     echo
     run_app "${app_absolute_path}/bin/${gcc_target}-gdb${suffix}" --version
