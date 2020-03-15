@@ -368,7 +368,8 @@ run_binutils
 run_gcc
 run_gdb
 
-if [  "${TARGET_PLATFORM}" != "win32" ]
+# With PYTHONPATH it still complains, but no longer fails.
+if true # [  "${TARGET_PLATFORM}" != "win32" ]
 then
   if [ "${WITH_GDB_PY}" == "y" ]
   then

@@ -1402,11 +1402,15 @@ function run_gdb()
     if [ "${suffix}" == "-py" ]
     then
       echo
-      python --version
+      python2 --version
 
       if [ "${TARGET_PLATFORM}" == "linux" ]
       then
         export PYTHONHOME="${XBB_FOLDER_PATH}"
+      elif [ "${TARGET_PLATFORM}" == "win32" ]
+      then
+        # export PYTHONHOME="${XBB_FOLDER_PATH}"
+        export PYTHONPATH="${XBB_FOLDER_PATH}/lib/python2.7"
       fi
     elif [ "${suffix}" == "-py3" ]
     then
@@ -1421,6 +1425,7 @@ function run_gdb()
 
     set +u
     echo "PYTHONHOME=${PYTHONHOME}"
+    echo "PYTHONPATH=${PYTHONPATH}"
     set -u
 
     run_app "${APP_PREFIX}/bin/${GCC_TARGET}-gdb${suffix}" --version
