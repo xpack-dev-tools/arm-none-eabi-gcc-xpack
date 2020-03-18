@@ -20,14 +20,15 @@ then
   exit 1
 fi
 
-
 while [ $# -ge 1 ]
 do
   opt="$1"
   case ${opt} in
 
     --prefix|--exec-prefix)
-      echo "${SOURCES_FOLDER_PATH}/${PYTHON3_WIN_EMBED_FOLDER_NAME}"
+      prefix="${SOURCES_FOLDER_PATH}/${PYTHON3_WIN_EMBED_FOLDER_NAME}"
+      echo "${opt} -> [${prefix}]" >&2
+      echo "${prefix}"
       ;;
 
     --includes|--cflags)
@@ -37,13 +38,16 @@ do
       then
         cflags+=" ${CFLAGS}"
       fi
-      echo ${cflags}
+      echo "${opt} -> [${cflags}]" >&2
+      echo "${cflags}"
       ;;
 
     --libs|--ldflags)
       # Options to link to static libpython2.7 archive so as to avoid  an
       # external dependency on python
-      echo "-L${SOURCES_FOLDER_PATH}/${PYTHON3_WIN_EMBED_FOLDER_NAME} -lpython3"
+      libs="-L${SOURCES_FOLDER_PATH}/${PYTHON3_WIN_EMBED_FOLDER_NAME} -lpython37"
+      echo "${opt} -> [${libs}]" >&2
+      echo "${libs}"
       ;;
 
     --*)
