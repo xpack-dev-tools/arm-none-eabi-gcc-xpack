@@ -251,6 +251,19 @@ function run_gdb()
     suffix="$1"
   fi
 
+  local exe=""
+  if [ "${archive_platform}" == "win32" ]
+  then
+    exe=".exe"
+  fi
+
+  if [ ! -x "${app_absolute_path}/bin/${gcc_target}-gdb${suffix}${exe}" ]
+  then
+    echo
+    echo ">>> gdb${suffix} not present, skipping..."
+    return
+  fi
+
   (
     case "${suffix}" in
       '')
@@ -286,8 +299,17 @@ function run_gdb()
         echo "PYTHONHOME=${PYTHONHOME}"
         ;;
       -py3)
+        local python_name
+        if [ "${archive_platform}" == "win32" ]
+        then
+          python_name="python"
+        else       
+          python_name="python3.7"
+        fi
+
         set +e
-        local which_python="$(which python3.7 2>/dev/null)"
+        local which_python
+        which_python="$(which ${python_name} 2>/dev/null)"
         if [ -z "${which_python}" ]
         then
           echo
@@ -299,10 +321,10 @@ function run_gdb()
         echo
         echo "Testing if gdb${suffix} starts properly..."
         echo
-        python3.7 --version
-        python3.7 -c 'import sys; print(sys.path)'
+        ${python_name} --version
+        ${python_name} -c 'import sys; print(sys.path)'
 
-        export PYTHONHOME="$(python3.7 -c 'from distutils import sysconfig;print(sysconfig.PREFIX)')"
+        export PYTHONHOME="$(${python_name} -c 'from distutils import sysconfig;print(sysconfig.PREFIX)')"
         echo "PYTHONHOME=${PYTHONHOME}"
         ;;
 
@@ -326,6 +348,24 @@ function run_gdb()
       -ex='show language' \
       -ex='set language auto' \
       -ex='quit'
+    
+    if [ ! -z "${suffix}" ]
+    then
+      local out=$("${app_absolute_path}/bin/${gcc_target}-gdb${suffix}" \
+        --nh \
+        --nx \
+        -ex='python print("baburiba")' \
+        -ex='quit' | grep 'baburiba')
+      if [ "${out}" == "baburiba" ]
+      then
+        echo
+        echo 'GDB python print() functional.'
+      else
+        echo
+        echo 'GDB python print() not functional.'
+        exit 1
+      fi
+    fi
   )
 }
 
