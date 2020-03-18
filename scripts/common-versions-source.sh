@@ -136,14 +136,14 @@ function prepare_versions()
     GETTEXT_VERSION="0.19.8.1"
 
     # Arm uses 2.7.7
-    PYTHON_WIN_VERSION="2.7.13"
+    PYTHON_WIN_VERSION="2.7.13" # -> 2.7.17
 
     # GDB 8.3 with Python3 not yet functional on Windows.
     # GDB does not know the Python3 API when compiled with mingw.
     if [ "${TARGET_PLATFORM}" != "win32" ]
     then
       WITH_GDB_PY3="y" 
-      PYTHON3_VERSION="3.7.2"
+      PYTHON3_VERSION="3.7.2" # -> 3.7.6
     fi
 
     if [ "${TARGET_PLATFORM}" == "darwin" ]
@@ -169,6 +169,17 @@ function prepare_versions()
       then
         NCURSES_VERSION="6.2"
       fi
+
+      if [ "${TARGET_PLATFORM}" == "win32" ]
+      then
+        WITH_GDB_PY="n"
+        # PYTHON_WIN_VERSION="2.7.17"
+      fi
+
+      # https://sourceware.org/git/gitweb.cgi?p=binutils-gdb.git;a=commit;h=272044897e178835f596c96740c5a1800ec6f9fb
+      WITH_GDB_PY3="y" 
+      PYTHON3_VERSION="3.7.6"
+
     fi
 
   elif [[ "${RELEASE_VERSION}" =~ 8\.3\.1-* ]]
@@ -329,13 +340,14 @@ function prepare_versions()
   if [ ! -z "${PYTHON3_VERSION}" ]
   then
     PYTHON3_VERSION_MAJOR=$(echo ${PYTHON3_VERSION} | sed -e 's|\([0-9]\)\..*|\1|')
-    PYTHON3_VERSION_MINOR=$(echo ${PYTHON3_VERSION} | sed -e 's|\([0-9]\)\.\([0-9]\)\..*|\2|')
+    PYTHON3_VERSION_MINOR=$(echo ${PYTHON3_VERSION} | sed -e 's|\([0-9]\)\.\([0-9][0-9]*\)\..*|\2|')
 
+    # Version 3.7.2 uses a longer name, like python-3.7.2.post1-embed-amd64.zip.
     if [ "${TARGET_BITS}" == "32" ]
     then
-      PYTHON3_WIN_EMBED_FOLDER_NAME=python-"${PYTHON3_VERSION}.post1-embed-win32"
+      PYTHON3_WIN_EMBED_FOLDER_NAME=python-"${PYTHON3_VERSION}-embed-win32"
     else
-      PYTHON3_WIN_EMBED_FOLDER_NAME=python-"${PYTHON3_VERSION}.post1-embed-amd64"
+      PYTHON3_WIN_EMBED_FOLDER_NAME=python-"${PYTHON3_VERSION}-embed-amd64"
     fi
 
     export PYTHON3_WIN_EMBED_FOLDER_NAME

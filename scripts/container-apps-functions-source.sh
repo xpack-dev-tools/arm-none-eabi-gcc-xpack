@@ -89,6 +89,10 @@ function download_python_win()
     mkdir -p "${LIBS_INSTALL_FOLDER_PATH}/bin/"
     install -v -c -m 644 "${PYTHON_WIN}/python27.dll" \
       "${LIBS_INSTALL_FOLDER_PATH}/bin/"
+
+    mkdir -p "${LIBS_INSTALL_FOLDER_PATH}/lib/"
+    install -v -c -m 644 "${PYTHON_WIN}/python27.lib" \
+      "${LIBS_INSTALL_FOLDER_PATH}/lib/"
   )
 }
 
@@ -101,6 +105,9 @@ function download_python3_win()
   # https://www.python.org/ftp/python/3.7.2/python-3.7.2.exe
   # https://www.python.org/ftp/python/3.7.2/python-3.7.2-amd64.exe
   # https://www.python.org/ftp/python/3.7.2/Python-3.7.2.tar.xz
+  # https://www.python.org/ftp/python/3.7.6/
+  # https://www.python.org/ftp/python/3.7.6/python-3.7.6-embed-amd64.zip
+  # https://www.python.org/ftp/python/3.7.6/python-3.7.6-embed-win32.zip
 
   PYTHON3_WIN_EMBED_PACK="${PYTHON3_WIN_EMBED_FOLDER_NAME}.zip"
   PYTHON3_WIN_EMBED_URL="https://www.python.org/ftp/python/${PYTHON3_VERSION}/${PYTHON3_WIN_EMBED_PACK}"
@@ -126,6 +133,12 @@ function download_python3_win()
       "${LIBS_INSTALL_FOLDER_PATH}/bin/"
     install -v -c -m 644 "python${PYTHON3_VERSION_MAJOR}${PYTHON3_VERSION_MINOR}.dll" \
       "${LIBS_INSTALL_FOLDER_PATH}/bin/"
+
+    mkdir -p "${LIBS_INSTALL_FOLDER_PATH}/lib/"
+    install -v -c -m 644 "python${PYTHON3_VERSION_MAJOR}.dll" \
+      "${LIBS_INSTALL_FOLDER_PATH}/lib/"
+    install -v -c -m 644 "python${PYTHON3_VERSION_MAJOR}${PYTHON3_VERSION_MINOR}.dll" \
+      "${LIBS_INSTALL_FOLDER_PATH}/lib/"
   )
 
   PYTHON3_ARCHIVE="${PYTHON3_SRC_FOLDER_NAME}.tar.xz"
@@ -139,12 +152,13 @@ function download_python3_win()
 
     download_and_extract "${PYTHON3_URL}" "${PYTHON3_ARCHIVE}" \
       "${PYTHON3_SRC_FOLDER_NAME}"
-
-    # The source archive includes only the pyconfig.h.in, which needs
-    # to be configured, which is not an easy task. Thus add the file copied 
-    # from a Windows install.
-    cp "${BUILD_GIT_PATH}/patches/pyconfig-${PYTHON3_VERSION}.h" Include/pyconfig.h
   fi
+
+  # The source archive includes only the pyconfig.h.in, which needs
+  # to be configured, which is not an easy task. Thus add the file copied 
+  # from a Windows install.
+  cp -v "${BUILD_GIT_PATH}/patches/pyconfig-${PYTHON3_VERSION}.h" \
+    "${SOURCES_FOLDER_PATH}/${PYTHON3_SRC_FOLDER_NAME}/Include/pyconfig.h"
 }
 
 # -----------------------------------------------------------------------------
@@ -674,6 +688,92 @@ function do_newlib()
 
 # -----------------------------------------------------------------------------
 
+# Not used, it cannot be built on mingw.
+function do_python3()
+{
+  PYTHON3_FOLDER_NAME="python3-${PYTHON3_VERSION}"
+  PYTHON3_ARCHIVE="${PYTHON3_SRC_FOLDER_NAME}.tar.xz"
+  PYTHON3_URL="https://www.python.org/ftp/python/${PYTHON3_VERSION}/${PYTHON3_ARCHIVE}"
+
+  local python3_stamp_file_path="${INSTALL_FOLDER_PATH}/stamp-python3-${PYTHON3_VERSION}-installed"
+
+  if [ ! -f "${python3_stamp_file_path}" ]
+  then
+
+    cd "${SOURCES_FOLDER_PATH}"
+
+    download_and_extract "${PYTHON3_URL}" "${PYTHON3_ARCHIVE}" \
+      "${PYTHON3_SRC_FOLDER_NAME}"
+
+    (
+      mkdir -p "${BUILD_FOLDER_PATH}/${PYTHON3_FOLDER_NAME}"
+      cd "${BUILD_FOLDER_PATH}/${PYTHON3_FOLDER_NAME}"
+
+      xbb_activate
+      xbb_activate_installed_dev
+
+      CPPFLAGS="${XBB_CPPFLAGS}"
+      CFLAGS="${XBB_CFLAGS}"
+      CXXFLAGS="${XBB_CXXFLAGS}"
+
+      LDFLAGS="${XBB_LDFLAGS_APP_STATIC_GCC}" 
+      if [ "${TARGET_PLATFORM}" == "win32" ]
+      then
+        LDFLAGS="${LDFLAGS}"
+      fi
+
+      export CPPFLAGS
+      export CFLAGS
+      export CXXFLAGS
+      export LDFLAGS
+
+      if [ ! -f "config.status" ]
+      then
+        (
+          echo
+          echo "Running python3 configure..."
+      
+          bash "${SOURCES_FOLDER_PATH}/${PYTHON3_SRC_FOLDER_NAME}/configure" --help
+
+          bash ${DEBUG} "${SOURCES_FOLDER_PATH}/${PYTHON3_SRC_FOLDER_NAME}/configure" \
+            --prefix="${APP_PREFIX}" \
+            \
+            --build=${BUILD} \
+            --host=${HOST} \
+            --target=${GCC_TARGET} \
+            \
+            
+          cp "config.log" "${LOGS_FOLDER_PATH}/config-python3-log.txt"
+        ) 2>&1 | tee "${LOGS_FOLDER_PATH}/configure-python3-output.txt"
+      fi
+
+      (
+        echo
+        echo "Running python3 make..."
+      
+        # Build.
+        make -j ${JOBS} 
+
+        if [ "${WITH_TESTS}" == "y" ]
+        then
+          make check
+        fi
+      
+        # Avoid strip here, it may interfere with patchelf.
+        # make install-strip
+        make install
+
+      ) 2>&1 | tee "${LOGS_FOLDER_PATH}/make-python3-output.txt"
+    )
+
+    touch "${python3_stamp_file_path}"
+  else
+    echo "Component python3 already installed."
+  fi
+}
+
+# -----------------------------------------------------------------------------
+
 function copy_nano_libs() 
 {
   local src_folder="$1"
@@ -1192,16 +1292,22 @@ function do_gdb()
       CFLAGS="${XBB_CFLAGS} ${GCC_WARN_CFLAGS}"
       CXXFLAGS="${XBB_CXXFLAGS} ${GCC_WARN_CXXFLAGS}"
           
-      LDFLAGS="${XBB_LDFLAGS_APP}"
-      LIBS=""
-
       # libiconv is used by Python3.
       # export LIBS="-liconv"
       if [ "${TARGET_PLATFORM}" == "win32" ]
       then
+        # https://stackoverflow.com/questions/44150871/embeded-python3-6-with-mingw-in-c-fail-on-linking
+        # ???
+        CPPFLAGS+=" -DPy_BUILD_CORE_BUILTIN=1"
+
+        # From Arm script.
+        LDFLAGS="${XBB_LDFLAGS_APP} -v -Wl,${XBB_FOLDER_PATH}/${CROSS_COMPILE_PREFIX}/lib/CRT_glob.o"
         # Workaround for undefined reference to `__strcpy_chk' in GCC 9.
         # https://sourceforge.net/p/mingw-w64/bugs/818/
-        LIBS+=" -lssp"
+        LIBS="-lssp"
+      else
+        LDFLAGS="${XBB_LDFLAGS_APP} -v"
+        LIBS=""
       fi
 
       if [ "${TARGET_PLATFORM}" == "darwin" ]
