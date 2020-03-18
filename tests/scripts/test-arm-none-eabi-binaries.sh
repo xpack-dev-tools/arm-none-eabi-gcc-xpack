@@ -40,7 +40,7 @@ function validate()
   host_machine=$(uname -m | tr '[:upper:]' '[:lower:]')
   # echo ${host_platform} ${host_machine}
 
-  if [ "${host_platform}" != "${archive_platform}" ]
+  if [ "${host_platform}" != "${archive_platform}" ] && [[ "${host_platform}" != mingw64_nt* ]]
   then
     echo "The ${archive_name} can only be tested on ${archive_platform}, not ${host_platform}."
     exit 1
@@ -93,11 +93,49 @@ function validate()
           ;;
       esac
       ;;
+    win32)
+      case "${archive_arch}" in
+        x64)
+          if [ "${host_machine}" != "x86_64" ]
+          then
+            echo "Testing ${archive_arch} not supported on ${host_machine}."
+            exit 1
+          fi
+          ;;
+        x32)
+          if [ "${host_machine}" != "i386" -a "${host_machine}" != "i586" -a "${host_machine}" != "i686" -a "${host_machine}" != "x86_64" ]
+          then
+            echo "Testing ${archive_arch} not supported on ${host_machine}."
+            exit 1
+          fi
+          ;;
+        *)
+          echo "Testing ${archive_arch} not supported."
+          exit 1
+          ;;
+      esac
+
+      ;;
     *)
       echo "Testing ${archive_platform} not supported."
       exit 1
       ;;
   esac
+}
+
+function show_libs()
+{
+  # Does not include the .exe extension.
+  local app_path=$1
+  shift
+  if [ "${archive_platform}" == "win32" ]
+  then
+    app_path+='.exe'
+  fi
+
+  echo
+  echo "ldd ${app_path}"
+  ldd "${app_path}" 2>&1
 }
 
 function run_app()
@@ -116,6 +154,17 @@ function run_binutils()
   echo
   echo "Testing if binutils start properly..."
 
+  show_libs "${app_absolute_path}/bin/${gcc_target}-ar"
+  show_libs "${app_absolute_path}/bin/${gcc_target}-as"
+  show_libs "${app_absolute_path}/bin/${gcc_target}-ld"
+  show_libs "${app_absolute_path}/bin/${gcc_target}-nm"
+  show_libs "${app_absolute_path}/bin/${gcc_target}-objcopy"
+  show_libs "${app_absolute_path}/bin/${gcc_target}-objdump"
+  show_libs "${app_absolute_path}/bin/${gcc_target}-ranlib"
+  show_libs "${app_absolute_path}/bin/${gcc_target}-size"
+  show_libs "${app_absolute_path}/bin/${gcc_target}-strings"
+  show_libs "${app_absolute_path}/bin/${gcc_target}-strip"
+
   run_app "${app_absolute_path}/bin/${gcc_target}-ar" --version
   run_app "${app_absolute_path}/bin/${gcc_target}-as" --version
   run_app "${app_absolute_path}/bin/${gcc_target}-ld" --version
@@ -132,6 +181,9 @@ function run_gcc()
 {
   echo
   echo "Testing if gcc starts properly..."
+
+  show_libs "${app_absolute_path}/bin/${gcc_target}-gcc"
+  show_libs "${app_absolute_path}/bin/${gcc_target}-g++"
 
   run_app "${app_absolute_path}/bin/${gcc_target}-gcc" --help
   run_app "${app_absolute_path}/bin/${gcc_target}-gcc" -dumpversion
@@ -200,21 +252,52 @@ function run_gdb()
   fi
 
   (
-    echo
-    echo "Testing if gdb${suffix} starts properly..."
-
     case "${suffix}" in
       '')
+        echo
+        echo "Testing if gdb${suffix} starts properly..."
         ;;
       -py)
-        echo
-        python2.7 --version
-        python2.7 -c 'import sys; print sys.path'
+        local python_name
+        if [ "${archive_platform}" == "win32" ]
+        then
+          python_name="python"
+        else       
+          python_name="python2.7"
+        fi
 
-        export PYTHONHOME="$(python2.7 -c 'from distutils import sysconfig;print(sysconfig.PREFIX)')"
+        local which_python
+        set +e
+        which_python="$(which ${python_name} 2>/dev/null)"
+        if [ -z "${which_python}" ]
+        then
+          echo
+          echo ">>> No ${python_name} installed, skipping gdb_py test."
+          return
+        fi
+        set -e
+        echo
+        echo "Testing if gdb${suffix} starts properly..."
+        echo
+        ${python_name} --version
+        ${python_name} -c 'import sys; print sys.path'
+
+        export PYTHONHOME="$(${python_name} -c 'from distutils import sysconfig;print(sysconfig.PREFIX)')"
         echo "PYTHONHOME=${PYTHONHOME}"
         ;;
       -py3)
+        set +e
+        local which_python="$(which python3.7 2>/dev/null)"
+        if [ -z "${which_python}" ]
+        then
+          echo
+          echo ">>> No python3.7 installed, skipping gdb_py3 test."
+          return
+        fi
+        set -e
+
+        echo
+        echo "Testing if gdb${suffix} starts properly..."
         echo
         python3.7 --version
         python3.7 -c 'import sys; print(sys.path)'
@@ -222,11 +305,15 @@ function run_gdb()
         export PYTHONHOME="$(python3.7 -c 'from distutils import sysconfig;print(sysconfig.PREFIX)')"
         echo "PYTHONHOME=${PYTHONHOME}"
         ;;
+
       *)
         echo "Unsupported gdb-${suffix}"
         exit 1
         ;;
     esac
+
+    # rm -rf "${app_absolute_path}/bin/python27.dll"
+    show_libs "${app_absolute_path}/bin/${gcc_target}-gdb${suffix}"
 
     echo
     run_app "${app_absolute_path}/bin/${gcc_target}-gdb${suffix}" --version
@@ -288,8 +375,8 @@ archive_name=$(basename ${url})
 gcc_target=arm-none-eabi
 
 archive_folder_name=$(echo ${archive_name} | sed -e "s/\(xpack-${gcc_target}-gcc-[0-9.]*-[0-9.]*\)-.*/\1/")
-archive_platform=$(echo ${archive_name} | sed -e "s/\(xpack-${gcc_target}-gcc-[0-9.]*-[0-9.]*\)-\([a-z]*\)-.*/\2/")
-archive_arch=$(echo ${archive_name} | sed -e "s/\(xpack-${gcc_target}-gcc-[0-9.]*-[0-9.]*\)-\([a-z]*\)-\([a-z0-9]*\).*/\3/")
+archive_platform=$(echo ${archive_name} | sed -e "s/\(xpack-${gcc_target}-gcc-[0-9.]*-[0-9.]*\)-\([a-z0-9]*\)-.*/\2/")
+archive_arch=$(echo ${archive_name} | sed -e "s/\(xpack-${gcc_target}-gcc-[0-9.]*-[0-9.]*\)-\([a-z0-9]*\)-\([a-z0-9]*\).*/\3/")
 # echo ${archive_folder_name} ${archive_platform} ${archive_arch}
 
 validate
@@ -317,7 +404,12 @@ cd "${test_absolute_path}"
 
 echo
 echo "Extracting ${archive_name}..."
-tar xf "${work_absolute_path}/cache/${archive_name}"
+if [[ "${archive_name}" == *.zip ]]
+then
+  unzip -q "${work_absolute_path}/cache/${archive_name}"
+else 
+  tar xf "${work_absolute_path}/cache/${archive_name}"
+fi
 
 ls -lL "${test_absolute_path}"/xpack-arm-none-eabi-gcc*
 
