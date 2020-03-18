@@ -308,6 +308,9 @@ fi
 
 if [ "${WITH_GDB_PY3}" == "y" ]
 then
+  # checking MACHDEP... configure: error: cross build not supported for x86_64-w64-mingw32
+  # do_python3
+
   do_gdb "-py3"
 fi
 
@@ -369,17 +372,14 @@ run_gcc
 run_gdb
 
 # With PYTHONPATH it still complains, but no longer fails.
-if true # [  "${TARGET_PLATFORM}" != "win32" ]
+if [ "${WITH_GDB_PY}" == "y" ]
 then
-  if [ "${WITH_GDB_PY}" == "y" ]
-  then
-    run_gdb "-py"
-  fi
+  run_gdb "-py"
+fi
 
-  if [ "${WITH_GDB_PY3}" == "y" ]
-  then
-    run_gdb "-py3"
-  fi
+if [ "${WITH_GDB_PY3}" == "y" -a "${TARGET_PLATFORM}" != "win32" ]
+then
+  run_gdb "-py3"
 fi
 
 # -----------------------------------------------------------------------------
