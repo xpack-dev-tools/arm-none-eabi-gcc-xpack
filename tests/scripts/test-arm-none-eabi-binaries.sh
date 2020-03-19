@@ -359,10 +359,10 @@ function run_gdb()
       if [ "${out}" == "baburiba" ]
       then
         echo
-        echo 'GDB python print() functional.'
+        echo 'gdb${suffix} python print() functional.'
       else
         echo
-        echo 'GDB python print() not functional.'
+        echo 'gdb${suffix} python print() not functional.'
         exit 1
       fi
     fi
