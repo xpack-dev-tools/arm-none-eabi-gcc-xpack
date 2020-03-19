@@ -477,7 +477,7 @@ then
 fi
 
 echo
-echo "Done."
+echo "All tests completed successfully."
 
 exit 0
 
