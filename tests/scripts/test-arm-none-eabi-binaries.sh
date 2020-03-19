@@ -40,7 +40,7 @@ function validate()
   host_machine=$(uname -m | tr '[:upper:]' '[:lower:]')
   # echo ${host_platform} ${host_machine}
 
-  if [ "${host_platform}" != "${archive_platform}" ] && [[ "${host_platform}" != mingw64_nt* ]]
+  if [ "${host_platform}" != "${archive_platform}" ] && [[ "${host_platform}" != mingw64_nt* ]] && [[ "${host_platform}" != mingw32_nt* ]]
   then
     echo "The ${archive_name} can only be tested on ${archive_platform}, not ${host_platform}."
     exit 1
