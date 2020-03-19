@@ -48,6 +48,14 @@ branch:
 $ curl --fail -L https://github.com/xpack-dev-tools/arm-none-eabi-gcc-xpack/raw/xpack/scripts/git-clone-develop.sh | bash
 ```
 
+which is a shortcut for:
+
+```console
+$ rm -rf ~/Downloads/arm-none-eabi-gcc-xpack.git
+$ git clone --recurse-submodules --branch xpack-develop https://github.com/xpack-dev-tools/arm-none-eabi-gcc-xpack.git \
+  ~/Downloads/arm-none-eabi-gcc-xpack.git
+```
+
 ## The `Work` folder
 
 The script creates a temporary build `Work/arm-none-eabi-gcc-${version}`
