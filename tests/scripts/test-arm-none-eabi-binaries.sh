@@ -479,6 +479,10 @@ fi
 echo
 echo "All tests completed successfully."
 
+echo
+run_app uname -a
+run_app lsb_release -a
+
 exit 0
 
 # -----------------------------------------------------------------------------
