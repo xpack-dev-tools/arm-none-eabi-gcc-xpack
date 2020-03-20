@@ -482,6 +482,7 @@ echo "All tests completed successfully."
 echo
 run_app uname -a
 run_app lsb_release -a
+run_app ldd --version
 
 exit 0
 
