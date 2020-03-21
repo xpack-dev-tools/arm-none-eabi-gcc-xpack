@@ -1365,10 +1365,12 @@ function do_gdb()
         fi
       fi
 
-      local tui_option="--enable-tui"
+      local tui_option
       if [ "${TARGET_PLATFORM}" == "win32" ]
       then
         tui_option="--disable-tui"
+      else
+        tui_option="--enable-tui"
       fi
 
       export GCC_WARN_CFLAGS
