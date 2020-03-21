@@ -906,16 +906,26 @@ function do_gettext()
 function do_ncurses()
 {
   # https://invisible-island.net/ncurses/
-  # ftp://ftp.invisible-island.net//pub/ncurses/ncurses-6.2.tar.gz
+  # ftp://ftp.invisible-island.net/pub/ncurses
+  # ftp://ftp.invisible-island.net/pub/ncurses/ncurses-6.2.tar.gz
 
   # https://archlinuxarm.org/packages/aarch64/ncurses/files/PKGBUILD
 
+  # _4421.c:1364:15: error: expected ‘)’ before ‘int’
+  # ../include/curses.h:1906:56: note: in definition of macro ‘mouse_trafo’
+  # 1906 | #define mouse_trafo(y,x,to_screen) wmouse_trafo(stdscr,y,x,to_screen)
+
+  # 26 Feb 2011, "5.8" # build fails
+  # 27 Jan 2018, "5.9" # build fails
   # 27 Jan 2018, "6.1"
   # 12 Feb 2020, "6.2"
 
   NCURSES_FOLDER_NAME="ncurses-${NCURSES_VERSION}"
   local ncurses_archive="${NCURSES_FOLDER_NAME}.tar.gz"
   local ncurses_url="ftp://ftp.invisible-island.net//pub/ncurses/${ncurses_archive}"
+
+  local ncurses_version_major="$(echo ${NCURSES_VERSION} | sed -e 's|\([0-9][0-9]*\)\.\([0-9][0-9]*\)|\1|')"
+  local ncurses_version_minor="$(echo ${NCURSES_VERSION} | sed -e 's|\([0-9][0-9]*\)\.\([0-9][0-9]*\)|\2|')"
 
   local ncurses_stamp_file_path="${INSTALL_FOLDER_PATH}/stamp-ncurses-${NCURSES_VERSION}-installed"
   if [ ! -f "${ncurses_stamp_file_path}" ]
@@ -964,7 +974,6 @@ function do_ncurses()
               --with-cxx-binding \
               --with-cxx-shared \
               --with-prog \
-              --with-manpage-format=normal \
               --with-pkg-config-libdir="${LIBS_INSTALL_FOLDER_PATH}/lib/pkgconfig" \
               --without-ada \
               --without-debug \
@@ -996,11 +1005,15 @@ function do_ncurses()
               --with-cxx-shared \
               --with-manpage-format=normal \
               --with-pkg-config-libdir="${LIBS_INSTALL_FOLDER_PATH}/lib/pkgconfig" \
-              --without-debug \
+              --with-default-terminfo-dir=/usr/share \
+              --with-debug \
               --without-ada \
+              --without-manpage \
               \
               --enable-widec \
               --enable-pc-files \
+              --enable-termcap \
+              --enable-ext-colors \
 
           fi
 
@@ -1020,6 +1033,27 @@ function do_ncurses()
 
         # make install-strip
         make install
+
+        # fool packages looking to link to non-wide-character ncurses libraries
+        for lib in ncurses ncurses++ form panel menu; do
+          echo "INPUT(-l${lib}w)" > "${LIBS_INSTALL_FOLDER_PATH}/lib/lib${lib}.so"
+          rm "${LIBS_INSTALL_FOLDER_PATH}/lib/pkgconfig/${lib}.pc"
+          ln -s -v ${lib}w.pc "${LIBS_INSTALL_FOLDER_PATH}/lib/pkgconfig/${lib}.pc"
+        done
+
+        for lib in tic tinfo; do
+          echo "INPUT(libncursesw.so.${ncurses_version_major})" > "${LIBS_INSTALL_FOLDER_PATH}/lib/lib${lib}.so"
+          rm "${LIBS_INSTALL_FOLDER_PATH}/lib/lib${lib}.so.${ncurses_version_major}"
+          ln -s -v libncursesw.so.${ncurses_version_major} "${LIBS_INSTALL_FOLDER_PATH}/lib/lib${lib}.so.${ncurses_version_major}"
+          rm "${LIBS_INSTALL_FOLDER_PATH}/lib/pkgconfig/${lib}.pc"
+          ln -s -v ncursesw.pc "${LIBS_INSTALL_FOLDER_PATH}/lib/pkgconfig/${lib}.pc"
+        done
+
+        # some packages look for -lcurses during build
+        echo 'INPUT(-lncursesw)' > "${LIBS_INSTALL_FOLDER_PATH}/lib/libcursesw.so"
+        rm "${LIBS_INSTALL_FOLDER_PATH}/lib/libcurses.so"
+        ln -s -v libncurses.so "${LIBS_INSTALL_FOLDER_PATH}/lib/libcurses.so"
+
       ) 2>&1 | tee "${LOGS_FOLDER_PATH}/make-ncurses-output.txt"
     )
 
