@@ -39,13 +39,13 @@ The binaries were built using
 of build environments based on slightly older distributions, that should be
 compatible with most recent systems.
 
-- Intel GNU/Linux: all binaries were built with GCC 9.2, running in an
+- Intel GNU/Linux: all binaries were built with GCC 9.3, running in an
   Ubuntu 12.04 LTS Docker container
-- Arm GNU/Linux: all binaries were built with GCC 9.2, running in on Ubuntu
+- Arm GNU/Linux: all binaries were built with GCC 9.3, running in on Ubuntu
   16.04.6 LTS
-- Windows: all binaries were built with mingw-w64 GCC 9.2, running in a
+- Windows: all binaries were built with mingw-w64 GCC 9.3, running in a
   Ubuntu 12.04 LTS Docker container
-- macOS: most binaries were built with GCC 9.2, running in a separate
+- macOS: most binaries were built with GCC 9.3, running in a separate
   folder on macOS 10.10.5; GDB cannot be compiled with GCC, so Apple
   clang was used.
 
