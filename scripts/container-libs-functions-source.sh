@@ -1037,21 +1037,21 @@ function do_ncurses()
         # fool packages looking to link to non-wide-character ncurses libraries
         for lib in ncurses ncurses++ form panel menu; do
           echo "INPUT(-l${lib}w)" > "${LIBS_INSTALL_FOLDER_PATH}/lib/lib${lib}.so"
-          rm "${LIBS_INSTALL_FOLDER_PATH}/lib/pkgconfig/${lib}.pc"
+          rm -f "${LIBS_INSTALL_FOLDER_PATH}/lib/pkgconfig/${lib}.pc"
           ln -s -v ${lib}w.pc "${LIBS_INSTALL_FOLDER_PATH}/lib/pkgconfig/${lib}.pc"
         done
 
         for lib in tic tinfo; do
           echo "INPUT(libncursesw.so.${ncurses_version_major})" > "${LIBS_INSTALL_FOLDER_PATH}/lib/lib${lib}.so"
-          rm "${LIBS_INSTALL_FOLDER_PATH}/lib/lib${lib}.so.${ncurses_version_major}"
+          rm -f "${LIBS_INSTALL_FOLDER_PATH}/lib/lib${lib}.so.${ncurses_version_major}"
           ln -s -v libncursesw.so.${ncurses_version_major} "${LIBS_INSTALL_FOLDER_PATH}/lib/lib${lib}.so.${ncurses_version_major}"
-          rm "${LIBS_INSTALL_FOLDER_PATH}/lib/pkgconfig/${lib}.pc"
+          rm -f "${LIBS_INSTALL_FOLDER_PATH}/lib/pkgconfig/${lib}.pc"
           ln -s -v ncursesw.pc "${LIBS_INSTALL_FOLDER_PATH}/lib/pkgconfig/${lib}.pc"
         done
 
         # some packages look for -lcurses during build
         echo 'INPUT(-lncursesw)' > "${LIBS_INSTALL_FOLDER_PATH}/lib/libcursesw.so"
-        rm "${LIBS_INSTALL_FOLDER_PATH}/lib/libcurses.so"
+        rm -f "${LIBS_INSTALL_FOLDER_PATH}/lib/libcurses.so"
         ln -s -v libncurses.so "${LIBS_INSTALL_FOLDER_PATH}/lib/libcurses.so"
 
       ) 2>&1 | tee "${LOGS_FOLDER_PATH}/make-ncurses-output.txt"
