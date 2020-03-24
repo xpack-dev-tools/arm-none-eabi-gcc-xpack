@@ -282,20 +282,26 @@ $ cd ~/Work/arm-none-eabi-gcc-*/deploy
 $ scp * ilg@ilg-wks.local:Downloads/xpack-binaries/arm
 ```
 
-## Run a test build on macOS
+## Run a test build
 
 Before starting the builds on the dedicated machines, run a quick test on
-the local development workstation.
+the development workstation.
 
 ```console
 $ caffeinate bash ~/Downloads/arm-none-eabi-gcc-xpack.git/scripts/build.sh --osx --disable-multilib --develop --jobs 12
 ```
 
+or on the build machine:
+
+```console
+$ bash ~/Downloads/arm-none-eabi-gcc-xpack.git/scripts/build.sh --disable-multilib --develop --jobs 8 --linux64
+```
+
 This should check the commit IDs and the tag names in all the refered
 repositories, and the build scripts.
 
-It is _quick_ because it does not build the multilibs. Even so, on a
-fast machine, it takes about one hour.
+It is _quick_ because it does not build the multilibs. Even so, on a very
+fast machine, it takes about half hour.
 
 ## Subsequent runs
 
