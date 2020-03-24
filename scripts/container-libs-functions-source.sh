@@ -955,9 +955,11 @@ function do_ncurses()
 
           bash "${SOURCES_FOLDER_PATH}/${NCURSES_FOLDER_NAME}/configure" --help
 
-          # Not functional on windows.
+          # Not yet functional on windows.
           if [ "${TARGET_PLATFORM}" == "win32" ]
           then
+
+            # export PATH_SEPARATOR=";"
 
             # Without --with-pkg-config-libdir= it'll try to write the .pc files in the
             # xbb folder, probbaly by using the dirname of pkg-config.
@@ -967,17 +969,21 @@ function do_ncurses()
               --build=${BUILD} \
               --host=${HOST} \
               --target=${TARGET} \
+              --with-build-cc=${CC} \
+              --with-build-cflags=${CFLAGS} \
+              --with-build-cppflags=${CPPFLAGS} \
+              --with-build-ldflags=${LDFLAGS} \
               \
               --with-shared \
               --with-normal \
               --with-cxx \
               --with-cxx-binding \
               --with-cxx-shared \
-              --with-prog \
               --with-pkg-config-libdir="${LIBS_INSTALL_FOLDER_PATH}/lib/pkgconfig" \
               --without-ada \
               --without-debug \
-              --with-build-cc=gcc-9
+              --without-manpage \
+              --without-prog \
               \
               --enable-assertions \
               --enable-sp-funcs \
@@ -1003,12 +1009,14 @@ function do_ncurses()
               --with-cxx \
               --with-cxx-binding \
               --with-cxx-shared \
-              --with-manpage-format=normal \
               --with-pkg-config-libdir="${LIBS_INSTALL_FOLDER_PATH}/lib/pkgconfig" \
-              --with-default-terminfo-dir=/usr/share \
-              --with-debug \
+              --with-terminfo-dirs=/usr/share/terminfo \
+              --with-default-terminfo-dir=/usr/share/terminfo \
+              --with-gpm \
+              --without-debug \
               --without-ada \
               --without-manpage \
+              --without-prog \
               \
               --enable-widec \
               --enable-pc-files \
@@ -1029,7 +1037,6 @@ function do_ncurses()
         make -j ${JOBS}
 
         # The test-programs are interactive
-        # make check
 
         # make install-strip
         make install

@@ -1689,6 +1689,9 @@ function copy_distro_files()
     copy_license \
       "${SOURCES_FOLDER_PATH}/${XZ_FOLDER_NAME}" \
       "${XZ_FOLDER_NAME}"
+    copy_license \
+      "${SOURCES_FOLDER_PATH}/${NCURSES_FOLDER_NAME}" \
+      "${NCURSES_FOLDER_NAME}"
 
     copy_license \
       "${SOURCES_FOLDER_PATH}/${BINUTILS_SRC_FOLDER_NAME}" \
