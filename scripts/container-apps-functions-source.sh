@@ -312,6 +312,11 @@ function do_binutils()
         show_libs "${APP_PREFIX}/bin/${GCC_TARGET}-strip"
 
       ) 2>&1 | tee "${LOGS_FOLDER_PATH}/make-binutils-output.txt"
+
+      copy_license \
+        "${SOURCES_FOLDER_PATH}/${BINUTILS_SRC_FOLDER_NAME}" \
+        "${BINUTILS_SRC_FOLDER_NAME}-${BINUTILS_VERSION}"
+
     )
 
     touch "${binutils_stamp_file_path}"
@@ -678,6 +683,14 @@ function do_newlib()
         fi
 
       ) 2>&1 | tee "${LOGS_FOLDER_PATH}/make-newlib$1-output.txt"
+
+      if [ "$1" == "" ]
+      then
+        copy_license \
+          "${SOURCES_FOLDER_PATH}/${NEWLIB_SRC_FOLDER_NAME}" \
+          "${NEWLIB_SRC_FOLDER_NAME}-${NEWLIB_VERSION}"
+      fi
+
     )
 
     touch "${newlib_stamp_file_path}"
@@ -1131,6 +1144,14 @@ function do_gcc_final()
         fi
 
       ) 2>&1 | tee "${LOGS_FOLDER_PATH}/make-gcc$1-final-output.txt"
+
+      if [ "$1" == "" ]
+      then
+        copy_license \
+          "${SOURCES_FOLDER_PATH}/${GCC_SRC_FOLDER_NAME}" \
+          "${GCC_SRC_FOLDER_NAME}-${GCC_VERSION}"
+      fi
+
     )
 
     touch "${gcc_final_stamp_file_path}"
@@ -1477,6 +1498,14 @@ function do_gdb()
         show_libs "${APP_PREFIX}/bin/${GCC_TARGET}-gdb$1"
 
       ) 2>&1 | tee "${LOGS_FOLDER_PATH}/make-gdb$1-output.txt"
+
+      if [ "$1" == "" ]
+      then
+        copy_license \
+          "${SOURCES_FOLDER_PATH}/${GDB_SRC_FOLDER_NAME}" \
+          "${GDB_SRC_FOLDER_NAME}-${GDB_VERSION}"
+      fi
+
     )
 
     touch "${gdb_stamp_file_path}"
@@ -1658,53 +1687,6 @@ function copy_distro_files()
 
     rm -rf "${APP_PREFIX}/${DISTRO_INFO_NAME}"
     mkdir -p "${APP_PREFIX}/${DISTRO_INFO_NAME}"
-
-    echo
-    echo "Copying license files..."
-
-    copy_license \
-      "${SOURCES_FOLDER_PATH}/${ZLIB_FOLDER_NAME}" \
-      "${ZLIB_FOLDER_NAME}"
-    copy_license \
-      "${SOURCES_FOLDER_PATH}/${GMP_FOLDER_NAME}" \
-      "${GMP_FOLDER_NAME}"
-    copy_license \
-      "${SOURCES_FOLDER_PATH}/${MPFR_FOLDER_NAME}" \
-      "${MPFR_FOLDER_NAME}"
-    copy_license \
-      "${SOURCES_FOLDER_PATH}/${MPC_FOLDER_NAME}" \
-      "${MPC_FOLDER_NAME}"
-    copy_license \
-      "${SOURCES_FOLDER_PATH}/${ISL_FOLDER_NAME}" \
-      "${ISL_FOLDER_NAME}"
-    copy_license \
-      "${SOURCES_FOLDER_PATH}/${LIBELF_FOLDER_NAME}" \
-      "${LIBELF_FOLDER_NAME}"
-    copy_license \
-      "${SOURCES_FOLDER_PATH}/${EXPAT_FOLDER_NAME}" \
-      "${EXPAT_FOLDER_NAME}"
-    copy_license \
-      "${SOURCES_FOLDER_PATH}/${LIBICONV_FOLDER_NAME}" \
-      "${LIBICONV_FOLDER_NAME}"
-    copy_license \
-      "${SOURCES_FOLDER_PATH}/${XZ_FOLDER_NAME}" \
-      "${XZ_FOLDER_NAME}"
-    copy_license \
-      "${SOURCES_FOLDER_PATH}/${NCURSES_FOLDER_NAME}" \
-      "${NCURSES_FOLDER_NAME}"
-
-    copy_license \
-      "${SOURCES_FOLDER_PATH}/${BINUTILS_SRC_FOLDER_NAME}" \
-      "${BINUTILS_SRC_FOLDER_NAME}-${BINUTILS_VERSION}"
-    copy_license \
-      "${SOURCES_FOLDER_PATH}/${GCC_SRC_FOLDER_NAME}" \
-      "${GCC_SRC_FOLDER_NAME}-${GCC_VERSION}"
-    copy_license \
-      "${SOURCES_FOLDER_PATH}/${NEWLIB_SRC_FOLDER_NAME}" \
-      "${NEWLIB_SRC_FOLDER_NAME}-${NEWLIB_VERSION}"
-    copy_license \
-      "${SOURCES_FOLDER_PATH}/${GDB_SRC_FOLDER_NAME}" \
-      "${GDB_SRC_FOLDER_NAME}-${GDB_VERSION}"
 
     copy_build_files
 

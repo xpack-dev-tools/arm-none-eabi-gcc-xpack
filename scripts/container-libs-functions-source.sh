@@ -106,6 +106,11 @@ function do_zlib()
 
         ) 2>&1 | tee "${LOGS_FOLDER_PATH}/make-zlib-output.txt"
       fi
+
+      copy_license \
+        "${SOURCES_FOLDER_PATH}/${ZLIB_FOLDER_NAME}" \
+        "${ZLIB_FOLDER_NAME}"
+
     )
 
     touch "${zlib_stamp_file_path}"
@@ -200,6 +205,11 @@ function do_gmp()
 
         make install-strip
       ) 2>&1 | tee "${LOGS_FOLDER_PATH}/make-gmp-output.txt"
+
+      copy_license \
+        "${SOURCES_FOLDER_PATH}/${GMP_FOLDER_NAME}" \
+        "${GMP_FOLDER_NAME}"
+
     )
 
     touch "${gmp_stamp_file_path}"
@@ -282,6 +292,11 @@ function do_mpfr()
 
         make install-strip
       ) 2>&1 | tee "${LOGS_FOLDER_PATH}/make-mpfr-output.txt"
+
+      copy_license \
+        "${SOURCES_FOLDER_PATH}/${MPFR_FOLDER_NAME}" \
+        "${MPFR_FOLDER_NAME}"
+
     )
     touch "${mpfr_stamp_file_path}"
 
@@ -363,6 +378,11 @@ function do_mpc()
 
         make install-strip
       ) 2>&1 | tee "${LOGS_FOLDER_PATH}/make-mpc-output.txt"
+
+      copy_license \
+        "${SOURCES_FOLDER_PATH}/${MPC_FOLDER_NAME}" \
+        "${MPC_FOLDER_NAME}"
+
     )
     touch "${mpc_stamp_file_path}"
 
@@ -448,6 +468,10 @@ function do_isl()
         make install-strip
       ) 2>&1 | tee "${LOGS_FOLDER_PATH}/make-isl-output.txt"
 
+      copy_license \
+        "${SOURCES_FOLDER_PATH}/${ISL_FOLDER_NAME}" \
+        "${ISL_FOLDER_NAME}"
+
     )
     touch "${isl_stamp_file_path}"
 
@@ -531,6 +555,11 @@ function do_libelf()
 
         make install
       ) 2>&1 | tee "${LOGS_FOLDER_PATH}/make-libelf-output.txt"
+
+      copy_license \
+        "${SOURCES_FOLDER_PATH}/${LIBELF_FOLDER_NAME}" \
+        "${LIBELF_FOLDER_NAME}"
+
     )
 
     touch "${libelf_stamp_file_path}"
@@ -615,6 +644,11 @@ function do_expat()
 
         make install
       ) 2>&1 | tee "${LOGS_FOLDER_PATH}/make-expat-output.txt"
+
+      copy_license \
+        "${SOURCES_FOLDER_PATH}/${EXPAT_FOLDER_NAME}" \
+        "${EXPAT_FOLDER_NAME}"
+
     )
 
     touch "${expat_stamp_file_path}"
@@ -695,6 +729,11 @@ function do_libiconv()
 
         make install-strip
       ) 2>&1 | tee "${LOGS_FOLDER_PATH}/make-libiconv-output.txt"
+
+      copy_license \
+        "${SOURCES_FOLDER_PATH}/${LIBICONV_FOLDER_NAME}" \
+        "${LIBICONV_FOLDER_NAME}"
+
     )
 
     touch "${libiconv_stamp_file_path}"
@@ -775,6 +814,11 @@ function do_xz()
 
         make install-strip
       ) 2>&1 | tee "${LOGS_FOLDER_PATH}/make-xz-output.txt"
+
+      copy_license \
+        "${SOURCES_FOLDER_PATH}/${XZ_FOLDER_NAME}" \
+        "${XZ_FOLDER_NAME}"
+
     )
 
     touch "${xz_stamp_file_path}"
@@ -893,6 +937,11 @@ function do_gettext()
         make install
 
       ) 2>&1 | tee "${LOGS_FOLDER_PATH}/make-gettext-output.txt"
+
+      copy_license \
+        "${SOURCES_FOLDER_PATH}/${GETTEXT_FOLDER_NAME}" \
+        "${GETTEXT_FOLDER_NAME}"
+
     )
 
     touch "${gettext_stamp_file_path}"
@@ -1062,6 +1111,11 @@ function do_ncurses()
         ln -s -v libncurses.so "${LIBS_INSTALL_FOLDER_PATH}/lib/libcurses.so"
 
       ) 2>&1 | tee "${LOGS_FOLDER_PATH}/make-ncurses-output.txt"
+
+      copy_license \
+        "${SOURCES_FOLDER_PATH}/${NCURSES_FOLDER_NAME}" \
+        "${NCURSES_FOLDER_NAME}"
+
     )
 
     touch "${ncurses_stamp_file_path}"
@@ -1164,6 +1218,10 @@ function do_gpm()
         fi
 
       ) 2>&1 | tee "${LOGS_FOLDER_PATH}/make-gpm-output.txt"
+
+      copy_license \
+        "${SOURCES_FOLDER_PATH}/${GPM_FOLDER_NAME}" \
+        "${GPM_FOLDER_NAME}"
     )
 
     touch "${gpm_stamp_file_path}"
