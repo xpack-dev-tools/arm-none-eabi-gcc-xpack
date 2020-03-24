@@ -89,6 +89,13 @@ Mode details on the prerequisites of running GDB with Python support are
 available from
 [GDB with Python support](https://xpack.github.io/arm-none-eabi-gcc/python/).
 
+## Text User Interface (TUI)
+
+Support for TUI was added to GDB. The `ncurses` library (v6.2) was added to
+the distribution.
+
+Note: TUI is not available on Windows.
+
 ## Build
 
 The scripts used to build this distribution are in:
