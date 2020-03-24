@@ -138,7 +138,7 @@ function do_gmp()
     cd "${SOURCES_FOLDER_PATH}"
 
     download_and_extract "${gmp_url}" "${gmp_archive}" "${GMP_FOLDER_NAME}"
-
+    
     (
       mkdir -p "${LIBS_BUILD_FOLDER_PATH}/${GMP_FOLDER_NAME}"
       cd "${LIBS_BUILD_FOLDER_PATH}/${GMP_FOLDER_NAME}"
@@ -1070,3 +1070,105 @@ function do_ncurses()
     echo "Library ncurses already installed."
   fi
 }
+
+function do_gpm()
+{
+  # https://www.nico.schottelius.org/software/gpm/
+  # https://github.com/telmich/gpm
+  # https://github.com/telmich/gpm/releases/tag/1.20.7
+  # https://github.com/telmich/gpm/archive/1.20.7.tar.gz
+
+  # https://archlinuxarm.org/packages/aarch64/gpm/files/PKGBUILD
+
+  # 27 Oct 2012 "1.20.7"
+
+  GPM_FOLDER_NAME="gpm-${GPM_VERSION}"
+  local gpm_archive="${GPM_FOLDER_NAME}.tar.gz"
+  local gpm_github_archive="${GPM_VERSION}.tar.gz"
+  
+  local gpm_url="https://github.com/telmich/gpm/archive/${gpm_github_archive}"
+
+  local gpm_stamp_file_path="${INSTALL_FOLDER_PATH}/stamp-gpm-${GPM_VERSION}-installed"
+  if [ ! -f "${gpm_stamp_file_path}" ]
+  then
+
+    cd "${LIBS_BUILD_FOLDER_PATH}"
+
+    download_and_extract "${gpm_url}" "${gpm_archive}" "${GPM_FOLDER_NAME}"
+
+    (
+      cd "${LIBS_BUILD_FOLDER_PATH}/${GPM_FOLDER_NAME}"
+      if [ ! -f "stamp-autogen" ]
+      then
+
+        xbb_activate
+        
+        run_app bash ${DEBUG} "autogen.sh"
+
+        touch "stamp-autogen"
+      fi
+    ) 2>&1 | tee "${LOGS_FOLDER_PATH}/autogen-gpm-output.txt"
+
+    (
+      cd "${LIBS_BUILD_FOLDER_PATH}/${GPM_FOLDER_NAME}"
+
+      xbb_activate
+      xbb_activate_installed_dev
+
+      export CPPFLAGS="${XBB_CPPFLAGS}"
+      export CFLAGS="${XBB_CFLAGS}"
+      export CXXFLAGS="${XBB_CXXFLAGS}"
+      export LDFLAGS="${XBB_LDFLAGS_LIB}"
+
+      if [ ! -f "config.status" ]
+      then 
+        (
+          echo
+          echo "Running gpm configure..."
+
+          bash "configure" --help
+
+          bash ${DEBUG} "configure" \
+            --prefix="${LIBS_INSTALL_FOLDER_PATH}" \
+            \
+            --build=${BUILD} \
+            --host=${HOST} \
+            --target=${TARGET} \
+            \
+            --with-pic \
+            
+          cp "config.log" "${LOGS_FOLDER_PATH}/config-gpm-log.txt"
+        ) 2>&1 | tee "${LOGS_FOLDER_PATH}/configure-gpm-output.txt"
+      fi
+
+      (
+        echo
+        echo "Running gpm make..."
+
+        # Build.
+        make -j ${JOBS}
+
+        if [ "${WITH_TESTS}" == "y" ]
+        then
+          make check
+        fi
+
+        make install
+
+        if [ "${TARGET_PLATFORM}" == "linux" ]
+        then
+          cp -v "${LIBS_INSTALL_FOLDER_PATH}/lib/libgpm.so.2.1.0" "${APP_PREFIX}/bin"
+          ln -s -v "${LIBS_INSTALL_FOLDER_PATH}/lib/libgpm.so.2.1.0" "${APP_PREFIX}/bin/libgpm.so.2"
+        fi
+
+      ) 2>&1 | tee "${LOGS_FOLDER_PATH}/make-gpm-output.txt"
+    )
+
+    touch "${gpm_stamp_file_path}"
+
+  else
+    echo "Library gpm already installed."
+  fi
+}
+
+# -----------------------------------------------------------------------------

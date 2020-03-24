@@ -256,10 +256,17 @@ then
   do_gettext
 fi
 
+# Used by ncurses.
+if [ ! -z "${GPM_VERSION}" ]
+then
+  do_gpm
+fi
+
 if [ ! -z "${NCURSES_VERSION}" ]
 then
   do_ncurses
 fi
+
 
 # -----------------------------------------------------------------------------
 

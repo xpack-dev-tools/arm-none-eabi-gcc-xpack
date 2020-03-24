@@ -62,6 +62,7 @@ function prepare_versions()
   USE_TAR_GZ=""
 
   NCURSES_VERSION=""
+  GPM_VERSION=""
 
   # -----------------------------------------------------------------------------
 
@@ -168,6 +169,7 @@ function prepare_versions()
       if [ "${TARGET_PLATFORM}" != "win32" ]
       then
         NCURSES_VERSION="6.2"
+        GPM_VERSION="1.20.7"
       fi
 
       if [ "${TARGET_PLATFORM}" == "win32" ]
