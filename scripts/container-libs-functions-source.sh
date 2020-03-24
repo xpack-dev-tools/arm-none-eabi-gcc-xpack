@@ -1146,6 +1146,7 @@ function do_gpm()
   if [ ! -f "${gpm_stamp_file_path}" ]
   then
 
+    # In-source build.
     cd "${LIBS_BUILD_FOLDER_PATH}"
 
     download_and_extract "${gpm_url}" "${gpm_archive}" "${GPM_FOLDER_NAME}"
@@ -1211,16 +1212,21 @@ function do_gpm()
 
         if [ "${TARGET_PLATFORM}" == "linux" ]
         then
-          # Manual copy, since it is not refered in the elf.
-          cp -v "${LIBS_INSTALL_FOLDER_PATH}/lib/libgpm.so.2.1.0" "${APP_PREFIX}/bin"
-          rm -f "${APP_PREFIX}/bin/libgpm.so.2"
-          ln -s -v "${LIBS_INSTALL_FOLDER_PATH}/lib/libgpm.so.2.1.0" "${APP_PREFIX}/bin/libgpm.so.2"
+          (
+            mkdir -p "${APP_PREFIX}/bin"
+            cd "${APP_PREFIX}/bin"
+
+            # Manual copy, since it is not refered in the elf.
+            cp -v "${LIBS_INSTALL_FOLDER_PATH}/lib/libgpm.so.2.1.0" .
+            rm -f "libgpm.so.2"
+            ln -s -v "libgpm.so.2.1.0" "libgpm.so.2"
+          )
         fi
 
       ) 2>&1 | tee "${LOGS_FOLDER_PATH}/make-gpm-output.txt"
 
       copy_license \
-        "${SOURCES_FOLDER_PATH}/${GPM_FOLDER_NAME}" \
+        "${LIBS_BUILD_FOLDER_PATH}/${GPM_FOLDER_NAME}" \
         "${GPM_FOLDER_NAME}"
     )
 
