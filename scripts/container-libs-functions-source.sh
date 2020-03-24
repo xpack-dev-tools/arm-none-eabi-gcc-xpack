@@ -1157,6 +1157,7 @@ function do_gpm()
 
         if [ "${TARGET_PLATFORM}" == "linux" ]
         then
+          # Manual copy, since it is not refered in the elf.
           cp -v "${LIBS_INSTALL_FOLDER_PATH}/lib/libgpm.so.2.1.0" "${APP_PREFIX}/bin"
           ln -s -v "${LIBS_INSTALL_FOLDER_PATH}/lib/libgpm.so.2.1.0" "${APP_PREFIX}/bin/libgpm.so.2"
         fi
