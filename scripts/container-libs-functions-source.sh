@@ -1159,6 +1159,7 @@ function do_gpm()
         then
           # Manual copy, since it is not refered in the elf.
           cp -v "${LIBS_INSTALL_FOLDER_PATH}/lib/libgpm.so.2.1.0" "${APP_PREFIX}/bin"
+          rm -f "${APP_PREFIX}/bin/libgpm.so.2"
           ln -s -v "${LIBS_INSTALL_FOLDER_PATH}/lib/libgpm.so.2.1.0" "${APP_PREFIX}/bin/libgpm.so.2"
         fi
 
