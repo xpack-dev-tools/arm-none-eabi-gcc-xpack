@@ -256,8 +256,8 @@ then
   do_gettext
 fi
 
-# Used by ncurses.
-if [ ! -z "${GPM_VERSION}" ]
+# Used by ncurses. Fais on macOS.
+if [ ! -z "${GPM_VERSION}" -a "${TARGET_PLATFORM}" != "darwin" ]
 then
   do_gpm
 fi
