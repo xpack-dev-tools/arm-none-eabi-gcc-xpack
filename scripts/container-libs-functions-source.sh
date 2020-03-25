@@ -959,6 +959,7 @@ function do_ncurses()
   # ftp://ftp.invisible-island.net/pub/ncurses/ncurses-6.2.tar.gz
 
   # https://archlinuxarm.org/packages/aarch64/ncurses/files/PKGBUILD
+  # http://deb.debian.org/debian/pool/main/n/ncurses/ncurses_6.1+20181013.orig.tar.gz.asc
 
   # _4421.c:1364:15: error: expected ‘)’ before ‘int’
   # ../include/curses.h:1906:56: note: in definition of macro ‘mouse_trafo’
@@ -1059,9 +1060,11 @@ function do_ncurses()
               --with-cxx-binding \
               --with-cxx-shared \
               --with-pkg-config-libdir="${LIBS_INSTALL_FOLDER_PATH}/lib/pkgconfig" \
-              --with-terminfo-dirs=/usr/share/terminfo \
-              --with-default-terminfo-dir=/usr/share/terminfo \
+              --with-terminfo-dirs=/etc/terminfo \
+              --with-default-terminfo-dir="/etc/terminfo:/lib/terminfo:/usr/share/terminfo" \
               --with-gpm \
+              --with-versioned-syms \
+              --with-xterm-kbs=del \
               --without-debug \
               --without-ada \
               --without-manpage \
@@ -1071,6 +1074,9 @@ function do_ncurses()
               --enable-pc-files \
               --enable-termcap \
               --enable-ext-colors \
+              --enable-const \
+              --enable-symlinks \
+              --enable-overwrite \
 
           fi
 
