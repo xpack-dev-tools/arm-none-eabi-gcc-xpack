@@ -93,6 +93,10 @@ then
 elif [[ ${image_name} == *opensuse* ]]
 then
   zypper -q in -y git-core curl tar gzip lsb-release
+elif [[ ${image_name} == *manjaro* ]]
+then
+  pacman --noconfirm -Syyu
+  pacman --noconfirm -S git curl tar gzip lsb-release
 fi
 
 # -----------------------------------------------------------------------------
