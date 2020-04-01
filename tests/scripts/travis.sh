@@ -153,7 +153,7 @@ then
       docker_run_test "arm64v8/ubuntu:16.04" 
     fi
 
-    if true
+    if false
     then
       # 9 stretch, 10 buster.
       docker_run_test "arm64v8/debian:buster" 
@@ -172,7 +172,7 @@ then
       docker_run_test_32 "arm32v7/ubuntu:16.04" 
     fi
 
-    if true
+    if false
     then
       # 9 stretch, 10 buster.
       docker_run_test_32 "arm32v7/debian:buster" 
@@ -182,8 +182,8 @@ then
     if true
     then
       # 8 jessie, 9 stretch, 10 buster.
-      docker_run_test_32 "raspbian:stretch" 
-      docker_run_test_32 "raspbian:jessie" 
+      docker_run_test_32 "raspbian/stretch" 
+      docker_run_test_32 "raspbian/jessie" 
     fi
 
     exit 0
