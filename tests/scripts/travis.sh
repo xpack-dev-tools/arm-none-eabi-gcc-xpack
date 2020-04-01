@@ -44,7 +44,7 @@ function docker_run_test() {
   docker run \
     --tty \
     --hostname "docker" \
-    --workdir="/root"
+    --workdir="/root" \
     --env DEBUG=${DEBUG} \
     --volume "${HOME}/Work:${container_work_folder_path}" \
     --volume "${TRAVIS_BUILD_DIR}:${container_repo_folder_path}" \
