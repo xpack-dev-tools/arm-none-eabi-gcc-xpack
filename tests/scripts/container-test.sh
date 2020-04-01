@@ -38,7 +38,7 @@ image_name="$1"
 echo "${image_name}"
 shift
 
-base_url="$2"
+base_url="$1"
 echo "${base_url}"
 shift
 
