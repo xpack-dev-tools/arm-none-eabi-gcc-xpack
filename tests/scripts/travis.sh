@@ -139,7 +139,47 @@ then
   elif [ "${host_machine}" == "aarch64" ]
   then
     echo "Testing Arm Linux"
-    docker run hello-world  
+
+    if true
+    then
+      docker_run_test "arm64v8/ubuntu:20.04" 
+      docker_run_test "arm64v8/ubuntu:18.04" 
+      docker_run_test "arm64v8/ubuntu:16.04" 
+    fi
+
+    if false
+    then
+      # 9 stretch, 10 buster.
+      docker_run_test "arm64v8/debian:buster" 
+      docker_run_test "arm64v8/debian:stretch" 
+    fi
+
+    if false
+    then
+      docker_run_test "manjaroarm/manjaro-aarch64-base" 
+    fi
+
+    if true
+    then
+      docker_run_test_32 "arm32v7/ubuntu:20.04" 
+      docker_run_test_32 "arm32v7/ubuntu:18.04" 
+      docker_run_test_32 "arm32v7/ubuntu:16.04" 
+    fi
+
+    if false
+    then
+      # 9 stretch, 10 buster.
+      docker_run_test_32 "arm32v7/debian:buster" 
+      docker_run_test_32 "arm32v7/debian:stretch" 
+    fi
+
+    if false
+    then
+      # 8 jessie, 9 stretch, 10 buster.
+      docker_run_test_32 "raspbian:stretch" 
+      docker_run_test_32 "raspbian:jessie" 
+    fi
+
     exit 0
   else
     echo "${host_machine} not supported"
