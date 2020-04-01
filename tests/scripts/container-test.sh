@@ -84,8 +84,14 @@ version="$(cat ${repo_folder_absolute_path}/scripts/VERSION)"
 
 if [[ ${image_name} == ubuntu* ]] || [[ ${image_name} == debian* ]]
 then
-  apt-get -q update 
-  apt-get -q install -y git-core curl tar gzip lsb-release
+  apt-get -qq update 
+  apt-get -qq install -y git-core curl tar gzip lsb-release
+elif [[ ${image_name} == centos* ]]
+then
+  yum install -y git
+elif [[ ${image_name} == opensuse* ]]
+then
+  zypper in -y git-core curl tar gzip lsb-release
 fi
 
 # -----------------------------------------------------------------------------
