@@ -110,6 +110,11 @@ then
       docker_run_test "opensuse/amd64:13.2" 
     fi
 
+    if false
+    then
+      docker_run_test "manjarolinux/base" 
+    fi
+
     if true
     then
       # docker_run_test_32 "i386/ubuntu:20.04" # Fails to install prerequisites
