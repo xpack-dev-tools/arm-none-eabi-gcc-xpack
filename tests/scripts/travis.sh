@@ -99,7 +99,7 @@ then
 
     if true
     then
-      docker_run_test "i386/ubuntu:20.04" 
+      # docker_run_test "i386/ubuntu:20.04" # Fails to install prerequisites
       docker_run_test "i386/ubuntu:18.04" 
       docker_run_test "i386/ubuntu:16.04" 
       docker_run_test "i386/ubuntu:14.04" 
