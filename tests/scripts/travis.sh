@@ -36,19 +36,23 @@ script_folder_name="$(basename "${script_folder_path}")"
 
 function docker_run_test() {
   local image_name="$1"
+  shift
 
   local container_work_folder_path="/Host/Work"
   local container_repo_folder_path="/Host/repo"
 
   docker run \
     --tty \
+    --hostname "docker" \
+    --workdir="/root"
     --env DEBUG=${DEBUG} \
     --volume "${HOME}/Work:${container_work_folder_path}" \
     --volume "${TRAVIS_BUILD_DIR}:${container_repo_folder_path}" \
     "${image_name}" \
     /bin/bash "${container_repo_folder_path}/tests/scripts/container-test.sh" \
       "${image_name}" \
-      "${base_url}"
+      "${base_url}" \
+      $@
 }
 
 # =============================================================================
