@@ -113,10 +113,12 @@ then
       docker_run_test "opensuse/amd64:13.2" 
     fi
 
-    if false
+    if true
     then
       docker_run_test "manjarolinux/base" 
     fi
+
+    # -------------------------------------------------------------------------
 
     if true
     then
@@ -135,7 +137,7 @@ then
       docker_run_test_32 "i386/debian:jessie" --skip-gdb-py
     fi
 
-    if true
+    if false
     then
       # docker_run_test_32 "i386/centos:8" # not available
       docker_run_test_32 "i386/centos:7" 
@@ -160,10 +162,12 @@ then
       docker_run_test "arm64v8/debian:stretch" 
     fi
 
-    if false
+    if true
     then
       docker_run_test "manjaroarm/manjaro-aarch64-base" 
     fi
+
+    # -------------------------------------------------------------------------
 
     if false
     then
@@ -179,7 +183,7 @@ then
       docker_run_test_32 "arm32v7/debian:stretch" 
     fi
 
-    if true
+    if false
     then
       # 8 jessie, 9 stretch, 10 buster.
       docker_run_test_32 "raspbian/stretch" 
