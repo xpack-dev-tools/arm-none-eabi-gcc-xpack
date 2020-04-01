@@ -42,10 +42,11 @@ function docker_run_test() {
 
   docker run \
     --tty \
+    --env DEBUG=${DEBUG} \
     --volume "${HOME}/Work:${container_work_folder_path}" \
     --volume "${TRAVIS_BUILD_DIR}:${container_repo_folder_path}" \
     "${image_name}" \
-    /bin/bash ${DEBUG} "${container_repo_folder_path}/tests/scripts/container-test.sh" \
+    /bin/bash "${container_repo_folder_path}/tests/scripts/container-test.sh" \
       "${image_name}" \
       "${base_url}"
 }
