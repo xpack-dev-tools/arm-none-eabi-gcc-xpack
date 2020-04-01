@@ -183,7 +183,7 @@ then
     then
       # 8 jessie, 9 stretch, 10 buster.
       docker_run_test_32 "raspbian/stretch" 
-      docker_run_test_32 "raspbian/jessie" 
+      docker_run_test_32 "raspbian/jessie" --skip-gdb-py
     fi
 
     exit 0
