@@ -83,14 +83,14 @@ version="$(cat ${repo_folder_absolute_path}/scripts/VERSION)"
 # -----------------------------------------------------------------------------
 
 # Guarantee that the minimum prerequisites are met.
-if [[ ${image_name} == ubuntu* ]] || [[ ${image_name} == debian* ]]
+if [[ ${image_name} == *ubuntu* ]] || [[ ${image_name} == *debian* ]]
 then
   apt-get -qq update 
   apt-get -qq install -y git-core curl tar gzip lsb-release
-elif [[ ${image_name} == centos* ]]
+elif [[ ${image_name} == *centos* ]]
 then
   yum install -y -q git curl tar gzip redhat-lsb-core
-elif [[ ${image_name} == opensuse* ]]
+elif [[ ${image_name} == *opensuse* ]]
 then
   zypper -q in -y git-core curl tar gzip lsb-release
 fi
