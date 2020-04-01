@@ -303,6 +303,12 @@ repositories, and the build scripts.
 It is _quick_ because it does not build the multilibs. Even so, on a very
 fast machine, it takes about half hour.
 
+Test builds can also be executed on the build machine:
+
+```console
+$ bash ~/Downloads/arm-none-eabi-gcc-xpack.git/scripts/build.sh --disable-multilib --develop --jobs 8 --linux64 --win64
+```
+
 ## Subsequent runs
 
 ### Separate platform specific builds
