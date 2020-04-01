@@ -91,7 +91,7 @@ then
   yum install -y -q git curl tar gzip redhat-lsb-core
 elif [[ ${image_name} == opensuse* ]]
 then
-  zypper in -y git-core curl tar gzip lsb-release
+  zypper in -y -q git-core curl tar gzip lsb-release
 fi
 
 # -----------------------------------------------------------------------------
