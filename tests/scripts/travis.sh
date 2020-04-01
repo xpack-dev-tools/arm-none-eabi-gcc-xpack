@@ -41,24 +41,30 @@ function docker_run_test() {
   local container_work_folder_path="/Host/Work"
   local container_repo_folder_path="/Host/repo"
 
-  prefix32=""
-  if [ "${bits}" == "32" ]
-  then
-    prefix32="linux32"
-  fi
+  (
+    prefix32="${prefix32:-""}"
 
-  docker run \
-    --tty \
-    --hostname "docker" \
-    --workdir="/root" \
-    --env DEBUG=${DEBUG} \
-    --volume "${HOME}/Work:${container_work_folder_path}" \
-    --volume "${TRAVIS_BUILD_DIR}:${container_repo_folder_path}" \
-    "${image_name}" \
-    ${prefix32} /bin/bash "${container_repo_folder_path}/tests/scripts/container-test.sh" \
+    docker run \
+      --tty \
+      --hostname "docker" \
+      --workdir="/root" \
+      --env DEBUG=${DEBUG} \
+      --volume "${HOME}/Work:${container_work_folder_path}" \
+      --volume "${TRAVIS_BUILD_DIR}:${container_repo_folder_path}" \
       "${image_name}" \
-      "${base_url}" \
-      $@
+      ${prefix32} /bin/bash "${container_repo_folder_path}/tests/scripts/container-test.sh" \
+        "${image_name}" \
+        "${base_url}" \
+        $@
+  )
+}
+
+function docker_run_test_32() {
+  (
+    prefix32="linux32"
+
+    docker_run_test $@
+  )
 }
 
 # =============================================================================
@@ -106,22 +112,22 @@ then
 
     if true
     then
-      # docker_run_test "i386/ubuntu:20.04" # Fails to install prerequisites
-      docker_run_test "i386/ubuntu:18.04" 
-      docker_run_test "i386/ubuntu:16.04" 
-      docker_run_test "i386/ubuntu:14.04" 
-      # docker_run_test "i386/ubuntu:12.04" --skip-gdb-py # Not available
+      # docker_run_test_32 "i386/ubuntu:20.04" # Fails to install prerequisites
+      docker_run_test_32 "i386/ubuntu:18.04"
+      docker_run_test_32 "i386/ubuntu:16.04"
+      docker_run_test_32 "i386/ubuntu:14.04"
+      # docker_run_test_32 "i386/ubuntu:12.04" --skip-gdb-py # Not available
 
       # 8 jessie, 9 stretch, 10 buster.
-      docker_run_test "i386/debian:buster" 
-      docker_run_test "i386/debian:stretch" 
-      docker_run_test "i386/debian:jessie" --skip-gdb-py
+      docker_run_test_32 "i386/debian:buster"
+      docker_run_test_32 "i386/debian:stretch"
+      docker_run_test_32 "i386/debian:jessie" --skip-gdb-py
     fi
 
     if true
     then
-      # docker_run_test "i386/centos:8" # not available
-      docker_run_test "i386/centos:7" 
+      # docker_run_test_32 "i386/centos:8" # not available
+      docker_run_test_32 "i386/centos:7" 
     fi
 
     exit 0
