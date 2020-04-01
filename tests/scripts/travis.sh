@@ -77,7 +77,7 @@ then
   then
     echo "Testing Intel Linux"
 
-    if true
+    if false
     then
       docker_run_test "amd64/ubuntu:20.04" 
       docker_run_test "amd64/ubuntu:18.04" 
@@ -91,13 +91,13 @@ then
       docker_run_test "amd64/debian:jessie" --skip-gdb-py
     fi
 
-    if true
+    if false
     then
       docker_run_test "amd64/centos:8" 
       docker_run_test "amd64/centos:7" 
     fi
 
-    if true
+    if false
     then
       docker_run_test "opensuse/tumbleweed" 
       docker_run_test "opensuse/leap:15" 
