@@ -21,7 +21,7 @@ function detect_architecture()
     node_architecture="x64"
   elif [ "${uname_machine}" == "i386" -o "${uname_machine}" == "i586" -o "${uname_machine}" == "i686" ]
   then
-    node_architecture="x64"
+    node_architecture="x32"
   elif [ "${uname_machine}" == "aarch64" ]
   then
     node_architecture="arm64"
