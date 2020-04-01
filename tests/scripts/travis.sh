@@ -167,7 +167,7 @@ then
 
     if true
     then
-      docker_run_test_32 "arm32v7/ubuntu:20.04" 
+      # docker_run_test_32 "arm32v7/ubuntu:20.04" # Fails to install prerequisites
       docker_run_test_32 "arm32v7/ubuntu:18.04" 
       docker_run_test_32 "arm32v7/ubuntu:16.04" 
     fi
