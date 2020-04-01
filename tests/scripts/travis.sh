@@ -90,8 +90,11 @@ then
       docker_run_test "amd64/ubuntu:16.04" 
       docker_run_test "amd64/ubuntu:14.04" 
       docker_run_test "ubuntu:12.04" --skip-gdb-py # Available only with this name
+    fi
 
-      # 8 jessie, 9 stretch, 10 buster.
+    if false
+    then
+     # 8 jessie, 9 stretch, 10 buster.
       docker_run_test "amd64/debian:buster" 
       docker_run_test "amd64/debian:stretch" 
       docker_run_test "amd64/debian:jessie" --skip-gdb-py
@@ -122,7 +125,10 @@ then
       docker_run_test_32 "i386/ubuntu:16.04"
       docker_run_test_32 "i386/ubuntu:14.04"
       # docker_run_test_32 "i386/ubuntu:12.04" --skip-gdb-py # Not available
+    fi
 
+    if false
+    then
       # 8 jessie, 9 stretch, 10 buster.
       docker_run_test_32 "i386/debian:buster"
       docker_run_test_32 "i386/debian:stretch"
