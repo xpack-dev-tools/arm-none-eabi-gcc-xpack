@@ -71,28 +71,50 @@ then
   then
     echo "Testing Intel Linux"
 
-    if false
+    if true
     then
-      docker_run_test "ubuntu:20.04" 
-      docker_run_test "ubuntu:18.04" 
-      docker_run_test "ubuntu:16.04" 
-      docker_run_test "ubuntu:14.04" 
-      docker_run_test "ubuntu:12.04" --skip-gdb-py
+      docker_run_test "amd64/ubuntu:20.04" 
+      docker_run_test "amd64/ubuntu:18.04" 
+      docker_run_test "amd64/ubuntu:16.04" 
+      docker_run_test "amd64/ubuntu:14.04" 
+      docker_run_test "amd64/ubuntu:12.04" --skip-gdb-py
 
-      docker_run_test "debian:buster" 
-      docker_run_test "debian:stretch" 
-      docker_run_test "debian:jessie" --skip-gdb-py
+      docker_run_test "amd64/debian:buster" 
+      docker_run_test "amd64/debian:stretch" 
+      docker_run_test "amd64/debian:jessie" --skip-gdb-py
     fi
 
-    if false
+    if true
     then
-      docker_run_test "centos:8" 
-      docker_run_test "centos:7" 
+      docker_run_test "amd64/centos:8" 
+      docker_run_test "amd64/centos:7" 
     fi
 
-    docker_run_test "opensuse/tumbleweed" 
-    docker_run_test "opensuse/leap:15" 
-    docker_run_test "opensuse/amd64:13.2" 
+    if true
+    then
+      docker_run_test "opensuse/amd64:tumbleweed" 
+      docker_run_test "opensuse/leap:15" 
+      docker_run_test "opensuse/amd64:13.2" 
+    fi
+
+    if true
+    then
+      docker_run_test "i386/ubuntu:20.04" 
+      docker_run_test "i386/ubuntu:18.04" 
+      docker_run_test "i386/ubuntu:16.04" 
+      docker_run_test "i386/ubuntu:14.04" 
+      docker_run_test "i386/ubuntu:12.04" --skip-gdb-py
+
+      docker_run_test "i386/debian:buster" 
+      docker_run_test "i386/debian:stretch" 
+      docker_run_test "i386/debian:jessie" --skip-gdb-py
+    fi
+
+    if true
+    then
+      # docker_run_test "i386/centos:8" # not available
+      docker_run_test "i386/centos:7" 
+    fi
 
     exit 0
   elif [ "${host_machine}" == "aarch64" ]
