@@ -82,6 +82,7 @@ version="$(cat ${repo_folder_absolute_path}/scripts/VERSION)"
 
 # -----------------------------------------------------------------------------
 
+# Guarantee that the minimum prerequisites are met.
 if [[ ${image_name} == ubuntu* ]] || [[ ${image_name} == debian* ]]
 then
   apt-get -qq update 
@@ -96,30 +97,9 @@ fi
 
 # -----------------------------------------------------------------------------
 
-uname -a
+detect_architecture
 
-uname_platform=$(uname -s | tr '[:upper:]' '[:lower:]')
-uname_machine=$(uname -m | tr '[:upper:]' '[:lower:]')
-
-node_architecture=""
-if [ "${uname_machine}" == "x86_64" ]
-then
-  node_architecture="x64"
-elif [ "${uname_machine}" == "i386" -o "${uname_machine}" == "i586" -o "${uname_machine}" == "i686" ]
-then
-  node_architecture="x64"
-elif [ "${uname_machine}" == "aarch64" ]
-then
-  node_architecture="arm64"
-elif [ "${uname_machine}" == "armv7l" -o "${uname_machine}" == "armv8l" ]
-then
-  node_architecture="arm"
-else
-  echo "${uname_machine} not supported"
-  exit 1
-fi
-
-# TODO: add support for Windows.
+# TODO: add support for Windows .zip.
 archive_name="xpack-${gcc_target}-gcc-${version}-${uname_platform}-${node_architecture}.tar.gz"
 archive_folder_name="xpack-${gcc_target}-gcc-${version}"
 
