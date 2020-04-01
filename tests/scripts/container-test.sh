@@ -88,7 +88,7 @@ then
   apt-get -qq install -y git-core curl tar gzip lsb-release
 elif [[ ${image_name} == centos* ]]
 then
-  yum install -y git
+  yum install -y -q git curl tar gzip redhat-lsb-core
 elif [[ ${image_name} == opensuse* ]]
 then
   zypper in -y git-core curl tar gzip lsb-release
