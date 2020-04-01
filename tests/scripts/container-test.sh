@@ -83,7 +83,7 @@ version="$(cat ${repo_folder_absolute_path}/scripts/VERSION)"
 # -----------------------------------------------------------------------------
 
 # Guarantee that the minimum prerequisites are met.
-if [[ ${image_name} == *ubuntu* ]] || [[ ${image_name} == *debian* ]]
+if [[ ${image_name} == *ubuntu* ]] || [[ ${image_name} == *debian* ]] || [[ ${image_name} == *raspbian* ]]
 then
   apt-get -qq update 
   apt-get -qq install -y git-core curl tar gzip lsb-release
