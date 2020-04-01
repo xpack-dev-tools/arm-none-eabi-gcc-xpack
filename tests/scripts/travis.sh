@@ -84,8 +84,11 @@ then
       docker_run_test "debian:jessie" --skip-gdb-py
     fi
 
-    docker_run_test "centos:8" 
-    docker_run_test "centos:7" 
+    if false
+    then
+      docker_run_test "centos:8" 
+      docker_run_test "centos:7" 
+    fi
 
     docker_run_test "opensuse/tumbleweed" 
     docker_run_test "opensuse/leap:15" 
