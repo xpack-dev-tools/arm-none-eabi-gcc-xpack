@@ -75,11 +75,11 @@ then
     docker_run_test "ubuntu:18.04" 
     docker_run_test "ubuntu:16.04" 
     docker_run_test "ubuntu:14.04" 
-    docker_run_test "ubuntu:12.04" -skip-gdb-py
+    docker_run_test "ubuntu:12.04" --skip-gdb-py
 
     docker_run_test "debian:buster" 
     docker_run_test "debian:stretch" 
-    docker_run_test "debian:jessie" -skip-gdb-py
+    docker_run_test "debian:jessie" --skip-gdb-py
 
     exit 0
   elif [ "${host_machine}" == "aarch64" ]
