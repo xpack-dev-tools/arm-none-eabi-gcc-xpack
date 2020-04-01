@@ -69,7 +69,7 @@ done
 
 # -----------------------------------------------------------------------------
 
-source "${script_folder_name}/common-functions-source.sh"
+source "${script_folder_path}/common-functions-source.sh"
 
 # -----------------------------------------------------------------------------
 
