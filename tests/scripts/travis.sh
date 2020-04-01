@@ -146,14 +146,14 @@ then
   then
     echo "Testing Arm Linux"
 
-    if true
+    if false
     then
       docker_run_test "arm64v8/ubuntu:20.04" 
       docker_run_test "arm64v8/ubuntu:18.04" 
       docker_run_test "arm64v8/ubuntu:16.04" 
     fi
 
-    if false
+    if true
     then
       # 9 stretch, 10 buster.
       docker_run_test "arm64v8/debian:buster" 
@@ -165,21 +165,21 @@ then
       docker_run_test "manjaroarm/manjaro-aarch64-base" 
     fi
 
-    if true
+    if false
     then
       # docker_run_test_32 "arm32v7/ubuntu:20.04" # Fails to install prerequisites
       docker_run_test_32 "arm32v7/ubuntu:18.04" 
       docker_run_test_32 "arm32v7/ubuntu:16.04" 
     fi
 
-    if false
+    if true
     then
       # 9 stretch, 10 buster.
       docker_run_test_32 "arm32v7/debian:buster" 
       docker_run_test_32 "arm32v7/debian:stretch" 
     fi
 
-    if false
+    if true
     then
       # 8 jessie, 9 stretch, 10 buster.
       docker_run_test_32 "raspbian:stretch" 
