@@ -92,7 +92,7 @@ then
 
     if true
     then
-      docker_run_test "opensuse/amd64:tumbleweed" 
+      docker_run_test "opensuse/tumbleweed" 
       docker_run_test "opensuse/leap:15" 
       docker_run_test "opensuse/amd64:13.2" 
     fi
