@@ -61,14 +61,14 @@ mkdir -p "${HOME}/Work"
 host_platform=$(uname -s | tr '[:upper:]' '[:lower:]')
 host_machine=$(uname -m | tr '[:upper:]' '[:lower:]')
 
-if [ "${host_platform}" == "Linux" ]
+if [ "${host_platform}" == "linux" ]
 then
   if [ "${host_machine}" == "x86_64" ]
   then
     echo "Testing Intel Linux"
 
     docker_run_test "ubuntu:20.04" 
-    
+
     exit 0
   elif [ "${host_machine}" == "aarch64" ]
   then
@@ -79,7 +79,7 @@ then
     echo "${host_machine} not supported"
     exit 1
   fi
-elif [ "${host_platform}" == "Darwin" ]
+elif [ "${host_platform}" == "darwin" ]
 then
     echo "Testing macOS"
     exit 0
