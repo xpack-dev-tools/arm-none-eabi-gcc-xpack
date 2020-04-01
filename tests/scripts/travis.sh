@@ -41,6 +41,12 @@ function docker_run_test() {
   local container_work_folder_path="/Host/Work"
   local container_repo_folder_path="/Host/repo"
 
+  prefix32=""
+  if [ "${bits}" == "32" ]
+  then
+    prefix32="linux32"
+  fi
+
   docker run \
     --tty \
     --hostname "docker" \
@@ -49,7 +55,7 @@ function docker_run_test() {
     --volume "${HOME}/Work:${container_work_folder_path}" \
     --volume "${TRAVIS_BUILD_DIR}:${container_repo_folder_path}" \
     "${image_name}" \
-    /bin/bash "${container_repo_folder_path}/tests/scripts/container-test.sh" \
+    ${prefix32} /bin/bash "${container_repo_folder_path}/tests/scripts/container-test.sh" \
       "${image_name}" \
       "${base_url}" \
       $@
