@@ -198,7 +198,7 @@ function run_gdb()
   if [ ! -x "${app_absolute_folder_path}/bin/${gcc_target}-gdb${suffix}${exe}" ]
   then
     echo
-    echo ">>> gdb${suffix} not present, skipping..."
+    echo ">>> ${gcc_target}-gdb${suffix} not present, skipping..."
     return
   fi
 
