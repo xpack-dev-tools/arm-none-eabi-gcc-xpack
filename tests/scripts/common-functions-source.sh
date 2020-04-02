@@ -283,7 +283,7 @@ function run_gdb()
       local out=$("${app_absolute_folder_path}/bin/${gcc_target}-gdb${suffix}" \
         --nh \
         --nx \
-        -ex='python print("baburiba")' \
+        -ex='python print("babu"+"riba")' \
         -ex='quit' | grep 'baburiba')
       if [ "${out}" == "baburiba" ]
       then
