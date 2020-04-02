@@ -51,9 +51,20 @@ function show_libs()
     app_path+='.exe'
   fi
 
-  echo
-  echo "ldd ${app_path}"
-  ldd "${app_path}" 2>&1
+  if [ "${node_platform}" == "linux" ]
+  then
+    echo
+    echo "readelf -d ${app_path} | grep 'ibrary'"
+    readelf -d "${app_path}" | grep 'ibrary'
+    echo
+    echo "ldd ${app_path}"
+    ldd "${app_path}" 2>&1
+  elif [ "${node_platform}" == "darwin" ]
+  then
+    echo
+    echo "otool -L ${app_path}"
+    otool -L "${app_path}"
+  fi
 }
 
 function run_app()
