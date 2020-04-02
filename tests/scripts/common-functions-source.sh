@@ -414,7 +414,7 @@ function run_gdb()
 
 # -----------------------------------------------------------------------------
 
-funtion run_tests()
+function run_tests()
 {
   run_binutils
 
