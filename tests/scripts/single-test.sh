@@ -34,7 +34,9 @@ script_folder_name="$(basename "${script_folder_path}")"
 
 # =============================================================================
 
-base_url="undefined"
+base_url="$1"
+echo "${base_url}"
+shift
 
 has_gdb_py="y"
 has_gdb_py3="y"
@@ -42,12 +44,6 @@ has_gdb_py3="y"
 while [ $# -gt 0 ]
 do
   case "$1" in
-
-    --base-url)
-      shift
-      base_url="$1"
-      shift
-      ;;
 
     --skip-gdb-py)
       has_gdb_py="n"
@@ -75,87 +71,13 @@ source "${script_folder_path}/common-functions-source.sh"
 
 # -----------------------------------------------------------------------------
 
-work_folder_absolute_path="${HOME}/Work"
-repo_folder_absolute_path="${TRAVIS_BUILD_DIR}"
-cache_absolute_folder_path="${work_folder_absolute_path}/cache"
-
-gcc_target="arm-none-eabi"
-version="$(cat ${repo_folder_absolute_path}/scripts/VERSION)"
-
-# -----------------------------------------------------------------------------
-
 detect_architecture
 
-if [ "${node_platform}" == "win32" ]
-then
-  archive_name="xpack-${gcc_target}-gcc-${version}-${node_platform}-${node_architecture}.zip"
-else
-  archive_name="xpack-${gcc_target}-gcc-${version}-${node_platform}-${node_architecture}.tar.gz"
-fi
-archive_folder_name="xpack-${gcc_target}-gcc-${version}"
+prepare_env
 
-# -----------------------------------------------------------------------------
+install_archive
 
-mkdir -p "${cache_absolute_folder_path}"
-
-if [ ! -f "${cache_absolute_folder_path}/${archive_name}" ]
-then
-  echo
-  echo "Downloading ${archive_name}..."
-  curl -L --fail -o "${cache_absolute_folder_path}/${archive_name}" \
-    ${base_url}/${archive_name}
-fi
-
-# In the container user home.
-test_absolute_folder_path="${HOME}/test-arm-none-eabi-gcc"
-
-mkdir -p "${test_absolute_folder_path}"
-cd "${test_absolute_folder_path}"
-
-echo
-echo "Extracting ${archive_name}..."
-if [[ "${archive_name}" == *.zip ]]
-then
-  unzip -q "${cache_absolute_folder_path}/${archive_name}"
-else 
-  tar xf "${cache_absolute_folder_path}/${archive_name}"
-fi
-
-app_absolute_folder_path="${test_absolute_folder_path}/${archive_folder_name}"
-
-ls -lL "${app_absolute_folder_path}"
-
-# -----------------------------------------------------------------------------
-
-run_binutils
-
-run_gcc
-
-run_gdb
-
-if [ "${has_gdb_py}" == "y" ]
-then
-  run_gdb "-py"
-fi
-
-if [ "${has_gdb_py3}" == "y" ]
-then
-  run_gdb "-py3"
-fi
-
-echo
-echo "All tests completed successfully."
-
-echo
-run_app uname -a
-if [ "${node_platform}" == "linux" ]
-then
-  run_app lsb_release -a
-  run_app ldd --version
-elif [ "${node_platform}" == "darwin" ]
-then
-  run_app sw_vers
-fi
+run_tests
 
 # Completed successfully.
 exit 0
