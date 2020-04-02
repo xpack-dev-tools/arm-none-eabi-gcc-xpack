@@ -18,8 +18,8 @@ function detect_architecture()
   node_platform="${uname_platform}"
   # Travis uses Msys2; git for Windows uses mingw-w64.
   if [[ "${uname_platform}" == msys_nt* ]] \
-  -o [[ "${uname_platform}" == mingw64_nt* ]] \
-  -o [[ "${uname_platform}" == mingw32_nt* ]]
+  || [[ "${uname_platform}" == mingw64_nt* ]] \
+  || [[ "${uname_platform}" == mingw32_nt* ]]
   then
     node_platform="win32"
   fi
