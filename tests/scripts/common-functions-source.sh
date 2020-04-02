@@ -74,6 +74,48 @@ function prepare_env()
 
 # -----------------------------------------------------------------------------
 
+# Requires base_url and lots of other variables.
+function install_archive()
+{
+  local archive_extension
+  if [ "${node_platform}" == "win32" ]
+  then
+    archive_extension="zip"
+  else
+    archive_extension="tar.gz"
+  fi
+  archive_name="xpack-${gcc_target_prefix}-gcc-${version}-${node_platform}-${node_architecture}.${archive_extension}"
+  archive_folder_name="xpack-${gcc_target_prefix}-gcc-${version}"
+
+  mkdir -p "${cache_absolute_folder_path}"
+
+  if [ ! -f "${cache_absolute_folder_path}/${archive_name}" ]
+  then
+    echo
+    echo "Downloading ${archive_name}..."
+    curl -L --fail -o "${cache_absolute_folder_path}/${archive_name}" \
+      "${base_url}/${archive_name}"
+  fi
+
+  app_absolute_folder_path="${test_absolute_folder_path}/${archive_folder_name}"
+
+  rm -rf "${app_absolute_folder_path}"
+
+  mkdir -p "${test_absolute_folder_path}"
+  cd "${test_absolute_folder_path}"
+
+  echo
+  echo "Extracting ${archive_name}..."
+  if [[ "${archive_name}" == *.zip ]]
+  then
+    unzip -q "${cache_absolute_folder_path}/${archive_name}"
+  else 
+    tar xf "${cache_absolute_folder_path}/${archive_name}"
+  fi
+
+  ls -lL "${app_absolute_folder_path}"
+}
+
 function show_libs()
 {
   # Does not include the .exe extension.
