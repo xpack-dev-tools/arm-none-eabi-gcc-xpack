@@ -15,6 +15,15 @@ function detect_architecture()
   uname_platform=$(uname -s | tr '[:upper:]' '[:lower:]')
   uname_machine=$(uname -m | tr '[:upper:]' '[:lower:]')
 
+  node_platform="${uname_platform}"
+  # Travis uses Msys2; git for Windows uses mingw-w64.
+  if [[ "${uname_platform}" == msys_nt* ]] \
+  -o [[ "${uname_platform}" == mingw64_nt* ]] \
+  -o [[ "${uname_platform}" == mingw32_nt* ]]
+  then
+    node_platform="win32"
+  fi
+
   node_architecture=""
   bits=""
   if [ "${uname_machine}" == "x86_64" ]
