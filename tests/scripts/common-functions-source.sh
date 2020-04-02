@@ -413,3 +413,38 @@ function run_gdb()
 }
 
 # -----------------------------------------------------------------------------
+
+funtion run_tests()
+{
+  run_binutils
+
+  run_gcc
+
+  run_gdb
+
+  if [ "${has_gdb_py}" == "y" ]
+  then
+    run_gdb "-py"
+  fi
+
+  if [ "${has_gdb_py3}" == "y" ]
+  then
+    run_gdb "-py3"
+  fi
+
+  echo
+  echo "All tests completed successfully."
+
+  echo
+  run_app uname -a
+  if [ "${node_platform}" == "linux" ]
+  then
+    run_app lsb_release -a
+    run_app ldd --version
+  elif [ "${node_platform}" == "darwin" ]
+  then
+    run_app sw_vers
+  fi
+}
+
+# -----------------------------------------------------------------------------
