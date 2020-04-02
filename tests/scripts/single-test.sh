@@ -86,8 +86,12 @@ version="$(cat ${repo_folder_absolute_path}/scripts/VERSION)"
 
 detect_architecture
 
-# TODO: add support for Windows .zip.
-archive_name="xpack-${gcc_target}-gcc-${version}-${uname_platform}-${node_architecture}.tar.gz"
+if [ "${node_platform}" == "win32" ]
+then
+  archive_name="xpack-${gcc_target}-gcc-${version}-${uname_platform}-${node_architecture}.zip"
+else
+  archive_name="xpack-${gcc_target}-gcc-${version}-${uname_platform}-${node_architecture}.tar.gz"
+fi
 archive_folder_name="xpack-${gcc_target}-gcc-${version}"
 
 node_platform="${uname_platform}"
