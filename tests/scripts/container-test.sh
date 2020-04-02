@@ -95,8 +95,9 @@ then
   zypper -q in -y git-core curl tar gzip lsb-release
 elif [[ ${image_name} == *manjaro* ]]
 then
-  pacman --noconfirm -Syyu
-  pacman --noconfirm -S git curl tar gzip lsb-release
+  pacman-mirrors -g -b stable
+  pacman --noconfirm -Syyuq
+  pacman --noconfirm -Sq git curl tar gzip lsb-release
 fi
 
 # -----------------------------------------------------------------------------
