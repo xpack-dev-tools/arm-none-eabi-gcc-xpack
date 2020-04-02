@@ -138,7 +138,7 @@ function docker_run_test() {
       --volume "${work_folder_absolute_path}:${container_work_folder_absolute_path}" \
       --volume "${repo_folder_absolute_path}:${container_repo_folder_absolute_path}" \
       "${image_name}" \
-      ${prefix32} /bin/bash "${container_repo_folder_path}/tests/scripts/container-test.sh" \
+      ${prefix32} /bin/bash "${container_repo_folder_absolute_path}/tests/scripts/container-test.sh" \
         "${image_name}" \
         "${base_url}" \
         $@
