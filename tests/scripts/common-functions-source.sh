@@ -116,6 +116,45 @@ function install_archive()
   ls -lL "${app_absolute_folder_path}"
 }
 
+# -----------------------------------------------------------------------------
+
+# $1 = image name
+# $2 = base URL
+function docker_run_test() {
+  local image_name="$1"
+  shift
+
+  local base_url="$1"
+  shift
+
+  (
+    prefix32="${prefix32:-""}"
+
+    docker run \
+      --tty \
+      --hostname "docker" \
+      --workdir="/root" \
+      --env DEBUG=${DEBUG} \
+      --volume "${work_folder_absolute_path}:${container_work_folder_absolute_path}" \
+      --volume "${repo_folder_absolute_path}:${container_repo_folder_absolute_path}" \
+      "${image_name}" \
+      ${prefix32} /bin/bash "${container_repo_folder_path}/tests/scripts/container-test.sh" \
+        "${image_name}" \
+        "${base_url}" \
+        $@
+  )
+}
+
+function docker_run_test_32() {
+  (
+    prefix32="linux32"
+
+    docker_run_test $@
+  )
+}
+
+# -----------------------------------------------------------------------------
+
 function show_libs()
 {
   # Does not include the .exe extension.
