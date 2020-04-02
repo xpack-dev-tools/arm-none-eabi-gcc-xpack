@@ -88,13 +88,11 @@ detect_architecture
 
 if [ "${node_platform}" == "win32" ]
 then
-  archive_name="xpack-${gcc_target}-gcc-${version}-${uname_platform}-${node_architecture}.zip"
+  archive_name="xpack-${gcc_target}-gcc-${version}-${node_platform}-${node_architecture}.zip"
 else
-  archive_name="xpack-${gcc_target}-gcc-${version}-${uname_platform}-${node_architecture}.tar.gz"
+  archive_name="xpack-${gcc_target}-gcc-${version}-${node_platform}-${node_architecture}.tar.gz"
 fi
 archive_folder_name="xpack-${gcc_target}-gcc-${version}"
-
-node_platform="${uname_platform}"
 
 # -----------------------------------------------------------------------------
 
