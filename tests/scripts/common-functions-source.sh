@@ -48,6 +48,30 @@ function detect_architecture()
   fi
 }
 
+function prepare_env() 
+{
+  container_work_folder_absolute_path="/Host/Work"
+  container_repo_folder_absolute_path="/Host/repo"
+
+  if [ -f "/.dockerenv" ]
+  then
+    work_folder_absolute_path="${container_work_folder_absolute_path}"
+    repo_folder_absolute_path="${container_repo_folder_absolute_path}"
+  else
+    work_folder_absolute_path="${HOME}/Work"
+    repo_folder_absolute_path="${TRAVIS_BUILD_DIR}"
+  fi
+
+  cache_absolute_folder_path="${work_folder_absolute_path}/cache"
+
+  gcc_target_prefix="arm-none-eabi"
+  # Extract only the first line
+  version="$(cat ${repo_folder_absolute_path}/scripts/VERSION | sed -e '2,$d')"
+
+  # Always in the user home, even when inside a container.
+  test_absolute_folder_path="${HOME}/test-arm-none-eabi-gcc"
+}
+
 # -----------------------------------------------------------------------------
 
 function show_libs()
