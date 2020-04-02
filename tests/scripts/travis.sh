@@ -164,7 +164,7 @@ then
       docker_run_test "arm64v8/debian:stretch" 
     fi
 
-    if true
+    if false
     then
       docker_run_test "manjaroarm/manjaro-aarch64-base" 
     fi
