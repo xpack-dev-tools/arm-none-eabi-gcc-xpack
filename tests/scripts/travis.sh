@@ -77,6 +77,8 @@ mkdir -p "${HOME}/Work"
 host_platform=$(uname -s | tr '[:upper:]' '[:lower:]')
 host_machine=$(uname -m | tr '[:upper:]' '[:lower:]')
 
+# https://hub.docker.com
+
 if [ "${host_platform}" == "linux" ]
 then
   if [ "${host_machine}" == "x86_64" ]
@@ -113,14 +115,14 @@ then
       docker_run_test "opensuse/amd64:13.2" 
     fi
 
-    if true
+    if false
     then
       docker_run_test "manjarolinux/base" 
     fi
 
     # -------------------------------------------------------------------------
 
-    if true
+    if false
     then
       # docker_run_test_32 "i386/ubuntu:20.04" # Fails to install prerequisites
       docker_run_test_32 "i386/ubuntu:18.04"
