@@ -146,8 +146,14 @@ echo "All tests completed successfully."
 
 echo
 run_app uname -a
-run_app lsb_release -a
-run_app ldd --version
+if [ "${node_platform}" == "linux" ]
+then
+  run_app lsb_release -a
+  run_app ldd --version
+elif [ "${node_platform}" == "darwin" ]
+then
+  run_app sw_vers
+fi
 
 # Completed successfully.
 exit 0
