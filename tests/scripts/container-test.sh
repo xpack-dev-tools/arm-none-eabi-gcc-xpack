@@ -34,6 +34,10 @@ script_folder_name="$(basename "${script_folder_path}")"
 
 # =============================================================================
 
+# This runs inside a Docker container.
+
+# -----------------------------------------------------------------------------
+
 image_name="$1"
 echo "${image_name}"
 shift
@@ -69,20 +73,7 @@ done
 
 # -----------------------------------------------------------------------------
 
-source "${script_folder_path}/common-functions-source.sh"
-
-# -----------------------------------------------------------------------------
-
-work_folder_absolute_path="/Host/Work"
-repo_folder_absolute_path="/Host/repo"
-cache_absolute_folder_path="${work_folder_absolute_path}/cache"
-
-gcc_target="arm-none-eabi"
-version="$(cat ${repo_folder_absolute_path}/scripts/VERSION)"
-
-# -----------------------------------------------------------------------------
-
-# Guarantee that the minimum prerequisites are met.
+# Make sure that the minimum prerequisites are met.
 if [[ ${image_name} == *ubuntu* ]] || [[ ${image_name} == *debian* ]] || [[ ${image_name} == *raspbian* ]]
 then
   apt-get -qq update 
@@ -102,70 +93,17 @@ fi
 
 # -----------------------------------------------------------------------------
 
+source "${script_folder_path}/common-functions-source.sh"
+
+# -----------------------------------------------------------------------------
+
 detect_architecture
 
-# TODO: add support for Windows .zip.
-archive_name="xpack-${gcc_target}-gcc-${version}-${uname_platform}-${node_architecture}.tar.gz"
-archive_folder_name="xpack-${gcc_target}-gcc-${version}"
+prepare_env
 
-node_platform="${uname_platform}"
+install_archive
 
-# -----------------------------------------------------------------------------
-
-mkdir -p "${cache_absolute_folder_path}"
-
-if [ ! -f "${cache_absolute_folder_path}/${archive_name}" ]
-then
-  echo
-  echo "Downloading ${archive_name}..."
-  curl -L --fail -o "${cache_absolute_folder_path}/${archive_name}" \
-    ${base_url}/${archive_name}
-fi
-
-# In the container user home.
-test_absolute_folder_path="${HOME}/test-arm-none-eabi-gcc"
-
-mkdir -p "${test_absolute_folder_path}"
-cd "${test_absolute_folder_path}"
-
-echo
-echo "Extracting ${archive_name}..."
-if [[ "${archive_name}" == *.zip ]]
-then
-  unzip -q "${cache_absolute_folder_path}/${archive_name}"
-else 
-  tar xf "${cache_absolute_folder_path}/${archive_name}"
-fi
-
-app_absolute_folder_path="${test_absolute_folder_path}/${archive_folder_name}"
-
-ls -lL "${app_absolute_folder_path}"
-
-# -----------------------------------------------------------------------------
-
-run_binutils
-
-run_gcc
-
-run_gdb
-
-if [ "${has_gdb_py}" == "y" ]
-then
-  run_gdb "-py"
-fi
-
-if [ "${has_gdb_py3}" == "y" ]
-then
-  run_gdb "-py3"
-fi
-
-echo
-echo "All tests completed successfully."
-
-echo
-run_app uname -a
-run_app lsb_release -a
-run_app ldd --version
+run_tests
 
 # Completed successfully.
 exit 0
