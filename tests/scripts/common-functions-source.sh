@@ -78,13 +78,18 @@ function prepare_env()
 function install_archive()
 {
   local archive_extension
+  local archive_architecture="${node_architecture}"
   if [ "${node_platform}" == "win32" ]
   then
     archive_extension="zip"
+    if [ "${force_32_bit}" == "y" ]
+    then
+      archive_architecture="x32"
+    fi
   else
     archive_extension="tar.gz"
   fi
-  archive_name="xpack-${gcc_target_prefix}-gcc-${version}-${node_platform}-${node_architecture}.${archive_extension}"
+  archive_name="xpack-${gcc_target_prefix}-gcc-${version}-${node_platform}-${archive_architecture}.${archive_extension}"
   archive_folder_name="xpack-${gcc_target_prefix}-gcc-${version}"
 
   mkdir -p "${cache_absolute_folder_path}"

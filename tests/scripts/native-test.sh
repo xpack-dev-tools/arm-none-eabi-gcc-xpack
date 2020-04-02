@@ -34,6 +34,13 @@ script_folder_name="$(basename "${script_folder_path}")"
 
 # =============================================================================
 
+force_32_bit=""
+if [ "$1" == "--32" ]
+then
+  force_32_bit="y"
+  shift
+fi
+
 base_url="$1"
 echo "${base_url}"
 shift
