@@ -77,18 +77,18 @@ done
 if [[ ${image_name} == *ubuntu* ]] || [[ ${image_name} == *debian* ]] || [[ ${image_name} == *raspbian* ]]
 then
   apt-get -qq update 
-  apt-get -qq install -y git-core curl tar gzip lsb-release
+  apt-get -qq install -y git-core curl tar gzip lsb-release readelf
 elif [[ ${image_name} == *centos* ]]
 then
-  yum install -y -q git curl tar gzip redhat-lsb-core
+  yum install -y -q git curl tar gzip redhat-lsb-core readelf
 elif [[ ${image_name} == *opensuse* ]]
 then
-  zypper -q in -y git-core curl tar gzip lsb-release
+  zypper -q in -y git-core curl tar gzip lsb-release readelf
 elif [[ ${image_name} == *manjaro* ]]
 then
   pacman-mirrors -g -b stable
   pacman --noconfirm -Syyuq
-  pacman --noconfirm -Sq git curl tar gzip lsb-release
+  pacman --noconfirm -Sq git curl tar gzip lsb-release readelf
 fi
 
 # -----------------------------------------------------------------------------
