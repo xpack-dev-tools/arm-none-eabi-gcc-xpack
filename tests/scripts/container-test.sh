@@ -42,9 +42,13 @@ script_folder_name="$(basename "${script_folder_path}")"
 
 # =============================================================================
 
-# This runs inside a Docker container.
+helper_folder_path="$(dirname $(dirname "${script_folder_path}"))/scripts/helper"
+
+source "${helper_folder_path}/test-functions-source.sh"
 
 # -----------------------------------------------------------------------------
+
+# This runs inside a Docker container.
 
 image_name="$1"
 echo "${image_name}"
