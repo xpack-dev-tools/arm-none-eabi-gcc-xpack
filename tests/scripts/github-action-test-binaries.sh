@@ -1,4 +1,12 @@
 #!/usr/bin/env bash
+# -----------------------------------------------------------------------------
+# This file is part of the xPack distribution.
+#   (https://xpack.github.io)
+# Copyright (c) 2020 Liviu Ionescu.
+#
+# Permission to use, copy, modify, and/or distribute this software 
+# for any purpose is hereby granted, under the terms of the MIT license.
+# -----------------------------------------------------------------------------
 
 # -----------------------------------------------------------------------------
 # Safety settings (see https://gist.github.com/ilg-ul/383869cbb01f61a51c4d).
@@ -43,3 +51,5 @@ curl \
   --header "Accept: application/vnd.github.everest-preview+json" \
   --data '{"event_type": "on-demand-test", "client_payload": {}}' \
   https://api.github.com/repos/xpack-dev-tools/arm-none-eabi-gcc-xpack/dispatches
+
+# -----------------------------------------------------------------------------
