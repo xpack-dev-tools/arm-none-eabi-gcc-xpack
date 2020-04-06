@@ -241,6 +241,8 @@ function run_gdb()
 
 function run_tests()
 {
+  local gcc_target_prefix="arm-none-eabi"
+
   run_binutils
 
   run_gcc
