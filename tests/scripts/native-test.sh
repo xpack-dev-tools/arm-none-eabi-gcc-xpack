@@ -88,6 +88,11 @@ source "${script_folder_path}/common-functions-source.sh"
 
 detect_architecture
 
+if [ "${node_platform}" == "win32" ]
+then
+  has_gdb_py3="n"
+fi
+
 prepare_env
 
 install_archive

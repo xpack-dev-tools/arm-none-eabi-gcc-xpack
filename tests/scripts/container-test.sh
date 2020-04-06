@@ -61,16 +61,6 @@ while [ $# -gt 0 ]
 do
   case "$1" in
 
-    --skip-gdb-py)
-      has_gdb_py="n"
-      shift
-      ;;
-
-    --skip-gdb-py3)
-      has_gdb_py3="n"
-      shift
-      ;;
-
     -*)
       echo "Unsupported option $1."
       exit 1
@@ -116,6 +106,17 @@ source "${script_folder_path}/common-functions-source.sh"
 # -----------------------------------------------------------------------------
 
 detect_architecture
+
+case "${image_name}" in
+
+  ubuntu:12.04 | \
+  debian:jessie | \
+  i386/debian:jessie | \
+  raspbian/jessie)
+    has_gdb_py="n"
+    ;;
+
+esac
 
 prepare_env
 
