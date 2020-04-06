@@ -93,6 +93,8 @@ then
   has_gdb_py3="n"
 fi
 
+app_lc_name="arm-none-eabi-gcc"
+
 prepare_env
 
 install_archive

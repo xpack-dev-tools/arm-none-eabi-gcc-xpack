@@ -118,6 +118,8 @@ case "${image_name}" in
 
 esac
 
+app_lc_name="arm-none-eabi-gcc"
+
 prepare_env
 
 install_archive
