@@ -98,7 +98,7 @@ fi
 
 app_lc_name="arm-none-eabi-gcc"
 
-prepare_env
+prepare_env "$(dirname $(dirname "${script_folder_path}"))"
 
 install_archive
 
