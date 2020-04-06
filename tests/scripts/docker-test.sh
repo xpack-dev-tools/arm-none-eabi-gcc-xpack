@@ -51,7 +51,7 @@ source "${script_folder_path}/common-functions-source.sh"
 
 detect_architecture
 
-prepare_env
+prepare_env "$(dirname $(dirname "${script_folder_path}"))"
 
 # If present, --32 must be the first.
 is_32_bit=""
