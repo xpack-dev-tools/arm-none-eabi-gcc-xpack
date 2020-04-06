@@ -101,6 +101,8 @@ install_archive
 
 run_tests
 
+good_bye
+
 # Completed successfully.
 exit 0
 
