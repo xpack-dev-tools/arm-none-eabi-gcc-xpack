@@ -51,6 +51,8 @@ source "${script_folder_path}/common-functions-source.sh"
 
 detect_architecture
 
+app_lc_name="arm-none-eabi-gcc"
+
 prepare_env "$(dirname $(dirname "${script_folder_path}"))"
 
 # If present, --32 must be the first.
