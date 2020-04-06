@@ -42,6 +42,13 @@ script_folder_name="$(basename "${script_folder_path}")"
 
 # =============================================================================
 
+helper_folder_path="$(dirname $(dirname "${script_folder_path}"))/scripts/helper"
+
+source "${helper_folder_path}/test-functions-source.sh"
+source "${script_folder_path}/common-functions-source.sh"
+
+# -----------------------------------------------------------------------------
+
 force_32_bit=""
 if [ "$1" == "--32" ]
 then
@@ -79,13 +86,6 @@ do
 done
 
 echo "${base_url}"
-
-# -----------------------------------------------------------------------------
-
-helper_folder_path="$(dirname $(dirname "${script_folder_path}"))/scripts/helper"
-
-source "${helper_folder_path}/test-functions-source.sh"
-source "${script_folder_path}/common-functions-source.sh"
 
 # -----------------------------------------------------------------------------
 
