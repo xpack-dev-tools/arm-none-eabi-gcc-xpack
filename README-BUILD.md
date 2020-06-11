@@ -131,14 +131,14 @@ on a macOS system, due to Docker specifics, it is faster to build the
 GNU/Linux and Windows binaries on a GNU/Linux system and the macOS binary
 separately.
 
-### Build the GNU/Linux and Windows binaries
+### Build the Intel GNU/Linux and Windows binaries
 
-The current platform for GNU/Linux and Windows production builds is an
-Ubuntu Server 18 LTS, running on an Intel NUC8i7BEH mini PC with 32 GB of RAM
+The current platform for Intel GNU/Linux and Windows production builds is a
+Debian 10, running on an Intel NUC8i7BEH mini PC with 32 GB of RAM
 and 512 GB of fast M.2 SSD.
 
 ```console
-$ ssh ilg-xbb-linux.local
+$ ssh @xbbi
 ```
 
 Before starting a multi-platform build, check if Docker is started:
@@ -164,11 +164,10 @@ The result should look similar to:
 
 ```console
 $ docker images
-REPOSITORY TAG IMAGE ID CREATED SIZE
-REPOSITORY          TAG                   IMAGE ID            CREATED             SIZE
-ilegeul/ubuntu      i386-12.04-xbb-v3.1   b78e41b9305f        16 hours ago        3.65GB
-ilegeul/ubuntu      amd64-12.04-xbb-v3.1  6f90ce85a148        18 hours ago        4.02GB
-hello-world         latest                fce289e99eb9        14 months ago        1.84kB
+REPOSITORY          TAG                              IMAGE ID            CREATED             SIZE
+ilegeul/ubuntu      i386-12.04-xbb-v3.2              fadc6405b606        2 days ago          4.55GB
+ilegeul/ubuntu      amd64-12.04-xbb-v3.2             3aba264620ea        2 days ago          4.98GB
+hello-world         latest                           bf756fb1ae65        5 months ago        13.3kB
 ```
 
 It is also recommended to Remove unused Docker space. This is mostly useful
@@ -178,7 +177,7 @@ by Docker.
 To check the content of a Docker image:
 
 ```console
-$ docker run --interactive --tty ilegeul/ubuntu:amd64-12.04-xbb-v3.1
+$ docker run --interactive --tty ilegeul/ubuntu:amd64-12.04-xbb-v3.2
 ```
 
 To remove unused files:
@@ -205,7 +204,7 @@ network connection or a computer entering sleep.
 $ screen -S arm
 
 $ sudo rm -rf ~/Work/arm-none-eabi-gcc-*
-$ bash ~/Downloads/arm-none-eabi-gcc-xpack.git/scripts/build.sh --all --jobs 8
+$ bash ~/Downloads/arm-none-eabi-gcc-xpack.git/scripts/build.sh --all
 ```
 
 To detach from the session, use `Ctrl-a` `Ctrl-d`; to reattach use
@@ -294,7 +293,7 @@ $ caffeinate bash ~/Downloads/arm-none-eabi-gcc-xpack.git/scripts/build.sh --osx
 or on the build machine:
 
 ```console
-$ bash ~/Downloads/arm-none-eabi-gcc-xpack.git/scripts/build.sh --disable-multilib --develop --jobs 8 --linux64
+$ bash ~/Downloads/arm-none-eabi-gcc-xpack.git/scripts/build.sh --disable-multilib --develop --linux64
 ```
 
 This should check the commit IDs and the tag names in all the refered
@@ -306,7 +305,7 @@ fast machine, it takes about half hour.
 Test builds can also be executed on the build machine:
 
 ```console
-$ bash ~/Downloads/arm-none-eabi-gcc-xpack.git/scripts/build.sh --disable-multilib --develop --jobs 8 --linux64 --win64
+$ bash ~/Downloads/arm-none-eabi-gcc-xpack.git/scripts/build.sh --disable-multilib --develop --linux64 --win64
 ```
 
 ## Subsequent runs
