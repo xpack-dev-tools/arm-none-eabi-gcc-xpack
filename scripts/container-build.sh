@@ -63,6 +63,10 @@ common_helper_functions_script_path="${script_folder_path}/helper/common-functio
 echo "Common helper functions source script: \"${common_helper_functions_script_path}\"."
 source "${common_helper_functions_script_path}"
 
+common_helper_libs_functions_script_path="${script_folder_path}/helper/common-libs-functions-source.sh"
+echo "Common helper libs functions source script: \"${common_helper_libs_functions_script_path}\"."
+source "${common_helper_libs_functions_script_path}"
+
 common_functions_script_path="${script_folder_path}/common-functions-source.sh"
 echo "Common functions source script: \"${common_functions_script_path}\"."
 source "${common_functions_script_path}"
