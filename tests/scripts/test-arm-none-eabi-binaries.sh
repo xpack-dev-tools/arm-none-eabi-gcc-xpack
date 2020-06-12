@@ -205,7 +205,7 @@ function run_gcc()
   local tmp="${test_absolute_path}-gcc"
   rm -rf "${tmp}"
 
-  mkdir -p "${tmp}"
+  mkdir -pv "${tmp}"
   cd "${tmp}"
 
   # Note: __EOF__ is quoted to prevent substitutions here.
@@ -434,7 +434,7 @@ echo "Test the ${archive_name} binaries on ${host_platform} ${host_machine}."
 
 work_absolute_path="${HOME}/Work"
 cache_absolute_path="${work_absolute_path}/cache"
-mkdir -p "${work_absolute_path}/cache"
+mkdir -pv "${work_absolute_path}/cache"
 cd "${work_absolute_path}/cache"
 
 if [ ! -f "${archive_name}" ]
@@ -447,7 +447,7 @@ fi
 test_absolute_path="${work_absolute_path}/test-arm-none-eabi-gcc"
 
 rm -rf "${test_absolute_path}"
-mkdir -p "${test_absolute_path}"
+mkdir -pv "${test_absolute_path}"
 cd "${test_absolute_path}"
 
 echo

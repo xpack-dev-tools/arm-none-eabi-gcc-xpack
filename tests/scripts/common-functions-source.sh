@@ -65,7 +65,7 @@ function run_gcc()
   local tmp="${test_absolute_folder_path}-gcc"
   rm -rf "${tmp}"
 
-  mkdir -p "${tmp}"
+  mkdir -pv "${tmp}"
   cd "${tmp}"
 
   # Note: __EOF__ is quoted to prevent substitutions here.

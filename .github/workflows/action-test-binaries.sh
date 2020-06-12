@@ -79,7 +79,7 @@ function run_gcc()
   local tmp=$(mktemp /tmp/gcc-test.XXXXX)
   rm -rf "${tmp}"
 
-  mkdir -p "${tmp}"
+  mkdir -pv "${tmp}"
   cd "${tmp}"
 
   # Note: __EOF__ is quoted to prevent substitutions here.
@@ -162,7 +162,7 @@ APP_FOLDER_NAME="xpack-arm-none-eabi-gcc-9.2.1-1.1"
 APP_PREFIX="${TEST_FOLDER}/${APP_FOLDER_NAME}"
 GCC_TARGET=arm-none-eabi
 
-mkdir -p "${TEST_FOLDER}"
+mkdir -pv "${TEST_FOLDER}"
 cd "${TEST_FOLDER}"
 
 echo

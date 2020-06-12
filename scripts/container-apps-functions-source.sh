@@ -67,11 +67,11 @@ function download_python_win()
 
     echo "Copying python27.dll..."
     # From here it'll be copied as dependency.
-    mkdir -p "${LIBS_INSTALL_FOLDER_PATH}/bin/"
+    mkdir -pv "${LIBS_INSTALL_FOLDER_PATH}/bin/"
     install -v -c -m 644 "${PYTHON_WIN}/python27.dll" \
       "${LIBS_INSTALL_FOLDER_PATH}/bin/"
 
-    mkdir -p "${LIBS_INSTALL_FOLDER_PATH}/lib/"
+    mkdir -pv "${LIBS_INSTALL_FOLDER_PATH}/lib/"
     install -v -c -m 644 "${PYTHON_WIN}/python27.lib" \
       "${LIBS_INSTALL_FOLDER_PATH}/lib/"
   )
@@ -98,7 +98,7 @@ function download_python3_win()
 
     if [ ! -d "${SOURCES_FOLDER_PATH}/${PYTHON3_WIN_EMBED_FOLDER_NAME}" ]
     then
-      mkdir -p "${SOURCES_FOLDER_PATH}/${PYTHON3_WIN_EMBED_FOLDER_NAME}"
+      mkdir -pv "${SOURCES_FOLDER_PATH}/${PYTHON3_WIN_EMBED_FOLDER_NAME}"
       cd "${SOURCES_FOLDER_PATH}/${PYTHON3_WIN_EMBED_FOLDER_NAME}"
 
       download_and_extract "${PYTHON3_WIN_EMBED_URL}" "${PYTHON3_WIN_EMBED_PACK}" "${PYTHON3_WIN_EMBED_FOLDER_NAME}"
@@ -109,13 +109,13 @@ function download_python3_win()
     cd "${SOURCES_FOLDER_PATH}/${PYTHON3_WIN_EMBED_FOLDER_NAME}"
     echo "Copying python${PYTHON3_VERSION_MAJOR}${PYTHON3_VERSION_MINOR}.dll..."
     # From here it'll be copied as dependency.
-    mkdir -p "${LIBS_INSTALL_FOLDER_PATH}/bin/"
+    mkdir -pv "${LIBS_INSTALL_FOLDER_PATH}/bin/"
     install -v -c -m 644 "python${PYTHON3_VERSION_MAJOR}.dll" \
       "${LIBS_INSTALL_FOLDER_PATH}/bin/"
     install -v -c -m 644 "python${PYTHON3_VERSION_MAJOR}${PYTHON3_VERSION_MINOR}.dll" \
       "${LIBS_INSTALL_FOLDER_PATH}/bin/"
 
-    mkdir -p "${LIBS_INSTALL_FOLDER_PATH}/lib/"
+    mkdir -pv "${LIBS_INSTALL_FOLDER_PATH}/lib/"
     install -v -c -m 644 "python${PYTHON3_VERSION_MAJOR}.dll" \
       "${LIBS_INSTALL_FOLDER_PATH}/lib/"
     install -v -c -m 644 "python${PYTHON3_VERSION_MAJOR}${PYTHON3_VERSION_MINOR}.dll" \
@@ -184,7 +184,7 @@ function build_binutils()
     mkdir -pv "${LOGS_FOLDER_PATH}/${binutils_folder_name}"
 
     (
-      mkdir -p "${BUILD_FOLDER_PATH}/${binutils_folder_name}"
+      mkdir -pv "${BUILD_FOLDER_PATH}/${binutils_folder_name}"
       cd "${BUILD_FOLDER_PATH}/${binutils_folder_name}"
 
       xbb_activate
@@ -359,7 +359,7 @@ function do_gcc_first()
     mkdir -pv "${LOGS_FOLDER_PATH}/${gcc_first_folder_name}"
 
     (
-      mkdir -p "${BUILD_FOLDER_PATH}/${gcc_first_folder_name}"
+      mkdir -pv "${BUILD_FOLDER_PATH}/${gcc_first_folder_name}"
       cd "${BUILD_FOLDER_PATH}/${gcc_first_folder_name}"
 
       xbb_activate
@@ -494,7 +494,7 @@ function do_newlib()
     mkdir -pv "${LOGS_FOLDER_PATH}/${newlib_folder_name}"
 
     (
-      mkdir -p "${BUILD_FOLDER_PATH}/${newlib_folder_name}"
+      mkdir -pv "${BUILD_FOLDER_PATH}/${newlib_folder_name}"
       cd "${BUILD_FOLDER_PATH}/${newlib_folder_name}"
 
       xbb_activate
@@ -719,7 +719,7 @@ function do_python3()
     mkdir -pv "${LOGS_FOLDER_PATH}/${PYTHON3_FOLDER_NAME}"
 
     (
-      mkdir -p "${BUILD_FOLDER_PATH}/${PYTHON3_FOLDER_NAME}"
+      mkdir -pv "${BUILD_FOLDER_PATH}/${PYTHON3_FOLDER_NAME}"
       cd "${BUILD_FOLDER_PATH}/${PYTHON3_FOLDER_NAME}"
 
       xbb_activate
@@ -899,7 +899,7 @@ function do_gcc_final()
     mkdir -pv "${LOGS_FOLDER_PATH}/${gcc_final_folder_name}"
 
     (
-      mkdir -p "${BUILD_FOLDER_PATH}/${gcc_final_folder_name}"
+      mkdir -pv "${BUILD_FOLDER_PATH}/${gcc_final_folder_name}"
       cd "${BUILD_FOLDER_PATH}/${gcc_final_folder_name}"
 
       xbb_activate
@@ -1110,7 +1110,7 @@ function do_gcc_final()
 
             # Copy the nano configured newlib.h file into the location that nano.specs
             # expects it to be.
-            mkdir -p "${APP_PREFIX}/${GCC_TARGET}/include/newlib-nano"
+            mkdir -pv "${APP_PREFIX}/${GCC_TARGET}/include/newlib-nano"
             cp -v -f "${APP_PREFIX_NANO}/${GCC_TARGET}/include/newlib.h" \
               "${APP_PREFIX}/${GCC_TARGET}/include/newlib-nano/newlib.h"
 
@@ -1191,7 +1191,7 @@ function run_gcc()
     local tmp=$(mktemp /tmp/gcc-test.XXXXX)
     rm -rf "${tmp}"
 
-    mkdir -p "${tmp}"
+    mkdir -pv "${tmp}"
     cd "${tmp}"
 
     # Note: __EOF__ is quoted to prevent substitutions here.
@@ -1268,7 +1268,7 @@ function do_gdb()
     mkdir -pv "${LOGS_FOLDER_PATH}/${gdb_folder_name}"
 
     (
-      mkdir -p "${BUILD_FOLDER_PATH}/${gdb_folder_name}"
+      mkdir -pv "${BUILD_FOLDER_PATH}/${gdb_folder_name}"
       cd "${BUILD_FOLDER_PATH}/${gdb_folder_name}"
 
       local platform_python2
@@ -1701,7 +1701,7 @@ function copy_distro_files()
     xbb_activate
 
     rm -rf "${APP_PREFIX}/${DISTRO_INFO_NAME}"
-    mkdir -p "${APP_PREFIX}/${DISTRO_INFO_NAME}"
+    mkdir -pv "${APP_PREFIX}/${DISTRO_INFO_NAME}"
 
     copy_build_files
 
@@ -1741,7 +1741,7 @@ function final_tunings()
         echo
         echo "Copying ${LTO_PLUGIN_ORIGINAL_NAME}..."
 
-        mkdir -p "$(dirname ${LTO_PLUGIN_BFD_PATH})"
+        mkdir -pv "$(dirname ${LTO_PLUGIN_BFD_PATH})"
 
         if [ ! -f "${LTO_PLUGIN_BFD_PATH}" ]
         then
@@ -1758,7 +1758,7 @@ function final_tunings()
         echo
         echo "Creating ${LTO_PLUGIN_ORIGINAL_NAME} link..."
 
-        mkdir -p "$(dirname ${LTO_PLUGIN_BFD_PATH})"
+        mkdir -pv "$(dirname ${LTO_PLUGIN_BFD_PATH})"
         if [ ! -f "${LTO_PLUGIN_BFD_PATH}" ]
         then
           local plugin_path="$(find * -type f -name ${LTO_PLUGIN_ORIGINAL_NAME})"
