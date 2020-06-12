@@ -287,13 +287,13 @@ Before starting the builds on the dedicated machines, run a quick test on
 the development workstation.
 
 ```console
-$ caffeinate bash ~/Downloads/arm-none-eabi-gcc-xpack.git/scripts/build.sh --osx --disable-multilib --develop --jobs 12
+$ caffeinate bash ~/Downloads/arm-none-eabi-gcc-xpack.git/scripts/build.sh --disable-multilib --disable-tests --develop  --osx
 ```
 
 or on the build machine:
 
 ```console
-$ bash ~/Downloads/arm-none-eabi-gcc-xpack.git/scripts/build.sh --disable-multilib --develop --linux64
+$ bash ~/Downloads/arm-none-eabi-gcc-xpack.git/scripts/build.sh --disable-multilib --disable-tests --develop --linux64
 ```
 
 This should check the commit IDs and the tag names in all the refered
