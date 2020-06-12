@@ -228,6 +228,8 @@ function do_binutils()
       export CXXFLAGS
       export LDFLAGS
 
+      env | sort
+
       if [ ! -f "config.status" ]
       then
         (
@@ -399,6 +401,8 @@ function do_gcc_first()
       export CFLAGS_FOR_TARGET 
       export CXXFLAGS_FOR_TARGET
 
+      env | sort
+
       if [ ! -f "config.status" ]
       then
         (
@@ -538,6 +542,8 @@ function do_newlib()
 
       export CFLAGS_FOR_TARGET
       export CXXFLAGS_FOR_TARGET
+
+      env | sort
 
       if [ ! -f "config.status" ]
       then
@@ -744,6 +750,8 @@ function do_python3()
       export CFLAGS
       export CXXFLAGS
       export LDFLAGS
+
+      env | sort
 
       if [ ! -f "config.status" ]
       then
@@ -958,6 +966,8 @@ function do_gcc_final()
         export GCC_FOR_TARGET=${GCC_TARGET}-gcc
         export CXX_FOR_TARGET=${GCC_TARGET}-g++
       fi
+
+      env | sort
 
       if [ ! -f "config.status" ]
       then
@@ -1402,6 +1412,8 @@ function do_gdb()
       export LIBS
 
       export CONFIG_PYTHON_PREFIX
+
+      env | sort
 
       # python -c 'from distutils import sysconfig;print(sysconfig.PREFIX)'
       # python -c 'from distutils import sysconfig;print(sysconfig.EXEC_PREFIX)'
