@@ -238,7 +238,7 @@ function do_binutils()
 
           # ? --without-python --without-curses, --with-expat
 
-          bash ${DEBUG} "${SOURCES_FOLDER_PATH}/${BINUTILS_SRC_FOLDER_NAME}/configure" \
+          run_verbose bash ${DEBUG} "${SOURCES_FOLDER_PATH}/${BINUTILS_SRC_FOLDER_NAME}/configure" \
             --prefix="${APP_PREFIX}" \
             --infodir="${APP_PREFIX_DOC}/info" \
             --mandir="${APP_PREFIX_DOC}/man" \
@@ -272,30 +272,30 @@ function do_binutils()
         echo "Running binutils make..."
       
         # Build.
-        make -j ${JOBS} 
+        run_verbose make -j ${JOBS} 
 
         if [ "${WITH_TESTS}" == "y" ]
         then
-          make check
+          run_verbose make check
         fi
       
         # Avoid strip here, it may interfere with patchelf.
         # make install-strip
-        make install
+        run_verbose make install
 
         (
           xbb_activate_tex
 
           if [ "${WITH_PDF}" == "y" ]
           then
-            make pdf
-            make install-pdf
+            run_verbose make pdf
+            run_verbose make install-pdf
           fi
 
           if [ "${WITH_HTML}" == "y" ]
           then
-            make html
-            make install-html
+            run_verbose make html
+            run_verbose make install-html
           fi
         )
 
@@ -423,7 +423,7 @@ function do_gcc_first()
           # Prefer an explicit libexec folder.
           # --libexecdir="${APP_PREFIX}/lib" 
 
-          bash ${DEBUG} "${SOURCES_FOLDER_PATH}/${GCC_SRC_FOLDER_NAME}/configure" \
+          run_verbose bash ${DEBUG} "${SOURCES_FOLDER_PATH}/${GCC_SRC_FOLDER_NAME}/configure" \
             --prefix="${APP_PREFIX}"  \
             --infodir="${APP_PREFIX_DOC}/info" \
             --mandir="${APP_PREFIX_DOC}/man" \
@@ -471,11 +471,11 @@ function do_gcc_first()
 
         # No need to make 'all', 'all-gcc' is enough to compile the libraries.
         # Parallel builds may fail.
-        make -j ${JOBS} all-gcc
+        run_verbose make -j ${JOBS} all-gcc
         # make all-gcc
 
         # No -strip available here.
-        make install-gcc
+        run_verbose make install-gcc
 
         # Strip?
 
@@ -576,7 +576,7 @@ function do_newlib()
             # Extra options to Arm distribution:
             # --enable-newlib-io-long-long
             # --enable-newlib-io-c99-formats
-            bash ${DEBUG} "${SOURCES_FOLDER_PATH}/${NEWLIB_SRC_FOLDER_NAME}/configure" \
+            run_verbose bash ${DEBUG} "${SOURCES_FOLDER_PATH}/${NEWLIB_SRC_FOLDER_NAME}/configure" \
               --prefix="${APP_PREFIX}"  \
               --infodir="${APP_PREFIX_DOC}/info" \
               --mandir="${APP_PREFIX_DOC}/man" \
@@ -602,7 +602,7 @@ function do_newlib()
             # --enable-newlib-io-long-long and --enable-newlib-io-c99-formats
             # are currently ignored if --enable-newlib-nano-formatted-io.
             # --enable-newlib-register-fini is debatable, was removed.
-            bash ${DEBUG} "${SOURCES_FOLDER_PATH}/${NEWLIB_SRC_FOLDER_NAME}/configure" \
+            run_verbose bash ${DEBUG} "${SOURCES_FOLDER_PATH}/${NEWLIB_SRC_FOLDER_NAME}/configure" \
               --prefix="${APP_PREFIX_NANO}"  \
               \
               --build=${BUILD} \
@@ -637,11 +637,11 @@ function do_newlib()
         echo "Running newlib$1 make..."
 
         # Parallel builds may fail.
-        make -j ${JOBS}
+        run_verbose make -j ${JOBS}
         # make
 
         # Top make fails with install-strip due to libgloss make.
-        make install
+        run_verbose make install
 
         if [ "$1" == "" ]
         then
@@ -659,7 +659,7 @@ function do_newlib()
 
               xbb_activate_tex
 
-              make pdf
+              run_verbose make pdf
             )
 
             install -v -d "${APP_PREFIX_DOC}/pdf"
@@ -676,7 +676,7 @@ function do_newlib()
           if [ "${WITH_HTML}" == "y" ]
           then
 
-            make html
+            run_verbose make html
 
             install -v -d "${APP_PREFIX_DOC}/html"
 
@@ -753,7 +753,7 @@ function do_python3()
       
           bash "${SOURCES_FOLDER_PATH}/${PYTHON3_SRC_FOLDER_NAME}/configure" --help
 
-          bash ${DEBUG} "${SOURCES_FOLDER_PATH}/${PYTHON3_SRC_FOLDER_NAME}/configure" \
+          run_verbose bash ${DEBUG} "${SOURCES_FOLDER_PATH}/${PYTHON3_SRC_FOLDER_NAME}/configure" \
             --prefix="${APP_PREFIX}" \
             \
             --build=${BUILD} \
@@ -770,16 +770,16 @@ function do_python3()
         echo "Running python3 make..."
       
         # Build.
-        make -j ${JOBS} 
+        run_verbose make -j ${JOBS} 
 
         if [ "${WITH_TESTS}" == "y" ]
         then
-          make check
+          run_verbose make check
         fi
       
         # Avoid strip here, it may interfere with patchelf.
         # make install-strip
-        make install
+        run_verbose make install
 
       ) 2>&1 | tee "${LOGS_FOLDER_PATH}/make-python3-output.txt"
     )
@@ -986,7 +986,7 @@ function do_gcc_final()
           if [ "$1" == "" ]
           then
 
-            bash ${DEBUG} "${SOURCES_FOLDER_PATH}/${GCC_SRC_FOLDER_NAME}/configure" \
+            run_verbose bash ${DEBUG} "${SOURCES_FOLDER_PATH}/${GCC_SRC_FOLDER_NAME}/configure" \
               --prefix="${APP_PREFIX}"  \
               --infodir="${APP_PREFIX_DOC}/info" \
               --mandir="${APP_PREFIX_DOC}/man" \
@@ -1029,7 +1029,7 @@ function do_gcc_final()
           elif [ "$1" == "-nano" ]
           then
 
-            bash ${DEBUG} "${SOURCES_FOLDER_PATH}/${GCC_SRC_FOLDER_NAME}/configure" \
+            run_verbose bash ${DEBUG} "${SOURCES_FOLDER_PATH}/${GCC_SRC_FOLDER_NAME}/configure" \
               --prefix="${APP_PREFIX_NANO}"  \
               \
               --build=${BUILD} \
@@ -1082,12 +1082,12 @@ function do_gcc_final()
           # CRTSTUFF_T_CFLAGS
 
           # Parallel builds may fail.
-          make -j ${JOBS} INHIBIT_LIBC_CFLAGS="-DUSE_TM_CLONE_REGISTRY=0"
+          run_verbose make -j ${JOBS} INHIBIT_LIBC_CFLAGS="-DUSE_TM_CLONE_REGISTRY=0"
           # make INHIBIT_LIBC_CFLAGS="-DUSE_TM_CLONE_REGISTRY=0"
 
           # Avoid strip here, it may interfere with patchelf.
           # make install-strip
-          make install
+          run_verbose make install
 
           if [ "$1" == "-nano" ]
           then
@@ -1120,11 +1120,11 @@ function do_gcc_final()
           # For Windows build only the GCC binaries, the libraries were copied 
           # from the Linux build.
           # Parallel builds may fail.
-          make -j ${JOBS} all-gcc
+          run_verbose make -j ${JOBS} all-gcc
           # make all-gcc
 
           # No -strip here.
-          make install-gcc
+          run_verbose make install-gcc
 
           # Strip?
 
@@ -1138,14 +1138,14 @@ function do_gcc_final()
             # Full build, with documentation.
             if [ "${WITH_PDF}" == "y" ]
             then
-              make pdf
-              make install-pdf
+              run_verbose make pdf
+              run_verbose make install-pdf
             fi
 
             if [ "${WITH_HTML}" == "y" ]
             then
-              make html
-              make install-html
+              run_verbose make html
+              run_verbose make install-html
             fi
           )
         fi
@@ -1419,7 +1419,7 @@ function do_gdb()
           bash "${SOURCES_FOLDER_PATH}/${GDB_SRC_FOLDER_NAME}/gdb/configure" --help
 
           # Note that all components are disabled, except GDB.
-          bash ${DEBUG} "${SOURCES_FOLDER_PATH}/${GDB_SRC_FOLDER_NAME}/configure" \
+          run_verbose bash ${DEBUG} "${SOURCES_FOLDER_PATH}/${GDB_SRC_FOLDER_NAME}/configure" \
             --prefix="${APP_PREFIX}"  \
             --infodir="${APP_PREFIX_DOC}/info" \
             --mandir="${APP_PREFIX_DOC}/man" \
@@ -1465,13 +1465,13 @@ function do_gdb()
         echo "Running gdb$1 make..."
 
         # Parallel builds may fail.
-        make -j ${JOBS}
+        run_verbose make -j ${JOBS}
         # make 
 
         # install-strip fails, not only because of readline has no install-strip
         # but even after patching it tries to strip a non elf file
         # strip:.../install/riscv-none-gcc/bin/_inst.672_: file format not recognized
-        make install
+        run_verbose make install
 
         if [ "$1" == "" ]
         then
@@ -1480,14 +1480,14 @@ function do_gdb()
 
             if [ "${WITH_PDF}" == "y" ]
             then
-              make pdf
-              make install-pdf
+              run_verbose make pdf
+              run_verbose make install-pdf
             fi
 
             if [ "${WITH_HTML}" == "y" ]
             then
-              make html 
-              make install-html 
+              run_verbose make html 
+              run_verbose make install-html 
             fi
           )
         fi
