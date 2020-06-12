@@ -194,8 +194,12 @@ function do_binutils()
   # https://aur.archlinux.org/cgit/aur.git/tree/PKGBUILD?h=binutils-git
   # https://aur.archlinux.org/cgit/aur.git/tree/PKGBUILD?h=gdb-git
 
-  BINUTILS_FOLDER_NAME="binutils-${BINUTILS_VERSION}"
-  local binutils_stamp_file_path="${INSTALL_FOLDER_PATH}/stamp-binutils-${BINUTILS_VERSION}-installed"
+  local binutils_version="$1"
+  # No versioning here, the inner archives use simple names.
+  local binutils_folder_name="binutils-${binutils_version}"
+  local binutils_patch="${binutils_folder_name}.patch"
+
+  local binutils_stamp_file_path="${INSTALL_FOLDER_PATH}/stamp-${binutils_folder_name}-installed"
 
   if [ ! -f "${binutils_stamp_file_path}" ]
   then
@@ -203,8 +207,8 @@ function do_binutils()
     download_binutils
 
     (
-      mkdir -p "${BUILD_FOLDER_PATH}/${BINUTILS_FOLDER_NAME}"
-      cd "${BUILD_FOLDER_PATH}/${BINUTILS_FOLDER_NAME}"
+      mkdir -p "${BUILD_FOLDER_PATH}/${binutils_folder_name}"
+      cd "${BUILD_FOLDER_PATH}/${binutils_folder_name}"
 
       xbb_activate
       xbb_activate_installed_dev
@@ -321,11 +325,12 @@ function do_binutils()
 
       copy_license \
         "${SOURCES_FOLDER_PATH}/${BINUTILS_SRC_FOLDER_NAME}" \
-        "${BINUTILS_SRC_FOLDER_NAME}-${BINUTILS_VERSION}"
+        "${binutils_folder_name}"
 
     )
 
     touch "${binutils_stamp_file_path}"
+
   else
     echo "Component binutils already installed."
   fi
@@ -364,7 +369,7 @@ function run_binutils()
 function do_gcc_first()
 {
   local gcc_first_folder_name="gcc-${GCC_VERSION}-first"
-  local gcc_first_stamp_file_path="${INSTALL_FOLDER_PATH}/stamp-gcc-${GCC_VERSION}-first-installed"
+  local gcc_first_stamp_file_path="${INSTALL_FOLDER_PATH}/stamp-${gcc_first_folder_name}-installed"
 
   if [ ! -f "${gcc_first_stamp_file_path}" ]
   then
@@ -487,6 +492,7 @@ function do_gcc_first()
     )
 
     touch "${gcc_first_stamp_file_path}"
+
   else
     echo "Component gcc first stage already installed."
   fi
@@ -497,7 +503,7 @@ function do_gcc_first()
 function do_newlib()
 {
   local newlib_folder_name="newlib-${NEWLIB_VERSION}$1"
-  local newlib_stamp_file_path="${INSTALL_FOLDER_PATH}/stamp-newlib$1-${NEWLIB_VERSION}-installed"
+  local newlib_stamp_file_path="${INSTALL_FOLDER_PATH}/stamp-${newlib_folder_name}-installed"
 
   if [ ! -f "${newlib_stamp_file_path}" ]
   then
@@ -719,7 +725,7 @@ function do_python3()
   PYTHON3_ARCHIVE="${PYTHON3_SRC_FOLDER_NAME}.tar.xz"
   PYTHON3_URL="https://www.python.org/ftp/python/${PYTHON3_VERSION}/${PYTHON3_ARCHIVE}"
 
-  local python3_stamp_file_path="${INSTALL_FOLDER_PATH}/stamp-python3-${PYTHON3_VERSION}-installed"
+  local python3_stamp_file_path="${INSTALL_FOLDER_PATH}/stamp-${PYTHON3_FOLDER_NAME}-installed"
 
   if [ ! -f "${python3_stamp_file_path}" ]
   then
@@ -897,7 +903,7 @@ function copy_linux_libs()
 function do_gcc_final()
 {
   local gcc_final_folder_name="gcc-${GCC_VERSION}-final$1"
-  local gcc_final_stamp_file_path="${INSTALL_FOLDER_PATH}/stamp-gcc$1-final-${GCC_VERSION}-installed"
+  local gcc_final_stamp_file_path="${INSTALL_FOLDER_PATH}/stamp-${gcc_final_folder_name}-installed"
 
   if [ ! -f "${gcc_final_stamp_file_path}" ]
   then
@@ -1172,6 +1178,7 @@ function do_gcc_final()
     )
 
     touch "${gcc_final_stamp_file_path}"
+
   else
     echo "Component gcc$1 final stage already installed."
   fi
@@ -1252,7 +1259,7 @@ function do_gdb()
   # https://ftp.gnu.org/old-gnu/Manuals/gdb/html_chapter/gdb_19.html#SEC197
 
   local gdb_folder_name="gdb-${GDB_VERSION}$1"
-  local gdb_stamp_file_path="${INSTALL_FOLDER_PATH}/stamp-gdb$1-${GDB_VERSION}-installed"
+  local gdb_stamp_file_path="${INSTALL_FOLDER_PATH}/stamp-${gdb_folder_name}-installed"
 
   if [ ! -f "${gdb_stamp_file_path}" ]
   then
@@ -1512,7 +1519,7 @@ function do_gdb()
       then
         copy_license \
           "${SOURCES_FOLDER_PATH}/${GDB_SRC_FOLDER_NAME}" \
-          "${GDB_SRC_FOLDER_NAME}-${GDB_VERSION}"
+          "${gdb_folder_name}"
       fi
 
     )
