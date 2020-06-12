@@ -206,6 +206,8 @@ function do_binutils()
 
     download_binutils
 
+    mkdir -pv "${LOGS_FOLDER_PATH}/${binutils_folder_name}"
+
     (
       mkdir -p "${BUILD_FOLDER_PATH}/${binutils_folder_name}"
       cd "${BUILD_FOLDER_PATH}/${binutils_folder_name}"
@@ -269,8 +271,8 @@ function do_binutils()
             --disable-rpath \
             --with-system-zlib \
             
-          cp "config.log" "${LOGS_FOLDER_PATH}/config-binutils-log.txt"
-        ) 2>&1 | tee "${LOGS_FOLDER_PATH}/configure-binutils-output.txt"
+          cp "config.log" "${LOGS_FOLDER_PATH}/${binutils_folder_name}/config-log.txt"
+        ) 2>&1 | tee "${LOGS_FOLDER_PATH}/${binutils_folder_name}/configure-output.txt"
       fi
 
       (
@@ -321,7 +323,7 @@ function do_binutils()
         show_libs "${APP_PREFIX}/bin/${GCC_TARGET}-strings"
         show_libs "${APP_PREFIX}/bin/${GCC_TARGET}-strip"
 
-      ) 2>&1 | tee "${LOGS_FOLDER_PATH}/make-binutils-output.txt"
+      ) 2>&1 | tee "${LOGS_FOLDER_PATH}/${binutils_folder_name}/make-output.txt"
 
       copy_license \
         "${SOURCES_FOLDER_PATH}/${BINUTILS_SRC_FOLDER_NAME}" \
@@ -378,6 +380,8 @@ function do_gcc_first()
 
     extract "${GCC_COMBO_FOLDER_NAME}/src/gcc.tar.bz2" \
       "${GCC_SRC_FOLDER_NAME}" "${GCC_PATCH}"
+
+    mkdir -pv "${LOGS_FOLDER_PATH}/${gcc_first_folder_name}"
 
     (
       mkdir -p "${BUILD_FOLDER_PATH}/${gcc_first_folder_name}"
@@ -469,8 +473,8 @@ function do_gcc_first()
             --disable-build-format-warnings \
             --with-system-zlib \
           
-          cp "config.log" "${LOGS_FOLDER_PATH}/config-gcc-first-log.txt"
-        ) 2>&1 | tee "${LOGS_FOLDER_PATH}/configure-gcc-first-output.txt"
+          cp "config.log" "${LOGS_FOLDER_PATH}/${gcc_first_folder_name}/config-log.txt"
+        ) 2>&1 | tee "${LOGS_FOLDER_PATH}/${gcc_first_folder_name}/configure-output.txt"
       fi
 
       (
@@ -488,7 +492,7 @@ function do_gcc_first()
 
         # Strip?
 
-      ) 2>&1 | tee "${LOGS_FOLDER_PATH}/make-gcc-first-output.txt"
+      ) 2>&1 | tee "${LOGS_FOLDER_PATH}/${gcc_first_folder_name}/make-output.txt"
     )
 
     touch "${gcc_first_stamp_file_path}"
@@ -511,6 +515,8 @@ function do_newlib()
     cd "${SOURCES_FOLDER_PATH}"
 
     extract "${GCC_COMBO_FOLDER_NAME}/src/newlib.tar.bz2" "${NEWLIB_SRC_FOLDER_NAME}"
+
+    mkdir -pv "${LOGS_FOLDER_PATH}/${newlib_folder_name}"
 
     (
       mkdir -p "${BUILD_FOLDER_PATH}/${newlib_folder_name}"
@@ -639,8 +645,8 @@ function do_newlib()
             exit 1
           fi
 
-          cp "config.log" "${LOGS_FOLDER_PATH}/config-newlib$1-log.txt"
-        ) 2>&1 | tee "${LOGS_FOLDER_PATH}/configure-newlib$1-output.txt"
+          cp "config.log" "${LOGS_FOLDER_PATH}/${newlib_folder_name}/config-log.txt"
+        ) 2>&1 | tee "${LOGS_FOLDER_PATH}/${newlib_folder_name}/configure-output.txt"
       fi
 
       (
@@ -699,7 +705,7 @@ function do_newlib()
 
         fi
 
-      ) 2>&1 | tee "${LOGS_FOLDER_PATH}/make-newlib$1-output.txt"
+      ) 2>&1 | tee "${LOGS_FOLDER_PATH}/${newlib_folder_name}/make-output.txt"
 
       if [ "$1" == "" ]
       then
@@ -734,6 +740,8 @@ function do_python3()
 
     download_and_extract "${PYTHON3_URL}" "${PYTHON3_ARCHIVE}" \
       "${PYTHON3_SRC_FOLDER_NAME}"
+
+    mkdir -pv "${LOGS_FOLDER_PATH}/${PYTHON3_FOLDER_NAME}"
 
     (
       mkdir -p "${BUILD_FOLDER_PATH}/${PYTHON3_FOLDER_NAME}"
@@ -775,8 +783,8 @@ function do_python3()
             --target=${GCC_TARGET} \
             \
             
-          cp "config.log" "${LOGS_FOLDER_PATH}/config-python3-log.txt"
-        ) 2>&1 | tee "${LOGS_FOLDER_PATH}/configure-python3-output.txt"
+          cp "config.log" "${LOGS_FOLDER_PATH}/${PYTHON3_FOLDER_NAME}/config-log.txt"
+        ) 2>&1 | tee "${LOGS_FOLDER_PATH}/${PYTHON3_FOLDER_NAME}/configure-output.txt"
       fi
 
       (
@@ -795,7 +803,7 @@ function do_python3()
         # make install-strip
         run_verbose make install
 
-      ) 2>&1 | tee "${LOGS_FOLDER_PATH}/make-python3-output.txt"
+      ) 2>&1 | tee "${LOGS_FOLDER_PATH}/${PYTHON3_FOLDER_NAME}/make-output.txt"
     )
 
     touch "${python3_stamp_file_path}"
@@ -912,6 +920,8 @@ function do_gcc_final()
 
     extract "${GCC_COMBO_FOLDER_NAME}/src/gcc.tar.bz2" \
       "${GCC_SRC_FOLDER_NAME}" "${GCC_PATCH}"
+
+    mkdir -pv "${LOGS_FOLDER_PATH}/${gcc_final_folder_name}"
 
     (
       mkdir -p "${BUILD_FOLDER_PATH}/${gcc_final_folder_name}"
@@ -1080,8 +1090,8 @@ function do_gcc_final()
               --with-system-zlib
 
           fi
-          cp "config.log" "${LOGS_FOLDER_PATH}/config-gcc$1-final-log.txt"
-        ) 2>&1 | tee "${LOGS_FOLDER_PATH}/configure-gcc$1-final-output.txt"
+          cp "config.log" "${LOGS_FOLDER_PATH}/${gcc_final_folder_name}/config-log.txt"
+        ) 2>&1 | tee "${LOGS_FOLDER_PATH}/${gcc_final_folder_name}/configure-output.txt"
       fi
 
       (
@@ -1267,6 +1277,7 @@ function do_gdb()
     cd "${SOURCES_FOLDER_PATH}"
 
     download_gdb
+    mkdir -pv "${LOGS_FOLDER_PATH}/${gdb_folder_name}"
 
     (
       mkdir -p "${BUILD_FOLDER_PATH}/${gdb_folder_name}"
@@ -1475,8 +1486,8 @@ function do_gdb()
             --without-libunwind-ia64 \
             ${tui_option} \
 
-          cp "config.log" "${LOGS_FOLDER_PATH}/config-gdb$1-log.txt"
-        ) 2>&1 | tee "${LOGS_FOLDER_PATH}/configure-gdb$1-output.txt"
+          cp "config.log" "${LOGS_FOLDER_PATH}/${gdb_folder_name}/config-log.txt"
+        ) 2>&1 | tee "${LOGS_FOLDER_PATH}/${gdb_folder_name}/configure-output.txt"
       fi
 
       (
@@ -1513,7 +1524,7 @@ function do_gdb()
 
         show_libs "${APP_PREFIX}/bin/${GCC_TARGET}-gdb$1"
 
-      ) 2>&1 | tee "${LOGS_FOLDER_PATH}/make-gdb$1-output.txt"
+      ) 2>&1 | tee "${LOGS_FOLDER_PATH}/${gdb_folder_name}/make-output.txt"
 
       if [ "$1" == "" ]
       then
