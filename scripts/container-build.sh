@@ -190,8 +190,15 @@ done
 
 if [ "${IS_DEBUG}" == "y" ]
 then
-  WITH_STRIP="n"
+  export WITH_STRIP="n"
 fi
+
+if [ "${TARGET_PLATFORM}" == "win32" ]
+then
+  export WITH_TESTS="n"
+fi
+
+env | sort
 
 # -----------------------------------------------------------------------------
 
@@ -202,15 +209,6 @@ detect_container
 prepare_xbb_env
 
 prepare_xbb_extras
-
-# -----------------------------------------------------------------------------
-
-prepare_versions
-
-if [ "${TARGET_PLATFORM}" == "win32" ]
-then
-  export WITH_TESTS="n"
-fi
 
 # -----------------------------------------------------------------------------
 
