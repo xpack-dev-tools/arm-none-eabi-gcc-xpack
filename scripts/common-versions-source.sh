@@ -24,7 +24,7 @@ function prepare_versions()
   # a patch to avoid the comma separator.
   BRANDING="${BRANDING}\x2C ${TARGET_BITS}-bit"
 
-  CFLAGS_OPTIMIZATIONS_FOR_TARGET="-ffunction-sections -fdata-sections -O2"
+  CFLAGS_OPTIMIZATIONS_FOR_TARGET="-ffunction-sections -fdata-sections -O2 -w"
 
   # https://developer.arm.com/open-source/gnu-toolchain/gnu-rm/downloads
   # https://gcc.gnu.org/viewcvs/gcc/branches/ARM/
