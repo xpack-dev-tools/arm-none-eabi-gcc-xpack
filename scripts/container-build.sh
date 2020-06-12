@@ -106,7 +106,15 @@ IS_DEVELOP=""
 IS_DEBUG=""
 LINUX_INSTALL_PATH=""
 
-JOBS="1"
+if [ "$(uname)" == "Linux" ]
+then
+  JOBS="$(nproc)"
+elif [ "$(uname)" == "Darwin" ]
+then
+  JOBS="$(sysctl hw.ncpu | sed 's/hw.ncpu: //')"
+else
+  JOBS="1"
+fi
 
 while [ $# -gt 0 ]
 do
