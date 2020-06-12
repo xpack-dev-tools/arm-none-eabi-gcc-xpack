@@ -35,12 +35,11 @@ function prepare_versions()
   # Defaults. Must be present.
 
   # Redefine to existing file names to enable patches.
-  BINUTILS_PATCH=""
   GCC_PATCH=""
   GDB_PATCH=""
   HAS_WINPTHREAD=""
 
-  BINUTILS_PROJECT_NAME="binutils-gdb"
+  # Use it to download a separate binutils from Git.
   BINUTILS_GIT_URL=""
 
   WITH_GDB_PY="y"
@@ -58,11 +57,11 @@ function prepare_versions()
   MULTILIB_FLAGS=""
   GETTEXT_VERSION=""
 
-  USE_SINGLE_FOLDER=""
-  USE_TAR_GZ=""
-
   NCURSES_VERSION=""
   GPM_VERSION=""
+
+  USE_SINGLE_FOLDER="y"
+  USE_TAR_GZ="y"
 
   # ---------------------------------------------------------------------------
 
@@ -114,7 +113,7 @@ function prepare_versions()
   if [[ "${RELEASE_VERSION}" =~ 9\.2\.1-* ]]
   then
 
-    # https://developer.arm.com/-/media/Files/downloads/gnu-rm/9-2019q4/gcc-arm-none-eabi-9-2019-q4-major-src.tar.bz2
+    # Used to download the Arm source archive.
     GCC_COMBO_VERSION_MAJOR="9"
     GCC_COMBO_VERSION_YEAR="2019"
     GCC_COMBO_VERSION_QUARTER="q4"
@@ -125,7 +124,11 @@ function prepare_versions()
     GCC_COMBO_FOLDER_NAME="gcc-arm-none-eabi-${GCC_COMBO_VERSION}"
     GCC_COMBO_ARCHIVE="${GCC_COMBO_FOLDER_NAME}-src.tar.bz2"
 
+    # https://developer.arm.com/-/media/Files/downloads/gnu-rm/9-2019q4/gcc-arm-none-eabi-9-2019-q4-major-src.tar.bz2
     GCC_COMBO_URL="https://developer.arm.com/-/media/Files/downloads/gnu-rm/${GCC_COMBO_VERSION_MAJOR}-${GCC_COMBO_VERSION_YEAR}${GCC_COMBO_VERSION_QUARTER}${GCC_COMBO_VERSION_SUBFOLDER}/${GCC_COMBO_ARCHIVE}"
+
+    # -------------------------------------------------------------------------
+    # Used mainly to name the build folders.
 
     # From /release.txt
     BINUTILS_VERSION="2.32"
@@ -141,6 +144,7 @@ function prepare_versions()
     # git: e908e11a4f74ab6a06aef8c302a03b2a0dbc4d83 from /release.txt
     GDB_VERSION="8.3"
 
+    # -------------------------------------------------------------------------
 
     # Arm uses 2.7.7
     PYTHON_WIN_VERSION="2.7.13" # -> 2.7.17
@@ -157,15 +161,11 @@ function prepare_versions()
     then
       USE_PLATFORM_PYTHON="y"
     fi
-    USE_SINGLE_FOLDER="y"
-    USE_TAR_GZ="y"
-
-    BINUTILS_PATCH="binutils-${BINUTILS_VERSION}.patch"
 
     if [ "${RELEASE_VERSION}" != "9.2.1-1.1" ]
     then
       # 9.2.1-1.2 and up
-      
+
       if [ "${TARGET_PLATFORM}" == "darwin" ]
       then
         USE_PLATFORM_PYTHON="n"
@@ -183,7 +183,6 @@ function prepare_versions()
       # https://sourceware.org/git/gitweb.cgi?p=binutils-gdb.git;a=commit;h=272044897e178835f596c96740c5a1800ec6f9fb
       WITH_GDB_PY3="y" 
       PYTHON3_VERSION="3.7.6"
-
     fi
 
     # -------------------------------------------------------------------------
