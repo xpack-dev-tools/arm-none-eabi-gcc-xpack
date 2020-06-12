@@ -24,25 +24,6 @@ function download_gcc_combo()
     "${GCC_COMBO_FOLDER_NAME}"
 }
 
-function download_gdb() 
-{
-  # Same package as binutils.
-  if [ ! -d "${SOURCES_FOLDER_PATH}/${GDB_SRC_FOLDER_NAME}" ]
-  then
-    cd "${SOURCES_FOLDER_PATH}"
-    if [ -n "${GDB_GIT_URL}" ]
-    then
-      git_clone "${GDB_GIT_URL}" "${GDB_GIT_BRANCH}" \
-        "${GDB_GIT_COMMIT}" "${GDB_SRC_FOLDER_NAME}"
-      cd "${GDB_SRC_FOLDER_NAME}"
-      do_patch "${GDB_PATCH}"
-    else
-      extract "${GCC_COMBO_FOLDER_NAME}/src/gdb.tar.bz2" \
-        "${GDB_SRC_FOLDER_NAME}" "${GDB_PATCH}"
-    fi
-  fi
-}
-
 # -----------------------------------------------------------------------------
 
 function download_python_win() 
@@ -1274,9 +1255,22 @@ function do_gdb()
   if [ ! -f "${gdb_stamp_file_path}" ]
   then
 
-    cd "${SOURCES_FOLDER_PATH}"
+    # Download gdb
+    if [ ! -d "${SOURCES_FOLDER_PATH}/${GDB_SRC_FOLDER_NAME}" ]
+    then
+      cd "${SOURCES_FOLDER_PATH}"
+      if [ -n "${GDB_GIT_URL}" ]
+      then
+        git_clone "${GDB_GIT_URL}" "${GDB_GIT_BRANCH}" \
+          "${GDB_GIT_COMMIT}" "${GDB_SRC_FOLDER_NAME}"
+        cd "${GDB_SRC_FOLDER_NAME}"
+        do_patch "${GDB_PATCH}"
+      else
+        extract "${GCC_COMBO_FOLDER_NAME}/src/gdb.tar.bz2" \
+          "${GDB_SRC_FOLDER_NAME}" "${GDB_PATCH}"
+      fi
+    fi
 
-    download_gdb
     mkdir -pv "${LOGS_FOLDER_PATH}/${gdb_folder_name}"
 
     (
