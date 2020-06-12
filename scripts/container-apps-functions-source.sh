@@ -194,7 +194,7 @@ function build_binutils()
       CFLAGS="${XBB_CFLAGS_NO_W}"
       CXXFLAGS="${XBB_CXXFLAGS_NO_W}"
 
-      LDFLAGS="${XBB_LDFLAGS_APP_STATIC_GCC}" 
+      LDFLAGS="${XBB_LDFLAGS_APP}" 
       if [ "${TARGET_PLATFORM}" == "win32" ]
       then
         LDFLAGS+=" -Wl,${XBB_FOLDER_PATH}/${CROSS_COMPILE_PREFIX}/lib/CRT_glob.o"
@@ -368,7 +368,7 @@ function do_gcc_first()
       CPPFLAGS="${XBB_CPPFLAGS}"
       CFLAGS="${XBB_CFLAGS_NO_W}"
       CXXFLAGS="${XBB_CXXFLAGS_NO_W}"
-      LDFLAGS="${XBB_LDFLAGS_APP_STATIC_GCC}" 
+      LDFLAGS="${XBB_LDFLAGS_APP}" 
       if [ "${IS_DEVELOP}" == "y" ]
       then
         LDFLAGS+=" -v"
@@ -729,7 +729,7 @@ function do_python3()
       CFLAGS="${XBB_CFLAGS_NO_W}"
       CXXFLAGS="${XBB_CXXFLAGS_NO_W}"
 
-      LDFLAGS="${XBB_LDFLAGS_APP_STATIC_GCC}" 
+      LDFLAGS="${XBB_LDFLAGS_APP}" 
       if [ "${IS_DEVELOP}" == "y" ]
       then
         LDFLAGS+=" -v"
@@ -909,7 +909,7 @@ function do_gcc_final()
       CFLAGS="${XBB_CFLAGS_NO_W}"
       CXXFLAGS="${XBB_CXXFLAGS_NO_W}"
 
-      LDFLAGS="${XBB_LDFLAGS_APP_STATIC_GCC}" 
+      LDFLAGS="${XBB_LDFLAGS_APP}" 
       # Do not add CRT_glob.o here, it will fail with already defined,
       # since it is already handled by --enable-mingw-wildcard.
       if [ "${IS_DEVELOP}" == "y" ]
