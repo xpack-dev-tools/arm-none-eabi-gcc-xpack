@@ -144,7 +144,7 @@ function download_python3_win()
 
 # -----------------------------------------------------------------------------
 
-function do_binutils()
+function build_binutils()
 {
   # https://ftp.gnu.org/gnu/binutils/
   # https://aur.archlinux.org/cgit/aur.git/tree/PKGBUILD?h=binutils-git

@@ -277,7 +277,7 @@ function prepare_versions()
     # Task [III-0] /$HOST_NATIVE/binutils/
     # Task [IV-1] /$HOST_MINGW/binutils/
 
-    do_binutils
+    build_binutils "${BINUTILS_VERSION}"
     # copy_dir to libs included above
 
     if [ "${TARGET_PLATFORM}" != "win32" ]
