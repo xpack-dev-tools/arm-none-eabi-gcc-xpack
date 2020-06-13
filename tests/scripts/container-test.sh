@@ -119,15 +119,6 @@ case "${image_name}" in
 
 esac
 
-case "${image_name}" in
-
-  i386/ubuntu:rolling | \
-  i386/debian:buster)
-    has_gdb_py3="n"
-    ;;
-
-esac
-
 app_lc_name="arm-none-eabi-gcc"
 
 prepare_env
