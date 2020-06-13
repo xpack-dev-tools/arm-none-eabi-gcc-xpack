@@ -94,14 +94,14 @@ then
 
   # Update even if up to date (-yy) & upgrade (-u).
   # pacman -S -yy -u -q --noconfirm 
-  pacman -S -q --noconfirm --noprogressbar  git curl tar gzip lsb-release binutils
+  pacman -S -q --noconfirm --noprogressbar  git curl tar gzip lsb-release binutils file
 elif [[ ${image_name} == *archlinux* ]]
 then
   pacman -S -y -q --noconfirm 
 
   # Update even if up to date (-yy) & upgrade (-u).
   # pacman -S -yy -u -q --noconfirm 
-  pacman -S -q --noconfirm --noprogressbar  git curl tar gzip lsb-release binutils
+  pacman -S -q --noconfirm --noprogressbar  git curl tar gzip lsb-release binutils file
 fi
 
 # -----------------------------------------------------------------------------
