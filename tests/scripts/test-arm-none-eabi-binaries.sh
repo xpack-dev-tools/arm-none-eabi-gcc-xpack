@@ -485,6 +485,15 @@ then
 fi
 
 echo
+echo "Checking the Python3 shared library."
+
+for file_path in $(find "${app_folder_path}" -name 'libpython3*so*')
+do
+  run_app file "${file_path}"
+  run_app ldd -v "${file_path}" || true
+done
+
+echo
 echo "All tests completed successfully."
 
 echo
