@@ -1,4 +1,4 @@
-# How to build the xPack GNU Arm Embedded GCC?
+# How to build the xPack GNU Arm Embedded GCC
 
 ## Introduction
 

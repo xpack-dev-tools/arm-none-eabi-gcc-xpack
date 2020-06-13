@@ -1,4 +1,4 @@
-# How to build the xPack GNU Arm Embedded GCC?
+# How to build the xPack GNU Arm Embedded GCC
 
 ## Introduction
 
@@ -8,8 +8,16 @@ build and publish the
 
 The build scripts use the
 [xPack Build Box (XBB)](https://github.com/xpack/xpack-build-box),
-a set of elaborate build environments based on GCC 7.4 (Docker containers
+a set of elaborate build environments based on a recent GCC (Docker containers
 for GNU/Linux and Windows or a custom folder for MacOS).
+
+There are two types of builds:
+
+- local/native builds, which use the tools available on the
+  host machine; generally the binaries do not run on a different system
+  distribution/version; intended mostly for development purposes.
+- distribution builds, which create the archives distributed as
+  binaries; expected to run on most modern systems.
 
 ## Repository URLs
 
@@ -17,6 +25,13 @@ The build scripts use Arm archives; occasionally, to avoid bugs, original
 repositories are used:
 
 - `git://sourceware.org/git/binutils-gdb.git`
+
+## Branches
+
+- `xpack` - the updated content, used during builds
+- `xpack-develop` - the updated content, used during development
+- `master` - the original content; it follows the upstream master (but
+  currently merges from it are several versions behind)
 
 ## Download the build scripts
 
@@ -62,6 +77,15 @@ The script creates a temporary build `Work/arm-none-eabi-gcc-${version}`
 folder in the user home. Although not recommended, if for any reasons
 you need to change the location of the `Work` folder,
 you can redefine `WORK_FOLDER_PATH` variable before invoking the script.
+
+## Spaces in folder names
+
+Due to the limitations of `make`, builds started in folders which
+include spaces in the names are known to fail.
+
+If on your system the work folder in in such a location, redefine it in a
+folder without spaces and set the `WORK_FOLDER_PATH` variable before invoking 
+the script.
 
 ## Customizations
 
@@ -138,7 +162,7 @@ Debian 10, running on an Intel NUC8i7BEH mini PC with 32 GB of RAM
 and 512 GB of fast M.2 SSD.
 
 ```console
-$ ssh @xbbi
+$ ssh xbbi
 ```
 
 Before starting a multi-platform build, check if Docker is started:
@@ -233,6 +257,87 @@ folder in a terminal and use `scp`:
 ```console
 $ cd ~/Work/arm-none-eabi-gcc-*/deploy
 $ scp * ilg@ilg-wks.local:Downloads/xpack-binaries/arm
+```
+
+#### Build the Arm GNU/Linux binaries
+
+The supported Arm architectures are:
+
+- `armhf` for 32-bit devices
+- `arm64` for 64-bit devices
+
+The current platform for Arm GNU/Linux production builds is a
+Debian 9, running on an ROCK Pi 4 SBC with 4 GB of RAM
+and 256 GB of fast M.2 SSD.
+
+```console
+$ ssh xbba
+```
+
+Before starting a multi-platform build, check if Docker is started:
+
+```console
+$ docker info
+```
+
+Before running a build for the first time, it is recommended to preload the
+docker images.
+
+```console
+$ bash ~/Downloads/arm-none-eabi-gcc-xpack.git/scripts/build.sh preload-images
+```
+
+The result should look similar to:
+
+```console
+$ docker images
+REPOSITORY          TAG                                IMAGE ID            CREATED             SIZE
+ilegeul/ubuntu      arm32v7-16.04-xbb-v3.2             b501ae18580a        27 hours ago        3.23GB
+ilegeul/ubuntu      arm64v8-16.04-xbb-v3.2             db95609ffb69        37 hours ago        3.45GB
+hello-world         latest                             a29f45ccde2a        5 months ago        9.14kB
+```
+
+To download the build scripts:
+
+```console
+$ curl -L https://github.com/xpack-dev-tools/arm-none-eabi-gcc-xpack/raw/xpack/scripts/git-clone.sh | bash
+```
+
+Since the build takes a while, use `screen` to isolate the build session
+from unexpected events, like a broken
+network connection or a computer entering sleep.
+
+```console
+$ screen -S arm
+
+$ sudo rm -rf ~/Work/arm-none-eabi-gcc-*
+$ bash ~/Downloads/arm-none-eabi-gcc-xpack.git/scripts/build.sh --all
+```
+
+To detach from the session, use `Ctrl-a` `Ctrl-d`; to reattach use
+`screen -r arm`; to kill the session use `Ctrl-a` `Ctrl-k` and confirm.
+
+Several hours later, the output of the build script
+is a set of 2
+archives and their SHA signatures, created in the `deploy` folder:
+
+```console
+$ cd ~/Work/arm-none-eabi-gcc-*
+$ ls -l deploy
+total 13076
+-rw-r--r-- 1 ilg ilg 115361011 Jul 26 11:57 xpack-arm-none-eabi-gcc-9.2.1-1.2-linux-arm64.tgz
+-rw-r--r-- 1 ilg ilg       114 Jul 26 11:57 xpack-arm-none-eabi-gcc-9.2.1-1.2-linux-arm64.tgz.sha
+-rw-r--r-- 1 ilg ilg 115361011 Jul 26 11:57 xpack-arm-none-eabi-gcc-9.2.1-1.2-linux-arm.tgz
+-rw-r--r-- 1 ilg ilg       114 Jul 26 11:57 xpack-arm-none-eabi-gcc-9.2.1-1.2-linux-arm.tgz.sha
+```
+
+To copy the files from the build machine to the current development
+machine, either use NFS to mount the entire folder, or open the `deploy`
+folder in a terminal and use `scp`:
+
+```console
+$ cd ~/Work/arm-none-eabi-gcc-*/deploy
+$ scp * ilg@wks:Downloads/xpack-binaries/arm
 ```
 
 ### Build the macOS binary
