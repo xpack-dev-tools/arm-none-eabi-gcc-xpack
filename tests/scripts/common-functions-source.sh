@@ -11,8 +11,8 @@
 # Common functions used in various tests.
 #
 # Requires 
-# - app_absolute_folder_path
-# - test_absolute_folder_path
+# - app_folder_path
+# - test_folder_path
 # - archive_platform (win32|linux|darwin)
 
 # -----------------------------------------------------------------------------
@@ -22,27 +22,27 @@ function run_binutils()
   echo
   echo "Testing if binutils start properly..."
 
-  show_libs "${app_absolute_folder_path}/bin/${gcc_target_prefix}-ar"
-  show_libs "${app_absolute_folder_path}/bin/${gcc_target_prefix}-as"
-  show_libs "${app_absolute_folder_path}/bin/${gcc_target_prefix}-ld"
-  show_libs "${app_absolute_folder_path}/bin/${gcc_target_prefix}-nm"
-  show_libs "${app_absolute_folder_path}/bin/${gcc_target_prefix}-objcopy"
-  show_libs "${app_absolute_folder_path}/bin/${gcc_target_prefix}-objdump"
-  show_libs "${app_absolute_folder_path}/bin/${gcc_target_prefix}-ranlib"
-  show_libs "${app_absolute_folder_path}/bin/${gcc_target_prefix}-size"
-  show_libs "${app_absolute_folder_path}/bin/${gcc_target_prefix}-strings"
-  show_libs "${app_absolute_folder_path}/bin/${gcc_target_prefix}-strip"
+  show_libs "${app_folder_path}/bin/${gcc_target_prefix}-ar"
+  show_libs "${app_folder_path}/bin/${gcc_target_prefix}-as"
+  show_libs "${app_folder_path}/bin/${gcc_target_prefix}-ld"
+  show_libs "${app_folder_path}/bin/${gcc_target_prefix}-nm"
+  show_libs "${app_folder_path}/bin/${gcc_target_prefix}-objcopy"
+  show_libs "${app_folder_path}/bin/${gcc_target_prefix}-objdump"
+  show_libs "${app_folder_path}/bin/${gcc_target_prefix}-ranlib"
+  show_libs "${app_folder_path}/bin/${gcc_target_prefix}-size"
+  show_libs "${app_folder_path}/bin/${gcc_target_prefix}-strings"
+  show_libs "${app_folder_path}/bin/${gcc_target_prefix}-strip"
 
-  run_app "${app_absolute_folder_path}/bin/${gcc_target_prefix}-ar" --version
-  run_app "${app_absolute_folder_path}/bin/${gcc_target_prefix}-as" --version
-  run_app "${app_absolute_folder_path}/bin/${gcc_target_prefix}-ld" --version
-  run_app "${app_absolute_folder_path}/bin/${gcc_target_prefix}-nm" --version
-  run_app "${app_absolute_folder_path}/bin/${gcc_target_prefix}-objcopy" --version
-  run_app "${app_absolute_folder_path}/bin/${gcc_target_prefix}-objdump" --version
-  run_app "${app_absolute_folder_path}/bin/${gcc_target_prefix}-ranlib" --version
-  run_app "${app_absolute_folder_path}/bin/${gcc_target_prefix}-size" --version
-  run_app "${app_absolute_folder_path}/bin/${gcc_target_prefix}-strings" --version
-  run_app "${app_absolute_folder_path}/bin/${gcc_target_prefix}-strip" --version
+  run_app "${app_folder_path}/bin/${gcc_target_prefix}-ar" --version
+  run_app "${app_folder_path}/bin/${gcc_target_prefix}-as" --version
+  run_app "${app_folder_path}/bin/${gcc_target_prefix}-ld" --version
+  run_app "${app_folder_path}/bin/${gcc_target_prefix}-nm" --version
+  run_app "${app_folder_path}/bin/${gcc_target_prefix}-objcopy" --version
+  run_app "${app_folder_path}/bin/${gcc_target_prefix}-objdump" --version
+  run_app "${app_folder_path}/bin/${gcc_target_prefix}-ranlib" --version
+  run_app "${app_folder_path}/bin/${gcc_target_prefix}-size" --version
+  run_app "${app_folder_path}/bin/${gcc_target_prefix}-strings" --version
+  run_app "${app_folder_path}/bin/${gcc_target_prefix}-strip" --version
 }
 
 function run_gcc()
@@ -50,19 +50,19 @@ function run_gcc()
   echo
   echo "Testing if gcc starts properly..."
 
-  show_libs "${app_absolute_folder_path}/bin/${gcc_target_prefix}-gcc"
-  show_libs "${app_absolute_folder_path}/bin/${gcc_target_prefix}-g++"
+  show_libs "${app_folder_path}/bin/${gcc_target_prefix}-gcc"
+  show_libs "${app_folder_path}/bin/${gcc_target_prefix}-g++"
 
-  run_app "${app_absolute_folder_path}/bin/${gcc_target_prefix}-gcc" --help
-  run_app "${app_absolute_folder_path}/bin/${gcc_target_prefix}-gcc" -dumpversion
-  run_app "${app_absolute_folder_path}/bin/${gcc_target_prefix}-gcc" -dumpmachine
-  run_app "${app_absolute_folder_path}/bin/${gcc_target_prefix}-gcc" -print-multi-lib
-  run_app "${app_absolute_folder_path}/bin/${gcc_target_prefix}-gcc" -dumpspecs | wc -l
+  run_app "${app_folder_path}/bin/${gcc_target_prefix}-gcc" --help
+  run_app "${app_folder_path}/bin/${gcc_target_prefix}-gcc" -dumpversion
+  run_app "${app_folder_path}/bin/${gcc_target_prefix}-gcc" -dumpmachine
+  run_app "${app_folder_path}/bin/${gcc_target_prefix}-gcc" -print-multi-lib
+  run_app "${app_folder_path}/bin/${gcc_target_prefix}-gcc" -dumpspecs | wc -l
  
   echo
   echo "Testing if gcc compiles simple programs..."
 
-  local tmp="${test_absolute_folder_path}-gcc"
+  local tmp="${test_folder_path}-gcc"
   rm -rf "${tmp}"
 
   mkdir -pv "${tmp}"
@@ -79,10 +79,10 @@ main(int argc, char* argv[])
 }
 __EOF__
 
-  run_app "${app_absolute_folder_path}/bin/${gcc_target_prefix}-gcc" -o hello-c.elf -specs=nosys.specs hello.c
+  run_app "${app_folder_path}/bin/${gcc_target_prefix}-gcc" -o hello-c.elf -specs=nosys.specs hello.c
 
-  run_app "${app_absolute_folder_path}/bin/${gcc_target_prefix}-gcc" -o hello.c.o -c -flto hello.c
-  run_app "${app_absolute_folder_path}/bin/${gcc_target_prefix}-gcc" -o hello-c-lto.elf -specs=nosys.specs -flto -v hello.c.o
+  run_app "${app_folder_path}/bin/${gcc_target_prefix}-gcc" -o hello.c.o -c -flto hello.c
+  run_app "${app_folder_path}/bin/${gcc_target_prefix}-gcc" -o hello-c-lto.elf -specs=nosys.specs -flto -v hello.c.o
 
   # Note: __EOF__ is quoted to prevent substitutions here.
   cat <<'__EOF__' > hello.cpp
@@ -102,10 +102,10 @@ __sync_synchronize()
 }
 __EOF__
 
-  run_app "${app_absolute_folder_path}/bin/${gcc_target_prefix}-g++" -o hello-cpp.elf -specs=nosys.specs hello.cpp
+  run_app "${app_folder_path}/bin/${gcc_target_prefix}-g++" -o hello-cpp.elf -specs=nosys.specs hello.cpp
 
-  run_app "${app_absolute_folder_path}/bin/${gcc_target_prefix}-g++" -o hello.cpp.o -c -flto hello.cpp
-  run_app "${app_absolute_folder_path}/bin/${gcc_target_prefix}-g++" -o hello-cpp-lto.elf -specs=nosys.specs -flto -v hello.cpp.o
+  run_app "${app_folder_path}/bin/${gcc_target_prefix}-g++" -o hello.cpp.o -c -flto hello.cpp
+  run_app "${app_folder_path}/bin/${gcc_target_prefix}-g++" -o hello-cpp-lto.elf -specs=nosys.specs -flto -v hello.cpp.o
 
   cd ..
   rm -rf "${tmp}"
@@ -125,7 +125,7 @@ function run_gdb()
     exe=".exe"
   fi
 
-  if [ ! -x "${app_absolute_folder_path}/bin/${gcc_target_prefix}-gdb${suffix}${exe}" ]
+  if [ ! -x "${app_folder_path}/bin/${gcc_target_prefix}-gdb${suffix}${exe}" ]
   then
     echo
     echo ">>> ${gcc_target_prefix}-gdb${suffix} not present, skipping..."
@@ -202,15 +202,15 @@ function run_gdb()
         ;;
     esac
 
-    # rm -rf "${app_absolute_folder_path}/bin/python27.dll"
-    show_libs "${app_absolute_folder_path}/bin/${gcc_target_prefix}-gdb${suffix}"
+    # rm -rf "${app_folder_path}/bin/python27.dll"
+    show_libs "${app_folder_path}/bin/${gcc_target_prefix}-gdb${suffix}"
 
     echo
-    run_app "${app_absolute_folder_path}/bin/${gcc_target_prefix}-gdb${suffix}" --version
-    run_app "${app_absolute_folder_path}/bin/${gcc_target_prefix}-gdb${suffix}" --config
+    run_app "${app_folder_path}/bin/${gcc_target_prefix}-gdb${suffix}" --version
+    run_app "${app_folder_path}/bin/${gcc_target_prefix}-gdb${suffix}" --config
 
     # This command is known to fail with 'Abort trap: 6' (SIGABRT)
-    run_app "${app_absolute_folder_path}/bin/${gcc_target_prefix}-gdb${suffix}" \
+    run_app "${app_folder_path}/bin/${gcc_target_prefix}-gdb${suffix}" \
       --nh \
       --nx \
       -ex='show language' \
@@ -219,7 +219,7 @@ function run_gdb()
     
     if [ ! -z "${suffix}" ]
     then
-      local out=$("${app_absolute_folder_path}/bin/${gcc_target_prefix}-gdb${suffix}" \
+      local out=$("${app_folder_path}/bin/${gcc_target_prefix}-gdb${suffix}" \
         --nh \
         --nx \
         -ex='python print("babu"+"riba")' \
