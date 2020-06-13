@@ -317,9 +317,6 @@ function prepare_versions()
 
     if [ "${WITH_GDB_PY3}" == "y" ]
     then
-      # checking MACHDEP... configure: error: cross build not supported for x86_64-w64-mingw32
-      # build_python3
-
       build_gdb "-py3"
     fi
 
