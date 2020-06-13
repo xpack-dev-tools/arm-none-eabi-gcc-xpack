@@ -485,9 +485,9 @@ then
 fi
 
 echo
-echo "Checking the Python3 shared library."
+echo "Checking the Python shared libraries."
 
-for file_path in $(find "${app_folder_path}" -name 'libpython3*so*')
+for file_path in $(find "${app_folder_path}" -name 'libpython*so*')
 do
   run_app file "${file_path}"
   run_app ldd -v "${file_path}" || true
