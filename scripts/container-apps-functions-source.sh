@@ -1308,7 +1308,8 @@ function do_gdb()
       # xbb_activate_dev
       xbb_activate_installed_dev
 
-      if [ "${TARGET_PLATFORM}" == "darwin" ]
+      # No longer seen with XBB v3.2.
+      if false # [ "${TARGET_PLATFORM}" == "darwin" ]
       then
         # When compiled with GCC-7 it fails to run, due to
         # some problems with exceptions unwind.
