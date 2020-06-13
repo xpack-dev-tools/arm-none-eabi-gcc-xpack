@@ -598,15 +598,24 @@ location (like
 https://github.com/xpack-dev-tools/files-cache/tree/master/libs),
 place them in the XBB cache (`Work/cache`) and restart the build.
 
+## Known issues
+
+Python support in GDB is still tricky, and does not work on
+some platforms.
+
 ## Pitfalls
 
 ### Parallel builds
+
+Note: no longer seen with XBB v3.2.
 
 For various reasons, in some environments, parallel builds for
 some components fail. Reduce the number of parallel jobs until
 the build passes.
 
 ### Building GDB on macOS
+
+Note: no longer seen with XBB v3.2.
 
 GDB uses a complex and custom logic to unwind the stack when processing
 exceptions; macOS also uses a custom logic to organize memory and process
