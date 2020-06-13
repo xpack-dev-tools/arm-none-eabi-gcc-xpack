@@ -343,7 +343,7 @@ function run_binutils()
   )
 }
 
-function do_gcc_first()
+function build_gcc_first()
 {
   local gcc_first_folder_name="gcc-${GCC_VERSION}-first"
   local gcc_first_stamp_file_path="${INSTALL_FOLDER_PATH}/stamp-${gcc_first_folder_name}-installed"
@@ -479,7 +479,7 @@ function do_gcc_first()
 
 # For the nano build, call it with "-nano".
 # $1="" or $1="-nano"
-function do_newlib()
+function build_newlib()
 {
   local newlib_folder_name="newlib-${NEWLIB_VERSION}$1"
   local newlib_stamp_file_path="${INSTALL_FOLDER_PATH}/stamp-${newlib_folder_name}-installed"
@@ -616,7 +616,7 @@ function do_newlib()
               --disable-nls \
             
           else
-            echo "Unsupported do_newlib arg $1"
+            echo "Unsupported build_newlib arg $1"
             exit 1
           fi
 
@@ -700,7 +700,7 @@ function do_newlib()
 # -----------------------------------------------------------------------------
 
 # Not used, it cannot be built on mingw.
-function do_python3()
+function build_python3()
 {
   PYTHON3_FOLDER_NAME="python3-${PYTHON3_VERSION}"
   PYTHON3_ARCHIVE="${PYTHON3_SRC_FOLDER_NAME}.tar.xz"
@@ -883,7 +883,7 @@ function copy_linux_libs()
 
 # For the nano build, call it with "-nano".
 # $1="" or $1="-nano"
-function do_gcc_final()
+function build_gcc_final()
 {
   local gcc_final_folder_name="gcc-${GCC_VERSION}-final$1"
   local gcc_final_stamp_file_path="${INSTALL_FOLDER_PATH}/stamp-${gcc_final_folder_name}-installed"
@@ -1238,7 +1238,7 @@ __EOF__
 
 # Called multile times, with and without python support.
 # $1="" or $1="-py" or $1="-py3"
-function do_gdb()
+function build_gdb()
 {
   # GDB Text User Interface
   # https://ftp.gnu.org/old-gnu/Manuals/gdb/html_chapter/gdb_19.html#SEC197

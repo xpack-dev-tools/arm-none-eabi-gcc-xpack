@@ -283,18 +283,18 @@ function prepare_versions()
     then
 
       # Task [III-1] /$HOST_NATIVE/gcc-first/
-      do_gcc_first
+      build_gcc_first
 
       # Task [III-2] /$HOST_NATIVE/newlib/
-      do_newlib ""
+      build_newlib ""
       # Task [III-3] /$HOST_NATIVE/newlib-nano/
-      do_newlib "-nano"
+      build_newlib "-nano"
 
       # Task [III-4] /$HOST_NATIVE/gcc-final/
-      do_gcc_final ""
+      build_gcc_final ""
 
       # Task [III-5] /$HOST_NATIVE/gcc-size-libstdcxx/
-      do_gcc_final "-nano"
+      build_gcc_final "-nano"
 
     else
 
@@ -302,25 +302,25 @@ function prepare_versions()
       copy_linux_libs
 
       # Task [IV-3] /$HOST_MINGW/gcc-final/
-      do_gcc_final ""
+      build_gcc_final ""
 
     fi
 
     # Task [III-6] /$HOST_NATIVE/gdb/
     # Task [IV-4] /$HOST_MINGW/gdb/
-    do_gdb ""
+    build_gdb ""
 
     if [ "${WITH_GDB_PY}" == "y" ]
     then
-      do_gdb "-py"
+      build_gdb "-py"
     fi
 
     if [ "${WITH_GDB_PY3}" == "y" ]
     then
       # checking MACHDEP... configure: error: cross build not supported for x86_64-w64-mingw32
-      # do_python3
+      # build_python3
 
-      do_gdb "-py3"
+      build_gdb "-py3"
     fi
 
     # Task [III-7] /$HOST_NATIVE/build-manual
