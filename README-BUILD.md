@@ -347,7 +347,7 @@ VirtualBox image running on the same macMini with 16 GB of RAM and a
 fast SSD.
 
 ```console
-$ ssh ilg-xbb-mac.local
+$ ssh xbbm
 ```
 To download them, the following shortcut is available:
 
@@ -361,7 +361,7 @@ To build the latest macOS version:
 $ screen -S arm
 
 $ sudo rm -rf ~/Work/arm-none-eabi-gcc-*
-$ caffeinate bash ~/Downloads/arm-none-eabi-gcc-xpack.git/scripts/build.sh --osx --jobs 8
+$ caffeinate bash ~/Downloads/arm-none-eabi-gcc-xpack.git/scripts/build.sh --osx
 ```
 
 To detach from the session, use `Ctrl-a` `Ctrl-d`; to reattach use
