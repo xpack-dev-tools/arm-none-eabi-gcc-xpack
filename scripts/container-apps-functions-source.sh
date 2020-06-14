@@ -566,9 +566,8 @@ function build_newlib()
           if [ "$1" == "" ]
           then
 
-            # Extra options to Arm distribution:
-            # --enable-newlib-io-long-long
-            # --enable-newlib-io-c99-formats
+            # Extra options compared to Arm 9.3.1 distribution:
+            # --enable-newlib-io-long-double 
             run_verbose bash ${DEBUG} "${SOURCES_FOLDER_PATH}/${NEWLIB_SRC_FOLDER_NAME}/configure" \
               --prefix="${APP_PREFIX}"  \
               --infodir="${APP_PREFIX_DOC}/info" \
@@ -583,6 +582,7 @@ function build_newlib()
               --enable-newlib-io-long-double \
               --enable-newlib-register-fini \
               --enable-newlib-retargetable-locking \
+              --enable-newlib-reent-check-verify \
               --disable-newlib-supplied-syscalls \
               --disable-nls \
               \
@@ -603,6 +603,7 @@ function build_newlib()
               --target="${GCC_TARGET}" \
               \
               --disable-newlib-supplied-syscalls \
+              --enable-newlib-reent-check-verify \
               --enable-newlib-reent-small \
               --enable-newlib-retargetable-locking \
               --disable-newlib-fvwrite-in-streamio \
