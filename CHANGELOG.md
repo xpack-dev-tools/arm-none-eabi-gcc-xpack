@@ -2,10 +2,15 @@
 
 Releases in reverse chronological order.
 
+### 2020-06-14
+
+- v9.3.1-1.1 prepared
+
 ### 2019-12-11
 
 - v9.2.1-1.2 prepared
 - add support for native builds and arm64/armv7l targets
+- add support for TUI in GDB
 
 ### 2019-12-06
 
@@ -18,7 +23,7 @@ Releases in reverse chronological order.
 
 ### 2019-12-04
 
-- v8.3.1-1.4 released, as a repack of 1.3 with linsingle folder content
+- v8.3.1-1.4 released, as a repack of 1.3 with single folder content
 
 ### 2019-11-02
 

@@ -110,7 +110,243 @@ function prepare_versions()
   # In reverse chronological order.
   # Keep them in sync with combo archive content.
   # https://developer.arm.com/tools-and-software/open-source-software/developer-tools/gnu-toolchain/gnu-rm/downloads
-  if [[ "${RELEASE_VERSION}" =~ 9\.2\.1-* ]]
+  if [[ "${RELEASE_VERSION}" =~ 9\.3\.1-* ]]
+  then
+
+    # Used to download the Arm source archive.
+    GCC_COMBO_VERSION_MAJOR="9"
+    GCC_COMBO_VERSION_YEAR="2020"
+    GCC_COMBO_VERSION_QUARTER="q2"
+    GCC_COMBO_VERSION_KIND="update"
+    GCC_COMBO_VERSION_SUBFOLDER=""
+
+    GCC_COMBO_VERSION="${GCC_COMBO_VERSION_MAJOR}-${GCC_COMBO_VERSION_YEAR}-${GCC_COMBO_VERSION_QUARTER}-${GCC_COMBO_VERSION_KIND}"
+    GCC_COMBO_FOLDER_NAME="gcc-arm-none-eabi-${GCC_COMBO_VERSION}"
+    GCC_COMBO_ARCHIVE="${GCC_COMBO_FOLDER_NAME}-src.tar.bz2"
+
+    # https://developer.arm.com/-/media/Files/downloads/gnu-rm/9-2020q2/gcc-arm-none-eabi-9-2020-q2-update-src.tar.bz2
+    GCC_COMBO_URL="https://developer.arm.com/-/media/Files/downloads/gnu-rm/${GCC_COMBO_VERSION_MAJOR}-${GCC_COMBO_VERSION_YEAR}${GCC_COMBO_VERSION_QUARTER}${GCC_COMBO_VERSION_SUBFOLDER}/${GCC_COMBO_ARCHIVE}"
+
+    # -------------------------------------------------------------------------
+    # Used mainly to name the build folders.
+
+    # From /release.txt
+    # binutils-2_34-branch
+    # git://sourceware.org/git/binutils-gdb.git commit f75c52135257ea05da151a508d99fbaee1bb9dc1
+    BINUTILS_VERSION="2.34"
+
+    # From /release.txt (gcc/BASE_VER). 
+    # refs/vendors/ARM/heads/arm-9-branch
+    # git://gcc.gnu.org/git/gcc.git commit 13861a80750d118fbdca6006ab175903bacbb7ec
+    GCC_VERSION="9.3.1"
+
+    # From /release.txt
+    # git://sourceware.org/git/newlib-cygwin.git commit 6d79e0a58866548f435527798fbd4a6849d05bc7
+    # VERSION from configure, comment in NEWS.
+    NEWLIB_VERSION="3.3.0"
+
+    # From /release.txt
+    # git://sourceware.org/git/binutils-gdb.git commit fc94da0a253e925166bbb1a429c190200dc5778d
+    GDB_VERSION="8.3"
+
+    # -------------------------------------------------------------------------
+
+    # Arm uses 2.7.7
+    PYTHON_WIN_VERSION="2.7.13" # -> 2.7.17
+
+    # GDB 8.3 with Python3 not yet functional on Windows.
+    # GDB does not know the Python3 API when compiled with mingw.
+    if [ "${TARGET_PLATFORM}" != "win32" ]
+    then
+      WITH_GDB_PY3="y" 
+      PYTHON3_VERSION="3.7.2" # -> 3.7.6
+    fi
+
+    GDB_PATCH="gdb-${GDB_VERSION}.patch"
+    USE_SINGLE_FOLDER_PATH="y"
+
+    if [ "${TARGET_PLATFORM}" == "win32" ]
+    then
+      WITH_GDB_PY="n"
+      # PYTHON_WIN_VERSION="2.7.17"
+    fi
+
+    # https://sourceware.org/git/gitweb.cgi?p=binutils-gdb.git;a=commit;h=272044897e178835f596c96740c5a1800ec6f9fb
+    WITH_GDB_PY3="y" 
+    PYTHON3_VERSION="3.7.6"
+
+    # -------------------------------------------------------------------------
+
+    if [ "${TARGET_BITS}" == "32" ]
+    then
+      PYTHON_WIN=python-"${PYTHON_WIN_VERSION}"
+    else
+      PYTHON_WIN=python-"${PYTHON_WIN_VERSION}".amd64
+    fi
+
+    if [ ! -z "${PYTHON3_VERSION}" ]
+    then
+      PYTHON3_VERSION_MAJOR=$(echo ${PYTHON3_VERSION} | sed -e 's|\([0-9]\)\..*|\1|')
+      PYTHON3_VERSION_MINOR=$(echo ${PYTHON3_VERSION} | sed -e 's|\([0-9]\)\.\([0-9][0-9]*\)\..*|\2|')
+
+      # Version 3.7.2 uses a longer name, like python-3.7.2.post1-embed-amd64.zip.
+      if [ "${TARGET_BITS}" == "32" ]
+      then
+        PYTHON3_WIN_EMBED_FOLDER_NAME=python-"${PYTHON3_VERSION}-embed-win32"
+      else
+        PYTHON3_WIN_EMBED_FOLDER_NAME=python-"${PYTHON3_VERSION}-embed-amd64"
+      fi
+
+      export PYTHON3_WIN_EMBED_FOLDER_NAME
+      export PYTHON3_SRC_FOLDER_NAME="Python-${PYTHON3_VERSION}"
+      export PYTHON3_FOLDER_NAME="Python-${PYTHON3_VERSION}"
+    fi
+
+    # -------------------------------------------------------------------------
+
+    # Download the combo package from Arm.
+    download_gcc_combo
+
+    if [ "${TARGET_PLATFORM}" == "win32" ]
+    then
+      # The Windows GDB needs some headers from the Python distribution.
+      if [ "${WITH_GDB_PY}" == "y" ]
+      then
+        download_python_win
+      fi
+      
+      if [ "${WITH_GDB_PY3}" == "y" ]
+      then
+        download_python3_win
+      fi
+    fi
+
+    # -------------------------------------------------------------------------
+    # Build dependent libraries.
+
+    # For better control, without it some components pick the lib packed 
+    # inside the archive.
+    build_zlib "1.2.8"
+
+    # The classical GCC libraries.
+    build_gmp "6.1.0"
+    build_mpfr "3.1.4"
+    build_mpc "1.0.3"
+    build_isl "0.18"
+
+    build_expat "2.1.1"
+
+    # LIBELF_VERSION="0.8.13"
+
+    if [ "${TARGET_PLATFORM}" == "darwin" ]
+    then
+      build_libiconv "1.15"
+    fi
+
+    build_xz "5.2.3"
+
+    build_gettext "0.19.8.1"
+
+    if [ "${TARGET_PLATFORM}" != "win32" ]
+    then
+      # Used by ncurses. Fais on macOS.
+      if [ "${TARGET_PLATFORM}" == "linux" ]
+      then
+        build_gpm "1.20.7"
+      fi
+
+      build_ncurses "6.2"
+    fi
+
+
+    # -------------------------------------------------------------------------
+
+    # The task descriptions are from the Arm build script.
+
+    # Task [III-0] /$HOST_NATIVE/binutils/
+    # Task [IV-1] /$HOST_MINGW/binutils/
+
+    build_binutils "${BINUTILS_VERSION}"
+    # copy_dir to libs included above
+
+    if [ "${TARGET_PLATFORM}" != "win32" ]
+    then
+
+      # Task [III-1] /$HOST_NATIVE/gcc-first/
+      build_gcc_first
+
+      # Task [III-2] /$HOST_NATIVE/newlib/
+      build_newlib ""
+      # Task [III-3] /$HOST_NATIVE/newlib-nano/
+      build_newlib "-nano"
+
+      # Task [III-4] /$HOST_NATIVE/gcc-final/
+      build_gcc_final ""
+
+      # Task [III-5] /$HOST_NATIVE/gcc-size-libstdcxx/
+      build_gcc_final "-nano"
+
+    else
+
+      # Task [IV-2] /$HOST_MINGW/copy_libs/
+      copy_linux_libs
+
+      # Task [IV-3] /$HOST_MINGW/gcc-final/
+      build_gcc_final ""
+
+    fi
+
+    # Task [III-6] /$HOST_NATIVE/gdb/
+    # Task [IV-4] /$HOST_MINGW/gdb/
+    build_gdb ""
+
+    if [ "${WITH_GDB_PY}" == "y" ]
+    then
+      build_gdb "-py"
+    fi
+
+    if [ "${WITH_GDB_PY3}" == "y" ]
+    then
+      build_gdb "-py3"
+    fi
+
+    # Task [III-7] /$HOST_NATIVE/build-manual
+    # Nope, the build process is different.
+
+    # -------------------------------------------------------------------------
+
+    # Task [III-8] /$HOST_NATIVE/pretidy/
+    # Task [IV-5] /$HOST_MINGW/pretidy/
+    tidy_up
+
+    # Task [III-9] /$HOST_NATIVE/strip_host_objects/
+    # Task [IV-6] /$HOST_MINGW/strip_host_objects/
+    strip_binaries
+
+    # Must be done after gcc 2 make install, otherwise some wrong links
+    # are created in libexec.
+    # Must also be done after strip binaries, since strip after patchelf
+    # damages the binaries.
+    prepare_app_folder_libraries
+
+    if [ "${TARGET_PLATFORM}" != "win32" ]
+    then
+      # Task [III-10] /$HOST_NATIVE/strip_target_objects/
+      strip_libs
+    fi
+
+    final_tunings
+
+    # Task [IV-7] /$HOST_MINGW/installation/
+    # Nope, no setup.exe.
+
+    # Task [III-11] /$HOST_NATIVE/package_tbz2/
+    # Task [IV-8] /Package toolchain in zip format/
+    # See create_archive below.
+
+    check_binaries
+
+  elif [[ "${RELEASE_VERSION}" =~ 9\.2\.1-* ]]
   then
 
     # Used to download the Arm source archive.
