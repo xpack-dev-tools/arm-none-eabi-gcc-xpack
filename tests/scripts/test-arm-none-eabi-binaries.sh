@@ -490,7 +490,7 @@ echo "Checking the Python shared libraries."
 for file_path in $(find "${app_folder_path}" -name 'libpython*so*')
 do
   run_app file "${file_path}"
-  run_app ldd -v "${file_path}" || true
+  run_app ldd -v "${file_path}"
 done
 
 echo
