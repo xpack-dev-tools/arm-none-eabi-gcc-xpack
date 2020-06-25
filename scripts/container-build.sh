@@ -207,8 +207,9 @@ start_timer
 detect_container
 
 prepare_xbb_env
-
 prepare_xbb_extras
+
+tests_initialize
 
 # -----------------------------------------------------------------------------
 
@@ -235,20 +236,7 @@ fix_ownership
 
 prime_wine
 
-run_binutils
-run_gcc
-run_gdb
-
-# With PYTHONPATH it still complains, but no longer fails.
-if [ "${WITH_GDB_PY}" == "y" ]
-then
-  run_gdb "-py"
-fi
-
-if [ "${WITH_GDB_PY3}" == "y" -a "${TARGET_PLATFORM}" != "win32" ]
-then
-  run_gdb "-py3"
-fi
+tests_run
 
 # -----------------------------------------------------------------------------
 

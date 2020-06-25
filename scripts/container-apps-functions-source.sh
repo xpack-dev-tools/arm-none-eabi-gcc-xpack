@@ -193,9 +193,11 @@ function build_binutils()
   else
     echo "Component binutils already installed."
   fi
+
+  tests_add "test_binutils"
 }
 
-function run_binutils()
+function test_binutils()
 {
   (
     xbb_activate_installed_bin
@@ -960,9 +962,14 @@ function build_gcc_final()
   else
     echo "Component gcc$1 final stage already installed."
   fi
+
+  if [ "$1" == "" ]
+  then
+    tests_add "test_gcc"
+  fi
 }
 
-function run_gcc()
+function test_gcc()
 {
   (
     xbb_activate_installed_bin
@@ -1321,14 +1328,41 @@ function build_gdb()
   else
     echo "Component gdb$1 already installed."
   fi
+
+  tests_add "test_gdb$1"
 }
 
-function run_gdb()
+function test_gdb_py()
+{
+  test_gdb "-py"
+}
+
+function test_gdb_py3()
+{
+  test_gdb "-py3"
+}
+
+function test_gdb()
 {
   local suffix=""
   if [ $# -ge 1 ]
   then
     suffix="$1"
+  fi
+
+  if [ "${suffix}" != "" -a "${TARGET_PLATFORM}" == "win32" ]
+  then
+    (
+      xbb_activate
+
+      show_libs "${APP_PREFIX}/bin/${GCC_TARGET}-gdb${suffix}"
+
+      # Fails on Wine
+      # ImportError: No module named site
+      # 007b:fixme:msvcrt:__clean_type_info_names_internal (0x1e31e2e8) stub
+      run_app "${APP_PREFIX}/bin/${GCC_TARGET}-gdb${suffix}" --version || true
+    )
+    return 0
   fi
 
   # error while loading shared libraries: /Host/home/ilg/Work/arm-none-eabi-gcc-8.2.1-1.5/linux-x32/install/arm-none-eabi-gcc/bin/libpython3.7m.so.1.0: unsupported version 0 of Verneed record
