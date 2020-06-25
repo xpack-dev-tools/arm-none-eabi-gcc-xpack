@@ -59,6 +59,14 @@ host_functions_script_path="${script_folder_path}/helper/host-functions-source.s
 echo "Host helper functions source script: \"${host_functions_script_path}\"."
 source "${host_functions_script_path}"
 
+common_helper_functions_script_path="${script_folder_path}/helper/common-functions-source.sh"
+echo "Common helper functions source script: \"${common_helper_functions_script_path}\"."
+source "${common_helper_functions_script_path}"
+
+common_helper_libs_functions_script_path="${script_folder_path}/helper/common-libs-functions-source.sh"
+echo "Common helper libs functions source script: \"${common_helper_libs_functions_script_path}\"."
+source "${common_helper_libs_functions_script_path}"
+
 common_functions_script_path="${script_folder_path}/common-functions-source.sh"
 echo "Common functions source script: \"${common_functions_script_path}\"."
 source "${common_functions_script_path}"
@@ -87,6 +95,8 @@ host_common
 prepare_xbb_env
 prepare_xbb_extras
 
+tests_initialize
+
 # -----------------------------------------------------------------------------
 
 container_libs_functions_script_path="${script_folder_path}/${CONTAINER_LIBS_FUNCTIONS_SCRIPT_NAME}"
@@ -99,142 +109,17 @@ source "${container_apps_functions_script_path}"
 
 # -----------------------------------------------------------------------------
 
-build_versions
-
-# -----------------------------------------------------------------------------
-
 echo
 echo "Here we go..."
 echo
 
-# Download the combo package from Arm.
-download_gcc_combo
-
-if [ "${TARGET_PLATFORM}" == "win32" ]
-then
-  # The Windows GDB needs some headers from the Python distribution.
-  if [ "${WITH_GDB_PY}" == "y" ]
-  then
-    download_python_win
-  fi
-  
-  if [ "${WITH_GDB_PY3}" == "y" ]
-  then
-    download_python3_win
-  fi
-fi
-
-# -----------------------------------------------------------------------------
-# Build dependent libraries.
-
-# For better control, without it some components pick the lib packed 
-# inside the archive.
-do_zlib
-
-# The classical GCC libraries.
-do_gmp
-do_mpfr
-do_mpc
-do_isl
-
-# More libraries.
-do_libelf
-do_expat
-do_libiconv
-do_xz
-
-if [ ! -z "${GETTEXT_VERSION}" ]
-then
-  do_gettext
-fi
+build_versions
 
 # -----------------------------------------------------------------------------
 
-# The task descriptions are from the Arm build script.
-
-# Task [III-0] /$HOST_NATIVE/binutils/
-# Task [IV-1] /$HOST_MINGW/binutils/
-build_binutils
-# copy_dir to libs included above
-
-if [ "${TARGET_PLATFORM}" != "win32" ]
-then
-
-  # Task [III-1] /$HOST_NATIVE/gcc-first/
-  build_gcc_first
-
-  # Task [III-2] /$HOST_NATIVE/newlib/
-  build_newlib ""
-  # Task [III-3] /$HOST_NATIVE/newlib-nano/
-  build_newlib "-nano"
-
-  # Task [III-4] /$HOST_NATIVE/gcc-final/
-  build_gcc_final ""
-
-  # Task [III-5] /$HOST_NATIVE/gcc-size-libstdcxx/
-  build_gcc_final "-nano"
-
-else
-
-  # Task [IV-2] /$HOST_MINGW/copy_libs/
-  copy_linux_libs
-
-  # Task [IV-3] /$HOST_MINGW/gcc-final/
-  build_gcc_final ""
-
-fi
-
-# Task [III-6] /$HOST_NATIVE/gdb/
-# Task [IV-4] /$HOST_MINGW/gdb/
-build_gdb ""
-
-if [ "${WITH_GDB_PY}" == "y" ]
-then
-  build_gdb "-py"
-fi
-
-if [ "${WITH_GDB_PY3}" == "y" ]
-then
-  build_gdb "-py3"
-fi
-
-# Task [III-7] /$HOST_NATIVE/build-manual
-# Nope, the build process is different.
+build_versions
 
 # -----------------------------------------------------------------------------
-
-# Task [III-8] /$HOST_NATIVE/pretidy/
-# Task [IV-5] /$HOST_MINGW/pretidy/
-tidy_up
-
-# Task [III-9] /$HOST_NATIVE/strip_host_objects/
-# Task [IV-6] /$HOST_MINGW/strip_host_objects/
-strip_binaries
-
-# Must be done after gcc 2 make install, otherwise some wrong links
-# are created in libexec.
-# Must also be done after strip binaries, since strip after patchelf
-# damages the binaries.
-prepare_app_folder_libraries
-
-if [ "${TARGET_PLATFORM}" != "win32" ]
-then
-  # Task [III-10] /$HOST_NATIVE/strip_target_objects/
-  strip_libs
-fi
-
-final_tunings
-
-# Task [IV-7] /$HOST_MINGW/installation/
-# Nope, no setup.exe.
-
-# Task [III-11] /$HOST_NATIVE/package_tbz2/
-# Task [IV-8] /Package toolchain in zip format/
-# See create_archive below.
-
-# -----------------------------------------------------------------------------
-
-check_binaries
 
 copy_distro_files
 
@@ -248,22 +133,10 @@ create_archive
 # Final checks.
 # To keep everything as pristine as possible, run tests
 # only after the archive is packed.
-run_binutils
-run_gcc
-run_gdb
 
-if [  "${TARGET_PLATFORM}" != "win32" ]
-then
-  if [ "${WITH_GDB_PY}" == "y" ]
-  then
-    run_gdb "-py"
-  fi
+prime_wine
 
-  if [ "${WITH_GDB_PY3}" == "y" ]
-  then
-    run_gdb "-py3"
-  fi
-fi
+tests_run
 
 # -----------------------------------------------------------------------------
 
