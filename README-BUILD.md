@@ -6,6 +6,14 @@ This project includes the scripts and additional files required to
 build and publish the
 [xPack GNU Arm Embedded GCC](https://xpack.github.io/arm-none-eabi-gcc/) binaries.
 
+It follows the official
+[Arm](https://developer.arm.com/open-source/gnu-toolchain/gnu-rm)
+distribution, and it is planned to make a new release after each future
+Arm release.
+
+Currently the build procedure uses the _Source Invariant_ archive and
+the configure options are the same as in the Arm build scripts.
+
 The build scripts use the
 [xPack Build Box (XBB)](https://github.com/xpack/xpack-build-box),
 a set of elaborate build environments based on a recent GCC (Docker containers
@@ -18,6 +26,8 @@ There are two types of builds:
   distribution/version; intended mostly for development purposes.
 - distribution builds, which create the archives distributed as
   binaries; expected to run on most modern systems.
+
+This page documents the distribution builds.
 
 ## Repository URLs
 
@@ -33,7 +43,7 @@ repositories are used:
 - `master` - the original content; it follows the upstream master (but
   currently merges from it are several versions behind)
 
-## Download the build scripts
+## Download the build scripts repo
 
 The build scripts are available in the `scripts` folder of the
 [`xpack-dev-tools/arm-none-eabi-gcc-xpack`](https://github.com/xpack-dev-tools/arm-none-eabi-gcc-xpack)
@@ -96,24 +106,12 @@ either passed to Docker or sourced to shell. The Docker syntax
 **is not** identical to shell, so some files may
 not be accepted by bash.
 
-## How to build distributions
-
-### Prerequisites
+## Prerequisites
 
 The prerequisites are common to all binary builds. Please follow the
 instructions from the separate
 [Prerequisites for building xPack binaries](https://xpack.github.io/xbb/prerequisites/)
 page and return when ready.
-
-## Update git repos
-
-The xPack GNU Arm Embedded GCC distribution follows the official
-[Arm](https://developer.arm.com/open-source/gnu-toolchain/gnu-rm)
-distribution, and it is planned to make a new release after each future
-Arm release.
-
-Currently the build procedure uses the _Source Invariant_ archive and
-the configure options are the same as in the Arm build scripts.
 
 ## Prepare release
 
@@ -405,7 +403,7 @@ This should check the commit IDs and the tag names in all the refered
 repositories, and the build scripts.
 
 It is _quick_ because it does not build the multilibs. Even so, on a very
-fast machine, it takes about half hour.
+fast machine, it may take 30-60 minutes.
 
 Test builds can also be executed on the build machine:
 
@@ -458,16 +456,15 @@ host file system, and resume an interrupted build.
 For development builds, it is also possible to create everything
 with `-g -O0` and be able to run debug sessions.
 
+### --disable-multilib
+
+For development builds, to save time, it is recommended to build the
+toolchain without multilib.
+
 ### --jobs
 
-By default, the build steps use a single job at a time, but for
-recent CPUs with multiple cores it is possible to run multiple jobs
-in parallel.
-
-The setting applies to all steps.
-
-Warning: Parallel builds require significant system resources and occasionally
-may crash the build.
+By default, the build steps use all available cores. If, for any reason,
+parallel builds fail, it is possible to reduce the load.
 
 ### Interrupted builds
 
@@ -485,8 +482,8 @@ Although not guaranteed to work, previous versions can be re-built by
 explicitly specifying the version:
 
 ```console
-$ RELEASE_VERSION=7.3.1-1.2 bash ~/Downloads/arm-none-eabi-gcc-xpack.git/scripts/build.sh --all --jobs 8
-$ RELEASE_VERSION=8.3.1-1.1 bash ~/Downloads/arm-none-eabi-gcc-xpack.git/scripts/build.sh --all --jobs 8
+$ RELEASE_VERSION=7.3.1-1.2 bash ~/Downloads/arm-none-eabi-gcc-xpack.git/scripts/build.sh --all
+$ RELEASE_VERSION=8.3.1-1.1 bash ~/Downloads/arm-none-eabi-gcc-xpack.git/scripts/build.sh --all
 ```
 
 > Note: This procedure builds a previous release but in the context of

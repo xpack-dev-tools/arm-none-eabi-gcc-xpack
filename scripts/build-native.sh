@@ -86,7 +86,7 @@ docker_images
 # -----------------------------------------------------------------------------
 
 help_message="    bash $0 [--win] [--disable-multilib] [--disable-strip] [--without-pdf] [--with-html] [--debug] [--develop] [--jobs N] [--help] [clean|cleanlibs|cleanall]"
-host_custom_options "${help_message}" $@
+host_custom_options "${help_message}" "$@"
 
 # -----------------------------------------------------------------------------
 

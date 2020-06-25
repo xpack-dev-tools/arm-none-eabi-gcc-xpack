@@ -67,9 +67,9 @@ fi
 
 if [ "${is_32_bit}" == "y" ]
 then
-  docker_run_test_32 $@
+  docker_run_test_32 "$@"
 else
-  docker_run_test $@
+  docker_run_test "$@"
 fi
 
 # -----------------------------------------------------------------------------
