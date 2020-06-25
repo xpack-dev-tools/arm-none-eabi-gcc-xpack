@@ -1117,12 +1117,6 @@ function build_gdb()
         export CXX=clang++
       fi
 
-      if [ "${TARGET_PLATFORM}" == "win32" ]
-      then
-        # Definition required by python-config.sh.
-        export GNURM_PYTHON_WIN_DIR="${SOURCES_FOLDER_PATH}/${PYTHON_WIN}"
-      fi
-
       CPPFLAGS="${XBB_CPPFLAGS}" 
       CFLAGS="${XBB_CFLAGS_NO_W}"
       CXXFLAGS="${XBB_CXXFLAGS_NO_W}"
@@ -1135,14 +1129,34 @@ function build_gdb()
         # ???
         CPPFLAGS+=" -DPy_BUILD_CORE_BUILTIN=1"
 
+        if [ "$1" == "-py" ]
+        then
+          # Definition required by python-config.sh.
+          export GNURM_PYTHON_WIN_DIR="${SOURCES_FOLDER_PATH}/${PYTHON2_SRC_FOLDER_NAME}"
+        fi
+
         # From Arm script.
         LDFLAGS="${XBB_LDFLAGS_APP} -v -Wl,${XBB_FOLDER_PATH}/mingw/lib/CRT_glob.o"
         # Workaround for undefined reference to `__strcpy_chk' in GCC 9.
         # https://sourceforge.net/p/mingw-w64/bugs/818/
-        LIBS="-lssp"
-      else
-        LDFLAGS="${XBB_LDFLAGS_APP} -v"
+        LIBS="-lssp -liconv"
+      elif [ "${TARGET_PLATFORM}" == "darwin" ]
+      then
+        # This makes gdb-py fail!
+        # Pick some system libraries from XBB, to avoid rebuilding them here.
+        #        CPPFLAGS+=" -I${XBB_FOLDER_PATH}/include" 
+        #        LDFLAGS+=" -L${XBB_FOLDER_PATH}/lib"
+        LDFLAGS="${XBB_LDFLAGS_APP}"
+        LIBS="-liconv -lncurses"
+      elif [ "${TARGET_PLATFORM}" == "linux" ]
+      then
+        LDFLAGS="${XBB_LDFLAGS_APP}"
         LIBS=""
+      fi
+
+      if [ "${IS_DEVELOP}" == "y" ]
+      then
+        LDFLAGS+=" -v"
       fi
 
       if [ "${TARGET_PLATFORM}" == "darwin" ]
@@ -1207,9 +1221,6 @@ function build_gdb()
       else
         tui_option="--enable-tui"
       fi
-
-      export GCC_WARN_CFLAGS
-      export GCC_WARN_CXXFLAGS
 
       export CPPFLAGS
       export CFLAGS
@@ -1283,9 +1294,8 @@ function build_gdb()
         echo
         echo "Running gdb$1 make..."
 
-        # Parallel builds may fail.
+        # Build.
         run_verbose make -j ${JOBS}
-        # make 
 
         # install-strip fails, not only because of readline has no install-strip
         # but even after patching it tries to strip a non elf file
