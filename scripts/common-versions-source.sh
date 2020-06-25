@@ -13,7 +13,7 @@
 
 # -----------------------------------------------------------------------------
 
-function prepare_versions()
+function build_versions()
 {
   APP_PREFIX_NANO="${INSTALL_FOLDER_PATH}/${APP_LC_NAME}-nano"
 
