@@ -47,6 +47,13 @@ function build_versions()
   USE_PLATFORM_PYTHON=""
   USE_PLATFORM_PYTHON3=""
 
+  if [ "${WITHOUT_MULTILIB}" == "y" ]
+  then
+    MULTILIB_FLAGS="--disable-multilib"
+  else
+    MULTILIB_FLAGS="--with-multilib-list=rmprofile"
+  fi
+
   # Redefine to actual URL if the build should use the Git sources.
   # Also be sure GDB_GIT_BRANCH and GDB_GIT_COMMIT are defined
   GDB_GIT_URL=""
@@ -81,15 +88,6 @@ function build_versions()
   fi
 
   FIX_LTO_PLUGIN="y"
-
-  # ---------------------------------------------------------------------------
-
-  if [ "${WITHOUT_MULTILIB}" == "y" ]
-  then
-    MULTILIB_FLAGS="--disable-multilib"
-  else
-    MULTILIB_FLAGS="--with-multilib-list=rmprofile"
-  fi
 
   # ---------------------------------------------------------------------------
 
