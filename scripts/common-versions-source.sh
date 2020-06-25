@@ -60,14 +60,10 @@ function build_versions()
   # Defined for completeness, not yet used by download_gdb().
   GDB_ARCHIVE_URL=""
 
-  MULTILIB_FLAGS=""
   GETTEXT_VERSION=""
 
   NCURSES_VERSION=""
   GPM_VERSION=""
-
-  USE_SINGLE_FOLDER="y"
-  USE_TAR_GZ="y"
 
   # ---------------------------------------------------------------------------
 
@@ -201,7 +197,7 @@ function build_versions()
 
     if [ "${TARGET_PLATFORM}" != "win32" ]
     then
-      # Used by ncurses. Fais on macOS.
+      # Used by ncurses. Fails on macOS.
       if [ "${TARGET_PLATFORM}" == "linux" ]
       then
         build_gpm "1.20.7"
@@ -209,7 +205,6 @@ function build_versions()
 
       build_ncurses "6.2"
     fi
-
 
     # -------------------------------------------------------------------------
 
