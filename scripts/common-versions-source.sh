@@ -196,14 +196,7 @@ function build_versions()
     build_isl "0.18"
 
     build_expat "2.1.1"
-
-    # LIBELF_VERSION="0.8.13"
-
-    if [ "${TARGET_PLATFORM}" == "darwin" ]
-    then
-      build_libiconv "1.15"
-    fi
-
+    build_libiconv "1.15"
     build_xz "5.2.3"
 
     build_gettext "0.19.8.1"
