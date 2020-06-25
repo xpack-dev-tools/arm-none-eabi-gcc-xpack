@@ -42,9 +42,8 @@ function build_versions()
   # Use it to download a separate binutils from Git.
   BINUTILS_GIT_URL=""
 
-  WITH_GDB_PY="y"
+  WITH_GDB_PY=""
   WITH_GDB_PY3=""
-  PYTHON3_VERSION=""
   USE_PLATFORM_PYTHON=""
   USE_PLATFORM_PYTHON3=""
 
@@ -151,75 +150,37 @@ function build_versions()
 
     # -------------------------------------------------------------------------
 
-    # Arm uses 2.7.7
-    PYTHON_WIN_VERSION="2.7.13" # -> 2.7.17
-
-    # GDB 8.3 with Python3 not yet functional on Windows.
-    # GDB does not know the Python3 API when compiled with mingw.
-    if [ "${TARGET_PLATFORM}" != "win32" ]
-    then
-      WITH_GDB_PY3="y" 
-      PYTHON3_VERSION="3.7.2" # -> 3.7.6
-    fi
-
-    GDB_PATCH="gdb-${GDB_VERSION}.patch"
-    USE_SINGLE_FOLDER_PATH="y"
-
     if [ "${TARGET_PLATFORM}" == "win32" ]
     then
-      WITH_GDB_PY="n"
-      # PYTHON_WIN_VERSION="2.7.17"
-    fi
-
-    # https://sourceware.org/git/gitweb.cgi?p=binutils-gdb.git;a=commit;h=272044897e178835f596c96740c5a1800ec6f9fb
-    WITH_GDB_PY3="y" 
-    PYTHON3_VERSION="3.7.6"
-
-    # -------------------------------------------------------------------------
-
-    if [ "${TARGET_BITS}" == "32" ]
+      # On Windows if fails with 
+      # "The procedure entry point ClearCommBreak could not be located
+      # in the dynamic link library." 
+      # It looks like an incompatibility between Python2 and mingw-w64.
+      # Given that Python2 is end-of-life, it is not worth to further
+      # investigate, disable it for now.
+      WITH_GDB_PY2=""
+    elif [ "${TARGET_PLATFORM}" == "darwin" ]
     then
-      PYTHON_WIN=python-"${PYTHON_WIN_VERSION}"
+      # ImportError: dlopen(/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/lib-dynload/operator.so, 2): Symbol not found: __PyUnicodeUCS2_AsDefaultEncodedString
+      #  Referenced from: /Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/lib-dynload/operator.so
+      #  Expected in: flat namespace
+      # in /Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/lib-dynload/operator.so
+      WITH_GDB_PY2=""
     else
-      PYTHON_WIN=python-"${PYTHON_WIN_VERSION}".amd64
+      WITH_GDB_PY2="y"
     fi
 
-    if [ ! -z "${PYTHON3_VERSION}" ]
-    then
-      PYTHON3_VERSION_MAJOR=$(echo ${PYTHON3_VERSION} | sed -e 's|\([0-9]\)\..*|\1|')
-      PYTHON3_VERSION_MINOR=$(echo ${PYTHON3_VERSION} | sed -e 's|\([0-9]\)\.\([0-9][0-9]*\)\..*|\2|')
+    PYTHON2_WIN_VERSION="2.7.18"
 
-      # Version 3.7.2 uses a longer name, like python-3.7.2.post1-embed-amd64.zip.
-      if [ "${TARGET_BITS}" == "32" ]
-      then
-        PYTHON3_WIN_EMBED_FOLDER_NAME=python-"${PYTHON3_VERSION}-embed-win32"
-      else
-        PYTHON3_WIN_EMBED_FOLDER_NAME=python-"${PYTHON3_VERSION}-embed-amd64"
-      fi
+    WITH_GDB_PY3="y" 
+    PYTHON3_WIN_VERSION="3.7.6"
 
-      export PYTHON3_WIN_EMBED_FOLDER_NAME
-      export PYTHON3_SRC_FOLDER_NAME="Python-${PYTHON3_VERSION}"
-      export PYTHON3_FOLDER_NAME="Python-${PYTHON3_VERSION}"
-    fi
+    GDB_PATCH="gdb-${GDB_VERSION}.patch"
 
     # -------------------------------------------------------------------------
 
     # Download the combo package from Arm.
     download_gcc_combo
-
-    if [ "${TARGET_PLATFORM}" == "win32" ]
-    then
-      # The Windows GDB needs some headers from the Python distribution.
-      if [ "${WITH_GDB_PY}" == "y" ]
-      then
-        download_python_win
-      fi
-      
-      if [ "${WITH_GDB_PY3}" == "y" ]
-      then
-        download_python3_win
-      fi
-    fi
 
     # -------------------------------------------------------------------------
     # Build dependent libraries.
@@ -302,11 +263,22 @@ function build_versions()
 
     if [ "${WITH_GDB_PY}" == "y" ]
     then
+      # The Windows GDB needs some headers from the Python distribution.
+      if [ "${TARGET_PLATFORM}" == "win32" ]
+      then
+        download_python2_win "${PYTHON2_WIN_VERSION}"
+      fi
+
       build_gdb "-py"
     fi
 
     if [ "${WITH_GDB_PY3}" == "y" ]
     then
+      if [ "${TARGET_PLATFORM}" == "win32" ]
+      then
+        download_python3_win "${PYTHON3_WIN_VERSION}"
+      fi
+
       build_gdb "-py3"
     fi
 
@@ -383,7 +355,7 @@ function build_versions()
     # -------------------------------------------------------------------------
 
     # Arm uses 2.7.7
-    PYTHON_WIN_VERSION="2.7.13" # -> 2.7.17
+    PYTHON2_WIN_VERSION="2.7.13" # -> 2.7.17
 
     # GDB 8.3 with Python3 not yet functional on Windows.
     # GDB does not know the Python3 API when compiled with mingw.
@@ -413,7 +385,6 @@ function build_versions()
       if [ "${TARGET_PLATFORM}" == "win32" ]
       then
         WITH_GDB_PY="n"
-        # PYTHON_WIN_VERSION="2.7.17"
       fi
 
       # https://sourceware.org/git/gitweb.cgi?p=binutils-gdb.git;a=commit;h=272044897e178835f596c96740c5a1800ec6f9fb
@@ -423,49 +394,8 @@ function build_versions()
 
     # -------------------------------------------------------------------------
 
-    if [ "${TARGET_BITS}" == "32" ]
-    then
-      PYTHON_WIN=python-"${PYTHON_WIN_VERSION}"
-    else
-      PYTHON_WIN=python-"${PYTHON_WIN_VERSION}".amd64
-    fi
-
-    if [ ! -z "${PYTHON3_VERSION}" ]
-    then
-      PYTHON3_VERSION_MAJOR=$(echo ${PYTHON3_VERSION} | sed -e 's|\([0-9]\)\..*|\1|')
-      PYTHON3_VERSION_MINOR=$(echo ${PYTHON3_VERSION} | sed -e 's|\([0-9]\)\.\([0-9][0-9]*\)\..*|\2|')
-
-      # Version 3.7.2 uses a longer name, like python-3.7.2.post1-embed-amd64.zip.
-      if [ "${TARGET_BITS}" == "32" ]
-      then
-        PYTHON3_WIN_EMBED_FOLDER_NAME=python-"${PYTHON3_VERSION}-embed-win32"
-      else
-        PYTHON3_WIN_EMBED_FOLDER_NAME=python-"${PYTHON3_VERSION}-embed-amd64"
-      fi
-
-      export PYTHON3_WIN_EMBED_FOLDER_NAME
-      export PYTHON3_SRC_FOLDER_NAME="Python-${PYTHON3_VERSION}"
-      export PYTHON3_FOLDER_NAME="Python-${PYTHON3_VERSION}"
-    fi
-
-    # -------------------------------------------------------------------------
-
     # Download the combo package from Arm.
     download_gcc_combo
-
-    if [ "${TARGET_PLATFORM}" == "win32" ]
-    then
-      # The Windows GDB needs some headers from the Python distribution.
-      if [ "${WITH_GDB_PY}" == "y" ]
-      then
-        download_python_win
-      fi
-      
-      if [ "${WITH_GDB_PY3}" == "y" ]
-      then
-        download_python3_win
-      fi
-    fi
 
     # -------------------------------------------------------------------------
     # Build dependent libraries.
@@ -548,11 +478,22 @@ function build_versions()
 
     if [ "${WITH_GDB_PY}" == "y" ]
     then
+      # The Windows GDB needs some headers from the Python distribution.
+      if [ "${TARGET_PLATFORM}" == "win32" ]
+      then
+        download_python2_win "${PYTHON2_WIN_VERSION}"
+      fi
+
       build_gdb "-py"
     fi
 
     if [ "${WITH_GDB_PY3}" == "y" ]
     then
+      if [ "${TARGET_PLATFORM}" == "win32" ]
+      then
+        download_python3_win "${PYTHON3_WIN_VERSION}"
+      fi
+
       build_gdb "-py3"
     fi
 
