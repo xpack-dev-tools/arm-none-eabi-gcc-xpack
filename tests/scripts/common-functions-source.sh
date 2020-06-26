@@ -17,7 +17,7 @@
 
 # -----------------------------------------------------------------------------
 
-function run_binutils()
+function test_binutils()
 {
   echo
   echo "Testing if binutils start properly..."
@@ -45,7 +45,7 @@ function run_binutils()
   run_app "${app_folder_path}/bin/${gcc_target_prefix}-strip" --version
 }
 
-function run_gcc()
+function test_gcc()
 {
   echo
   echo "Testing if gcc starts properly..."
@@ -111,7 +111,7 @@ __EOF__
   rm -rf "${tmp}"
 }
 
-function run_gdb()
+function test_gdb()
 {
   local suffix=""
   if [ $# -ge 1 ]
@@ -128,16 +128,15 @@ function run_gdb()
   if [ ! -x "${app_folder_path}/bin/${gcc_target_prefix}-gdb${suffix}${exe}" ]
   then
     echo
-    echo ">>> ${gcc_target_prefix}-gdb${suffix} not present, skipping..."
+    echo ">>> ${gcc_target_prefix}-gdb${suffix} not present, tests skipped."
     return
   fi
 
   (
     case "${suffix}" in
       '')
-        echo
-        echo "Testing if gdb${suffix} starts properly..."
         ;;
+
       -py)
         local python_name
         if [ "${node_platform}" == "win32" ]
@@ -146,6 +145,9 @@ function run_gdb()
         else       
           python_name="python2.7"
         fi
+
+        echo
+        echo "Identifying Python 2..."
 
         local which_python
         set +e
@@ -157,8 +159,9 @@ function run_gdb()
           return
         fi
         set -e
-        echo
-        echo "Testing if gdb${suffix} starts properly..."
+
+        echo "Found as ${which_python}."
+
         echo
         ${python_name} --version
         ${python_name} -c 'import sys; print sys.path'
@@ -166,14 +169,30 @@ function run_gdb()
         export PYTHONHOME="$(${python_name} -c 'from distutils import sysconfig;print(sysconfig.PREFIX)')"
         echo "PYTHONHOME=${PYTHONHOME}"
         ;;
+
       -py3)
         local python_name
         if [ "${node_platform}" == "win32" ]
         then
+          if [ -f "/c/Python38/python.exe" ]
+          then
+            export PATH="/c/Python38:$PATH"
+          elif [ -f "/c/Python37/python.exe" ]
+          then
+            export PATH="/c/Python37:$PATH"
+          fi
+
           python_name="python"
-        else       
+        elif [ "${node_platform}" == "linux" ]
+        then
+          python_name="python3.7"
+        elif [ "${node_platform}" == "darwin" ]
+        then
           python_name="python3.7"
         fi
+
+        echo
+        echo "Identifying Python 3..."
 
         set +e
         local which_python
@@ -181,13 +200,12 @@ function run_gdb()
         if [ -z "${which_python}" ]
         then
           echo
-          echo ">>> No python3.7 installed, skipping gdb_py3 test."
+          echo ">>> No ${python_name} installed, skipping gdb_py3 test."
           return
         fi
         set -e
+        echo "Found as ${which_python}."
 
-        echo
-        echo "Testing if gdb${suffix} starts properly..."
         echo
         ${python_name} --version
         ${python_name} -c 'import sys; print(sys.path)'
@@ -201,6 +219,9 @@ function run_gdb()
         exit 1
         ;;
     esac
+
+    echo
+    echo "Testing if gdb${suffix} starts properly..."
 
     # rm -rf "${app_folder_path}/bin/python27.dll"
     show_libs "${app_folder_path}/bin/${gcc_target_prefix}-gdb${suffix}"
@@ -243,20 +264,20 @@ function run_tests()
 {
   local gcc_target_prefix="arm-none-eabi"
 
-  run_binutils
+  test_binutils
 
-  run_gcc
+  test_gcc
 
-  run_gdb
+  test_gdb
 
   if [ "${has_gdb_py}" == "y" ]
   then
-    run_gdb "-py"
+    test_gdb "-py"
   fi
 
   if [ "${has_gdb_py3}" == "y" ]
   then
-    run_gdb "-py3"
+    test_gdb "-py3"
   fi
 
   echo
