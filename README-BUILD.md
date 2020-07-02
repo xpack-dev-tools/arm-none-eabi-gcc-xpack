@@ -122,8 +122,8 @@ To prepare a new release:
   (except the PDF);
 - commit with a message like **8-2018-q4-major**; also add a tag;
 - check differences from the previous version;
-- determine the GCC version (like `8.2.1`) and update the `scripts/VERSION`
-  file; the format is `8.2.1-1.8`. The fourth digit is the number of the
+- determine the GCC version (like `9.3.1`) and update the `scripts/VERSION`
+  file; the format is `9.3.1-1.1`. The fourth digit is the number of the
   Arm release of the same GCC version, and the fifth digit is the xPack
   GNU Arm Embedded GCC release number of this version.
 - add a new set of definitions in the `scripts/container-build.sh`, with
@@ -238,14 +238,14 @@ their SHA signatures, created in the `deploy` folder:
 ```console
 $ ls -l deploy
 total 487380
--rw-r--r-- 1 ilg ilg 115361011 Jul 26 11:57 xpack-arm-none-eabi-gcc-8.2.1-1.8-linux-x32.tgz
--rw-r--r-- 1 ilg ilg       114 Jul 26 11:57 xpack-arm-none-eabi-gcc-8.2.1-1.8-linux-x32.tgz.sha
--rw-r--r-- 1 ilg ilg 113706069 Jul 26 11:55 xpack-arm-none-eabi-gcc-8.2.1-1.8-linux-x64.tgz
--rw-r--r-- 1 ilg ilg       114 Jul 26 11:55 xpack-arm-none-eabi-gcc-8.2.1-1.8-linux-x64.tgz.sha
--rw-r--r-- 1 ilg ilg 130202357 Jul 26 11:58 xpack-arm-none-eabi-gcc-8.2.1-1.8-win32-x32.zip
--rw-r--r-- 1 ilg ilg       114 Jul 26 11:58 xpack-arm-none-eabi-gcc-8.2.1-1.8-win32-x32.zip.sha
--rw-r--r-- 1 ilg ilg 139768099 Jul 26 11:56 xpack-arm-none-eabi-gcc-8.2.1-1.8-win32-x64.zip
--rw-r--r-- 1 ilg ilg       114 Jul 26 11:56 xpack-arm-none-eabi-gcc-8.2.1-1.8-win32-x64.zip.sha
+-rw-r--r-- 1 ilg ilg 115361011 Jul 26 11:57 xpack-arm-none-eabi-gcc-9.3.1-1.1-linux-x32.tgz
+-rw-r--r-- 1 ilg ilg       114 Jul 26 11:57 xpack-arm-none-eabi-gcc-9.3.1-1.1-linux-x32.tgz.sha
+-rw-r--r-- 1 ilg ilg 113706069 Jul 26 11:55 xpack-arm-none-eabi-gcc-9.3.1-1.1-linux-x64.tgz
+-rw-r--r-- 1 ilg ilg       114 Jul 26 11:55 xpack-arm-none-eabi-gcc-9.3.1-1.1-linux-x64.tgz.sha
+-rw-r--r-- 1 ilg ilg 130202357 Jul 26 11:58 xpack-arm-none-eabi-gcc-9.3.1-1.1-win32-x32.zip
+-rw-r--r-- 1 ilg ilg       114 Jul 26 11:58 xpack-arm-none-eabi-gcc-9.3.1-1.1-win32-x32.zip.sha
+-rw-r--r-- 1 ilg ilg 139768099 Jul 26 11:56 xpack-arm-none-eabi-gcc-9.3.1-1.1-win32-x64.zip
+-rw-r--r-- 1 ilg ilg       114 Jul 26 11:56 xpack-arm-none-eabi-gcc-9.3.1-1.1-win32-x64.zip.sha
 ```
 
 To copy the files from the build machine to the current development
@@ -323,10 +323,10 @@ archives and their SHA signatures, created in the `deploy` folder:
 $ cd ~/Work/arm-none-eabi-gcc-*
 $ ls -l deploy
 total 13076
--rw-r--r-- 1 ilg ilg 115361011 Jul 26 11:57 xpack-arm-none-eabi-gcc-9.2.1-1.2-linux-arm64.tgz
--rw-r--r-- 1 ilg ilg       114 Jul 26 11:57 xpack-arm-none-eabi-gcc-9.2.1-1.2-linux-arm64.tgz.sha
--rw-r--r-- 1 ilg ilg 115361011 Jul 26 11:57 xpack-arm-none-eabi-gcc-9.2.1-1.2-linux-arm.tgz
--rw-r--r-- 1 ilg ilg       114 Jul 26 11:57 xpack-arm-none-eabi-gcc-9.2.1-1.2-linux-arm.tgz.sha
+-rw-r--r-- 1 ilg ilg 115361011 Jul 26 11:57 xpack-arm-none-eabi-gcc-9.3.1-1.1-linux-arm64.tgz
+-rw-r--r-- 1 ilg ilg       114 Jul 26 11:57 xpack-arm-none-eabi-gcc-9.3.1-1.1-linux-arm64.tgz.sha
+-rw-r--r-- 1 ilg ilg 115361011 Jul 26 11:57 xpack-arm-none-eabi-gcc-9.3.1-1.1-linux-arm.tgz
+-rw-r--r-- 1 ilg ilg       114 Jul 26 11:57 xpack-arm-none-eabi-gcc-9.3.1-1.1-linux-arm.tgz.sha
 ```
 
 To copy the files from the build machine to the current development
@@ -371,8 +371,8 @@ and its SHA signature, created in the `deploy` folder:
 ```console
 $ ls -l deploy
 total 215648
--rw-r--r--  1 ilg  staff  110404277 Jul 26 13:29 xpack-arm-none-eabi-gcc-8.2.1-1.8-darwin-x64.tgz
--rw-r--r--  1 ilg  staff        115 Jul 26 13:29 xpack-arm-none-eabi-gcc-8.2.1-1.8-darwin-x64.tgz.sha
+-rw-r--r--  1 ilg  staff  110404277 Jul 26 13:29 xpack-arm-none-eabi-gcc-9.3.1-1.1-darwin-x64.tgz
+-rw-r--r--  1 ilg  staff        115 Jul 26 13:29 xpack-arm-none-eabi-gcc-9.3.1-1.1-darwin-x64.tgz.sha
 ```
 
 To copy the files from the build machine to the current development
@@ -503,8 +503,8 @@ program from there. For example on macOS the output should
 look like:
 
 ```console
-$ /Users/ilg/Downloads/xPacks/arm-none-eabi-gcc/8.2.1-1.8/bin/arm-none-eabi-gcc --version
-arm-none-eabi-gcc (xPack GNU Arm Embedded GCC, 64-bit) 8.2.1 20170904 (release) [ARM/embedded-7-branch revision 255204]
+$ /Users/ilg/Downloads/xPacks/arm-none-eabi-gcc/9.3.1-1.1/bin/arm-none-eabi-gcc --version
+arm-none-eabi-gcc (xPack GNU Arm Embedded GCC, 64-bit) 9.3.1 20170904 (release) [ARM/embedded-7-branch revision 255204]
 ```
 
 ## Installed folders
@@ -513,8 +513,8 @@ After install, the package should create a structure like this (only the
 first two depth levels are shown):
 
 ```console
-$ tree -L 2 /Users/ilg/Library/xPacks/\@xpack-dev-tools/arm-none-eabi-gcc/8.2.1-1.8/.content/
-/Users/ilg/Library/xPacks/\@xpack-dev-tools/arm-none-eabi-gcc/8.2.1-1.8/.content/
+$ tree -L 2 /Users/ilg/Library/xPacks/\@xpack-dev-tools/arm-none-eabi-gcc/9.3.1-1.1/.content/
+/Users/ilg/Library/xPacks/\@xpack-dev-tools/arm-none-eabi-gcc/9.3.1-1.1/.content/
 ├── README.md
 ├── arm-none-eabi
 │   ├── bin
@@ -531,7 +531,7 @@ $ tree -L 2 /Users/ilg/Library/xPacks/\@xpack-dev-tools/arm-none-eabi-gcc/8.2.1-
 │   ├── arm-none-eabi-elfedit
 │   ├── arm-none-eabi-g++
 │   ├── arm-none-eabi-gcc
-│   ├── arm-none-eabi-gcc-8.2.1
+│   ├── arm-none-eabi-gcc-9.3.1
 │   ├── arm-none-eabi-gcc-ar
 │   ├── arm-none-eabi-gcc-nm
 │   ├── arm-none-eabi-gcc-ranlib

@@ -4,6 +4,11 @@
 
 Before starting the build, perform some checks.
 
+### Check possible open issues
+
+Check GitHub [issues](https://github.com/xpack-dev-tools/arm-none-eabi-gcc-xpack/issues)
+and fix them; do not close them yet.
+
 ### Check the `CHANGELOG.md` file
 
 Open the `CHANGELOG.txt` file and check if
@@ -38,11 +43,11 @@ functional.
 
 For this, on each platform (Mac, GNU/Linux 64/32, Windows 64/32):
 
-- - unpack the archive in `Desktop` or in `Downloads`, and rename the version
+- unpack the archive in `Desktop` or in `Downloads`, and rename the version
   folder, by replacing a dash with a space; this will test paths with spaces;
   on Windows the current paths always use spaces, so renaming is not needed;
 - clone this repo locally; on Windows use the Git console;
-```console
+  ```console
 $ git clone --recurse-submodules https://github.com/xpack-dev-tools/arm-none-eabi-gcc-xpack.git \
   ~/Downloads/arm-none-eabi-gcc-xpack.git
 ```
@@ -76,11 +81,11 @@ C:\Users\ilg>set PYTHONHOME=C:\Python27.16
 - commit and push the repo
 - go to the [GitHub Releases](https://github.com/xpack-dev-tools/arm-none-eabi-gcc-xpack/releases) page
 - click **Draft a new release**
-- name the tag like **v8.2.1-1.8** (mind the dash in the middle!)
-- name the release like **xPack GNU Arm Embedded GCC v8.2.1-1.8**
+- name the tag like **v9.3.1-1.1** (mind the dash in the middle!)
+- name the release like **xPack GNU Arm Embedded GCC v9.3.1-1.1**
 (mind the dash)
 - as description
-  - add a downloads badge like `![Github Releases (by Release)](https://img.shields.io/github/downloads/xpack-dev-tools/arm-none-eabi-gcc-xpack/v8.2.1-1.8/total.svg)`
+  - add a downloads badge like `![Github Releases (by Release)](https://img.shields.io/github/downloads/xpack-dev-tools/arm-none-eabi-gcc-xpack/v9.3.1-1.1/total.svg)`
   - draft a short paragraph explaining what are the main changes
 - **attach binaries** and SHA (drag and drop from the archives folder will do it)
 - **enable** the **pre-release** button
@@ -89,14 +94,22 @@ C:\Users\ilg>set PYTHONHOME=C:\Python27.16
 Note: at this moment the system should send a notification to all clients
 watching this project.
 
+## Run the Travis tests
+
+As URL, use something like
+
+base_url="https://github.com/xpack-dev-tools/arm-none-eabi-gcc-xpack/releases/download/v9.3.1-1.1/"
+
+For more details, see `tests/scripts/README.md`.
+
 ## Prepare a new blog post
 
 In the `xpack.github.io` web Git:
 
 - add a new file to `_posts/arm-none-eabi-gcc/releases`
-- name the file like `2018-04-01-arm-none-eabi-gcc-v8-2-1-1-8-released.md`
-- name the post like: **xPack GNU Arm Embedded GCC v8.2.1-1.8 released**
-- as `download_url` use the tagged URL like `https://github.com/xpack-dev-tools/arm-none-eabi-gcc-xpack/releases/tag/v8.2.1-1.8/`
+- name the file like `2020-07-03-arm-none-eabi-gcc-v9-3-1-1-1-released.md`
+- name the post like: **xPack GNU Arm Embedded GCC v9.3.1-1.1 released**
+- as `download_url` use the tagged URL like `https://github.com/xpack-dev-tools/arm-none-eabi-gcc-xpack/releases/tag/v9.3.1-1.1/`
 - update the `date:` field with the current date
 
 If any, close [issues](https://github.com/xpack-dev-tools/arm-none-eabi-gcc-xpack/issues)
@@ -113,16 +126,16 @@ Copy/paste the build report at the end of the post as:
 The SHA-256 hashes for the files are:
 
 4fe99c9122c7f2f84a998640d9b3d3d890a2ae47cbd5469813a3ad015e69bbd7
-xpack-arm-none-eabi-gcc-8.2.1-1.8-linux-x32.tar.xz
+xpack-arm-none-eabi-gcc-9.3.1-1.1-linux-x32.tar.xz
 
 ed6c727b859eed4fcb55aa14bdafd329f71b087877d2eb7438abfec2bb533227
-xpack-arm-none-eabi-gcc-8.2.1-1.8-linux-x64.tar.xz
+xpack-arm-none-eabi-gcc-9.3.1-1.1-linux-x64.tar.xz
 
 578c4525187c498ec0b8255ac46d4177ed3b51b115cb6ca4cd379baa6b70db7a
-xpack-arm-none-eabi-gcc-8.2.1-1.8-win32-x32.zip
+xpack-arm-none-eabi-gcc-9.3.1-1.1-win32-x32.zip
 
 fd9573d0b9e89d87b9bf7f237955bbeba206a93c6cecc2fc3996458798d7a05b
-xpack-arm-none-eabi-gcc-8.2.1-1.8-win32-x64.zip
+xpack-arm-none-eabi-gcc-9.3.1-1.1-win32-x64.zip
 ```
 
 If you missed this, `cat` the content of the `.sha` files:
@@ -135,7 +148,7 @@ $ cat *.sha
 ## Update the Web
 
 - commit the `xpack.github.io` web Git; use a message
-like **xPack GNU Arm Embedded GCC v8.2.1-1.8 released**
+like **xPack GNU Arm Embedded GCC v9.3.1-1.1 released**
 - adjust timestamps
 - wait for the GitHub Pages build to complete
 - remember the post URL, since it must be updated in the release page
@@ -147,21 +160,27 @@ like **xPack GNU Arm Embedded GCC v8.2.1-1.8 released**
 - update the `baseUrl:` with the file URLs (including the tag/version)
 - from the release, copy the SHA & file names
 - check the executable names
-- commit all changes, use a message like `package.json: update urls for 8.2.1-1.8 release` (without `v`)
+- commit all changes, use a message like `package.json: update urls for 9.3.1-1.1 release` (without `v`)
+- check the latest commits `npm run git-log`
 - update `CHANGELOG.md`; commit with a message like
-  _CHANGELOG: prepare npm v8.2.1-1.8.1_
-- `npm version 8.2.1-1.8.1`; the first 5 numbers are the same as the
+  _CHANGELOG: prepare npm v9.3.1-1.1.1_
+- `npm version 9.3.1-1.1.1`; the first 5 numbers are the same as the
   GitHub release; the sixth number is the npm specific version
 - `npm pack` and check the content of the archive
 - push all changes to GitHub
-- `npm publish` (use `--access public` when publishing for the first time)
+- `npm publish --tag next` (use `--access public` when publishing for the first time)
+When the release is considered stable, promote it as `latest`:
+
+- `npm dist-tag ls @xpack-dev-tools/arm-none-eabi-gcc`
+- `npm dist-tag add @xpack-dev-tools/arm-none-eabi-gcc@9.3.1-1.1.1 latest`
+- `npm dist-tag ls @xpack-dev-tools/arm-none-eabi-gcc`
 
 ## Test npm binaries
 
 Install the binaries on all platforms.
 
 ```console
-$ xpm install --global @xpack-dev-tools/arm-none-eabi-gcc@latest
+$ xpm install --global @xpack-dev-tools/arm-none-eabi-gcc@next
 ```
 
 ## Create a final GitHub release
@@ -176,7 +195,7 @@ $ xpm install --global @xpack-dev-tools/arm-none-eabi-gcc@latest
 
 - in a separate browser windows, open [TweetDeck](https://tweetdeck.twitter.com/)
 - using the `@xpack_project` account
-- paste the release name like **xPack GNU Arm Embedded GCC v8.2.1-1.8 released**
+- paste the release name like **xPack GNU Arm Embedded GCC v9.3.1-1.1 released**
 - paste the link to the Web page release
 - click the **Tweet** button
 
