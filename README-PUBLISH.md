@@ -47,10 +47,12 @@ For this, on each platform (Mac, GNU/Linux 64/32, Windows 64/32):
   folder, by replacing a dash with a space; this will test paths with spaces;
   on Windows the current paths always use spaces, so renaming is not needed;
 - clone this repo locally; on Windows use the Git console;
-  ```console
+
+```console
 $ git clone --recurse-submodules https://github.com/xpack-dev-tools/arm-none-eabi-gcc-xpack.git \
   ~/Downloads/arm-none-eabi-gcc-xpack.git
 ```
+
 - in a separate workspace, Import → General → Existing Projects into Workspace
   the Eclipse projects available in the
   `tests/eclipse` folder of the build repo; more details in the
@@ -71,6 +73,7 @@ $ git clone --recurse-submodules https://github.com/xpack-dev-tools/arm-none-eab
   - stop (Terminate)
   - (don't miss the LTO cases, since in the past they had problems)
 - to test the Python debugger, start it with `--version`; on Windows, to test with different versions, set the path with:
+
 ```
 C:\Users\ilg>set PYTHONHOME=C:\Python27.16
 ```
@@ -125,16 +128,25 @@ Copy/paste the build report at the end of the post as:
 ## Checksums
 The SHA-256 hashes for the files are:
 
-4fe99c9122c7f2f84a998640d9b3d3d890a2ae47cbd5469813a3ad015e69bbd7
-xpack-arm-none-eabi-gcc-9.3.1-1.1-linux-x32.tar.xz
+6f5e5b94ecf2afece992b46a60465e3ed5aae172202c2a4e34f8e81e5b0da790  
+xpack-arm-none-eabi-gcc-9.3.1-1.1-darwin-x64.tar.gz
 
-ed6c727b859eed4fcb55aa14bdafd329f71b087877d2eb7438abfec2bb533227
-xpack-arm-none-eabi-gcc-9.3.1-1.1-linux-x64.tar.xz
+8791f653f1fc15b004987a2b84a7c0aabd71bde11e0e68eb32846e9b1ad80986  
+xpack-arm-none-eabi-gcc-9.3.1-1.1-linux-arm64.tar.gz
 
-578c4525187c498ec0b8255ac46d4177ed3b51b115cb6ca4cd379baa6b70db7a
+bb4e1f6c72e32a1696edcfdec57d32ece64ac691a0363e4781db559addac7b79  
+xpack-arm-none-eabi-gcc-9.3.1-1.1-linux-arm.tar.gz
+
+be98731e1bb05fd78e2ec5727f7d6c9a6f2ae548970bbd0998de7079021d8e11  
+xpack-arm-none-eabi-gcc-9.3.1-1.1-linux-x32.tar.gz
+
+10b859d83c7a451add58eaf79afdb9a4a66fc38920884e8a54c809e0a1f4ed3e  
+xpack-arm-none-eabi-gcc-9.3.1-1.1-linux-x64.tar.gz
+
+5cc86c9d17c4fda97107b374ae939fedf9d7428d06e6c31418ea0e5ff1e6aa41  
 xpack-arm-none-eabi-gcc-9.3.1-1.1-win32-x32.zip
 
-fd9573d0b9e89d87b9bf7f237955bbeba206a93c6cecc2fc3996458798d7a05b
+91ab5e1b9b3ffcc606262e2be96bd70ab0be26a42d21e610340412f65de2bb16  
 xpack-arm-none-eabi-gcc-9.3.1-1.1-win32-x64.zip
 ```
 

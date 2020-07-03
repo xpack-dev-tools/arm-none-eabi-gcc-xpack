@@ -237,15 +237,15 @@ their SHA signatures, created in the `deploy` folder:
 
 ```console
 $ ls -l deploy
-total 487380
--rw-r--r-- 1 ilg ilg 115361011 Jul 26 11:57 xpack-arm-none-eabi-gcc-9.3.1-1.1-linux-x32.tgz
--rw-r--r-- 1 ilg ilg       114 Jul 26 11:57 xpack-arm-none-eabi-gcc-9.3.1-1.1-linux-x32.tgz.sha
--rw-r--r-- 1 ilg ilg 113706069 Jul 26 11:55 xpack-arm-none-eabi-gcc-9.3.1-1.1-linux-x64.tgz
--rw-r--r-- 1 ilg ilg       114 Jul 26 11:55 xpack-arm-none-eabi-gcc-9.3.1-1.1-linux-x64.tgz.sha
--rw-r--r-- 1 ilg ilg 130202357 Jul 26 11:58 xpack-arm-none-eabi-gcc-9.3.1-1.1-win32-x32.zip
--rw-r--r-- 1 ilg ilg       114 Jul 26 11:58 xpack-arm-none-eabi-gcc-9.3.1-1.1-win32-x32.zip.sha
--rw-r--r-- 1 ilg ilg 139768099 Jul 26 11:56 xpack-arm-none-eabi-gcc-9.3.1-1.1-win32-x64.zip
--rw-r--r-- 1 ilg ilg       114 Jul 26 11:56 xpack-arm-none-eabi-gcc-9.3.1-1.1-win32-x64.zip.sha
+total 557668
+-rw-rw-r-- 1 ilg ilg 143131261 Jul  2 18:55 xpack-arm-none-eabi-gcc-9.3.1-1.1-linux-x32.tar.gz
+-rw-rw-r-- 1 ilg ilg       117 Jul  2 18:55 xpack-arm-none-eabi-gcc-9.3.1-1.1-linux-x32.tar.gz.sha
+-rw-rw-r-- 1 ilg ilg 140245584 Jul  2 16:33 xpack-arm-none-eabi-gcc-9.3.1-1.1-linux-x64.tar.gz
+-rw-rw-r-- 1 ilg ilg       117 Jul  2 16:33 xpack-arm-none-eabi-gcc-9.3.1-1.1-linux-x64.tar.gz.sha
+-rw-rw-r-- 1 ilg ilg 138135276 Jul  2 19:45 xpack-arm-none-eabi-gcc-9.3.1-1.1-win32-x32.zip
+-rw-rw-r-- 1 ilg ilg       114 Jul  2 19:45 xpack-arm-none-eabi-gcc-9.3.1-1.1-win32-x32.zip.sha
+-rw-rw-r-- 1 ilg ilg 149515912 Jul  2 17:21 xpack-arm-none-eabi-gcc-9.3.1-1.1-win32-x64.zip
+-rw-rw-r-- 1 ilg ilg       114 Jul  2 17:21 xpack-arm-none-eabi-gcc-9.3.1-1.1-win32-x64.zip.sha
 ```
 
 To copy the files from the build machine to the current development
@@ -322,11 +322,11 @@ archives and their SHA signatures, created in the `deploy` folder:
 ```console
 $ cd ~/Work/arm-none-eabi-gcc-*
 $ ls -l deploy
-total 13076
--rw-r--r-- 1 ilg ilg 115361011 Jul 26 11:57 xpack-arm-none-eabi-gcc-9.3.1-1.1-linux-arm64.tgz
--rw-r--r-- 1 ilg ilg       114 Jul 26 11:57 xpack-arm-none-eabi-gcc-9.3.1-1.1-linux-arm64.tgz.sha
--rw-r--r-- 1 ilg ilg 115361011 Jul 26 11:57 xpack-arm-none-eabi-gcc-9.3.1-1.1-linux-arm.tgz
--rw-r--r-- 1 ilg ilg       114 Jul 26 11:57 xpack-arm-none-eabi-gcc-9.3.1-1.1-linux-arm.tgz.sha
+total 268824
+-rw-rw-r-- 1 ilg ilg 139392567 Jul  2 18:59 xpack-arm-none-eabi-gcc-9.3.1-1.1-linux-arm64.tar.gz
+-rw-rw-r-- 1 ilg ilg       119 Jul  2 18:59 xpack-arm-none-eabi-gcc-9.3.1-1.1-linux-arm64.tar.gz.sha
+-rw-rw-r-- 1 ilg ilg 135866864 Jul  3 01:10 xpack-arm-none-eabi-gcc-9.3.1-1.1-linux-arm.tar.gz
+-rw-rw-r-- 1 ilg ilg       117 Jul  3 01:10 xpack-arm-none-eabi-gcc-9.3.1-1.1-linux-arm.tar.gz.sha
 ```
 
 To copy the files from the build machine to the current development
@@ -370,9 +370,9 @@ and its SHA signature, created in the `deploy` folder:
 
 ```console
 $ ls -l deploy
-total 215648
--rw-r--r--  1 ilg  staff  110404277 Jul 26 13:29 xpack-arm-none-eabi-gcc-9.3.1-1.1-darwin-x64.tgz
--rw-r--r--  1 ilg  staff        115 Jul 26 13:29 xpack-arm-none-eabi-gcc-9.3.1-1.1-darwin-x64.tgz.sha
+total 268232
+-rw-r--r--  1 ilg  staff  137326762 Jul  2 21:34 xpack-arm-none-eabi-gcc-9.3.1-1.1-darwin-x64.tar.gz
+-rw-r--r--  1 ilg  staff        118 Jul  2 21:34 xpack-arm-none-eabi-gcc-9.3.1-1.1-darwin-x64.tar.gz.sha
 ```
 
 To copy the files from the build machine to the current development
