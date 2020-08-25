@@ -61,13 +61,13 @@ same folder as the executable.
 On GNU/Linux the binaries are adjusted to use a relative run path:
 
 ```console
-$ readelf -d library.so | grep runpath
- 0x000000000000001d (RUNPATH)            Library runpath: [$ORIGIN]
+$ readelf -d library.so | grep rpath
+ 0x000000000000001d (RPATH)            Library runpath: [$ORIGIN]
 ```
 
-Please note that in the GNU ld.so search strategy, the `DT_RUNPATH` has
-lower priority than `LD_LIBRARY_PATH`, so if this later one is set
-in the environment, it might interfere with the xPack binaries.
+Please note that in the GNU ld.so search strategy, the `DT_RPATH` has
+higher priority than `LD_LIBRARY_PATH`, so if this later one is set
+in the environment, it should not interfere with the xPack binaries.
 
 ### `@executable_path`
 
