@@ -51,8 +51,12 @@ source "${helper_folder_path}/test-functions-source.sh"
 message="Test xPack Arm Embed GCC on latest platforms"
 branch="xpack-develop"
 
+version="$(cat $(dirname $(dirname ${script_folder_path}))/scripts/VERSION)"
+
+# base_url="https://github.com/xpack-dev-tools/pre-releases/releases/download/test/"
 # base_url="https://github.com/xpack-dev-tools/pre-releases/releases/download/experimental/"
-base_url="https://github.com/xpack-dev-tools/arm-none-eabi-gcc-xpack/releases/download/v9.3.1-1.1/"
+base_url="https://github.com/xpack-dev-tools/arm-none-eabi-gcc-xpack/releases/download/v${version}/"
+echo ${base_url}
 
 data_file_path="$(mktemp)"
 
