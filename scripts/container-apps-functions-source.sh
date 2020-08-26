@@ -257,7 +257,7 @@ function build_gcc_first()
         LDFLAGS+=" -v"
       fi
 
-      define_flags_for_target "$1"
+      define_flags_for_target ""
 
       export CPPFLAGS
       export CFLAGS
