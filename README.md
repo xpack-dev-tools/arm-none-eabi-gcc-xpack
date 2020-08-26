@@ -3,10 +3,10 @@
 
 # The xPack GNU Arm Embedded GCC
 
-This open source project is hosted on GitHub as
-[`xpack-dev-tools/arm-none-eabi-gcc-xpack`](https://github.com/xpack-dev-tools/arm-none-eabi-gcc-xpack)
-and provides the platform specific binaries for the
-[xPack GNU Arm Embedded GCC](https://xpack.github.io/arm-none-eabi-gcc/).
+This open source project provides the platform specific binaries for the
+[xPack GNU Arm Embedded GCC](https://xpack.github.io/arm-none-eabi-gcc/);
+it is hosted on GitHub as
+[`xpack-dev-tools/arm-none-eabi-gcc-xpack`](https://github.com/xpack-dev-tools/arm-none-eabi-gcc-xpack).
 
 This distribution plans to follow the official
 [GNU Arm Embedded Toolchain](https://developer.arm.com/open-source/gnu-toolchain/gnu-rm)
@@ -49,8 +49,8 @@ $ xpm install --global @xpack-dev-tools/arm-none-eabi-gcc@latest
 
 This command will always install the latest available version,
 into the central xPacks repository, which is a platform dependent folder
-(check the output of the `xpm` command or the actual folder used on
-your platform).
+(check the output of the `xpm` command for the actual folder used on
+your platform, and mind the hidden `.content` folder).
 
 This location is configurable using the environment variable
 `XPACKS_REPO_FOLDER`; for more details please check the
@@ -84,8 +84,8 @@ For more details please read the [Install](https://xpack.github.io/arm-none-eabi
 
 ## Maintainer info
 
-- [How to build?](https://github.com/xpack-dev-tools/arm-none-eabi-gcc-xpack/blob/xpack/README-BUILD.md)
-- [How to publish?](https://github.com/xpack-dev-tools/arm-none-eabi-gcc-xpack/blob/xpack/README-PUBLISH.md)
+- [How to build](https://github.com/xpack-dev-tools/arm-none-eabi-gcc-xpack/blob/xpack/README-BUILD.md)
+- [How to publish](https://github.com/xpack-dev-tools/arm-none-eabi-gcc-xpack/blob/xpack/README-PUBLISH.md)
 
 ## Support
 

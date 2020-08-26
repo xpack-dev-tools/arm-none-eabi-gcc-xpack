@@ -1,4 +1,4 @@
-# How to publish the xPack GNU Arm Embedded GCC binaries?
+# How to publish the xPack GNU Arm Embedded GCC binaries
 
 ## Build
 
@@ -78,6 +78,26 @@ $ git clone --recurse-submodules https://github.com/xpack-dev-tools/arm-none-eab
 C:\Users\ilg>set PYTHONHOME=C:\Python27.16
 ```
 
+## Publish the binaries as pre-release/test
+
+Use the [test pre-release](https://github.com/xpack-dev-tools/pre-releases/releases/tag/test)
+to publish the binaries, for other to test them.
+
+## Run the pre-release Travis tests
+
+In the `tests/scripts/trigger-travis-*.sh` files, check and update the
+URL to use something like
+
+```
+base_url="https://github.com/xpack-dev-tools/pre-releases/releases/download/test/"
+```
+
+Trigger the stable and latest Travis builds (on a Mac by double-clicking 
+on the command scripts):
+
+- `tests/scripts/trigger-travis-stable.mac.command
+- `tests/scripts/trigger-travis-latest.mac.command
+
 ## Create a new GitHub pre-release
 
 - in `CHANGELOG.md`, add release date
@@ -97,11 +117,14 @@ C:\Users\ilg>set PYTHONHOME=C:\Python27.16
 Note: at this moment the system should send a notification to all clients
 watching this project.
 
-## Run the Travis tests
+## Run the release Travis tests
 
-As URL, use something like
+In the `tests/scripts/trigger-travis-*.sh` files, check and update the
+URL, use something like
 
+```
 base_url="https://github.com/xpack-dev-tools/arm-none-eabi-gcc-xpack/releases/download/v9.3.1-1.2/"
+```
 
 For more details, see `tests/scripts/README.md`.
 
@@ -181,6 +204,7 @@ like **xPack GNU Arm Embedded GCC v9.3.1-1.2 released**
 - `npm pack` and check the content of the archive
 - push all changes to GitHub
 - `npm publish --tag next` (use `--access public` when publishing for the first time)
+
 When the release is considered stable, promote it as `latest`:
 
 - `npm dist-tag ls @xpack-dev-tools/arm-none-eabi-gcc`

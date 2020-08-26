@@ -1,4 +1,4 @@
-# How to build the xPack GNU Arm Embedded GCC
+# How to build the xPack GNU Arm Embedded GCC binaries
 
 ## Introduction
 
@@ -29,6 +29,8 @@ There are two types of builds:
 
 This page documents the distribution builds.
 
+For native builds, see the `build-native.sh` script.
+
 ## Repository URLs
 
 The build scripts use Arm archives; occasionally, to avoid bugs, original
@@ -40,8 +42,7 @@ repositories are used:
 
 - `xpack` - the updated content, used during builds
 - `xpack-develop` - the updated content, used during development
-- `master` - the original content; it follows the upstream master (but
-  currently merges from it are several versions behind)
+- `master` - empty, not used.
 
 ## Download the build scripts repo
 
@@ -90,8 +91,8 @@ you can redefine `WORK_FOLDER_PATH` variable before invoking the script.
 
 ## Spaces in folder names
 
-Due to the limitations of `make`, builds started in folders which
-include spaces in the names are known to fail.
+Due to the limitations of `make`, builds started in folders with
+spaces in names are known to fail.
 
 If on your system the work folder is in such a location, redefine it in a
 folder without spaces and set the `WORK_FOLDER_PATH` variable before invoking
@@ -113,6 +114,15 @@ instructions from the separate
 [Prerequisites for building xPack binaries](https://xpack.github.io/xbb/prerequisites/)
 page and return when ready.
 
+## Versioning
+
+The version string is an extension to semver, the format looks like `9.3.1-1.2`.
+It includes the three digits with the original GCC version (9.3.1), a fourth
+digit with the Arm release (1), and a
+fifth digit with the xPack release number.
+
+When publishing on the **npmjs.com** server, a sixth digit is appended.
+
 ## Prepare release
 
 To prepare a new release:
@@ -123,9 +133,7 @@ To prepare a new release:
 - commit with a message like **8-2018-q4-major**; also add a tag;
 - check differences from the previous version;
 - determine the GCC version (like `9.3.1`) and update the `scripts/VERSION`
-  file; the format is `9.3.1-1.2`. The fourth digit is the number of the
-  Arm release of the same GCC version, and the fifth digit is the xPack
-  GNU Arm Embedded GCC release number of this version.
+  file; the format is `9.3.1-1.2`.
 - add a new set of definitions in the `scripts/container-build.sh`, with
   the versions of various components;
 - if newer libraries are used, check if they are available from the local git
