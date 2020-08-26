@@ -5,7 +5,7 @@ Releases in reverse chronological order.
 ### 2020-08-26
 
 - v9.3.1-1.2 prepared
-- [#7] fix libstdc++ exception
+- [#7] fix libstdc++ ignored exceptions
 - remove --disable-rpath
 
 ### 2020-07-03

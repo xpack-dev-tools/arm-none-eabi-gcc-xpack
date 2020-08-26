@@ -140,3 +140,27 @@ function add_linux_install_path()
 }
 
 # -----------------------------------------------------------------------------
+
+function define_flags_for_target()
+{
+  local optimize="${CFLAGS_OPTIMIZATIONS_FOR_TARGET}"
+  if [ "$1" == "" ]
+  then
+    # Normally this is the default, but for just in case.
+    optimize+=" -fexceptions"
+  elif [ "$1" == "-nano" ]
+  then
+    # For newlib-nano optimize for size and disable exceptions.
+    optimize="$(echo ${optimize} | sed -e 's/-O[123]/-Os/') -fno-exceptions"
+  fi
+
+  # Note the intentional `-g`.
+  CFLAGS_FOR_TARGET="${optimize} -g" 
+  CXXFLAGS_FOR_TARGET="${optimize} -g"
+  
+  if [ "${WITH_LIBS_LTO}" == "y" ]
+  then
+    CFLAGS_FOR_TARGET+=" -flto -ffat-lto-objects"
+    CXXFLAGS_FOR_TARGET+=" -flto -ffat-lto-objects"
+  fi 
+}

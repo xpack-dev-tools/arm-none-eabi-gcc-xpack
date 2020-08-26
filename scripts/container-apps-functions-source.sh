@@ -257,8 +257,7 @@ function build_gcc_first()
         LDFLAGS+=" -v"
       fi
 
-      CFLAGS_FOR_TARGET="${CFLAGS_OPTIMIZATIONS_FOR_TARGET}" 
-      CXXFLAGS_FOR_TARGET="${CFLAGS_OPTIMIZATIONS_FOR_TARGET}" 
+      define_flags_for_target "$1"
 
       export CPPFLAGS
       export CFLAGS
@@ -385,25 +384,11 @@ function build_newlib()
       # Add the gcc first stage binaries to the path.
       PATH="${APP_PREFIX}/bin:${PATH}"
 
-      local optimize="${CFLAGS_OPTIMIZATIONS_FOR_TARGET}"
-      if [ "$1" == "-nano" ]
-      then
-        # For newlib-nano optimize for size.
-        optimize="$(echo ${optimize} | sed -e 's/-O[123]/-Os/')"
-      fi
-
       CPPFLAGS="${XBB_CPPFLAGS}" 
       CFLAGS="${XBB_CFLAGS_NO_W}"
       CXXFLAGS="${XBB_CXXFLAGS_NO_W}"
 
-      # Note the intentional `-g`.
-      CFLAGS_FOR_TARGET="${optimize} -g" 
-      CXXFLAGS_FOR_TARGET="${optimize} -g" 
-      if [ "${WITH_NEWLIB_LTO}" == "y" ]
-      then
-        CFLAGS_FOR_TARGET+=" -flto -ffat-lto-objects"
-        CXXFLAGS_FOR_TARGET+=" -flto -ffat-lto-objects"
-      fi
+      define_flags_for_target "$1"
 
       export CPPFLAGS
       export CFLAGS
@@ -710,21 +695,7 @@ function build_gcc_final()
         LDFLAGS+=" -v"
       fi
 
-      local optimize="${CFLAGS_OPTIMIZATIONS_FOR_TARGET}"
-      if [ "$1" == "-nano" ]
-      then
-        # For newlib-nano optimize for size.
-        optimize="$(echo ${optimize} | sed -e 's/-O[123]/-Os/')"
-      fi
-
-      # Note the intentional `-g`.
-      CFLAGS_FOR_TARGET="${optimize} -g" 
-      CXXFLAGS_FOR_TARGET="${optimize} -fno-exceptions -g" 
-      if [ "${WITH_LIBS_LTO}" == "y" ]
-      then
-        CFLAGS_FOR_TARGET+=" -flto -ffat-lto-objects"
-        CXXFLAGS_FOR_TARGET+=" -flto -ffat-lto-objects"
-      fi   
+      define_flags_for_target "$1"
 
       export CPPFLAGS
       export CFLAGS
