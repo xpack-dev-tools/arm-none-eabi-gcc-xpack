@@ -23,7 +23,7 @@ There are two types of builds:
 
 - local/native builds, which use the tools available on the
   host machine; generally the binaries do not run on a different system
-  distribution/version; intended mostly for development purposes.
+  distribution/version; intended mostly for development purposes;
 - distribution builds, which create the archives distributed as
   binaries; expected to run on most modern systems.
 
@@ -93,8 +93,8 @@ you can redefine `WORK_FOLDER_PATH` variable before invoking the script.
 Due to the limitations of `make`, builds started in folders which
 include spaces in the names are known to fail.
 
-If on your system the work folder in in such a location, redefine it in a
-folder without spaces and set the `WORK_FOLDER_PATH` variable before invoking 
+If on your system the work folder is in such a location, redefine it in a
+folder without spaces and set the `WORK_FOLDER_PATH` variable before invoking
 the script.
 
 ## Customizations
@@ -232,7 +232,7 @@ $ bash ~/Downloads/arm-none-eabi-gcc-xpack.git/scripts/build.sh --all
 To detach from the session, use `Ctrl-a` `Ctrl-d`; to reattach use
 `screen -r arm`; to kill the session use `Ctrl-a` `Ctrl-k` and confirm.
 
-Several hours later, the output of the build script is a set of 4 files and
+About 4.5 hours later, the output of the build script is a set of 4 files and
 their SHA signatures, created in the `deploy` folder:
 
 ```console
@@ -315,7 +315,7 @@ $ bash ~/Downloads/arm-none-eabi-gcc-xpack.git/scripts/build.sh --all
 To detach from the session, use `Ctrl-a` `Ctrl-d`; to reattach use
 `screen -r arm`; to kill the session use `Ctrl-a` `Ctrl-k` and confirm.
 
-Several hours later, the output of the build script
+About 9 hours later, the output of the build script
 is a set of 2
 archives and their SHA signatures, created in the `deploy` folder:
 
@@ -347,6 +347,7 @@ fast SSD.
 ```console
 $ ssh xbbm
 ```
+
 To download them, the following shortcut is available:
 
 ```console
@@ -365,7 +366,7 @@ $ caffeinate bash ~/Downloads/arm-none-eabi-gcc-xpack.git/scripts/build.sh --osx
 To detach from the session, use `Ctrl-a` `Ctrl-d`; to reattach use
 `screen -r arm`; to kill the session use `Ctrl-a` `Ctrl-k` and confirm.
 
-Several hours later, the output of the build script is a compressed archive
+In about 4 hours, the output of the build script is a compressed archive
 and its SHA signature, created in the `deploy` folder:
 
 ```console
@@ -381,7 +382,7 @@ folder in a terminal and use `scp`:
 
 ```console
 $ cd ~/Work/arm-none-eabi-gcc-*/deploy
-$ scp * ilg@ilg-wks.local:Downloads/xpack-binaries/arm
+$ scp * ilg@wks:Downloads/xpack-binaries/arm
 ```
 
 ## Run a test build
