@@ -205,12 +205,6 @@ like **xPack GNU Arm Embedded GCC v9.3.1-1.2 released**
 - push all changes to GitHub
 - `npm publish --tag next` (use `--access public` when publishing for the first time)
 
-When the release is considered stable, promote it as `latest`:
-
-- `npm dist-tag ls @xpack-dev-tools/arm-none-eabi-gcc`
-- `npm dist-tag add @xpack-dev-tools/arm-none-eabi-gcc@9.3.1-1.2.1 latest`
-- `npm dist-tag ls @xpack-dev-tools/arm-none-eabi-gcc`
-
 ## Test the npm binaries with xpm
 
 Run the `tests/scripts/trigger-travis-xpm-install.sh` file, this
@@ -229,6 +223,14 @@ $ xpm install --global @xpack-dev-tools/arm-none-eabi-gcc@next
 - add a link to the Web page `[Continue reading »]()`; use an same blog URL
 - **disable** the **pre-release** button
 - click the **Update Release** button
+
+## Promote next to latest
+
+Promote the release as `latest`:
+
+- `npm dist-tag ls @xpack-dev-tools/arm-none-eabi-gcc`
+- `npm dist-tag add @xpack-dev-tools/arm-none-eabi-gcc@9.3.1-1.2.1 latest`
+- `npm dist-tag ls @xpack-dev-tools/arm-none-eabi-gcc`
 
 ## Share on Twitter
 
