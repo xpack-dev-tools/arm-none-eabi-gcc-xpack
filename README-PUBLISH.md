@@ -211,9 +211,12 @@ When the release is considered stable, promote it as `latest`:
 - `npm dist-tag add @xpack-dev-tools/arm-none-eabi-gcc@9.3.1-1.2.1 latest`
 - `npm dist-tag ls @xpack-dev-tools/arm-none-eabi-gcc`
 
-## Test npm binaries
+## Test the npm binaries with xpm
 
-Install the binaries on all platforms.
+Run the `tests/scripts/trigger-travis-xpm-install.sh` file, this
+will install the package on Intel Linux 64-bit, macOS and Windows 64-bit.
+
+For the 32-bit platforms, install the binaries manually.
 
 ```console
 $ xpm install --global @xpack-dev-tools/arm-none-eabi-gcc@next
