@@ -21,10 +21,10 @@ for GNU/Linux and Windows or a custom folder for MacOS).
 
 There are two types of builds:
 
-- local/native builds, which use the tools available on the
+- **local/native builds**, which use the tools available on the
   host machine; generally the binaries do not run on a different system
   distribution/version; intended mostly for development purposes;
-- distribution builds, which create the archives distributed as
+- **distribution builds**, which create the archives distributed as
   binaries; expected to run on most modern systems.
 
 This page documents the distribution builds.
