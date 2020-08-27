@@ -240,7 +240,7 @@ $ bash ~/Downloads/arm-none-eabi-gcc-xpack.git/scripts/build.sh --all
 To detach from the session, use `Ctrl-a` `Ctrl-d`; to reattach use
 `screen -r arm`; to kill the session use `Ctrl-a` `Ctrl-k` and confirm.
 
-About 4.5 hours later, the output of the build script is a set of 4 files and
+About 5 hours later, the output of the build script is a set of 4 files and
 their SHA signatures, created in the `deploy` folder:
 
 ```console
@@ -323,8 +323,7 @@ $ bash ~/Downloads/arm-none-eabi-gcc-xpack.git/scripts/build.sh --all
 To detach from the session, use `Ctrl-a` `Ctrl-d`; to reattach use
 `screen -r arm`; to kill the session use `Ctrl-a` `Ctrl-k` and confirm.
 
-About 9 hours later, the output of the build script
-is a set of 2
+About 13 hours later, the output of the build script is a set of 2
 archives and their SHA signatures, created in the `deploy` folder:
 
 ```console
