@@ -262,7 +262,7 @@ folder in a terminal and use `scp`:
 
 ```console
 $ cd ~/Work/arm-none-eabi-gcc-*/deploy
-$ scp * ilg@ilg-wks.local:Downloads/xpack-binaries/arm
+$ scp * ilg@wks:Downloads/xpack-binaries/arm
 ```
 
 #### Build the Arm GNU/Linux binaries
