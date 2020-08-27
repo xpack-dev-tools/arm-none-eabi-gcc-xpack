@@ -245,15 +245,15 @@ their SHA signatures, created in the `deploy` folder:
 
 ```console
 $ ls -l deploy
-total 557668
--rw-rw-r-- 1 ilg ilg 143131261 Jul  2 18:55 xpack-arm-none-eabi-gcc-9.3.1-1.2-linux-x32.tar.gz
--rw-rw-r-- 1 ilg ilg       117 Jul  2 18:55 xpack-arm-none-eabi-gcc-9.3.1-1.2-linux-x32.tar.gz.sha
--rw-rw-r-- 1 ilg ilg 140245584 Jul  2 16:33 xpack-arm-none-eabi-gcc-9.3.1-1.2-linux-x64.tar.gz
--rw-rw-r-- 1 ilg ilg       117 Jul  2 16:33 xpack-arm-none-eabi-gcc-9.3.1-1.2-linux-x64.tar.gz.sha
--rw-rw-r-- 1 ilg ilg 138135276 Jul  2 19:45 xpack-arm-none-eabi-gcc-9.3.1-1.2-win32-x32.zip
--rw-rw-r-- 1 ilg ilg       114 Jul  2 19:45 xpack-arm-none-eabi-gcc-9.3.1-1.2-win32-x32.zip.sha
--rw-rw-r-- 1 ilg ilg 149515912 Jul  2 17:21 xpack-arm-none-eabi-gcc-9.3.1-1.2-win32-x64.zip
--rw-rw-r-- 1 ilg ilg       114 Jul  2 17:21 xpack-arm-none-eabi-gcc-9.3.1-1.2-win32-x64.zip.sha
+total 598108
+-rw-rw-r-- 1 ilg ilg 153671384 Aug 26 18:21 xpack-arm-none-eabi-gcc-9.3.1-1.2-linux-x32.tar.gz
+-rw-rw-r-- 1 ilg ilg       117 Aug 26 18:21 xpack-arm-none-eabi-gcc-9.3.1-1.2-linux-x32.tar.gz.sha
+-rw-rw-r-- 1 ilg ilg 150796175 Aug 26 15:59 xpack-arm-none-eabi-gcc-9.3.1-1.2-linux-x64.tar.gz
+-rw-rw-r-- 1 ilg ilg       117 Aug 26 15:59 xpack-arm-none-eabi-gcc-9.3.1-1.2-linux-x64.tar.gz.sha
+-rw-rw-r-- 1 ilg ilg 148295355 Aug 26 19:11 xpack-arm-none-eabi-gcc-9.3.1-1.2-win32-x32.zip
+-rw-rw-r-- 1 ilg ilg       114 Aug 26 19:11 xpack-arm-none-eabi-gcc-9.3.1-1.2-win32-x32.zip.sha
+-rw-rw-r-- 1 ilg ilg 159675812 Aug 26 16:47 xpack-arm-none-eabi-gcc-9.3.1-1.2-win32-x64.zip
+-rw-rw-r-- 1 ilg ilg       114 Aug 26 16:47 xpack-arm-none-eabi-gcc-9.3.1-1.2-win32-x64.zip.sha
 ```
 
 To copy the files from the build machine to the current development
@@ -330,11 +330,11 @@ archives and their SHA signatures, created in the `deploy` folder:
 ```console
 $ cd ~/Work/arm-none-eabi-gcc-*
 $ ls -l deploy
-total 268824
--rw-rw-r-- 1 ilg ilg 139392567 Jul  2 18:59 xpack-arm-none-eabi-gcc-9.3.1-1.2-linux-arm64.tar.gz
--rw-rw-r-- 1 ilg ilg       119 Jul  2 18:59 xpack-arm-none-eabi-gcc-9.3.1-1.2-linux-arm64.tar.gz.sha
--rw-rw-r-- 1 ilg ilg 135866864 Jul  3 01:10 xpack-arm-none-eabi-gcc-9.3.1-1.2-linux-arm.tar.gz
--rw-rw-r-- 1 ilg ilg       117 Jul  3 01:10 xpack-arm-none-eabi-gcc-9.3.1-1.2-linux-arm.tar.gz.sha
+total 289492
+-rw-rw-r-- 1 ilg ilg 149928203 Aug 26 18:21 xpack-arm-none-eabi-gcc-9.3.1-1.2-linux-arm64.tar.gz
+-rw-rw-r-- 1 ilg ilg       119 Aug 26 18:21 xpack-arm-none-eabi-gcc-9.3.1-1.2-linux-arm64.tar.gz.sha
+-rw-rw-r-- 1 ilg ilg 146492312 Aug 27 00:35 xpack-arm-none-eabi-gcc-9.3.1-1.2-linux-arm.tar.gz
+-rw-rw-r-- 1 ilg ilg       117 Aug 27 00:35 xpack-arm-none-eabi-gcc-9.3.1-1.2-linux-arm.tar.gz.sha
 ```
 
 To copy the files from the build machine to the current development
@@ -379,9 +379,9 @@ and its SHA signature, created in the `deploy` folder:
 
 ```console
 $ ls -l deploy
-total 268232
--rw-r--r--  1 ilg  staff  137326762 Jul  2 21:34 xpack-arm-none-eabi-gcc-9.3.1-1.2-darwin-x64.tar.gz
--rw-r--r--  1 ilg  staff        118 Jul  2 21:34 xpack-arm-none-eabi-gcc-9.3.1-1.2-darwin-x64.tar.gz.sha
+total 289000
+-rw-r--r--  1 ilg  staff  147961639 Aug 26 13:50 xpack-arm-none-eabi-gcc-9.3.1-1.2-darwin-x64.tar.gz
+-rw-r--r--  1 ilg  staff        118 Aug 26 13:51 xpack-arm-none-eabi-gcc-9.3.1-1.2-darwin-x64.tar.gz.sha
 ```
 
 To copy the files from the build machine to the current development
@@ -549,8 +549,8 @@ $ tree -L 2 /Users/ilg/Library/xPacks/\@xpack-dev-tools/arm-none-eabi-gcc/9.3.1-
 │   ├── arm-none-eabi-gcov-tool
 │   ├── arm-none-eabi-gdb
 │   ├── arm-none-eabi-gdb-add-index
-│   ├── arm-none-eabi-gdb-add-index-py
-│   ├── arm-none-eabi-gdb-py
+│   ├── arm-none-eabi-gdb-add-index-py3
+│   ├── arm-none-eabi-gdb-py3
 │   ├── arm-none-eabi-gprof
 │   ├── arm-none-eabi-ld
 │   ├── arm-none-eabi-ld.bfd
@@ -561,17 +561,30 @@ $ tree -L 2 /Users/ilg/Library/xPacks/\@xpack-dev-tools/arm-none-eabi-gcc/9.3.1-
 │   ├── arm-none-eabi-readelf
 │   ├── arm-none-eabi-size
 │   ├── arm-none-eabi-strings
-│   └── arm-none-eabi-strip
+│   ├── arm-none-eabi-strip
+│   ├── libcrypt.2.dylib
+│   ├── libexpat.1.dylib
+│   ├── libgcc_s.1.dylib
+│   ├── libgmp.10.dylib
+│   ├── libiconv.2.dylib
+│   ├── libintl.8.dylib
+│   ├── liblzma.5.dylib
+│   ├── libmpfr.4.dylib
+│   ├── libncurses.6.dylib
+│   ├── libpython3.7m.dylib
+│   ├── libstdc++.6.dylib
+│   ├── libz.1.2.8.dylib
+│   └── libz.1.dylib -> libz.1.2.8.dylib
 ├── distro-info
 │   ├── CHANGELOG.md
 │   ├── arm-readme.txt
 │   ├── arm-release.txt
-│   ├── licenses
 │   ├── patches
 │   └── scripts
 ├── include
 │   └── gdb
 ├── lib
+│   ├── bfd-plugins
 │   ├── gcc
 │   ├── libcc1.0.so
 │   └── libcc1.so -> libcc1.0.so
@@ -581,7 +594,7 @@ $ tree -L 2 /Users/ilg/Library/xPacks/\@xpack-dev-tools/arm-none-eabi-gcc/9.3.1-
     ├── doc
     └── gcc-arm-none-eabi
 
-19 directories, 37 files
+19 directories, 50 files
 ```
 
 No other files are installed in any system folders or other locations.
