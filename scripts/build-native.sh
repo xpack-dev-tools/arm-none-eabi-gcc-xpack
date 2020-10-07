@@ -81,7 +81,11 @@ source "${defines_script_path}"
 
 host_detect
 
-docker_images
+# For clarity, explicitly define the docker images here.
+docker_linux64_image=${docker_linux64_image:-"ilegeul/ubuntu:amd64-12.04-xbb-v3.2"}
+docker_linux32_image=${docker_linux32_image:-"ilegeul/ubuntu:i386-12.04-xbb-v3.2"}
+docker_linux_arm64_image=${docker_linux_arm64_image:-"ilegeul/ubuntu:arm64v8-16.04-xbb-v3.2"}
+docker_linux_arm32_image=${docker_linux_arm32_image:-"ilegeul/ubuntu:arm32v7-16.04-xbb-v3.2"}
 
 # -----------------------------------------------------------------------------
 
@@ -91,6 +95,7 @@ host_custom_options "${help_message}" "$@"
 # -----------------------------------------------------------------------------
 
 host_common
+export TARGET_BITS="${HOST_BITS}"
 
 prepare_xbb_env
 prepare_xbb_extras
@@ -112,10 +117,6 @@ source "${container_apps_functions_script_path}"
 echo
 echo "Here we go..."
 echo
-
-build_versions
-
-# -----------------------------------------------------------------------------
 
 build_versions
 
