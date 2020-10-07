@@ -43,7 +43,7 @@ script_folder_name="$(basename "${script_folder_path}")"
 # Script to build the xPack GNU Arm Embeded GCC distribution packages.
 #
 # Developed on macOS 10.13 High Sierra, but intended to run on
-# macOS 10.10 Yosemite and CentOS 6 XBB. 
+# macOS 10.10 Yosemite and Ubuntu 12 XBB. 
 
 # -----------------------------------------------------------------------------
 
