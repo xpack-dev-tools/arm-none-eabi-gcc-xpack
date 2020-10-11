@@ -1106,7 +1106,7 @@ function build_gdb()
         LDFLAGS+=" -v"
       fi
 
-      if [ "${TARGET_PLATFORM}" == "darwin" ]
+      if false # [ "${TARGET_PLATFORM}" == "darwin" ]
       then
         # Pick some system libraries from XBB, to avoid rebuilding them here.
         CPPFLAGS+=" -I${XBB_FOLDER_PATH}/include" 
