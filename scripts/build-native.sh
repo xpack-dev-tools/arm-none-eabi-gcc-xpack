@@ -123,6 +123,7 @@ build_versions
 # -----------------------------------------------------------------------------
 
 copy_distro_files
+copy_arm_files
 
 create_archive
 

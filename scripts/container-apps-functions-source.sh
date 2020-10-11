@@ -1410,17 +1410,14 @@ function strip_libs()
   fi
 }
 
-function copy_distro_files()
+function copy_arm_files()
 {
   (
     set +u
 
     xbb_activate
 
-    rm -rf "${APP_PREFIX}/${DISTRO_INFO_NAME}"
     mkdir -pv "${APP_PREFIX}/${DISTRO_INFO_NAME}"
-
-    copy_build_files
 
     echo
     echo "Copying Arm files..."
@@ -1432,13 +1429,6 @@ function copy_distro_files()
 
     install -v -c -m 644 "release.txt" \
       "${APP_PREFIX}/${DISTRO_INFO_NAME}/arm-release.txt"
-
-    echo
-    echo "Copying distro files..."
-
-    cd "${BUILD_GIT_PATH}"
-    install -v -c -m 644 "scripts/${README_OUT_FILE_NAME}" \
-      "${APP_PREFIX}/README.md"
   )
 }
 
