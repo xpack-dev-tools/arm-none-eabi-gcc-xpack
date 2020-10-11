@@ -1054,15 +1054,6 @@ function build_gdb()
       # xbb_activate_dev
       xbb_activate_installed_dev
 
-      # No longer seen with XBB v3.2.
-      if false # [ "${TARGET_PLATFORM}" == "darwin" ]
-      then
-        # When compiled with GCC-7 it fails to run, due to
-        # some problems with exceptions unwind.
-        export CC=clang
-        export CXX=clang++
-      fi
-
       CPPFLAGS="${XBB_CPPFLAGS}" 
       CFLAGS="${XBB_CFLAGS_NO_W}"
       CXXFLAGS="${XBB_CXXFLAGS_NO_W}"
@@ -1104,13 +1095,6 @@ function build_gdb()
       if [ "${IS_DEVELOP}" == "y" ]
       then
         LDFLAGS+=" -v"
-      fi
-
-      if false # [ "${TARGET_PLATFORM}" == "darwin" ]
-      then
-        # Pick some system libraries from XBB, to avoid rebuilding them here.
-        CPPFLAGS+=" -I${XBB_FOLDER_PATH}/include" 
-        LDFLAGS+=" -L${XBB_FOLDER_PATH}/lib"
       fi
 
       CONFIG_PYTHON_PREFIX=""
