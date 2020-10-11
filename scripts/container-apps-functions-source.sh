@@ -1049,38 +1049,6 @@ function build_gdb()
       mkdir -pv "${BUILD_FOLDER_PATH}/${gdb_folder_name}"
       cd "${BUILD_FOLDER_PATH}/${gdb_folder_name}"
 
-      local platform_python2
-      if [ -x "/Library/Frameworks/Python.framework/Versions/2.7/bin/python" ]
-      then
-        platform_python2="/Library/Frameworks/Python.framework/Versions/2.7/bin/python2"
-      elif [ -x "/usr/bin/python2.7" ]
-      then
-        platform_python2="/usr/bin/python2.7"
-      elif [ -x "/usr/bin/python2.6" ]
-      then
-        platform_python2="/usr/bin/python2.6"
-      else
-        set +e
-        platform_python2="$(which python)"
-        set -e
-      fi
-
-      local platform_python3
-      if [ -x "/Library/Frameworks/Python.framework/Versions/3.7/bin/python3" ]
-      then
-        platform_python3="/Library/Frameworks/Python.framework/Versions/3.7/bin/python3"
-      elif [ -x "/usr/bin/python3.7" ]
-      then
-        platform_python3="/usr/bin/python3.7"
-      elif [ -x "/usr/bin/python3.6" ]
-      then
-        platform_python3="/usr/bin/python3.6"
-      else
-        set +e
-        platform_python3="$(which python3)"
-        set -e
-      fi
-
       xbb_activate
       # To pick up the python lib from XBB
       # xbb_activate_dev
@@ -1152,15 +1120,10 @@ function build_gdb()
       then
         if [ "${TARGET_PLATFORM}" == "win32" ]
         then
-          extra_python_opts="--with-python=${SOURCES_FOLDER_PATH}/${GCC_COMBO_FOLDER_NAME}/python-config.sh"
+          extra_python_opts="--with-python=${BUILD_GIT_PATH}/patches/python27-config.sh"
         else
-          if [ "${USE_PLATFORM_PYTHON}" == "y" ]
-          then
-            extra_python_opts="--with-python=${platform_python2}"
-          else
-            extra_python_opts="--with-python=$(which python2)"
-          fi
-          
+          extra_python_opts="--with-python=${LIBS_INSTALL_FOLDER_PATH}/bin/python2.7"
+
           if [ "${TARGET_PLATFORM}" == "darwin" ]
           then
             # Use the custom path, 2.7 will be removed from future macOS.
@@ -1174,18 +1137,19 @@ function build_gdb()
       then
         if [ "${TARGET_PLATFORM}" == "win32" ]
         then
-          extra_python_opts="--with-python=${BUILD_GIT_PATH}/patches/python3-config.sh"
+          # The source archive includes only the pyconfig.h.in, which needs
+          # to be configured, which is not an easy task. Thus add the file copied 
+          # from a Windows install.
+          cp -v "${BUILD_GIT_PATH}/patches/pyconfig-win-${PYTHON3_VERSION}.h" \
+            "${LIBS_INSTALL_FOLDER_PATH}/include/pyconfig.h"
+
+          extra_python_opts="--with-python=${BUILD_GIT_PATH}/patches/python${PYTHON3_VERSION_MAJOR_MINOR}-config.sh"
         else
-          if [ "${USE_PLATFORM_PYTHON3}" == "y" ]
-          then
-            extra_python_opts="--with-python=${platform_python3}"
-          else
-            extra_python_opts="--with-python=$(which python3)"
-          fi
+          extra_python_opts="--with-python=${LIBS_INSTALL_FOLDER_PATH}/bin/python3.${PYTHON3_VERSION_MINOR}"
 
           if [ "${TARGET_PLATFORM}" == "darwin" ]
           then
-            CONFIG_PYTHON_PREFIX="/Library/Frameworks/Python.framework/Versions/3.7"
+            CONFIG_PYTHON_PREFIX="/Library/Frameworks/Python.framework/Versions/3.${PYTHON3_VERSION_MINOR}"
           elif [ "${TARGET_PLATFORM}" == "linux" ]
           then
             CONFIG_PYTHON_PREFIX="/usr/local"
@@ -1299,6 +1263,8 @@ function build_gdb()
           )
         fi
 
+        rm -rfv "${LIBS_INSTALL_FOLDER_PATH}/include/pyconfig.h"
+
         show_libs "${APP_PREFIX}/bin/${GCC_TARGET}-gdb$1"
 
       ) 2>&1 | tee "${LOGS_FOLDER_PATH}/${gdb_folder_name}/make-output.txt"
@@ -1338,27 +1304,6 @@ function test_gdb()
     suffix="$1"
   fi
 
-  if [ "${suffix}" != "" -a "${TARGET_PLATFORM}" == "win32" ]
-  then
-    (
-      xbb_activate
-
-      show_libs "${APP_PREFIX}/bin/${GCC_TARGET}-gdb${suffix}"
-
-      # Fails on Wine
-      # ImportError: No module named site
-      # 007b:fixme:msvcrt:__clean_type_info_names_internal (0x1e31e2e8) stub
-      run_app "${APP_PREFIX}/bin/${GCC_TARGET}-gdb${suffix}" --version || true
-    )
-    return 0
-  fi
-
-  # error while loading shared libraries: /Host/home/ilg/Work/arm-none-eabi-gcc-8.2.1-1.5/linux-x32/install/arm-none-eabi-gcc/bin/libpython3.7m.so.1.0: unsupported version 0 of Verneed record
-  if [ "${suffix}" == "-py3" -a "${TARGET_PLATFORM}" == "linux" -a "${TARGET_ARCH}" == "x32" ]
-  then
-    return 0
-  fi
-
   (
     # Required by gdb-py to access the python shared library.
     xbb_activate_installed_bin
@@ -1369,32 +1314,43 @@ function test_gdb()
     # Use the XBB modern Python.
     if [ "${suffix}" == "-py" ]
     then
-      echo
-      python2 --version
+      if [ "${TARGET_PLATFORM}" == "win32" ]
+      then
+        # There is no simple way to create a Windows Python2 environment to
+        # run the tests, so...
+        echo "skipped..."
+        return 0
+        # export PYTHONPATH="${SOURCES_FOLDER_PATH}/${PYTHON2_WIN_SRC_FOLDER_NAME}/python27.zip;${SOURCES_FOLDER_PATH}/${PYTHON2_WIN_SRC_FOLDER_NAME}"
+      else
+        echo
+        python2.${PYTHON2_VERSION_MINOR} --version
+        python2.${PYTHON2_VERSION_MINOR} -c 'import sys; import os; print(os.pathsep.join(sys.path))'
 
-      if [ "${TARGET_PLATFORM}" == "linux" ]
-      then
-        export PYTHONHOME="${XBB_FOLDER_PATH}"
-      elif [ "${TARGET_PLATFORM}" == "win32" ]
-      then
-        # export PYTHONHOME="${XBB_FOLDER_PATH}"
-        export PYTHONPATH="${XBB_FOLDER_PATH}/lib/python2.7"
+        export PYTHONHOME="$(python2.${PYTHON2_VERSION_MINOR} -c 'import sys; print(sys.prefix)')"
+        export PYTHONPATH="$(python2.${PYTHON2_VERSION_MINOR} -c 'import sys; import os; print(os.pathsep.join(sys.path))')"
       fi
     elif [ "${suffix}" == "-py3" ]
     then
-      echo
-      python3 --version
-
-      if [ "${TARGET_PLATFORM}" == "linux" ]
+      if [ "${TARGET_PLATFORM}" == "win32" ]
       then
-        export PYTHONHOME="${XBB_FOLDER_PATH}"
+        export PYTHONPATH="${SOURCES_FOLDER_PATH}/${PYTHON3_WIN_SRC_FOLDER_NAME}/python37.zip;${SOURCES_FOLDER_PATH}/${PYTHON3_WIN_SRC_FOLDER_NAME}"
+      else
+        echo
+        python3.${PYTHON3_VERSION_MINOR} --version
+        python3.${PYTHON3_VERSION_MINOR} -c 'import sys; import os; print(os.pathsep.join(sys.path))'
+
+        export PYTHONHOME="$(python3.${PYTHON3_VERSION_MINOR} -c 'import sys; print(sys.prefix)')"
+        export PYTHONPATH="$(python3.${PYTHON3_VERSION_MINOR} -c 'import sys; import os; print(os.pathsep.join(sys.path))')"
       fi
     fi
 
-    set +u
-    echo "PYTHONHOME=${PYTHONHOME}"
-    echo "PYTHONPATH=${PYTHONPATH}"
-    set -u
+    if [ "${suffix}" != "" ]
+    then
+      set +u
+      echo "PYTHONHOME=${PYTHONHOME}"
+      echo "PYTHONPATH=${PYTHONPATH}"
+      set -u
+    fi
 
     run_app "${APP_PREFIX}/bin/${GCC_TARGET}-gdb${suffix}" --version
     run_app "${APP_PREFIX}/bin/${GCC_TARGET}-gdb${suffix}" --config
