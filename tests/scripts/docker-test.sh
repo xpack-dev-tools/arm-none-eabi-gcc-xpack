@@ -42,6 +42,8 @@ script_folder_name="$(basename "${script_folder_path}")"
 
 # =============================================================================
 
+source "${script_folder_path}/app-defs.sh"
+
 helper_folder_path="$(dirname $(dirname "${script_folder_path}"))/scripts/helper"
 
 source "${helper_folder_path}/test-functions-source.sh"
@@ -50,8 +52,6 @@ source "${script_folder_path}/common-functions-source.sh"
 # -----------------------------------------------------------------------------
 
 detect_architecture
-
-app_lc_name="arm-none-eabi-gcc"
 
 prepare_env "$(dirname $(dirname "${script_folder_path}"))"
 

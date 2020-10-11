@@ -270,14 +270,12 @@ function run_tests()
 
   test_gdb
 
-  if [ "${has_gdb_py}" == "y" ]
-  then
-    test_gdb "-py"
-  fi
-
   if [ "${has_gdb_py3}" == "y" ]
   then
     test_gdb "-py3"
+  else
+    echo
+    echo ">>> gdb-py3 tests skipped."
   fi
 
   echo

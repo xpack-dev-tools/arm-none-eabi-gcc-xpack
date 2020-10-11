@@ -51,33 +51,15 @@ source "${script_folder_path}/common-functions-source.sh"
 
 # -----------------------------------------------------------------------------
 
-force_32_bit=""
-if [ "$1" == "--32" ]
-then
-  force_32_bit="y"
-  shift
-fi
+# This runs inside a Docker container.
 
-base_url="$1"
-echo "${base_url}"
+image_name="$1"
+echo "${image_name}"
 shift
-
-has_gdb_py="y"
-has_gdb_py3="y"
 
 while [ $# -gt 0 ]
 do
   case "$1" in
-
-    --skip-gdb-py)
-      has_gdb_py="n"
-      shift
-      ;;
-
-    --skip-gdb-py3)
-      has_gdb_py3="n"
-      shift
-      ;;
 
     -*)
       echo "Unsupported option $1."
@@ -87,32 +69,59 @@ do
   esac
 done
 
-echo "${base_url}"
+# -----------------------------------------------------------------------------
+
+# Make sure that the minimum prerequisites are met.
+if [[ ${image_name} == *ubuntu* ]] || [[ ${image_name} == *debian* ]] || [[ ${image_name} == *raspbian* ]]
+then
+  run_verbose apt-get -qq update 
+  run_verbose apt-get -qq install -y git-core curl tar gzip lsb-release binutils
+  run_verbose apt-get -qq install -y build-essential 
+  run_verbose apt-get -qq install -y python || true
+  # run_verbose apt-get -qq install -y python3 || true
+elif [[ ${image_name} == *centos* ]] || [[ ${image_name} == *fedora* ]]
+then
+  run_verbose yum install -y -q git curl tar gzip redhat-lsb-core binutils
+  run_verbose yum install -y -q python || true
+  # run_verbose yum install -y -q python3 || true
+elif [[ ${image_name} == *opensuse* ]]
+then
+  run_verbose zypper -q in -y git-core curl tar gzip lsb-release binutils
+  run_verbose zypper -q in -y python || true
+  # run_verbose zypper -q in -y python3 || true
+elif [[ ${image_name} == *manjaro* ]]
+then
+  run_verbose pacman-mirrors -g
+  run_verbose pacman -S -y -q --noconfirm 
+
+  # Update even if up to date (-yy) & upgrade (-u).
+  # pacman -S -yy -u -q --noconfirm 
+  run_verbose pacman -S -q --noconfirm --noprogressbar git curl tar gzip lsb-release binutils file
+  run_verbose pacman -S -q --noconfirm --noprogressbar python || true
+  # run_verbose pacman -S -q --noconfirm --noprogressbar python3 || true
+elif [[ ${image_name} == *archlinux* ]]
+then
+  pacman -S -y -q --noconfirm 
+
+  # Update even if up to date (-yy) & upgrade (-u).
+  # pacman -S -yy -u -q --noconfirm 
+  run_verbose pacman -S -q --noconfirm --noprogressbar git curl tar gzip lsb-release binutils file
+  run_verbose pacman -S -q --noconfirm --noprogressbar python || true
+  # run_verbose pacman -S -q --noconfirm --noprogressbar python3 || true
+fi
 
 # -----------------------------------------------------------------------------
 
 detect_architecture
 
-if [ "${node_platform}" == "win32" ]
-then
-  # https://chocolatey.org/docs/commands-reference
-  choco list --local-only
-  # https://chocolatey.org/packages/python3
-  choco install python --version=3.7.6 --yes
-  env | sort
+prepare_env
 
-  echo
-  echo ls -l /c/Python*
-  ls -l /c/Python*
-  
-  echo
-fi
+install_xpm
 
-prepare_env "$(dirname $(dirname "${script_folder_path}"))"
+env | sort
+pwd
 
-install_archive
-
-run_tests
+xpm install --global ${npm_package}
 
 good_bye
 

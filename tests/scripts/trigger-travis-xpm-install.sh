@@ -42,6 +42,8 @@ script_folder_name="$(basename "${script_folder_path}")"
 
 # =============================================================================
 
+source "${script_folder_path}/app-defs.sh"
+
 helper_folder_path="$(dirname $(dirname "${script_folder_path}"))/scripts/helper"
 
 source "${helper_folder_path}/test-functions-source.sh"
@@ -56,9 +58,6 @@ data_file_path="$(mktemp)"
 create_xpm_install_data_file "${message}" "${branch}" "${data_file_path}"
 
 # https://docs.travis-ci.com/user/triggering-builds/
-
-github_org="xpack-dev-tools"
-github_repo="arm-none-eabi-gcc-xpack"
 
 # TRAVIS_ORG_TOKEN must be present in the environment.
 trigger_travis "${github_org}" "${github_repo}" "${data_file_path}"

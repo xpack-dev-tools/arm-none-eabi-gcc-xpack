@@ -35,43 +35,16 @@ then
   script_path="$(pwd)/$0"
 fi
 
-script_name="$(basename "${script_path}")"
-
 script_folder_path="$(dirname "${script_path}")"
 script_folder_name="$(basename "${script_folder_path}")"
 
 # =============================================================================
 
-source "${script_folder_path}/app-defs.sh"
+script_name="$(basename "${script_path}")"
 
-helper_folder_path="$(dirname $(dirname "${script_folder_path}"))/scripts/helper"
+script_base=$(echo "${script_name}" | sed -e 's/\(.*\)[.]mac[.]command/\1/')
+# echo "${script_base}"
 
-source "${helper_folder_path}/test-functions-source.sh"
-
-# -----------------------------------------------------------------------------
-
-message="Test ${app_description} on Windows platforms"
-branch="xpack-develop"
-
-version="$(cat $(dirname $(dirname ${script_folder_path}))/scripts/VERSION)"
-
-base_url="https://github.com/${github_org}/${github_repo}/releases/download/v${version}/"
-# base_url="https://github.com/${github_org}/${github_pre_releases}/releases/download/test/"
-# base_url="https://github.com/${github_org}/${github_pre_releases}/releases/download/experimental/"
-echo ${base_url}
-
-data_file_path="$(mktemp)"
-
-create_windows_data_file "${message}" "${branch}" "${base_url}" "${data_file_path}"
-
-# https://docs.travis-ci.com/user/triggering-builds/
-
-# TRAVIS_ORG_TOKEN must be present in the environment.
-trigger_travis "${github_org}" "${github_repo}" "${data_file_path}"
-
-cat "${data_file_path}"
-rm -v "${data_file_path}"
-
-echo "Done."
+DEBUG=${DEBUG} bash "${script_folder_path}/${script_base}.sh"
 
 # -----------------------------------------------------------------------------

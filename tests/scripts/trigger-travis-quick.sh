@@ -50,19 +50,19 @@ source "${helper_folder_path}/test-functions-source.sh"
 
 # -----------------------------------------------------------------------------
 
-message="Test ${app_description} on Windows platforms"
+message="Test ${app_description} on stable platforms"
 branch="xpack-develop"
 
 version="$(cat $(dirname $(dirname ${script_folder_path}))/scripts/VERSION)"
 
 base_url="https://github.com/${github_org}/${github_repo}/releases/download/v${version}/"
 # base_url="https://github.com/${github_org}/${github_pre_releases}/releases/download/test/"
-# base_url="https://github.com/${github_org}/${github_pre_releases}/releases/download/experimental/"
+ base_url="https://github.com/${github_org}/${github_pre_releases}/releases/download/experimental/"
 echo ${base_url}
 
 data_file_path="$(mktemp)"
 
-create_windows_data_file "${message}" "${branch}" "${base_url}" "${data_file_path}"
+create_quick_data_file "${message}" "${branch}" "${base_url}" "${data_file_path}"
 
 # https://docs.travis-ci.com/user/triggering-builds/
 
