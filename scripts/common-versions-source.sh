@@ -87,10 +87,6 @@ function build_versions()
 
   # ---------------------------------------------------------------------------
 
-  README_OUT_FILE_NAME="README-${RELEASE_VERSION}.md"
-
-  # ---------------------------------------------------------------------------
-
   # No versioning here, the inner archives use simple names.
   BINUTILS_SRC_FOLDER_NAME=${BINUTILS_SRC_FOLDER_NAME:-"binutils"}
 
@@ -119,6 +115,11 @@ function build_versions()
 
     # https://developer.arm.com/-/media/Files/downloads/gnu-rm/9-2020q2/gcc-arm-none-eabi-9-2020-q2-update-src.tar.bz2
     GCC_COMBO_URL="https://developer.arm.com/-/media/Files/downloads/gnu-rm/${GCC_COMBO_VERSION_MAJOR}-${GCC_COMBO_VERSION_YEAR}${GCC_COMBO_VERSION_QUARTER}${GCC_COMBO_VERSION_SUBFOLDER}/${GCC_COMBO_ARCHIVE}"
+
+    if [[ "${RELEASE_VERSION}" =~ 9\.3\.1-1\.[12] ]]
+    then
+      README_OUT_FILE_NAME="README-${RELEASE_VERSION}.md"
+    fi
 
     # -------------------------------------------------------------------------
     # Used mainly to name the build folders.
@@ -320,6 +321,8 @@ function build_versions()
 
     # https://developer.arm.com/-/media/Files/downloads/gnu-rm/9-2019q4/gcc-arm-none-eabi-9-2019-q4-major-src.tar.bz2
     GCC_COMBO_URL="https://developer.arm.com/-/media/Files/downloads/gnu-rm/${GCC_COMBO_VERSION_MAJOR}-${GCC_COMBO_VERSION_YEAR}${GCC_COMBO_VERSION_QUARTER}${GCC_COMBO_VERSION_SUBFOLDER}/${GCC_COMBO_ARCHIVE}"
+
+    README_OUT_FILE_NAME="README-${RELEASE_VERSION}.md"
 
     # -------------------------------------------------------------------------
     # Used mainly to name the build folders.
