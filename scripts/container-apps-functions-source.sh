@@ -1413,8 +1413,6 @@ function strip_libs()
 function copy_arm_files()
 {
   (
-    set +u
-
     xbb_activate
 
     mkdir -pv "${APP_PREFIX}/${DISTRO_INFO_NAME}"
