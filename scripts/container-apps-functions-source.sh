@@ -1428,61 +1428,6 @@ function tidy_up()
   )
 }
 
-function strip_binaries()
-{
-  local folder_path="${APP_PREFIX}"
-  if [ $# -ge 1 ]
-  then
-    folder_path="$1"
-  fi
-
-  if [ "${WITH_STRIP}" == "y" ]
-  then
-    (
-      xbb_activate
-
-      echo
-      echo "Stripping binaries..."
-
-      local binaries
-      if [ "${TARGET_PLATFORM}" == "win32" ]
-      then
-
-        binaries=$(find "${folder_path}" -name \*.exe)
-        for bin in ${binaries} 
-        do
-          strip_binary2 "${CROSS_COMPILE_PREFIX}"-strip "${bin}"
-        done
-
-      elif [ "${TARGET_PLATFORM}" == "darwin" ]
-      then
-
-        binaries=$(find "${folder_path}" -name \* -perm +111 -and ! -type d)
-        for bin in ${binaries} 
-        do
-          if is_elf "${bin}"
-          then
-            strip_binary2 strip "${bin}"
-          fi
-        done
-
-      elif [ "${TARGET_PLATFORM}" == "linux" ]
-      then
-
-        binaries=$(find "${folder_path}" -name \* -perm /111 -and ! -type d)
-        for bin in ${binaries} 
-        do
-          if is_elf "${bin}"
-          then
-            strip_binary2 strip "${bin}"
-          fi
-        done
-
-      fi
-    )
-  fi
-}
-
 function strip_libs()
 {
   if [ "${WITH_STRIP}" == "y" ]
