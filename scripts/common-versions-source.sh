@@ -555,13 +555,6 @@ function build_versions()
   fi
 
   # ---------------------------------------------------------------------------
-
-  if [ ! -f "${BUILD_GIT_PATH}/scripts/${README_OUT_FILE_NAME}" ]
-  then
-    echo "Missing ${README_OUT_FILE_NAME}, quit."
-    exit 1
-  fi
-
 }
 
 # -----------------------------------------------------------------------------
