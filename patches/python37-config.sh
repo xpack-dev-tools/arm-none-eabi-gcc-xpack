@@ -15,7 +15,7 @@ then
   exit 1
 fi
 
-if [ ! -d "${SOURCES_FOLDER_PATH}/${PYTHON3_WIN_EMBED_FOLDER_NAME}" ]
+if [ ! -d "${SOURCES_FOLDER_PATH}/${PYTHON3_WIN_SRC_FOLDER_NAME}" ]
 then
   exit 1
 fi
@@ -26,7 +26,7 @@ do
   case ${opt} in
 
     --prefix|--exec-prefix)
-      prefix="${SOURCES_FOLDER_PATH}/${PYTHON3_WIN_EMBED_FOLDER_NAME}"
+      prefix="${SOURCES_FOLDER_PATH}/${PYTHON3_WIN_SRC_FOLDER_NAME}"
       echo "${opt} -> [${prefix}]" >&2
       echo "${prefix}"
       ;;
@@ -45,7 +45,7 @@ do
     --libs|--ldflags)
       # Options to link to static libpython2.7 archive so as to avoid  an
       # external dependency on python
-      libs="-L${SOURCES_FOLDER_PATH}/${PYTHON3_WIN_EMBED_FOLDER_NAME} -lpython37"
+      libs="-L${SOURCES_FOLDER_PATH}/${PYTHON3_WIN_SRC_FOLDER_NAME} -lpython37"
       echo "${opt} -> [${libs}]" >&2
       echo "${libs}"
       ;;

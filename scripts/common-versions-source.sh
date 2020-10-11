@@ -145,30 +145,36 @@ function build_versions()
 
     # -------------------------------------------------------------------------
 
-    if [ "${TARGET_PLATFORM}" == "win32" ]
+    if [[ "${RELEASE_VERSION}" =~ 9\.3\.1-1\.[12] ]]
     then
-      # On Windows if fails with 
-      # "The procedure entry point ClearCommBreak could not be located
-      # in the dynamic link library." 
-      # It looks like an incompatibility between Python2 and mingw-w64.
-      # Given that Python2 is end-of-life, it is not worth to further
-      # investigate, disable it for now.
-      WITH_GDB_PY2=""
-    elif [ "${TARGET_PLATFORM}" == "darwin" ]
-    then
-      # ImportError: dlopen(/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/lib-dynload/operator.so, 2): Symbol not found: __PyUnicodeUCS2_AsDefaultEncodedString
-      #  Referenced from: /Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/lib-dynload/operator.so
-      #  Expected in: flat namespace
-      # in /Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/lib-dynload/operator.so
-      WITH_GDB_PY2=""
+      if [ "${TARGET_PLATFORM}" == "win32" ]
+      then
+        # On Windows if fails with 
+        # "The procedure entry point ClearCommBreak could not be located
+        # in the dynamic link library." 
+        # It looks like an incompatibility between Python2 and mingw-w64.
+        # Given that Python2 is end-of-life, it is not worth to further
+        # investigate, disable it for now.
+        WITH_GDB_PY2=""
+      elif [ "${TARGET_PLATFORM}" == "darwin" ]
+      then
+        # ImportError: dlopen(/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/lib-dynload/operator.so, 2): Symbol not found: __PyUnicodeUCS2_AsDefaultEncodedString
+        #  Referenced from: /Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/lib-dynload/operator.so
+        #  Expected in: flat namespace
+        # in /Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/lib-dynload/operator.so
+        WITH_GDB_PY2=""
+      else
+        WITH_GDB_PY2="y"
+      fi
+
+      PYTHON2_VERSION="2.7.18"
+
+      WITH_GDB_PY3="y" 
+      PYTHON3_VERSION="3.7.6"
     else
-      WITH_GDB_PY2="y"
+      WITH_GDB_PY3="y" 
+      PYTHON3_VERSION="3.7.9"
     fi
-
-    PYTHON2_WIN_VERSION="2.7.18"
-
-    WITH_GDB_PY3="y" 
-    PYTHON3_WIN_VERSION="3.7.6"
 
     GDB_PATCH="gdb-${GDB_VERSION}.patch"
 
@@ -205,6 +211,27 @@ function build_versions()
       fi
 
       build_ncurses "6.2"
+
+      if [[ "${RELEASE_VERSION}" =~ 9\.3\.1-1\.[3] ]]
+      then
+        build_readline "8.0" # requires ncurses
+
+        build_bzip2 "1.0.8"
+        build_libffi "3.3"
+
+        # Required by a Python 3 module.
+        build_sqlite "3.32.3"
+
+        # We cannot rely on a python shared library in the system, even
+        # the custom build from sources does not have one.
+
+        if [ "${WITH_GDB_PY3}" == "y" ]
+        then
+          # Replacement for the old libcrypt.so.1; required by Python 3.
+          build_libxcrypt "4.4.17"
+          build_python3 "${PYTHON3_VERSION}"
+        fi
+      fi
     fi
 
     # -------------------------------------------------------------------------
@@ -253,7 +280,7 @@ function build_versions()
       # The Windows GDB needs some headers from the Python distribution.
       if [ "${TARGET_PLATFORM}" == "win32" ]
       then
-        download_python2_win "${PYTHON2_WIN_VERSION}"
+        download_python2_win "${PYTHON2_VERSION}"
       fi
 
       build_gdb "-py"
@@ -263,7 +290,7 @@ function build_versions()
     then
       if [ "${TARGET_PLATFORM}" == "win32" ]
       then
-        download_python3_win "${PYTHON3_WIN_VERSION}"
+        download_python3_win "${PYTHON3_VERSION}"
       fi
 
       build_gdb "-py3"
@@ -344,7 +371,7 @@ function build_versions()
     # -------------------------------------------------------------------------
 
     # Arm uses 2.7.7
-    PYTHON2_WIN_VERSION="2.7.13" # -> 2.7.17
+    PYTHON2_VERSION="2.7.13" # -> 2.7.17
 
     # GDB 8.3 with Python3 not yet functional on Windows.
     # GDB does not know the Python3 API when compiled with mingw.
@@ -470,7 +497,7 @@ function build_versions()
       # The Windows GDB needs some headers from the Python distribution.
       if [ "${TARGET_PLATFORM}" == "win32" ]
       then
-        download_python2_win "${PYTHON2_WIN_VERSION}"
+        download_python2_win "${PYTHON2_VERSION}"
       fi
 
       build_gdb "-py"
@@ -480,7 +507,7 @@ function build_versions()
     then
       if [ "${TARGET_PLATFORM}" == "win32" ]
       then
-        download_python3_win "${PYTHON3_WIN_VERSION}"
+        download_python3_win "${PYTHON3_VERSION}"
       fi
 
       build_gdb "-py3"

@@ -2,6 +2,10 @@
 
 Releases in reverse chronological order.
 
+### 2020-1011
+
+- v9.3.1-1.3 prepared
+
 ### 2020-08-27
 
 - v9.3.1-1.2.1 published on npmjs.com
