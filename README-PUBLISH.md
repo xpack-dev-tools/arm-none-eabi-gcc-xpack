@@ -98,6 +98,8 @@ on the command scripts):
 
 - in `CHANGELOG.md`, add release date
 - commit and push the repo
+- merge xpack-develop to xpack
+- push the repo
 - go to the [GitHub Releases](https://github.com/xpack-dev-tools/arm-none-eabi-gcc-xpack/releases) page
 - click **Draft a new release**
 - name the tag like **v9.3.1-1.3** (mind the dash in the middle!)
@@ -115,12 +117,15 @@ watching this project.
 
 ## Run the release Travis tests
 
-In the `tests/scripts/trigger-travis-*.sh` files, check and update the
-URL, use something like
+Using the scripts in `tests/scripts/`, start:
 
-```
-base_url="https://github.com/xpack-dev-tools/arm-none-eabi-gcc-xpack/releases/download/v9.3.1-1.3/"
-```
+- trigger-travis-quick.mac.command (optional)
+- trigger-travis-stable.mac.command
+- trigger-travis-latest.mac.command
+
+The test results are available from:
+
+- https://travis-ci.org/github/xpack-dev-tools/arm-none-eabi-gcc-xpack
 
 For more details, see `tests/scripts/README.md`.
 
