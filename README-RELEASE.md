@@ -30,6 +30,14 @@ In this Git repo:
 - push it to GitHub.
 - possibly push the helper project too.
 
+### Clean the destination folder
+
+Clear the folder where the binaries from all build machines will be collected.
+
+```console
+$ rm -f ~/Downloads/xpack-binaries/arm/*
+```
+
 ### Run the build scripts
 
 When everything is ready, follow the instructions from the
@@ -211,19 +219,11 @@ like **xPack GNU Arm Embedded GCC v9.3.1-1.3 released**
 Run the `tests/scripts/trigger-travis-xpm-install.sh` file, this
 will install the package on Intel Linux 64-bit, macOS and Windows 64-bit.
 
-For the 32-bit platforms, install the binaries manually.
+For 32-bit Windows, 32-bit Intel GNU/Linux and 32-bit Arm, install manually.
 
 ```console
 $ xpm install --global @xpack-dev-tools/arm-none-eabi-gcc@next
 ```
-
-## Create a final GitHub release
-
-- go to the [GitHub Releases](https://github.com/xpack-dev-tools/arm-none-eabi-gcc-xpack/releases) page
-- check the download counter, it should match the number of tests
-- add a link to the Web page `[Continue reading »]()`; use an same blog URL
-- **disable** the **pre-release** button
-- click the **Update Release** button
 
 ## Promote next to latest
 
@@ -232,6 +232,14 @@ Promote the release as `latest`:
 - `npm dist-tag ls @xpack-dev-tools/arm-none-eabi-gcc`
 - `npm dist-tag add @xpack-dev-tools/arm-none-eabi-gcc@9.3.1-1.3.1 latest`
 - `npm dist-tag ls @xpack-dev-tools/arm-none-eabi-gcc`
+
+## Create the final GitHub release
+
+- go to the [GitHub Releases](https://github.com/xpack-dev-tools/arm-none-eabi-gcc-xpack/releases) page
+- check the download counter, it should match the number of tests
+- add a link to the Web page `[Continue reading »]()`; use an same blog URL
+- **disable** the **pre-release** button
+- click the **Update Release** button
 
 ## Share on Twitter
 
