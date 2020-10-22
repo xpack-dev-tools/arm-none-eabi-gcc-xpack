@@ -924,7 +924,7 @@ function build_gcc_final()
           )
         fi
 
-      ) 2>&1 | tee "${LOGS_FOLDER_PATH}/make-gcc$1-final-output.txt"
+      ) 2>&1 | tee "${LOGS_FOLDER_PATH}/${gcc_final_folder_name}/make-output.txt"
 
       if [ "$1" == "" ]
       then
