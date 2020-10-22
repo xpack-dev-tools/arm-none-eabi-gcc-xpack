@@ -1282,7 +1282,7 @@ function test_gdb()
       -ex='set language auto' \
       -ex='quit'
 
-    if [ "${suffix}" == "py3" ]
+    if [ "${suffix}" == "-py3" ]
     then
       # Show Python paths.
       run_app "${APP_PREFIX}/bin/${GCC_TARGET}-gdb${suffix}" \
