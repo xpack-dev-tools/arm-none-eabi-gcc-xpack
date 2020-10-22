@@ -62,17 +62,11 @@ base_url="$1"
 echo "${base_url}"
 shift
 
-has_gdb_py="y"
 has_gdb_py3="y"
 
 while [ $# -gt 0 ]
 do
   case "$1" in
-
-    --skip-gdb-py)
-      has_gdb_py="n"
-      shift
-      ;;
 
     --skip-gdb-py3)
       has_gdb_py3="n"
@@ -92,21 +86,6 @@ echo "${base_url}"
 # -----------------------------------------------------------------------------
 
 detect_architecture
-
-if [ "${node_platform}" == "win32" ]
-then
-  # https://chocolatey.org/docs/commands-reference
-  choco list --local-only
-  # https://chocolatey.org/packages/python3
-  choco install python --version=3.7.6 --yes
-  env | sort
-
-  echo
-  echo ls -l /c/Python*
-  ls -l /c/Python*
-  
-  echo
-fi
 
 prepare_env "$(dirname $(dirname "${script_folder_path}"))"
 

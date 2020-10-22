@@ -61,7 +61,6 @@ base_url="$1"
 echo "${base_url}"
 shift
 
-has_gdb_py="y"
 has_gdb_py3="y"
 
 while [ $# -gt 0 ]

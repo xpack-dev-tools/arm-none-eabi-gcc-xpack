@@ -103,15 +103,6 @@ tested.
 The GDB client is started with various options and commands, and should
 exit 0.
 
-Testing the GDB binaries which include Python support proved quite
-difficult, and is done summarily, only when possible.
-
-The problem is that embedding Python requires the presence of exactly
-the same version; if for final machines building from sources this exact
-version is relatively easy, doing this on all dcocker images is to
-expensive, so if the exact versions are found, the gdb-py tests are
-performed, otherwise are skipped.
-
 ## GitHub API endpoint
 
 Programatic access to GitHub is done via the v3 API:
