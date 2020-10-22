@@ -329,7 +329,7 @@ function build_gcc_first()
             --without-headers \
             --with-gnu-as \
             --with-gnu-ld \
-            --with-python-dir=share/gcc-${GCC_TARGET} \
+            --with-python-dir="share/gcc-${GCC_TARGET}" \
             --with-sysroot="${APP_PREFIX}/${GCC_TARGET}" \
             ${MULTILIB_FLAGS} \
             \
@@ -1100,24 +1100,7 @@ function build_gdb()
       CONFIG_PYTHON_PREFIX=""
 
       local extra_python_opts="--with-python=no"
-      if [ "$1" == "-py" ]
-      then
-        if [ "${TARGET_PLATFORM}" == "win32" ]
-        then
-          extra_python_opts="--with-python=${BUILD_GIT_PATH}/patches/python27-config.sh"
-        else
-          extra_python_opts="--with-python=${LIBS_INSTALL_FOLDER_PATH}/bin/python2.7"
-
-          if [ "${TARGET_PLATFORM}" == "darwin" ]
-          then
-            # Use the custom path, 2.7 will be removed from future macOS.
-            CONFIG_PYTHON_PREFIX="/Library/Frameworks/Python.framework/Versions/2.7"
-          elif [ "${TARGET_PLATFORM}" == "linux" ]
-          then
-            CONFIG_PYTHON_PREFIX="/usr/local"
-          fi
-        fi
-      elif [ "$1" == "-py3" ]
+      if [ "$1" == "-py3" ]
       then
         if [ "${TARGET_PLATFORM}" == "win32" ]
         then
@@ -1131,13 +1114,7 @@ function build_gdb()
         else
           extra_python_opts="--with-python=${LIBS_INSTALL_FOLDER_PATH}/bin/python3.${PYTHON3_VERSION_MINOR}"
 
-          if [ "${TARGET_PLATFORM}" == "darwin" ]
-          then
-            CONFIG_PYTHON_PREFIX="/Library/Frameworks/Python.framework/Versions/3.${PYTHON3_VERSION_MINOR}"
-          elif [ "${TARGET_PLATFORM}" == "linux" ]
-          then
-            CONFIG_PYTHON_PREFIX="/usr/local"
-          fi
+          CONFIG_PYTHON_PREFIX="${APP_PREFIX}"
         fi
       fi
 
@@ -1294,48 +1271,6 @@ function test_gdb()
 
     show_libs "${APP_PREFIX}/bin/${GCC_TARGET}-gdb${suffix}"
 
-    # The original Python in Ubunutu XBB is too old and the test fails.
-    # Use the XBB modern Python.
-    if [ "${suffix}" == "-py" ]
-    then
-      if [ "${TARGET_PLATFORM}" == "win32" ]
-      then
-        # There is no simple way to create a Windows Python2 environment to
-        # run the tests, so...
-        echo "skipped..."
-        return 0
-        # export PYTHONPATH="${SOURCES_FOLDER_PATH}/${PYTHON2_WIN_SRC_FOLDER_NAME}/python27.zip;${SOURCES_FOLDER_PATH}/${PYTHON2_WIN_SRC_FOLDER_NAME}"
-      else
-        echo
-        python2.${PYTHON2_VERSION_MINOR} --version
-        python2.${PYTHON2_VERSION_MINOR} -c 'import sys; import os; print(os.pathsep.join(sys.path))'
-
-        export PYTHONHOME="$(python2.${PYTHON2_VERSION_MINOR} -c 'import sys; print(sys.prefix)')"
-        export PYTHONPATH="$(python2.${PYTHON2_VERSION_MINOR} -c 'import sys; import os; print(os.pathsep.join(sys.path))')"
-      fi
-    elif [ "${suffix}" == "-py3" ]
-    then
-      if [ "${TARGET_PLATFORM}" == "win32" ]
-      then
-        export PYTHONPATH="${SOURCES_FOLDER_PATH}/${PYTHON3_WIN_SRC_FOLDER_NAME}/python37.zip;${SOURCES_FOLDER_PATH}/${PYTHON3_WIN_SRC_FOLDER_NAME}"
-      else
-        echo
-        python3.${PYTHON3_VERSION_MINOR} --version
-        python3.${PYTHON3_VERSION_MINOR} -c 'import sys; import os; print(os.pathsep.join(sys.path))'
-
-        export PYTHONHOME="$(python3.${PYTHON3_VERSION_MINOR} -c 'import sys; print(sys.prefix)')"
-        export PYTHONPATH="$(python3.${PYTHON3_VERSION_MINOR} -c 'import sys; import os; print(os.pathsep.join(sys.path))')"
-      fi
-    fi
-
-    if [ "${suffix}" != "" ]
-    then
-      set +u
-      echo "PYTHONHOME=${PYTHONHOME}"
-      echo "PYTHONPATH=${PYTHONPATH}"
-      set -u
-    fi
-
     run_app "${APP_PREFIX}/bin/${GCC_TARGET}-gdb${suffix}" --version
     run_app "${APP_PREFIX}/bin/${GCC_TARGET}-gdb${suffix}" --config
 
@@ -1346,6 +1281,17 @@ function test_gdb()
       -ex='show language' \
       -ex='set language auto' \
       -ex='quit'
+
+    if [ "${suffix}" == "py3" ]
+    then
+      # Show Python paths.
+      run_app "${APP_PREFIX}/bin/${GCC_TARGET}-gdb${suffix}" \
+        --nh \
+        --nx \
+        -ex='python import sys; print(sys.prefix)' \
+        -ex='python import sys; import os; print(os.pathsep.join(sys.path))' \
+        -ex='quit'
+    fi
   )
 }
 

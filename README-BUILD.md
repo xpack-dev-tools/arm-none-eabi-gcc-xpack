@@ -33,6 +33,11 @@ For native builds, see the `build-native.sh` script.
 
 ## Repository URLs
 
+- `https://github.com/xpack-dev-tools/arm-none-eabi-gcc-xpack.git` - the URL of the
+  [xPack GNU Arm Embedded GCC](https://github.com/xpack-dev-tools/arm-none-eabi-gcc-xpack)
+- `https://github.com/xpack-dev-tools/build-helper` - the URL of the
+  xPack build helper, used as the `scripts/helper` submodule
+
 The build scripts use Arm archives; occasionally, to avoid bugs, original
 repositories are used:
 
@@ -43,6 +48,13 @@ repositories are used:
 - `xpack` - the updated content, used during builds
 - `xpack-develop` - the updated content, used during development
 - `master` - empty, not used.
+
+## Prerequisites
+
+The prerequisites are common to all binary builds. Please follow the
+instructions in the separate
+[Prerequisites for building binaries](https://xpack.github.io/xbb/prerequisites/)
+page and return when ready.
 
 ## Download the build scripts repo
 
@@ -59,8 +71,8 @@ $ curl --fail -L https://github.com/xpack-dev-tools/arm-none-eabi-gcc-xpack/raw/
 This small script issues the following two commands:
 
 ```console
-$ rm -rf ~/Downloads/arm-none-eabi-gcc-xpack.git
-$ git clone --recurse-submodules https://github.com/xpack-dev-tools/arm-none-eabi-gcc-xpack.git \
+$ rm -rf ~/Downloads/arm-none-eabi-gcc-xpack.git; \
+  git clone --recurse-submodules https://github.com/xpack-dev-tools/arm-none-eabi-gcc-xpack.git \
   ~/Downloads/arm-none-eabi-gcc-xpack.git
 ```
 
@@ -77,8 +89,8 @@ $ curl --fail -L https://github.com/xpack-dev-tools/arm-none-eabi-gcc-xpack/raw/
 which is a shortcut for:
 
 ```console
-$ rm -rf ~/Downloads/arm-none-eabi-gcc-xpack.git
-$ git clone --recurse-submodules --branch xpack-develop https://github.com/xpack-dev-tools/arm-none-eabi-gcc-xpack.git \
+$ rm -rf ~/Downloads/arm-none-eabi-gcc-xpack.git; \
+  git clone --recurse-submodules --branch xpack-develop https://github.com/xpack-dev-tools/arm-none-eabi-gcc-xpack.git \
   ~/Downloads/arm-none-eabi-gcc-xpack.git
 ```
 
@@ -107,52 +119,34 @@ either passed to Docker or sourced to shell. The Docker syntax
 **is not** identical to shell, so some files may
 not be accepted by bash.
 
-## Prerequisites
-
-The prerequisites are common to all binary builds. Please follow the
-instructions from the separate
-[Prerequisites for building xPack binaries](https://xpack.github.io/xbb/prerequisites/)
-page and return when ready.
-
 ## Versioning
 
-The version string is an extension to semver, the format looks like `9.3.1-1.3`.
+The version string is an extension to semver, the format looks like `9.3.1-1.4`.
 It includes the three digits with the original GCC version (9.3.1), a fourth
-digit with the Arm release (1), and a
-fifth digit with the xPack release number.
+digit with the Arm release, a fifth digit with the xPack release number,
+and the sixth with the npm version number.
 
 When publishing on the **npmjs.com** server, a sixth digit is appended.
 
-## Prepare release
+## Changes
 
-To prepare a new release:
+Compared to the original Arm distribution, there should be no
+functional changes.
 
-- download the new _Source Invariant_ archive
-- copy/paste the files and override the `arm-gcc-original-scripts.git` files
-  (except the PDF);
-- commit with a message like **8-2018-q4-major**; also add a tag;
-- check differences from the previous version;
-- determine the GCC version (like `9.3.1`) and update the `scripts/VERSION`
-  file; the format is `9.3.1-1.3`.
-- add a new set of definitions in the `scripts/container-build.sh`, with
-  the versions of various components;
-- if newer libraries are used, check if they are available from the local git
-  cache project.
+The actual changes for each version are documented in the corresponding
+release pages:
 
-### Check `README.md`
+- https://xpack.github.io/arm-none-eabi-gcc/releases/
 
-Normally `README.md` should not need changes, but better check.
-Information related to the new version should not be included here,
-but in the version specific file (below).
+## How to build local/native binaries
 
-### Create `README-<version>.md`
+### README-DEVELOP.md
 
-In the `scripts` folder create a copy of the previous one and update the
-Git commit and possible other details.
+The details on how to prepare the development environment for native build
+are in the
+[`README-DEVELOP.md`](https://github.com/xpack-dev-tools/arm-none-eabi-gcc-xpack/blob/xpack/README-DEVELOP.md) file.
 
-## Update `CHANGELOG.md`
-
-Check `CHANGELOG.md` and add the new release.
+## How to build distributions
 
 ## Build
 
@@ -216,12 +210,6 @@ To remove unused files:
 $ docker system prune --force
 ```
 
-To download the build scripts:
-
-```console
-$ curl --fail -L https://github.com/xpack-dev-tools/arm-none-eabi-gcc-xpack/raw/xpack/scripts/git-clone.sh | bash
-```
-
 To build both the 32/64-bit Windows and GNU/Linux versions, use `--all`; to
 build selectively, use `--linux64 --win64` or `--linux32 --win32` (GNU/Linux
 can be built alone; Windows also requires the GNU/Linux build).
@@ -232,15 +220,20 @@ network connection or a computer entering sleep.
 
 ```console
 $ screen -S arm
-
-$ sudo rm -rf ~/Work/arm-none-eabi-gcc-*
-$ bash ~/Downloads/arm-none-eabi-gcc-xpack.git/scripts/build.sh --all
 ```
 
-or, for development builds:
+Run the development builds on the development machine:
 
 ```console
-$ bash ~/Downloads/arm-none-eabi-gcc-xpack.git/scripts/build.sh --disable-multilib --develop --disable-tests --without-pdf --linux64 --linux32 --win64 --win32
+$ sudo rm -rf ~/Work/arm-none-eabi-gcc-*
+$ bash ~/Downloads/arm-none-eabi-gcc-xpack.git/scripts/build.sh --develop --without-pdf --disable-tests --disable-multilib --linux64 --linux32 --win64 --win32
+```
+
+When ready, run the build on the production machine:
+
+```console
+$ sudo rm -rf ~/Work/arm-none-eabi-gcc-*
+$ bash ~/Downloads/arm-none-eabi-gcc-xpack.git/scripts/build.sh --all
 ```
 
 To detach from the session, use `Ctrl-a` `Ctrl-d`; to reattach use
@@ -252,22 +245,14 @@ their SHA signatures, created in the `deploy` folder:
 ```console
 $ ls -l ~/Work/arm-none-eabi-gcc-*/deploy
 total 598108
--rw-rw-r-- 1 ilg ilg 153671384 Aug 26 18:21 xpack-arm-none-eabi-gcc-9.3.1-1.3-linux-x32.tar.gz
--rw-rw-r-- 1 ilg ilg       117 Aug 26 18:21 xpack-arm-none-eabi-gcc-9.3.1-1.3-linux-x32.tar.gz.sha
--rw-rw-r-- 1 ilg ilg 150796175 Aug 26 15:59 xpack-arm-none-eabi-gcc-9.3.1-1.3-linux-x64.tar.gz
--rw-rw-r-- 1 ilg ilg       117 Aug 26 15:59 xpack-arm-none-eabi-gcc-9.3.1-1.3-linux-x64.tar.gz.sha
--rw-rw-r-- 1 ilg ilg 148295355 Aug 26 19:11 xpack-arm-none-eabi-gcc-9.3.1-1.3-win32-x32.zip
--rw-rw-r-- 1 ilg ilg       114 Aug 26 19:11 xpack-arm-none-eabi-gcc-9.3.1-1.3-win32-x32.zip.sha
--rw-rw-r-- 1 ilg ilg 159675812 Aug 26 16:47 xpack-arm-none-eabi-gcc-9.3.1-1.3-win32-x64.zip
--rw-rw-r-- 1 ilg ilg       114 Aug 26 16:47 xpack-arm-none-eabi-gcc-9.3.1-1.3-win32-x64.zip.sha
-```
-
-To copy the files from the build machine to the current development
-machine, either use NFS to mount the entire folder, or open the `deploy`
-folder in a terminal and use `scp`:
-
-```console
-$ (cd ~/Work/arm-none-eabi-gcc-*/deploy; scp * ilg@wks:Downloads/xpack-binaries/arm)
+-rw-rw-r-- 1 ilg ilg 153671384 Aug 26 18:21 xpack-arm-none-eabi-gcc-9.3.1-1.4-linux-x32.tar.gz
+-rw-rw-r-- 1 ilg ilg       117 Aug 26 18:21 xpack-arm-none-eabi-gcc-9.3.1-1.4-linux-x32.tar.gz.sha
+-rw-rw-r-- 1 ilg ilg 150796175 Aug 26 15:59 xpack-arm-none-eabi-gcc-9.3.1-1.4-linux-x64.tar.gz
+-rw-rw-r-- 1 ilg ilg       117 Aug 26 15:59 xpack-arm-none-eabi-gcc-9.3.1-1.4-linux-x64.tar.gz.sha
+-rw-rw-r-- 1 ilg ilg 148295355 Aug 26 19:11 xpack-arm-none-eabi-gcc-9.3.1-1.4-win32-x32.zip
+-rw-rw-r-- 1 ilg ilg       114 Aug 26 19:11 xpack-arm-none-eabi-gcc-9.3.1-1.4-win32-x32.zip.sha
+-rw-rw-r-- 1 ilg ilg 159675812 Aug 26 16:47 xpack-arm-none-eabi-gcc-9.3.1-1.4-win32-x64.zip
+-rw-rw-r-- 1 ilg ilg       114 Aug 26 16:47 xpack-arm-none-eabi-gcc-9.3.1-1.4-win32-x64.zip.sha
 ```
 
 #### Build the Arm GNU/Linux binaries
@@ -308,80 +293,70 @@ ilegeul/ubuntu      arm64v8-16.04-xbb-v3.2             db95609ffb69        37 ho
 hello-world         latest                             a29f45ccde2a        5 months ago        9.14kB
 ```
 
-To download the build scripts:
-
-```console
-$ curl -L https://github.com/xpack-dev-tools/arm-none-eabi-gcc-xpack/raw/xpack/scripts/git-clone.sh | bash
-```
-
 Since the build takes a while, use `screen` to isolate the build session
 from unexpected events, like a broken
 network connection or a computer entering sleep.
 
 ```console
 $ screen -S arm
+```
 
+Run the development builds on the development machine:
+
+```console
+$ sudo rm -rf ~/Work/arm-none-eabi-gcc-*
+$ bash ~/Downloads/arm-none-eabi-gcc-xpack.git/scripts/build.sh --develop --without-pdf --disable-tests --disable-multilib --arm32 --arm64
+```
+
+When ready, run the build on the production machine:
+
+```console
 $ sudo rm -rf ~/Work/arm-none-eabi-gcc-*
 $ bash ~/Downloads/arm-none-eabi-gcc-xpack.git/scripts/build.sh --all
 ```
 
-or, for development builds:
-
-```console
-$ bash ~/Downloads/arm-none-eabi-gcc-xpack.git/scripts/build.sh --disable-multilib --develop --disable-tests --without-pdf --arm32 --arm64
-
 To detach from the session, use `Ctrl-a` `Ctrl-d`; to reattach use
 `screen -r arm`; to kill the session use `Ctrl-a` `Ctrl-k` and confirm.
 
-About 13 hours later, the output of the build script is a set of 2
+About 13-14 hours later, the output of the build script is a set of 2
 archives and their SHA signatures, created in the `deploy` folder:
 
 ```console
 $ ls -l ~/Work/arm-none-eabi-gcc-*/deploy
 total 289492
--rw-rw-r-- 1 ilg ilg 149928203 Aug 26 18:21 xpack-arm-none-eabi-gcc-9.3.1-1.3-linux-arm64.tar.gz
--rw-rw-r-- 1 ilg ilg       119 Aug 26 18:21 xpack-arm-none-eabi-gcc-9.3.1-1.3-linux-arm64.tar.gz.sha
--rw-rw-r-- 1 ilg ilg 146492312 Aug 27 00:35 xpack-arm-none-eabi-gcc-9.3.1-1.3-linux-arm.tar.gz
--rw-rw-r-- 1 ilg ilg       117 Aug 27 00:35 xpack-arm-none-eabi-gcc-9.3.1-1.3-linux-arm.tar.gz.sha
-```
-
-To copy the files from the build machine to the current development
-machine, either use NFS to mount the entire folder, or open the `deploy`
-folder in a terminal and use `scp`:
-
-```console
-$ (cd ~/Work/arm-none-eabi-gcc-*/deploy; scp * ilg@wks:Downloads/xpack-binaries/arm)
+-rw-rw-r-- 1 ilg ilg 149928203 Aug 26 18:21 xpack-arm-none-eabi-gcc-9.3.1-1.4-linux-arm64.tar.gz
+-rw-rw-r-- 1 ilg ilg       119 Aug 26 18:21 xpack-arm-none-eabi-gcc-9.3.1-1.4-linux-arm64.tar.gz.sha
+-rw-rw-r-- 1 ilg ilg 146492312 Aug 27 00:35 xpack-arm-none-eabi-gcc-9.3.1-1.4-linux-arm.tar.gz
+-rw-rw-r-- 1 ilg ilg       117 Aug 27 00:35 xpack-arm-none-eabi-gcc-9.3.1-1.4-linux-arm.tar.gz.sha
 ```
 
 ### Build the macOS binary
 
 The current platform for macOS production builds is a macOS 10.10.5
-VirtualBox image running on the same macMini with 16 GB of RAM and a
-fast SSD.
+running on a MacBook Pro with 32 GB of RAM and a fast SSD.
 
 ```console
 $ ssh xbbm
-```
-
-To download them, the following shortcut is available:
-
-```console
-$ curl --fail -L https://github.com/xpack-dev-tools/arm-none-eabi-gcc-xpack/raw/xpack/scripts/git-clone.sh | bash
 ```
 
 To build the latest macOS version:
 
 ```console
 $ screen -S arm
-
-$ sudo rm -rf ~/Work/arm-none-eabi-gcc-*
-$ caffeinate bash ~/Downloads/arm-none-eabi-gcc-xpack.git/scripts/build.sh --osx
 ```
 
-or, for development builds:
+Run the development builds on the development machine:
 
 ```console
-$ caffeinate bash ~/Downloads/arm-none-eabi-gcc-xpack.git/scripts/build.sh --disable-multilib --develop --disable-tests --without-pdf --osx
+$ sudo rm -rf ~/Work/arm-none-eabi-gcc-*
+$ caffeinate bash ~/Downloads/arm-none-eabi-gcc-xpack.git/scripts/build.sh --develop --without-pdf --disable-tests --disable-multilib --osx
+```
+
+When ready, run the build on the production machine:
+
+```console
+$ sudo rm -rf ~/Work/arm-none-eabi-gcc-*
+$ caffeinate bash ~/Downloads/arm-none-eabi-gcc-xpack.git/scripts/build.sh --osx
 ```
 
 To detach from the session, use `Ctrl-a` `Ctrl-d`; to reattach use
@@ -393,43 +368,8 @@ and its SHA signature, created in the `deploy` folder:
 ```console
 $ ls -l ~/Work/arm-none-eabi-gcc-*/deploy
 total 289000
--rw-r--r--  1 ilg  staff  147961639 Aug 26 13:50 xpack-arm-none-eabi-gcc-9.3.1-1.3-darwin-x64.tar.gz
--rw-r--r--  1 ilg  staff        118 Aug 26 13:51 xpack-arm-none-eabi-gcc-9.3.1-1.3-darwin-x64.tar.gz.sha
-```
-
-To copy the files from the build machine to the current development
-machine, either use NFS to mount the entire folder, or open the `deploy`
-folder in a terminal and use `scp`:
-
-```console
-$ (cd ~/Work/arm-none-eabi-gcc-*/deploy; scp * ilg@wks:Downloads/xpack-binaries/arm)
-```
-
-## Run a test build
-
-Before starting the builds on the dedicated machines, run a quick test on
-the development workstation.
-
-```console
-$ caffeinate bash ~/Downloads/arm-none-eabi-gcc-xpack.git/scripts/build.sh --disable-multilib --disable-tests --develop --without-pdf --osx
-```
-
-or on the build machine:
-
-```console
-$ bash ~/Downloads/arm-none-eabi-gcc-xpack.git/scripts/build.sh --disable-multilib --disable-tests --develop --without-pdf --linux64
-```
-
-This should check the commit IDs and the tag names in all the refered
-repositories, and the build scripts.
-
-It is _quick_ because it does not build the multilibs. Even so, on a very
-fast machine, it may take 30-60 minutes.
-
-Test builds can also be executed on the build machine:
-
-```console
-$ bash ~/Downloads/arm-none-eabi-gcc-xpack.git/scripts/build.sh --disable-multilib --develop --linux64 --win64
+-rw-r--r--  1 ilg  staff  147961639 Aug 26 13:50 xpack-arm-none-eabi-gcc-9.3.1-1.4-darwin-x64.tar.gz
+-rw-r--r--  1 ilg  staff        118 Aug 26 13:51 xpack-arm-none-eabi-gcc-9.3.1-1.4-darwin-x64.tar.gz.sha
 ```
 
 ## Subsequent runs
@@ -510,7 +450,7 @@ program from there. For example on macOS the output should
 look like:
 
 ```console
-$ /Users/ilg/Downloads/xPacks/arm-none-eabi-gcc/9.3.1-1.3/bin/arm-none-eabi-gcc --version
+$ /Users/ilg/Downloads/xPacks/arm-none-eabi-gcc/9.3.1-1.4/bin/arm-none-eabi-gcc --version
 arm-none-eabi-gcc (xPack GNU Arm Embedded GCC, 64-bit) 9.3.1 20170904 (release) [ARM/embedded-7-branch revision 255204]
 ```
 
@@ -527,8 +467,8 @@ After install, the package should create a structure like this (only the
 first two depth levels are shown):
 
 ```console
-$ tree -L 2 /Users/ilg/Library/xPacks/\@xpack-dev-tools/arm-none-eabi-gcc/9.3.1-1.3/.content/
-/Users/ilg/Library/xPacks/\@xpack-dev-tools/arm-none-eabi-gcc/9.3.1-1.3/.content/
+$ tree -L 2 /Users/ilg/Library/xPacks/\@xpack-dev-tools/arm-none-eabi-gcc/9.3.1-1.4/.content/
+/Users/ilg/Library/xPacks/\@xpack-dev-tools/arm-none-eabi-gcc/9.3.1-1.4/.content/
 ├── README.md
 ├── arm-none-eabi
 │   ├── bin

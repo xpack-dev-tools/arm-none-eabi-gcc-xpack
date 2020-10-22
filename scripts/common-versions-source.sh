@@ -196,14 +196,27 @@ function build_versions()
     build_mpc "1.0.3"
     build_isl "0.18"
 
+    build_libmpdec "2.5.0" # Used by Python
     build_expat "2.1.1"
     build_libiconv "1.15"
     build_xz "5.2.3"
 
     build_gettext "0.19.8.1"
 
-    if [ "${TARGET_PLATFORM}" != "win32" ]
+    if [ "${TARGET_PLATFORM}" == "win32" ]
     then
+      if [ "${WITH_GDB_PY3}" == "y" ]
+      then
+        if [[ "${RELEASE_VERSION}" =~ 9\.3\.1-1\.[4] ]]
+        then
+          # Shortcut, use the existing pyton.exe instead of building
+          # if from sources. It also downloads the sources.
+          download_python3_win "${PYTHON3_VERSION}"
+
+          add_python3_win_syslibs
+        fi
+      fi
+    else # linux or darwin
       # Used by ncurses. Fails on macOS.
       if [ "${TARGET_PLATFORM}" == "linux" ]
       then
@@ -212,24 +225,32 @@ function build_versions()
 
       build_ncurses "6.2"
 
-      if [[ "${RELEASE_VERSION}" =~ 9\.3\.1-1\.[3] ]]
+      if [[ "${RELEASE_VERSION}" =~ 9\.3\.1-1\.[34] ]]
       then
         build_readline "8.0" # requires ncurses
 
         build_bzip2 "1.0.8"
         build_libffi "3.3"
 
-        # Required by a Python 3 module.
-        build_sqlite "3.32.3"
 
         # We cannot rely on a python shared library in the system, even
         # the custom build from sources does not have one.
 
         if [ "${WITH_GDB_PY3}" == "y" ]
         then
+          # Required by a Python 3 module.
+          build_sqlite "3.32.3"
+
           # Replacement for the old libcrypt.so.1; required by Python 3.
           build_libxcrypt "4.4.17"
+          build_openssl "1.1.1h"
+
           build_python3 "${PYTHON3_VERSION}"
+
+          if [[ "${RELEASE_VERSION}" =~ 9\.3\.1-1\.[4] ]]
+          then
+            add_python3_syslibs
+          fi
         fi
       fi
     fi
@@ -275,24 +296,8 @@ function build_versions()
     # Task [IV-4] /$HOST_MINGW/gdb/
     build_gdb ""
 
-    if [ "${WITH_GDB_PY}" == "y" ]
-    then
-      # The Windows GDB needs some headers from the Python distribution.
-      if [ "${TARGET_PLATFORM}" == "win32" ]
-      then
-        download_python2_win "${PYTHON2_VERSION}"
-      fi
-
-      build_gdb "-py"
-    fi
-
     if [ "${WITH_GDB_PY3}" == "y" ]
     then
-      if [ "${TARGET_PLATFORM}" == "win32" ]
-      then
-        download_python3_win "${PYTHON3_VERSION}"
-      fi
-
       build_gdb "-py3"
     fi
 
@@ -513,6 +518,8 @@ function build_versions()
       build_gdb "-py3"
     fi
 
+if false
+then
     # Task [III-7] /$HOST_NATIVE/build-manual
     # Nope, the build process is different.
 
@@ -548,7 +555,7 @@ function build_versions()
     # See create_archive below.
 
     check_binaries
-
+fi
   else
     echo "Unsupported version ${RELEASE_VERSION}."
     exit 1

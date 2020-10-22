@@ -1,6 +1,6 @@
 # xPack GNU Arm Embedded GCC
 
-The **xPack GNU Arm Embedded GCC**  (formely GNU MCU Eclipse Arm GCC)
+The **xPack GNU Arm Embedded GCC** (formely GNU MCU Eclipse Arm GCC)
 is the **xPack** version of the **GNU Arm Embedded Toolchain**
 maintained by Arm.
 

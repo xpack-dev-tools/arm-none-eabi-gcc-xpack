@@ -26,7 +26,9 @@ do
   case ${opt} in
 
     --prefix|--exec-prefix)
-      prefix="${SOURCES_FOLDER_PATH}/${PYTHON3_WIN_SRC_FOLDER_NAME}"
+      # prefix="${SOURCES_FOLDER_PATH}/${PYTHON3_WIN_SRC_FOLDER_NAME}"
+      # Must have a common part to force PYTHON_PATH_RELOCATABLE
+      prefix="${APP_PREFIX}"
       echo "${opt} -> [${prefix}]" >&2
       echo "${prefix}"
       ;;

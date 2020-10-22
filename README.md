@@ -85,7 +85,7 @@ For more details please read the [Install](https://xpack.github.io/arm-none-eabi
 ## Maintainer info
 
 - [How to build](https://github.com/xpack-dev-tools/arm-none-eabi-gcc-xpack/blob/xpack/README-BUILD.md)
-- [How to publish](https://github.com/xpack-dev-tools/arm-none-eabi-gcc-xpack/blob/xpack/README-PUBLISH.md)
+- [How to make new releases](https://github.com/xpack-dev-tools/arm-none-eabi-gcc-xpack/blob/xpack/README-RELEASE.md)
 
 ## Support
 
