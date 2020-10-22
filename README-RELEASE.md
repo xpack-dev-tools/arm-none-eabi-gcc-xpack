@@ -118,8 +118,8 @@ caffeinate ssh xbba
 
 On all machines, clone the `xpack-develop` branch:
 
-```console
-$ rm -rf ~/Downloads/arm-none-eabi-gcc-xpack.git; \
+```bash
+rm -rf ~/Downloads/arm-none-eabi-gcc-xpack.git; \
   git clone --recurse-submodules --branch xpack-develop https://github.com/xpack-dev-tools/arm-none-eabi-gcc-xpack.git \
   ~/Downloads/arm-none-eabi-gcc-xpack.git
 ```
