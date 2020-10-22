@@ -156,6 +156,7 @@ function test_gdb()
       run_app "${app_folder_path}/bin/${gcc_target_prefix}-gdb${suffix}" \
         --nh \
         --nx \
+        -ex='set pagination off' \
         -ex='python import sys; print(sys.prefix)' \
         -ex='python import sys; import os; print(os.pathsep.join(sys.path))' \
         -ex='quit'
@@ -166,6 +167,7 @@ function test_gdb()
       local out=$("${app_folder_path}/bin/${gcc_target_prefix}-gdb${suffix}" \
         --nh \
         --nx \
+        -ex='set pagination off' \
         -ex='python print("babu"+"riba")' \
         -ex='quit' | grep 'baburiba')
       if [ "${out}" == "baburiba" ]
