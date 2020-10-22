@@ -144,14 +144,14 @@ function define_flags_for_target()
   if [ "$1" == "" ]
   then
     # For newlib, optimize for speed.
-    optimize="$(echo ${optimize} | sed -e 's/-O[123]/-Ofast/')"
+    optimize="$(echo ${optimize} | sed -e 's/-O[123]/-Ofast/g')"
     # Normally this is the default, but for just in case.
     optimize+=" -fexceptions"
   elif [ "$1" == "-nano" ]
   then
     # For newlib-nano optimize for size and disable exceptions.
-    optimize="$(echo ${optimize} | sed -e 's/-O[123]/-Os/')"
-    optimize="$(echo ${optimize} | sed -e 's/-Ofast/-Os/')"
+    optimize="$(echo ${optimize} | sed -e 's/-O[123]/-Os/g')"
+    optimize="$(echo ${optimize} | sed -e 's/-Ofast/-Os/p')"
     optimize+=" -fno-exceptions"
   fi
 
