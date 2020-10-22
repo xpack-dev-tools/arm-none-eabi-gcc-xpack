@@ -639,7 +639,7 @@ function copy_linux_libs()
   if [ ! -f "${copy_linux_stamp_file_path}" ]
   then
 
-    local linux_path="${LINUX_INSTALL_PATH}"
+    local linux_path="${LINUX_INSTALL_RELATIVE_PATH}/${APP_LC_NAME}"
 
     (
       cd "${WORK_FOLDER_PATH}"
