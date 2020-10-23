@@ -287,7 +287,7 @@ git clone \
 - in `CHANGELOG.md`, add release date
 - commit and push the `xpack-develop` branch
 - go to the [GitHub Releases](https://github.com/xpack-dev-tools/arm-none-eabi-gcc-xpack/releases) page
-- click **Draft a new release**
+- click **Draft a new release**, in the `xpack-develop` branch
 - name the tag like **v9.3.1-1.4** (mind the dash in the middle!)
 - name the release like **xPack GNU Arm Embedded GCC v9.3.1-1.4**
 (mind the dash)
