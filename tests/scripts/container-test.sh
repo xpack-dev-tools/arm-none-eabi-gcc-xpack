@@ -87,10 +87,9 @@ then
   yum install -y -q git curl tar gzip redhat-lsb-core binutils
 elif [[ ${image_name} == *opensuse* ]]
 then
-  zypper -q refresh -y
+  zypper -q refresh
   zypper -q update -y
   zypper -q in -y git-core curl tar gzip lsb-release binutils
-  zypper -q in -y gnu-getopt
 elif [[ ${image_name} == *manjaro* ]]
 then
   pacman-mirrors -g
