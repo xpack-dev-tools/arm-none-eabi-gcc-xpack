@@ -211,22 +211,6 @@ function run_tests()
     run_app file "${file_path}"
     run_app ldd -v "${file_path}" || true
   done
-
-  echo
-  echo "All tests completed successfully."
-
-  echo
-  run_app uname -a
-  if [ "${node_platform}" == "linux" ]
-  then
-    # On opensuse/tumbleweed:latest it fails:
-    # /usr/bin/lsb_release: line 122: getopt: command not found
-    run_app lsb_release -a || true
-    run_app ldd --version
-  elif [ "${node_platform}" == "darwin" ]
-  then
-    run_app sw_vers
-  fi
 }
 
 # -----------------------------------------------------------------------------
