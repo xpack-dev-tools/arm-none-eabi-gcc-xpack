@@ -18,7 +18,7 @@ Before starting the build, perform some checks and tweaks.
 - commit with a message like **8-2018-q4-major**; also add a tag;
 - check differences from the previous version;
 - determine the GCC version (like `9.3.1`) and update the `scripts/VERSION`
-  file; the format is `9.3.1-1.4`.
+  file; the format is `9.3.1-1.4`;
 - add a new set of definitions in the `scripts/container-build.sh`, with
   the versions of various components;
 - if newer libraries are used, check if they are available from the local git
@@ -63,20 +63,11 @@ recreate the archives with the correct file.
 
 ## Build
 
-### Clean the destination folder
-
-On the development machine clear the folder where binaries from all
-build machines will be collected.
-
-```bash
-rm -f ~/Downloads/xpack-binaries/arm/*
-```
-
 Before starting the build, perform some checks.
 
-### Pre-run the build scripts
+### Development run the build scripts
 
-Before the real build, run a test build on the development machine:
+Before the real build, run a test build on the development machine (`wks`):
 
 ```bash
 sudo rm -rf ~/Work/arm-none-eabi-gcc-*
@@ -95,11 +86,11 @@ In this Git repo:
 
 From here it'll be cloned on the production machines.
 
-### Run the build scripts
+### Run the build scripts without multilibs
 
 Move to the three production machines.
 
-On the macOS build machine
+On the macOS build machine (`xbbm`):
 
 - empty the trash bin
 - create three new terminals
@@ -120,7 +111,10 @@ On all machines, clone the `xpack-develop` branch:
 
 ```bash
 rm -rf ~/Downloads/arm-none-eabi-gcc-xpack.git; \
-  git clone --recurse-submodules --branch xpack-develop https://github.com/xpack-dev-tools/arm-none-eabi-gcc-xpack.git \
+  git clone \
+  --recurse-submodules \
+  --branch xpack-develop \
+  https://github.com/xpack-dev-tools/arm-none-eabi-gcc-xpack.git \
   ~/Downloads/arm-none-eabi-gcc-xpack.git
 ```
 
@@ -130,29 +124,121 @@ On all machines, remove any previous build:
 sudo rm -rf ~/Work/arm-none-eabi-gcc-*
 ```
 
-On the macOS machine:
+On the macOS machine (`xbbm`):
+
+```bash
+caffeinate bash ~/Downloads/arm-none-eabi-gcc-xpack.git/scripts/build.sh --osx --disable-multilib
+```
+
+A typical run takes about 80 minutes.
+
+On both Linux machines (`xbbi` and `xbba`):
+
+```bash
+bash ~/Downloads/arm-none-eabi-gcc-xpack.git/scripts/build.sh --all --disable-multilib
+```
+
+A typical run on the Intel machine takes about 105 minutes;
+on the Arm machine it takes about 370 minutes.
+
+### Clean the destination folder for the test binaries
+
+On the development machine (`wks`) clear the folder where binaries from all
+build machines will be collected.
+
+```bash
+rm -f ~/Downloads/xpack-binaries/arm/*
+```
+
+### Copy the test binaries to the development machine
+
+On all three machines:
+
+```console
+(cd ~/Work/arm-none-eabi-gcc-*/deploy; scp * ilg@wks:Downloads/xpack-binaries/arm)
+```
+
+## Publish the binaries as pre-release/experimental
+
+For really new versions, test before making the release.
+
+Use the [experimental pre-release](https://github.com/xpack-dev-tools/pre-releases/releases/tag/experimental)
+to publish the binaries, to run the Travis tests and to allow for
+others to test them.
+
+## Run the pre-release Travis tests
+
+In the `tests/scripts/trigger-travis-*.sh` files, check and update the
+URL to use something like
+
+```
+base_url="https://github.com/xpack-dev-tools/pre-releases/releases/download/experimental/"
+```
+
+Trigger the stable and latest Travis builds (on a Mac by double-clicking
+on the command scripts):
+
+- `trigger-travis-quick.mac.command` (optional)
+- `trigger-travis-stable.mac.command`
+- `trigger-travis-latest.mac.command`
+
+The test results are available from:
+
+- https://travis-ci.org/github/xpack-dev-tools/arm-none-eabi-gcc-xpack
+
+### Run the build scripts with multilibs
+
+On all machines, clone the `xpack-develop` branch:
+
+```bash
+rm -rf ~/Downloads/arm-none-eabi-gcc-xpack.git; \
+  git clone \
+  --recurse-submodules \
+  --branch xpack-develop \
+  https://github.com/xpack-dev-tools/arm-none-eabi-gcc-xpack.git \
+  ~/Downloads/arm-none-eabi-gcc-xpack.git
+```
+
+On all machines, remove any previous build:
+
+```bash
+sudo rm -rf ~/Work/arm-none-eabi-gcc-*
+```
+
+Empty trash.
+
+On the macOS machine (`xbbm`):
 
 ```bash
 caffeinate bash ~/Downloads/arm-none-eabi-gcc-xpack.git/scripts/build.sh --osx
 ```
 
-A typical run takes about XX minutes.
+A typical run takes about 225 minutes.
 
-On the Linux machines:
+On both Linux machines (`xbbi` and `xbba`):
 
 ```bash
 bash ~/Downloads/arm-none-eabi-gcc-xpack.git/scripts/build.sh --all
 ```
 
-A typical run on the Intel machine takes about XX minutes;
-on the Arm machine it takes about XXX minutes.
+A typical run on the Intel machine takes about 290 minutes;
+on the Arm machine it takes about 875 minutes.
 
-Copy the binaries to the development machine.
+### Clean the destination folder
+
+On the development machine (`wks`) clear the folder where binaries from all
+build machines will be collected.
+
+```bash
+rm -f ~/Downloads/xpack-binaries/arm/*
+```
+
+### Copy the binaries to the development machine
 
 On all three machines:
 
 ```console
-$ (cd ~/Work/arm-none-eabi-gcc-*/deploy; scp * ilg@wks:Downloads/xpack-binaries/arm)
+(cd ~/Work/arm-none-eabi-gcc-*/deploy; scp * ilg@wks:Downloads/xpack-binaries/arm)
 ```
 
 ## Test
@@ -167,8 +253,11 @@ For this, on each platform (Mac, GNU/Linux 64/32, Windows 64/32):
   on Windows the current paths always use spaces, so renaming is not needed;
 - clone this repo locally; on Windows use the Git console;
 
-```console
-$ git clone --recurse-submodules https://github.com/xpack-dev-tools/arm-none-eabi-gcc-xpack.git \
+```bash
+git clone \
+  --recurse-submodules \
+  --branch xpack-develop \
+  https://github.com/xpack-dev-tools/arm-none-eabi-gcc-xpack.git \
   ~/Downloads/arm-none-eabi-gcc-xpack.git
 ```
 
@@ -192,28 +281,6 @@ $ git clone --recurse-submodules https://github.com/xpack-dev-tools/arm-none-eab
   - stop (Terminate)
   - (don't miss the LTO cases, since in the past they had problems)
 - to test the Python debugger, start it with `--version`
-
-## Publish the binaries as pre-release/test
-
-For really new versions, test before making the release.
-
-Use the [test pre-release](https://github.com/xpack-dev-tools/pre-releases/releases/tag/test)
-to publish the binaries, for other to test them.
-
-## Run the pre-release Travis tests
-
-In the `tests/scripts/trigger-travis-*.sh` files, check and update the
-URL to use something like
-
-```
-base_url="https://github.com/xpack-dev-tools/pre-releases/releases/download/test/"
-```
-
-Trigger the stable and latest Travis builds (on a Mac by double-clicking 
-on the command scripts):
-
-- `tests/scripts/trigger-travis-stable.mac.command
-- `tests/scripts/trigger-travis-latest.mac.command
 
 ## Create a new GitHub pre-release
 
@@ -239,9 +306,9 @@ watching this project.
 
 Using the scripts in `tests/scripts/`, start:
 
-- trigger-travis-quick.mac.command (optional)
-- trigger-travis-stable.mac.command
-- trigger-travis-latest.mac.command
+- `trigger-travis-quick.mac.command` (optional)
+- `trigger-travis-stable.mac.command`
+- `trigger-travis-latest.mac.command`
 
 The test results are available from:
 
@@ -251,7 +318,7 @@ For more details, see `tests/scripts/README.md`.
 
 ## Prepare a new blog post
 
-In the `xpack.github.io` web Git:
+In the `xpack/web-jekyll` GitHub repo:
 
 - select the `xpack-develop` branch
 - add a new file to `_posts/arm-none-eabi-gcc/releases`
@@ -299,14 +366,14 @@ xpack-arm-none-eabi-gcc-9.3.1-1.4-win32-x64.zip
 
 If you missed this, `cat` the content of the `.sha` files:
 
-```console
-$ cd ~Downloads/xpack-binaries/arm
-$ cat *.sha
+```bash
+cd ~Downloads/xpack-binaries/arm
+cat *.sha
 ```
 
 ## Update the Web
 
-- commit the `develop` branch of `xpack.github.io` project; use a message
+- commit the `develop` branch of `xpack/web-jekyll` GitHub repo; use a message
   like **xPack GNU Arm Embedded GCC v9.3.1-1.4 released**
 - wait for the GitHub Pages build to complete
 - the preview web is https://xpack.github.io/web-preview/
@@ -345,16 +412,16 @@ The test results are available from:
 
 For 32-bit Windows, 32-bit Intel GNU/Linux and 32-bit Arm, install manually.
 
-```console
-$ xpm install --global @xpack-dev-tools/arm-none-eabi-gcc@next
+```bash
+xpm install --global @xpack-dev-tools/arm-none-eabi-gcc@next
 ```
 
 ## Test the npm binaries
 
 Install the binaries on all platforms.
 
-```console
-$ xpm install --global @xpack-dev-tools/arm-none-eabi-gcc@next
+```bash
+xpm install --global @xpack-dev-tools/arm-none-eabi-gcc@next
 ```
 
 On GNU/Linux systems, including Raspberry Pi, use the following commands:

@@ -244,15 +244,15 @@ their SHA signatures, created in the `deploy` folder:
 
 ```console
 $ ls -l ~/Work/arm-none-eabi-gcc-*/deploy
-total 598108
--rw-rw-r-- 1 ilg ilg 153671384 Aug 26 18:21 xpack-arm-none-eabi-gcc-9.3.1-1.4-linux-x32.tar.gz
--rw-rw-r-- 1 ilg ilg       117 Aug 26 18:21 xpack-arm-none-eabi-gcc-9.3.1-1.4-linux-x32.tar.gz.sha
--rw-rw-r-- 1 ilg ilg 150796175 Aug 26 15:59 xpack-arm-none-eabi-gcc-9.3.1-1.4-linux-x64.tar.gz
--rw-rw-r-- 1 ilg ilg       117 Aug 26 15:59 xpack-arm-none-eabi-gcc-9.3.1-1.4-linux-x64.tar.gz.sha
--rw-rw-r-- 1 ilg ilg 148295355 Aug 26 19:11 xpack-arm-none-eabi-gcc-9.3.1-1.4-win32-x32.zip
--rw-rw-r-- 1 ilg ilg       114 Aug 26 19:11 xpack-arm-none-eabi-gcc-9.3.1-1.4-win32-x32.zip.sha
--rw-rw-r-- 1 ilg ilg 159675812 Aug 26 16:47 xpack-arm-none-eabi-gcc-9.3.1-1.4-win32-x64.zip
--rw-rw-r-- 1 ilg ilg       114 Aug 26 16:47 xpack-arm-none-eabi-gcc-9.3.1-1.4-win32-x64.zip.sha
+total 682464
+-rw-rw-r-- 1 ilg ilg 172441920 Oct 23 00:45 xpack-arm-none-eabi-gcc-9.3.1-1.4-linux-x32.tar.gz
+-rw-rw-r-- 1 ilg ilg       117 Oct 23 00:45 xpack-arm-none-eabi-gcc-9.3.1-1.4-linux-x32.tar.gz.sha
+-rw-rw-r-- 1 ilg ilg 169389142 Oct 22 22:17 xpack-arm-none-eabi-gcc-9.3.1-1.4-linux-x64.tar.gz
+-rw-rw-r-- 1 ilg ilg       117 Oct 22 22:17 xpack-arm-none-eabi-gcc-9.3.1-1.4-linux-x64.tar.gz.sha
+-rw-rw-r-- 1 ilg ilg 172415284 Oct 23 01:35 xpack-arm-none-eabi-gcc-9.3.1-1.4-win32-x32.zip
+-rw-rw-r-- 1 ilg ilg       114 Oct 23 01:35 xpack-arm-none-eabi-gcc-9.3.1-1.4-win32-x32.zip.sha
+-rw-rw-r-- 1 ilg ilg 184570818 Oct 22 23:04 xpack-arm-none-eabi-gcc-9.3.1-1.4-win32-x64.zip
+-rw-rw-r-- 1 ilg ilg       114 Oct 22 23:04 xpack-arm-none-eabi-gcc-9.3.1-1.4-win32-x64.zip.sha
 ```
 
 #### Build the Arm GNU/Linux binaries
@@ -323,11 +323,11 @@ archives and their SHA signatures, created in the `deploy` folder:
 
 ```console
 $ ls -l ~/Work/arm-none-eabi-gcc-*/deploy
-total 289492
--rw-rw-r-- 1 ilg ilg 149928203 Aug 26 18:21 xpack-arm-none-eabi-gcc-9.3.1-1.4-linux-arm64.tar.gz
--rw-rw-r-- 1 ilg ilg       119 Aug 26 18:21 xpack-arm-none-eabi-gcc-9.3.1-1.4-linux-arm64.tar.gz.sha
--rw-rw-r-- 1 ilg ilg 146492312 Aug 27 00:35 xpack-arm-none-eabi-gcc-9.3.1-1.4-linux-arm.tar.gz
--rw-rw-r-- 1 ilg ilg       117 Aug 27 00:35 xpack-arm-none-eabi-gcc-9.3.1-1.4-linux-arm.tar.gz.sha
+total 325316
+-rw-rw-r-- 1 ilg ilg 168517506 Oct 23 01:08 xpack-arm-none-eabi-gcc-9.3.1-1.4-linux-arm64.tar.gz
+-rw-rw-r-- 1 ilg ilg       119 Oct 23 01:08 xpack-arm-none-eabi-gcc-9.3.1-1.4-linux-arm64.tar.gz.sha
+-rw-rw-r-- 1 ilg ilg 164591258 Oct 23 08:19 xpack-arm-none-eabi-gcc-9.3.1-1.4-linux-arm.tar.gz
+-rw-rw-r-- 1 ilg ilg       117 Oct 23 08:19 xpack-arm-none-eabi-gcc-9.3.1-1.4-linux-arm.tar.gz.sha
 ```
 
 ### Build the macOS binary
@@ -367,9 +367,9 @@ and its SHA signature, created in the `deploy` folder:
 
 ```console
 $ ls -l ~/Work/arm-none-eabi-gcc-*/deploy
-total 289000
--rw-r--r--  1 ilg  staff  147961639 Aug 26 13:50 xpack-arm-none-eabi-gcc-9.3.1-1.4-darwin-x64.tar.gz
--rw-r--r--  1 ilg  staff        118 Aug 26 13:51 xpack-arm-none-eabi-gcc-9.3.1-1.4-darwin-x64.tar.gz.sha
+total 321872
+-rw-r--r--  1 ilg  staff  164794316 Oct 23 00:27 xpack-arm-none-eabi-gcc-9.3.1-1.4-darwin-x64.tar.gz
+-rw-r--r--  1 ilg  staff        118 Oct 23 00:27 xpack-arm-none-eabi-gcc-9.3.1-1.4-darwin-x64.tar.gz.sha
 ```
 
 ## Subsequent runs
