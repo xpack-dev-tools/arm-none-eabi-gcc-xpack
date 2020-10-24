@@ -63,8 +63,6 @@ recreate the archives with the correct file.
 
 ## Build
 
-Before starting the build, perform some checks.
-
 ### Development run the build scripts
 
 Before the real build, run a test build on the development machine (`wks`):
@@ -95,13 +93,13 @@ On the macOS build machine (`xbbm`):
 - empty the trash bin
 - create three new terminals
 
-Connect to the Intel Linux:
+Connect to the Intel Linux (`xbbi`):
 
 ```bash
 caffeinate ssh xbbi
 ```
 
-Connect to the Arm Linux:
+Connect to the Arm Linux (`xbba`):
 
 ```bash
 caffeinate ssh xbba
@@ -149,6 +147,8 @@ build machines will be collected.
 ```bash
 rm -f ~/Downloads/xpack-binaries/arm/*
 ```
+
+Note: this step is very important, to avoid using test binaries!
 
 ### Copy the test binaries to the development machine
 
@@ -286,7 +286,7 @@ git clone \
 
 - in `CHANGELOG.md`, add release date
 - commit and push the `xpack-develop` branch
-- go to the [GitHub Releases](https://github.com/xpack-dev-tools/arm-none-eabi-gcc-xpack/releases) page
+- go to the GitHub [releases](https://github.com/xpack-dev-tools/arm-none-eabi-gcc-xpack/releases) page
 - click **Draft a new release**, in the `xpack-develop` branch
 - name the tag like **v9.3.1-1.4** (mind the dash in the middle!)
 - name the release like **xPack GNU Arm Embedded GCC v9.3.1-1.4**
@@ -327,6 +327,8 @@ In the `xpack/web-jekyll` GitHub repo:
 - as `download_url` use the tagged URL like `https://github.com/xpack-dev-tools/arm-none-eabi-gcc-xpack/releases/tag/v9.3.1-1.4/`
 - update the `date:` field with the current date
 - update the Travis URLs using the actual test pages
+- update the SHA sums via copy/paste from the original build machines
+(it is very important to use the originals!)
 
 If any, refer to closed
 [issues](https://github.com/xpack-dev-tools/arm-none-eabi-gcc-xpack/issues)
@@ -364,14 +366,16 @@ xpack-arm-none-eabi-gcc-9.3.1-1.4-win32-x32.zip
 xpack-arm-none-eabi-gcc-9.3.1-1.4-win32-x64.zip
 ```
 
-If you missed this, `cat` the content of the `.sha` files:
+## Check the SHA sums
+
+On the development machine (`wks`):
 
 ```bash
 cd ~Downloads/xpack-binaries/arm
 cat *.sha
 ```
 
-## Update the Web
+## Update the preview Web
 
 - commit the `develop` branch of `xpack/web-jekyll` GitHub repo; use a message
   like **xPack GNU Arm Embedded GCC v9.3.1-1.4 released**
@@ -382,11 +386,13 @@ cat *.sha
 
 - select the `xpack-develop` branch
 - open the `package.json` file
-- open [GitHub Releases](https://github.com/xpack-dev-tools/arm-none-eabi-gcc-xpack/releases)
-  and select the latest release
+- open the GitHub [releases](https://github.com/xpack-dev-tools/arm-none-eabi-gcc-xpack/releases)
+  page and select the latest release
 - check the download counter, it should match the number of tests
-- update the `baseUrl:` with the file URLs (including the tag/version)
+- update the `baseUrl:` with the file URLs (including the tag/version);
+  no terminating `/` is required
 - from the release, copy the SHA & file names
+- compare the SHA sums with those shown by `cat *.sha`
 - check the executable names
 - commit all changes, use a message like
   `package.json: update urls for 9.3.1-1.4 release` (without `v`)
@@ -400,6 +406,10 @@ cat *.sha
 - push the `xpack-develop` branch to GitHub
 - `npm publish --tag next` (use `--access public` when publishing for
   the first time)
+
+The version is visible at:
+
+- https://www.npmjs.com/package/@xpack-dev-tools/arm-none-eabi-gcc?activeTab=versions
 
 ## Test if the npm binaries can be installed with xpm
 
@@ -453,17 +463,24 @@ TODO
 - merge `xpack-develop` into `xpack`
 - push
 
-## Promote next to latest
+## Tag the npm package as `latest`
 
-Promote the release as `latest`:
+When the release is considered stable, promote it as `latest`:
 
 - `npm dist-tag ls @xpack-dev-tools/arm-none-eabi-gcc`
 - `npm dist-tag add @xpack-dev-tools/arm-none-eabi-gcc@9.3.1-1.4.1 latest`
 - `npm dist-tag ls @xpack-dev-tools/arm-none-eabi-gcc`
 
+## Update the Web
+
+- in the `master` branch, merge the `develop` branch
+- wait for the GitHub Pages build to complete
+- the result is in https://xpack.github.io/news/
+- remember the post URL, since it must be updated in the release page
+
 ## Create the final GitHub release
 
-- go to the [GitHub Releases](https://github.com/xpack-dev-tools/arm-none-eabi-gcc-xpack/releases) page
+- go to the GitHub [releases](https://github.com/xpack-dev-tools/arm-none-eabi-gcc-xpack/releases) page
 - check the download counter, it should match the number of tests
 - add a link to the Web page `[Continue reading »]()`; use an same blog URL
 - **disable** the **pre-release** button

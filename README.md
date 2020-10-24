@@ -78,7 +78,7 @@ For all platforms, the **xPack GNU Arm Embedded GCC** binaries are released as p
 archives that can be installed in any location.
 
 The archives can be downloaded from the
-[GitHub Releases](https://github.com/xpack-dev-tools/arm-none-eabi-gcc-xpack/releases/) page.
+GitHub [releases](https://github.com/xpack-dev-tools/arm-none-eabi-gcc-xpack/releases/) page.
 
 For more details please read the [Install](https://xpack.github.io/arm-none-eabi-gcc/install/) page.
 

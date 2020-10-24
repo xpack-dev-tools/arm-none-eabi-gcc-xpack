@@ -56,6 +56,8 @@ instructions in the separate
 [Prerequisites for building binaries](https://xpack.github.io/xbb/prerequisites/)
 page and return when ready.
 
+Note: Building the Arm binaries requires an Arm machine.
+
 ## Download the build scripts repo
 
 The build scripts are available in the `scripts` folder of the
@@ -159,7 +161,7 @@ separately.
 
 The current platform for Intel GNU/Linux and Windows production builds is a
 Debian 10, running on an Intel NUC8i7BEH mini PC with 32 GB of RAM
-and 512 GB of fast M.2 SSD.
+and 512 GB of fast M.2 SSD. The machine name is `xbbi`.
 
 ```console
 $ ssh xbbi
@@ -210,10 +212,6 @@ To remove unused files:
 $ docker system prune --force
 ```
 
-To build both the 32/64-bit Windows and GNU/Linux versions, use `--all`; to
-build selectively, use `--linux64 --win64` or `--linux32 --win32` (GNU/Linux
-can be built alone; Windows also requires the GNU/Linux build).
-
 Since the build takes a while, use `screen` to isolate the build session
 from unexpected events, like a broken
 network connection or a computer entering sleep.
@@ -222,14 +220,14 @@ network connection or a computer entering sleep.
 $ screen -S arm
 ```
 
-Run the development builds on the development machine:
+Run the development builds on the development machine (`wks`):
 
 ```console
 $ sudo rm -rf ~/Work/arm-none-eabi-gcc-*
 $ bash ~/Downloads/arm-none-eabi-gcc-xpack.git/scripts/build.sh --develop --without-pdf --disable-tests --disable-multilib --linux64 --linux32 --win64 --win32
 ```
 
-When ready, run the build on the production machine:
+When ready, run the build on the production machine (`xbbi`):
 
 ```console
 $ sudo rm -rf ~/Work/arm-none-eabi-gcc-*
@@ -264,7 +262,7 @@ The supported Arm architectures are:
 
 The current platform for Arm GNU/Linux production builds is a
 Debian 9, running on an ROCK Pi 4 SBC with 4 GB of RAM
-and 256 GB of fast M.2 SSD.
+and 256 GB of fast M.2 SSD. The machine name is `xbba`.
 
 ```console
 $ ssh xbba
@@ -308,7 +306,7 @@ $ sudo rm -rf ~/Work/arm-none-eabi-gcc-*
 $ bash ~/Downloads/arm-none-eabi-gcc-xpack.git/scripts/build.sh --develop --without-pdf --disable-tests --disable-multilib --arm32 --arm64
 ```
 
-When ready, run the build on the production machine:
+When ready, run the build on the production machine (`xbba`):
 
 ```console
 $ sudo rm -rf ~/Work/arm-none-eabi-gcc-*
@@ -333,7 +331,8 @@ total 325316
 ### Build the macOS binary
 
 The current platform for macOS production builds is a macOS 10.10.5
-running on a MacBook Pro with 32 GB of RAM and a fast SSD.
+running on a MacBook Pro with 32 GB of RAM and a fast SSD. The machine
+name is `xbbm`.
 
 ```console
 $ ssh xbbm
@@ -345,14 +344,14 @@ To build the latest macOS version:
 $ screen -S arm
 ```
 
-Run the development builds on the development machine:
+Run the development builds on the development machine (`wks`):
 
 ```console
 $ sudo rm -rf ~/Work/arm-none-eabi-gcc-*
 $ caffeinate bash ~/Downloads/arm-none-eabi-gcc-xpack.git/scripts/build.sh --develop --without-pdf --disable-tests --disable-multilib --osx
 ```
 
-When ready, run the build on the production machine:
+When ready, run the build on the production machine (`xbbm`):
 
 ```console
 $ sudo rm -rf ~/Work/arm-none-eabi-gcc-*
