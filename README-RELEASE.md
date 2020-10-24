@@ -241,7 +241,7 @@ On all three machines:
 (cd ~/Work/arm-none-eabi-gcc-*/deploy; scp * ilg@wks:Downloads/xpack-binaries/arm)
 ```
 
-## Test
+## Testing
 
 Install the binaries on all supported platforms and check if they are
 functional.

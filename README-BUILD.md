@@ -124,9 +124,8 @@ not be accepted by bash.
 ## Versioning
 
 The version string is an extension to semver, the format looks like `9.3.1-1.4`.
-It includes the three digits with the original GCC version (9.3.1), a fourth
-digit with the Arm release, a fifth digit with the xPack release number,
-and the sixth with the npm version number.
+It includes the three digits with the original GCC version, a fourth
+digit with the Arm release, a fifth digit with the xPack release number.
 
 When publishing on the **npmjs.com** server, a sixth digit is appended.
 
@@ -180,7 +179,7 @@ $ docker run hello-world
 ```
 
 Before running a build for the first time, it is recommended to preload the
-docker images.
+docker images, since they are pretty large.
 
 ```console
 $ bash ~/Downloads/arm-none-eabi-gcc-xpack.git/scripts/build.sh preload-images
@@ -275,7 +274,7 @@ $ docker info
 ```
 
 Before running a build for the first time, it is recommended to preload the
-docker images.
+docker images, since they are pretty large.
 
 ```console
 $ bash ~/Downloads/arm-none-eabi-gcc-xpack.git/scripts/build.sh preload-images
@@ -299,7 +298,7 @@ network connection or a computer entering sleep.
 $ screen -S arm
 ```
 
-Run the development builds on the development machine:
+Run the development builds on the development machine (`wks`):
 
 ```console
 $ sudo rm -rf ~/Work/arm-none-eabi-gcc-*
@@ -328,7 +327,7 @@ total 325316
 -rw-rw-r-- 1 ilg ilg       117 Oct 23 08:19 xpack-arm-none-eabi-gcc-9.3.1-1.4-linux-arm.tar.gz.sha
 ```
 
-### Build the macOS binary
+### Build the macOS binaries
 
 The current platform for macOS production builds is a macOS 10.10.5
 running on a MacBook Pro with 32 GB of RAM and a fast SSD. The machine
@@ -338,7 +337,9 @@ name is `xbbm`.
 $ ssh xbbm
 ```
 
-To build the latest macOS version:
+Since the build takes a while, use `screen` to isolate the build session
+from unexpected events, like a broken
+network connection or a computer entering sleep.
 
 ```console
 $ screen -S arm
@@ -438,7 +439,7 @@ However, for an interrupted build, this step is skipped, and files in
 the install folder will remain owned by root. Thus, before removing the
 build folder, it might be necessary to run a recursive `chown`.
 
-## Test
+## Testing
 
 A simple test is performed by the script at the end, by launching the
 executables to check if all shared/dynamic libraries are correctly used.
