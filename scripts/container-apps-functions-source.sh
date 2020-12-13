@@ -1302,7 +1302,7 @@ function tidy_up()
     xbb_activate
 
     echo
-    echo "Tidying up..."
+    echo "# Tidying up..."
 
     find "${APP_PREFIX}" -name "libiberty.a" -exec rm -v '{}' ';'
     find "${APP_PREFIX}" -name '*.la' -exec rm -v '{}' ';'

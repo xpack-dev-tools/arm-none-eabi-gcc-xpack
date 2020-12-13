@@ -214,7 +214,7 @@ tests_initialize
 # -----------------------------------------------------------------------------
 
 echo
-echo "Here we go..."
+echo "# Here we go... Building..."
 echo
 
 build_versions
