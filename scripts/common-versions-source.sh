@@ -171,7 +171,7 @@ function build_versions()
 
       WITH_GDB_PY3="y" 
       PYTHON3_VERSION="3.7.6"
-    else
+    else # [345]
       WITH_GDB_PY3="y" 
       PYTHON3_VERSION="3.7.9"
     fi
@@ -207,8 +207,10 @@ function build_versions()
     then
       if [ "${WITH_GDB_PY3}" == "y" ]
       then
-        if [[ "${RELEASE_VERSION}" =~ 9\.3\.1-1\.[4] ]]
+        if [[ "${RELEASE_VERSION}" =~ 9\.3\.1-1\.[123] ]]
         then
+          :
+        else # [45]
           # Shortcut, use the existing pyton.exe instead of building
           # if from sources. It also downloads the sources.
           download_python3_win "${PYTHON3_VERSION}"
@@ -225,8 +227,10 @@ function build_versions()
 
       build_ncurses "6.2"
 
-      if [[ "${RELEASE_VERSION}" =~ 9\.3\.1-1\.[34] ]]
+      if [[ "${RELEASE_VERSION}" =~ 9\.3\.1-1\.[12] ]]
       then
+        :
+      else # [345]
         build_readline "8.0" # requires ncurses
 
         build_bzip2 "1.0.8"
@@ -247,8 +251,10 @@ function build_versions()
 
           build_python3 "${PYTHON3_VERSION}"
 
-          if [[ "${RELEASE_VERSION}" =~ 9\.3\.1-1\.[4] ]]
+          if [[ "${RELEASE_VERSION}" =~ 9\.3\.1-1\.[123] ]]
           then
+            :
+          else # [45]
             add_python3_syslibs
           fi
         fi
