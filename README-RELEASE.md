@@ -61,6 +61,10 @@ recreate the archives with the correct file.
 - open the `common-versions-source.sh` file
 - add a new `if` with the new version before the existing code
 
+### Update helper
+
+With Sourcetree, go to the helper repo and update to the latest master commit.
+
 ## Build
 
 ### Development run the build scripts
@@ -320,7 +324,7 @@ For more details, see `tests/scripts/README.md`.
 
 In the `xpack/web-jekyll` GitHub repo:
 
-- select the `xpack-develop` branch
+- select the `develop` branch
 - add a new file to `_posts/arm-none-eabi-gcc/releases`
 - name the file like `2020-07-03-arm-none-eabi-gcc-v9-3-1-1-1-released.md`
 - name the post like: **xPack GNU Arm Embedded GCC v9.3.1-1.4 released**
@@ -413,7 +417,7 @@ The version is visible at:
 
 ## Test if the npm binaries can be installed with xpm
 
-Run the `tests/scripts/trigger-travis-xpm-install.sh` file, this
+Run the `tests/scripts/trigger-travis-xpm-install.sh` script, this
 will install the package on Intel Linux 64-bit, macOS and Windows 64-bit.
 
 The test results are available from:
