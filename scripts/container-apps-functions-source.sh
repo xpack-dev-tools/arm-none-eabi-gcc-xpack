@@ -1288,6 +1288,7 @@ function test_gdb()
       run_app "${APP_PREFIX}/bin/${GCC_TARGET}-gdb${suffix}" \
         --nh \
         --nx \
+        -ex='set pagination off' \
         -ex='python import sys; print(sys.prefix)' \
         -ex='python import sys; import os; print(os.pathsep.join(sys.path))' \
         -ex='quit'
