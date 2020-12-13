@@ -335,8 +335,6 @@ function build_versions()
     # Task [IV-8] /Package toolchain in zip format/
     # See create_archive below.
 
-    check_binaries
-
   elif [[ "${RELEASE_VERSION}" =~ 9\.2\.1-* ]]
   then
 
@@ -553,8 +551,6 @@ then
     # Task [III-11] /$HOST_NATIVE/package_tbz2/
     # Task [IV-8] /Package toolchain in zip format/
     # See create_archive below.
-
-    check_binaries
 fi
   else
     echo "Unsupported version ${RELEASE_VERSION}."

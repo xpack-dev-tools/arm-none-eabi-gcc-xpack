@@ -219,6 +219,8 @@ echo
 
 build_versions
 
+check_binaries
+
 # -----------------------------------------------------------------------------
 
 copy_distro_files
