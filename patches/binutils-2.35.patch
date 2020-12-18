@@ -1,0 +1,11 @@
+--- bfd/Makefile-orig.in	2020-11-06 03:15:17.000000000 +0200
++++ bfd/Makefile.in	2020-12-18 17:25:17.000000000 +0200
+@@ -2070,7 +2070,7 @@
+ 	fi ;\
+ 	$(SED) -e "s,@bfd_version@,$$bfd_version," \
+ 	    -e "s,@bfd_version_string@,$$bfd_version_string," \
+-	    -e "s,@bfd_version_package@,$$bfd_version_package," \
++	    -e "s|@bfd_version_package@|$$bfd_version_package|" \
+ 	    -e "s,@report_bugs_to@,$$report_bugs_to," \
+ 	    < $(srcdir)/version.h > $@; \
+ 	echo "$${bfd_soversion}" > libtool-soversion
