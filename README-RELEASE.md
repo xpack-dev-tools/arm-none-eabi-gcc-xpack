@@ -116,7 +116,7 @@ On all machines, clone the `xpack-develop` branch:
 
 ```bash
 rm -rf ~/Downloads/arm-none-eabi-gcc-xpack.git; \
-  git clone \
+git clone \
   --recurse-submodules \
   --branch xpack-develop \
   https://github.com/xpack-dev-tools/arm-none-eabi-gcc-xpack.git \
@@ -152,7 +152,7 @@ On the development machine (`wks`) clear the folder where binaries from all
 build machines will be collected.
 
 ```bash
-rm -f ~/Downloads/xpack-binaries/arm/*
+rm -f ~/Downloads/xpack-binaries/arm-none-eabi-gcc/*
 ```
 
 Note: this step is very important, to avoid using test binaries!
@@ -162,7 +162,7 @@ Note: this step is very important, to avoid using test binaries!
 On all three machines:
 
 ```console
-(cd ~/Work/arm-none-eabi-gcc-*/deploy; scp * ilg@wks:Downloads/xpack-binaries/arm)
+(cd ~/Work/arm-none-eabi-gcc-*/deploy; scp * ilg@wks:Downloads/xpack-binaries/arm-none-eabi-gcc)
 ```
 
 ## Publish the binaries as pre-release/experimental
@@ -237,7 +237,7 @@ On the development machine (`wks`) clear the folder where binaries from all
 build machines will be collected.
 
 ```bash
-rm -f ~/Downloads/xpack-binaries/arm/*
+rm -f ~/Downloads/xpack-binaries/arm-none-eabi-gcc/*
 ```
 
 ### Copy the binaries to the development machine
@@ -245,7 +245,7 @@ rm -f ~/Downloads/xpack-binaries/arm/*
 On all three machines:
 
 ```console
-(cd ~/Work/arm-none-eabi-gcc-*/deploy; scp * ilg@wks:Downloads/xpack-binaries/arm)
+(cd ~/Work/arm-none-eabi-gcc-*/deploy; scp * ilg@wks:Downloads/xpack-binaries/arm-none-eabi-gcc)
 ```
 
 ## Testing
@@ -378,7 +378,7 @@ xpack-arm-none-eabi-gcc-10.2.1-1.1-win32-x64.zip
 On the development machine (`wks`):
 
 ```bash
-cd ~Downloads/xpack-binaries/arm
+cd ~Downloads/xpack-binaries/arm-none-eabi-gcc
 cat *.sha
 ```
 
