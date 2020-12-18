@@ -135,7 +135,7 @@ On the macOS machine (`xbbm`):
 caffeinate bash ~/Downloads/arm-none-eabi-gcc-xpack.git/scripts/build.sh --osx --disable-multilib
 ```
 
-A typical run takes about 80 minutes.
+A typical run takes about 85 minutes.
 
 On both Linux machines (`xbbi` and `xbba`):
 
@@ -143,8 +143,8 @@ On both Linux machines (`xbbi` and `xbba`):
 bash ~/Downloads/arm-none-eabi-gcc-xpack.git/scripts/build.sh --all --disable-multilib
 ```
 
-A typical run on the Intel machine takes about 105 minutes;
-on the Arm machine it takes about 370 minutes.
+A typical run on the Intel machine takes about 110 minutes;
+on the Arm machine it takes about 390 minutes.
 
 ### Clean the destination folder for the test binaries
 
