@@ -80,31 +80,31 @@ done
 # Make sure that the minimum prerequisites are met.
 if [[ ${image_name} == *ubuntu* ]] || [[ ${image_name} == *debian* ]] || [[ ${image_name} == *raspbian* ]]
 then
-  apt-get -qq update 
-  apt-get -qq install -y git-core curl tar gzip lsb-release binutils
+  run_verbose apt-get -qq update 
+  run_verbose apt-get -qq install -y git-core curl tar gzip lsb-release binutils
 elif [[ ${image_name} == *centos* ]] || [[ ${image_name} == *fedora* ]]
 then
-  yum install -y -q git curl tar gzip redhat-lsb-core binutils
+  run_verbose yum install -y -q git curl tar gzip redhat-lsb-core binutils
 elif [[ ${image_name} == *opensuse* ]]
 then
-  zypper -q refresh
-  zypper -q update -y
-  zypper -q in -y git-core curl tar gzip lsb-release binutils
+  run_verbose zypper -q refresh
+  run_verbose zypper -q update -y
+  run_verbose zypper -q in -y git-core curl tar gzip lsb-release binutils
 elif [[ ${image_name} == *manjaro* ]]
 then
-  pacman-mirrors -g
-  pacman -S -y -q --noconfirm 
+  run_verbose pacman-mirrors -g
+  run_verbose pacman -S -y -q --noconfirm 
 
   # Update even if up to date (-yy) & upgrade (-u).
   # pacman -S -yy -u -q --noconfirm 
-  pacman -S -q --noconfirm --noprogressbar  git curl tar gzip lsb-release binutils file
+  run_verbose pacman -S -q --noconfirm --noprogressbar  git curl tar gzip lsb-release binutils file
 elif [[ ${image_name} == *archlinux* ]]
 then
-  pacman -S -y -q --noconfirm 
+  run_verbose pacman -S -y -q --noconfirm 
 
   # Update even if up to date (-yy) & upgrade (-u).
   # pacman -S -yy -u -q --noconfirm 
-  pacman -S -q --noconfirm --noprogressbar  git curl tar gzip lsb-release binutils file
+  run_verbose pacman -S -q --noconfirm --noprogressbar  git curl tar gzip lsb-release binutils file
 fi
 
 # -----------------------------------------------------------------------------
