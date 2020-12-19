@@ -411,7 +411,6 @@ xpm-js.git/bin/xpm-dev.js binaries-update '10.2.1-1.1' "${HOME}/Downloads/xpack-
 - commit all changes, use a message like
   `package.json: update urls for 10.2.1-1.1 release` (without `v`)
 
-
 ## Publish on the npmjs.com server
 
 - select the `xpack-develop` branch
@@ -517,3 +516,9 @@ When the release is considered stable, promote it as `latest`:
 
 Add a new topic in the **GNU Toolchain forum** category of the
 [Arm Developer Community](https://community.arm.com/developer/tools-software/oss-platforms/f/gnu-toolchain-forum)
+
+- title: copy release title
+- content:
+  - The xPack GNU Arm Embedded GCC is an alternate binary distribution that complements the official GNU Arm Embedded Toolchain maintained by Arm.
+  - The latest release is [10.2.1-1.1]() following Arm release from Dec 11, 2020 (version 10-2020-q4-major).
+- tags: xpack, gnu, gcc, arm, toolchain
