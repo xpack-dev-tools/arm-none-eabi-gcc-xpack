@@ -199,7 +199,7 @@ On all machines, clone the `xpack-develop` branch:
 
 ```bash
 rm -rf ~/Downloads/arm-none-eabi-gcc-xpack.git; \
-  git clone \
+git clone \
   --recurse-submodules \
   --branch xpack-develop \
   https://github.com/xpack-dev-tools/arm-none-eabi-gcc-xpack.git \
