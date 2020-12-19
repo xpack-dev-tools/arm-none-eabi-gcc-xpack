@@ -51,7 +51,6 @@ source "${helper_folder_path}/test-functions-source.sh"
 # -----------------------------------------------------------------------------
 
 message="Test xpm install"
-branch="xpack-develop"
 
 data_file_path="$(mktemp)"
 

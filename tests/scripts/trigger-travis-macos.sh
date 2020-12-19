@@ -53,13 +53,7 @@ source "${helper_folder_path}/test-functions-source.sh"
 source "${script_folder_path}/app-defs.sh"
 
 message="Test ${app_description} on macOS platforms"
-branch="xpack-develop"
 
-version="$(cat $(dirname $(dirname ${script_folder_path}))/scripts/VERSION)"
-
-base_url="https://github.com/${github_org}/${github_repo}/releases/download/v${version}/"
-# base_url="https://github.com/${github_org}/${github_pre_releases}/releases/download/test/"
-# base_url="https://github.com/${github_org}/${github_pre_releases}/releases/download/experimental/"
 echo ${base_url}
 
 data_file_path="$(mktemp)"
