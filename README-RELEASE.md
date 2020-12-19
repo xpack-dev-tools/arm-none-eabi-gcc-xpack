@@ -229,7 +229,7 @@ bash ~/Downloads/arm-none-eabi-gcc-xpack.git/scripts/build.sh --all
 ```
 
 A typical run on the Intel machine takes about 310 minutes;
-on the Arm machine it takes about 890 minutes.
+on the Arm machine it takes about 930 minutes.
 
 ### Clean the destination folder
 
@@ -301,7 +301,7 @@ git clone \
 - as description
   - add a downloads badge like `![Github Releases (by Release)](https://img.shields.io/github/downloads/xpack-dev-tools/arm-none-eabi-gcc-xpack/v10.2.1-1.1/total.svg)`
   - draft a short paragraph explaining what are the main changes
-  - add _At this moment these binaries are provided for tests only!_
+  - add _For the moment these binaries are provided only for testing purposes!_
 - **attach binaries** and SHA (drag and drop from the archives folder will do it)
 - **enable** the **pre-release** button
 - click the **Publish Release** button
@@ -329,7 +329,7 @@ In the `xpack/web-jekyll` GitHub repo:
 
 - select the `develop` branch
 - add a new file to `_posts/arm-none-eabi-gcc/releases`
-- name the file like `2020-07-03-arm-none-eabi-gcc-v10-2-1-1-1-released.md`
+- name the file like `2020-12-19-arm-none-eabi-gcc-v10-2-1-1-1-released.md`
 - name the post like: **xPack GNU Arm Embedded GCC v10.2.1-1.1 released**
 - as `download_url` use the tagged URL like `https://github.com/xpack-dev-tools/arm-none-eabi-gcc-xpack/releases/tag/v10.2.1-1.1/`
 - update the `date:` field with the current date
@@ -389,20 +389,32 @@ cat *.sha
 - wait for the GitHub Pages build to complete
 - the preview web is https://xpack.github.io/web-preview/
 
-## Publish on the npmjs.com server
+## Update package.json binaries
 
 - select the `xpack-develop` branch
 - open the `package.json` file
+- run `xpm-dev binaries-update`
+
+```
+cd ~/Downloads/arm-none-eabi-gcc-xpack.git
+xpm-js.git/bin/xpm-dev.js binaries-update '10.2.1-1' "${HOME}/Downloads/xpack-binaries/arm-none-eabi-gcc"
+```
+
 - open the GitHub [releases](https://github.com/xpack-dev-tools/arm-none-eabi-gcc-xpack/releases)
   page and select the latest release
 - check the download counter, it should match the number of tests
-- update the `baseUrl:` with the file URLs (including the tag/version);
+- check the `baseUrl:` it should match the file URLs (including the tag/version);
   no terminating `/` is required
-- from the release, copy the SHA & file names
+- from the release, check the SHA & file names
 - compare the SHA sums with those shown by `cat *.sha`
 - check the executable names
 - commit all changes, use a message like
   `package.json: update urls for 10.2.1-1.1 release` (without `v`)
+
+
+## Publish on the npmjs.com server
+
+- select the `xpack-develop` branch
 - check the latest commits `npm run git-log`
 - update `CHANGELOG.md`; commit with a message like
   _CHANGELOG: prepare npm v10.2.1-1.1.1_
