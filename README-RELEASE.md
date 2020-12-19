@@ -417,8 +417,8 @@ xpm-js.git/bin/xpm-dev.js binaries-update '10.2.1-1.1' "${HOME}/Downloads/xpack-
 - select the `xpack-develop` branch
 - check the latest commits `npm run git-log`
 - update `CHANGELOG.md`; commit with a message like
-  _CHANGELOG: prepare npm v10.2.1-1.1.1_
-- `npm version 10.2.1-1.1.1`; the first 5 numbers are the same as the
+  _CHANGELOG: prepare npm v10.2.1-1.1.2_
+- `npm version 10.2.1-1.1.2`; the first 5 numbers are the same as the
   GitHub release; the sixth number is the npm specific version
 - `npm pack` and check the content of the archive, which should list
   only the `package.json`, the `README.md`, `LICENSE` and `CHANGELOG.md`
@@ -456,7 +456,7 @@ xpm install --global @xpack-dev-tools/arm-none-eabi-gcc@next
 On GNU/Linux systems, including Raspberry Pi, use the following commands:
 
 ```bash
-~/opt/xPacks/@xpack-dev-tools/arm-none-eabi-gcc/10.2.1-1.1.1/.content/bin/arm-none-eabi-gcc --version
+~/opt/xPacks/@xpack-dev-tools/arm-none-eabi-gcc/10.2.1-1.1.2/.content/bin/arm-none-eabi-gcc --version
 
 TODO
 ```
@@ -464,7 +464,7 @@ TODO
 On macOS, use:
 
 ```bash
-~/Library/xPacks/@xpack-dev-tools/arm-none-eabi-gcc/10.2.1-1.1.1/.content/bin/arm-none-eabi-gcc --version
+~/Library/xPacks/@xpack-dev-tools/arm-none-eabi-gcc/10.2.1-1.1.2/.content/bin/arm-none-eabi-gcc --version
 
 TODO
 ```
@@ -472,7 +472,7 @@ TODO
 On Windows use:
 
 ```
-%HOMEPATH%\AppData\Roaming\xPacks\@xpack-dev-tools\arm-none-eabi-gcc\10.2.1-1.1.1\.content\bin\arm-none-eabi-gcc --version
+%HOMEPATH%\AppData\Roaming\xPacks\@xpack-dev-tools\arm-none-eabi-gcc\10.2.1-1.1.2\.content\bin\arm-none-eabi-gcc --version
 
 TODO
 ```
@@ -487,7 +487,7 @@ TODO
 When the release is considered stable, promote it as `latest`:
 
 - `npm dist-tag ls @xpack-dev-tools/arm-none-eabi-gcc`
-- `npm dist-tag add @xpack-dev-tools/arm-none-eabi-gcc@10.2.1-1.1.1 latest`
+- `npm dist-tag add @xpack-dev-tools/arm-none-eabi-gcc@10.2.1-1.1.2 latest`
 - `npm dist-tag ls @xpack-dev-tools/arm-none-eabi-gcc`
 
 ## Update the Web
