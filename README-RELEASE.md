@@ -397,7 +397,7 @@ cat *.sha
 
 ```
 cd ~/Downloads/arm-none-eabi-gcc-xpack.git
-xpm-js.git/bin/xpm-dev.js binaries-update '10.2.1-1' "${HOME}/Downloads/xpack-binaries/arm-none-eabi-gcc"
+xpm-js.git/bin/xpm-dev.js binaries-update '10.2.1-1.1' "${HOME}/Downloads/xpack-binaries/arm-none-eabi-gcc"
 ```
 
 - open the GitHub [releases](https://github.com/xpack-dev-tools/arm-none-eabi-gcc-xpack/releases)
