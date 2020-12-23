@@ -1,5 +1,11 @@
 # How to make a new release (maintainer info)
 
+## Release schedule
+
+The xPack GNU Arm Embedded GCC release schedule generally follows the
+[GNU Arm Embedded Toolchain](https://developer.arm.com/tools-and-software/open-source-software/developer-tools/gnu-toolchain/gnu-rm/downloads)
+release schedule, which is about two releases per year.
+
 ## Prepare the build
 
 Before starting the build, perform some checks and tweaks.
