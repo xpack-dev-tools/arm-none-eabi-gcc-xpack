@@ -143,14 +143,23 @@ caffeinate bash ~/Downloads/arm-none-eabi-gcc-xpack.git/scripts/build.sh --osx -
 
 A typical run takes about 85 minutes.
 
-On both Linux machines (`xbbi` and `xbba`):
+On `xbbi`:
 
 ```bash
-bash ~/Downloads/arm-none-eabi-gcc-xpack.git/scripts/build.sh --all --disable-multilib
+bash ~/Downloads/arm-none-eabi-gcc-xpack.git/scripts/build.sh --linux64 --win64 --disable-multilib
+bash ~/Downloads/arm-none-eabi-gcc-xpack.git/scripts/build.sh --linux32 --win32 --disable-multilib
 ```
 
-A typical run on the Intel machine takes about 110 minutes;
-on the Arm machine it takes about 390 minutes.
+A typical run takes about 110 minutes.
+
+On `xbba`:
+
+```bash
+bash ~/Downloads/arm-none-eabi-gcc-xpack.git/scripts/build.sh --arm64 --disable-multilib
+bash ~/Downloads/arm-none-eabi-gcc-xpack.git/scripts/build.sh --arm32 --disable-multilib
+```
+
+A typical run takes about 390 minutes.
 
 ### Clean the destination folder for the test binaries
 
@@ -228,14 +237,23 @@ caffeinate bash ~/Downloads/arm-none-eabi-gcc-xpack.git/scripts/build.sh --osx
 
 A typical run takes about 230 minutes.
 
-On both Linux machines (`xbbi` and `xbba`):
+On `xbbi`:
 
 ```bash
-bash ~/Downloads/arm-none-eabi-gcc-xpack.git/scripts/build.sh --all
+bash ~/Downloads/arm-none-eabi-gcc-xpack.git/scripts/build.sh --linux64 --win64
+bash ~/Downloads/arm-none-eabi-gcc-xpack.git/scripts/build.sh --linux32 --win32
 ```
 
-A typical run on the Intel machine takes about 310 minutes;
-on the Arm machine it takes about 930 minutes.
+A typical run takes about 310 minutes.
+
+On `xbba`:
+
+```bash
+bash ~/Downloads/arm-none-eabi-gcc-xpack.git/scripts/build.sh --arm64
+bash ~/Downloads/arm-none-eabi-gcc-xpack.git/scripts/build.sh --arm32
+```
+
+A typical run takes about 930 minutes.
 
 ### Clean the destination folder
 
