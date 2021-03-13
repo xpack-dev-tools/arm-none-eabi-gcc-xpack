@@ -26,8 +26,8 @@ Before starting the build, perform some checks and tweaks.
 - check differences from the previous version;
 - determine the GCC version (like `10.2.1`) and update the `scripts/VERSION`
   file; the format is `10.2.1-1.1`;
-- add a new set of definitions in the `scripts/container-build.sh`, with
-  the versions of various components;
+- add a new set of definitions in the `scripts/common-versions-source.sh`,
+  with the versions of various components;
 - if newer libraries are used, check if they are available from the local git
   cache project.
 
