@@ -12,8 +12,12 @@ Before starting the build, perform some checks and tweaks.
 
 ### Check Git
 
+In the `xpack-dev-tools/arm-none-eabi-gcc-xpack` Git repo:
+
 - switch to the `xpack-develop` branch
 - if needed, merge the `xpack` branch
+
+No need to add a tag here, it'll be added when the release is created.
 
 ### Update to latest Arm release
 
@@ -25,7 +29,7 @@ Before starting the build, perform some checks and tweaks.
 - commit with a message like **10-2020-q4-major**; also add a tag;
 - check differences from the previous version;
 - determine the GCC version (like `10.2.1`) and update the `scripts/VERSION`
-  file; the format is `10.2.1-1.1`;
+  file; the format is `10.2.1-1.2`;
 - add a new set of definitions in the `scripts/common-versions-source.sh`,
   with the versions of various components;
 - if newer libraries are used, check if they are available from the local git
@@ -34,7 +38,7 @@ Before starting the build, perform some checks and tweaks.
 ### Increase the version
 
 Determine the GCC version (like `10.2.1`) and update the `scripts/VERSION`
-file; the format is `10.2.1-1.1`. The fourth number is the xPack release number
+file; the format is `10.2.1-1.2`. The fourth number is the xPack release number
 of this version. A fifth number will be added when publishing
 the package on the `npm` server.
 
@@ -42,22 +46,28 @@ the package on the `npm` server.
 
 Check GitHub issues and pull requests:
 
-- https://github.com/xpack-dev-tools/arm-none-eabi-gcc-xpack/issues
+- <https://github.com/xpack-dev-tools/arm-none-eabi-gcc-xpack/issues/>
 
-and fix them; assign them to a milestone (like `10.2.1-1.1`).
+and fix them; assign them to a milestone (like `10.2.1-1.2`).
 
 ### Check `README.md`
 
 Normally `README.md` should not need changes, but better check.
 Information related to the new version should not be included here,
-but in the version specific file (below).
+but in the version specific release page.
+
+### Update versions in `README` files
+
+- update version in `README-RELEASE.md`
+- update version in `README-BUILD.md`
+- update version in `README.md`
 
 ## Update `CHANGELOG.md`
 
 - open the `CHANGELOG.md` file
 - check if all previous fixed issues are in
-- add a new entry like _v10.2.1-1.1 prepared_
-- commit commit with a message like _CHANGELOG: prepare v10.2.1-1.1_
+- add a new entry like _v10.2.1-1.2 prepared_
+- commit with a message like _prepare v10.2.1-1.2_
 
 Note: if you missed to update the `CHANGELOG.md` before starting the build,
 edit the file and rerun the build, it should take only a few minutes to
@@ -76,19 +86,37 @@ With Sourcetree, go to the helper repo and update to the latest master commit.
 
 ### Development run the build scripts
 
-Before the real build, run a test build on the development machine (`wks`):
+Before the real build, run a test build on the development machine (`wks`)
+or the production machine (`xbbm`):
 
-```bash
+```sh
 sudo rm -rf ~/Work/arm-none-eabi-gcc-*
 
-caffeinate bash ~/Downloads/arm-none-eabi-gcc-xpack.git/scripts/build.sh --develop --without-pdf --disable-tests --disable-multilib --linux64 --win64 --linux32 --win32
+caffeinate bash ~/Downloads/arm-none-eabi-gcc-xpack.git/scripts/helper/build.sh --develop --without-pdf --disable-tests --disable-multilib --osx
 ```
 
-Work on the scripts until all 4 platforms pass the build.
+Similarly on the Intel Linux (`xbbi`):
+
+```sh
+bash ~/Downloads/arm-none-eabi-gcc-xpack.git/scripts/helper/build.sh --develop --without-pdf --without-html --disable-tests --disable-multilib --linux64
+bash ~/Downloads/arm-none-eabi-gcc-xpack.git/scripts/helper/build.sh --develop --without-pdf --without-html --disable-tests --disable-multilib --linux32
+
+bash ~/Downloads/arm-none-eabi-gcc-xpack.git/scripts/helper/build.sh --develop --without-pdf --without-html --disable-tests --disable-multilib --win64
+bash ~/Downloads/arm-none-eabi-gcc-xpack.git/scripts/helper/build.sh --develop --without-pdf --without-html --disable-tests --disable-multilib --win32
+```
+
+And on the Arm Linux (`xbba`):
+
+```sh
+bash ~/Downloads/arm-none-eabi-gcc-xpack.git/scripts/helper/build.sh --develop --without-pdf --without-html --disable-tests --disable-multilib --arm64
+bash ~/Downloads/arm-none-eabi-gcc-xpack.git/scripts/helper/build.sh --develop --without-pdf --without-html --disable-tests --disable-multilib --arm32
+```
+
+Work on the scripts until all platforms pass the build.
 
 Possibly add binutils & gdb patches.
 
-## Push the build script
+## Push the build scripts
 
 In this Git repo:
 
@@ -97,182 +125,99 @@ In this Git repo:
 
 From here it'll be cloned on the production machines.
 
-### Run the build scripts without multilibs
+## Run the CI build
 
-Move to the three production machines.
+The automation is provided by GitHub Actions and three self-hosted runners.
 
-On the macOS build machine (`xbbm`):
+- on the macOS machine (`xbbm`) open ssh sessions to both Linux
+machines (`xbbi` and `xbba`):
 
-- empty the trash bin
-- create three new terminals
-
-Connect to the Intel Linux (`xbbi`):
-
-```bash
+```sh
 caffeinate ssh xbbi
-```
 
-Connect to the Arm Linux (`xbba`):
-
-```bash
 caffeinate ssh xbba
 ```
 
-On all machines, clone the `xpack-develop` branch:
+Start the runner on all three machines:
 
-```bash
-rm -rf ~/Downloads/arm-none-eabi-gcc-xpack.git; \
-git clone \
-  --recurse-submodules \
-  --branch xpack-develop \
-  https://github.com/xpack-dev-tools/arm-none-eabi-gcc-xpack.git \
-  ~/Downloads/arm-none-eabi-gcc-xpack.git
+```sh
+~/actions-runner/run.sh
 ```
 
-On all machines, remove any previous build:
+Check that both the project Git and the submodule are pushed to GitHub.
 
-```bash
-sudo rm -rf ~/Work/arm-none-eabi-gcc-*
+To trigger the GitHub Actions build, use the xPack action:
+
+- `trigger-workflow-build`
+
+This is equivalent to:
+
+```sh
+bash ~/Downloads/arm-none-eabi-gcc-xpack.git/scripts/helper/trigger-workflow-build.sh
 ```
 
-On the macOS machine (`xbbm`):
+This script requires the `GITHUB_API_DISPATCH_TOKEN` to be present
+in the environment.
 
-```bash
-caffeinate bash ~/Downloads/arm-none-eabi-gcc-xpack.git/scripts/build.sh --osx --disable-multilib
-```
+This command uses the `xpack-develop` branch of this repo.
 
-A typical run takes about 85 minutes.
+The builds take about 930 minutes to complete.
 
-On `xbbi`:
+The workflow result and logs are available from the
+[Actions](https://github.com/xpack-dev-tools/arm-none-eabi-gcc-xpack/actions/) page.
 
-```bash
-bash ~/Downloads/arm-none-eabi-gcc-xpack.git/scripts/build.sh --linux64 --win64 --disable-multilib
-bash ~/Downloads/arm-none-eabi-gcc-xpack.git/scripts/build.sh --linux32 --win32 --disable-multilib
-```
-
-A typical run takes about 110 minutes.
-
-On `xbba`:
-
-```bash
-bash ~/Downloads/arm-none-eabi-gcc-xpack.git/scripts/build.sh --arm64 --disable-multilib
-bash ~/Downloads/arm-none-eabi-gcc-xpack.git/scripts/build.sh --arm32 --disable-multilib
-```
-
-A typical run takes about 390 minutes.
-
-### Clean the destination folder for the test binaries
-
-On the development machine (`wks`) clear the folder where binaries from all
-build machines will be collected.
-
-```bash
-rm -f ~/Downloads/xpack-binaries/arm-none-eabi-gcc/*
-```
-
-Note: this step is very important, to avoid using test binaries!
-
-### Copy the test binaries to the development machine
-
-On all three machines:
-
-```console
-(cd ~/Work/arm-none-eabi-gcc-*/deploy; scp * ilg@wks:Downloads/xpack-binaries/arm-none-eabi-gcc)
-```
-
-## Publish the binaries as pre-release/experimental
-
-For really new versions, test before making the release.
-
-Use the [experimental pre-release](https://github.com/xpack-dev-tools/pre-releases/releases/tag/experimental)
-to publish the binaries, to run the Travis tests and to allow for
-others to test them.
-
-## Run the pre-release Travis tests
-
-In the `tests/scripts/trigger-travis-*.sh` files, check and update the
-URL to use something like
-
-```
-base_url="https://github.com/xpack-dev-tools/pre-releases/releases/download/experimental/"
-```
-
-Trigger the stable and latest Travis builds (on a Mac by double-clicking
-on the command scripts):
-
-- `trigger-travis-quick.mac.command` (optional)
-- `trigger-travis-stable.mac.command`
-- `trigger-travis-latest.mac.command`
-
-The test results are available from:
-
-- https://travis-ci.org/github/xpack-dev-tools/arm-none-eabi-gcc-xpack
-
-### Run the build scripts with multilibs
-
-On all machines, clone the `xpack-develop` branch:
-
-```bash
-rm -rf ~/Downloads/arm-none-eabi-gcc-xpack.git; \
-git clone \
-  --recurse-submodules \
-  --branch xpack-develop \
-  https://github.com/xpack-dev-tools/arm-none-eabi-gcc-xpack.git \
-  ~/Downloads/arm-none-eabi-gcc-xpack.git
-```
-
-On all machines, remove any previous build:
-
-```bash
-sudo rm -rf ~/Work/arm-none-eabi-gcc-*
-```
-
-Empty trash.
-
-On the macOS machine (`xbbm`):
-
-```bash
-caffeinate bash ~/Downloads/arm-none-eabi-gcc-xpack.git/scripts/build.sh --osx
-```
-
-A typical run takes about 230 minutes.
-
-On `xbbi`:
-
-```bash
-bash ~/Downloads/arm-none-eabi-gcc-xpack.git/scripts/build.sh --linux64 --win64
-bash ~/Downloads/arm-none-eabi-gcc-xpack.git/scripts/build.sh --linux32 --win32
-```
-
-A typical run takes about 310 minutes.
-
-On `xbba`:
-
-```bash
-bash ~/Downloads/arm-none-eabi-gcc-xpack.git/scripts/build.sh --arm64
-bash ~/Downloads/arm-none-eabi-gcc-xpack.git/scripts/build.sh --arm32
-```
-
-A typical run takes about 930 minutes.
-
-### Clean the destination folder
-
-On the development machine (`wks`) clear the folder where binaries from all
-build machines will be collected.
-
-```bash
-rm -f ~/Downloads/xpack-binaries/arm-none-eabi-gcc/*
-```
-
-### Copy the binaries to the development machine
-
-On all three machines:
-
-```console
-(cd ~/Work/arm-none-eabi-gcc-*/deploy; scp * ilg@wks:Downloads/xpack-binaries/arm-none-eabi-gcc)
-```
+The resulting binaries are available for testing from
+[pre-releases/test](https://github.com/xpack-dev-tools/pre-releases/releases/tag/test/).
 
 ## Testing
+
+### CI tests
+
+The automation is provided by GitHub Actions.
+
+To trigger the GitHub Actions tests, use the xPack actions:
+
+- `trigger-workflow-test-prime`
+- `trigger-workflow-test-docker-linux-intel`
+- `trigger-workflow-test-docker-linux-arm`
+
+These are equivalent to:
+
+```sh
+bash ~/Downloads/arm-none-eabi-gcc-xpack.git/scripts/helper/tests/trigger-workflow-test-prime.sh
+bash ~/Downloads/arm-none-eabi-gcc-xpack.git/scripts/helper/tests/trigger-workflow-test-docker-linux-intel.sh
+bash ~/Downloads/arm-none-eabi-gcc-xpack.git/scripts/helper/tests/trigger-workflow-test-docker-linux-arm.sh
+```
+
+These scripts require the `GITHUB_API_DISPATCH_TOKEN` to be present
+in the environment.
+
+These actions use the `xpack-develop` branch of this repo and the
+[pre-releases/test](https://github.com/xpack-dev-tools/pre-releases/releases/tag/test/)
+binaries.
+
+The tests results are available from the
+[Actions](https://github.com/xpack-dev-tools/arm-none-eabi-gcc-xpack/actions/) page.
+
+Since GitHub Actions provides a single version of macOS, the
+multi-version macOS tests run on Travis.
+
+To trigger the Travis test, use the xPack action:
+
+- `trigger-travis-macos`
+
+This is equivalent to:
+
+```sh
+bash ~/Downloads/arm-none-eabi-gcc-xpack.git/scripts/helper/tests/trigger-travis-macos.sh
+```
+
+This script requires the `TRAVIS_COM_TOKEN` to be present in the environment.
+
+The test results are available from
+[travis-ci.com](https://app.travis-ci.com/github/xpack-dev-tools/arm-none-eabi-gcc-xpack/builds/).
+
+### Manual tests
 
 Install the binaries on all supported platforms and check if they are
 functional.
@@ -284,12 +229,12 @@ For this, on each platform (Mac, GNU/Linux 64/32, Windows 64/32):
   on Windows the current paths always use spaces, so renaming is not needed;
 - clone this repo locally; on Windows use the Git console;
 
-```bash
+```sh
 git clone \
-  --recurse-submodules \
   --branch xpack-develop \
   https://github.com/xpack-dev-tools/arm-none-eabi-gcc-xpack.git \
-  ~/Downloads/arm-none-eabi-gcc-xpack.git
+  ~/Downloads/arm-none-eabi-gcc-xpack.git; \
+git -C ~/Downloads/arm-none-eabi-gcc-xpack.git submodule update --init --recursive
 ```
 
 - in a separate workspace, Import → General → Existing Projects into Workspace
@@ -313,216 +258,113 @@ git clone \
   - (don't miss the LTO cases, since in the past they had problems)
 - to test the Python debugger, start it with `--version`
 
-## Create a new GitHub pre-release
+## Create a new GitHub pre-release draft
 
 - in `CHANGELOG.md`, add release date
 - commit and push the `xpack-develop` branch
-- go to the GitHub [releases](https://github.com/xpack-dev-tools/arm-none-eabi-gcc-xpack/releases) page
-- click **Draft a new release**, in the `xpack-develop` branch
-- name the tag like **v10.2.1-1.1** (mind the dash in the middle!)
-- name the release like **xPack GNU Arm Embedded GCC v10.2.1-1.1**
-(mind the dash)
-- as description
-  - add a downloads badge like `![Github Releases (by Release)](https://img.shields.io/github/downloads/xpack-dev-tools/arm-none-eabi-gcc-xpack/v10.2.1-1.1/total.svg)`
-  - draft a short paragraph explaining what are the main changes
-  - add _For the moment these binaries are provided only for testing purposes!_
-- **attach binaries** and SHA (drag and drop from the archives folder will do it)
-- **enable** the **pre-release** button
-- click the **Publish Release** button
+- run the xPack action `trigger-workflow-publish-release`
 
-Note: at this moment the system should send a notification to all clients
-watching this project.
-
-## Run the release Travis tests
-
-Using the scripts in `tests/scripts/`, start:
-
-- `trigger-travis-quick.mac.command` (optional)
-- `trigger-travis-stable.mac.command`
-- `trigger-travis-latest.mac.command`
-
-The test results are available from:
-
-- https://travis-ci.org/github/xpack-dev-tools/arm-none-eabi-gcc-xpack
-
-For more details, see `tests/scripts/README.md`.
+The result is a
+[draft pre-release](https://github.com/xpack-dev-tools/arm-none-eabi-gcc-xpack/releases/)
+tagged like **v10.2.1-1.2** (mind the dash in the middle!) and
+named like **xPack GNU Arm Embedded GCC v10.2.1-1.2** (mind the dash),
+with all binaries attached.
 
 ## Prepare a new blog post
+
+Run the xPack action `generate-jekyll-post`; this will leave a file
+on the Desktop.
 
 In the `xpack/web-jekyll` GitHub repo:
 
 - select the `develop` branch
-- add a new file to `_posts/arm-none-eabi-gcc/releases`
-- name the file like `2020-12-19-arm-none-eabi-gcc-v10-2-1-1-1-released.md`
-- name the post like: **xPack GNU Arm Embedded GCC v10.2.1-1.1 released**
-- as `download_url` use the tagged URL like `https://github.com/xpack-dev-tools/arm-none-eabi-gcc-xpack/releases/tag/v10.2.1-1.1/`
-- update the `date:` field with the current date
-- update the Travis URLs using the actual test pages
-- update the SHA sums via copy/paste from the original build machines
-(it is very important to use the originals!)
+- copy the new file to `_posts/releases/arm-none-eabi-gcc`
 
 If any, refer to closed
-[issues](https://github.com/xpack-dev-tools/arm-none-eabi-gcc-xpack/issues)
-as:
-
-- **[Issue:\[#1\]\(...\)]**.
-
-### Update the SHA sums
-
-Copy/paste the build report at the end of the post as:
-
-```console
-## Checksums
-The SHA-256 hashes for the files are:
-
-6f5e5b94ecf2afece992b46a60465e3ed5aae172202c2a4e34f8e81e5b0da790  
-xpack-arm-none-eabi-gcc-10.2.1-1.1-darwin-x64.tar.gz
-
-8791f653f1fc15b004987a2b84a7c0aabd71bde11e0e68eb32846e9b1ad80986  
-xpack-arm-none-eabi-gcc-10.2.1-1.1-linux-arm64.tar.gz
-
-bb4e1f6c72e32a1696edcfdec57d32ece64ac691a0363e4781db559addac7b79  
-xpack-arm-none-eabi-gcc-10.2.1-1.1-linux-arm.tar.gz
-
-be98731e1bb05fd78e2ec5727f7d6c9a6f2ae548970bbd0998de7079021d8e11  
-xpack-arm-none-eabi-gcc-10.2.1-1.1-linux-ia32.tar.gz
-
-10b859d83c7a451add58eaf79afdb9a4a66fc38920884e8a54c809e0a1f4ed3e  
-xpack-arm-none-eabi-gcc-10.2.1-1.1-linux-x64.tar.gz
-
-5cc86c9d17c4fda97107b374ae939fedf9d7428d06e6c31418ea0e5ff1e6aa41  
-xpack-arm-none-eabi-gcc-10.2.1-1.1-win32-ia32.zip
-
-91ab5e1b9b3ffcc606262e2be96bd70ab0be26a42d21e610340412f65de2bb16  
-xpack-arm-none-eabi-gcc-10.2.1-1.1-win32-x64.zip
-```
-
-## Check the SHA sums
-
-On the development machine (`wks`):
-
-```bash
-cd ~Downloads/xpack-binaries/arm-none-eabi-gcc
-cat *.sha
-```
+[issues](https://github.com/xpack-dev-tools/arm-none-eabi-gcc-xpack/issues/).
 
 ## Update the preview Web
 
-- commit the `develop` branch of `xpack/web-jekyll` GitHub repo; use a message
-  like **xPack GNU Arm Embedded GCC v10.2.1-1.1 released**
+- commit the `develop` branch of `xpack/web-jekyll` GitHub repo;
+  use a message like **xPack GNU Arm Embedded GCC v10.2.1-1 released**
+- push to GitHub
 - wait for the GitHub Pages build to complete
-- the preview web is https://xpack.github.io/web-preview/
+- the preview web is <https://xpack.github.io/web-preview/news/>
+
+## Create the pre-release
+
+- go to the GitHub [releases](https://github.com/xpack-dev-tools/arm-none-eabi-gcc-xpack/releases/) page
+- perform the final edits and check if everything is fine
+- save the release
+
+Note: at this moment the system should send a notification to all clients
+watching this project.
 
 ## Update package.json binaries
 
 - select the `xpack-develop` branch
+- run the xPack action `update-package-binaries`
 - open the `package.json` file
-- run `xpm-dev binaries-update`
-
-```
-cd ~/Downloads/arm-none-eabi-gcc-xpack.git
-xpm-js.git/bin/xpm-dev.js binaries-update '10.2.1-1.1' "${HOME}/Downloads/xpack-binaries/arm-none-eabi-gcc"
-```
-
-- open the GitHub [releases](https://github.com/xpack-dev-tools/arm-none-eabi-gcc-xpack/releases)
-  page and select the latest release
-- check the download counter, it should match the number of tests
 - check the `baseUrl:` it should match the file URLs (including the tag/version);
   no terminating `/` is required
 - from the release, check the SHA & file names
 - compare the SHA sums with those shown by `cat *.sha`
 - check the executable names
 - commit all changes, use a message like
-  `package.json: update urls for 10.2.1-1.1 release` (without `v`)
+  `package.json: update urls for 10.2.1-1.2 release` (without `v`)
 
 ## Publish on the npmjs.com server
 
 - select the `xpack-develop` branch
 - check the latest commits `npm run git-log`
 - update `CHANGELOG.md`; commit with a message like
-  _CHANGELOG: prepare npm v10.2.1-1.1.2_
-- `npm version 10.2.1-1.1.2`; the first 5 numbers are the same as the
-  GitHub release; the sixth number is the npm specific version
+  _CHANGELOG: publish npm v10.2.1-1.2_
 - `npm pack` and check the content of the archive, which should list
-  only the `package.json`, the `README.md`, `LICENSE` and `CHANGELOG.md`
+  only the `package.json`, the `README.md`, `LICENSE` and `CHANGELOG.md`;
+  possibly adjust `.npmignore`
+- `npm version 10.2.1-1.2`; the first 5 numbers are the same as the
+  GitHub release; the sixth number is the npm specific version
 - push the `xpack-develop` branch to GitHub
+- push tags with `git push origin --tags`
 - `npm publish --tag next` (use `--access public` when publishing for
   the first time)
 
-The version is visible at:
+After a few moments the version will be visible at:
 
-- https://www.npmjs.com/package/@xpack-dev-tools/arm-none-eabi-gcc?activeTab=versions
+- <https://www.npmjs.com/package/@xpack-dev-tools/arm-none-eabi-gcc?activeTab=versions>
 
 ## Test if the npm binaries can be installed with xpm
 
-Run the `tests/scripts/trigger-travis-xpm-install.sh` script, this
-will install the package on Intel Linux 64-bit, macOS and Windows 64-bit.
+Run the `scripts/tests/trigger-travis-xpm-install.sh` script, this
+will install the package via `xpm install` on all supported platforms.
 
 The test results are available from:
 
-- https://travis-ci.org/github/xpack-dev-tools/arm-none-eabi-gcc-xpack
-
-For 32-bit Windows, 32-bit Intel GNU/Linux and 32-bit Arm, install manually.
-
-```bash
-xpm install --global @xpack-dev-tools/arm-none-eabi-gcc@next
-```
-
-## Test the npm binaries
-
-Install the binaries on all platforms.
-
-```bash
-xpm install --global @xpack-dev-tools/arm-none-eabi-gcc@next
-```
-
-On GNU/Linux systems, including Raspberry Pi, use the following commands:
-
-```bash
-~/opt/xPacks/@xpack-dev-tools/arm-none-eabi-gcc/10.2.1-1.1.2/.content/bin/arm-none-eabi-gcc --version
-
-TODO
-```
-
-On macOS, use:
-
-```bash
-~/Library/xPacks/@xpack-dev-tools/arm-none-eabi-gcc/10.2.1-1.1.2/.content/bin/arm-none-eabi-gcc --version
-
-TODO
-```
-
-On Windows use:
-
-```
-%HOMEPATH%\AppData\Roaming\xPacks\@xpack-dev-tools\arm-none-eabi-gcc\10.2.1-1.1.2\.content\bin\arm-none-eabi-gcc --version
-
-TODO
-```
+- <https://travis-ci.com/github/xpack-dev-tools/arm-none-eabi-gcc-xpack/>
 
 ## Update the repo
 
 - merge `xpack-develop` into `xpack`
-- push
+- push to GitHub
 
 ## Tag the npm package as `latest`
 
 When the release is considered stable, promote it as `latest`:
 
 - `npm dist-tag ls @xpack-dev-tools/arm-none-eabi-gcc`
-- `npm dist-tag add @xpack-dev-tools/arm-none-eabi-gcc@10.2.1-1.1.2 latest`
+- `npm dist-tag add @xpack-dev-tools/arm-none-eabi-gcc@10.2.1-1.2.1 latest`
 - `npm dist-tag ls @xpack-dev-tools/arm-none-eabi-gcc`
 
 ## Update the Web
 
 - in the `master` branch, merge the `develop` branch
 - wait for the GitHub Pages build to complete
-- the result is in https://xpack.github.io/news/
+- the result is in <https://xpack.github.io/news/>
 - remember the post URL, since it must be updated in the release page
 
 ## Create the final GitHub release
 
-- go to the GitHub [releases](https://github.com/xpack-dev-tools/arm-none-eabi-gcc-xpack/releases) page
+- go to the GitHub [releases](https://github.com/xpack-dev-tools/arm-none-eabi-gcc-xpack/releases/) page
 - check the download counter, it should match the number of tests
 - add a link to the Web page `[Continue reading »]()`; use an same blog URL
 - **disable** the **pre-release** button
@@ -532,9 +374,15 @@ When the release is considered stable, promote it as `latest`:
 
 - in a separate browser windows, open [TweetDeck](https://tweetdeck.twitter.com/)
 - using the `@xpack_project` account
-- paste the release name like **xPack GNU Arm Embedded GCC v10.2.1-1.1 released**
-- paste the link to the Web page release
+- paste the release name like **xPack GNU Arm Embedded GCC v10.2.1-1.2 released**
+- paste the link to the Web page
+  [release](https://xpack.github.io/arm-none-eabi-gcc/releases/)
 - click the **Tweet** button
+
+## Remove pre-release binaries
+
+- go to <https://github.com/xpack-dev-tools/pre-releases/releases/tag/test/>
+- remove the test binaries
 
 ## Announce to Arm community
 
@@ -544,5 +392,5 @@ Add a new topic in the **GNU Toolchain forum** category of the
 - title: copy release title
 - content:
   - The xPack GNU Arm Embedded GCC is an alternate binary distribution that complements the official GNU Arm Embedded Toolchain maintained by Arm.
-  - The latest release is [10.2.1-1.1]() following Arm release from Dec 11, 2020 (version 10-2020-q4-major).
+  - The latest release is 10.2.1-1.2 following Arm release from Dec 11, 2020 (version 10-2020-q4-major).
 - tags: xpack, gnu, gcc, arm, toolchain

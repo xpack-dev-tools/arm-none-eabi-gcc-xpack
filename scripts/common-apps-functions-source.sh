@@ -35,10 +35,11 @@ function build_binutils()
   local binutils_version="$1"
   # No versioning here, the inner archives use simple names.
   local binutils_folder_name="binutils-${binutils_version}"
+
+  mkdir -pv "${LOGS_FOLDER_PATH}/${binutils_folder_name}"
+
   local binutils_patch="${binutils_folder_name}.patch"
-
   local binutils_stamp_file_path="${INSTALL_FOLDER_PATH}/stamp-${binutils_folder_name}-installed"
-
   if [ ! -f "${binutils_stamp_file_path}" ]
   then
 
@@ -62,8 +63,6 @@ function build_binutils()
         fi
       )
     fi
-
-    mkdir -pv "${LOGS_FOLDER_PATH}/${binutils_folder_name}"
 
     (
       mkdir -pv "${BUILD_FOLDER_PATH}/${binutils_folder_name}"
@@ -232,8 +231,10 @@ function test_binutils()
 function build_gcc_first()
 {
   local gcc_first_folder_name="gcc-${GCC_VERSION}-first"
-  local gcc_first_stamp_file_path="${INSTALL_FOLDER_PATH}/stamp-${gcc_first_folder_name}-installed"
 
+  mkdir -pv "${LOGS_FOLDER_PATH}/${gcc_first_folder_name}"
+
+  local gcc_first_stamp_file_path="${INSTALL_FOLDER_PATH}/stamp-${gcc_first_folder_name}-installed"
   if [ ! -f "${gcc_first_stamp_file_path}" ]
   then
 
@@ -241,8 +242,6 @@ function build_gcc_first()
 
     extract "${GCC_COMBO_FOLDER_NAME}/src/gcc.tar.bz2" \
       "${GCC_SRC_FOLDER_NAME}" "${GCC_PATCH}"
-
-    mkdir -pv "${LOGS_FOLDER_PATH}/${gcc_first_folder_name}"
 
     (
       mkdir -pv "${BUILD_FOLDER_PATH}/${gcc_first_folder_name}"
@@ -370,16 +369,16 @@ function build_gcc_first()
 function build_newlib()
 {
   local newlib_folder_name="newlib-${NEWLIB_VERSION}$1"
-  local newlib_stamp_file_path="${INSTALL_FOLDER_PATH}/stamp-${newlib_folder_name}-installed"
 
+  mkdir -pv "${LOGS_FOLDER_PATH}/${newlib_folder_name}"
+
+  local newlib_stamp_file_path="${INSTALL_FOLDER_PATH}/stamp-${newlib_folder_name}-installed"
   if [ ! -f "${newlib_stamp_file_path}" ]
   then
 
     cd "${SOURCES_FOLDER_PATH}"
 
     extract "${GCC_COMBO_FOLDER_NAME}/src/newlib.tar.bz2" "${NEWLIB_SRC_FOLDER_NAME}"
-
-    mkdir -pv "${LOGS_FOLDER_PATH}/${newlib_folder_name}"
 
     (
       mkdir -pv "${BUILD_FOLDER_PATH}/${newlib_folder_name}"
@@ -671,8 +670,10 @@ function copy_linux_libs()
 function build_gcc_final()
 {
   local gcc_final_folder_name="gcc-${GCC_VERSION}-final$1"
-  local gcc_final_stamp_file_path="${INSTALL_FOLDER_PATH}/stamp-${gcc_final_folder_name}-installed"
 
+  mkdir -pv "${LOGS_FOLDER_PATH}/${gcc_final_folder_name}"
+
+  local gcc_final_stamp_file_path="${INSTALL_FOLDER_PATH}/stamp-${gcc_final_folder_name}-installed"
   if [ ! -f "${gcc_final_stamp_file_path}" ]
   then
 
@@ -680,8 +681,6 @@ function build_gcc_final()
 
     extract "${GCC_COMBO_FOLDER_NAME}/src/gcc.tar.bz2" \
       "${GCC_SRC_FOLDER_NAME}" "${GCC_PATCH}"
-
-    mkdir -pv "${LOGS_FOLDER_PATH}/${gcc_final_folder_name}"
 
     (
       mkdir -pv "${BUILD_FOLDER_PATH}/${gcc_final_folder_name}"
@@ -1022,6 +1021,9 @@ function build_gdb()
   # https://ftp.gnu.org/old-gnu/Manuals/gdb/html_chapter/gdb_19.html#SEC197
 
   local gdb_folder_name="gdb-${GDB_VERSION}$1"
+
+  mkdir -pv "${LOGS_FOLDER_PATH}/${gdb_folder_name}"
+
   local gdb_stamp_file_path="${INSTALL_FOLDER_PATH}/stamp-${gdb_folder_name}-installed"
 
   if [ ! -f "${gdb_stamp_file_path}" ]
@@ -1042,8 +1044,6 @@ function build_gdb()
           "${GDB_SRC_FOLDER_NAME}" "${GDB_PATCH}"
       fi
     fi
-
-    mkdir -pv "${LOGS_FOLDER_PATH}/${gdb_folder_name}"
 
     (
       mkdir -pv "${BUILD_FOLDER_PATH}/${gdb_folder_name}"
@@ -1341,7 +1341,7 @@ function strip_libs()
   fi
 }
 
-function copy_arm_files()
+function copy_custom_files()
 {
   (
     xbb_activate

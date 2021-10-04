@@ -12,8 +12,8 @@ The **xPack Arm Embedded GCC** toolchain is also available as a
 binary [xPack](https://www.npmjs.com/package/@xpack-dev-tools/arm-none-eabi-gcc)
 and can be conveniently installed with [xpm](https://www.npmjs.com/package/xpm):
 
-```console
-$ xpm install --global @xpack-dev-tools/arm-none-eabi-gcc@8.3.1-1.3
+```sh
+xpm install --global @xpack-dev-tools/arm-none-eabi-gcc@8.3.1-1.3
 ```
 
 For more details on how to install the toolchain, please see

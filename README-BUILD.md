@@ -2,9 +2,9 @@
 
 ## Introduction
 
-This project includes the scripts and additional files required to
+This project also includes the scripts and additional files required to
 build and publish the
-[xPack GNU Arm Embedded GCC](https://xpack.github.io/arm-none-eabi-gcc/) binaries.
+[xPack GNU Arm Embedded GCC](https://github.com/xpack-dev-tools/arm-none-eabi-gcc-xpack) binaries.
 
 It follows the official
 [Arm](https://developer.arm.com/open-source/gnu-toolchain/gnu-rm)
@@ -31,19 +31,21 @@ This page documents the distribution builds.
 
 For native builds, see the `build-native.sh` script.
 
-## Repository URLs
+## Repositories
 
-- `https://github.com/xpack-dev-tools/arm-none-eabi-gcc-xpack.git` - the URL of the
-  [xPack GNU Arm Embedded GCC](https://github.com/xpack-dev-tools/arm-none-eabi-gcc-xpack)
-- `https://github.com/xpack-dev-tools/build-helper` - the URL of the
+- <https://github.com/xpack-dev-tools/arm-none-eabi-gcc-xpack.git> -
+  the URL of the xPack build scripts repository
+- <https://github.com/xpack-dev-tools/build-helper> - the URL of the
   xPack build helper, used as the `scripts/helper` submodule
+- <https://github.com/xpack-dev-tools/arm-gcc-original-scripts.git> -
+  the URL of a local repository with the original Arm build scripts
 
 The build scripts use Arm archives; occasionally, to avoid bugs, original
 repositories are used:
 
 - `git://sourceware.org/git/binutils-gdb.git`
 
-## Branches
+### Branches
 
 - `xpack` - the updated content, used during builds
 - `xpack-develop` - the updated content, used during development
@@ -64,36 +66,29 @@ The build scripts are available in the `scripts` folder of the
 [`xpack-dev-tools/arm-none-eabi-gcc-xpack`](https://github.com/xpack-dev-tools/arm-none-eabi-gcc-xpack)
 Git repo.
 
-To download them, the following shortcut is available:
+To download them, issue the following commands:
 
-```console
-$ curl --fail -L https://github.com/xpack-dev-tools/arm-none-eabi-gcc-xpack/raw/xpack/scripts/git-clone.sh | bash
-```
-
-This small script issues the following two commands:
-
-```console
-$ rm -rf ~/Downloads/arm-none-eabi-gcc-xpack.git; \
-  git clone --recurse-submodules https://github.com/xpack-dev-tools/arm-none-eabi-gcc-xpack.git \
-  ~/Downloads/arm-none-eabi-gcc-xpack.git
+```sh
+rm -rf ~/Downloads/arm-none-eabi-gcc-xpack.git; \
+git clone \
+  https://github.com/xpack-dev-tools/arm-none-eabi-gcc-xpack.git \
+  ~/Downloads/arm-none-eabi-gcc-xpack.git; \
+git -C ~/Downloads/arm-none-eabi-gcc-xpack.git submodule update --init --recursive 
 ```
 
 > Note: the repository uses submodules; for a successful build it is
 > mandatory to recurse the submodules.
 
-For development purposes, there is a shortcut to clone the `xpack-develop`
+For development purposes, clone the `xpack-develop`
 branch:
 
-```console
-$ curl --fail -L https://github.com/xpack-dev-tools/arm-none-eabi-gcc-xpack/raw/xpack/scripts/git-clone-develop.sh | bash
-```
-
-which is a shortcut for:
-
-```console
-$ rm -rf ~/Downloads/arm-none-eabi-gcc-xpack.git; \
-  git clone --recurse-submodules --branch xpack-develop https://github.com/xpack-dev-tools/arm-none-eabi-gcc-xpack.git \
-  ~/Downloads/arm-none-eabi-gcc-xpack.git
+```sh
+rm -rf ~/Downloads/arm-none-eabi-gcc-xpack.git; \
+git clone \
+  --branch xpack-develop \
+  https://github.com/xpack-dev-tools/arm-none-eabi-gcc-xpack.git \
+  ~/Downloads/arm-none-eabi-gcc-xpack.git; \
+git -C ~/Downloads/arm-none-eabi-gcc-xpack.git submodule update --init --recursive
 ```
 
 ## The `Work` folder
@@ -137,7 +132,7 @@ functional changes.
 The actual changes for each version are documented in the corresponding
 release pages:
 
-- https://xpack.github.io/arm-none-eabi-gcc/releases/
+- <https://xpack.github.io/arm-none-eabi-gcc/releases/>
 
 ## How to build local/native binaries
 
@@ -151,10 +146,8 @@ are in the
 
 ## Build
 
-Although it is perfectly possible to build all binaries in a single step
-on a macOS system, due to Docker specifics, it is faster to build the
-GNU/Linux and Windows binaries on a GNU/Linux system and the macOS binary
-separately.
+The builds currently run on 3 dedicated machines (Intel GNU/Linux,
+Arm GNU/Linux and Intel macOS). A fourth machine for Arm macOS is planned.
 
 ### Build the Intel GNU/Linux and Windows binaries
 
@@ -162,27 +155,21 @@ The current platform for Intel GNU/Linux and Windows production builds is a
 Debian 10, running on an Intel NUC8i7BEH mini PC with 32 GB of RAM
 and 512 GB of fast M.2 SSD. The machine name is `xbbi`.
 
-```console
-$ ssh xbbi
+```sh
+caffeinate ssh xbbi
 ```
 
-Before starting a multi-platform build, check if Docker is started:
+Before starting a build, check if Docker is started:
 
-```console
-$ docker info
-```
-
-Eventually run the test image:
-
-```console
-$ docker run hello-world
+```sh
+docker info
 ```
 
 Before running a build for the first time, it is recommended to preload the
-docker images, since they are pretty large.
+docker images.
 
-```console
-$ bash ~/Downloads/arm-none-eabi-gcc-xpack.git/scripts/build.sh preload-images
+```sh
+bash ~/Downloads/arm-none-eabi-gcc-xpack.git/scripts/helper/build.sh preload-images
 ```
 
 The result should look similar to:
@@ -190,8 +177,8 @@ The result should look similar to:
 ```console
 $ docker images
 REPOSITORY          TAG                              IMAGE ID            CREATED             SIZE
-ilegeul/ubuntu      i386-12.04-xbb-v3.2              fadc6405b606        2 days ago          4.55GB
-ilegeul/ubuntu      amd64-12.04-xbb-v3.2             3aba264620ea        2 days ago          4.98GB
+ilegeul/ubuntu      i386-12.04-xbb-v3.3              fadc6405b606        2 days ago          4.55GB
+ilegeul/ubuntu      amd64-12.04-xbb-v3.3             3aba264620ea        2 days ago          4.98GB
 hello-world         latest                           bf756fb1ae65        5 months ago        13.3kB
 ```
 
@@ -201,37 +188,35 @@ by Docker.
 
 To check the content of a Docker image:
 
-```console
-$ docker run --interactive --tty ilegeul/ubuntu:amd64-12.04-xbb-v3.2
+```sh
+docker run --interactive --tty ilegeul/ubuntu:amd64-12.04-xbb-v3.3
 ```
 
 To remove unused files:
 
-```console
-$ docker system prune --force
+```sh
+docker system prune --force
 ```
 
 Since the build takes a while, use `screen` to isolate the build session
 from unexpected events, like a broken
 network connection or a computer entering sleep.
 
-```console
-$ screen -S arm
+```sh
+screen -S arm
+
+sudo rm -rf ~/Work/arm-none-eabi-gcc-*
+bash ~/Downloads/arm-none-eabi-gcc-xpack.git/scripts/helper/build.sh --develop --all
 ```
 
-Run the development builds on the development machine (`wks`):
+or, for development builds:
 
-```console
-$ sudo rm -rf ~/Work/arm-none-eabi-gcc-*
-$ bash ~/Downloads/arm-none-eabi-gcc-xpack.git/scripts/build.sh --develop --without-pdf --disable-tests --disable-multilib --linux64 --linux32 --win64 --win32
+```sh
+sudo rm -rf ~/Work/arm-none-eabi-gcc-*
+bash ~/Downloads/arm-none-eabi-gcc-xpack.git/scripts/helper/build.sh --develop --without-pdf --disable-tests --disable-multilib --linux64 --linux32 --win64 --win32
 ```
 
 When ready, run the build on the production machine (`xbbi`):
-
-```console
-$ sudo rm -rf ~/Work/arm-none-eabi-gcc-*
-$ bash ~/Downloads/arm-none-eabi-gcc-xpack.git/scripts/build.sh --all
-```
 
 To detach from the session, use `Ctrl-a` `Ctrl-d`; to reattach use
 `screen -r arm`; to kill the session use `Ctrl-a` `Ctrl-k` and confirm.
@@ -252,32 +237,32 @@ total 682464
 -rw-rw-r-- 1 ilg ilg       114 Oct 22 23:04 xpack-arm-none-eabi-gcc-10.2.1-1.1-win32-x64.zip.sha
 ```
 
-#### Build the Arm GNU/Linux binaries
+### Build the Arm GNU/Linux binaries
 
 The supported Arm architectures are:
 
 - `armhf` for 32-bit devices
-- `arm64` for 64-bit devices
+- `aarch64` for 64-bit devices
 
 The current platform for Arm GNU/Linux production builds is a
-Debian 9, running on an ROCK Pi 4 SBC with 4 GB of RAM
-and 256 GB of fast M.2 SSD. The machine name is `xbba`.
+Raspberry Pi OS 10, running on a Raspberry Pi Compute Module 4, with
+8 GB of RAM and 256 GB of fast M.2 SSD. The machine name is `xbba`.
 
-```console
-$ ssh xbba
+```sh
+caffeinate ssh xbba
 ```
 
 Before starting a multi-platform build, check if Docker is started:
 
-```console
-$ docker info
+```sh
+docker info
 ```
 
 Before running a build for the first time, it is recommended to preload the
-docker images, since they are pretty large.
+docker images.
 
-```console
-$ bash ~/Downloads/arm-none-eabi-gcc-xpack.git/scripts/build.sh preload-images
+```sh
+bash ~/Downloads/arm-none-eabi-gcc-xpack.git/scripts/helper/build.sh preload-images
 ```
 
 The result should look similar to:
@@ -285,8 +270,8 @@ The result should look similar to:
 ```console
 $ docker images
 REPOSITORY          TAG                                IMAGE ID            CREATED             SIZE
-ilegeul/ubuntu      arm32v7-16.04-xbb-v3.2             b501ae18580a        27 hours ago        3.23GB
-ilegeul/ubuntu      arm64v8-16.04-xbb-v3.2             db95609ffb69        37 hours ago        3.45GB
+ilegeul/ubuntu      arm32v7-16.04-xbb-v3.3             b501ae18580a        27 hours ago        3.23GB
+ilegeul/ubuntu      arm64v8-16.04-xbb-v3.3             db95609ffb69        37 hours ago        3.45GB
 hello-world         latest                             a29f45ccde2a        5 months ago        9.14kB
 ```
 
@@ -294,22 +279,20 @@ Since the build takes a while, use `screen` to isolate the build session
 from unexpected events, like a broken
 network connection or a computer entering sleep.
 
-```console
-$ screen -S arm
+```sh
+screen -S arm
+
+sudo rm -rf ~/Work/arm-none-eabi-gcc-*
+bash ~/Downloads/arm-none-eabi-gcc-xpack.git/scripts/helper/build.sh ---develop --disable-multilib --all
 ```
 
-Run the development builds on the development machine (`wks`):
+or, for development builds:
 
-```console
-$ sudo rm -rf ~/Work/arm-none-eabi-gcc-*
-$ bash ~/Downloads/arm-none-eabi-gcc-xpack.git/scripts/build.sh --develop --without-pdf --disable-tests --disable-multilib --arm32 --arm64
-```
+```sh
+screen -S arm
 
-When ready, run the build on the production machine (`xbba`):
-
-```console
-$ sudo rm -rf ~/Work/arm-none-eabi-gcc-*
-$ bash ~/Downloads/arm-none-eabi-gcc-xpack.git/scripts/build.sh --all
+sudo rm -rf ~/Work/arm-none-eabi-gcc-*
+bash ~/Downloads/arm-none-eabi-gcc-xpack.git/scripts/helper/build.sh --develop --without-pdf --disable-tests --disable-multilib --arm32 --arm64
 ```
 
 To detach from the session, use `Ctrl-a` `Ctrl-d`; to reattach use
@@ -329,34 +312,28 @@ total 325316
 
 ### Build the macOS binaries
 
-The current platform for macOS production builds is a macOS 10.10.5
-running on a MacBook Pro with 32 GB of RAM and a fast SSD. The machine
-name is `xbbm`.
+The current platform for macOS production builds is a macOS 10.13.6
+running on a MacBook Pro 2011 with 32 GB of RAM and a fast SSD.
+The machine name is `xbbm`.
 
-```console
-$ ssh xbbm
+```sh
+caffeinate ssh xbbm
 ```
 
-Since the build takes a while, use `screen` to isolate the build session
-from unexpected events, like a broken
-network connection or a computer entering sleep.
+To build the latest macOS version:
 
-```console
-$ screen -S arm
+```sh
+screen -S arm
+
+sudo rm -rf ~/Work/arm-none-eabi-gcc-*
+caffeinate bash ~/Downloads/arm-none-eabi-gcc-xpack.git/scripts/helper/build.sh --develop  --disable-multilib --osx
 ```
 
-Run the development builds on the development machine (`wks`):
+or, for development builds:
 
-```console
-$ sudo rm -rf ~/Work/arm-none-eabi-gcc-*
-$ caffeinate bash ~/Downloads/arm-none-eabi-gcc-xpack.git/scripts/build.sh --develop --without-pdf --disable-tests --disable-multilib --osx
-```
-
-When ready, run the build on the production machine (`xbbm`):
-
-```console
-$ sudo rm -rf ~/Work/arm-none-eabi-gcc-*
-$ caffeinate bash ~/Downloads/arm-none-eabi-gcc-xpack.git/scripts/build.sh --osx
+```sh
+sudo rm -rf ~/Work/arm-none-eabi-gcc-*
+caffeinate bash ~/Downloads/arm-none-eabi-gcc-xpack.git/scripts/helper/build.sh --develop --without-pdf --disable-tests --disable-multilib --osx
 ```
 
 To detach from the session, use `Ctrl-a` `Ctrl-d`; to reattach use
@@ -378,10 +355,15 @@ total 321872
 
 Instead of `--all`, you can use any combination of:
 
-```
---linux32 --linux64
---arm32 --arm64
+```console
 --win32 --win64
+--linux32 --linux64
+```
+
+On Arm, instead of `--all`, you can use:
+
+```console
+--arm32 --arm64
 ```
 
 Please note that, due to the specifics of the GCC build process, the
@@ -393,14 +375,14 @@ or together with `--linux64`.
 
 To remove most build files, use:
 
-```console
-$ bash ~/Downloads/arm-none-eabi-gcc-xpack.git/scripts/build.sh clean
+```sh
+bash ~/Downloads/arm-none-eabi-gcc-xpack.git/scripts/helper/build.sh clean
 ```
 
 To also remove the repository and the output files, use:
 
-```console
-$ bash ~/Downloads/arm-none-eabi-gcc-xpack.git/scripts/build.sh cleanall
+```sh
+bash ~/Downloads/arm-none-eabi-gcc-xpack.git/scripts/helper/build.sh cleanall
 ```
 
 For production builds it is recommended to completely remove the build folder.
@@ -419,15 +401,15 @@ host file system, and resume an interrupted build.
 For development builds, it is also possible to create everything
 with `-g -O0` and be able to run debug sessions.
 
-### --disable-multilib
-
-For development builds, to save time, it is recommended to build the
-toolchain without multilib.
-
 ### --jobs
 
 By default, the build steps use all available cores. If, for any reason,
 parallel builds fail, it is possible to reduce the load.
+
+### --disable-multilib
+
+For development builds, to save time, it is recommended to build the
+toolchain without multilib.
 
 ### Interrupted builds
 
@@ -450,16 +432,12 @@ program from there. For example on macOS the output should
 look like:
 
 ```console
-$ /Users/ilg/Downloads/xPacks/arm-none-eabi-gcc/10.2.1-1.1/bin/arm-none-eabi-gcc --version
-arm-none-eabi-gcc (xPack GNU Arm Embedded GCC, 64-bit) 10.2.1 20170904 (release) [ARM/embedded-7-branch revision 255204]
+$ .../xpack-arm-none-eabi-gcc/bin/arm-none-eabi-gcc --version
+arm-none-eabi-gcc (xPack GNU Arm Embedded GCC x86_64) 10.2.1 20201103 (release)
+Copyright (C) 2020 Free Software Foundation, Inc.
+This is free software; see the source for copying conditions.  There is NO
+warranty; not even for MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
 ```
-
-## Travis tests
-
-A multi-platform validation test for all binary archives can be performed
-using Travis CI.
-
-For details please see `tests/scripts/README.md`.
 
 ## Installed folders
 
@@ -499,6 +477,7 @@ $ tree -L 2 /Users/ilg/Library/xPacks/\@xpack-dev-tools/arm-none-eabi-gcc/10.2.1
 │   ├── arm-none-eabi-gprof
 │   ├── arm-none-eabi-ld
 │   ├── arm-none-eabi-ld.bfd
+│   ├── arm-none-eabi-lto-dump
 │   ├── arm-none-eabi-nm
 │   ├── arm-none-eabi-objcopy
 │   ├── arm-none-eabi-objdump
@@ -506,24 +485,12 @@ $ tree -L 2 /Users/ilg/Library/xPacks/\@xpack-dev-tools/arm-none-eabi-gcc/10.2.1
 │   ├── arm-none-eabi-readelf
 │   ├── arm-none-eabi-size
 │   ├── arm-none-eabi-strings
-│   ├── arm-none-eabi-strip
-│   ├── libcrypt.2.dylib
-│   ├── libexpat.1.dylib
-│   ├── libgcc_s.1.dylib
-│   ├── libgmp.10.dylib
-│   ├── libiconv.2.dylib
-│   ├── libintl.8.dylib
-│   ├── liblzma.5.dylib
-│   ├── libmpfr.4.dylib
-│   ├── libncurses.6.dylib
-│   ├── libpython3.7m.dylib
-│   ├── libstdc++.6.dylib
-│   ├── libz.1.2.8.dylib
-│   └── libz.1.dylib -> libz.1.2.8.dylib
+│   └── arm-none-eabi-strip
 ├── distro-info
 │   ├── CHANGELOG.md
 │   ├── arm-readme.txt
 │   ├── arm-release.txt
+│   ├── licenses
 │   ├── patches
 │   └── scripts
 ├── include
@@ -532,14 +499,36 @@ $ tree -L 2 /Users/ilg/Library/xPacks/\@xpack-dev-tools/arm-none-eabi-gcc/10.2.1
 │   ├── bfd-plugins
 │   ├── gcc
 │   ├── libcc1.0.so
-│   └── libcc1.so -> libcc1.0.so
+│   ├── libcc1.so -> libcc1.0.so
+│   └── python3.7
 ├── libexec
-│   └── gcc
+│   ├── gcc
+│   ├── libcrypt.2.dylib
+│   ├── libcrypto.1.1.dylib
+│   ├── libexpat.1.dylib
+│   ├── libgcc_s.1.dylib
+│   ├── libgmp.10.dylib
+│   ├── libiconv.2.dylib
+│   ├── libintl.8.dylib
+│   ├── libisl.15.dylib
+│   ├── liblzma.5.dylib
+│   ├── libmpc.3.dylib
+│   ├── libmpfr.4.dylib
+│   ├── libncurses.6.dylib
+│   ├── libpanel.6.dylib
+│   ├── libpython3.7m.dylib
+│   ├── libreadline.8.0.dylib
+│   ├── libreadline.8.dylib -> libreadline.8.0.dylib
+│   ├── libsqlite3.0.dylib
+│   ├── libssl.1.1.dylib
+│   ├── libstdc++.6.dylib
+│   ├── libz.1.2.8.dylib
+│   └── libz.1.dylib -> libz.1.2.8.dylib
 └── share
     ├── doc
     └── gcc-arm-none-eabi
 
-19 directories, 50 files
+21 directories, 59 files
 ```
 
 No other files are installed in any system folders or other locations.
@@ -559,7 +548,7 @@ may fail.
 
 The workaround is to manually download the files from an alternate
 location (like
-https://github.com/xpack-dev-tools/files-cache/tree/master/libs),
+<https://github.com/xpack-dev-tools/files-cache/tree/master/libs>),
 place them in the XBB cache (`Work/cache`) and restart the build.
 
 ## More build details

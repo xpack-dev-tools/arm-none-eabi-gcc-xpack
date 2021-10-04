@@ -2,6 +2,10 @@
 
 Releases in reverse chronological order.
 
+### 2021-10-04
+
+- update for new helper & XBB v3.3
+
 ### 2020-12-19
 
 - v10.2.1-1.1.2 published on npmjs.com

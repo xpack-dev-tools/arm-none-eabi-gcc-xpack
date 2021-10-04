@@ -9,18 +9,20 @@ various scripts.
 The location of the binaries can be either the final release or one of
 the pre-release locations:
 
-- https://github.com/xpack-dev-tools/arm-none-eabi-gcc-xpack/releases
-- https://github.com/xpack-dev-tools/pre-releases/releases
+- <https://github.com/xpack-dev-tools/arm-none-eabi-gcc-xpack/releases>
+- <https://github.com/xpack-dev-tools/pre-releases/releases>
 
 ## GitHub repo
 
 The test scripts are part of the `arm-none-eabi-gcc` xPack:
 
-```
-rm -rf ~/Downloads/arm-none-eabi-gcc-xpack.git
-git clone --recurse-submodules -b xpack-develop \
+```sh
+rm -rf ~/Downloads/arm-none-eabi-gcc-xpack.git; \
+git clone \
+  --branch xpack-develop \
   https://github.com/xpack-dev-tools/arm-none-eabi-gcc-xpack.git \
-  ~/Downloads/arm-none-eabi-gcc-xpack.git
+  ~/Downloads/arm-none-eabi-gcc-xpack.git; \
+git -C ~/Downloads/arm-none-eabi-gcc-xpack.git submodule update --init --recursive
 ```
 
 The scripts are in the `tests/scripts` folder, and there is also a
@@ -64,7 +66,7 @@ Both the native and container scripts call the public function
 The script to run the test as native on the current host mainly requires
 the URL of the folder where the archives are stored:
 
-```
+```sh
 bash ~/Downloads/arm-none-eabi-gcc-xpack.git/tests/scripts/native-test.sh \
   https://github.com/xpack-dev-tools/pre-releases/releases/download/experimental/
 ```
@@ -79,8 +81,8 @@ the archive is not downloaded each time.
 
 To force a new download, remove the cached archive:
 
-```console
-rm ~/Work/cache/xpack-arm-none-eabi-gcc-*
+```sh
+rm -rf ~/Work/cache/xpack-arm-none-eabi-gcc-*
 ```
 
 ## GCC tests
@@ -107,9 +109,9 @@ exit 0.
 
 Programatic access to GitHub is done via the v3 API:
 
-- https://developer.github.com/v3/
+- <https://developer.github.com/v3/>
 
-```
+```sh
 curl -i https://api.github.com/users/ilg-ul/orgs
 
 curl -i https://api.github.com/repos/xpack-dev-tools/arm-none-eabi-gcc-xpack/releases
@@ -120,16 +122,16 @@ curl -v -X GET https://api.github.com/repos/xpack-dev-tools/arm-none-eabi-gcc-xp
 For authenticated requests, preferably create a new token and pass it
 via the environment.
 
-- https://developer.github.com/v3/#authentication
+- <https://developer.github.com/v3/#authentication>
 
 ## Trigger GitHub action
 
 To trigger a GitHub action it is necessary to send an authenticated POST
 at a specific URL:
 
-- https://developer.github.com/v3/repos/#create-a-repository-dispatch-event
+- <https://developer.github.com/v3/repos/#create-a-repository-dispatch-event>
 
-```
+```sh
 curl \
   --include \
   --header "Authorization: token ${GITHUB_API_DISPATCH_TOKEN}" \
