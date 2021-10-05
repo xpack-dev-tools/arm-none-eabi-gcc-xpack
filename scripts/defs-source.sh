@@ -33,6 +33,11 @@ GCC_TARGET=${GCC_TARGET:-"arm-none-eabi"}
 
 # -----------------------------------------------------------------------------
 
+# Normally should be commented out. Enable it only for tests.
+WITHOUT_MULTILIB="y"
+
+# -----------------------------------------------------------------------------
+
 GITHUB_ORG="${GITHUB_ORG:-"xpack-dev-tools"}"
 GITHUB_REPO="${GITHUB_REPO:-"${APP_LC_NAME}-xpack"}"
 GITHUB_PRE_RELEASES="${GITHUB_PRE_RELEASES:-"pre-releases"}"
