@@ -1072,6 +1072,11 @@ function build_gdb()
           export GNURM_PYTHON_WIN_DIR="${SOURCES_FOLDER_PATH}/${PYTHON2_SRC_FOLDER_NAME}"
         fi
 
+        # Hack to place the bcrypt library at the end of the list of libraries,
+        # to avoid 'undefined reference to BCryptGenRandom'.
+        # Using LIBS does not work, the order is important.
+        export DEBUGINFOD_LIBS="-lbcrypt"
+
         # From Arm script.
         LDFLAGS="${XBB_LDFLAGS_APP} -v -Wl,${XBB_FOLDER_PATH}/mingw/lib/CRT_glob.o"
         # Workaround for undefined reference to `__strcpy_chk' in GCC 9.
