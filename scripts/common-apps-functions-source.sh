@@ -1304,6 +1304,9 @@ function tidy_up()
     echo
     echo "# Tidying up..."
 
+    # find: pred.c:1932: launch: Assertion `starting_desc >= 0' failed.
+    cd "${APP_PREFIX}"
+
     find "${APP_PREFIX}" -name "libiberty.a" -exec rm -v '{}' ';'
     find "${APP_PREFIX}" -name '*.la' -exec rm -v '{}' ';'
 
