@@ -688,15 +688,13 @@ function build_versions()
 
   # Task [III-9] /$HOST_NATIVE/strip_host_objects/
   # Task [IV-6] /$HOST_MINGW/strip_host_objects/
-  # In common code.
-  # strip_binaries
 
-  # Must be done after gcc 2 make install, otherwise some wrong links
-  # are created in libexec.
+  # strip_binaries # In common code.
+
+  # `prepare_app_folder_libraries` must be done after gcc 2 make install,
+  # otherwise some wrong links are created in libexec.
   # Must also be done after strip binaries, since strip after patchelf
   # damages the binaries.
-  # In common code.
-  prepare_app_folder_libraries
 
   if [ "${TARGET_PLATFORM}" != "win32" ]
   then
