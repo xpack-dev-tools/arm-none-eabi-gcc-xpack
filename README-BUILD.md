@@ -283,7 +283,7 @@ network connection or a computer entering sleep.
 screen -S arm
 
 sudo rm -rf ~/Work/arm-none-eabi-gcc-*
-bash ~/Downloads/arm-none-eabi-gcc-xpack.git/scripts/helper/build.sh ---develop --disable-multilib --all
+bash ~/Downloads/arm-none-eabi-gcc-xpack.git/scripts/helper/build.sh --develop --disable-multilib --all
 ```
 
 or, for development builds:
