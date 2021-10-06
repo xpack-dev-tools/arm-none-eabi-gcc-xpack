@@ -172,7 +172,13 @@ function build_versions()
       build_zlib "1.2.8"
 
       # The classical GCC libraries.
-      build_gmp "6.1.0"
+      (
+        if [ "${TARGET_PLATFORM}" == "linux" && "${TARGET_ARCH}" == "arm64" ]
+        then
+          WITH_TESTS="n"
+        fi
+        build_gmp "6.1.0"
+      )
       build_mpfr "3.1.4"
       build_mpc "1.0.3"
       build_isl "0.18"
