@@ -173,7 +173,8 @@ function build_versions()
 
       # The classical GCC libraries.
       (
-        if [ "${TARGET_PLATFORM}" == "linux" && "${TARGET_ARCH}" == "arm64" ]
+        if [ "${TARGET_PLATFORM}" == "linux" -a \
+          \( "${TARGET_ARCH}" == "arm64" -o "${TARGET_ARCH}" == "arm" \) ]
         then
           WITH_TESTS="n"
         fi
