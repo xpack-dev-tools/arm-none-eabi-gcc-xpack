@@ -19,13 +19,22 @@
 
 function run_tests()
 {
-  test_openocd
+  GCC_VERSION="$(echo "${RELEASE_VERSION}" | sed -e 's|-.*||')"
+  GCC_VERSION_MAJOR=$(echo ${GCC_VERSION} | sed -e 's|\([0-9][0-9]*\)\..*|\1|')
+
+  test_binutils
+
+  test_gcc
+
+  test_gdb
+
+  test_gdb_py3
 }
 
 function update_image()
 {
   local image_name="$1"
-
+  
   # Make sure that the minimum prerequisites are met.
   if [[ ${image_name} == *ubuntu* ]] || [[ ${image_name} == *debian* ]] || [[ ${image_name} == *raspbian* ]]
   then
@@ -35,11 +44,11 @@ function update_image()
   elif [[ ${image_name} == *centos* ]] || [[ ${image_name} == *redhat* ]] || [[ ${image_name} == *fedora* ]]
   then
     run_verbose yum install -y -q git curl tar gzip redhat-lsb-core binutils
-    run_verbose yum install -y -q glibc-devel libstdc++-devel # TODO: get rid of them
+    run_verbose yum install -y -q glibc-devel glibc-devel-static libstdc++-devel # TODO: get rid of them
   elif [[ ${image_name} == *suse* ]]
   then
     run_verbose zypper -q in -y git-core curl tar gzip lsb-release binutils findutils util-linux
-    run_verbose zypper -q in -y glibc-devel libstdc++6 # TODO: get rid of them
+    run_verbose zypper -q in -y glibc-devel glibc-devel-static libstdc++6 # TODO: get rid of them
   elif [[ ${image_name} == *manjaro* ]]
   then
     # run_verbose pacman-mirrors -g
@@ -58,6 +67,10 @@ function update_image()
     run_verbose pacman -S -q --noconfirm --noprogressbar git curl tar gzip lsb-release binutils
     run_verbose pacman -S -q --noconfirm --noprogressbar gcc-libs
   fi
+
+  echo
+  echo "The system C/C++ libraries..."
+  find /usr/lib* /lib -name 'libc.*' -o -name 'libstdc++.*' -o -name 'libgcc_s.*'
 }
 
 # -----------------------------------------------------------------------------

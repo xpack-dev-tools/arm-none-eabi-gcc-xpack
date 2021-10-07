@@ -201,8 +201,6 @@ function build_binutils()
 function test_binutils()
 {
   (
-    xbb_activate_installed_bin
-
     show_libs "${APP_PREFIX}/bin/${GCC_TARGET}-ar"
     show_libs "${APP_PREFIX}/bin/${GCC_TARGET}-as"
     show_libs "${APP_PREFIX}/bin/${GCC_TARGET}-ld"
@@ -949,8 +947,6 @@ function build_gcc_final()
 function test_gcc()
 {
   (
-    xbb_activate_installed_bin
-
     show_libs "${APP_PREFIX}/bin/${GCC_TARGET}-gcc"
     show_libs "${APP_PREFIX}/bin/${GCC_TARGET}-g++"
     show_libs "${APP_PREFIX}/libexec/gcc/${GCC_TARGET}/${GCC_VERSION}/cc1"
@@ -1271,9 +1267,6 @@ function test_gdb()
   fi
 
   (
-    # Required by gdb-py to access the python shared library.
-    xbb_activate_installed_bin
-
     show_libs "${APP_PREFIX}/bin/${GCC_TARGET}-gdb${suffix}"
 
     run_app "${APP_PREFIX}/bin/${GCC_TARGET}-gdb${suffix}" --version
