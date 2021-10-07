@@ -1,20 +1,20 @@
 # Simple toolchain use tests
 
+Note: may be outdated, not actively maintained.
+
 ## arm-f4b-fs
 
 Freestanding blinky for STM32F4DISCOVERY, with and without LTO.
 
 Compiler and debugger (QEMU & OpenOCD) test.
 
-
 ## arm-static-lib
 
-Simple static library with and without LTO. 
+Simple static library with and without LTO.
 
 ## arm-f4b-fs-lib
 
 Same as above, but including a static library.
-
 
 ## arm exe spaces
 
@@ -26,7 +26,6 @@ Same as above, but including a static library.
 
 - fails on macOS
   
-
 ## Debugger diagnosis
 
 ### Quick test
@@ -34,7 +33,7 @@ Same as above, but including a static library.
 If the debug session fails to start, start the GDB client in the Debug folder,
 and pass as many commands as needed:
 
-```
+```console
 .../bin/arm-none-eabi-gdb --nh --nx --ex='set language auto'
 ```
 
@@ -42,7 +41,7 @@ and pass as many commands as needed:
 
 For a more realistic test, first start a GDB server, like QEMU:
 
-```
+```console
 .../bin/qemu-system-gnuarmeclipse --verbose --board STM32F4-Discovery \
 --gdb tcp::1234 -d unimp,guest_errors --nographic \
 --semihosting-config enable=on,target=native \
@@ -51,13 +50,13 @@ For a more realistic test, first start a GDB server, like QEMU:
 
 Then start the GDB client in the Debug folder, and issue MI commands:
 
-```
+```console
 .../bin/arm-none-eabi-gdb --interpreter=mi2 --nx
 ```
 
 A typical session looks like:
 
-```
+```console
 2-gdb-show language
 2^done,value="auto"
 (gdb) 
