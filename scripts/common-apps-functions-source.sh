@@ -947,15 +947,6 @@ function build_gcc_final()
 function test_gcc()
 {
   (
-    if [ "${TARGET_PLATFORM}" == "win32" ]
-    then
-      run_verbose which "cc1"
-      run_verbose ls -l "$(dirname $(which "cc1"))"
-      # Very slow.
-      # run_verbose choco uninstall mingw
-      run_verbose mv "$(dirname $(which "cc1"))" "$(dirname $(which "cc1")).bak"
-    fi
-
     show_libs "${APP_PREFIX}/bin/${GCC_TARGET}-gcc"
     show_libs "${APP_PREFIX}/bin/${GCC_TARGET}-g++"
     show_libs "${APP_PREFIX}/libexec/gcc/${GCC_TARGET}/${GCC_VERSION}/cc1"
