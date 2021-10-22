@@ -947,6 +947,11 @@ function build_gcc_final()
 function test_gcc()
 {
   (
+    if [ "${TARGET_PLATFORM}" == "win32" ]
+    then
+      which "cc1"
+    fi
+
     show_libs "${APP_PREFIX}/bin/${GCC_TARGET}-gcc"
     show_libs "${APP_PREFIX}/bin/${GCC_TARGET}-g++"
     show_libs "${APP_PREFIX}/libexec/gcc/${GCC_TARGET}/${GCC_VERSION}/cc1"
