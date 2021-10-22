@@ -109,7 +109,7 @@ binaries are released as portable
 archives that can be installed in any location.
 
 The archives can be downloaded from the
-GitHub [releases](https://github.com/xpack-dev-tools/arm-none-eabi-gcc-xpack/releases/)
+GitHub [Releases](https://github.com/xpack-dev-tools/arm-none-eabi-gcc-xpack/releases/)
 page.
 
 For more details please read the
@@ -118,15 +118,17 @@ For more details please read the
 ### Versioning
 
 The version strings used by the GCC project are three number string
-like `0.11.0`; to this string the xPack distribution adds a four number,
+like `10.3.1`; to this string the xPack distribution adds a four number,
+as the Arm version,
 but since semver allows only three numbers, all additional ones can
 be added only as pre-release strings, separated by a dash,
-like `0.11.0-2`. When published as a npm package, the version gets
-a fifth number, like `0.11.0-2.1`.
+like `10.3.1-1.1`. The fifth number is the xPack release.
+When published as a npm package, the version gets
+a sixth number, like `10.3.1-1.1.1`.
 
 Since adherance of third party packages to semver is not guaranteed,
-it is recommended to use semver expressions like `^0.11.0` and `~0.11.0`
-with caution, and prefer exact matches, like `0.11.0-2.1`.
+it is recommended to use semver expressions like `^10.3.1` and `~10.3.1`
+with caution, and prefer exact matches, like `10.3.1-1.1.1`.
 
 ### Windows drivers
 

@@ -105,7 +105,187 @@ function build_versions()
   # In reverse chronological order.
   # Keep them in sync with combo archive content.
   # https://developer.arm.com/tools-and-software/open-source-software/developer-tools/gnu-toolchain/gnu-rm/downloads
-  if [[ "${RELEASE_VERSION}" =~ 10\.2\.1-* ]]
+  if [[ "${RELEASE_VERSION}" =~ 10\.3\.1-* ]]
+  then
+
+    # Used to download the Arm source archive.
+    GCC_COMBO_VERSION_MAJOR="10"
+    GCC_COMBO_VERSION_MINOR="3"
+    GCC_COMBO_VERSION_YEAR="2021"
+    GCC_COMBO_VERSION_MONTH="10"
+    GCC_COMBO_VERSION_SUBFOLDER=""
+
+    GCC_COMBO_VERSION="${GCC_COMBO_VERSION_MAJOR}.${GCC_COMBO_VERSION_MINOR}-${GCC_COMBO_VERSION_YEAR}.${GCC_COMBO_VERSION_MONTH}"
+    GCC_COMBO_FOLDER_NAME="gcc-arm-none-eabi-${GCC_COMBO_VERSION}"
+    GCC_COMBO_ARCHIVE="${GCC_COMBO_FOLDER_NAME}-src.tar.bz2"
+
+    # https://developer.arm.com/-/media/Files/downloads/gnu-rm/10.3-2021.10/gcc-arm-none-eabi-10.3-2021.10-src.tar.bz2
+    GCC_COMBO_URL="https://developer.arm.com/-/media/Files/downloads/gnu-rm/${GCC_COMBO_VERSION_MAJOR}.${GCC_COMBO_VERSION_MINOR}-${GCC_COMBO_VERSION_YEAR}.${GCC_COMBO_VERSION_MONTH}/${GCC_COMBO_ARCHIVE}"
+
+    # -------------------------------------------------------------------------
+    # Used mainly to name the build folders.
+
+    # From /release.txt
+    # binutils-2_36-branch
+    # git://sourceware.org/git/binutils-gdb.git commit a7eb3ff36cebc093af6658049e03d63579dade86
+    BINUTILS_VERSION="2.36"
+
+    # From /release.txt (gcc/BASE_VER). 
+    # refs/vendors/ARM/heads/arm-10
+    # git://gcc.gnu.org/git/gcc.git commit a7eb0564c3060418b5ca68c2806ad74f73384fd0
+    GCC_VERSION="10.3.1"
+
+    # From /release.txt
+    # newlib and newlib-nano : 2a3a03972b35377aef8d3d52d873ac3b8fcc512c
+    # git://sourceware.org/git/newlib-cygwin.git commit 2a3a03972b35377aef8d3d52d873ac3b8fcc512c    # VERSION from configure, comment in NEWS.
+    # PACKAGE_VERSION from newlib/configure, comment in newlib/NEWS.
+    NEWLIB_VERSION="4.1.0"
+
+    # From /release.txt
+    # gdb-10-branch
+    # git://sourceware.org/git/binutils-gdb.git commit abbf09189720ddc14fe71d0afdfa7653b8c67b5d
+    # gdb/version.in
+    # PATCH!
+    GDB_VERSION="10.2"
+
+    # -------------------------------------------------------------------------
+
+    WITH_GDB_PY3="y"
+
+    # pythonNN-config.h!
+    # pyconfig-win-N.N.N.h!
+    PYTHON3_VERSION="3.7.9"
+
+    GDB_PATCH="gdb-${GDB_VERSION}.patch"
+
+    # -------------------------------------------------------------------------
+
+    (
+      xbb_activate
+
+      # Download the combo package from Arm.
+      download_gcc_combo
+
+      # -------------------------------------------------------------------------
+      # Build dependent libraries.
+
+      # For better control, without it some components pick the lib packed 
+      # inside the archive.
+      build_zlib "1.2.8"
+
+      # The classical GCC libraries.
+      (
+        if [ "${TARGET_PLATFORM}" == "linux" -a \
+          \( "${TARGET_ARCH}" == "arm64" -o "${TARGET_ARCH}" == "arm" \) ]
+        then
+          WITH_TESTS="n"
+        fi
+        build_gmp "6.1.0"
+      )
+      build_mpfr "3.1.4"
+      build_mpc "1.0.3"
+      build_isl "0.18"
+
+      build_libmpdec "2.5.0" # Used by Python
+      build_expat "2.1.1"
+      build_libiconv "1.15"
+      build_xz "5.2.3"
+
+      # Fails on mingw. 0.8.13 is deprecated. Not used anyway.
+      # build_libelf "0.8.13"
+
+      build_gettext "0.19.8.1"
+
+      if [ "${TARGET_PLATFORM}" == "win32" ]
+      then
+        if [ "${WITH_GDB_PY3}" == "y" ]
+        then
+          # Shortcut, use the existing pyton.exe instead of building
+          # if from sources. It also downloads the sources.
+          download_python3_win "${PYTHON3_VERSION}"
+
+          add_python3_win_syslibs
+        fi
+      else # linux or darwin
+        # Used by ncurses. Fails on macOS.
+        if [ "${TARGET_PLATFORM}" == "linux" ]
+        then
+          build_gpm "1.20.7"
+        fi
+
+        build_ncurses "6.2"
+
+        build_readline "8.0" # requires ncurses
+
+        build_bzip2 "1.0.8"
+        build_libffi "3.3"
+
+        # We cannot rely on a python shared library in the system, even
+        # the custom build from sources does not have one.
+
+        if [ "${WITH_GDB_PY3}" == "y" ]
+        then
+          # Required by a Python 3 module.
+          build_sqlite "3.32.3"
+
+          # Replacement for the old libcrypt.so.1; required by Python 3.
+          build_libxcrypt "4.4.17"
+          build_openssl "1.1.1h"
+
+          build_python3 "${PYTHON3_VERSION}"
+
+          add_python3_syslibs
+        fi
+      fi
+
+      # -------------------------------------------------------------------------
+
+      # The task descriptions are from the Arm build script.
+
+      # Task [III-0] /$HOST_NATIVE/binutils/
+      # Task [IV-1] /$HOST_MINGW/binutils/
+
+      build_binutils "${BINUTILS_VERSION}"
+      # copy_dir to libs included above
+
+      if [ "${TARGET_PLATFORM}" != "win32" ]
+      then
+
+        # Task [III-1] /$HOST_NATIVE/gcc-first/
+        build_gcc_first
+
+        # Task [III-2] /$HOST_NATIVE/newlib/
+        build_newlib ""
+        # Task [III-3] /$HOST_NATIVE/newlib-nano/
+        build_newlib "-nano"
+
+        # Task [III-4] /$HOST_NATIVE/gcc-final/
+        build_gcc_final ""
+
+        # Task [III-5] /$HOST_NATIVE/gcc-size-libstdcxx/
+        build_gcc_final "-nano"
+
+      else
+
+        # Task [IV-2] /$HOST_MINGW/copy_libs/
+        copy_linux_libs
+
+        # Task [IV-3] /$HOST_MINGW/gcc-final/
+        build_gcc_final ""
+
+      fi
+
+      # Task [III-6] /$HOST_NATIVE/gdb/
+      # Task [IV-4] /$HOST_MINGW/gdb/
+      build_gdb ""
+
+      if [ "${WITH_GDB_PY3}" == "y" ]
+      then
+        build_gdb "-py3"
+      fi
+    )
+
+  elif [[ "${RELEASE_VERSION}" =~ 10\.2\.1-* ]]
   then
 
     # Used to download the Arm source archive.

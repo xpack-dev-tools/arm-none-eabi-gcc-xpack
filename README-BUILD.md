@@ -15,7 +15,7 @@ Currently the build procedure uses the _Source Invariant_ archive and
 the configure options are the same as in the Arm build scripts.
 
 The build scripts use the
-[xPack Build Box (XBB)](https://github.com/xpack/xpack-build-box),
+[xPack Build Box (XBB)](https://xpack.github.io/xbb/),
 a set of elaborate build environments based on a recent GCC (Docker containers
 for GNU/Linux and Windows or a custom folder for MacOS).
 
@@ -118,7 +118,7 @@ not be accepted by bash.
 
 ## Versioning
 
-The version string is an extension to semver, the format looks like `10.2.1-1.1`.
+The version string is an extension to semver, the format looks like `10.3.1-1.1`.
 It includes the three digits with the original GCC version, a fourth
 digit with the Arm release, a fifth digit with the xPack release number.
 
@@ -176,10 +176,9 @@ The result should look similar to:
 
 ```console
 $ docker images
-REPOSITORY          TAG                              IMAGE ID            CREATED             SIZE
-ilegeul/ubuntu      i386-12.04-xbb-v3.3              fadc6405b606        2 days ago          4.55GB
-ilegeul/ubuntu      amd64-12.04-xbb-v3.3             3aba264620ea        2 days ago          4.98GB
-hello-world         latest                           bf756fb1ae65        5 months ago        13.3kB
+REPOSITORY          TAG                    IMAGE ID            CREATED             SIZE
+ilegeul/ubuntu      i386-12.04-xbb-v3.3    35fb0236572c        23 hours ago        5GB
+ilegeul/ubuntu      amd64-12.04-xbb-v3.3   1c4ba2e7e87e        29 hours ago        5.43GB
 ```
 
 It is also recommended to Remove unused Docker space. This is mostly useful
@@ -206,7 +205,7 @@ network connection or a computer entering sleep.
 screen -S arm
 
 sudo rm -rf ~/Work/arm-none-eabi-gcc-*
-bash ~/Downloads/arm-none-eabi-gcc-xpack.git/scripts/helper/build.sh --develop --all
+bash ~/Downloads/arm-none-eabi-gcc-xpack.git/scripts/helper/build.sh --develop --disable-multilib --all
 ```
 
 or, for development builds:
@@ -227,14 +226,14 @@ their SHA signatures, created in the `deploy` folder:
 ```console
 $ ls -l ~/Work/arm-none-eabi-gcc-*/deploy
 total 682464
--rw-rw-r-- 1 ilg ilg 172441920 Oct 23 00:45 xpack-arm-none-eabi-gcc-10.2.1-1.1-linux-x32.tar.gz
--rw-rw-r-- 1 ilg ilg       117 Oct 23 00:45 xpack-arm-none-eabi-gcc-10.2.1-1.1-linux-x32.tar.gz.sha
--rw-rw-r-- 1 ilg ilg 169389142 Oct 22 22:17 xpack-arm-none-eabi-gcc-10.2.1-1.1-linux-x64.tar.gz
--rw-rw-r-- 1 ilg ilg       117 Oct 22 22:17 xpack-arm-none-eabi-gcc-10.2.1-1.1-linux-x64.tar.gz.sha
--rw-rw-r-- 1 ilg ilg 172415284 Oct 23 01:35 xpack-arm-none-eabi-gcc-10.2.1-1.1-win32-x32.zip
--rw-rw-r-- 1 ilg ilg       114 Oct 23 01:35 xpack-arm-none-eabi-gcc-10.2.1-1.1-win32-x32.zip.sha
--rw-rw-r-- 1 ilg ilg 184570818 Oct 22 23:04 xpack-arm-none-eabi-gcc-10.2.1-1.1-win32-x64.zip
--rw-rw-r-- 1 ilg ilg       114 Oct 22 23:04 xpack-arm-none-eabi-gcc-10.2.1-1.1-win32-x64.zip.sha
+-rw-rw-r-- 1 ilg ilg 172441920 Oct 23 00:45 xpack-arm-none-eabi-gcc-10.3.1-1.1-linux-x32.tar.gz
+-rw-rw-r-- 1 ilg ilg       117 Oct 23 00:45 xpack-arm-none-eabi-gcc-10.3.1-1.1-linux-x32.tar.gz.sha
+-rw-rw-r-- 1 ilg ilg 169389142 Oct 22 22:17 xpack-arm-none-eabi-gcc-10.3.1-1.1-linux-x64.tar.gz
+-rw-rw-r-- 1 ilg ilg       117 Oct 22 22:17 xpack-arm-none-eabi-gcc-10.3.1-1.1-linux-x64.tar.gz.sha
+-rw-rw-r-- 1 ilg ilg 172415284 Oct 23 01:35 xpack-arm-none-eabi-gcc-10.3.1-1.1-win32-x32.zip
+-rw-rw-r-- 1 ilg ilg       114 Oct 23 01:35 xpack-arm-none-eabi-gcc-10.3.1-1.1-win32-x32.zip.sha
+-rw-rw-r-- 1 ilg ilg 184570818 Oct 22 23:04 xpack-arm-none-eabi-gcc-10.3.1-1.1-win32-x64.zip
+-rw-rw-r-- 1 ilg ilg       114 Oct 22 23:04 xpack-arm-none-eabi-gcc-10.3.1-1.1-win32-x64.zip.sha
 ```
 
 ### Build the Arm GNU/Linux binaries
@@ -269,10 +268,9 @@ The result should look similar to:
 
 ```console
 $ docker images
-REPOSITORY          TAG                                IMAGE ID            CREATED             SIZE
-ilegeul/ubuntu      arm32v7-16.04-xbb-v3.3             b501ae18580a        27 hours ago        3.23GB
-ilegeul/ubuntu      arm64v8-16.04-xbb-v3.3             db95609ffb69        37 hours ago        3.45GB
-hello-world         latest                             a29f45ccde2a        5 months ago        9.14kB
+REPOSITORY       TAG                      IMAGE ID       CREATED          SIZE
+ilegeul/ubuntu   arm32v7-16.04-xbb-v3.3   a0ceaa6dad05   57 minutes ago   3.34GB
+ilegeul/ubuntu   arm64v8-16.04-xbb-v3.3   1b0b4a94de6d   13 hours ago     3.6GB
 ```
 
 Since the build takes a while, use `screen` to isolate the build session
@@ -304,10 +302,10 @@ archives and their SHA signatures, created in the `deploy` folder:
 ```console
 $ ls -l ~/Work/arm-none-eabi-gcc-*/deploy
 total 325316
--rw-rw-r-- 1 ilg ilg 168517506 Oct 23 01:08 xpack-arm-none-eabi-gcc-10.2.1-1.1-linux-arm64.tar.gz
--rw-rw-r-- 1 ilg ilg       119 Oct 23 01:08 xpack-arm-none-eabi-gcc-10.2.1-1.1-linux-arm64.tar.gz.sha
--rw-rw-r-- 1 ilg ilg 164591258 Oct 23 08:19 xpack-arm-none-eabi-gcc-10.2.1-1.1-linux-arm.tar.gz
--rw-rw-r-- 1 ilg ilg       117 Oct 23 08:19 xpack-arm-none-eabi-gcc-10.2.1-1.1-linux-arm.tar.gz.sha
+-rw-rw-r-- 1 ilg ilg 168517506 Oct 23 01:08 xpack-arm-none-eabi-gcc-10.3.1-1.1-linux-arm64.tar.gz
+-rw-rw-r-- 1 ilg ilg       119 Oct 23 01:08 xpack-arm-none-eabi-gcc-10.3.1-1.1-linux-arm64.tar.gz.sha
+-rw-rw-r-- 1 ilg ilg 164591258 Oct 23 08:19 xpack-arm-none-eabi-gcc-10.3.1-1.1-linux-arm.tar.gz
+-rw-rw-r-- 1 ilg ilg       117 Oct 23 08:19 xpack-arm-none-eabi-gcc-10.3.1-1.1-linux-arm.tar.gz.sha
 ```
 
 ### Build the macOS binaries
@@ -345,8 +343,8 @@ and its SHA signature, created in the `deploy` folder:
 ```console
 $ ls -l ~/Work/arm-none-eabi-gcc-*/deploy
 total 321872
--rw-r--r--  1 ilg  staff  164794316 Oct 23 00:27 xpack-arm-none-eabi-gcc-10.2.1-1.1-darwin-x64.tar.gz
--rw-r--r--  1 ilg  staff        118 Oct 23 00:27 xpack-arm-none-eabi-gcc-10.2.1-1.1-darwin-x64.tar.gz.sha
+-rw-r--r--  1 ilg  staff  164794316 Oct 23 00:27 xpack-arm-none-eabi-gcc-10.3.1-1.1-darwin-x64.tar.gz
+-rw-r--r--  1 ilg  staff        118 Oct 23 00:27 xpack-arm-none-eabi-gcc-10.3.1-1.1-darwin-x64.tar.gz.sha
 ```
 
 ## Subsequent runs
@@ -433,7 +431,7 @@ look like:
 
 ```console
 $ .../xpack-arm-none-eabi-gcc/bin/arm-none-eabi-gcc --version
-arm-none-eabi-gcc (xPack GNU Arm Embedded GCC x86_64) 10.2.1 20201103 (release)
+arm-none-eabi-gcc (xPack GNU Arm Embedded GCC x86_64) 10.3.1 20201103 (release)
 Copyright (C) 2020 Free Software Foundation, Inc.
 This is free software; see the source for copying conditions.  There is NO
 warranty; not even for MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
@@ -445,8 +443,8 @@ After install, the package should create a structure like this (only the
 first two depth levels are shown):
 
 ```console
-$ tree -L 2 /Users/ilg/Library/xPacks/\@xpack-dev-tools/arm-none-eabi-gcc/10.2.1-1.1/.content/
-/Users/ilg/Library/xPacks/\@xpack-dev-tools/arm-none-eabi-gcc/10.2.1-1.1/.content/
+$ tree -L 2 /Users/ilg/Library/xPacks/\@xpack-dev-tools/arm-none-eabi-gcc/10.3.1-1.1/.content/
+/Users/ilg/Library/xPacks/\@xpack-dev-tools/arm-none-eabi-gcc/10.3.1-1.1/.content/
 ├── README.md
 ├── arm-none-eabi
 │   ├── bin
@@ -463,7 +461,7 @@ $ tree -L 2 /Users/ilg/Library/xPacks/\@xpack-dev-tools/arm-none-eabi-gcc/10.2.1
 │   ├── arm-none-eabi-elfedit
 │   ├── arm-none-eabi-g++
 │   ├── arm-none-eabi-gcc
-│   ├── arm-none-eabi-gcc-10.2.1
+│   ├── arm-none-eabi-gcc-10.3.1
 │   ├── arm-none-eabi-gcc-ar
 │   ├── arm-none-eabi-gcc-nm
 │   ├── arm-none-eabi-gcc-ranlib
