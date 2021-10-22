@@ -950,7 +950,7 @@ function test_gcc()
     if [ "${TARGET_PLATFORM}" == "win32" ]
     then
       which "cc1"
-      choco uninstall gcc
+      choco uninstall mingw
       which "cc1"
     fi
 
