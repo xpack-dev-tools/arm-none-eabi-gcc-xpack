@@ -949,9 +949,10 @@ function test_gcc()
   (
     if [ "${TARGET_PLATFORM}" == "win32" ]
     then
-      which "cc1"
-      choco uninstall mingw
-      which "cc1"
+      run_verbose which "cc1"
+      run_verbose ls -l "$(dirname $(which "cc1"))"
+      run_verbose choco uninstall mingw
+      # which "cc1"
     fi
 
     show_libs "${APP_PREFIX}/bin/${GCC_TARGET}-gcc"
