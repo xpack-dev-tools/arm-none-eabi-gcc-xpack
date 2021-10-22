@@ -951,8 +951,9 @@ function test_gcc()
     then
       run_verbose which "cc1"
       run_verbose ls -l "$(dirname $(which "cc1"))"
-      run_verbose choco uninstall mingw
-      # which "cc1"
+      # Very slow.
+      # run_verbose choco uninstall mingw
+      run_verbose mv "$(dirname $(which "cc1"))" "$(dirname $(which "cc1")).bak"
     fi
 
     show_libs "${APP_PREFIX}/bin/${GCC_TARGET}-gcc"
