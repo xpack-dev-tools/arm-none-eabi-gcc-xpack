@@ -950,6 +950,8 @@ function test_gcc()
     if [ "${TARGET_PLATFORM}" == "win32" ]
     then
       which "cc1"
+      choco uninstall gcc
+      which "cc1"
     fi
 
     show_libs "${APP_PREFIX}/bin/${GCC_TARGET}-gcc"
