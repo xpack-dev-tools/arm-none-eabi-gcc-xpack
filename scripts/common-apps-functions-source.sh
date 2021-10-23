@@ -78,7 +78,6 @@ function build_binutils()
       LDFLAGS="${XBB_LDFLAGS_APP}" 
       if [ "${TARGET_PLATFORM}" == "win32" ]
       then
-        CPPFLAGS+=" -D__USE_MINGW_ACCESS"
         LDFLAGS+=" -Wl,${XBB_FOLDER_PATH}/mingw/lib/CRT_glob.o"
       elif [ "${TARGET_PLATFORM}" == "linux" ]
       then
@@ -252,11 +251,8 @@ function build_gcc_first()
       CPPFLAGS="${XBB_CPPFLAGS}"
       CFLAGS="${XBB_CFLAGS_NO_W}"
       CXXFLAGS="${XBB_CXXFLAGS_NO_W}"
-      LDFLAGS="${XBB_LDFLAGS_APP}" 
-      if [ "${TARGET_PLATFORM}" == "win32" ]
-      then
-        CPPFLAGS+=" -D__USE_MINGW_ACCESS"
-      elif [ "${TARGET_PLATFORM}" == "linux" ]
+      LDFLAGS="${XBB_LDFLAGS_APP}"
+      if [ "${TARGET_PLATFORM}" == "linux" ]
       then
         LDFLAGS+=" -Wl,-rpath,${LD_LIBRARY_PATH}"
       fi      
@@ -696,10 +692,7 @@ function build_gcc_final()
       CXXFLAGS="${XBB_CXXFLAGS_NO_W}"
 
       LDFLAGS="${XBB_LDFLAGS_APP}" 
-      if [ "${TARGET_PLATFORM}" == "win32" ]
-      then
-        CPPFLAGS+=" -D__USE_MINGW_ACCESS"
-      elif [ "${TARGET_PLATFORM}" == "linux" ]
+      if [ "${TARGET_PLATFORM}" == "linux" ]
       then
         LDFLAGS+=" -Wl,-rpath,${LD_LIBRARY_PATH}"
       fi      
@@ -1066,7 +1059,6 @@ function build_gdb()
       # export LIBS="-liconv"
       if [ "${TARGET_PLATFORM}" == "win32" ]
       then
-        CPPFLAGS+=" -D__USE_MINGW_ACCESS"
         # https://stackoverflow.com/questions/44150871/embeded-python3-6-with-mingw-in-c-fail-on-linking
         # ???
         CPPFLAGS+=" -DPy_BUILD_CORE_BUILTIN=1"
