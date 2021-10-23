@@ -112,7 +112,17 @@ function build_versions()
     GCC_COMBO_VERSION_MAJOR="10"
     GCC_COMBO_VERSION_MINOR="3"
     GCC_COMBO_VERSION_YEAR="2021"
-    GCC_COMBO_VERSION_MONTH="10"
+    if [[ "${RELEASE_VERSION}" =~ 10\.3\.1-2\.* ]]
+    then
+      GCC_COMBO_VERSION_MONTH="10"
+    elif [[ "${RELEASE_VERSION}" =~ 10\.3\.1-1\.* ]]
+    then
+      GCC_COMBO_VERSION_MONTH="07"
+    else
+      echo "Unsupported version ${RELEASE_VERSION}."
+      exit 1
+    fi
+
     GCC_COMBO_VERSION_SUBFOLDER=""
 
     GCC_COMBO_VERSION="${GCC_COMBO_VERSION_MAJOR}.${GCC_COMBO_VERSION_MINOR}-${GCC_COMBO_VERSION_YEAR}.${GCC_COMBO_VERSION_MONTH}"
@@ -125,6 +135,8 @@ function build_versions()
     # -------------------------------------------------------------------------
     # Used mainly to name the build folders.
 
+    # The commit ids are different for 2021.07, but the versions are the same.
+    
     # From /release.txt
     # binutils-2_36-branch
     # git://sourceware.org/git/binutils-gdb.git commit a7eb3ff36cebc093af6658049e03d63579dade86

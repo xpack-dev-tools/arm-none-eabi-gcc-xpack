@@ -4,7 +4,8 @@ Entries in this file are in reverse chronological order.
 
 ## 2021-10-22
 
-- v10.3.1-1.1 prepared
+- v10.3.1-2.1 prepared from 2021.10
+- v10.3.1-1.1 prepared from 2021.07, but no longer released
 
 ## 2021-10-04
 
