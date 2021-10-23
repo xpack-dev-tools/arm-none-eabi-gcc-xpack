@@ -118,25 +118,25 @@ jobs:
   # https://en.wikipedia.org/wiki/CentOS
   # https://hub.docker.com/_/centos
   # `-static` disabled, there is no static libc.a.
-  centos-x64:
-    name: 'x64 GNU Arm Embedded GCC ${{ github.event.inputs.version }} test on CentOS 8, 7 stable'
-    runs-on: ubuntu-latest
-    steps:
-      - name: 'Checkout'
-        uses: actions/checkout@v2
-        with:
-          fetch-depth: 3
-          submodules: true
-      - name: 'CentOS 8 x64'
-        uses: docker://centos:8
-        with:
-          entrypoint: /bin/bash
-          args: /github/workspace/scripts/helper/tests/native-test.sh --image centos:8 --version ${{ github.event.inputs.version }} --base-url ${{ github.event.inputs.base_url }}
-      - name: 'CentOS 7 x64'
-        uses: docker://centos:7
-        with:
-          entrypoint: /bin/bash
-          args: /github/workspace/scripts/helper/tests/native-test.sh --image centos:7 --version ${{ github.event.inputs.version }} --base-url ${{ github.event.inputs.base_url }}
+  # centos-x64:
+  #   name: 'x64 GNU Arm Embedded GCC ${{ github.event.inputs.version }} test on CentOS 8, 7 stable'
+  #   runs-on: ubuntu-latest
+  #   steps:
+  #     - name: 'Checkout'
+  #       uses: actions/checkout@v2
+  #       with:
+  #         fetch-depth: 3
+  #         submodules: true
+  #     - name: 'CentOS 8 x64'
+  #       uses: docker://centos:8
+  #       with:
+  #         entrypoint: /bin/bash
+  #         args: /github/workspace/scripts/helper/tests/native-test.sh --image centos:8 --version ${{ github.event.inputs.version }} --base-url ${{ github.event.inputs.base_url }}
+  #     - name: 'CentOS 7 x64'
+  #       uses: docker://centos:7
+  #       with:
+  #         entrypoint: /bin/bash
+  #         args: /github/workspace/scripts/helper/tests/native-test.sh --image centos:7 --version ${{ github.event.inputs.version }} --base-url ${{ github.event.inputs.base_url }}
 
   # https://hub.docker.com/r/i386/centos
   # docker://i386/centos:7 - fails not finding -lc
@@ -158,29 +158,6 @@ jobs:
         with:
           entrypoint: /bin/bash
           args: /github/workspace/scripts/helper/tests/native-test.sh --image redhat/ubi8 --version ${{ github.event.inputs.version }} --base-url ${{ github.event.inputs.base_url }}
-
-  # https://en.wikipedia.org/wiki/OpenSUSE#Releases
-  # https://hub.docker.com/u/opensuse
-  # `-static` disabled, there is no static libc.a.
-  opensuse-x64:
-    name: 'x64 GNU Arm Embedded GCC ${{ github.event.inputs.version }} test on OpenSUSE 15, 13 stable'
-    runs-on: ubuntu-latest
-    steps:
-      - name: 'Checkout'
-        uses: actions/checkout@v2
-        with:
-          fetch-depth: 3
-          submodules: true
-      - name: 'OpenSUSE 15 x64'
-        uses: docker://opensuse/leap:15.3
-        with:
-          entrypoint: /bin/bash
-          args: /github/workspace/scripts/helper/tests/native-test.sh --image opensuse/leap:15.3 --version ${{ github.event.inputs.version }} --base-url ${{ github.event.inputs.base_url }}
-      - name: 'OpenSUSE 13 x64'
-        uses: docker://opensuse/amd64:13.2
-        with:
-          entrypoint: /bin/bash
-          args: /github/workspace/scripts/helper/tests/native-test.sh --image opensuse/amd64:13.2 --version ${{ github.event.inputs.version }} --base-url ${{ github.event.inputs.base_url }}
 
   # https://en.wikipedia.org/wiki/Fedora_version_history
   # https://hub.docker.com/_/fedora
@@ -219,6 +196,29 @@ jobs:
         with:
           entrypoint: /bin/bash
           args: /github/workspace/scripts/helper/tests/native-test.sh --image fedora:20 --version ${{ github.event.inputs.version }} --base-url ${{ github.event.inputs.base_url }}
+
+  # https://en.wikipedia.org/wiki/OpenSUSE#Releases
+  # https://hub.docker.com/u/opensuse
+  # `-static` disabled, there is no static libc.a.
+  opensuse-x64:
+    name: 'x64 GNU Arm Embedded GCC ${{ github.event.inputs.version }} test on OpenSUSE 15, 13 stable'
+    runs-on: ubuntu-latest
+    steps:
+      - name: 'Checkout'
+        uses: actions/checkout@v2
+        with:
+          fetch-depth: 3
+          submodules: true
+      - name: 'OpenSUSE 15 x64'
+        uses: docker://opensuse/leap:15.3
+        with:
+          entrypoint: /bin/bash
+          args: /github/workspace/scripts/helper/tests/native-test.sh --image opensuse/leap:15.3 --version ${{ github.event.inputs.version }} --base-url ${{ github.event.inputs.base_url }}
+      - name: 'OpenSUSE 13 x64'
+        uses: docker://opensuse/amd64:13.2
+        with:
+          entrypoint: /bin/bash
+          args: /github/workspace/scripts/helper/tests/native-test.sh --image opensuse/amd64:13.2 --version ${{ github.event.inputs.version }} --base-url ${{ github.event.inputs.base_url }}
 
   ubuntu-x64-latest:
     name: 'x64 GNU Arm Embedded GCC ${{ github.event.inputs.version }} test on Ubuntu latest'

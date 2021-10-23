@@ -109,21 +109,21 @@ jobs:
   # https://en.wikipedia.org/wiki/CentOS
   # https://hub.docker.com/_/centos
   # `-static` disabled, there is no static libc.a.
-  centos-arm64:
-    name: 'arm64 GNU Arm Embedded GCC ${{ github.event.inputs.version }} test on CentOS 8, 7 stable'
-    runs-on: [self-hosted, Linux, Arm64]
-    steps:
-      - name: 'Checkout'
-        uses: actions/checkout@v2
-        with:
-          fetch-depth: 3
-          submodules: true
-      - name: 'CentOS 8 arm64'
-        uses: docker://centos:8
-        with:
-          entrypoint: /bin/bash
-          args: /github/workspace/scripts/helper/tests/native-test.sh --image centos:8 --version ${{ github.event.inputs.version }} --base-url ${{ github.event.inputs.base_url }}
-      # docker://centos:7 - undefined reference to `__cxa_thread_atexit_impl@GLIBC_2.18'
+  # centos-arm64:
+  #   name: 'arm64 GNU Arm Embedded GCC ${{ github.event.inputs.version }} test on CentOS 8, 7 stable'
+  #   runs-on: [self-hosted, Linux, Arm64]
+  #   steps:
+  #     - name: 'Checkout'
+  #       uses: actions/checkout@v2
+  #       with:
+  #         fetch-depth: 3
+  #         submodules: true
+  #     - name: 'CentOS 8 arm64'
+  #       uses: docker://centos:8
+  #       with:
+  #         entrypoint: /bin/bash
+  #         args: /github/workspace/scripts/helper/tests/native-test.sh --image centos:8 --version ${{ github.event.inputs.version }} --base-url ${{ github.event.inputs.base_url }}
+  #     # docker://centos:7 - undefined reference to `__cxa_thread_atexit_impl@GLIBC_2.18'
 
 
   # https://hub.docker.com/r/redhat/ubi8
@@ -142,25 +142,6 @@ jobs:
         with:
           entrypoint: /bin/bash
           args: /github/workspace/scripts/helper/tests/native-test.sh --image redhat/ubi8 --version ${{ github.event.inputs.version }} --base-url ${{ github.event.inputs.base_url }}
-
-  # https://en.wikipedia.org/wiki/OpenSUSE#Releases
-  # https://hub.docker.com/u/opensuse
-  # `-static` disabled, there is no static libc.a.
-  opensuse-arm64:
-    name: 'arm64 GNU Arm Embedded GCC ${{ github.event.inputs.version }} test on OpenSUSE 15, 13 stable'
-    runs-on: [self-hosted, Linux, Arm64]
-    steps:
-      - name: 'Checkout'
-        uses: actions/checkout@v2
-        with:
-          fetch-depth: 3
-          submodules: true
-      - name: 'OpenSUSE 15 arm64'
-        uses: docker://opensuse/leap:15.3
-        with:
-          entrypoint: /bin/bash
-          args: /github/workspace/scripts/helper/tests/native-test.sh --image opensuse/leap:15.3 --version ${{ github.event.inputs.version }} --base-url ${{ github.event.inputs.base_url }}
-      # docker://opensuse/leap:13 not available
 
   # https://en.wikipedia.org/wiki/Fedora_version_history
   # https://hub.docker.com/_/fedora
@@ -194,8 +175,25 @@ jobs:
         with:
           entrypoint: /bin/bash
           args: /github/workspace/scripts/helper/tests/native-test.sh --image fedora:27 --version ${{ github.event.inputs.version }} --base-url ${{ github.event.inputs.base_url }}
-
-  # fedora-arm: fails to update
+  
+  # https://en.wikipedia.org/wiki/OpenSUSE#Releases
+  # https://hub.docker.com/u/opensuse
+  # `-static` disabled, there is no static libc.a.
+  opensuse-arm64:
+    name: 'arm64 GNU Arm Embedded GCC ${{ github.event.inputs.version }} test on OpenSUSE 15, 13 stable'
+    runs-on: [self-hosted, Linux, Arm64]
+    steps:
+      - name: 'Checkout'
+        uses: actions/checkout@v2
+        with:
+          fetch-depth: 3
+          submodules: true
+      - name: 'OpenSUSE 15 arm64'
+        uses: docker://opensuse/leap:15.3
+        with:
+          entrypoint: /bin/bash
+          args: /github/workspace/scripts/helper/tests/native-test.sh --image opensuse/leap:15.3 --version ${{ github.event.inputs.version }} --base-url ${{ github.event.inputs.base_url }}
+      # docker://opensuse/leap:13 not available
 
   # ---------------------------------------------------------------------------
 
@@ -336,6 +334,9 @@ jobs:
 
   # centos:latest outdated
   # docker://arm32v7/centos:latest outdated
+
+  # fedora-arm: fails to update
+
   
 
 # -----------------------------------------------------------------------------
