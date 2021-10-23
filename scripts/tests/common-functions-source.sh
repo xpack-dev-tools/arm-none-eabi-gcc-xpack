@@ -25,13 +25,6 @@ function run_tests()
   echo
   env
 
-  if [ "${GITHUB_ACTIONS:-""}" == "true" -a "${RUNNER_OS:-""}" == "Windows" ]
-  then
-    run_verbose ls -l "${ChocolateyInstall}/bin"
-    # Hide Chocolatey.
-    run_verbose mv "${ChocolateyInstall}" "${ChocolateyInstall}.bak"
-  fi
-
   test_binutils
 
   test_gcc
