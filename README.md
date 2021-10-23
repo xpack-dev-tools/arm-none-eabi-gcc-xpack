@@ -3,7 +3,7 @@
 
 # The xPack GNU Arm Embedded GCC
 
-A standalone cross-platform (Windows/macOS/Linux) **Arm Embeddded GCC**
+A standalone cross-platform (Windows/macOS/Linux) **GNU Arm Embeddded GCC**
 binary distribution, intended for reproducible builds.
 
 In addition to the the binary archives and the package meta data,
@@ -22,7 +22,7 @@ The binaries can be installed automatically as **binary xPacks** or manually as
 ## Release schedule
 
 This distribution plans to follow the official
-[GNU Arm Embedded Toolchain](https://developer.arm.com/open-source/gnu-toolchain/gnu-rm)
+[GNU Arm Embedded Toolchain](https://developer.arm.com/tools-and-software/open-source-software/developer-tools/gnu-toolchain/gnu-rm/downloads/)
 distribution, by Arm.
 
 ## User info
@@ -129,20 +129,6 @@ a sixth number, like `10.3.1-2.1.1`.
 Since adherance of third party packages to semver is not guaranteed,
 it is recommended to use semver expressions like `^10.3.1` and `~10.3.1`
 with caution, and prefer exact matches, like `10.3.1-2.1.1`.
-
-### Windows drivers
-
-Most JTAG probes require separate drivers on Windows.
-For more details please read the
-[Install](https://xpack.github.io/arm-none-eabi-gcc/install/) page.
-
-### GNU/Linux UDEV subsystem
-
-For the JTAG probes implemented as USB devices (actually most of them),
-the last installation step on GNU/Linux is to configure the UDEV subsystem.
-
-For more details please read the
-[Install](https://xpack.github.io/arm-none-eabi-gcc/install/) page.
 
 ## Maintainer info
 

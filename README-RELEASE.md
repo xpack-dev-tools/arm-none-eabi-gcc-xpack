@@ -130,6 +130,10 @@ From here it'll be cloned on the production machines.
 
 The automation is provided by GitHub Actions and three self-hosted runners.
 
+It is recommended to do a first run without the multi-libs
+(see the `defs-source.sh` file), test it,
+and, when ready, rerun the full build.
+
 Run the `generate-workflows` to re-generate the
 GitHub workflow files; commit and push if necessary.
 
@@ -165,7 +169,8 @@ in the environment.
 
 This command uses the `xpack-develop` branch of this repo.
 
-The builds take about 930 minutes to complete.
+The full builds take about 16 hours (about 6 hours without multi-libs)
+to complete.
 
 The workflow result and logs are available from the
 [Actions](https://github.com/xpack-dev-tools/arm-none-eabi-gcc-xpack/actions/) page.
