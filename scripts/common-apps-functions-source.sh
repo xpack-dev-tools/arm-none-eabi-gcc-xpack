@@ -89,11 +89,14 @@ function build_binutils()
       export CXXFLAGS
       export LDFLAGS
 
-      env | sort
-
       if [ ! -f "config.status" ]
       then
         (
+          if [ "${IS_DEVELOP}" == "y" ]
+          then
+            env | sort
+          fi
+
           echo
           echo "Running binutils configure..."
       
@@ -263,11 +266,14 @@ function build_gcc_first()
       export CFLAGS_FOR_TARGET 
       export CXXFLAGS_FOR_TARGET
 
-      env | sort
-
       if [ ! -f "config.status" ]
       then
         (
+          if [ "${IS_DEVELOP}" == "y" ]
+          then
+            env | sort
+          fi
+
           echo
           echo "Running gcc first stage configure..."
       
@@ -393,11 +399,14 @@ function build_newlib()
       export CFLAGS_FOR_TARGET
       export CXXFLAGS_FOR_TARGET
 
-      env | sort
-
       if [ ! -f "config.status" ]
       then
         (
+          if [ "${IS_DEVELOP}" == "y" ]
+          then
+            env | sort
+          fi
+
           # --disable-nls do not use Native Language Support
           # --enable-newlib-io-long-double   enable long double type support in IO functions printf/scanf
           # --enable-newlib-io-long-long   enable long long type support in IO functions like printf/scanf
@@ -718,11 +727,14 @@ function build_gcc_final()
         export CXX_FOR_TARGET=${GCC_TARGET}-g++
       fi
 
-      env | sort
-
       if [ ! -f "config.status" ]
       then
         (
+          if [ "${IS_DEVELOP}" == "y" ]
+          then
+            env | sort
+          fi
+
           echo
           echo "Running gcc$1 final stage configure..."
       
@@ -1120,8 +1132,6 @@ function build_gdb()
 
       export CONFIG_PYTHON_PREFIX
 
-      env | sort
-
       # python -c 'from distutils import sysconfig;print(sysconfig.PREFIX)'
       # python -c 'from distutils import sysconfig;print(sysconfig.EXEC_PREFIX)'
 
@@ -1132,6 +1142,11 @@ function build_gdb()
       if [ ! -f "config.status" ]
       then
         (
+          if [ "${IS_DEVELOP}" == "y" ]
+          then
+            env | sort
+          fi
+
           echo
           echo "Running gdb$1 configure..."
    
