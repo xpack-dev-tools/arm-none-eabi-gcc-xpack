@@ -154,25 +154,29 @@ Start the runner on all three machines:
 
 Check that both the project Git and the submodule are pushed to GitHub.
 
-To trigger the GitHub Actions build, use the xPack action:
+To trigger the GitHub Actions build, use the xPack actions:
 
-- `trigger-workflow-build`
+- `trigger-workflow-build-xbbi`
+- `trigger-workflow-build-xbba`
+- `trigger-workflow-build-xbbm`
 
 This is equivalent to:
 
 ```sh
-bash ~/Downloads/arm-none-eabi-gcc-xpack.git/scripts/helper/trigger-workflow-build.sh
+bash ~/Downloads/arm-none-eabi-gcc-xpack.git/scripts/helper/trigger-workflow-build.sh --machine xbbi
+bash ~/Downloads/arm-none-eabi-gcc-xpack.git/scripts/helper/trigger-workflow-build.sh --machine xbba
+bash ~/Downloads/arm-none-eabi-gcc-xpack.git/scripts/helper/trigger-workflow-build.sh --machine xbbm
 ```
 
-This script requires the `GITHUB_API_DISPATCH_TOKEN` to be present
+These scripts require the `GITHUB_API_DISPATCH_TOKEN` to be present
 in the environment.
 
-This command uses the `xpack-develop` branch of this repo.
+These commands use the `xpack-develop` branch of this repo.
 
 The full builds take about 16 hours (about 6 hours without multi-libs)
 to complete.
 
-The workflow result and logs are available from the
+The workflows results and logs are available from the
 [Actions](https://github.com/xpack-dev-tools/arm-none-eabi-gcc-xpack/actions/) page.
 
 The resulting binaries are available for testing from
