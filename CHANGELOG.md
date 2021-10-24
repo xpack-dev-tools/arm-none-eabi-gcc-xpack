@@ -4,6 +4,7 @@ Entries in this file are in reverse chronological order.
 
 ## 2021-10-24
 
+- v10.3.1-2.1 released
 - `-D__USE_MINGW_ACCESS` used to fix mingw `access()` issue
 
 ## 2021-10-22
