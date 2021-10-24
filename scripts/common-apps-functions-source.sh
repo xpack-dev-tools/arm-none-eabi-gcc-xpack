@@ -689,6 +689,12 @@ function build_gcc_final()
       xbb_activate_installed_dev
 
       CPPFLAGS="${XBB_CPPFLAGS}" 
+      if [ "${TARGET_PLATFORM}" == "darwin" ]
+      then
+        # Hack to avoid spurious errors like:
+        # fatal error: bits/nested_exception.h: No such file or directory
+        CPPFLAGS+=" -I${BUILD_FOLDER_PATH}/${gcc_final_folder_name}/${GCC_TARGET}/libstdc++-v3/include" 
+      fi
       CFLAGS="${XBB_CFLAGS_NO_W}"
       CXXFLAGS="${XBB_CXXFLAGS_NO_W}"
 
