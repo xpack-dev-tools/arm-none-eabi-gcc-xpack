@@ -83,10 +83,6 @@ function build_binutils()
       then
         LDFLAGS+=" -Wl,-rpath,${LD_LIBRARY_PATH}"
       fi
-      if [ "${IS_DEVELOP}" == "y" ]
-      then
-        LDFLAGS+=" -v"
-      fi
 
       export CPPFLAGS
       export CFLAGS
@@ -256,10 +252,6 @@ function build_gcc_first()
       then
         LDFLAGS+=" -Wl,-rpath,${LD_LIBRARY_PATH}"
       fi      
-      if [ "${IS_DEVELOP}" == "y" ]
-      then
-        LDFLAGS+=" -v"
-      fi
 
       define_flags_for_target ""
 
@@ -698,16 +690,12 @@ function build_gcc_final()
       fi      
       # Do not add CRT_glob.o here, it will fail with already defined,
       # since it is already handled by --enable-mingw-wildcard.
-      if [ "${IS_DEVELOP}" == "y" ]
-      then
-        LDFLAGS+=" -v"
-      fi
 
       define_flags_for_target "$1"
 
       export CPPFLAGS
       export CFLAGS
-      export CXXFLAGS 
+      export CXXFLAGS
       export LDFLAGS        
 
       export CFLAGS_FOR_TARGET
@@ -1094,11 +1082,6 @@ function build_gdb()
         LIBS=""
       fi
 
-      if [ "${IS_DEVELOP}" == "y" ]
-      then
-        LDFLAGS+=" -v"
-      fi
-
       CONFIG_PYTHON_PREFIX=""
 
       local extra_python_opts="--with-python=no"
@@ -1131,7 +1114,7 @@ function build_gdb()
       export CPPFLAGS
       export CFLAGS
       export CXXFLAGS
-          
+
       export LDFLAGS
       export LIBS
 
