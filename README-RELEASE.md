@@ -349,7 +349,7 @@ watching this project.
 - `npm pack` and check the content of the archive, which should list
   only the `package.json`, the `README.md`, `LICENSE` and `CHANGELOG.md`;
   possibly adjust `.npmignore`
-- `npm version 10.3.1-2.1`; the first 5 numbers are the same as the
+- `npm version 10.3.1-2.1.1`; the first 5 numbers are the same as the
   GitHub release; the sixth number is the npm specific version
 - push the `xpack-develop` branch to GitHub
 - push tags with `git push origin --tags`
