@@ -3,10 +3,10 @@ title:  xPack Arm Embedded GCC {{ RELEASE_VERSION }} released
 
 TODO: select one summary
 
-summary: "Version {{ RELEASE_VERSION }} is a maintenance release; it updates to
+summary: "Version **{{ RELEASE_VERSION }}** is a maintenance release; it updates to
 the latest upstream master."
 
-summary: "Version {{ RELEASE_VERSION }} is a new release; it follows the upstream Arm release."
+summary: "Version **{{ RELEASE_VERSION }}** is a new release; it follows the upstream Arm release."
 
 arm_version: 10.3-2021.10
 arm_date: October 21, 2021
