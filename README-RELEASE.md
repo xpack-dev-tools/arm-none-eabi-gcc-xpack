@@ -417,11 +417,11 @@ In case the previous version is not functional and needs to be unpublished:
 
 ## Announce to Arm community
 
-Add a new topic in the **GNU Toolchain forum** category of the
-[Arm Developer Community](https://community.arm.com/developer/tools-software/oss-platforms/f/gnu-toolchain-forum)
+Add a new topic in the **Compilers and Libraries** forum of the
+[Arm Developer Community](https://community.arm.com/support-forums/f/compilers-and-libraries-forum)
 
 - title: copy release title
 - content:
-  - The xPack GNU Arm Embedded GCC is an alternate binary distribution that complements the official GNU Arm Embedded Toolchain maintained by Arm.
-  - The latest release is 10.3.1-2.1 following Arm release from Dec 11, 2020 (version 10-2020-q4-major).
+  - The **xPack GNU Arm Embedded GCC** is an alternate binary distribution that complements the official GNU Arm Embedded Toolchain maintained by Arm.
+  - The latest release is [10.3.1-2.1]() following Arm release from October 21, 2021 (version 10.3-2021.10).
 - tags: xpack, gnu, gcc, arm, toolchain
