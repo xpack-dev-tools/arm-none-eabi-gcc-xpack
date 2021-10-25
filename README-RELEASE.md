@@ -168,7 +168,7 @@ bash ~/Downloads/arm-none-eabi-gcc-xpack.git/scripts/helper/trigger-workflow-bui
 bash ~/Downloads/arm-none-eabi-gcc-xpack.git/scripts/helper/trigger-workflow-build.sh --machine xbbm
 ```
 
-These scripts require the `GITHUB_API_DISPATCH_TOKEN` to be present
+These scripts require the `GITHUB_API_DISPATCH_TOKEN` variable to be present
 in the environment.
 
 These commands use the `xpack-develop` branch of this repo.
@@ -202,7 +202,7 @@ bash ~/Downloads/arm-none-eabi-gcc-xpack.git/scripts/helper/tests/trigger-workfl
 bash ~/Downloads/arm-none-eabi-gcc-xpack.git/scripts/helper/tests/trigger-workflow-test-docker-linux-arm.sh
 ```
 
-These scripts require the `GITHUB_API_DISPATCH_TOKEN` to be present
+These scripts require the `GITHUB_API_DISPATCH_TOKEN` variable to be present
 in the environment.
 
 These actions use the `xpack-develop` branch of this repo and the
@@ -225,7 +225,8 @@ This is equivalent to:
 bash ~/Downloads/arm-none-eabi-gcc-xpack.git/scripts/helper/tests/trigger-travis-macos.sh
 ```
 
-This script requires the `TRAVIS_COM_TOKEN` to be present in the environment.
+This script requires the `TRAVIS_COM_TOKEN` variable to be present
+in the environment.
 
 The test results are available from
 [travis-ci.com](https://app.travis-ci.com/github/xpack-dev-tools/arm-none-eabi-gcc-xpack/builds/).
@@ -271,6 +272,13 @@ git -C ~/Downloads/arm-none-eabi-gcc-xpack.git submodule update --init --recursi
   - (don't miss the LTO cases, since in the past they had problems)
 - to test the Python debugger, start it with `--version`
 
+Note: on macOS it is necessarry to remove the `com.apple.quarantine`
+attribute of archive and possibly the expanded folder:
+
+```sh
+xattr -dr com.apple.quarantine xpack-arm-none-eabi-gcc-*
+```
+
 ## Create a new GitHub pre-release draft
 
 - in `CHANGELOG.md`, add the release date and a message like _- v10.3.1-2.1 released_
@@ -284,7 +292,7 @@ named like **xPack GNU Arm Embedded GCC v10.3.1-2.1** (mind the dash),
 with all binaries attached.
 
 - edit the draft and attach it to the `xpack-develop` branch (important!)
-- save the draft
+- save the draft (do **not** publish yet!)
 
 ## Prepare a new blog post
 

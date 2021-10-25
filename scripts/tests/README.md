@@ -1,4 +1,4 @@
-# Scripts to test the Arm Embeddded GCC xPack
+# Scripts to test the Arm Embedded GCC xPack
 
 The binaries can be available from one of the pre-releases:
 
@@ -6,7 +6,7 @@ The binaries can be available from one of the pre-releases:
 
 ## Download the repo
 
-The test script is part of the Arm Embeddded GCC xPack:
+The test script is part of the Arm Embedded GCC xPack:
 
 ```sh
 rm -rf  ~/Downloads/arm-none-eabi-gcc-xpack.git; \
@@ -19,7 +19,7 @@ git -C ~/Downloads/arm-none-eabi-gcc-xpack.git submodule update --init --recursi
 
 ## Start a local test
 
-To check if Arm Embeddded GCC starts on the current platform, run a native test:
+To check if Arm Embedded GCC starts on the current platform, run a native test:
 
 ```sh
 bash ~/Downloads/arm-none-eabi-gcc-xpack.git/scripts/helper/tests/native-test.sh \
