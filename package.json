@@ -1,6 +1,6 @@
 {
   "name": "@xpack-dev-tools/arm-none-eabi-gcc",
-  "version": "10.3.1-2.1",
+  "version": "10.3.1-2.1.1",
   "description": "A binary xPack with the GNU Arm Embedded GCC toolchain executables",
   "main": "",
   "scripts": {
