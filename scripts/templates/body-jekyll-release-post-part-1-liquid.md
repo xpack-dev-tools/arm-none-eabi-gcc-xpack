@@ -1,5 +1,5 @@
 ---
-title:  xPack Arm Embeddded GCC {{ RELEASE_VERSION }} released
+title:  xPack Arm Embedded GCC {{ RELEASE_VERSION }} released
 
 TODO: select one summary
 
@@ -24,9 +24,9 @@ tags:
 
 ---
 
-[The xPack Arm Embeddded GCC](https://xpack.github.io/arm-none-eabi-gcc/)
+[The xPack Arm Embedded GCC](https://xpack.github.io/arm-none-eabi-gcc/)
 is a standalone cross-platform binary distribution of
-[Arm Embeddded GCC](http://arm-none-eabi-gcc.org).
+[Arm Embedded GCC](http://arm-none-eabi-gcc.org).
 
 There are separate binaries for **Windows** (Intel 32/64-bit),
 **macOS** (Intel 64-bit) and **GNU/Linux** (Intel 32/64-bit, Arm 32/64-bit).
@@ -53,13 +53,13 @@ The binary files are available from GitHub [Releases]({% raw %}{{ page.download_
 
 ## Install
 
-The full details of installing the **xPack Arm Embeddded GCC** on various platforms
+The full details of installing the **xPack Arm Embedded GCC** on various platforms
 are presented in the separate
 [Install]({% raw %}{{ site.baseurl }}{% endraw %}/arm-none-eabi-gcc/install/) page.
 
 ### Easy install
 
-The easiest way to install Arm Embeddded GCC is with
+The easiest way to install Arm Embedded GCC is with
 [`xpm`]({% raw %}{{ site.baseurl }}{% endraw %}/xpm/)
 by using the **binary xPack**, available as
 [`@xpack-dev-tools/arm-none-eabi-gcc`](https://www.npmjs.com/package/@xpack-dev-tools/arm-none-eabi-gcc)
@@ -85,7 +85,7 @@ xpm install @xpack-dev-tools/arm-none-eabi-gcc@{% raw %}{{ page.version }}.{{ pa
 ```
 
 For xPacks aware tools, like the **Eclipse Embedded C/C++ plug-ins**,
-it is also possible to install Arm Embeddded GCC globally, in the user home folder.
+it is also possible to install Arm Embedded GCC globally, in the user home folder.
 
 ```sh
 xpm install --global @xpack-dev-tools/arm-none-eabi-gcc@latest
@@ -113,14 +113,14 @@ xpm uninstall --global @xpack-dev-tools/arm-none-eabi-gcc
 
 ## Compliance
 
-The xPack Arm Embeddded GCC generally follows the official
-[Arm Embeddded GCC](http://arm-none-eabi-gcc.org) releases.
+The xPack Arm Embedded GCC generally follows the official
+[Arm Embedded GCC](http://arm-none-eabi-gcc.org) releases.
 
 The current version is based on:
 
 TODO: update commit id and date.
 
-- Arm Embeddded GCC version 0.11.0, the development commit
+- Arm Embedded GCC version 0.11.0, the development commit
 [<xxxxxxx>](https://github.com/xpack-dev-tools/arm-none-eabi-gcc/commit/<xxxxxxxxxxxxx>)
 from <ddddddddd>.
 
