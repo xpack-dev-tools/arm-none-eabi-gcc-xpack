@@ -200,27 +200,38 @@ function build_binutils()
 function test_binutils()
 {
   (
-    show_libs "${APP_PREFIX}/bin/${GCC_TARGET}-ar"
-    show_libs "${APP_PREFIX}/bin/${GCC_TARGET}-as"
-    show_libs "${APP_PREFIX}/bin/${GCC_TARGET}-ld"
-    show_libs "${APP_PREFIX}/bin/${GCC_TARGET}-nm"
-    show_libs "${APP_PREFIX}/bin/${GCC_TARGET}-objcopy"
-    show_libs "${APP_PREFIX}/bin/${GCC_TARGET}-objdump"
-    show_libs "${APP_PREFIX}/bin/${GCC_TARGET}-ranlib"
-    show_libs "${APP_PREFIX}/bin/${GCC_TARGET}-size"
-    show_libs "${APP_PREFIX}/bin/${GCC_TARGET}-strings"
-    show_libs "${APP_PREFIX}/bin/${GCC_TARGET}-strip"
+    if [ -d "xpacks/.bin" ]
+    then
+      TEST_BIN_PATH="$(pwd)/xpacks/.bin"
+    elif [ -d "${APP_PREFIX}/bin" ]
+    then
+      TEST_BIN_PATH="${APP_PREFIX}/bin"
+    else
+      echo "Wrong folder."
+      exit 1
+    fi
 
-    run_app "${APP_PREFIX}/bin/${GCC_TARGET}-ar" --version
-    run_app "${APP_PREFIX}/bin/${GCC_TARGET}-as" --version
-    run_app "${APP_PREFIX}/bin/${GCC_TARGET}-ld" --version
-    run_app "${APP_PREFIX}/bin/${GCC_TARGET}-nm" --version
-    run_app "${APP_PREFIX}/bin/${GCC_TARGET}-objcopy" --version
-    run_app "${APP_PREFIX}/bin/${GCC_TARGET}-objdump" --version
-    run_app "${APP_PREFIX}/bin/${GCC_TARGET}-ranlib" --version
-    run_app "${APP_PREFIX}/bin/${GCC_TARGET}-size" --version
-    run_app "${APP_PREFIX}/bin/${GCC_TARGET}-strings" --version
-    run_app "${APP_PREFIX}/bin/${GCC_TARGET}-strip" --version
+    show_libs "${TEST_BIN_PATH}/${GCC_TARGET}-ar"
+    show_libs "${TEST_BIN_PATH}/${GCC_TARGET}-as"
+    show_libs "${TEST_BIN_PATH}/${GCC_TARGET}-ld"
+    show_libs "${TEST_BIN_PATH}/${GCC_TARGET}-nm"
+    show_libs "${TEST_BIN_PATH}/${GCC_TARGET}-objcopy"
+    show_libs "${TEST_BIN_PATH}/${GCC_TARGET}-objdump"
+    show_libs "${TEST_BIN_PATH}/${GCC_TARGET}-ranlib"
+    show_libs "${TEST_BIN_PATH}/${GCC_TARGET}-size"
+    show_libs "${TEST_BIN_PATH}/${GCC_TARGET}-strings"
+    show_libs "${TEST_BIN_PATH}/${GCC_TARGET}-strip"
+
+    run_app "${TEST_BIN_PATH}/${GCC_TARGET}-ar" --version
+    run_app "${TEST_BIN_PATH}/${GCC_TARGET}-as" --version
+    run_app "${TEST_BIN_PATH}/${GCC_TARGET}-ld" --version
+    run_app "${TEST_BIN_PATH}/${GCC_TARGET}-nm" --version
+    run_app "${TEST_BIN_PATH}/${GCC_TARGET}-objcopy" --version
+    run_app "${TEST_BIN_PATH}/${GCC_TARGET}-objdump" --version
+    run_app "${TEST_BIN_PATH}/${GCC_TARGET}-ranlib" --version
+    run_app "${TEST_BIN_PATH}/${GCC_TARGET}-size" --version
+    run_app "${TEST_BIN_PATH}/${GCC_TARGET}-strings" --version
+    run_app "${TEST_BIN_PATH}/${GCC_TARGET}-strip" --version
 
   )
 }
@@ -969,20 +980,31 @@ function build_gcc_final()
 function test_gcc()
 {
   (
-    show_libs "${APP_PREFIX}/bin/${GCC_TARGET}-gcc"
-    show_libs "${APP_PREFIX}/bin/${GCC_TARGET}-g++"
-    show_libs "${APP_PREFIX}/libexec/gcc/${GCC_TARGET}/${GCC_VERSION}/cc1"
-    show_libs "${APP_PREFIX}/libexec/gcc/${GCC_TARGET}/${GCC_VERSION}/cc1plus"
-    show_libs "${APP_PREFIX}/libexec/gcc/${GCC_TARGET}/${GCC_VERSION}/collect2"
-    show_libs "${APP_PREFIX}/libexec/gcc/${GCC_TARGET}/${GCC_VERSION}/lto-wrapper"
-    show_libs "${APP_PREFIX}/libexec/gcc/${GCC_TARGET}/${GCC_VERSION}/lto1"
+    if [ -d "xpacks/.bin" ]
+    then
+      TEST_BIN_PATH="$(pwd)/xpacks/.bin"
+    elif [ -d "${APP_PREFIX}/bin" ]
+    then
+      TEST_BIN_PATH="${APP_PREFIX}/bin"
+    else
+      echo "Wrong folder."
+      exit 1
+    fi
 
-    run_app "${APP_PREFIX}/bin/${GCC_TARGET}-gcc" --help
-    run_app "${APP_PREFIX}/bin/${GCC_TARGET}-gcc" -dumpversion
-    run_app "${APP_PREFIX}/bin/${GCC_TARGET}-gcc" -dumpmachine
-    run_app "${APP_PREFIX}/bin/${GCC_TARGET}-gcc" -print-multi-lib
-    run_app "${APP_PREFIX}/bin/${GCC_TARGET}-gcc" -print-search-dirs
-    # run_app "${APP_PREFIX}/bin/${GCC_TARGET}-gcc" -dumpspecs | wc -l
+    show_libs "${TEST_BIN_PATH}/${GCC_TARGET}-gcc"
+    show_libs "${TEST_BIN_PATH}/${GCC_TARGET}-g++"
+    show_libs "$(${TEST_BIN_PATH}/${GCC_TARGET}-gcc -print-prog-name=cc1)"
+    show_libs "$(${TEST_BIN_PATH}/${GCC_TARGET}-gcc -print-prog-name=cc1plus)"
+    show_libs "$(${TEST_BIN_PATH}/${GCC_TARGET}-gcc -print-prog-name=collect2)"
+    show_libs "$(${TEST_BIN_PATH}/${GCC_TARGET}-gcc -print-prog-name=lto-wrapper)"
+    show_libs "$(${TEST_BIN_PATH}/${GCC_TARGET}-gcc -print-prog-name=lto1)"
+
+    run_app "${TEST_BIN_PATH}/${GCC_TARGET}-gcc" --help
+    run_app "${TEST_BIN_PATH}/${GCC_TARGET}-gcc" -dumpversion
+    run_app "${TEST_BIN_PATH}/${GCC_TARGET}-gcc" -dumpmachine
+    run_app "${TEST_BIN_PATH}/${GCC_TARGET}-gcc" -print-multi-lib
+    run_app "${TEST_BIN_PATH}/${GCC_TARGET}-gcc" -print-search-dirs
+    # run_app "${TEST_BIN_PATH}/${GCC_TARGET}-gcc" -dumpspecs | wc -l
     
     local tmp=$(mktemp /tmp/gcc-test.XXXXX)
     rm -rf "${tmp}"
@@ -1000,10 +1022,10 @@ main(int argc, char* argv[])
   printf("Hello World\n");
 }
 __EOF__
-    run_app "${APP_PREFIX}/bin/${GCC_TARGET}-gcc" -o hello-c.elf -specs=nosys.specs hello.c -v
+    run_app "${TEST_BIN_PATH}/${GCC_TARGET}-gcc" -o hello-c.elf -specs=nosys.specs hello.c -v
 
-    run_app "${APP_PREFIX}/bin/${GCC_TARGET}-gcc" -o hello.c.o -c -flto hello.c
-    run_app "${APP_PREFIX}/bin/${GCC_TARGET}-gcc" -o hello-c-lto.elf -specs=nosys.specs -flto -v hello.c.o
+    run_app "${TEST_BIN_PATH}/${GCC_TARGET}-gcc" -o hello.c.o -c -flto hello.c
+    run_app "${TEST_BIN_PATH}/${GCC_TARGET}-gcc" -o hello-c-lto.elf -specs=nosys.specs -flto -v hello.c.o
 
     # Note: __EOF__ is quoted to prevent substitutions here.
     cat <<'__EOF__' > hello.cpp
@@ -1022,10 +1044,10 @@ __sync_synchronize()
 {
 }
 __EOF__
-    run_app "${APP_PREFIX}/bin/${GCC_TARGET}-g++" -o hello-cpp.elf -specs=nosys.specs hello.cpp
+    run_app "${TEST_BIN_PATH}/${GCC_TARGET}-g++" -o hello-cpp.elf -specs=nosys.specs hello.cpp
 
-    run_app "${APP_PREFIX}/bin/${GCC_TARGET}-g++" -o hello.cpp.o -c -flto hello.cpp
-    run_app "${APP_PREFIX}/bin/${GCC_TARGET}-g++" -o hello-cpp-lto.elf -specs=nosys.specs -flto -v hello.cpp.o
+    run_app "${TEST_BIN_PATH}/${GCC_TARGET}-g++" -o hello.cpp.o -c -flto hello.cpp
+    run_app "${TEST_BIN_PATH}/${GCC_TARGET}-g++" -o hello-cpp-lto.elf -specs=nosys.specs -flto -v hello.cpp.o
 
     cd ..
     rm -rf "${tmp}"
@@ -1288,13 +1310,24 @@ function test_gdb()
   fi
 
   (
-    show_libs "${APP_PREFIX}/bin/${GCC_TARGET}-gdb${suffix}"
+    if [ -d "xpacks/.bin" ]
+    then
+      TEST_BIN_PATH="$(pwd)/xpacks/.bin"
+    elif [ -d "${APP_PREFIX}/bin" ]
+    then
+      TEST_BIN_PATH="${APP_PREFIX}/bin"
+    else
+      echo "Wrong folder."
+      exit 1
+    fi
 
-    run_app "${APP_PREFIX}/bin/${GCC_TARGET}-gdb${suffix}" --version
-    run_app "${APP_PREFIX}/bin/${GCC_TARGET}-gdb${suffix}" --config
+    show_libs "${TEST_BIN_PATH}/${GCC_TARGET}-gdb${suffix}"
+
+    run_app "${TEST_BIN_PATH}/${GCC_TARGET}-gdb${suffix}" --version
+    run_app "${TEST_BIN_PATH}/${GCC_TARGET}-gdb${suffix}" --config
 
     # This command is known to fail with 'Abort trap: 6' (SIGABRT)
-    run_app "${APP_PREFIX}/bin/${GCC_TARGET}-gdb${suffix}" \
+    run_app "${TEST_BIN_PATH}/${GCC_TARGET}-gdb${suffix}" \
       --nh \
       --nx \
       -ex='show language' \
@@ -1304,7 +1337,7 @@ function test_gdb()
     if [ "${suffix}" == "-py3" ]
     then
       # Show Python paths.
-      run_app "${APP_PREFIX}/bin/${GCC_TARGET}-gdb${suffix}" \
+      run_app "${TEST_BIN_PATH}/${GCC_TARGET}-gdb${suffix}" \
         --nh \
         --nx \
         -ex='set pagination off' \
