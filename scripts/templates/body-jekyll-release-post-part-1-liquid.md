@@ -6,8 +6,10 @@ TODO: select one summary
 summary: "Version {{ RELEASE_VERSION }} is a maintenance release; it updates to
 the latest upstream master."
 
-summary: "Version {{ RELEASE_VERSION }} is a new release; it follows the upstream release."
+summary: "Version {{ RELEASE_VERSION }} is a new release; it follows the upstream Arm release."
 
+arm_version: 10.3-2021.10
+arm_date: October 21, 2021
 version: {{ RELEASE_VERSION }}
 npm_subversion: 1
 download_url: https://github.com/xpack-dev-tools/arm-none-eabi-gcc-xpack/releases/tag/v{{ RELEASE_VERSION }}/
@@ -20,13 +22,18 @@ categories:
 
 tags:
   - releases
+  - arm
   - arm-none-eabi-gcc
+  - gcc
+  - binaries
+  - c++
+  - exceptions
 
 ---
 
 [The xPack Arm Embedded GCC](https://xpack.github.io/arm-none-eabi-gcc/)
 is a standalone cross-platform binary distribution of
-[Arm Embedded GCC](http://arm-none-eabi-gcc.org).
+[GNU Arm Embedded Toolchain](https://developer.arm.com/open-source/gnu-toolchain/gnu-rm).
 
 There are separate binaries for **Windows** (Intel 32/64-bit),
 **macOS** (Intel 64-bit) and **GNU/Linux** (Intel 32/64-bit, Arm 32/64-bit).
@@ -118,22 +125,68 @@ The xPack Arm Embedded GCC generally follows the official
 
 The current version is based on:
 
-TODO: update commit id and date.
+- [GNU Arm Embedded Toolchain](https://developer.arm.com/open-source/gnu-toolchain/gnu-rm)
+release **{% raw %}{{ page.arm_version }}{% endraw %}** from {% raw %}{{ page.arm_date }}{% endraw %} and uses the
+`gcc-arm-none-eabi-{% raw %}{{ page.arm_version }}{% endraw %}-src.tar.bz2` source invariant.
 
-- Arm Embedded GCC version 0.11.0, the development commit
-[<xxxxxxx>](https://github.com/xpack-dev-tools/arm-none-eabi-gcc/commit/<xxxxxxxxxxxxx>)
-from <ddddddddd>.
+For more details see the original Arm release text files:
+
+- `distro-info/arm-readme.txt`
+- `distro-info/arm-release.txt`
+
+## Supported libraries
+
+The supported libraries are:
+
+```console
+$ arm-none-eabi-gcc -print-multi-lib
+.;
+arm/v5te/softfp;@marm@march=armv5te+fp@mfloat-abi=softfp
+arm/v5te/hard;@marm@march=armv5te+fp@mfloat-abi=hard
+thumb/nofp;@mthumb@mfloat-abi=soft
+thumb/v7/nofp;@mthumb@march=armv7@mfloat-abi=soft
+thumb/v7+fp/softfp;@mthumb@march=armv7+fp@mfloat-abi=softfp
+thumb/v7+fp/hard;@mthumb@march=armv7+fp@mfloat-abi=hard
+thumb/v7-r+fp.sp/softfp;@mthumb@march=armv7-r+fp.sp@mfloat-abi=softfp
+thumb/v7-r+fp.sp/hard;@mthumb@march=armv7-r+fp.sp@mfloat-abi=hard
+thumb/v6-m/nofp;@mthumb@march=armv6s-m@mfloat-abi=soft
+thumb/v7-m/nofp;@mthumb@march=armv7-m@mfloat-abi=soft
+thumb/v7e-m/nofp;@mthumb@march=armv7e-m@mfloat-abi=soft
+thumb/v7e-m+fp/softfp;@mthumb@march=armv7e-m+fp@mfloat-abi=softfp
+thumb/v7e-m+fp/hard;@mthumb@march=armv7e-m+fp@mfloat-abi=hard
+thumb/v7e-m+dp/softfp;@mthumb@march=armv7e-m+fp.dp@mfloat-abi=softfp
+thumb/v7e-m+dp/hard;@mthumb@march=armv7e-m+fp.dp@mfloat-abi=hard
+thumb/v8-m.base/nofp;@mthumb@march=armv8-m.base@mfloat-abi=soft
+thumb/v8-m.main/nofp;@mthumb@march=armv8-m.main@mfloat-abi=soft
+thumb/v8-m.main+fp/softfp;@mthumb@march=armv8-m.main+fp@mfloat-abi=softfp
+thumb/v8-m.main+fp/hard;@mthumb@march=armv8-m.main+fp@mfloat-abi=hard
+thumb/v8-m.main+dp/softfp;@mthumb@march=armv8-m.main+fp.dp@mfloat-abi=softfp
+thumb/v8-m.main+dp/hard;@mthumb@march=armv8-m.main+fp.dp@mfloat-abi=hard
+thumb/v8.1-m.main+mve/hard;@mthumb@march=armv8.1-m.main+mve@mfloat-abi=hard
+```
 
 ## Changes
 
-There are no functional changes.
+Compared to the Arm version, there should be no functional changes.
 
-Compared to the upstream, the following changes were applied:
+### Python
 
-- a configure option was added to configure branding (`--enable-branding`)
-- the `src/arm-none-eabi-gcc.c` file was edited to display the branding string
-- the `contrib/60-arm-none-eabi-gcc.rules` file was simplified to avoid protection
-  related issues.
+Support for Python scripting was added to GDB. This distribution provides
+a separate binary, `arm-none-eabi-gdb-py3` with
+support for **Python 3.7**.
+
+The Python 3 run-time is included, so GDB does not need any version of
+Python to be installed, and is insensitive to the presence of other
+versions.
+
+Support for Python 2 was discontinued.
+
+### Text User Interface (TUI)
+
+Support for TUI was added to GDB. The `ncurses` library (v6.2) was added to
+the distribution.
+
+{% raw %}{% include note.html content="TUI is not available on Windows." %}{% endraw %}
 
 ## Bug fixes
 
@@ -206,23 +259,9 @@ set of platforms. The results are available from:
 
 ## Tests
 
-The binaries were testes on Windows 10 Pro 32/64-bit, Intel Ubuntu 18
-LTS 64-bit, Intel Xubuntu 18 LTS 32-bit and macOS 10.15.
-
-Install the package with xpm.
-
-The simple test, consists in starting the binaries
-only to identify the STM32F4DISCOVERY board.
-
-```sh
-.../xpack-arm-none-eabi-gcc-{{ RELEASE_VERSION }}/bin/arm-none-eabi-gcc -f board/stm32f4discovery.cfg
-```
-
-A more complex test consist in programming and debugging a simple blinky
-application on the STM32F4DISCOVERY board. The binaries were
-those generated by
-[simple Eclipse projects](https://github.com/xpack-dev-tools/arm-none-eabi-gcc-xpack/tree/xpack/tests/eclipse)
-available in the **xPack GNU Arm Embedded GCC** project.
+The binaries were tested on a variety of platforms,
+but mainly to check the integrity of the
+build, not the compiler functionality.
 
 ## Checksums
 
