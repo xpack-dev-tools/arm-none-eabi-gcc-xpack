@@ -232,7 +232,6 @@ function test_binutils()
     run_app "${TEST_BIN_PATH}/${GCC_TARGET}-size" --version
     run_app "${TEST_BIN_PATH}/${GCC_TARGET}-strings" --version
     run_app "${TEST_BIN_PATH}/${GCC_TARGET}-strip" --version
-
   )
 }
 
@@ -884,9 +883,7 @@ function build_gcc_final()
               || run_verbose make -j ${JOBS} INHIBIT_LIBC_CFLAGS="-DUSE_TM_CLONE_REGISTRY=0"
             fi
           else
-            # Parallel builds may fail.
             run_verbose make -j ${JOBS} INHIBIT_LIBC_CFLAGS="-DUSE_TM_CLONE_REGISTRY=0"
-            # make INHIBIT_LIBC_CFLAGS="-DUSE_TM_CLONE_REGISTRY=0"
           fi
 
           # Avoid strip here, it may interfere with patchelf.
