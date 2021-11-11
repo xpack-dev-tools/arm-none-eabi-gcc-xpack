@@ -41,9 +41,14 @@ function define_flags_for_target()
     optimize+=" -fno-exceptions"
   fi
 
-  # Note the intentional `-g`.
-  CFLAGS_FOR_TARGET="${optimize} -g" 
-  CXXFLAGS_FOR_TARGET="${optimize} -g"
+  CFLAGS_FOR_TARGET="${optimize}" 
+  CXXFLAGS_FOR_TARGET="${optimize}" 
+  if [ "${IS_DEBUG}" == "y" ]
+  then
+    # Avoid `-g`, many local symbols cannot be removed by strip.
+    CFLAGS_FOR_TARGET+=" -g"
+    CXXFLAGS_FOR_TARGET+=" -g"
+  fi
   
   if [ "${WITH_LIBS_LTO}" == "y" ]
   then
