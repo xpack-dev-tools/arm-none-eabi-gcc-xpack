@@ -23,7 +23,7 @@ function run_tests()
   GCC_VERSION_MAJOR=$(echo ${GCC_VERSION} | sed -e 's|\([0-9][0-9]*\)\..*|\1|')
 
   echo
-  env
+  env | sort
 
   test_binutils
 
