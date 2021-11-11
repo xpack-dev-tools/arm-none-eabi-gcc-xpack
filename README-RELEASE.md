@@ -130,7 +130,7 @@ From here it'll be cloned on the production machines.
 
 The automation is provided by GitHub Actions and three self-hosted runners.
 
-It is recommended to do a first run without the multi-libs
+It is recommended to do **a first run without the multi-libs**
 (see the `defs-source.sh` file), test it,
 and, when ready, rerun the full build.
 
@@ -241,9 +241,17 @@ For this, on each platform (Mac, GNU/Linux 64/32, Windows 64/32):
 - unpack the archive in `Desktop` or in `Downloads`, and rename the version
   folder, by replacing a dash with a space; this will test paths with spaces;
   on Windows the current paths always use spaces, so renaming is not needed;
+- on macOS it is necessarry to remove the `com.apple.quarantine`
+  attribute of archive and possibly the expanded folder:
+
+```sh
+xattr -dr com.apple.quarantine xpack-arm-none-eabi-gcc-*
+```
+
 - clone this repo locally; on Windows use the Git console;
 
 ```sh
+rm -rf ~/Downloads/arm-none-eabi-gcc-xpack.git; \
 git clone \
   --branch xpack-develop \
   https://github.com/xpack-dev-tools/arm-none-eabi-gcc-xpack.git \
@@ -271,13 +279,6 @@ git -C ~/Downloads/arm-none-eabi-gcc-xpack.git submodule update --init --recursi
   - stop (Terminate)
   - (don't miss the LTO cases, since in the past they had problems)
 - to test the Python debugger, start it with `--version`
-
-Note: on macOS it is necessarry to remove the `com.apple.quarantine`
-attribute of archive and possibly the expanded folder:
-
-```sh
-xattr -dr com.apple.quarantine xpack-arm-none-eabi-gcc-*
-```
 
 ## Create a new GitHub pre-release draft
 
@@ -310,7 +311,7 @@ If any, refer to closed
 ## Update the preview Web
 
 - commit the `develop` branch of `xpack/web-jekyll` GitHub repo;
-  use a message like **xPack GNU Arm Embedded GCC v10.3.1-2 released**
+  use a message like **xPack GNU Arm Embedded GCC v10.3.1-2.1 released**
 - push to GitHub
 - wait for the GitHub Pages build to complete
 - the preview web is <https://xpack.github.io/web-preview/news/>
@@ -344,8 +345,8 @@ watching this project.
 
 - select the `xpack-develop` branch
 - check the latest commits `npm run git-log`
-- update `CHANGELOG.md`, add a line like _- v10.3.1-2.1 published on npmjs.com_
-- commit with a message like _CHANGELOG: publish npm v10.3.1-2.1_
+- update `CHANGELOG.md`, add a line like _- v10.3.1-2.1.1 published on npmjs.com_
+- commit with a message like _CHANGELOG: publish npm v10.3.1-2.1.1_
 - `npm pack` and check the content of the archive, which should list
   only the `package.json`, the `README.md`, `LICENSE` and `CHANGELOG.md`;
   possibly adjust `.npmignore`
