@@ -1386,8 +1386,14 @@ function strip_libs()
       local libs=$(find "${APP_PREFIX}" -name '*.[ao]')
       for lib in ${libs}
       do
-        echo "${GCC_TARGET}-objcopy -R ... ${lib}"
-        "${GCC_TARGET}-objcopy" -R .comment -R .note -R .debug_info -R .debug_aranges -R .debug_pubnames -R .debug_pubtypes -R .debug_abbrev -R .debug_line -R .debug_str -R .debug_ranges -R .debug_loc ${lib} || true
+        if false
+        then
+          echo "${GCC_TARGET}-objcopy -R ... ${lib}"
+          "${APP_PREFIX}/bin/${GCC_TARGET}-objcopy" -R .comment -R .note -R .debug_info -R .debug_aranges -R .debug_pubnames -R .debug_pubtypes -R .debug_abbrev -R .debug_line -R .debug_str -R .debug_ranges -R .debug_loc "${lib}" || true
+        else
+          echo "[${APP_PREFIX}/bin/${GCC_TARGET}-strip --strip-debug ${lib}]"
+          "${APP_PREFIX}/bin/${GCC_TARGET}-strip" --strip-debug "${lib}"
+        fi
       done
     )
   fi
