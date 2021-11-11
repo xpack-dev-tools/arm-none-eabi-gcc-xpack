@@ -10,4 +10,4 @@ release **10.3-2021.10** from DATE. (TODO: edit!)
 
 [Continue reading »](TODO: edit, add URL!)
 
-_At this moment these binaries are provided for tests only!_
+_At this moment the binaries are provided for tests only!_
