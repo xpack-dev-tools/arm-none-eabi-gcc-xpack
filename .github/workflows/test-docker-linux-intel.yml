@@ -163,7 +163,7 @@ jobs:
   # https://hub.docker.com/_/fedora
   # `-static` disabled, there is no static libc.a.
   fedora-x64:
-    name: 'x64 GNU Arm Embedded GCC ${{ github.event.inputs.version }} test on Fedora 34, 32, 30, 25, 20, stable'
+    name: 'x64 GNU Arm Embedded GCC ${{ github.event.inputs.version }} test on Fedora 35, 33, 30, 25, 20, stable'
     runs-on: ubuntu-latest
     steps:
       - name: 'Checkout'
@@ -171,16 +171,16 @@ jobs:
         with:
           fetch-depth: 3
           submodules: true
-      - name: 'Fedora 34 x64'
-        uses: docker://fedora:34
+      - name: 'Fedora 35 x64'
+        uses: docker://fedora:35
         with:
           entrypoint: /bin/bash
-          args: /github/workspace/scripts/helper/tests/native-test.sh --image fedora:34 --version ${{ github.event.inputs.version }} --base-url ${{ github.event.inputs.base_url }}
-      - name: 'Fedora 32 x64'
-        uses: docker://fedora:32
+          args: /github/workspace/scripts/helper/tests/native-test.sh --image fedora:35 --version ${{ github.event.inputs.version }} --base-url ${{ github.event.inputs.base_url }}
+      - name: 'Fedora 33 x64'
+        uses: docker://fedora:33
         with:
           entrypoint: /bin/bash
-          args: /github/workspace/scripts/helper/tests/native-test.sh --image fedora:32 --version ${{ github.event.inputs.version }} --base-url ${{ github.event.inputs.base_url }}
+          args: /github/workspace/scripts/helper/tests/native-test.sh --image fedora:33 --version ${{ github.event.inputs.version }} --base-url ${{ github.event.inputs.base_url }}
       - name: 'Fedora 30 x64'
         uses: docker://fedora:30
         with:
