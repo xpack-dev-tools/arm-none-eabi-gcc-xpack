@@ -4,6 +4,7 @@ Entries in this file are in reverse chronological order.
 
 ## 2021-11-12
 
+- v10.3.1-2.2.1 published on npmjs.com
 - v10.3.1-2.2 released
 
 ## 2021-11-11
