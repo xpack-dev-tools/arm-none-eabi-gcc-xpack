@@ -2,6 +2,10 @@
 
 Entries in this file are in reverse chronological order.
 
+## 2021-11-12
+
+- v10.3.1-2.2 released
+
 ## 2021-11-11
 
 - v10.3.1-2.2 prepared
