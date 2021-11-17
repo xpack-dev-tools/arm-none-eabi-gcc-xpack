@@ -170,6 +170,12 @@ function build_versions()
 
     GDB_PATCH="gdb-${GDB_VERSION}.patch"
 
+    if [[ "${RELEASE_VERSION}" =~ 10\.3\.1-2\.3 ]] \
+       && [ "${TARGET_PLATFORM}" == "darwin" -a "${TARGET_ARCH}" == "arm64" ]
+    then
+      GCC_PATCH="gcc-10.3.1-apple-silicon.patch"
+    fi
+
     # -------------------------------------------------------------------------
 
     (
