@@ -192,7 +192,13 @@ function build_versions()
         then
           WITH_TESTS="n"
         fi
-        build_gmp "6.1.0"
+
+        if [[ "${RELEASE_VERSION}" =~ 10\.3\.1-2\.3 ]]
+        then
+          build_gmp "6.2.1" # "6.1.0"
+        else
+          build_gmp "6.1.0"
+        fi
       )
       build_mpfr "3.1.4"
       build_mpc "1.0.3"
@@ -206,7 +212,12 @@ function build_versions()
       # Fails on mingw. 0.8.13 is deprecated. Not used anyway.
       # build_libelf "0.8.13"
 
-      build_gettext "0.19.8.1"
+      if [[ "${RELEASE_VERSION}" =~ 10\.3\.1-2\.3 ]]
+      then
+        build_gettext "0.21" # "0.19.8.1"
+      else
+        build_gettext "0.19.8.1"
+      fi
 
       if [ "${TARGET_PLATFORM}" == "win32" ]
       then
@@ -242,7 +253,13 @@ function build_versions()
 
           # Replacement for the old libcrypt.so.1; required by Python 3.
           build_libxcrypt "4.4.17"
-          build_openssl "1.1.1h"
+
+          if [[ "${RELEASE_VERSION}" =~ 10\.3\.1-2\.3 ]]
+          then
+            build_openssl "1.1.1l" # "1.1.1h"
+          else
+            build_openssl "1.1.1h"
+          fi
 
           build_python3 "${PYTHON3_VERSION}"
 
