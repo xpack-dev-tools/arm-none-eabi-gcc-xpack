@@ -173,7 +173,7 @@ function build_versions()
     if [[ "${RELEASE_VERSION}" =~ 10\.3\.1-2\.3 ]] \
        && [ "${TARGET_PLATFORM}" == "darwin" -a "${TARGET_ARCH}" == "arm64" ]
     then
-      GCC_PATCH="gcc-10.3.1-apple-silicon.patch"
+      GCC_PATCH="gcc-10.3.1-apple-silicon.patch.diff"
     fi
 
     # -------------------------------------------------------------------------

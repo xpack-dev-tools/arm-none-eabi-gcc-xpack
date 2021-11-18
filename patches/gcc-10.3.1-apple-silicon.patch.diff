@@ -30,8 +30,8 @@ Subject: [PATCH] Iains patches
 
 diff --git a/config.guess b/config.guess
 index 97ad0733304..0fc11edb2d1 100755
---- config.guess
-+++ config.guess
+--- a/config.guess
++++ b/config.guess
 @@ -1,8 +1,8 @@
  #! /bin/sh
  # Attempt to guess a canonical system name.
@@ -749,8 +749,8 @@ index 97ad0733304..0fc11edb2d1 100755
  
 diff --git a/config.sub b/config.sub
 index a318a468685..c874b7a9df8 100755
---- config.sub
-+++ config.sub
+--- a/config.sub
++++ b/config.sub
 @@ -1,8 +1,8 @@
  #! /bin/sh
  # Configuration validation subroutine script.
@@ -2171,8 +2171,8 @@ index a318a468685..c874b7a9df8 100755
  # Local variables:
 diff --git a/config/mh-darwin b/config/mh-darwin
 index 148b73038c3..fb2bb5ad1d9 100644
---- config/mh-darwin
-+++ config/mh-darwin
+--- a/config/mh-darwin
++++ b/config/mh-darwin
 @@ -1,29 +1,38 @@
  # The -mdynamic-no-pic ensures that the compiler executable is built without
 -# position-independent-code -- the usual default on Darwin. This fix speeds
@@ -2238,8 +2238,8 @@ index 148b73038c3..fb2bb5ad1d9 100644
 +@endunless gcc-bootstrap
 diff --git a/configure b/configure
 index f2ec106a86e..3d566041069 100755
---- configure
-+++ configure
+--- a/configure
++++ b/configure
 @@ -4077,7 +4077,7 @@ fi
    hppa*-*)
      host_makefile_frag="config/mh-pa"
@@ -2251,8 +2251,8 @@ index f2ec106a86e..3d566041069 100755
    powerpc-*-aix*)
 diff --git a/configure.ac b/configure.ac
 index 115db3f402a..561c89f56e1 100644
---- configure.ac
-+++ configure.ac
+--- a/configure.ac
++++ b/configure.ac
 @@ -1333,7 +1333,7 @@ case "${host}" in
    hppa*-*)	
      host_makefile_frag="config/mh-pa"
@@ -2264,8 +2264,8 @@ index 115db3f402a..561c89f56e1 100644
    powerpc-*-aix*)
 diff --git a/gcc/Makefile.in b/gcc/Makefile.in
 index 646db219460..5ac87c98230 100644
---- gcc/Makefile.in
-+++ gcc/Makefile.in
+--- a/gcc/Makefile.in
++++ b/gcc/Makefile.in
 @@ -783,13 +783,8 @@ DIR = ../gcc
  # Native compiler for the build machine and its switches.
  CC_FOR_BUILD = @CC_FOR_BUILD@
@@ -2291,8 +2291,8 @@ index 646db219460..5ac87c98230 100644
  
 diff --git a/gcc/ada/gcc-interface/Make-lang.in b/gcc/ada/gcc-interface/Make-lang.in
 index acbe2b877ca..903ef6937ba 100644
---- gcc/ada/gcc-interface/Make-lang.in
-+++ gcc/ada/gcc-interface/Make-lang.in
+--- a/gcc/ada/gcc-interface/Make-lang.in
++++ b/gcc/ada/gcc-interface/Make-lang.in
 @@ -655,6 +655,14 @@ endif
  # For unwind-pe.h
  CFLAGS-ada/raise-gcc.o += -I$(srcdir)/../libgcc -DEH_MECHANISM_$(EH_MECHANISM)
@@ -2328,8 +2328,8 @@ index acbe2b877ca..903ef6937ba 100644
  gnattools: $(GCC_PARTS) $(CONFIG_H) prefix.o force
 diff --git a/gcc/ada/sigtramp-ios.c b/gcc/ada/sigtramp-ios.c
 index de04c1adb04..43276e9863f 100644
---- gcc/ada/sigtramp-ios.c
-+++ gcc/ada/sigtramp-ios.c
+--- a/gcc/ada/sigtramp-ios.c
++++ b/gcc/ada/sigtramp-ios.c
 @@ -71,6 +71,10 @@
  
  /* sigtramp stub providing unwind info for common registers.  */
@@ -2354,8 +2354,8 @@ index de04c1adb04..43276e9863f 100644
  #define STR(TEXT) #TEXT
 diff --git a/gcc/collect2.c b/gcc/collect2.c
 index f8a5ce45994..f71016807ea 100644
---- gcc/collect2.c
-+++ gcc/collect2.c
+--- a/gcc/collect2.c
++++ b/gcc/collect2.c
 @@ -2301,10 +2301,15 @@ is_lto_object_file (const char *prog_name)
  							LTO_SEGMENT_NAME,
  							&errmsg, &err);
@@ -2375,8 +2375,8 @@ index f8a5ce45994..f71016807ea 100644
  
 diff --git a/gcc/config.gcc b/gcc/config.gcc
 index 6fcdd771d4c..61b1ae685b8 100644
---- gcc/config.gcc
-+++ gcc/config.gcc
+--- a/gcc/config.gcc
++++ b/gcc/config.gcc
 @@ -691,9 +691,9 @@ case ${target} in
        *-*-darwin[4-9]* | *-*-darwin1[0-9]*)
          macos_min=`expr $darwin_maj - 4`
@@ -2392,8 +2392,8 @@ index 6fcdd771d4c..61b1ae685b8 100644
        *-*-darwin)
 diff --git a/gcc/config.host b/gcc/config.host
 index 84f0433e2ad..37758501138 100644
---- gcc/config.host
-+++ gcc/config.host
+--- a/gcc/config.host
++++ b/gcc/config.host
 @@ -99,7 +99,8 @@ case ${host} in
  esac
  
@@ -2419,7 +2419,7 @@ diff --git a/gcc/config/aarch64/host-aarch64-darwin.c b/gcc/config/aarch64/host-
 new file mode 100644
 index 00000000000..d70f2df3bf1
 --- /dev/null
-+++ gcc/config/aarch64/host-aarch64-darwin.c
++++ b/gcc/config/aarch64/host-aarch64-darwin.c
 @@ -0,0 +1,33 @@
 +/* aarch64/arm64-darwin host-specific hook definitions.
 +
@@ -2458,15 +2458,15 @@ diff --git a/gcc/config/aarch64/x-darwin b/gcc/config/aarch64/x-darwin
 new file mode 100644
 index 00000000000..6d788d5e89c
 --- /dev/null
-+++ gcc/config/aarch64/x-darwin
++++ b/gcc/config/aarch64/x-darwin
 @@ -0,0 +1,3 @@
 +host-aarch64-darwin.o : $(srcdir)/config/aarch64/host-aarch64-darwin.c
 +	$(COMPILE) $<
 +	$(POSTCOMPILE)
 diff --git a/gcc/config/darwin-c.c b/gcc/config/darwin-c.c
 index 96172305711..3c2afe56522 100644
---- gcc/config/darwin-c.c
-+++ gcc/config/darwin-c.c
+--- a/gcc/config/darwin-c.c
++++ b/gcc/config/darwin-c.c
 @@ -691,7 +691,7 @@ macosx_version_as_macro (void)
    if (!version_array)
      goto fail;
@@ -2478,8 +2478,8 @@ index 96172305711..3c2afe56522 100644
    if (version_array[MAJOR] == 10 && version_array[MINOR] < 10)
 diff --git a/gcc/config/darwin-driver.c b/gcc/config/darwin-driver.c
 index f00d5a02d1d..35f925aef86 100644
---- gcc/config/darwin-driver.c
-+++ gcc/config/darwin-driver.c
+--- a/gcc/config/darwin-driver.c
++++ b/gcc/config/darwin-driver.c
 @@ -64,17 +64,17 @@ validate_macosx_version_min (const char *version_str)
  
    major = strtoul (version_str, &end, 10);
@@ -2513,8 +2513,8 @@ index f00d5a02d1d..35f925aef86 100644
      /* On 10.4 and earlier, the old linker is used which does not
 diff --git a/gcc/configure b/gcc/configure
 index 8fe9c91fd7c..ea987f37e24 100755
---- gcc/configure
-+++ gcc/configure
+--- a/gcc/configure
++++ b/gcc/configure
 @@ -747,10 +747,6 @@ FGREP
  SED
  LIBTOOL
@@ -2571,8 +2571,8 @@ index 8fe9c91fd7c..ea987f37e24 100755
  #if HAVE_DLFCN_H
 diff --git a/gcc/configure.ac b/gcc/configure.ac
 index 84dceb8074a..aab3e8e9d8e 100644
---- gcc/configure.ac
-+++ gcc/configure.ac
+--- a/gcc/configure.ac
++++ b/gcc/configure.ac
 @@ -2304,23 +2304,13 @@ BUILD_CXXFLAGS='$(ALL_CXXFLAGS)' AC_SUBST(BUILD_CXXFLAGS)
  BUILD_LDFLAGS='$(LDFLAGS)'	AC_SUBST(BUILD_LDFLAGS)
  STMP_FIXINC=stmp-fixinc		AC_SUBST(STMP_FIXINC)
@@ -2599,8 +2599,8 @@ index 84dceb8074a..aab3e8e9d8e 100644
  # This substitutes for lots of t-* files.
 diff --git a/libiberty/configure b/libiberty/configure
 index 3f82c5bb865..7bc8b571531 100755
---- libiberty/configure
-+++ libiberty/configure
+--- a/libiberty/configure
++++ b/libiberty/configure
 @@ -5977,9 +5977,16 @@ vars="sys_errlist sys_nerr sys_siglist"
  
  checkfuncs="__fsetlocking canonicalize_file_name dup3 getrlimit getrusage \
@@ -2643,8 +2643,8 @@ index 3f82c5bb865..7bc8b571531 100755
    ac_have_decl=1
 diff --git a/libiberty/configure.ac b/libiberty/configure.ac
 index 4e2599c14a8..9b9ec236c3d 100644
---- libiberty/configure.ac
-+++ libiberty/configure.ac
+--- a/libiberty/configure.ac
++++ b/libiberty/configure.ac
 @@ -394,9 +394,16 @@ vars="sys_errlist sys_nerr sys_siglist"
  
  checkfuncs="__fsetlocking canonicalize_file_name dup3 getrlimit getrusage \
@@ -2678,8 +2678,8 @@ index 4e2599c14a8..9b9ec236c3d 100644
    AC_CHECK_DECLS([strnlen])
 diff --git a/libiberty/xmalloc.c b/libiberty/xmalloc.c
 index 96d51b57780..40b6eea62c9 100644
---- libiberty/xmalloc.c
-+++ libiberty/xmalloc.c
+--- a/libiberty/xmalloc.c
++++ b/libiberty/xmalloc.c
 @@ -87,7 +87,9 @@ extern "C" {
  void *malloc (size_t);
  void *realloc (void *, size_t);
