@@ -6,7 +6,7 @@
 #   (https://xpack.github.io)
 # Copyright (c) 2021 Liviu Ionescu.
 #
-# Permission to use, copy, modify, and/or distribute this software 
+# Permission to use, copy, modify, and/or distribute this software
 # for any purpose is hereby granted, under the terms of the MIT license.
 # -----------------------------------------------------------------------------
 
@@ -22,7 +22,7 @@
 
 # https://github.com/docker-library/official-images#architectures-other-than-amd64
 
-# Debian versions: 
+# Debian versions:
 # - 8 jessie
 # - 9 stretch
 # - 10 buster
@@ -50,7 +50,7 @@ on:
         required: false
         default: 'current'
 
-# The scripts are executed in the Docker context by GitHub Actions, 
+# The scripts are executed in the Docker context by GitHub Actions,
 # so `native-test.sh` should be fine, it already takes care of updates.
 jobs:
 
@@ -61,6 +61,8 @@ jobs:
     name: 'x64 GNU Arm Embedded GCC ${{ github.event.inputs.version }} test on Ubuntu 20, 18, 16, 14 stable'
     runs-on: ubuntu-latest
     steps:
+      - name: 'Machine'
+        run: uname -a
       - name: 'Checkout'
         uses: actions/checkout@v2
         with:
@@ -93,6 +95,8 @@ jobs:
     name: 'x64 GNU Arm Embedded GCC ${{ github.event.inputs.version }} test on Debian 10, 9, 8 stable'
     runs-on: ubuntu-latest
     steps:
+      - name: 'Machine'
+        run: uname -a
       - name: 'Checkout'
         uses: actions/checkout@v2
         with:
@@ -148,6 +152,8 @@ jobs:
     name: 'x64 GNU Arm Embedded GCC ${{ github.event.inputs.version }} test on RedHat 8 stable'
     runs-on: ubuntu-latest
     steps:
+      - name: 'Machine'
+        run: uname -a
       - name: 'Checkout'
         uses: actions/checkout@v2
         with:
@@ -166,6 +172,8 @@ jobs:
     name: 'x64 GNU Arm Embedded GCC ${{ github.event.inputs.version }} test on Fedora 35, 33, 30, 25, 20, stable'
     runs-on: ubuntu-latest
     steps:
+      - name: 'Machine'
+        run: uname -a
       - name: 'Checkout'
         uses: actions/checkout@v2
         with:
@@ -204,6 +212,8 @@ jobs:
     name: 'x64 GNU Arm Embedded GCC ${{ github.event.inputs.version }} test on OpenSUSE 15, 13 stable'
     runs-on: ubuntu-latest
     steps:
+      - name: 'Machine'
+        run: uname -a
       - name: 'Checkout'
         uses: actions/checkout@v2
         with:
@@ -224,6 +234,8 @@ jobs:
     name: 'x64 GNU Arm Embedded GCC ${{ github.event.inputs.version }} test on Ubuntu latest'
     runs-on: ubuntu-latest
     steps:
+      - name: 'Machine'
+        run: uname -a
       - name: 'Checkout'
         uses: actions/checkout@v2
         with:
@@ -240,6 +252,8 @@ jobs:
     name: 'x64 GNU Arm Embedded GCC ${{ github.event.inputs.version }} test on Debian latest'
     runs-on: ubuntu-latest
     steps:
+      - name: 'Machine'
+        run: uname -a
       - name: 'Checkout'
         uses: actions/checkout@v2
         with:
@@ -267,6 +281,8 @@ jobs:
     name: 'x64 GNU Arm Embedded GCC ${{ github.event.inputs.version }} test on Arch latest'
     runs-on: ubuntu-latest
     steps:
+      - name: 'Machine'
+        run: uname -a
       - name: 'Checkout'
         uses: actions/checkout@v2
         with:
@@ -290,6 +306,8 @@ jobs:
     name: 'ia32 GNU Arm Embedded GCC ${{ github.event.inputs.version }} test on Ubuntu 18, 16, 14 stable'
     runs-on: ubuntu-latest
     steps:
+      - name: 'Machine'
+        run: uname -a
       - name: 'Checkout'
         uses: actions/checkout@v2
         with:
@@ -321,6 +339,8 @@ jobs:
     name: 'ia32 GNU Arm Embedded GCC ${{ github.event.inputs.version }} test on Debian 10, 9, 8 stable'
     runs-on: ubuntu-latest
     steps:
+      - name: 'Machine'
+        run: uname -a
       - name: 'Checkout'
         uses: actions/checkout@v2
         with:
@@ -348,6 +368,8 @@ jobs:
     name: 'ia32 GNU Arm Embedded GCC ${{ github.event.inputs.version }} test on Debian latest'
     runs-on: ubuntu-latest
     steps:
+      - name: 'Machine'
+        run: uname -a
       - name: 'Checkout'
         uses: actions/checkout@v2
         with:
@@ -356,7 +378,7 @@ jobs:
       - name: 'Debian testing ia32'
         uses: docker://i386/debian:testing
         with:
-          entrypoint: /usr/bin/linux32 
+          entrypoint: /usr/bin/linux32
           args: /bin/bash /github/workspace/scripts/helper/tests/native-test.sh --image i386/debian:testing --version ${{ github.event.inputs.version }} --base-url ${{ github.event.inputs.base_url }}
 
   # centos:latest outdated
