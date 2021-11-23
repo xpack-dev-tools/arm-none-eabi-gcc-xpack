@@ -33,8 +33,9 @@ GCC_TARGET=${GCC_TARGET:-"arm-none-eabi"}
 
 # -----------------------------------------------------------------------------
 
-# Normally should be commented out. Enable it only for tests.
-# WITHOUT_MULTILIB="y"
+# Normally should be commented out. Enable it only during tests,
+# to save some build time.
+WITHOUT_MULTILIB="y"
 
 # -----------------------------------------------------------------------------
 
