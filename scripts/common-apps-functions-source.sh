@@ -128,8 +128,8 @@ function build_binutils()
             --enable-build-warnings=no \
             --with-system-zlib \
 
-          cp "config.log" "${LOGS_FOLDER_PATH}/${binutils_folder_name}/config-log.txt"
-        ) 2>&1 | tee "${LOGS_FOLDER_PATH}/${binutils_folder_name}/configure-output.txt"
+          cp "config.log" "${LOGS_FOLDER_PATH}/${binutils_folder_name}/config-log-$(ndate).txt"
+        ) 2>&1 | tee "${LOGS_FOLDER_PATH}/${binutils_folder_name}/configure-output-$(ndate).txt"
       fi
 
       (
@@ -180,7 +180,7 @@ function build_binutils()
         show_libs "${APP_PREFIX}/bin/${GCC_TARGET}-strings"
         show_libs "${APP_PREFIX}/bin/${GCC_TARGET}-strip"
 
-      ) 2>&1 | tee "${LOGS_FOLDER_PATH}/${binutils_folder_name}/make-output.txt"
+      ) 2>&1 | tee "${LOGS_FOLDER_PATH}/${binutils_folder_name}/make-output-$(ndate).txt"
 
       copy_license \
         "${SOURCES_FOLDER_PATH}/${BINUTILS_SRC_FOLDER_NAME}" \
@@ -341,8 +341,8 @@ function build_gcc_first()
             --disable-build-format-warnings \
             --with-system-zlib \
 
-          cp "config.log" "${LOGS_FOLDER_PATH}/${gcc_first_folder_name}/config-log.txt"
-        ) 2>&1 | tee "${LOGS_FOLDER_PATH}/${gcc_first_folder_name}/configure-output.txt"
+          cp "config.log" "${LOGS_FOLDER_PATH}/${gcc_first_folder_name}/config-log-$(ndate).txt"
+        ) 2>&1 | tee "${LOGS_FOLDER_PATH}/${gcc_first_folder_name}/configure-output-$(ndate).txt"
       fi
 
       (
@@ -360,7 +360,7 @@ function build_gcc_first()
 
         # Strip?
 
-      ) 2>&1 | tee "${LOGS_FOLDER_PATH}/${gcc_first_folder_name}/make-output.txt"
+      ) 2>&1 | tee "${LOGS_FOLDER_PATH}/${gcc_first_folder_name}/make-output-$(ndate).txt"
     )
 
     touch "${gcc_first_stamp_file_path}"
@@ -503,8 +503,8 @@ function build_newlib()
             exit 1
           fi
 
-          cp "config.log" "${LOGS_FOLDER_PATH}/${newlib_folder_name}/config-log.txt"
-        ) 2>&1 | tee "${LOGS_FOLDER_PATH}/${newlib_folder_name}/configure-output.txt"
+          cp "config.log" "${LOGS_FOLDER_PATH}/${newlib_folder_name}/config-log-$(ndate).txt"
+        ) 2>&1 | tee "${LOGS_FOLDER_PATH}/${newlib_folder_name}/configure-output-$(ndate).txt"
       fi
 
       (
@@ -563,7 +563,7 @@ function build_newlib()
 
         fi
 
-      ) 2>&1 | tee "${LOGS_FOLDER_PATH}/${newlib_folder_name}/make-output.txt"
+      ) 2>&1 | tee "${LOGS_FOLDER_PATH}/${newlib_folder_name}/make-output-$(ndate).txt"
 
       if [ "$1" == "" ]
       then
@@ -851,8 +851,8 @@ function build_gcc_final()
               --with-system-zlib
 
           fi
-          cp "config.log" "${LOGS_FOLDER_PATH}/${gcc_final_folder_name}/config-log.txt"
-        ) 2>&1 | tee "${LOGS_FOLDER_PATH}/${gcc_final_folder_name}/configure-output.txt"
+          cp "config.log" "${LOGS_FOLDER_PATH}/${gcc_final_folder_name}/config-log-$(ndate).txt"
+        ) 2>&1 | tee "${LOGS_FOLDER_PATH}/${gcc_final_folder_name}/configure-output-$(ndate).txt"
       fi
 
       (
@@ -951,7 +951,7 @@ function build_gcc_final()
           )
         fi
 
-      ) 2>&1 | tee "${LOGS_FOLDER_PATH}/${gcc_final_folder_name}/make-output.txt"
+      ) 2>&1 | tee "${LOGS_FOLDER_PATH}/${gcc_final_folder_name}/make-output-$(ndate).txt"
 
       if [ "$1" == "" ]
       then
@@ -1230,8 +1230,8 @@ function build_gdb()
             --without-libunwind-ia64 \
             ${tui_option} \
 
-          cp "config.log" "${LOGS_FOLDER_PATH}/${gdb_folder_name}/config-log.txt"
-        ) 2>&1 | tee "${LOGS_FOLDER_PATH}/${gdb_folder_name}/configure-output.txt"
+          cp "config.log" "${LOGS_FOLDER_PATH}/${gdb_folder_name}/config-log-$(ndate).txt"
+        ) 2>&1 | tee "${LOGS_FOLDER_PATH}/${gdb_folder_name}/configure-output-$(ndate).txt"
       fi
 
       (
@@ -1269,7 +1269,7 @@ function build_gdb()
 
         show_libs "${APP_PREFIX}/bin/${GCC_TARGET}-gdb$1"
 
-      ) 2>&1 | tee "${LOGS_FOLDER_PATH}/${gdb_folder_name}/make-output.txt"
+      ) 2>&1 | tee "${LOGS_FOLDER_PATH}/${gdb_folder_name}/make-output-$(ndate).txt"
 
       if [ "$1" == "" ]
       then
@@ -1411,11 +1411,11 @@ function copy_custom_files()
 
     cd "${SOURCES_FOLDER_PATH}/${GCC_COMBO_FOLDER_NAME}"
 
-    install -v -c -m 644 "readme.txt" \
-      "${APP_PREFIX}/${DISTRO_INFO_NAME}/arm-readme.txt"
+    install -v -c -m 644 "readme-$(ndate).txt" \
+      "${APP_PREFIX}/${DISTRO_INFO_NAME}/arm-readme-$(ndate).txt"
 
-    install -v -c -m 644 "release.txt" \
-      "${APP_PREFIX}/${DISTRO_INFO_NAME}/arm-release.txt"
+    install -v -c -m 644 "release-$(ndate).txt" \
+      "${APP_PREFIX}/${DISTRO_INFO_NAME}/arm-release-$(ndate).txt"
   )
 }
 
