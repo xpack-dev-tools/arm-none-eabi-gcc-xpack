@@ -1411,11 +1411,11 @@ function copy_custom_files()
 
     cd "${SOURCES_FOLDER_PATH}/${GCC_COMBO_FOLDER_NAME}"
 
-    install -v -c -m 644 "readme-$(ndate).txt" \
-      "${APP_PREFIX}/${DISTRO_INFO_NAME}/arm-readme-$(ndate).txt"
+    install -v -c -m 644 "readme.txt" \
+      "${APP_PREFIX}/${DISTRO_INFO_NAME}/arm-readme.txt"
 
-    install -v -c -m 644 "release-$(ndate).txt" \
-      "${APP_PREFIX}/${DISTRO_INFO_NAME}/arm-release-$(ndate).txt"
+    install -v -c -m 644 "release.txt" \
+      "${APP_PREFIX}/${DISTRO_INFO_NAME}/arm-release.txt"
   )
 }
 
