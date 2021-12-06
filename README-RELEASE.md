@@ -323,6 +323,7 @@ If any, refer to closed
 - temporarily fill in the _Continue Reading »_ with the URL of the
   web-preview release
 - keep the pre-release button enabled
+- do not enable Discussions yet
 - publish the release
 
 Note: at this moment the system should send a notification to all clients
