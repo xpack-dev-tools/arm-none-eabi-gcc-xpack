@@ -260,6 +260,12 @@ function build_gcc_first()
       CPPFLAGS="${XBB_CPPFLAGS}"
       CFLAGS="${XBB_CFLAGS_NO_W}"
       CXXFLAGS="${XBB_CXXFLAGS_NO_W}"
+      if [ "${TARGET_PLATFORM}" == "win32" ]
+      then
+        # The CFLAGS are set in XBB_CFLAGS, but for C++ it must be selective.
+        # Without it gcc cannot identify cc1 and other binaries
+        CXXFLAGS+=" -D__USE_MINGW_ACCESS"
+      fi
       LDFLAGS="${XBB_LDFLAGS_APP}"
       if [ "${TARGET_PLATFORM}" == "linux" ]
       then
@@ -707,6 +713,12 @@ function build_gcc_final()
       # fi
       CFLAGS="${XBB_CFLAGS_NO_W}"
       CXXFLAGS="${XBB_CXXFLAGS_NO_W}"
+      if [ "${TARGET_PLATFORM}" == "win32" ]
+      then
+        # The CFLAGS are set in XBB_CFLAGS, but for C++ it must be selective.
+        # Without it gcc cannot identify cc1 and other binaries
+        CXXFLAGS+=" -D__USE_MINGW_ACCESS"
+      fi
 
       LDFLAGS="${XBB_LDFLAGS_APP}"
       if [ "${TARGET_PLATFORM}" == "linux" ]
