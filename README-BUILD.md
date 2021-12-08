@@ -73,7 +73,7 @@ rm -rf ~/Downloads/arm-none-eabi-gcc-xpack.git; \
 git clone \
   https://github.com/xpack-dev-tools/arm-none-eabi-gcc-xpack.git \
   ~/Downloads/arm-none-eabi-gcc-xpack.git; \
-git -C ~/Downloads/arm-none-eabi-gcc-xpack.git submodule update --init --recursive 
+git -C ~/Downloads/arm-none-eabi-gcc-xpack.git submodule update --init --recursive
 ```
 
 > Note: the repository uses submodules; for a successful build it is
@@ -324,14 +324,14 @@ To build the latest macOS version:
 screen -S arm
 
 sudo rm -rf ~/Work/arm-none-eabi-gcc-*
-caffeinate bash ~/Downloads/arm-none-eabi-gcc-xpack.git/scripts/helper/build.sh --develop  --disable-multilib --osx
+caffeinate bash ~/Downloads/arm-none-eabi-gcc-xpack.git/scripts/helper/build.sh --develop  --disable-multilib --macos
 ```
 
 or, for development builds:
 
 ```sh
 sudo rm -rf ~/Work/arm-none-eabi-gcc-*
-caffeinate bash ~/Downloads/arm-none-eabi-gcc-xpack.git/scripts/helper/build.sh --develop --without-pdf --disable-tests --disable-multilib --osx
+caffeinate bash ~/Downloads/arm-none-eabi-gcc-xpack.git/scripts/helper/build.sh --develop --without-pdf --disable-tests --disable-multilib --macos
 ```
 
 To detach from the session, use `Ctrl-a` `Ctrl-d`; to reattach use

@@ -93,7 +93,7 @@ or the production machine (`xbbm`):
 ```sh
 sudo rm -rf ~/Work/arm-none-eabi-gcc-*
 
-caffeinate bash ~/Downloads/arm-none-eabi-gcc-xpack.git/scripts/helper/build.sh --develop --disable-multilib --osx
+caffeinate bash ~/Downloads/arm-none-eabi-gcc-xpack.git/scripts/helper/build.sh --develop --disable-multilib --macos
 ```
 
 Similarly on the Intel Linux (`xbbi`):
