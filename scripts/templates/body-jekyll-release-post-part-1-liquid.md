@@ -1,5 +1,5 @@
 ---
-title:  xPack Arm Embedded GCC {{ RELEASE_VERSION }} released
+title:  xPack Arm Embedded GCC v{{ RELEASE_VERSION }} released
 
 TODO: select one summary
 
