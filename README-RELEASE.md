@@ -100,10 +100,8 @@ Similarly on the Intel Linux (`xbbli`):
 
 ```sh
 bash ~/Downloads/arm-none-eabi-gcc-xpack.git/scripts/helper/build.sh --develop --disable-multilib --linux64
-bash ~/Downloads/arm-none-eabi-gcc-xpack.git/scripts/helper/build.sh --develop --disable-multilib --linux32
 
 bash ~/Downloads/arm-none-eabi-gcc-xpack.git/scripts/helper/build.sh --develop --disable-multilib --win64
-bash ~/Downloads/arm-none-eabi-gcc-xpack.git/scripts/helper/build.sh --develop --disable-multilib --win32
 ```
 
 And on the Arm Linux (`xbbla`):

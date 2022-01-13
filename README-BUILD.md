@@ -176,9 +176,8 @@ The result should look similar to:
 
 ```console
 $ docker images
-REPOSITORY          TAG                    IMAGE ID            CREATED             SIZE
-ilegeul/ubuntu      i386-12.04-xbb-v3.3    35fb0236572c        23 hours ago        5GB
-ilegeul/ubuntu      amd64-12.04-xbb-v3.3   1c4ba2e7e87e        29 hours ago        5.43GB
+REPOSITORY       TAG                    IMAGE ID       CREATED         SIZE
+ilegeul/ubuntu   amd64-18.04-xbb-v3.4   ace5ae2e98e5   4 weeks ago     5.11GB
 ```
 
 It is also recommended to Remove unused Docker space. This is mostly useful
@@ -188,7 +187,7 @@ by Docker.
 To check the content of a Docker image:
 
 ```sh
-docker run --interactive --tty ilegeul/ubuntu:amd64-12.04-xbb-v3.3
+docker run --interactive --tty ilegeul/ubuntu:amd64-18.04-xbb-v3.4
 ```
 
 To remove unused files:
@@ -212,7 +211,7 @@ or, for development builds:
 
 ```sh
 sudo rm -rf ~/Work/arm-none-eabi-gcc-*
-bash ~/Downloads/arm-none-eabi-gcc-xpack.git/scripts/helper/build.sh --develop --without-pdf --disable-tests --disable-multilib --linux64 --linux32 --win64 --win32
+bash ~/Downloads/arm-none-eabi-gcc-xpack.git/scripts/helper/build.sh --develop --without-pdf --disable-tests --disable-multilib --linux64 --win64
 ```
 
 When ready, run the build on the production machine (`xbbli`):
@@ -226,12 +225,8 @@ their SHA signatures, created in the `deploy` folder:
 ```console
 $ ls -l ~/Work/arm-none-eabi-gcc-*/deploy
 total 682464
--rw-rw-r-- 1 ilg ilg 172441920 Oct 23 00:45 xpack-arm-none-eabi-gcc-10.3.1-2.3-linux-x32.tar.gz
--rw-rw-r-- 1 ilg ilg       117 Oct 23 00:45 xpack-arm-none-eabi-gcc-10.3.1-2.3-linux-x32.tar.gz.sha
 -rw-rw-r-- 1 ilg ilg 169389142 Oct 22 22:17 xpack-arm-none-eabi-gcc-10.3.1-2.3-linux-x64.tar.gz
 -rw-rw-r-- 1 ilg ilg       117 Oct 22 22:17 xpack-arm-none-eabi-gcc-10.3.1-2.3-linux-x64.tar.gz.sha
--rw-rw-r-- 1 ilg ilg 172415284 Oct 23 01:35 xpack-arm-none-eabi-gcc-10.3.1-2.3-win32-x32.zip
--rw-rw-r-- 1 ilg ilg       114 Oct 23 01:35 xpack-arm-none-eabi-gcc-10.3.1-2.3-win32-x32.zip.sha
 -rw-rw-r-- 1 ilg ilg 184570818 Oct 22 23:04 xpack-arm-none-eabi-gcc-10.3.1-2.3-win32-x64.zip
 -rw-rw-r-- 1 ilg ilg       114 Oct 22 23:04 xpack-arm-none-eabi-gcc-10.3.1-2.3-win32-x64.zip.sha
 ```
@@ -359,20 +354,18 @@ total 321872
 Instead of `--all`, you can use any combination of:
 
 ```console
---win32 --win64
---linux32 --linux64
+--linux64 --win64
 ```
 
-On Arm, instead of `--all`, you can use:
+On Arm, instead of `--all`, you can use any combination of:
 
 ```console
 --arm32 --arm64
 ```
 
 Please note that, due to the specifics of the GCC build process, the
-Windows build requires the corresponding GNU/Linux build, so `--win32`
-should be run after or together with `--linux32` and `--win64` after
-or together with `--linux64`.
+Windows build requires the corresponding GNU/Linux build, so `--win64`
+should be run after or together with `--linux64`.
 
 ### clean
 
