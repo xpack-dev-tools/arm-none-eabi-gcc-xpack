@@ -9,12 +9,12 @@ The binaries can be available from one of the pre-releases:
 The test script is part of the Arm Embedded GCC xPack:
 
 ```sh
-rm -rf  ~/Downloads/arm-none-eabi-gcc-xpack.git; \
+rm -rf  ${HOME}/Work/arm-none-eabi-gcc-xpack.git; \
 git clone \
   --branch xpack-develop \
   https://github.com/xpack-dev-tools/arm-none-eabi-gcc-xpack.git  \
-   ~/Downloads/arm-none-eabi-gcc-xpack.git; \
-git -C ~/Downloads/arm-none-eabi-gcc-xpack.git submodule update --init --recursive
+   ${HOME}/Work/arm-none-eabi-gcc-xpack.git; \
+git -C ${HOME}/Work/arm-none-eabi-gcc-xpack.git submodule update --init --recursive
 ```
 
 ## Start a local test
@@ -22,7 +22,7 @@ git -C ~/Downloads/arm-none-eabi-gcc-xpack.git submodule update --init --recursi
 To check if Arm Embedded GCC starts on the current platform, run a native test:
 
 ```sh
-bash ~/Downloads/arm-none-eabi-gcc-xpack.git/scripts/helper/tests/native-test.sh \
+bash ${HOME}/Work/arm-none-eabi-gcc-xpack.git/scripts/helper/tests/native-test.sh \
   --base-url "https://github.com/xpack-dev-tools/pre-releases/releases/download/test/"
 ```
 
@@ -41,15 +41,15 @@ The multi-platform tests run on GitHub Actions; they do not fire on
 git commits, but only via a manual POST to the GitHub API.
 
 ```sh
-bash ~/Downloads/arm-none-eabi-gcc-xpack.git/scripts/tests/trigger-workflow-test-native.sh \
+bash ${HOME}/Work/arm-none-eabi-gcc-xpack.git/scripts/tests/trigger-workflow-test-native.sh \
   --branch xpack-develop \
   --base-url "https://github.com/xpack-dev-tools/pre-releases/releases/download/test/"
 
-bash ~/Downloads/arm-none-eabi-gcc-xpack.git/scripts/tests/trigger-workflow-test-docker-linux-intel.sh \
+bash ${HOME}/Work/arm-none-eabi-gcc-xpack.git/scripts/tests/trigger-workflow-test-docker-linux-intel.sh \
   --branch xpack-develop \
   --base-url "https://github.com/xpack-dev-tools/pre-releases/releases/download/test/"
 
-bash ~/Downloads/arm-none-eabi-gcc-xpack.git/scripts/tests/trigger-workflow-test-docker-linux-arm.sh \
+bash ${HOME}/Work/arm-none-eabi-gcc-xpack.git/scripts/tests/trigger-workflow-test-docker-linux-arm.sh \
   --branch xpack-develop \
   --base-url "https://github.com/xpack-dev-tools/pre-releases/releases/download/test/"
 

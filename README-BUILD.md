@@ -69,11 +69,11 @@ Git repo.
 To download them, issue the following commands:
 
 ```sh
-rm -rf ~/Downloads/arm-none-eabi-gcc-xpack.git; \
+rm -rf ${HOME}/Work/arm-none-eabi-gcc-xpack.git; \
 git clone \
   https://github.com/xpack-dev-tools/arm-none-eabi-gcc-xpack.git \
-  ~/Downloads/arm-none-eabi-gcc-xpack.git; \
-git -C ~/Downloads/arm-none-eabi-gcc-xpack.git submodule update --init --recursive
+  ${HOME}/Work/arm-none-eabi-gcc-xpack.git; \
+git -C ${HOME}/Work/arm-none-eabi-gcc-xpack.git submodule update --init --recursive
 ```
 
 > Note: the repository uses submodules; for a successful build it is
@@ -83,12 +83,12 @@ For development purposes, clone the `xpack-develop`
 branch:
 
 ```sh
-rm -rf ~/Downloads/arm-none-eabi-gcc-xpack.git; \
+rm -rf ${HOME}/Work/arm-none-eabi-gcc-xpack.git; \
 git clone \
   --branch xpack-develop \
   https://github.com/xpack-dev-tools/arm-none-eabi-gcc-xpack.git \
-  ~/Downloads/arm-none-eabi-gcc-xpack.git; \
-git -C ~/Downloads/arm-none-eabi-gcc-xpack.git submodule update --init --recursive
+  ${HOME}/Work/arm-none-eabi-gcc-xpack.git; \
+git -C ${HOME}/Work/arm-none-eabi-gcc-xpack.git submodule update --init --recursive
 ```
 
 ## The `Work` folder
@@ -169,7 +169,7 @@ Before running a build for the first time, it is recommended to preload the
 docker images.
 
 ```sh
-bash ~/Downloads/arm-none-eabi-gcc-xpack.git/scripts/helper/build.sh preload-images
+bash ${HOME}/Work/arm-none-eabi-gcc-xpack.git/scripts/helper/build.sh preload-images
 ```
 
 The result should look similar to:
@@ -204,14 +204,14 @@ network connection or a computer entering sleep.
 screen -S arm
 
 sudo rm -rf ~/Work/arm-none-eabi-gcc-*
-bash ~/Downloads/arm-none-eabi-gcc-xpack.git/scripts/helper/build.sh --develop --disable-multilib --all
+bash ${HOME}/Work/arm-none-eabi-gcc-xpack.git/scripts/helper/build.sh --develop --disable-multilib --all
 ```
 
 or, for development builds:
 
 ```sh
 sudo rm -rf ~/Work/arm-none-eabi-gcc-*
-bash ~/Downloads/arm-none-eabi-gcc-xpack.git/scripts/helper/build.sh --develop --without-pdf --disable-tests --disable-multilib --linux64 --win64
+bash ${HOME}/Work/arm-none-eabi-gcc-xpack.git/scripts/helper/build.sh --develop --without-pdf --disable-tests --disable-multilib --linux64 --win64
 ```
 
 When ready, run the build on the production machine (`xbbli`):
@@ -256,7 +256,7 @@ Before running a build for the first time, it is recommended to preload the
 docker images.
 
 ```sh
-bash ~/Downloads/arm-none-eabi-gcc-xpack.git/scripts/helper/build.sh preload-images
+bash ${HOME}/Work/arm-none-eabi-gcc-xpack.git/scripts/helper/build.sh preload-images
 ```
 
 The result should look similar to:
@@ -276,7 +276,7 @@ network connection or a computer entering sleep.
 screen -S arm
 
 sudo rm -rf ~/Work/arm-none-eabi-gcc-*
-bash ~/Downloads/arm-none-eabi-gcc-xpack.git/scripts/helper/build.sh --develop --disable-multilib --all
+bash ${HOME}/Work/arm-none-eabi-gcc-xpack.git/scripts/helper/build.sh --develop --disable-multilib --all
 ```
 
 or, for development builds:
@@ -285,7 +285,7 @@ or, for development builds:
 screen -S arm
 
 sudo rm -rf ~/Work/arm-none-eabi-gcc-*
-bash ~/Downloads/arm-none-eabi-gcc-xpack.git/scripts/helper/build.sh --develop --without-pdf --disable-tests --disable-multilib --arm32 --arm64
+bash ${HOME}/Work/arm-none-eabi-gcc-xpack.git/scripts/helper/build.sh --develop --without-pdf --disable-tests --disable-multilib --arm32 --arm64
 ```
 
 To detach from the session, use `Ctrl-a` `Ctrl-d`; to reattach use
@@ -324,14 +324,14 @@ To build the latest macOS version:
 screen -S arm
 
 sudo rm -rf ~/Work/arm-none-eabi-gcc-*
-caffeinate bash ~/Downloads/arm-none-eabi-gcc-xpack.git/scripts/helper/build.sh --develop  --disable-multilib --macos
+caffeinate bash ${HOME}/Work/arm-none-eabi-gcc-xpack.git/scripts/helper/build.sh --develop  --disable-multilib --macos
 ```
 
 or, for development builds:
 
 ```sh
 sudo rm -rf ~/Work/arm-none-eabi-gcc-*
-caffeinate bash ~/Downloads/arm-none-eabi-gcc-xpack.git/scripts/helper/build.sh --develop --without-pdf --disable-tests --disable-multilib --macos
+caffeinate bash ${HOME}/Work/arm-none-eabi-gcc-xpack.git/scripts/helper/build.sh --develop --without-pdf --disable-tests --disable-multilib --macos
 ```
 
 To detach from the session, use `Ctrl-a` `Ctrl-d`; to reattach use
@@ -372,13 +372,13 @@ should be run after or together with `--linux64`.
 To remove most build files, use:
 
 ```sh
-bash ~/Downloads/arm-none-eabi-gcc-xpack.git/scripts/helper/build.sh clean
+bash ${HOME}/Work/arm-none-eabi-gcc-xpack.git/scripts/helper/build.sh clean
 ```
 
 To also remove the repository and the output files, use:
 
 ```sh
-bash ~/Downloads/arm-none-eabi-gcc-xpack.git/scripts/helper/build.sh cleanall
+bash ${HOME}/Work/arm-none-eabi-gcc-xpack.git/scripts/helper/build.sh cleanall
 ```
 
 For production builds it is recommended to completely remove the build folder.
