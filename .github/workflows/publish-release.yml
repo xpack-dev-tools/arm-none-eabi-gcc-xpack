@@ -54,10 +54,11 @@ jobs:
           allowUpdates: true
           artifacts: '~/Work/arm-none-eabi-gcc-${{ github.event.inputs.version }}/deploy/*'
           bodyFile: '.github/workflows/body-github-release.md'
-          commit: 'master'
+          commit: 'xpack-develop'
           draft: true
           name: 'xPack GNU Arm Embedded GCC v${{ github.event.inputs.version }}'
           omitBodyDuringUpdate: true
+          omitDraftDuringUpdate: true
           omitNameDuringUpdate: true
           owner: 'xpack-dev-tools'
           prerelease: true
@@ -70,9 +71,9 @@ jobs:
 
 
 
-  linux-arm64:
-    name: 'Linux Arm - GNU Arm Embedded GCC ${{ github.event.inputs.version }} publish release'
-    runs-on: [self-hosted, linux, arm64]
+  linux-arm:
+    name: 'Linux Arm 32 - GNU Arm Embedded GCC ${{ github.event.inputs.version }} publish release'
+    runs-on: [self-hosted, linux, arm, xbbla32]
     steps:
       - name: 'Machine'
         run: uname -a
@@ -93,10 +94,51 @@ jobs:
           allowUpdates: true
           artifacts: '~/Work/arm-none-eabi-gcc-${{ github.event.inputs.version }}/deploy/*'
           bodyFile: '.github/workflows/body-github-release.md'
-          commit: 'master'
+          commit: 'xpack-develop'
           draft: true
           name: 'xPack GNU Arm Embedded GCC v${{ github.event.inputs.version }}'
           omitBodyDuringUpdate: true
+          omitDraftDuringUpdate: true
+          omitNameDuringUpdate: true
+          owner: 'xpack-dev-tools'
+          prerelease: true
+          replacesArtifacts: true
+          repo: 'arm-none-eabi-gcc-xpack'
+          tag: 'v${{ github.event.inputs.version }}'
+          token: ${{ secrets.PUBLISH_TOKEN }}
+      - name: 'Show SHA'
+        run: cat ~/Work/arm-none-eabi-gcc-${{ github.event.inputs.version }}/deploy/*.sha
+
+
+
+  linux-arm64:
+    name: 'Linux Arm 64 - GNU Arm Embedded GCC ${{ github.event.inputs.version }} publish release'
+    runs-on: [self-hosted, linux, arm64, xbbla64]
+    steps:
+      - name: 'Machine'
+        run: uname -a
+      - name: 'Checkout'
+        uses: actions/checkout@v2
+        with:
+          fetch-depth: 3
+          submodules: true
+      - name: 'Create body'
+        run: |
+          npm install
+          cat scripts/templates/body-github-release-liquid.md | npm run liquidjs --silent -- '{ "RELEASE_VERSION": "${{ github.event.inputs.version }}" }' >.github/workflows/body-github-release.md
+          cat .github/workflows/body-github-release.md
+      - name: 'Publish release'
+        # https://github.com/ncipollo/release-action
+        uses: ncipollo/release-action@v1
+        with:
+          allowUpdates: true
+          artifacts: '~/Work/arm-none-eabi-gcc-${{ github.event.inputs.version }}/deploy/*'
+          bodyFile: '.github/workflows/body-github-release.md'
+          commit: 'xpack-develop'
+          draft: true
+          name: 'xPack GNU Arm Embedded GCC v${{ github.event.inputs.version }}'
+          omitBodyDuringUpdate: true
+          omitDraftDuringUpdate: true
           omitNameDuringUpdate: true
           owner: 'xpack-dev-tools'
           prerelease: true
@@ -111,7 +153,9 @@ jobs:
 
   macos-x64:
     name: 'macOS Intel - GNU Arm Embedded GCC ${{ github.event.inputs.version }} publish release'
+
     runs-on: [self-hosted, macos, intel]
+
     steps:
       - name: 'Machine'
         run: uname -a
@@ -132,10 +176,11 @@ jobs:
           allowUpdates: true
           artifacts: '~/Work/arm-none-eabi-gcc-${{ github.event.inputs.version }}/deploy/*'
           bodyFile: '.github/workflows/body-github-release.md'
-          commit: 'master'
+          commit: 'xpack-develop'
           draft: true
           name: 'xPack GNU Arm Embedded GCC v${{ github.event.inputs.version }}'
           omitBodyDuringUpdate: true
+          omitDraftDuringUpdate: true
           omitNameDuringUpdate: true
           owner: 'xpack-dev-tools'
           prerelease: true
@@ -150,7 +195,9 @@ jobs:
 
   macos-arm64:
     name: 'macOS Arm - GNU Arm Embedded GCC ${{ github.event.inputs.version }} publish release'
+
     runs-on: [self-hosted, macos, apple]
+
     defaults:
       run:
         shell: "/usr/bin/arch -arch arm64e /bin/bash -l {0}"
@@ -176,10 +223,11 @@ jobs:
           allowUpdates: true
           artifacts: '~/Work/arm-none-eabi-gcc-${{ github.event.inputs.version }}/deploy/*'
           bodyFile: '.github/workflows/body-github-release.md'
-          commit: 'master'
+          commit: 'xpack-develop'
           draft: true
           name: 'xPack GNU Arm Embedded GCC v${{ github.event.inputs.version }}'
           omitBodyDuringUpdate: true
+          omitDraftDuringUpdate: true
           omitNameDuringUpdate: true
           owner: 'xpack-dev-tools'
           prerelease: true
