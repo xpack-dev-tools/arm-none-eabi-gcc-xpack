@@ -104,10 +104,15 @@ bash ${HOME}/Work/arm-none-eabi-gcc-xpack.git/scripts/helper/build.sh --develop 
 bash ${HOME}/Work/arm-none-eabi-gcc-xpack.git/scripts/helper/build.sh --develop --disable-multilib --win64
 ```
 
-And on the Arm Linux (`xbbla`):
+... the Arm Linux 64-bit (`xbbla64`):
 
 ```sh
 bash ${HOME}/Work/arm-none-eabi-gcc-xpack.git/scripts/helper/build.sh --develop --disable-multilib --arm64
+```
+
+... and on the Arm Linux 32-bit (`xbbla32`):
+
+```sh
 bash ${HOME}/Work/arm-none-eabi-gcc-xpack.git/scripts/helper/build.sh --develop --disable-multilib --arm32
 ```
 
@@ -135,13 +140,14 @@ and, when ready, rerun the full build.
 Run the `generate-workflows` to re-generate the
 GitHub workflow files; commit and push if necessary.
 
-- on the macOS machine (`xbbmi`) open ssh sessions to both Linux
-machines (`xbbli` and `xbbla`):
+- on the macOS machine (`xbbmi`) open ssh sessions to the Linux
+machines (`xbbli`, `xbbla64` and `xbbla32`):
 
 ```sh
 caffeinate ssh xbbli
 
-caffeinate ssh xbbla
+caffeinate ssh xbbla64
+caffeinate ssh xbbla32
 ```
 
 Start the runner on all three machines:
@@ -155,7 +161,8 @@ Check that both the project Git and the submodule are pushed to GitHub.
 To trigger the GitHub Actions build, use the xPack actions:
 
 - `trigger-workflow-build-xbbli`
-- `trigger-workflow-build-xbbla`
+- `trigger-workflow-build-xbbla64`
+- `trigger-workflow-build-xbbla32`
 - `trigger-workflow-build-xbbmi`
 - `trigger-workflow-build-xbbma`
 
@@ -163,7 +170,8 @@ This is equivalent to:
 
 ```sh
 bash ${HOME}/Work/arm-none-eabi-gcc-xpack.git/scripts/helper/trigger-workflow-build.sh --machine xbbli
-bash ${HOME}/Work/arm-none-eabi-gcc-xpack.git/scripts/helper/trigger-workflow-build.sh --machine xbbla
+bash ${HOME}/Work/arm-none-eabi-gcc-xpack.git/scripts/helper/trigger-workflow-build.sh --machine xbbla64
+bash ${HOME}/Work/arm-none-eabi-gcc-xpack.git/scripts/helper/trigger-workflow-build.sh --machine xbbla32
 bash ${HOME}/Work/arm-none-eabi-gcc-xpack.git/scripts/helper/trigger-workflow-build.sh --machine xbbmi
 bash ${HOME}/Work/arm-none-eabi-gcc-xpack.git/scripts/helper/trigger-workflow-build.sh --machine xbbma
 ```
