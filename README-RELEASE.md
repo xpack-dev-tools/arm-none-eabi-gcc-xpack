@@ -91,7 +91,7 @@ Before the real build, run a test build on the development machine (`wks`)
 or the production machines (`xbbma`, `xbbmi`):
 
 ```sh
-sudo rm -rf ~/Work/arm-none-eabi-gcc-*
+sudo rm -rf ~/Work/arm-none-eabi-gcc-*-*
 
 caffeinate bash ${HOME}/Work/arm-none-eabi-gcc-xpack.git/scripts/helper/build.sh --develop --disable-multilib --macos
 ```

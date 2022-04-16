@@ -203,14 +203,14 @@ network connection or a computer entering sleep.
 ```sh
 screen -S arm
 
-sudo rm -rf ~/Work/arm-none-eabi-gcc-*
+sudo rm -rf ~/Work/arm-none-eabi-gcc-*-*
 bash ${HOME}/Work/arm-none-eabi-gcc-xpack.git/scripts/helper/build.sh --develop --disable-multilib --all
 ```
 
 or, for development builds:
 
 ```sh
-sudo rm -rf ~/Work/arm-none-eabi-gcc-*
+sudo rm -rf ~/Work/arm-none-eabi-gcc-*-*
 bash ${HOME}/Work/arm-none-eabi-gcc-xpack.git/scripts/helper/build.sh --develop --without-pdf --disable-tests --disable-multilib --linux64 --win64
 ```
 
@@ -276,7 +276,7 @@ network connection or a computer entering sleep.
 ```sh
 screen -S arm
 
-sudo rm -rf ~/Work/arm-none-eabi-gcc-*
+sudo rm -rf ~/Work/arm-none-eabi-gcc-*-*
 bash ${HOME}/Work/arm-none-eabi-gcc-xpack.git/scripts/helper/build.sh --develop --disable-multilib --all
 ```
 
@@ -285,7 +285,7 @@ or, for development builds:
 ```sh
 screen -S arm
 
-sudo rm -rf ~/Work/arm-none-eabi-gcc-*
+sudo rm -rf ~/Work/arm-none-eabi-gcc-*-*
 bash ${HOME}/Work/arm-none-eabi-gcc-xpack.git/scripts/helper/build.sh --develop --without-pdf --disable-tests --disable-multilib --arm32 --arm64
 ```
 
@@ -324,14 +324,14 @@ To build the latest macOS version:
 ```sh
 screen -S arm
 
-sudo rm -rf ~/Work/arm-none-eabi-gcc-*
+sudo rm -rf ~/Work/arm-none-eabi-gcc-*-*
 caffeinate bash ${HOME}/Work/arm-none-eabi-gcc-xpack.git/scripts/helper/build.sh --develop  --disable-multilib --macos
 ```
 
 or, for development builds:
 
 ```sh
-sudo rm -rf ~/Work/arm-none-eabi-gcc-*
+sudo rm -rf ~/Work/arm-none-eabi-gcc-*-*
 caffeinate bash ${HOME}/Work/arm-none-eabi-gcc-xpack.git/scripts/helper/build.sh --develop --without-pdf --disable-tests --disable-multilib --macos
 ```
 
