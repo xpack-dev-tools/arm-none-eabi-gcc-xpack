@@ -22,7 +22,7 @@ The binaries can be installed automatically as **binary xPacks** or manually as
 ## Release schedule
 
 This distribution plans to follow the official
-[GNU Arm Embedded Toolchain](https://developer.arm.com/tools-and-software/open-source-software/developer-tools/gnu-toolchain/gnu-rm/downloads/)
+[Arm GNU Toolchain](https://developer.arm.com/tools-and-software/open-source-software/developer-tools/gnu-toolchain/downloads-1/)
 distribution, by Arm.
 
 ## User info
@@ -118,17 +118,17 @@ For more details please read the
 ### Versioning
 
 The version strings used by the GCC project are three number string
-like `10.3.1`; to this string the xPack distribution adds a four number,
+like `11.2.1`; to this string the xPack distribution adds a four number,
 as the Arm version,
 but since semver allows only three numbers, all additional ones can
 be added only as pre-release strings, separated by a dash,
-like `10.3.1-2.3`. The fifth number is the xPack release.
+like `11.2.1-1.1`. The fifth number is the xPack release.
 When published as a npm package, the version gets
-a sixth number, like `10.3.1-2.3.1`.
+a sixth number, like `11.2.1-1.1.1`.
 
-Since adherance of third party packages to semver is not guaranteed,
-it is recommended to use semver expressions like `^10.3.1` and `~10.3.1`
-with caution, and prefer exact matches, like `10.3.1-2.3.1`.
+Since adherence of third party packages to semver is not guaranteed,
+it is recommended to use semver expressions like `^11.2.1` and `~11.2.1`
+with caution, and prefer exact matches, like `11.2.1-1.1.1`.
 
 ## Maintainer info
 

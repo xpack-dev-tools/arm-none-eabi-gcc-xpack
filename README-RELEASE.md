@@ -3,7 +3,7 @@
 ## Release schedule
 
 The xPack GNU Arm Embedded GCC release schedule generally follows the
-[GNU Arm Embedded Toolchain](https://developer.arm.com/tools-and-software/open-source-software/developer-tools/gnu-toolchain/gnu-rm/downloads)
+[Arm GNU Toolchain](https://developer.arm.com/tools-and-software/open-source-software/developer-tools/gnu-toolchain/downloads-1/)
 release schedule, which is about two releases per year.
 
 ## Prepare the build
@@ -21,24 +21,15 @@ No need to add a tag here, it'll be added when the release is created.
 
 ### Update to latest Arm release
 
-- download the new _Source Invariant_ archive from
-  [Arm](https://developer.arm.com/open-source/gnu-toolchain/gnu-rm)
-- clone the `arm-gcc-original-scripts.git` repo
-- remove all files except README.md, from the repo
-- copy/paste all files, except the PDF, from the new archive
-- commit with a message like **10.3-2021.10**; also add a tag;
-- check differences from the previous version;
-- determine the GCC version (like `10.3.1`) and update the `scripts/VERSION`
-  file; the format is `10.3.1-2.3`;
-- add a new set of definitions in the `scripts/common-versions-source.sh`,
-  with the versions of various components;
-- if newer libraries are used, check if they are available from the local git
-  cache project.
+Download the new _Source code_ archive (like
+`gcc-arm-src-snapshot-11.2-2022.02.tar.xz` from
+[Arm](https://developer.arm.com/tools-and-software/open-source-software/developer-tools/gnu-toolchain/downloads-1)
 
 ### Increase the version
 
-Determine the GCC version (like `10.3.1`) and update the `scripts/VERSION`
-file; the format is `10.3.1-2.3`. The fourth number is the Arm release
+From `gcc/BASE-VER`, determine the GCC version (like `11.2.1`)
+and update the `scripts/VERSION`
+file; the format is `11.2.1-1.1`. The fourth number is the Arm release
 number and the fifth is the xPack release number
 of this version. A sixth number will be added when publishing
 the package on the `npm` server.
@@ -49,7 +40,7 @@ Check GitHub issues and pull requests:
 
 - <https://github.com/xpack-dev-tools/arm-none-eabi-gcc-xpack/issues/>
 
-and fix them; assign them to a milestone (like `10.3.1-2.3`).
+and fix them; assign them to a milestone (like `11.2.1-1.1`).
 
 ### Check `README.md`
 
@@ -59,6 +50,9 @@ but in the version specific release page.
 
 ### Update versions in `README` files
 
+Update both full 5 numbers (`11.2.1-1.1`) and short 3 numbers (`11.2.1`)
+versions in:
+
 - update version in `README-RELEASE.md`
 - update version in `README-BUILD.md`
 - update version in `README.md`
@@ -67,8 +61,8 @@ but in the version specific release page.
 
 - open the `CHANGELOG.md` file
 - check if all previous fixed issues are in
-- add a new entry like _- v10.3.1-2.3 prepared_
-- commit with a message like _prepare v10.3.1-2.3_
+- add a new entry like _- v11.2.1-1.1 prepared_
+- commit with a message like _prepare v11.2.1-1.1_
 
 Note: if you missed to update the `CHANGELOG.md` before starting the build,
 edit the file and rerun the build, it should take only a few minutes to
@@ -290,14 +284,14 @@ git -C ${HOME}/Work/arm-none-eabi-gcc-xpack.git submodule update --init --recurs
 
 ## Create a new GitHub pre-release draft
 
-- in `CHANGELOG.md`, add the release date and a message like _- v10.3.1-2.3 released_
+- in `CHANGELOG.md`, add the release date and a message like _- v11.2.1-1.1 released_
 - commit and push the `xpack-develop` branch
 - run the xPack action `trigger-workflow-publish-release`
 
 The result is a
 [draft pre-release](https://github.com/xpack-dev-tools/arm-none-eabi-gcc-xpack/releases/)
-tagged like **v10.3.1-2.3** (mind the dash in the middle!) and
-named like **xPack GNU Arm Embedded GCC v10.3.1-2.3** (mind the dash),
+tagged like **v11.2.1-1.1** (mind the dash in the middle!) and
+named like **xPack GNU Arm Embedded GCC v11.2.1-1.1** (mind the dash),
 with all binaries attached.
 
 - edit the draft and attach it to the `xpack-develop` branch (important!)
@@ -319,7 +313,7 @@ If any, refer to closed
 ## Update the preview Web
 
 - commit the `develop` branch of `xpack/web-jekyll` GitHub repo;
-  use a message like **xPack GNU Arm Embedded GCC v10.3.1-2.3 released**
+  use a message like **xPack GNU Arm Embedded GCC v11.2.1-1.1 released**
 - push to GitHub
 - wait for the GitHub Pages build to complete
 - the preview web is <https://xpack.github.io/web-preview/news/>
@@ -337,6 +331,12 @@ If any, refer to closed
 Note: at this moment the system should send a notification to all clients
 watching this project.
 
+## Update the README listings and examples
+
+- check and possibly update the `ls -l`
+- check and possibly update the output of the `--version` runs
+- commit changes
+
 ## Update package.json binaries
 
 - select the `xpack-develop` branch
@@ -348,18 +348,18 @@ watching this project.
 - compare the SHA sums with those shown by `cat *.sha`
 - check the executable names
 - commit all changes, use a message like
-  `package.json: update urls for 10.3.1-2.3 release` (without `v`)
+  `package.json: update urls for 11.2.1-1.1 release` (without `v`)
 
 ## Publish on the npmjs.com server
 
 - select the `xpack-develop` branch
 - check the latest commits `npm run git-log`
-- update `CHANGELOG.md`, add a line like _- v10.3.1-2.3.1 published on npmjs.com_
-- commit with a message like _CHANGELOG: publish npm v10.3.1-2.3.1_
+- update `CHANGELOG.md`, add a line like _- v11.2.1-1.1.1 published on npmjs.com_
+- commit with a message like _CHANGELOG: publish npm v11.2.1-1.1.1_
 - `npm pack` and check the content of the archive, which should list
   only the `package.json`, the `README.md`, `LICENSE` and `CHANGELOG.md`;
   possibly adjust `.npmignore`
-- `npm version 10.3.1-2.3.1`; the first 5 numbers are the same as the
+- `npm version 11.2.1-1.1.1`; the first 5 numbers are the same as the
   GitHub release; the sixth number is the npm specific version
 - the commits and the tag should have beed pushed by the `postversion` script;
   if not, push them with `git push origin --tags`
@@ -388,12 +388,12 @@ The tests results are available from the
 When the release is considered stable, promote it as `latest`:
 
 - `npm dist-tag ls @xpack-dev-tools/arm-none-eabi-gcc`
-- `npm dist-tag add @xpack-dev-tools/arm-none-eabi-gcc@10.3.1-2.3.1 latest`
+- `npm dist-tag add @xpack-dev-tools/arm-none-eabi-gcc@11.2.1-1.1.1 latest`
 - `npm dist-tag ls @xpack-dev-tools/arm-none-eabi-gcc`
 
 In case the previous version is not functional and needs to be unpublished:
 
-- `npm unpublish @xpack-dev-tools/arm-none-eabi-gcc@10.3.1-2.3.X`
+- `npm unpublish @xpack-dev-tools/arm-none-eabi-gcc@11.2.1-1.1.X`
 
 ## Update the Web
 
@@ -415,7 +415,7 @@ In case the previous version is not functional and needs to be unpublished:
 
 - in a separate browser windows, open [TweetDeck](https://tweetdeck.twitter.com/)
 - using the `@xpack_project` account
-- paste the release name like **xPack GNU Arm Embedded GCC v10.3.1-2.3 released**
+- paste the release name like **xPack GNU Arm Embedded GCC v11.2.1-1.1 released**
 - paste the link to the Web page
   [release](https://xpack.github.io/arm-none-eabi-gcc/releases/)
 - click the **Tweet** button
@@ -433,5 +433,5 @@ Add a new topic in the **Compilers and Libraries** forum of the
 - title: copy release title
 - content:
   - The **xPack GNU Arm Embedded GCC** is an alternate binary distribution that complements the official GNU Arm Embedded Toolchain maintained by Arm.
-  - The latest release is [10.3.1-2.3]() following Arm release from October 21, 2021 (version 10.3-2021.10).
+  - The latest release is [11.2.1-1.1]() following Arm release from October 21, 2021 (version 10.3-2021.10).
 - tags: xpack, gnu, gcc, arm, toolchain

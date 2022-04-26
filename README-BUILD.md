@@ -118,7 +118,7 @@ not be accepted by bash.
 
 ## Versioning
 
-The version string is an extension to semver, the format looks like `10.3.1-2.3`.
+The version string is an extension to semver, the format looks like `11.2.1-1.1`.
 It includes the three digits with the original GCC version, a fourth
 digit with the Arm release, a fifth digit with the xPack release number.
 
@@ -225,10 +225,10 @@ their SHA signatures, created in the `deploy` folder:
 ```console
 $ ls -l ~/Work/arm-none-eabi-gcc-*/deploy
 total 682464
--rw-rw-r-- 1 ilg ilg 169389142 Oct 22 22:17 xpack-arm-none-eabi-gcc-10.3.1-2.3-linux-x64.tar.gz
--rw-rw-r-- 1 ilg ilg       117 Oct 22 22:17 xpack-arm-none-eabi-gcc-10.3.1-2.3-linux-x64.tar.gz.sha
--rw-rw-r-- 1 ilg ilg 184570818 Oct 22 23:04 xpack-arm-none-eabi-gcc-10.3.1-2.3-win32-x64.zip
--rw-rw-r-- 1 ilg ilg       114 Oct 22 23:04 xpack-arm-none-eabi-gcc-10.3.1-2.3-win32-x64.zip.sha
+-rw-rw-r-- 1 ilg ilg 169389142 Oct 22 22:17 xpack-arm-none-eabi-gcc-11.2.1-1.1-linux-x64.tar.gz
+-rw-rw-r-- 1 ilg ilg       117 Oct 22 22:17 xpack-arm-none-eabi-gcc-11.2.1-1.1-linux-x64.tar.gz.sha
+-rw-rw-r-- 1 ilg ilg 184570818 Oct 22 23:04 xpack-arm-none-eabi-gcc-11.2.1-1.1-win32-x64.zip
+-rw-rw-r-- 1 ilg ilg       114 Oct 22 23:04 xpack-arm-none-eabi-gcc-11.2.1-1.1-win32-x64.zip.sha
 ```
 
 ### Build the Arm GNU/Linux binaries
@@ -298,10 +298,10 @@ archives and their SHA signatures, created in the `deploy` folder:
 ```console
 $ ls -l ~/Work/arm-none-eabi-gcc-*/deploy
 total 325316
--rw-rw-r-- 1 ilg ilg 168517506 Oct 23 01:08 xpack-arm-none-eabi-gcc-10.3.1-2.3-linux-arm64.tar.gz
--rw-rw-r-- 1 ilg ilg       119 Oct 23 01:08 xpack-arm-none-eabi-gcc-10.3.1-2.3-linux-arm64.tar.gz.sha
--rw-rw-r-- 1 ilg ilg 164591258 Oct 23 08:19 xpack-arm-none-eabi-gcc-10.3.1-2.3-linux-arm.tar.gz
--rw-rw-r-- 1 ilg ilg       117 Oct 23 08:19 xpack-arm-none-eabi-gcc-10.3.1-2.3-linux-arm.tar.gz.sha
+-rw-rw-r-- 1 ilg ilg 168517506 Oct 23 01:08 xpack-arm-none-eabi-gcc-11.2.1-1.1-linux-arm64.tar.gz
+-rw-rw-r-- 1 ilg ilg       119 Oct 23 01:08 xpack-arm-none-eabi-gcc-11.2.1-1.1-linux-arm64.tar.gz.sha
+-rw-rw-r-- 1 ilg ilg 164591258 Oct 23 08:19 xpack-arm-none-eabi-gcc-11.2.1-1.1-linux-arm.tar.gz
+-rw-rw-r-- 1 ilg ilg       117 Oct 23 08:19 xpack-arm-none-eabi-gcc-11.2.1-1.1-linux-arm.tar.gz.sha
 ```
 
 ### Build the macOS binaries
@@ -344,8 +344,8 @@ and its SHA signature, created in the `deploy` folder:
 ```console
 $ ls -l ~/Work/arm-none-eabi-gcc-*/deploy
 total 321872
--rw-r--r--  1 ilg  staff  164794316 Oct 23 00:27 xpack-arm-none-eabi-gcc-10.3.1-2.3-darwin-x64.tar.gz
--rw-r--r--  1 ilg  staff        118 Oct 23 00:27 xpack-arm-none-eabi-gcc-10.3.1-2.3-darwin-x64.tar.gz.sha
+-rw-r--r--  1 ilg  staff  164794316 Oct 23 00:27 xpack-arm-none-eabi-gcc-11.2.1-1.1-darwin-x64.tar.gz
+-rw-r--r--  1 ilg  staff        118 Oct 23 00:27 xpack-arm-none-eabi-gcc-11.2.1-1.1-darwin-x64.tar.gz.sha
 ```
 
 ## Subsequent runs
@@ -430,7 +430,7 @@ look like:
 
 ```console
 $ .../xpack-arm-none-eabi-gcc/bin/arm-none-eabi-gcc --version
-arm-none-eabi-gcc (xPack GNU Arm Embedded GCC x86_64) 10.3.1 20201103 (release)
+arm-none-eabi-gcc (xPack GNU Arm Embedded GCC x86_64) 11.2.1 20201103 (release)
 Copyright (C) 2020 Free Software Foundation, Inc.
 This is free software; see the source for copying conditions.  There is NO
 warranty; not even for MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
@@ -442,8 +442,8 @@ After install, the package should create a structure like this (only the
 first two depth levels are shown):
 
 ```console
-$ tree -L 2 /Users/ilg/Library/xPacks/\@xpack-dev-tools/arm-none-eabi-gcc/10.3.1-2.3/.content/
-/Users/ilg/Library/xPacks/\@xpack-dev-tools/arm-none-eabi-gcc/10.3.1-2.3/.content/
+$ tree -L 2 /Users/ilg/Library/xPacks/\@xpack-dev-tools/arm-none-eabi-gcc/11.2.1-1.1/.content/
+/Users/ilg/Library/xPacks/\@xpack-dev-tools/arm-none-eabi-gcc/11.2.1-1.1/.content/
 ├── README.md
 ├── arm-none-eabi
 │   ├── bin
@@ -460,7 +460,7 @@ $ tree -L 2 /Users/ilg/Library/xPacks/\@xpack-dev-tools/arm-none-eabi-gcc/10.3.1
 │   ├── arm-none-eabi-elfedit
 │   ├── arm-none-eabi-g++
 │   ├── arm-none-eabi-gcc
-│   ├── arm-none-eabi-gcc-10.3.1
+│   ├── arm-none-eabi-gcc-11.2.1
 │   ├── arm-none-eabi-gcc-ar
 │   ├── arm-none-eabi-gcc-nm
 │   ├── arm-none-eabi-gcc-ranlib
