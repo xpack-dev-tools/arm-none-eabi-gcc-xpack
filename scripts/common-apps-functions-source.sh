@@ -71,7 +71,7 @@ function build_binutils()
       xbb_activate
       xbb_activate_installed_dev
 
-      CPPFLAGS="${XBB_CPPFLAGS}"
+      CPPFLAGS="${XBB_CPPFLAGS} -UFORTIFY_SOURCE" # ABE
       CFLAGS="${XBB_CFLAGS_NO_W}"
       CXXFLAGS="${XBB_CXXFLAGS_NO_W}"
 
