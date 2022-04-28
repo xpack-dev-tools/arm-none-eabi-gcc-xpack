@@ -73,6 +73,13 @@ recreate the archives with the correct file.
 - open the `common-versions-source.sh` file
 - add a new `if` with the new version before the existing code
 
+To find the actual versions of the dependent libraries, check the
+snapshot archive provided by arm.
+
+### update binutils
+
+...
+
 ### Update helper
 
 With a git client, go to the helper repo and update to the latest master commit.
@@ -87,27 +94,27 @@ or the production machines (`xbbma`, `xbbmi`):
 ```sh
 sudo rm -rf ~/Work/arm-none-eabi-gcc-*-*
 
-caffeinate bash ${HOME}/Work/arm-none-eabi-gcc-xpack.git/scripts/helper/build.sh --develop --disable-multilib --macos
+caffeinate bash ${HOME}/Work/arm-none-eabi-gcc-xpack.git/scripts/helper/build.sh --develop --macos --disable-multilib
 ```
 
 Similarly on the Intel Linux (`xbbli`):
 
 ```sh
-bash ${HOME}/Work/arm-none-eabi-gcc-xpack.git/scripts/helper/build.sh --develop --disable-multilib --linux64
+bash ${HOME}/Work/arm-none-eabi-gcc-xpack.git/scripts/helper/build.sh --develop --linux64 --disable-multilib
 
-bash ${HOME}/Work/arm-none-eabi-gcc-xpack.git/scripts/helper/build.sh --develop --disable-multilib --win64
+bash ${HOME}/Work/arm-none-eabi-gcc-xpack.git/scripts/helper/build.sh --develop --win64 --disable-multilib
 ```
 
 ... the Arm Linux 64-bit (`xbbla64`):
 
 ```sh
-bash ${HOME}/Work/arm-none-eabi-gcc-xpack.git/scripts/helper/build.sh --develop --disable-multilib --arm64
+bash ${HOME}/Work/arm-none-eabi-gcc-xpack.git/scripts/helper/build.sh --develop --arm64 --disable-multilib
 ```
 
 ... and on the Arm Linux 32-bit (`xbbla32`):
 
 ```sh
-bash ${HOME}/Work/arm-none-eabi-gcc-xpack.git/scripts/helper/build.sh --develop --disable-multilib --arm32
+bash ${HOME}/Work/arm-none-eabi-gcc-xpack.git/scripts/helper/build.sh --develop --arm32 --disable-multilib
 ```
 
 Work on the scripts until all platforms pass the build.
@@ -243,7 +250,7 @@ For this, on each platform (Mac, GNU/Linux 64/32, Windows 64/32):
 - unpack the archive in `Desktop` or in `Downloads`, and rename the version
   folder, by replacing a dash with a space; this will test paths with spaces;
   on Windows the current paths always use spaces, so renaming is not needed;
-- on macOS it is necessarry to remove the `com.apple.quarantine`
+- on macOS it is necessary to remove the `com.apple.quarantine`
   attribute of archive and possibly the expanded folder:
 
 ```sh
@@ -333,7 +340,7 @@ watching this project.
 
 ## Update the README listings and examples
 
-- check and possibly update the `ls -l`
+- check and possibly update the `ls -l` output
 - check and possibly update the output of the `--version` runs
 - commit changes
 
@@ -361,7 +368,7 @@ watching this project.
   possibly adjust `.npmignore`
 - `npm version 11.2.1-1.1.1`; the first 5 numbers are the same as the
   GitHub release; the sixth number is the npm specific version
-- the commits and the tag should have beed pushed by the `postversion` script;
+- the commits and the tag should have been pushed by the `postversion` script;
   if not, push them with `git push origin --tags`
 - `npm publish --tag next` (use `--access public` when publishing for
   the first time)
