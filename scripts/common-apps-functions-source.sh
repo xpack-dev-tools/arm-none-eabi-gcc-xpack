@@ -1213,7 +1213,7 @@ function build_gdb()
           # The source archive includes only the pyconfig.h.in, which needs
           # to be configured, which is not an easy task. Thus add the file copied
           # from a Windows install.
-          cp -v "${BUILD_GIT_PATH}/patches/pyconfig-win-${PYTHON3_VERSION}.h" \
+          cp -v "${helper_folder_path}/extras/python/pyconfig-win-${PYTHON3_VERSION}.h" \
             "${LIBS_INSTALL_FOLDER_PATH}/include/pyconfig.h"
         else
           CONFIG_PYTHON_PREFIX="${APP_PREFIX}"
