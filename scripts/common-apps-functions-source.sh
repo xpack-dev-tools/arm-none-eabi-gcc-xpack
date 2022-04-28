@@ -13,18 +13,11 @@
 
 # -----------------------------------------------------------------------------
 
-function download_gcc_combo()
-{
-  # https://developer.arm.com/open-source/gnu-toolchain/gnu-rm
-  # https://developer.arm.com/open-source/gnu-toolchain/gnu-rm/downloads
-
-  cd "${SOURCES_FOLDER_PATH}"
-
-  download_and_extract "${GCC_COMBO_URL}" "${GCC_COMBO_ARCHIVE}" \
-    "${GCC_COMBO_FOLDER_NAME}"
-}
-
-# -----------------------------------------------------------------------------
+# Environment variables:
+# BINUTILS_VERSION
+# BINUTILS_SRC_FOLDER_NAME
+# BINUTILS_ARCHIVE_NAME
+# BINUTILS_URL
 
 function build_binutils()
 {
@@ -32,9 +25,7 @@ function build_binutils()
   # https://aur.archlinux.org/cgit/aur.git/tree/PKGBUILD?h=binutils-git
   # https://aur.archlinux.org/cgit/aur.git/tree/PKGBUILD?h=gdb-git
 
-  local binutils_version="$1"
-  # No versioning here, the inner archives use simple names.
-  local binutils_folder_name="binutils-${binutils_version}"
+  local binutils_folder_name="binutils-${BINUTILS_VERSION}"
 
   mkdir -pv "${LOGS_FOLDER_PATH}/${binutils_folder_name}"
 
@@ -44,31 +35,14 @@ function build_binutils()
   then
 
     # Download binutils.
-    if [ ! -d "${SOURCES_FOLDER_PATH}/${BINUTILS_SRC_FOLDER_NAME}" ]
-    then
-      (
-        xbb_activate
-
-        cd "${SOURCES_FOLDER_PATH}"
-        if [ -n "${BINUTILS_GIT_URL}" ]
-        then
-          git_clone "${BINUTILS_GIT_URL}" "${BINUTILS_GIT_BRANCH}" \
-            "${BINUTILS_GIT_COMMIT}" "${BINUTILS_SRC_FOLDER_NAME}"
-          cd "${BINUTILS_SRC_FOLDER_NAME}"
-          do_patch "${binutils_patch}"
-        else
-          # Note: define binutils_patch to the patch file name.
-          extract "${GCC_COMBO_FOLDER_NAME}/src/binutils.tar.bz2" \
-            "${BINUTILS_SRC_FOLDER_NAME}" "${binutils_patch}"
-        fi
-      )
-    fi
+    cd "${SOURCES_FOLDER_PATH}"
+    download_and_extract "${BINUTILS_ARCHIVE_URL}" "${BINUTILS_ARCHIVE_NAME}" \
+        "${BINUTILS_SRC_FOLDER_NAME}" "${binutils_patch}"
 
     (
       mkdir -pv "${BUILD_FOLDER_PATH}/${binutils_folder_name}"
       cd "${BUILD_FOLDER_PATH}/${binutils_folder_name}"
 
-      xbb_activate
       xbb_activate_installed_dev
 
       CPPFLAGS="${XBB_CPPFLAGS} -UFORTIFY_SOURCE" # ABE
@@ -102,31 +76,50 @@ function build_binutils()
 
           bash "${SOURCES_FOLDER_PATH}/${BINUTILS_SRC_FOLDER_NAME}/configure" --help
 
+          # 11.2-2022.02-darwin-x86_64-arm-none-eabi-manifest.txt:
+          # binutils_configure='--enable-initfini-array --disable-nls
+          # --without-x --disable-gdbtk --without-tcl --without-tk
+          # --enable-plugins --disable-gdb --without-gdb --target=arm-none-eabi
+          # --prefix=/'
+
           # ? --without-python --without-curses, --with-expat
 
+          config_options=()
+
+          config_options+=("--prefix=${APP_PREFIX}")
+          config_options+=("--infodir=${APP_PREFIX_DOC}/info")
+          config_options+=("--mandir=${APP_PREFIX_DOC}/man")
+          config_options+=("--htmldir=${APP_PREFIX_DOC}/html")
+          config_options+=("--pdfdir=${APP_PREFIX_DOC}/pdf")
+
+          config_options+=("--build=${BUILD}")
+          config_options+=("--host=${HOST}")
+          config_options+=("--target=${GCC_TARGET}")
+
+          config_options+=("--disable-nls") # Arm
+          config_options+=("--disable-gdb") # Arm
+          config_options+=("--disable-gdbtk") # Arm
+
+          config_options+=("--disable-sim") # ABE
+          config_options+=("--disable-werror") # ABE
+
+          config_options+=("--enable-initfini-array") # Arm
+          config_options+=("--enable-lto") # ABE
+          config_options+=("--enable-plugins") # Arm
+          config_options+=("--enable-build-warnings=no")
+
+          config_options+=("--without-gdb") # Arm
+          config_options+=("--without-x") # Arm
+          config_options+=("--without-tcl") # Arm
+          config_options+=("--without-tk") # Arm
+
+          config_options+=("--with-pkgversion=${BRANDING}")
+          # In the ABE script.
+          config_options+=("--with-sysroot=${APP_PREFIX}/${GCC_TARGET}")
+          config_options+=("--with-system-zlib")
+
           run_verbose bash ${DEBUG} "${SOURCES_FOLDER_PATH}/${BINUTILS_SRC_FOLDER_NAME}/configure" \
-            --prefix="${APP_PREFIX}" \
-            --infodir="${APP_PREFIX_DOC}/info" \
-            --mandir="${APP_PREFIX_DOC}/man" \
-            --htmldir="${APP_PREFIX_DOC}/html" \
-            --pdfdir="${APP_PREFIX_DOC}/pdf" \
-            \
-            --build=${BUILD} \
-            --host=${HOST} \
-            --target=${GCC_TARGET} \
-            \
-            --with-pkgversion="${BRANDING}" \
-            \
-            --disable-nls \
-            --disable-werror \
-            --disable-sim \
-            --disable-gdb \
-            --enable-interwork \
-            --enable-plugins \
-            --with-sysroot="${APP_PREFIX}/${GCC_TARGET}" \
-            \
-            --enable-build-warnings=no \
-            --with-system-zlib \
+            "${config_options[@]}"
 
           cp "config.log" "${LOGS_FOLDER_PATH}/${binutils_folder_name}/config-log-$(ndate).txt"
         ) 2>&1 | tee "${LOGS_FOLDER_PATH}/${binutils_folder_name}/configure-output-$(ndate).txt"
@@ -185,7 +178,6 @@ function build_binutils()
       copy_license \
         "${SOURCES_FOLDER_PATH}/${BINUTILS_SRC_FOLDER_NAME}" \
         "${binutils_folder_name}"
-
     )
 
     touch "${binutils_stamp_file_path}"
@@ -235,6 +227,15 @@ function test_binutils()
   )
 }
 
+# -----------------------------------------------------------------------------
+
+# Environment variables:
+# GCC_VERSION
+# GCC_SRC_FOLDER_NAME
+# GCC_ARCHIVE_URL
+# GCC_ARCHIVE_NAME
+# GCC_PATCH_FILE_NAME
+
 function build_gcc_first()
 {
   local gcc_first_folder_name="gcc-${GCC_VERSION}-first"
@@ -247,14 +248,13 @@ function build_gcc_first()
 
     cd "${SOURCES_FOLDER_PATH}"
 
-    extract "${GCC_COMBO_FOLDER_NAME}/src/gcc.tar.bz2" \
-      "${GCC_SRC_FOLDER_NAME}" "${GCC_PATCH}"
+    download_and_extract "${GCC_ARCHIVE_URL}" "${GCC_ARCHIVE_NAME}" \
+      "${GCC_SRC_FOLDER_NAME}" "${GCC_PATCH_FILE_NAME}"
 
     (
       mkdir -pv "${BUILD_FOLDER_PATH}/${gcc_first_folder_name}"
       cd "${BUILD_FOLDER_PATH}/${gcc_first_folder_name}"
 
-      xbb_activate
       xbb_activate_installed_dev
 
       CPPFLAGS="${XBB_CPPFLAGS}"
@@ -296,7 +296,19 @@ function build_gcc_first()
 
           bash "${SOURCES_FOLDER_PATH}/${GCC_SRC_FOLDER_NAME}/configure" --help
 
-          # https://gcc.gnu.org/install/configure.html
+          # 11.2-2022.02-darwin-x86_64-arm-none-eabi-manifest.txt:
+          # gcc1_configure='--target=arm-none-eabi
+          # --prefix=/Volumes/data/jenkins/workspace/GNU-toolchain/arm-11/build-arm-none-eabi/install//
+          # --with-gmp=/Volumes/data/jenkins/workspace/GNU-toolchain/arm-11/build-arm-none-eabi/host-tools
+          # --with-mpfr=/Volumes/data/jenkins/workspace/GNU-toolchain/arm-11/build-arm-none-eabi/host-tools
+          # --with-mpc=/Volumes/data/jenkins/workspace/GNU-toolchain/arm-11/build-arm-none-eabi/host-tools
+          # --with-isl=/Volumes/data/jenkins/workspace/GNU-toolchain/arm-11/build-arm-none-eabi/host-tools
+          # --disable-shared --disable-nls --disable-threads --disable-tls
+          # --enable-checking=release --enable-languages=c --without-cloog
+          # --without-isl --with-newlib --without-headers
+          # --with-multilib-list=aprofile,rmprofile'
+
+          # From: https://gcc.gnu.org/install/configure.html
           # --enable-shared[=package[,…]] build shared versions of libraries
           # --enable-tls specify that the target supports TLS (Thread Local Storage).
           # --enable-nls enables Native Language Support (NLS)
@@ -312,41 +324,50 @@ function build_gcc_first()
           # Prefer an explicit libexec folder.
           # --libexecdir="${APP_PREFIX}/lib"
 
+          config_options=()
+
+          config_options+=("--prefix=${APP_PREFIX}")
+          config_options+=("--infodir=${APP_PREFIX_DOC}/info")
+          config_options+=("--mandir=${APP_PREFIX_DOC}/man")
+          config_options+=("--htmldir=${APP_PREFIX_DOC}/html")
+          config_options+=("--pdfdir=${APP_PREFIX_DOC}/pdf")
+
+          config_options+=("--build=${BUILD}")
+          config_options+=("--host=${HOST}")
+          config_options+=("--target=${GCC_TARGET}")
+
+          config_options+=("--disable-nls") # Arm
+          config_options+=("--disable-shared") # Arm
+          config_options+=("--disable-threads") # Arm
+          config_options+=("--disable-tls") # Arm
+
+          config_options+=("--enable-checking=release") # Arm
+          config_options+=("--enable-languages=c") # Arm
+          # config_options+=("--enable-lto") # ABE
+
+          config_options+=("--without-cloog") # Arm
+          config_options+=("--without-headers") # Arm
+          config_options+=("--without-isl") # Arm
+
+          # config_options+=("--with-gnu-as") # ABE
+          # config_options+=("--with-gnu-ld") # ABE
+          config_options+=("--with-pkgversion=${BRANDING}")
+          config_options+=("--with-newlib") # Arm
+
+          # config_options+=("--with-python-dir=share/gcc-${GCC_TARGET}")
+          config_options+=("--with-sysroot=${APP_PREFIX}/${GCC_TARGET}") # Arm
+          config_options+=("--with-system-zlib")
+
+          if [ "${WITHOUT_MULTILIB}" == "y" ]
+          then
+            config_options+=("--disable-multilib")
+          else
+            config_options+=("--enable-multilib") # Arm
+            config_options+=("--with-multilib-list=${GCC_MULTILIB_LIST}")  # Arm
+          fi
+
           run_verbose bash ${DEBUG} "${SOURCES_FOLDER_PATH}/${GCC_SRC_FOLDER_NAME}/configure" \
-            --prefix="${APP_PREFIX}"  \
-            --infodir="${APP_PREFIX_DOC}/info" \
-            --mandir="${APP_PREFIX_DOC}/man" \
-            --htmldir="${APP_PREFIX_DOC}/html" \
-            --pdfdir="${APP_PREFIX_DOC}/pdf" \
-            \
-            --build=${BUILD} \
-            --host=${HOST} \
-            --target=${GCC_TARGET} \
-            \
-            --with-pkgversion="${BRANDING}" \
-            \
-            --enable-languages=c \
-            --enable-lto \
-            --disable-decimal-float \
-            --disable-libffi \
-            --disable-libgomp \
-            --disable-libmudflap \
-            --disable-libquadmath \
-            --disable-libssp \
-            --disable-libstdcxx-pch \
-            --disable-nls \
-            --disable-threads \
-            --disable-tls \
-            --with-newlib \
-            --without-headers \
-            --with-gnu-as \
-            --with-gnu-ld \
-            --with-python-dir="share/gcc-${GCC_TARGET}" \
-            --with-sysroot="${APP_PREFIX}/${GCC_TARGET}" \
-            ${MULTILIB_FLAGS} \
-            \
-            --disable-build-format-warnings \
-            --with-system-zlib \
+            "${config_options[@]}"
 
           cp "config.log" "${LOGS_FOLDER_PATH}/${gcc_first_folder_name}/config-log-$(ndate).txt"
         ) 2>&1 | tee "${LOGS_FOLDER_PATH}/${gcc_first_folder_name}/configure-output-$(ndate).txt"
@@ -377,6 +398,14 @@ function build_gcc_first()
   fi
 }
 
+# -----------------------------------------------------------------------------
+
+# Environment variables:
+# NEWLIB_VERSION
+# NEWLIB_SRC_FOLDER_NAME
+# NEWLIB_ARCHIVE_URL
+# NEWLIB_ARCHIVE_NAME
+
 # For the nano build, call it with "-nano".
 # $1="" or $1="-nano"
 function build_newlib()
@@ -392,13 +421,13 @@ function build_newlib()
 
     cd "${SOURCES_FOLDER_PATH}"
 
-    extract "${GCC_COMBO_FOLDER_NAME}/src/newlib.tar.bz2" "${NEWLIB_SRC_FOLDER_NAME}"
+    download_and_extract "${NEWLIB_ARCHIVE_URL}" "${NEWLIB_ARCHIVE_NAME}" \
+     "${NEWLIB_SRC_FOLDER_NAME}"
 
     (
       mkdir -pv "${BUILD_FOLDER_PATH}/${newlib_folder_name}"
       cd "${BUILD_FOLDER_PATH}/${newlib_folder_name}"
 
-      xbb_activate
       xbb_activate_installed_dev
 
       # Add the gcc first stage binaries to the path.
@@ -450,62 +479,84 @@ function build_newlib()
 
           bash "${SOURCES_FOLDER_PATH}/${NEWLIB_SRC_FOLDER_NAME}/configure" --help
 
-          # I still did not figure out how to define a variable with
-          # the list of options, such that it can be extended, so the
-          # brute force approach is to duplicate the entire call.
+          config_options=()
 
           if [ "${name_suffix}" == "" ]
           then
 
-            # Extra options compared to Arm 9.3.1 distribution:
-            # --enable-newlib-io-long-double
+            # 11.2-2022.02-darwin-x86_64-arm-none-eabi-manifest.txt:
+            # newlib_configure=' --disable-newlib-supplied-syscalls
+            # --enable-newlib-io-long-long --enable-newlib-io-c99-formats
+            # --enable-newlib-mb --enable-newlib-reent-check-verify
+            # --target=arm-none-eabi --prefix=/'
+
+            config_options+=("--prefix=${APP_PREFIX}")
+            config_options+=("--infodir=${APP_PREFIX_DOC}/info")
+            config_options+=("--mandir=${APP_PREFIX_DOC}/man")
+            config_options+=("--htmldir=${APP_PREFIX_DOC}/html")
+            config_options+=("--pdfdir=${APP_PREFIX_DOC}/pdf")
+
+            config_options+=("--build=${BUILD}")
+            config_options+=("--host=${HOST}")
+            config_options+=("--target=${GCC_TARGET}")
+
+            config_options+=("--disable-newlib-supplied-syscalls") # Arm
+
+            config_options+=("--enable-newlib-io-c99-formats") # Arm
+
+            config_options+=("--enable-newlib-io-long-long") # Arm
+            config_options+=("--enable-newlib-mb") # Arm
+            config_options+=("--enable-newlib-reent-check-verify") # Arm
+
+            # Not used by Arm, but perhaps necessary?
+            # config_options+=("--enable-newlib-register-fini")
+
+            # config_options+=("--enable-newlib-retargetable-locking")
+
             run_verbose bash ${DEBUG} "${SOURCES_FOLDER_PATH}/${NEWLIB_SRC_FOLDER_NAME}/configure" \
-              --prefix="${APP_PREFIX}"  \
-              --infodir="${APP_PREFIX_DOC}/info" \
-              --mandir="${APP_PREFIX_DOC}/man" \
-              --htmldir="${APP_PREFIX_DOC}/html" \
-              --pdfdir="${APP_PREFIX_DOC}/pdf" \
-              \
-              --build=${BUILD} \
-              --host=${HOST} \
-              --target="${GCC_TARGET}" \
-              \
-              --enable-newlib-io-long-double \
-              --enable-newlib-register-fini \
-              --enable-newlib-retargetable-locking \
-              --enable-newlib-reent-check-verify \
-              --disable-newlib-supplied-syscalls \
-              --disable-nls \
-              \
-              --enable-newlib-io-long-long \
-              --enable-newlib-io-c99-formats \
+              "${config_options[@]}"
 
           elif [ "${name_suffix}" == "-nano" ]
           then
 
+            # 11.2-2022.02-darwin-x86_64-arm-none-eabi-manifest.txt:
+            # newlib_nano_configure=' --disable-newlib-supplied-syscalls
+            # --enable-newlib-nano-malloc --disable-newlib-unbuf-stream-opt
+            # --enable-newlib-reent-small --disable-newlib-fseek-optimization
+            # --enable-newlib-nano-formatted-io
+            # --disable-newlib-fvwrite-in-streamio --disable-newlib-wide-orient
+            # --enable-lite-exit --enable-newlib-global-atexit
+            # --enable-newlib-reent-check-verify
+            # --target=arm-none-eabi --prefix=/'
+
             # --enable-newlib-io-long-long and --enable-newlib-io-c99-formats
             # are currently ignored if --enable-newlib-nano-formatted-io.
             # --enable-newlib-register-fini is debatable, was removed.
+
+            config_options+=("--prefix=${APP_PREFIX_NANO}")
+
+            config_options+=("--build=${BUILD}")
+            config_options+=("--host=${HOST}")
+            config_options+=("--target=${GCC_TARGET}")
+
+            config_options+=("--disable-newlib-fseek-optimization") # Arm
+            config_options+=("--disable-newlib-fvwrite-in-streamio") # Arm
+
+            config_options+=("--disable-newlib-supplied-syscalls") # Arm
+            config_options+=("--disable-newlib-unbuf-stream-opt") # Arm
+            config_options+=("--disable-newlib-wide-orient") # Arm
+
+            config_options+=("--enable-lite-exit") # Arm
+            config_options+=("--enable-newlib-global-atexit") # Arm
+            config_options+=("--enable-newlib-nano-formatted-io") # Arm
+            config_options+=("--enable-newlib-nano-malloc") # Arm
+            config_options+=("--enable-newlib-reent-check-verify") # Arm
+            config_options+=("--enable-newlib-reent-small") # Arm
+
+            # config_options+=("--enable-newlib-retargetable-locking")
+
             run_verbose bash ${DEBUG} "${SOURCES_FOLDER_PATH}/${NEWLIB_SRC_FOLDER_NAME}/configure" \
-              --prefix="${APP_PREFIX_NANO}"  \
-              \
-              --build=${BUILD} \
-              --host=${HOST} \
-              --target="${GCC_TARGET}" \
-              \
-              --disable-newlib-supplied-syscalls \
-              --enable-newlib-reent-check-verify \
-              --enable-newlib-reent-small \
-              --enable-newlib-retargetable-locking \
-              --disable-newlib-fvwrite-in-streamio \
-              --disable-newlib-fseek-optimization \
-              --disable-newlib-wide-orient \
-              --enable-newlib-nano-malloc \
-              --disable-newlib-unbuf-stream-opt \
-              --enable-lite-exit \
-              --enable-newlib-global-atexit \
-              --enable-newlib-nano-formatted-io \
-              --disable-nls \
+              "${config_options[@]}"
 
           else
             echo "Unsupported build_newlib arg ${name_suffix}"
@@ -534,18 +585,10 @@ function build_newlib()
           if [ "${WITH_PDF}" == "y" ]
           then
 
+            xbb_activate_tex
+
             # Warning, parallel build failed on Debian 32-bit.
-
-            (
-              if [[ "${RELEASE_VERSION}" =~ 5\.4\.1-* ]]
-              then
-                hack_pdfetex
-              fi
-
-              xbb_activate_tex
-
-              run_verbose make pdf
-            )
+            run_verbose make pdf
 
             install -v -d "${APP_PREFIX_DOC}/pdf"
 
@@ -578,7 +621,7 @@ function build_newlib()
       then
         copy_license \
           "${SOURCES_FOLDER_PATH}/${NEWLIB_SRC_FOLDER_NAME}" \
-          "${NEWLIB_SRC_FOLDER_NAME}-${NEWLIB_VERSION}"
+          "${newlib_folder_name}"
       fi
 
     )
@@ -596,28 +639,14 @@ function copy_nano_libs()
   local src_folder="$1"
   local dst_folder="$2"
 
-  if [ -f "${src_folder}/libstdc++.a" ]
-  then
-    cp -v -f "${src_folder}/libstdc++.a" "${dst_folder}/libstdc++_nano.a"
-  fi
-  if [ -f "${src_folder}/libsupc++.a" ]
-  then
-    cp -v -f "${src_folder}/libsupc++.a" "${dst_folder}/libsupc++_nano.a"
-  fi
+  cp -v -f "${src_folder}/libstdc++.a" "${dst_folder}/libstdc++_nano.a"
+  cp -v -f "${src_folder}/libsupc++.a" "${dst_folder}/libsupc++_nano.a"
+
   cp -v -f "${src_folder}/libc.a" "${dst_folder}/libc_nano.a"
   cp -v -f "${src_folder}/libg.a" "${dst_folder}/libg_nano.a"
-  if [ -f "${src_folder}/librdimon.a" ]
-  then
-    cp -v -f "${src_folder}/librdimon.a" "${dst_folder}/librdimon_nano.a"
-  fi
 
-  cp -v -f "${src_folder}/nano.specs" "${dst_folder}/"
-  if [ -f "${src_folder}/rdimon.specs" ]
-  then
-    cp -v -f "${src_folder}/rdimon.specs" "${dst_folder}/"
-  fi
-  cp -v -f "${src_folder}/nosys.specs" "${dst_folder}/"
-  cp -v -f "${src_folder}"/*crt0.o "${dst_folder}/"
+  cp -v -f "${src_folder}/librdimon.a" "${dst_folder}/librdimon_nano.a"
+  cp -v -f "${src_folder}/librdimon-v2m.a" "${dst_folder}/lrdimon-v2m_nano.a"
 }
 
 # Copy target libraries from each multilib folders.
@@ -683,6 +712,13 @@ function copy_linux_libs()
 
 # -----------------------------------------------------------------------------
 
+# Environment variables:
+# GCC_VERSION
+# GCC_SRC_FOLDER_NAME
+# GCC_ARCHIVE_URL
+# GCC_ARCHIVE_NAME
+# GCC_PATCH_FILE_NAME
+
 # For the nano build, call it with "-nano".
 # $1="" or $1="-nano"
 function build_gcc_final()
@@ -699,14 +735,13 @@ function build_gcc_final()
 
     cd "${SOURCES_FOLDER_PATH}"
 
-    extract "${GCC_COMBO_FOLDER_NAME}/src/gcc.tar.bz2" \
-      "${GCC_SRC_FOLDER_NAME}" "${GCC_PATCH}"
+    download_and_extract "${GCC_ARCHIVE_URL}" "${GCC_ARCHIVE_NAME}" \
+      "${GCC_SRC_FOLDER_NAME}" "${GCC_PATCH_FILE_NAME}"
 
     (
       mkdir -pv "${BUILD_FOLDER_PATH}/${gcc_final_folder_name}"
       cd "${BUILD_FOLDER_PATH}/${gcc_final_folder_name}"
 
-      xbb_activate
       xbb_activate_installed_dev
 
       CPPFLAGS="${XBB_CPPFLAGS}"
@@ -750,8 +785,6 @@ function build_gcc_final()
       then
         add_linux_install_path
 
-        mingw_wildcard="--enable-mingw-wildcard"
-
         export AR_FOR_TARGET=${GCC_TARGET}-ar
         export NM_FOR_TARGET=${GCC_TARGET}-nm
         export OBJDUMP_FOR_TARET=${GCC_TARGET}-objdump
@@ -791,83 +824,87 @@ function build_gcc_final()
           # prevent -Dinhibit_libc, which will skip some functionality,
           # like libgcov.
 
+          config_options=()
+
+          config_options+=("--prefix=${APP_PREFIX}${name_suffix}")
+          if [ "${name_suffix}" == "" ]
+          then
+            config_options+=("--prefix=${APP_PREFIX}")
+            config_options+=("--infodir=${APP_PREFIX_DOC}/info")
+            config_options+=("--mandir=${APP_PREFIX_DOC}/man")
+            config_options+=("--htmldir=${APP_PREFIX_DOC}/html")
+            config_options+=("--pdfdir=${APP_PREFIX_DOC}/pdf")
+          else
+            config_options+=("--prefix=${APP_PREFIX_NANO}")
+          fi
+
+          config_options+=("--build=${BUILD}")
+          config_options+=("--host=${HOST}")
+          config_options+=("--target=${GCC_TARGET}")
+
+          config_options+=("--disable-nls") # Arm
+          config_options+=("--disable-shared") # Arm
+          config_options+=("--disable-threads") # Arm
+          config_options+=("--disable-tls") # Arm
+
+          config_options+=("--enable-checking=release") # Arm
+          config_options+=("--enable-languages=c,c++,fortran") # Arm
+
+          if [ "${TARGET_PLATFORM}" == "win32" ]
+          then
+            config_options+=("--enable-mingw-wildcard")
+          fi
+
+          # config_options+=("--with-gnu-as") # ABE
+          # config_options+=("--with-gnu-ld") # ABE
+
+          config_options+=("--with-newlib") # Arm
+          config_options+=("--with-pkgversion=${BRANDING}")
+
+          config_options+=("--with-system-zlib")
+
+          if [ "${WITHOUT_MULTILIB}" == "y" ]
+          then
+            config_options+=("--disable-multilib")
+          else
+            config_options+=("--enable-multilib") # Arm
+            config_options+=("--with-multilib-list=${GCC_MULTILIB_LIST}")  # Arm
+          fi
+
+          # Practically the same.
           if [ "${name_suffix}" == "" ]
           then
 
+            # 11.2-2022.02-darwin-x86_64-arm-none-eabi-manifest.txt:
+            # gcc2_configure='--target=arm-none-eabi
+            # --prefix=/Volumes/data/jenkins/workspace/GNU-toolchain/arm-11/build-arm-none-eabi/install//
+            # --with-gmp=/Volumes/data/jenkins/workspace/GNU-toolchain/arm-11/build-arm-none-eabi/host-tools
+            # --with-mpfr=/Volumes/data/jenkins/workspace/GNU-toolchain/arm-11/build-arm-none-eabi/host-tools
+            # --with-mpc=/Volumes/data/jenkins/workspace/GNU-toolchain/arm-11/build-arm-none-eabi/host-tools
+            # --with-isl=/Volumes/data/jenkins/workspace/GNU-toolchain/arm-11/build-arm-none-eabi/host-tools
+            # --disable-shared --disable-nls --disable-threads --disable-tls
+            # --enable-checking=release --enable-languages=c,c++,fortran
+            # --with-newlib --with-multilib-list=aprofile,rmprofile'
+
             run_verbose bash ${DEBUG} "${SOURCES_FOLDER_PATH}/${GCC_SRC_FOLDER_NAME}/configure" \
-              --prefix="${APP_PREFIX}"  \
-              --infodir="${APP_PREFIX_DOC}/info" \
-              --mandir="${APP_PREFIX_DOC}/man" \
-              --htmldir="${APP_PREFIX_DOC}/html" \
-              --pdfdir="${APP_PREFIX_DOC}/pdf" \
-              \
-              --build=${BUILD} \
-              --host=${HOST} \
-              --target=${GCC_TARGET} \
-              \
-              --with-pkgversion="${BRANDING}" \
-              \
-              --enable-languages=c,c++ \
-              ${mingw_wildcard} \
-              --enable-plugins \
-              --enable-lto \
-              --disable-decimal-float \
-              --disable-libffi \
-              --disable-libgomp \
-              --disable-libmudflap \
-              --disable-libquadmath \
-              --disable-libssp \
-              --disable-libstdcxx-pch \
-              --disable-nls \
-              --disable-threads \
-              --disable-tls \
-              --with-gnu-as \
-              --with-gnu-ld \
-              --with-newlib \
-              --with-headers=yes \
-              --with-python-dir="share/gcc-${GCC_TARGET}" \
-              --with-sysroot="${APP_PREFIX}/${GCC_TARGET}" \
-              --with-native-system-header-dir="/include" \
-              ${MULTILIB_FLAGS} \
-              \
-              --disable-build-format-warnings \
-              --with-system-zlib
+              "${config_options[@]}"
 
           elif [ "${name_suffix}" == "-nano" ]
           then
 
+            # 11.2-2022.02-darwin-x86_64-arm-none-eabi-manifest.txt:
+            # gcc2_nano_configure='--target=arm-none-eabi
+            # --prefix=/Volumes/data/jenkins/workspace/GNU-toolchain/arm-11/build-arm-none-eabi/nano_install//
+            # --with-gmp=/Volumes/data/jenkins/workspace/GNU-toolchain/arm-11/build-arm-none-eabi/host-tools
+            # --with-mpfr=/Volumes/data/jenkins/workspace/GNU-toolchain/arm-11/build-arm-none-eabi/host-tools
+            # --with-mpc=/Volumes/data/jenkins/workspace/GNU-toolchain/arm-11/build-arm-none-eabi/host-tools
+            # --with-isl=/Volumes/data/jenkins/workspace/GNU-toolchain/arm-11/build-arm-none-eabi/host-tools
+            # --disable-shared --disable-nls --disable-threads --disable-tls
+            # --enable-checking=release --enable-languages=c,c++,fortran
+            # --with-newlib --with-multilib-list=aprofile,rmprofile'
+
             run_verbose bash ${DEBUG} "${SOURCES_FOLDER_PATH}/${GCC_SRC_FOLDER_NAME}/configure" \
-              --prefix="${APP_PREFIX_NANO}"  \
-              \
-              --build=${BUILD} \
-              --host=${HOST} \
-              --target=${GCC_TARGET} \
-              \
-              --with-pkgversion="${BRANDING}" \
-              \
-              --enable-languages=c,c++ \
-              --disable-decimal-float \
-              --disable-libffi \
-              --disable-libgomp \
-              --disable-libmudflap \
-              --disable-libquadmath \
-              --disable-libssp \
-              --disable-libstdcxx-pch \
-              --disable-libstdcxx-verbose \
-              --disable-nls \
-              --disable-threads \
-              --disable-tls \
-              --with-gnu-as \
-              --with-gnu-ld \
-              --with-newlib \
-              --with-headers=yes \
-              --with-python-dir="share/gcc-${GCC_TARGET}" \
-              --with-sysroot="${APP_PREFIX_NANO}/${GCC_TARGET}" \
-              --with-native-system-header-dir="/include" \
-              ${MULTILIB_FLAGS} \
-              \
-              --disable-build-format-warnings \
-              --with-system-zlib
+              "${config_options[@]}"
 
           fi
           cp "config.log" "${LOGS_FOLDER_PATH}/${gcc_final_folder_name}/config-log-$(ndate).txt"
@@ -917,7 +954,16 @@ function build_gcc_final()
             then
               target_gcc="${GCC_TARGET}-gcc"
             else
-              target_gcc="${APP_PREFIX_NANO}/bin/${GCC_TARGET}-gcc"
+              if [ -x "${APP_PREFIX_NANO}/bin/${GCC_TARGET}-gcc" ]
+              then
+                target_gcc="${APP_PREFIX_NANO}/bin/${GCC_TARGET}-gcc"
+              # elif [ -x "${APP_PREFIX}/bin/${GCC_TARGET}-gcc" ]
+              # then
+              #   target_gcc="${APP_PREFIX}/bin/${GCC_TARGET}-gcc"
+              else
+                echo "No ${GCC_TARGET}-gcc --print-multi-lib"
+                exit 1
+              fi
             fi
 
             # Copy the libraries after appending the `_nano` suffix.
@@ -967,6 +1013,11 @@ function build_gcc_final()
               run_verbose make html
               run_verbose make install-html
             fi
+
+            if [ "${WITH_PDF}" != "y" -a "${WITH_HTML}" != "y" ]
+            then
+              run_verbose rm -rf "${APP_PREFIX}/shrare/doc"
+            fi
           )
         fi
 
@@ -976,7 +1027,7 @@ function build_gcc_final()
       then
         copy_license \
           "${SOURCES_FOLDER_PATH}/${GCC_SRC_FOLDER_NAME}" \
-          "${GCC_SRC_FOLDER_NAME}-${GCC_VERSION}"
+          "gcc-${GCC_VERSION}"
       fi
 
     )
@@ -1070,6 +1121,15 @@ __EOF__
   )
 }
 
+# -----------------------------------------------------------------------------
+
+# Environment variables:
+# GDB_VERSION
+# GDB_SRC_FOLDER_NAME
+# GDB_ARCHIVE_URL
+# GDB_ARCHIVE_NAME
+# GDB_PATCH_FILE_NAME
+
 # Called multile times, with and without python support.
 # $1="" or $1="-py" or $1="-py3"
 function build_gdb()
@@ -1092,23 +1152,15 @@ function build_gdb()
     if [ ! -d "${SOURCES_FOLDER_PATH}/${GDB_SRC_FOLDER_NAME}" ]
     then
       cd "${SOURCES_FOLDER_PATH}"
-      if [ -n "${GDB_GIT_URL}" ]
-      then
-        git_clone "${GDB_GIT_URL}" "${GDB_GIT_BRANCH}" \
-          "${GDB_GIT_COMMIT}" "${GDB_SRC_FOLDER_NAME}"
-        cd "${GDB_SRC_FOLDER_NAME}"
-        do_patch "${GDB_PATCH}"
-      else
-        extract "${GCC_COMBO_FOLDER_NAME}/src/gdb.tar.bz2" \
-          "${GDB_SRC_FOLDER_NAME}" "${GDB_PATCH}"
-      fi
+
+      download_and_extract "${GDB_ARCHIVE_URL}" "${GDB_ARCHIVE_NAME}" \
+          "${GDB_SRC_FOLDER_NAME}" "${GDB_PATCH_FILE_NAME}"
     fi
 
     (
       mkdir -pv "${BUILD_FOLDER_PATH}/${gdb_folder_name}"
       cd "${BUILD_FOLDER_PATH}/${gdb_folder_name}"
 
-      xbb_activate
       # To pick up the python lib from XBB
       # xbb_activate_dev
       xbb_activate_installed_dev
@@ -1116,6 +1168,9 @@ function build_gdb()
       CPPFLAGS="${XBB_CPPFLAGS}"
       CFLAGS="${XBB_CFLAGS_NO_W}"
       CXXFLAGS="${XBB_CXXFLAGS_NO_W}"
+
+      LDFLAGS="${XBB_LDFLAGS_APP}"
+      LIBS=""
 
       # libiconv is used by Python3.
       # export LIBS="-liconv"
@@ -1137,23 +1192,16 @@ function build_gdb()
         export DEBUGINFOD_LIBS="-lbcrypt"
 
         # From Arm script.
-        LDFLAGS="${XBB_LDFLAGS_APP} -v -Wl,${XBB_FOLDER_PATH}/mingw/lib/CRT_glob.o"
+        LDFLAGS+=" -v -Wl,${XBB_FOLDER_PATH}/mingw/lib/CRT_glob.o"
         # Workaround for undefined reference to `__strcpy_chk' in GCC 9.
         # https://sourceforge.net/p/mingw-w64/bugs/818/
         LIBS="-lssp -liconv"
       elif [ "${TARGET_PLATFORM}" == "darwin" ]
       then
-        # This makes gdb-py fail!
-        # Pick some system libraries from XBB, to avoid rebuilding them here.
-        #        CPPFLAGS+=" -I${XBB_FOLDER_PATH}/include"
-        #        LDFLAGS+=" -L${XBB_FOLDER_PATH}/lib"
-        LDFLAGS="${XBB_LDFLAGS_APP}"
-        LIBS="-liconv -lncurses"
+        : # LIBS="-liconv -lncurses"
       elif [ "${TARGET_PLATFORM}" == "linux" ]
       then
-        LDFLAGS="${XBB_LDFLAGS_APP}"
         LDFLAGS+=" -Wl,-rpath,${LD_LIBRARY_PATH}"
-        LIBS=""
       fi
 
       CONFIG_PYTHON_PREFIX=""
@@ -1167,21 +1215,9 @@ function build_gdb()
           # from a Windows install.
           cp -v "${BUILD_GIT_PATH}/patches/pyconfig-win-${PYTHON3_VERSION}.h" \
             "${LIBS_INSTALL_FOLDER_PATH}/include/pyconfig.h"
-
-          extra_python_opts="--with-python=${BUILD_GIT_PATH}/patches/python${PYTHON3_VERSION_MAJOR_MINOR}-config.sh"
         else
-          extra_python_opts="--with-python=${LIBS_INSTALL_FOLDER_PATH}/bin/python3.${PYTHON3_VERSION_MINOR}"
-
           CONFIG_PYTHON_PREFIX="${APP_PREFIX}"
         fi
-      fi
-
-      local tui_option
-      if [ "${TARGET_PLATFORM}" == "win32" ]
-      then
-        tui_option="--disable-tui"
-      else
-        tui_option="--enable-tui"
       fi
 
       export CPPFLAGS
@@ -1213,42 +1249,94 @@ function build_gdb()
 
           bash "${SOURCES_FOLDER_PATH}/${GDB_SRC_FOLDER_NAME}/gdb/configure" --help
 
+          # 11.2-2022.02-darwin-x86_64-arm-none-eabi-manifest.txt:
+          # gdb_configure='--enable-initfini-array --disable-nls --without-x
+          # --disable-gdbtk --without-tcl --without-tk --disable-werror
+          # --without-expat --without-libunwind-ia64 --without-lzma
+          # --without-babeltrace --without-intel-pt --without-xxhash
+          # --without-debuginfod --without-guile --disable-source-highlight
+          # --disable-objc-gc --with-python=no --disable-binutils
+          # --disable-sim --disable-as --disable-ld --enable-plugins
+          # --target=arm-none-eabi --prefix=/ --with-mpfr
+          # --with-libmpfr-prefix=/Volumes/data/jenkins/workspace/GNU-toolchain/arm-11/build-arm-none-eabi/host-tools
+          # --with-libmpfr-type=static
+          # --with-libgmp-prefix=/Volumes/data/jenkins/workspace/GNU-toolchain/arm-11/build-arm-none-eabi/host-tools
+          # --with-libgmp-type=static'
+
+          config_options=()
+
+          config_options+=("--prefix=${APP_PREFIX}")
+          config_options+=("--infodir=${APP_PREFIX_DOC}/info")
+          config_options+=("--mandir=${APP_PREFIX_DOC}/man")
+          config_options+=("--htmldir=${APP_PREFIX_DOC}/html")
+          config_options+=("--pdfdir=${APP_PREFIX_DOC}/pdf")
+
+          config_options+=("--build=${BUILD}")
+          config_options+=("--host=${HOST}")
+          config_options+=("--target=${GCC_TARGET}")
+
+          config_options+=("--program-prefix=${GCC_TARGET}-")
+          config_options+=("--program-suffix=${name_suffix}")
+
+          config_options+=("--disable-binutils") # Arm
+          config_options+=("--disable-as") # Arm
+          config_options+=("--disable-gdbtk") # Arm
+          config_options+=("--disable-gprof")
+          config_options+=("--disable-ld") # Arm
+          config_options+=("--disable-nls") # Arm
+          config_options+=("--disable-objc-gc") # Arm
+          config_options+=("--disable-sim") # Arm
+          config_options+=("--disable-source-highlight") # Arm
+          config_options+=("--disable-werror") # Arm
+
+          config_options+=("--enable-initfini-array") # Arm
+          config_options+=("--enable-build-warnings=no")
+          config_options+=("--enable-plugins") # Arm
+
+          config_options+=("--without-babeltrace") # Arm
+          config_options+=("--without-debuginfod") # Arm
+          config_options+=("--without-expat") # Arm
+          config_options+=("--without-guile") # Arm
+          config_options+=("--without-intel-pt") # Arm
+          config_options+=("--without-libunwind-ia64") # Arm
+          config_options+=("--without-lzma") # Arm
+          config_options+=("--without-tcl") # Arm
+          config_options+=("--without-tk") # Arm
+          config_options+=("--without-x") # Arm
+          config_options+=("--without-xxhash") # Arm
+
+          config_options+=("--with-gdb-datadir=${APP_PREFIX}/${GCC_TARGET}/share/gdb")
+
+          # No need to, we keep track of paths to shared libraries.
+          # config_options+=("--with-libgmp-type=static") # Arm
+          # config_options+=("--with-libmpfr-type=static") # Arm
+
+          config_options+=("--with-pkgversion=${BRANDING}")
+          config_options+=("--with-system-gdbinit=${APP_PREFIX}/${GCC_TARGET}/lib/gdbinit")
+          config_options+=("--with-system-zlib")
+
+          if [ "${name_suffix}" == "-py3" ]
+          then
+            if [ "${TARGET_PLATFORM}" == "win32" ]
+            then
+              config_options+=("--with-python=${BUILD_GIT_PATH}/patches/python${PYTHON3_VERSION_MAJOR_MINOR}-config.sh")
+            else
+              config_options+=("--with-python=${LIBS_INSTALL_FOLDER_PATH}/bin/python3.${PYTHON3_VERSION_MINOR}")
+            fi
+          else
+             config_options+=("--with-python=no")
+          fi
+
+          if [ "${TARGET_PLATFORM}" == "win32" ]
+          then
+            config_options+=("--disable-tui")
+          else
+            config_options+=("--enable-tui")
+          fi
+
           # Note that all components are disabled, except GDB.
           run_verbose bash ${DEBUG} "${SOURCES_FOLDER_PATH}/${GDB_SRC_FOLDER_NAME}/configure" \
-            --prefix="${APP_PREFIX}"  \
-            --infodir="${APP_PREFIX_DOC}/info" \
-            --mandir="${APP_PREFIX_DOC}/man" \
-            --htmldir="${APP_PREFIX_DOC}/html" \
-            --pdfdir="${APP_PREFIX_DOC}/pdf" \
-            \
-            --build=${BUILD} \
-            --host=${HOST} \
-            --target=${GCC_TARGET} \
-            \
-            --with-pkgversion="${BRANDING}" \
-            \
-            --disable-nls \
-            --disable-sim \
-            --disable-gas \
-            --disable-binutils \
-            --disable-ld \
-            --disable-gprof \
-            --with-expat \
-            --with-lzma=yes \
-            --with-system-gdbinit="${APP_PREFIX}/${GCC_TARGET}/lib/gdbinit" \
-            --with-gdb-datadir="${APP_PREFIX}/${GCC_TARGET}/share/gdb" \
-            \
-            ${extra_python_opts} \
-            --program-prefix="${GCC_TARGET}-" \
-            --program-suffix="$1" \
-            \
-            --disable-werror \
-            --enable-build-warnings=no \
-            --with-system-zlib \
-            --without-guile \
-            --without-babeltrace \
-            --without-libunwind-ia64 \
-            ${tui_option} \
+            "${config_options[@]}"
 
           cp "config.log" "${LOGS_FOLDER_PATH}/${gdb_folder_name}/config-log-$(ndate).txt"
         ) 2>&1 | tee "${LOGS_FOLDER_PATH}/${gdb_folder_name}/configure-output-$(ndate).txt"
@@ -1297,7 +1385,6 @@ function build_gdb()
           "${SOURCES_FOLDER_PATH}/${GDB_SRC_FOLDER_NAME}" \
           "${gdb_folder_name}"
       fi
-
     )
 
     touch "${gdb_stamp_file_path}"
@@ -1419,32 +1506,12 @@ function strip_libs()
   fi
 }
 
-function copy_custom_files()
-{
-  (
-    xbb_activate
-
-    mkdir -pv "${APP_PREFIX}/${DISTRO_INFO_NAME}"
-
-    echo
-    echo "Copying Arm files..."
-
-    cd "${SOURCES_FOLDER_PATH}/${GCC_COMBO_FOLDER_NAME}"
-
-    install -v -c -m 644 "readme.txt" \
-      "${APP_PREFIX}/${DISTRO_INFO_NAME}/arm-readme.txt"
-
-    install -v -c -m 644 "release.txt" \
-      "${APP_PREFIX}/${DISTRO_INFO_NAME}/arm-release.txt"
-  )
-}
-
 function final_tunings()
 {
   # Create the missing LTO plugin links.
   # For `ar` to work with LTO objects, it needs the plugin in lib/bfd-plugins,
   # but the build leaves it where `ld` needs it. On POSIX, make a soft link.
-  if [ "${FIX_LTO_PLUGIN}" == "y" ]
+  if [ "${FIX_LTO_PLUGIN:-}" == "y" ]
   then
     (
       cd "${APP_PREFIX}"

@@ -3,12 +3,12 @@
 #   (https://xpack.github.io)
 # Copyright (c) 2019 Liviu Ionescu.
 #
-# Permission to use, copy, modify, and/or distribute this software 
+# Permission to use, copy, modify, and/or distribute this software
 # for any purpose is hereby granted, under the terms of the MIT license.
 # -----------------------------------------------------------------------------
 
-# Helper script used in the second edition of the GNU MCU Eclipse build 
-# scripts. As the name implies, it should contain only functions and 
+# Helper script used in the second edition of the GNU MCU Eclipse build
+# scripts. As the name implies, it should contain only functions and
 # should be included with 'source' by the container build scripts.
 
 # -----------------------------------------------------------------------------
@@ -18,7 +18,7 @@ function build_versions()
   APP_PREFIX_NANO="${INSTALL_FOLDER_PATH}/${APP_LC_NAME}-nano"
 
   # Don't use a comma since the regular expression
-  # that processes this string in bfd/Makefile, silently fails and the 
+  # that processes this string in bfd/Makefile, silently fails and the
   # bfdver.h file remains empty.
   # XBB v3.1 update: newer tools expand the unicode and bfd/Makefile.in needs
   # a patch to avoid the comma separator.
@@ -35,67 +35,43 @@ function build_versions()
   # Defaults. Must be present.
 
   # Redefine to existing file names to enable patches.
-  GCC_PATCH=""
-  GDB_PATCH=""
-  HAS_WINPTHREAD=""
-
-  # Use it to download a separate binutils from Git.
-  BINUTILS_GIT_URL=""
-
-  WITH_GDB_PY=""
-  WITH_GDB_PY3=""
-  USE_PLATFORM_PYTHON=""
-  USE_PLATFORM_PYTHON3=""
-
-  if [ "${WITHOUT_MULTILIB}" == "y" ]
-  then
-    MULTILIB_FLAGS="--disable-multilib"
-  else
-    MULTILIB_FLAGS="--with-multilib-list=rmprofile"
-  fi
-
-  # Redefine to actual URL if the build should use the Git sources.
-  # Also be sure GDB_GIT_BRANCH and GDB_GIT_COMMIT are defined
-  GDB_GIT_URL=""
-  # Defined for completeness, not yet used by download_gdb().
-  GDB_ARCHIVE_URL=""
-
-  GETTEXT_VERSION=""
-
-  NCURSES_VERSION=""
-  GPM_VERSION=""
+  GCC_PATCH_FILE_NAME=""
+  GDB_PATCH_FILE_NAME=""
 
   # ---------------------------------------------------------------------------
 
   # Redefine to "y" to create the LTO plugin links.
-  FIX_LTO_PLUGIN=""
   if [ "${TARGET_PLATFORM}" == "darwin" ]
   then
-    LTO_PLUGIN_ORIGINAL_NAME="liblto_plugin.0.so"
+    LTO_PLUGIN_ORIGINAL_NAME="liblto_plugin.so"
     LTO_PLUGIN_BFD_PATH="lib/bfd-plugins/liblto_plugin.so"
   elif [ "${TARGET_PLATFORM}" == "linux" ]
   then
-    LTO_PLUGIN_ORIGINAL_NAME="liblto_plugin.so.0.0.0"
+    LTO_PLUGIN_ORIGINAL_NAME="liblto_plugin.so"
     LTO_PLUGIN_BFD_PATH="lib/bfd-plugins/liblto_plugin.so"
   elif [ "${TARGET_PLATFORM}" == "win32" ]
   then
-    LTO_PLUGIN_ORIGINAL_NAME="liblto_plugin-0.dll"
-    LTO_PLUGIN_BFD_PATH="lib/bfd-plugins/liblto_plugin-0.dll"
+    LTO_PLUGIN_ORIGINAL_NAME="liblto_plugin.dll"
+    LTO_PLUGIN_BFD_PATH="lib/bfd-plugins/liblto_plugin.dll"
   fi
 
   FIX_LTO_PLUGIN="y"
-  WITH_LIBS_LTO=""
+
+  NCURSES_DISABLE_WIDEC="y"
 
   # ---------------------------------------------------------------------------
 
   # No versioning here, the inner archives use simple names.
-  BINUTILS_SRC_FOLDER_NAME=${BINUTILS_SRC_FOLDER_NAME:-"binutils"}
+#  BINUTILS_SRC_FOLDER_NAME=${BINUTILS_SRC_FOLDER_NAME:-"binutils"}
 
-  GCC_SRC_FOLDER_NAME=${GCC_SRC_FOLDER_NAME:-"gcc"}
-  NEWLIB_SRC_FOLDER_NAME=${NEWLIB_SRC_FOLDER_NAME:-"newlib"}
-  GDB_SRC_FOLDER_NAME=${GDB_SRC_FOLDER_NAME:-"gdb"}
+#  GCC_SRC_FOLDER_NAME=${GCC_SRC_FOLDER_NAME:-"gcc"}
+#  NEWLIB_SRC_FOLDER_NAME=${NEWLIB_SRC_FOLDER_NAME:-"newlib"}
+#  GDB_SRC_FOLDER_NAME=${GDB_SRC_FOLDER_NAME:-"gdb"}
 
   # ---------------------------------------------------------------------------
+
+  GCC_VERSION="$(echo "${RELEASE_VERSION}" | sed -e 's|-.*||')"
+  GCC_VERSION_MAJOR=$(echo ${GCC_VERSION} | sed -e 's|\([0-9][0-9]*\)\..*|\1|')
 
   if [ "${TARGET_PLATFORM}" == "win32" ]
   then
@@ -103,9 +79,222 @@ function build_versions()
   fi
 
   # In reverse chronological order.
-  # Keep them in sync with combo archive content.
+  # Keep them in sync with the release manifest.txt file.
+  # https://developer.arm.com/tools-and-software/open-source-software/developer-tools/gnu-toolchain/downloads-1
+  if [[ "${RELEASE_VERSION}" =~ 11\.2\.1-* ]]
+  then
+    # https://developer.arm.com/-/media/Files/downloads/gnu/11.2-2022.02/manifest/gcc-arm-arm-none-eabi-abe-manifest.txt
+    (
+      xbb_activate
+
+      ARM_RELEASE="11.2-2022.02"
+      ARM_URL_BASE="https://developer.arm.com/-/media/Files/downloads/gnu/${ARM_RELEASE}/src"
+
+      # -------------------------------------------------------------------------
+      # Build dependent libraries.
+
+      # For better control, without it some components pick the lib packed
+      # inside the archive.
+      build_zlib "1.2.12" # "1.2.8"
+
+      # The classical GCC libraries.
+      # https://gmplib.org/download/gmp/
+      # Arm: In `gmp-h.in` search for `__GNU_MP_VERSION`.
+      build_gmp "6.2.1"
+
+      # http://www.mpfr.org/history.html
+      # Arm: In `VERSION`.
+      build_mpfr "3.1.6"
+
+      # https://www.multiprecision.org/mpc/download.html
+      # Arm: In `configure`, search for `VERSION=`.
+      build_mpc "1.0.3"
+
+      # https://sourceforge.net/projects/libisl/files/
+      # Arm: In `configure`, search for `PACKAGE_VERSION=`.
+      build_isl "0.15"
+
+      # https://www.bytereef.org/mpdecimal/download.html
+      build_libmpdec "2.5.1" # "2.5.0" # Used by Python
+
+      # https://github.com/libexpat/libexpat/releases
+      # Arm: from release notes
+      # https://developer.arm.com/tools-and-software/open-source-software/developer-tools/gnu-toolchain/downloads-1
+      build_expat "2.2.5" # "2.1.1"
+
+      # https://ftp.gnu.org/pub/gnu/libiconv/
+      # Arm: In `configure`, search for `PACKAGE_VERSION=`.
+      build_libiconv "1.15"
+
+      # https://sourceforge.net/projects/lzmautils/files/
+      build_xz "5.2.5" # "5.2.3"
+
+      # Fails on mingw. 0.8.13 is deprecated. Not used anyway.
+      # build_libelf "0.8.13"
+
+      # http://ftp.gnu.org/pub/gnu/gettext/
+      build_gettext "0.21"
+
+      # https://www.python.org/ftp/python/
+      # Requires `scripts/helper/extras/python/pyconfig-win-3.10.4.h` &
+      # `python3-config.sh`
+      PYTHON3_VERSION="3.10.4"
+      WITH_GDB_PY3="y"
+
+      if [ "${TARGET_PLATFORM}" == "win32" ]
+      then
+        if [ "${WITH_GDB_PY3}" == "y" ]
+        then
+          # Shortcut, use the existing pyton.exe instead of building
+          # if from sources. It also downloads the sources.
+          download_python3_win "${PYTHON3_VERSION}"
+
+          add_python3_win_syslibs
+        fi
+      else # linux or darwin
+        # Used by ncurses. Fails on macOS.
+        if [ "${TARGET_PLATFORM}" == "linux" ]
+        then
+          # https://github.com/telmich/gpm/tags
+          # https://github.com/xpack-dev-tools/gpm/tags
+          build_gpm "1.20.7-1" # "1.20.7"
+        fi
+
+        # https://ftp.gnu.org/gnu/ncurses/
+        build_ncurses "6.3" # "6.2"
+
+        # https://ftp.gnu.org/gnu/readline/
+        build_readline "8.1" # "8.0" # requires ncurses
+
+        # https://sourceware.org/pub/bzip2/
+        build_bzip2 "1.0.8"
+        # https://github.com/libffi/libffi/releases
+        build_libffi  "3.4.2" # "3.3"
+
+        # We cannot rely on a python shared library in the system, even
+        # the custom build from sources does not have one.
+
+        if [ "${WITH_GDB_PY3}" == "y" ]
+        then
+          # Required by a Python 3 module.
+          # https://www.sqlite.org/download.html
+          build_sqlite  "3380200" # "3.32.3"
+
+          # Replacement for the old libcrypt.so.1; required by Python 3.
+          # https://github.com/besser82/libxcrypt/releases
+          build_libxcrypt "4.4.28" # "4.4.17"
+
+          # https://www.openssl.org/source/
+          build_openssl "1.1.1n" # "1.1.1l" # "1.1.1h"
+
+          build_python3 "${PYTHON3_VERSION}"
+
+          add_python3_syslibs
+        fi
+      fi
+
+      # -----------------------------------------------------------------------
+
+      # The task descriptions are from the Arm build script.
+
+      # Task [III-0] /$HOST_NATIVE/binutils/
+      # Task [IV-1] /$HOST_MINGW/binutils/
+
+      # Arm: release notes.
+      # Repository: git://sourceware.org/git/binutils-gdb.git
+      # Branch: binutils-2_37-branch
+      # Revision: 5f62caec8175cf80a29f2bcab2c5077cbfae8c89
+      # https://github.com/xpack-dev-tools/binutils-gdb/tags
+
+      BINUTILS_VERSION="2.37"
+      BINUTILS_TAG_NAME="binutils-${BINUTILS_VERSION}-arm-none-eabi-${ARM_RELEASE}"
+
+      BINUTILS_SRC_FOLDER_NAME="binutils-gdb-${BINUTILS_TAG_NAME}"
+      BINUTILS_ARCHIVE_NAME="${BINUTILS_TAG_NAME}.tar.gz"
+      BINUTILS_ARCHIVE_URL="https://github.com/xpack-dev-tools/binutils-gdb/archive/refs/tags/${BINUTILS_ARCHIVE_NAME}"
+
+      build_binutils
+      # The nano requirement (copy_dir to libs) included above.
+
+      # -----------------------------------------------------------------------
+
+      # Arm: release notes.
+      # Repository: git://gcc.gnu.org/git/gcc.git
+      # Branch: refs/vendors/ARM/heads/arm-11
+      # Revision:028202d8ad150f23fcccd4d923c96aff4c2607cf
+
+      # GCC_VERSION computer from RELEASE_VERSION
+      GCC_SRC_FOLDER_NAME="gcc"
+      GCC_ARCHIVE_NAME="gcc-arm-none-eabi-${ARM_RELEASE}.tar.xz"
+      GCC_ARCHIVE_URL="${ARM_URL_BASE}/gcc.tar.xz"
+
+      GCC_MULTILIB_LIST="aprofile,rmprofile"
+
+      if [ "${TARGET_PLATFORM}" != "win32" ]
+      then
+
+        # Task [III-1] /$HOST_NATIVE/gcc-first/
+        build_gcc_first
+
+        # Arm: release notes.
+        # Repository: git://sourceware.org/git/newlib-cygwin.git
+        # Revision: 2a3a03972b35377aef8d3d52d873ac3b8fcc512c
+
+        NEWLIB_VERSION="4.1.0"
+        NEWLIB_SRC_FOLDER_NAME="newlib-cygwin"
+        NEWLIB_ARCHIVE_NAME="newlib-arm-none-eabi-${ARM_RELEASE}.tar.xz"
+        NEWLIB_ARCHIVE_URL="${ARM_URL_BASE}/newlib-cygwin.tar.xz"
+
+        # Task [III-2] /$HOST_NATIVE/newlib/
+        build_newlib ""
+
+        # Task [III-4] /$HOST_NATIVE/gcc-final/
+        build_gcc_final ""
+
+        # Once again, for the -nano variant.
+        # Task [III-3] /$HOST_NATIVE/newlib-nano/
+        build_newlib "-nano"
+
+        # Task [III-5] /$HOST_NATIVE/gcc-size-libstdcxx/
+        build_gcc_final "-nano"
+
+      else
+
+        # Task [IV-2] /$HOST_MINGW/copy_libs/
+        copy_linux_libs
+
+        # Task [IV-3] /$HOST_MINGW/gcc-final/
+        build_gcc_final ""
+
+      fi
+
+      # -----------------------------------------------------------------------
+
+      # Arm: release notes.
+      # Repository: git://sourceware.org/git/binutils-gdb.git
+      # Branch: gdb-11-branch
+      # Revision: a10d1f2c33a9a329f3a3006e07cfe872a7cc965b
+
+      # https://github.com/xpack-dev-tools/binutils-gdb/archive/refs/tags/gdb-11-arm-none-eabi-11.2-2022.02.tar.gz
+
+      # From `gdb/version.in`
+      GDB_VERSION="11.2"
+      GDB_SRC_FOLDER_NAME="binutils-gdb-gdb-11-arm-none-eabi-${ARM_RELEASE}"
+      GDB_ARCHIVE_NAME="gdb-11-arm-none-eabi-${ARM_RELEASE}.tar.gz"
+      GDB_ARCHIVE_URL="https://github.com/xpack-dev-tools/binutils-gdb/archive/refs/tags/${GDB_ARCHIVE_NAME}"
+
+      # Task [III-6] /$HOST_NATIVE/gdb/
+      # Task [IV-4] /$HOST_MINGW/gdb/
+      build_gdb ""
+
+      if [ "${WITH_GDB_PY3}" == "y" ]
+      then
+        build_gdb "-py3"
+      fi
+    )
+
   # https://developer.arm.com/tools-and-software/open-source-software/developer-tools/gnu-toolchain/gnu-rm/downloads
-  if [[ "${RELEASE_VERSION}" =~ 10\.3\.1-* ]]
+  elif [[ "${RELEASE_VERSION}" =~ 10\.3\.1-* ]]
   then
 
     # Used to download the Arm source archive.
@@ -136,13 +325,13 @@ function build_versions()
     # Used mainly to name the build folders.
 
     # The commit ids are different for 2021.07, but the versions are the same.
-    
+
     # From /release.txt
     # binutils-2_36-branch
     # git://sourceware.org/git/binutils-gdb.git commit a7eb3ff36cebc093af6658049e03d63579dade86
     BINUTILS_VERSION="2.36"
 
-    # From /release.txt (gcc/BASE_VER). 
+    # From /release.txt (gcc/BASE_VER).
     # refs/vendors/ARM/heads/arm-10
     # git://gcc.gnu.org/git/gcc.git commit a7eb0564c3060418b5ca68c2806ad74f73384fd0
     GCC_VERSION="10.3.1"
@@ -168,12 +357,12 @@ function build_versions()
     # pyconfig-win-N.N.N.h!
     PYTHON3_VERSION="3.7.9"
 
-    GDB_PATCH="gdb-${GDB_VERSION}.patch"
+    GDB_PATCH_FILE_NAME="gdb-${GDB_VERSION}.patch"
 
     if [[ "${RELEASE_VERSION}" =~ 10\.3\.1-2\.3 ]] \
        && [ "${TARGET_PLATFORM}" == "darwin" -a "${TARGET_ARCH}" == "arm64" ]
     then
-      GCC_PATCH="gcc-10.3.1-apple-silicon.patch.diff"
+      GCC_PATCH_FILE_NAME="gcc-10.3.1-apple-silicon.patch.diff"
     fi
 
     # -------------------------------------------------------------------------
@@ -187,7 +376,7 @@ function build_versions()
       # -------------------------------------------------------------------------
       # Build dependent libraries.
 
-      # For better control, without it some components pick the lib packed 
+      # For better control, without it some components pick the lib packed
       # inside the archive.
       build_zlib "1.2.8"
 
@@ -346,7 +535,7 @@ function build_versions()
     # PATCH!
     BINUTILS_VERSION="2.35"
 
-    # From /release.txt (gcc/BASE_VER). 
+    # From /release.txt (gcc/BASE_VER).
     # refs/vendors/ARM/heads/arm-10
     # git://gcc.gnu.org/git/gcc.git commit 3b91aab15443ee150b2ba314a4b26645ce8d713b
     GCC_VERSION="10.2.1"
@@ -369,7 +558,7 @@ function build_versions()
     # pyconfig-win-N.N.N.h!
     PYTHON3_VERSION="3.7.9"
 
-    GDB_PATCH="gdb-${GDB_VERSION}.patch"
+    GDB_PATCH_FILE_NAME="gdb-${GDB_VERSION}.patch"
 
     # -------------------------------------------------------------------------
 
@@ -382,7 +571,7 @@ function build_versions()
       # -------------------------------------------------------------------------
       # Build dependent libraries.
 
-      # For better control, without it some components pick the lib packed 
+      # For better control, without it some components pick the lib packed
       # inside the archive.
       build_zlib "1.2.8"
 
@@ -528,7 +717,7 @@ function build_versions()
     # git://sourceware.org/git/binutils-gdb.git commit f75c52135257ea05da151a508d99fbaee1bb9dc1
     BINUTILS_VERSION="2.34"
 
-    # From /release.txt (gcc/BASE_VER). 
+    # From /release.txt (gcc/BASE_VER).
     # refs/vendors/ARM/heads/arm-9-branch
     # git://gcc.gnu.org/git/gcc.git commit 13861a80750d118fbdca6006ab175903bacbb7ec
     GCC_VERSION="9.3.1"
@@ -548,9 +737,9 @@ function build_versions()
     then
       if [ "${TARGET_PLATFORM}" == "win32" ]
       then
-        # On Windows if fails with 
+        # On Windows if fails with
         # "The procedure entry point ClearCommBreak could not be located
-        # in the dynamic link library." 
+        # in the dynamic link library."
         # It looks like an incompatibility between Python2 and mingw-w64.
         # Given that Python2 is end-of-life, it is not worth to further
         # investigate, disable it for now.
@@ -568,14 +757,14 @@ function build_versions()
 
       PYTHON2_VERSION="2.7.18"
 
-      WITH_GDB_PY3="y" 
+      WITH_GDB_PY3="y"
       PYTHON3_VERSION="3.7.6"
     else # [345]
-      WITH_GDB_PY3="y" 
+      WITH_GDB_PY3="y"
       PYTHON3_VERSION="3.7.9"
     fi
 
-    GDB_PATCH="gdb-${GDB_VERSION}.patch"
+    GDB_PATCH_FILE_NAME="gdb-${GDB_VERSION}.patch"
 
     # -------------------------------------------------------------------------
 
@@ -588,7 +777,7 @@ function build_versions()
       # -------------------------------------------------------------------------
       # Build dependent libraries.
 
-      # For better control, without it some components pick the lib packed 
+      # For better control, without it some components pick the lib packed
       # inside the archive.
       build_zlib "1.2.8"
 
@@ -735,7 +924,7 @@ function build_versions()
     # From /release.txt
     BINUTILS_VERSION="2.32"
 
-    # From gcc/BASE_VER. 
+    # From gcc/BASE_VER.
     # gcc/LAST_UPDATED: Wed Oct 30 01:03:41 UTC 2019 (revision 277599)
     GCC_VERSION="9.2.1"
 
@@ -755,7 +944,7 @@ function build_versions()
     # GDB does not know the Python3 API when compiled with mingw.
     if [ "${TARGET_PLATFORM}" != "win32" ]
     then
-      WITH_GDB_PY3="y" 
+      WITH_GDB_PY3="y"
       PYTHON3_VERSION="3.7.2" # -> 3.7.6
     fi
 
@@ -773,7 +962,7 @@ function build_versions()
         USE_PLATFORM_PYTHON="n"
         USE_PLATFORM_PYTHON3="n"
       fi
-      GDB_PATCH="gdb-${GDB_VERSION}.patch"
+      GDB_PATCH_FILE_NAME="gdb-${GDB_VERSION}.patch"
 
       if [ "${TARGET_PLATFORM}" == "win32" ]
       then
@@ -781,7 +970,7 @@ function build_versions()
       fi
 
       # https://sourceware.org/git/gitweb.cgi?p=binutils-gdb.git;a=commit;h=272044897e178835f596c96740c5a1800ec6f9fb
-      WITH_GDB_PY3="y" 
+      WITH_GDB_PY3="y"
       PYTHON3_VERSION="3.7.6"
     fi
 
@@ -796,7 +985,7 @@ function build_versions()
       # -------------------------------------------------------------------------
       # Build dependent libraries.
 
-      # For better control, without it some components pick the lib packed 
+      # For better control, without it some components pick the lib packed
       # inside the archive.
       build_zlib "1.2.8"
 
