@@ -1319,7 +1319,7 @@ function build_gdb()
           then
             if [ "${TARGET_PLATFORM}" == "win32" ]
             then
-              config_options+=("--with-python=${helper_folder_path}/extras/python/python${PYTHON3_VERSION_MAJOR_MINOR}-config.sh")
+              config_options+=("--with-python=${helper_folder_path}/extras/python/python${PYTHON3_VERSION_MAJOR}-config.sh")
             else
               config_options+=("--with-python=${LIBS_INSTALL_FOLDER_PATH}/bin/python3.${PYTHON3_VERSION_MINOR}")
             fi
