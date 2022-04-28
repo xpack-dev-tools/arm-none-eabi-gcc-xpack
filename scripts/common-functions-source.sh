@@ -3,12 +3,12 @@
 #   (https://xpack.github.io)
 # Copyright (c) 2019 Liviu Ionescu.
 #
-# Permission to use, copy, modify, and/or distribute this software 
+# Permission to use, copy, modify, and/or distribute this software
 # for any purpose is hereby granted, under the terms of the MIT license.
 # -----------------------------------------------------------------------------
 
-# Helper script used in the second edition of the GNU MCU Eclipse build 
-# scripts. As the name implies, it should contain only functions and 
+# Helper script used in the second edition of the GNU MCU Eclipse build
+# scripts. As the name implies, it should contain only functions and
 # should be included with 'source' by the container build scripts.
 
 # -----------------------------------------------------------------------------
@@ -41,20 +41,22 @@ function define_flags_for_target()
     optimize+=" -fno-exceptions"
   fi
 
-  CFLAGS_FOR_TARGET="${optimize}" 
-  CXXFLAGS_FOR_TARGET="${optimize}" 
+  CFLAGS_FOR_TARGET="${optimize}"
+  CXXFLAGS_FOR_TARGET="${optimize}"
   if [ "${IS_DEBUG}" == "y" ]
   then
     # Avoid `-g`, many local symbols cannot be removed by strip.
     CFLAGS_FOR_TARGET+=" -g"
     CXXFLAGS_FOR_TARGET+=" -g"
   fi
-  
-  if [ "${WITH_LIBS_LTO}" == "y" ]
+
+  if [ "${WITH_LIBS_LTO:-}" == "y" ]
   then
     CFLAGS_FOR_TARGET+=" -flto -ffat-lto-objects"
     CXXFLAGS_FOR_TARGET+=" -flto -ffat-lto-objects"
-  fi 
+  fi
+
+  LDFLAGS_FOR_TARGET="--specs=nosys.specs"
 }
 
 # -----------------------------------------------------------------------------
