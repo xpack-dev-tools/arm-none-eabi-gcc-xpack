@@ -380,7 +380,8 @@ function build_gcc_first()
 # $1="" or $1="-nano"
 function build_newlib()
 {
-  local newlib_folder_name="newlib-${NEWLIB_VERSION}$1"
+  local name_suffix=${1-''}
+  local newlib_folder_name="newlib-${NEWLIB_VERSION}${name_suffix}"
 
   mkdir -pv "${LOGS_FOLDER_PATH}/${newlib_folder_name}"
 
@@ -406,7 +407,7 @@ function build_newlib()
       CFLAGS="${XBB_CFLAGS_NO_W}"
       CXXFLAGS="${XBB_CXXFLAGS_NO_W}"
 
-      define_flags_for_target "$1"
+      define_flags_for_target "${name_suffix}"
 
       export CPPFLAGS
       export CFLAGS
@@ -443,7 +444,7 @@ function build_newlib()
           # --enable-newlib-retargetable-locking ???
 
           echo
-          echo "Running newlib$1 configure..."
+          echo "Running newlib${name_suffix} configure..."
 
           bash "${SOURCES_FOLDER_PATH}/${NEWLIB_SRC_FOLDER_NAME}/configure" --help
 
@@ -451,7 +452,7 @@ function build_newlib()
           # the list of options, such that it can be extended, so the
           # brute force approach is to duplicate the entire call.
 
-          if [ "$1" == "" ]
+          if [ "${name_suffix}" == "" ]
           then
 
             # Extra options compared to Arm 9.3.1 distribution:
@@ -477,7 +478,7 @@ function build_newlib()
               --enable-newlib-io-long-long \
               --enable-newlib-io-c99-formats \
 
-          elif [ "$1" == "-nano" ]
+          elif [ "${name_suffix}" == "-nano" ]
           then
 
             # --enable-newlib-io-long-long and --enable-newlib-io-c99-formats
@@ -505,7 +506,7 @@ function build_newlib()
               --disable-nls \
 
           else
-            echo "Unsupported build_newlib arg $1"
+            echo "Unsupported build_newlib arg ${name_suffix}"
             exit 1
           fi
 
@@ -516,7 +517,7 @@ function build_newlib()
       (
         # Partial build, without documentation.
         echo
-        echo "Running newlib$1 make..."
+        echo "Running newlib${name_suffix} make..."
 
         # Parallel builds may fail.
         run_verbose make -j ${JOBS}
@@ -525,7 +526,7 @@ function build_newlib()
         # Top make fails with install-strip due to libgloss make.
         run_verbose make install
 
-        if [ "$1" == "" ]
+        if [ "${name_suffix}" == "" ]
         then
 
           if [ "${WITH_PDF}" == "y" ]
@@ -571,7 +572,7 @@ function build_newlib()
 
       ) 2>&1 | tee "${LOGS_FOLDER_PATH}/${newlib_folder_name}/make-output-$(ndate).txt"
 
-      if [ "$1" == "" ]
+      if [ "${name_suffix}" == "" ]
       then
         copy_license \
           "${SOURCES_FOLDER_PATH}/${NEWLIB_SRC_FOLDER_NAME}" \
@@ -684,7 +685,9 @@ function copy_linux_libs()
 # $1="" or $1="-nano"
 function build_gcc_final()
 {
-  local gcc_final_folder_name="gcc-${GCC_VERSION}-final$1"
+  local name_suffix=${1-''}
+
+  local gcc_final_folder_name="gcc-${GCC_VERSION}-final${name_suffix}"
 
   mkdir -pv "${LOGS_FOLDER_PATH}/${gcc_final_folder_name}"
 
@@ -728,7 +731,7 @@ function build_gcc_final()
       # Do not add CRT_glob.o here, it will fail with already defined,
       # since it is already handled by --enable-mingw-wildcard.
 
-      define_flags_for_target "$1"
+      define_flags_for_target "${name_suffix}"
 
       export CPPFLAGS
       export CFLAGS
@@ -764,7 +767,7 @@ function build_gcc_final()
           fi
 
           echo
-          echo "Running gcc$1 final stage configure..."
+          echo "Running gcc${name_suffix} final stage configure..."
 
           bash "${SOURCES_FOLDER_PATH}/${GCC_SRC_FOLDER_NAME}/configure" --help
 
@@ -784,7 +787,8 @@ function build_gcc_final()
           # --with-native-system-header-dir is needed to locate stdio.h, to
           # prevent -Dinhibit_libc, which will skip some functionality,
           # like libgcov.
-          if [ "$1" == "" ]
+
+          if [ "${name_suffix}" == "" ]
           then
 
             run_verbose bash ${DEBUG} "${SOURCES_FOLDER_PATH}/${GCC_SRC_FOLDER_NAME}/configure" \
@@ -826,7 +830,7 @@ function build_gcc_final()
               --disable-build-format-warnings \
               --with-system-zlib
 
-          elif [ "$1" == "-nano" ]
+          elif [ "${name_suffix}" == "-nano" ]
           then
 
             run_verbose bash ${DEBUG} "${SOURCES_FOLDER_PATH}/${GCC_SRC_FOLDER_NAME}/configure" \
@@ -870,7 +874,7 @@ function build_gcc_final()
       (
         # Partial build, without documentation.
         echo
-        echo "Running gcc$1 final stage make..."
+        echo "Running gcc${name_suffix} final stage make..."
 
         if [ "${TARGET_PLATFORM}" != "win32" ]
         then
@@ -902,7 +906,7 @@ function build_gcc_final()
           # make install-strip
           run_verbose make install
 
-          if [ "$1" == "-nano" ]
+          if [ "${name_suffix}" == "-nano" ]
           then
 
             local target_gcc=""
@@ -943,7 +947,7 @@ function build_gcc_final()
 
         fi
 
-        if [ "$1" == "" ]
+        if [ "${name_suffix}" == "" ]
         then
           (
             xbb_activate_tex
@@ -965,7 +969,7 @@ function build_gcc_final()
 
       ) 2>&1 | tee "${LOGS_FOLDER_PATH}/${gcc_final_folder_name}/make-output-$(ndate).txt"
 
-      if [ "$1" == "" ]
+      if [ "${name_suffix}" == "" ]
       then
         copy_license \
           "${SOURCES_FOLDER_PATH}/${GCC_SRC_FOLDER_NAME}" \
@@ -977,10 +981,10 @@ function build_gcc_final()
     touch "${gcc_final_stamp_file_path}"
 
   else
-    echo "Component gcc$1 final stage already installed."
+    echo "Component gcc${name_suffix} final stage already installed."
   fi
 
-  if [ "$1" == "" ]
+  if [ "${name_suffix}" == "" ]
   then
     tests_add "test_gcc"
   fi
@@ -1067,10 +1071,12 @@ __EOF__
 # $1="" or $1="-py" or $1="-py3"
 function build_gdb()
 {
+  local name_suffix=${1-''}
+
   # GDB Text User Interface
   # https://ftp.gnu.org/old-gnu/Manuals/gdb/html_chapter/gdb_19.html#SEC197
 
-  local gdb_folder_name="gdb-${GDB_VERSION}$1"
+  local gdb_folder_name="gdb-${GDB_VERSION}${name_suffix}"
 
   mkdir -pv "${LOGS_FOLDER_PATH}/${gdb_folder_name}"
 
@@ -1116,7 +1122,7 @@ function build_gdb()
         # ???
         CPPFLAGS+=" -DPy_BUILD_CORE_BUILTIN=1"
 
-        if [ "$1" == "-py" ]
+        if [ "${name_suffix}" == "-py" ]
         then
           # Definition required by python-config.sh.
           export GNURM_PYTHON_WIN_DIR="${SOURCES_FOLDER_PATH}/${PYTHON2_SRC_FOLDER_NAME}"
@@ -1149,8 +1155,7 @@ function build_gdb()
 
       CONFIG_PYTHON_PREFIX=""
 
-      local extra_python_opts="--with-python=no"
-      if [ "$1" == "-py3" ]
+      if [ "${name_suffix}" == "-py3" ]
       then
         if [ "${TARGET_PLATFORM}" == "win32" ]
         then
@@ -1201,7 +1206,7 @@ function build_gdb()
           fi
 
           echo
-          echo "Running gdb$1 configure..."
+          echo "Running gdb${name_suffix} configure..."
 
           bash "${SOURCES_FOLDER_PATH}/${GDB_SRC_FOLDER_NAME}/gdb/configure" --help
 
@@ -1248,7 +1253,7 @@ function build_gdb()
 
       (
         echo
-        echo "Running gdb$1 make..."
+        echo "Running gdb${name_suffix} make..."
 
         # Build.
         run_verbose make -j ${JOBS}
@@ -1258,7 +1263,7 @@ function build_gdb()
         # strip:.../install/riscv-none-gcc/bin/_inst.672_: file format not recognized
         run_verbose make install
 
-        if [ "$1" == "" ]
+        if [ "${name_suffix}" == "" ]
         then
           (
             xbb_activate_tex
@@ -1279,11 +1284,11 @@ function build_gdb()
 
         rm -rfv "${LIBS_INSTALL_FOLDER_PATH}/include/pyconfig.h"
 
-        show_libs "${APP_PREFIX}/bin/${GCC_TARGET}-gdb$1"
+        show_libs "${APP_PREFIX}/bin/${GCC_TARGET}-gdb${name_suffix}"
 
       ) 2>&1 | tee "${LOGS_FOLDER_PATH}/${gdb_folder_name}/make-output-$(ndate).txt"
 
-      if [ "$1" == "" ]
+      if [ "${name_suffix}" == "" ]
       then
         copy_license \
           "${SOURCES_FOLDER_PATH}/${GDB_SRC_FOLDER_NAME}" \
@@ -1294,10 +1299,10 @@ function build_gdb()
 
     touch "${gdb_stamp_file_path}"
   else
-    echo "Component gdb$1 already installed."
+    echo "Component gdb${name_suffix} already installed."
   fi
 
-  tests_add "test_gdb$1"
+  tests_add "test_gdb${name_suffix}"
 }
 
 function test_gdb_py()
