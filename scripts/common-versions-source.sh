@@ -219,6 +219,7 @@ function build_versions()
       GCC_ARCHIVE_NAME="gcc-arm-none-eabi-${ARM_RELEASE}.tar.xz"
       GCC_ARCHIVE_URL="${ARM_URL_BASE}/gcc.tar.xz"
 
+      GCC_PATCH_FILE_NAME="gcc-${GCC_VERSION}.patch.diff"
       GCC_MULTILIB_LIST="aprofile,rmprofile"
 
       if [ "${TARGET_PLATFORM}" != "win32" ]
