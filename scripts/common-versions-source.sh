@@ -61,15 +61,6 @@ function build_versions()
 
   # ---------------------------------------------------------------------------
 
-  # No versioning here, the inner archives use simple names.
-#  BINUTILS_SRC_FOLDER_NAME=${BINUTILS_SRC_FOLDER_NAME:-"binutils"}
-
-#  GCC_SRC_FOLDER_NAME=${GCC_SRC_FOLDER_NAME:-"gcc"}
-#  NEWLIB_SRC_FOLDER_NAME=${NEWLIB_SRC_FOLDER_NAME:-"newlib"}
-#  GDB_SRC_FOLDER_NAME=${GDB_SRC_FOLDER_NAME:-"gdb"}
-
-  # ---------------------------------------------------------------------------
-
   GCC_VERSION="$(echo "${RELEASE_VERSION}" | sed -e 's|-.*||')"
   GCC_VERSION_MAJOR=$(echo ${GCC_VERSION} | sed -e 's|\([0-9][0-9]*\)\..*|\1|')
 
