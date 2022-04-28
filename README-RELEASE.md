@@ -117,6 +117,14 @@ bash ${HOME}/Work/arm-none-eabi-gcc-xpack.git/scripts/helper/build.sh --develop 
 bash ${HOME}/Work/arm-none-eabi-gcc-xpack.git/scripts/helper/build.sh --develop --arm32 --disable-multilib
 ```
 
+The builds may take up to 3.5h:
+
+- `xbbmi`: 120 min
+- `xbbma`: 34 min
+- `xbbli`: 40 min, 143 min with multilib:
+- `xbbla64`: 199 min
+- `xbbla32`: 203 min
+
 Work on the scripts until all platforms pass the build.
 
 Possibly add binutils & gdb patches.
