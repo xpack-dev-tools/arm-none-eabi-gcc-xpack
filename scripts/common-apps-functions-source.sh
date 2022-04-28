@@ -281,6 +281,7 @@ function build_gcc_first()
 
       export CFLAGS_FOR_TARGET
       export CXXFLAGS_FOR_TARGET
+      export LDFLAGS_FOR_TARGET
 
       if [ ! -f "config.status" ]
       then
@@ -415,6 +416,7 @@ function build_newlib()
 
       export CFLAGS_FOR_TARGET
       export CXXFLAGS_FOR_TARGET
+      export LDFLAGS_FOR_TARGET
 
       if [ ! -f "config.status" ]
       then
@@ -740,6 +742,7 @@ function build_gcc_final()
 
       export CFLAGS_FOR_TARGET
       export CXXFLAGS_FOR_TARGET
+      export LDFLAGS_FOR_TARGET
 
       local mingw_wildcard="--disable-mingw-wildcard"
 
