@@ -3,12 +3,12 @@
 #   (https://xpack.github.io)
 # Copyright (c) 2019 Liviu Ionescu.
 #
-# Permission to use, copy, modify, and/or distribute this software 
+# Permission to use, copy, modify, and/or distribute this software
 # for any purpose is hereby granted, under the terms of the MIT license.
 # -----------------------------------------------------------------------------
 
-# Helper script used in the second edition of the GNU MCU Eclipse build 
-# scripts. As the name implies, it should contain only functions and 
+# Helper script used in the xPack Dev Tools build scripts.
+# As the name implies, it should contain only functions and
 # should be included with 'source' by the container build scripts.
 
 # -----------------------------------------------------------------------------
