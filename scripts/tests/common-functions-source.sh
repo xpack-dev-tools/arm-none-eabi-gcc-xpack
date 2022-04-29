@@ -25,13 +25,13 @@ function run_tests()
   echo
   env | sort
 
-  test_binutils
+  test_cross_binutils
 
-  test_gcc
+  test_cross_gcc
 
-  test_gdb
+  test_cross_gdb
 
-  test_gdb_py3
+  test_cross_gdb_py3
 }
 
 function update_image()

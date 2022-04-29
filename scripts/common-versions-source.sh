@@ -204,7 +204,7 @@ function build_versions()
       BINUTILS_ARCHIVE_NAME="${BINUTILS_TAG_NAME}.tar.gz"
       BINUTILS_ARCHIVE_URL="https://github.com/xpack-dev-tools/binutils-gdb/archive/refs/tags/${BINUTILS_ARCHIVE_NAME}"
 
-      build_binutils
+      build_cross_binutils
       # The nano requirement (copy_dir to libs) included above.
 
       # -----------------------------------------------------------------------
@@ -226,7 +226,7 @@ function build_versions()
       then
 
         # Task [III-1] /$HOST_NATIVE/gcc-first/
-        build_gcc_first
+        build_cross_gcc_first
 
         # Arm: release notes.
         # Repository: git://sourceware.org/git/newlib-cygwin.git
@@ -241,14 +241,14 @@ function build_versions()
         build_newlib ""
 
         # Task [III-4] /$HOST_NATIVE/gcc-final/
-        build_gcc_final ""
+        build_cross_gcc_final ""
 
         # Once again, for the -nano variant.
         # Task [III-3] /$HOST_NATIVE/newlib-nano/
         build_newlib "-nano"
 
         # Task [III-5] /$HOST_NATIVE/gcc-size-libstdcxx/
-        build_gcc_final "-nano"
+        build_cross_gcc_final "-nano"
 
       else
 
@@ -256,7 +256,7 @@ function build_versions()
         copy_linux_libs
 
         # Task [IV-3] /$HOST_MINGW/gcc-final/
-        build_gcc_final ""
+        build_cross_gcc_final ""
 
       fi
 
@@ -277,11 +277,11 @@ function build_versions()
 
       # Task [III-6] /$HOST_NATIVE/gdb/
       # Task [IV-4] /$HOST_MINGW/gdb/
-      build_gdb ""
+      build_cross_gdb ""
 
       if [ "${WITH_GDB_PY3}" == "y" ]
       then
-        build_gdb "-py3"
+        build_cross_gdb "-py3"
       fi
     )
 
