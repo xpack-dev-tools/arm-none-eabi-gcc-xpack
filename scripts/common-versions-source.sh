@@ -253,7 +253,7 @@ function build_versions()
       else
 
         # Task [IV-2] /$HOST_MINGW/copy_libs/
-        copy_linux_libs
+        copy_cross_linux_libs
 
         # Task [IV-3] /$HOST_MINGW/gcc-final/
         build_cross_gcc_final ""
