@@ -238,14 +238,14 @@ function build_versions()
         NEWLIB_ARCHIVE_URL="${ARM_URL_BASE}/newlib-cygwin.tar.xz"
 
         # Task [III-2] /$HOST_NATIVE/newlib/
-        build_newlib ""
+        build_cross_newlib ""
 
         # Task [III-4] /$HOST_NATIVE/gcc-final/
         build_cross_gcc_final ""
 
         # Once again, for the -nano variant.
         # Task [III-3] /$HOST_NATIVE/newlib-nano/
-        build_newlib "-nano"
+        build_cross_newlib "-nano"
 
         # Task [III-5] /$HOST_NATIVE/gcc-size-libstdcxx/
         build_cross_gcc_final "-nano"
