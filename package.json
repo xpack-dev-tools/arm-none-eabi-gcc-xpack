@@ -57,17 +57,9 @@
           "fileName": "xpack-arm-none-eabi-gcc-10.3.1-2.3-linux-arm.tar.gz",
           "sha256": "cf152bb008697143b802a85fffffc2c9b562bc1e6d0984ad02d4ee1f1bb91790"
         },
-        "linux-ia32": {
-          "fileName": "xpack-arm-none-eabi-gcc-10.3.1-2.3-linux-ia32.tar.gz",
-          "sha256": "8a6621590ac2f0b33fc71f1c501af6b60e900fc3d895a11f20de850cd4f55ca3"
-        },
         "linux-x64": {
           "fileName": "xpack-arm-none-eabi-gcc-10.3.1-2.3-linux-x64.tar.gz",
           "sha256": "559dcf1c2dfddac513110fe23da0ef254032c09967eaa901f075515d51818719"
-        },
-        "win32-ia32": {
-          "fileName": "xpack-arm-none-eabi-gcc-10.3.1-2.3-win32-ia32.zip",
-          "sha256": "c98fc443d7ef3524d42a40b6635e8b99c736efac77729f8a70463bb9ba19bc85"
         },
         "win32-x64": {
           "fileName": "xpack-arm-none-eabi-gcc-10.3.1-2.3-win32-x64.zip",
