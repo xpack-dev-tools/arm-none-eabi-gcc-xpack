@@ -25,6 +25,9 @@ Download the new _Source code_ archive (like
 `gcc-arm-src-snapshot-11.2-2022.02.tar.xz` from
 [Arm](https://developer.arm.com/tools-and-software/open-source-software/developer-tools/gnu-toolchain/downloads-1)
 
+Download the latest Darwin archive
+and copy the `manifest.txt` tile to extras.
+
 ### Increase the version
 
 From `gcc/BASE-VER`, determine the GCC version (like `11.2.1`)
@@ -75,10 +78,6 @@ recreate the archives with the correct file.
 
 To find the actual versions of the dependent libraries, check the
 snapshot archive provided by arm.
-
-### update binutils
-
-...
 
 ### Update helper
 
@@ -149,12 +148,12 @@ and, when ready, rerun the full build.
 Run the `generate-workflows` to re-generate the
 GitHub workflow files; commit and push if necessary.
 
-- on the macOS machine (`xbbmi`) open ssh sessions to the Linux
-machines (`xbbli`, `xbbla64` and `xbbla32`):
+- on the macOS machine (`xbbmi`) open ssh sessions to the build
+machines (`xbbma`, `xbbli`, `xbbla64` and `xbbla32`):
 
 ```sh
+caffeinate ssh xbbma
 caffeinate ssh xbbli
-
 caffeinate ssh xbbla64
 caffeinate ssh xbbla32
 ```
@@ -280,8 +279,8 @@ git -C ${HOME}/Work/arm-none-eabi-gcc-xpack.git submodule update --init --recurs
   the Eclipse projects available in the
   `tests/eclipse` folder of the build repo; more details in the
   [README.md](https://github.com/xpack-dev-tools/arm-none-eabi-gcc-xpack/blob/xpack/tests/eclipse/README.md)
-- define the **Workspace Arm Toolchain path** to use the `Downloads`
-  temporary location
+- in Preferences... → MCU, define the **Workspace Arm Toolchain path** to use
+  the `Downloads` temporary location
 - to test the compiler: for all projects (start with `arm-f4b-fs-lib`)
   - remove all build folders, or **Clean all**
   - build all configs, with the hammer, not with **Build all**, to be sure

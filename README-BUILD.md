@@ -7,7 +7,7 @@ build and publish the
 [xPack GNU Arm Embedded GCC](https://github.com/xpack-dev-tools/arm-none-eabi-gcc-xpack) binaries.
 
 It follows the official
-[Arm](https://developer.arm.com/open-source/gnu-toolchain/gnu-rm)
+[Arm](https://developer.arm.com/tools-and-software/open-source-software/developer-tools/gnu-toolchain)
 distribution, and it is planned to make a new release after each future
 Arm release.
 
@@ -37,13 +37,6 @@ For native builds, see the `build-native.sh` script.
   the URL of the xPack build scripts repository
 - <https://github.com/xpack-dev-tools/build-helper> - the URL of the
   xPack build helper, used as the `scripts/helper` submodule
-- <https://github.com/xpack-dev-tools/arm-gcc-original-scripts.git> -
-  the URL of a local repository with the original Arm build scripts
-
-The build scripts use Arm archives; occasionally, to avoid bugs, original
-repositories are used:
-
-- `git://sourceware.org/git/binutils-gdb.git`
 
 ### Branches
 
@@ -146,8 +139,8 @@ are in the
 
 ## Build
 
-The builds currently run on 3 dedicated machines (Intel GNU/Linux,
-Arm GNU/Linux and Intel macOS). A fourth machine for Arm macOS is planned.
+The builds currently run on 5 dedicated machines (Intel GNU/Linux,
+Arm 32 GNU/Linux, Arm 64 GNU/Linux, Intel macOS and Arm macOS.
 
 ### Build the Intel GNU/Linux and Windows binaries
 
@@ -204,14 +197,14 @@ network connection or a computer entering sleep.
 screen -S arm
 
 sudo rm -rf ~/Work/arm-none-eabi-gcc-*-*
-bash ${HOME}/Work/arm-none-eabi-gcc-xpack.git/scripts/helper/build.sh --develop --disable-multilib --all
+bash ${HOME}/Work/arm-none-eabi-gcc-xpack.git/scripts/helper/build.sh --develop --disable-multilib --linux64 --win64
 ```
 
 or, for development builds:
 
 ```sh
 sudo rm -rf ~/Work/arm-none-eabi-gcc-*-*
-bash ${HOME}/Work/arm-none-eabi-gcc-xpack.git/scripts/helper/build.sh --develop --without-pdf --disable-tests --disable-multilib --linux64 --win64
+bash ${HOME}/Work/arm-none-eabi-gcc-xpack.git/scripts/helper/build.sh --develop --disable-tests --disable-multilib --linux64 --win64
 ```
 
 When ready, run the build on the production machine (`xbbli`):
@@ -265,8 +258,9 @@ The result should look similar to:
 ```console
 $ docker images
 REPOSITORY       TAG                      IMAGE ID       CREATED          SIZE
-ilegeul/ubuntu   arm32v7-16.04-xbb-v3.3   a0ceaa6dad05   57 minutes ago   3.34GB
-ilegeul/ubuntu   arm64v8-16.04-xbb-v3.3   1b0b4a94de6d   13 hours ago     3.6GB
+hello-world      latest                   46331d942d63   6 weeks ago     9.14kB
+ilegeul/ubuntu   arm64v8-18.04-xbb-v3.4   4e7f14f6c886   4 months ago    3.29GB
+ilegeul/ubuntu   arm32v7-18.04-xbb-v3.4   a3718a8e6d0f   4 months ago    2.92GB
 ```
 
 Since the build takes a while, use `screen` to isolate the build session
@@ -277,7 +271,7 @@ network connection or a computer entering sleep.
 screen -S arm
 
 sudo rm -rf ~/Work/arm-none-eabi-gcc-*-*
-bash ${HOME}/Work/arm-none-eabi-gcc-xpack.git/scripts/helper/build.sh --develop --disable-multilib --all
+bash ${HOME}/Work/arm-none-eabi-gcc-xpack.git/scripts/helper/build.sh --develop --disable-multilib  --arm64 --arm32
 ```
 
 or, for development builds:
@@ -286,7 +280,7 @@ or, for development builds:
 screen -S arm
 
 sudo rm -rf ~/Work/arm-none-eabi-gcc-*-*
-bash ${HOME}/Work/arm-none-eabi-gcc-xpack.git/scripts/helper/build.sh --develop --without-pdf --disable-tests --disable-multilib --arm32 --arm64
+bash ${HOME}/Work/arm-none-eabi-gcc-xpack.git/scripts/helper/build.sh --develop --disable-tests --disable-multilib --arm64 --arm32
 ```
 
 To detach from the session, use `Ctrl-a` `Ctrl-d`; to reattach use
@@ -325,14 +319,14 @@ To build the latest macOS version:
 screen -S arm
 
 sudo rm -rf ~/Work/arm-none-eabi-gcc-*-*
-caffeinate bash ${HOME}/Work/arm-none-eabi-gcc-xpack.git/scripts/helper/build.sh --develop  --disable-multilib --macos
+caffeinate bash ${HOME}/Work/arm-none-eabi-gcc-xpack.git/scripts/helper/build.sh --develop --disable-multilib --macos
 ```
 
 or, for development builds:
 
 ```sh
 sudo rm -rf ~/Work/arm-none-eabi-gcc-*-*
-caffeinate bash ${HOME}/Work/arm-none-eabi-gcc-xpack.git/scripts/helper/build.sh --develop --without-pdf --disable-tests --disable-multilib --macos
+caffeinate bash ${HOME}/Work/arm-none-eabi-gcc-xpack.git/scripts/helper/build.sh --develop --disable-tests --disable-multilib --macos
 ```
 
 To detach from the session, use `Ctrl-a` `Ctrl-d`; to reattach use
@@ -361,7 +355,7 @@ Instead of `--all`, you can use any combination of:
 On Arm, instead of `--all`, you can use any combination of:
 
 ```console
---arm32 --arm64
+--arm64 --arm32
 ```
 
 Please note that, due to the specifics of the GCC build process, the
@@ -429,9 +423,9 @@ program from there. For example on macOS the output should
 look like:
 
 ```console
-$ .../xpack-arm-none-eabi-gcc/bin/arm-none-eabi-gcc --version
-arm-none-eabi-gcc (xPack GNU Arm Embedded GCC x86_64) 11.2.1 20201103 (release)
-Copyright (C) 2020 Free Software Foundation, Inc.
+$ .../Downloads/xpack-arm-none-eabi-gcc-11.2.1-1.1/bin/arm-none-eabi-gcc --version
+arm-none-eabi-gcc (xPack GNU Arm Embedded GCC x86_64) 11.2.1 20220111
+Copyright (C) 2021 Free Software Foundation, Inc.
 This is free software; see the source for copying conditions.  There is NO
 warranty; not even for MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
 ```
@@ -454,6 +448,7 @@ $ tree -L 2 /Users/ilg/Library/xPacks/\@xpack-dev-tools/arm-none-eabi-gcc/11.2.1
 │   ├── arm-none-eabi-addr2line
 │   ├── arm-none-eabi-ar
 │   ├── arm-none-eabi-as
+│   ├── arm-none-eabi-as-py3
 │   ├── arm-none-eabi-c++
 │   ├── arm-none-eabi-c++filt
 │   ├── arm-none-eabi-cpp
@@ -471,7 +466,9 @@ $ tree -L 2 /Users/ilg/Library/xPacks/\@xpack-dev-tools/arm-none-eabi-gcc/11.2.1
 │   ├── arm-none-eabi-gdb-add-index
 │   ├── arm-none-eabi-gdb-add-index-py3
 │   ├── arm-none-eabi-gdb-py3
+│   ├── arm-none-eabi-gfortran
 │   ├── arm-none-eabi-gprof
+│   ├── arm-none-eabi-gprof-py3
 │   ├── arm-none-eabi-ld
 │   ├── arm-none-eabi-ld.bfd
 │   ├── arm-none-eabi-lto-dump
@@ -485,8 +482,6 @@ $ tree -L 2 /Users/ilg/Library/xPacks/\@xpack-dev-tools/arm-none-eabi-gcc/11.2.1
 │   └── arm-none-eabi-strip
 ├── distro-info
 │   ├── CHANGELOG.md
-│   ├── arm-readme.txt
-│   ├── arm-release.txt
 │   ├── licenses
 │   ├── patches
 │   └── scripts
@@ -497,33 +492,32 @@ $ tree -L 2 /Users/ilg/Library/xPacks/\@xpack-dev-tools/arm-none-eabi-gcc/11.2.1
 │   ├── gcc
 │   ├── libcc1.0.so
 │   ├── libcc1.so -> libcc1.0.so
-│   └── python3.7
+│   └── python3.10
 ├── libexec
 │   ├── gcc
 │   ├── libcrypt.2.dylib
 │   ├── libcrypto.1.1.dylib
-│   ├── libexpat.1.dylib
+│   ├── libffi.8.dylib
 │   ├── libgcc_s.1.dylib
 │   ├── libgmp.10.dylib
 │   ├── libiconv.2.dylib
-│   ├── libintl.8.dylib
 │   ├── libisl.15.dylib
 │   ├── liblzma.5.dylib
 │   ├── libmpc.3.dylib
 │   ├── libmpfr.4.dylib
 │   ├── libncurses.6.dylib
 │   ├── libpanel.6.dylib
-│   ├── libpython3.7m.dylib
-│   ├── libreadline.8.0.dylib
-│   ├── libreadline.8.dylib -> libreadline.8.0.dylib
+│   ├── libpython3.10.dylib
+│   ├── libreadline.8.1.dylib
+│   ├── libreadline.8.dylib -> libreadline.8.1.dylib
 │   ├── libsqlite3.0.dylib
 │   ├── libssl.1.1.dylib
 │   ├── libstdc++.6.dylib
-│   ├── libz.1.2.8.dylib
-│   └── libz.1.dylib -> libz.1.2.8.dylib
+│   ├── libz.1.2.12.dylib
+│   └── libz.1.dylib -> libz.1.2.12.dylib
 └── share
     ├── doc
-    └── gcc-arm-none-eabi
+    └── gcc-11.2.1
 
 21 directories, 59 files
 ```
