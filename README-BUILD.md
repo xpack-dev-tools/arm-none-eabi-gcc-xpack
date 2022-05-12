@@ -38,6 +38,8 @@ For native builds, see the `build-native.sh` script.
 - <https://github.com/xpack-dev-tools/build-helper> - the URL of the
   xPack build helper, used as the `scripts/helper` submodule
 
+The build scripts use the same source code as Arm.
+
 ### Branches
 
 - `xpack` - the updated content, used during builds
@@ -309,7 +311,6 @@ The current platforms for macOS production builds are:
 
 ```sh
 caffeinate ssh xbbmi
-
 caffeinate ssh xbbma
 ```
 
