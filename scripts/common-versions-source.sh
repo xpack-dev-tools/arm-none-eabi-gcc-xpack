@@ -275,6 +275,9 @@ function build_versions()
       GDB_ARCHIVE_NAME="gdb-11-arm-none-eabi-${ARM_RELEASE}.tar.gz"
       GDB_ARCHIVE_URL="https://github.com/xpack-dev-tools/binutils-gdb/archive/refs/tags/${GDB_ARCHIVE_NAME}"
 
+      # Mandatory, otherwise gdb-py3 is not relocatable.
+      GDB_PATCH_FILE_NAME="gdb-${GDB_VERSION}.patch.diff"
+
       # Task [III-6] /$HOST_NATIVE/gdb/
       # Task [IV-4] /$HOST_MINGW/gdb/
       build_cross_gdb ""
