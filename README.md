@@ -117,7 +117,7 @@ For more details please read the
 
 ### Versioning
 
-The version strings used by the GCC project are three number string
+The version strings used by the GCC project are three number strings
 like `11.2.1`; to this string the xPack distribution adds a four number,
 as the Arm version,
 but since semver allows only three numbers, all additional ones can
@@ -138,9 +138,8 @@ with caution, and prefer exact matches, like `11.2.1-1.1.1`.
 
 ## Support
 
-The quick answer is to use the
-[xPack forums](https://www.tapatalk.com/groups/xpack/);
-please select the correct forum.
+The quick answer is to use the GitHub
+[Discussions](https://github.com/xpack-dev-tools/arm-none-eabi-gcc-xpack/discussions/).
 
 For more details please read the
 [Support](https://xpack.github.io/arm-none-eabi-gcc/support/) page.
