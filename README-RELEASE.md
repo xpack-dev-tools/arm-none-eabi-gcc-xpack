@@ -275,7 +275,7 @@ The test results are available from
 Install the binaries on all supported platforms and check if they are
 functional.
 
-For this, on each platform (Mac, GNU/Linux 64/32, Windows 64/32):
+For this, on each platform (Mac, GNU/Linux, Windows):
 
 - unpack the archive in `Downloads`, and rename the version
   folder, by replacing a dash with a space; this will test paths with spaces;
