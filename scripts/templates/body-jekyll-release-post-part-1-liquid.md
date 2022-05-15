@@ -235,7 +235,8 @@ relative path.
 
 ## Documentation
 
-The original documentation is available in the `share/doc` folder.
+The original documentation is available
+[online](https://gcc.gnu.org/onlinedocs/).
 
 ## Build
 
