@@ -375,6 +375,7 @@ watching this project.
 
 - check and possibly update the `ls -l` output
 - check and possibly update the output of the `--version` runs
+- check and possibly update the output of `tree -L 2`
 - commit changes
 
 ## Check the list of links

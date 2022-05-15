@@ -219,11 +219,11 @@ their SHA signatures, created in the `deploy` folder:
 
 ```console
 $ ls -l ~/Work/arm-none-eabi-gcc-*/deploy
-total 682464
--rw-rw-r-- 1 ilg ilg 169389142 Oct 22 22:17 xpack-arm-none-eabi-gcc-11.2.1-1.1-linux-x64.tar.gz
--rw-rw-r-- 1 ilg ilg       117 Oct 22 22:17 xpack-arm-none-eabi-gcc-11.2.1-1.1-linux-x64.tar.gz.sha
--rw-rw-r-- 1 ilg ilg 184570818 Oct 22 23:04 xpack-arm-none-eabi-gcc-11.2.1-1.1-win32-x64.zip
--rw-rw-r-- 1 ilg ilg       114 Oct 22 23:04 xpack-arm-none-eabi-gcc-11.2.1-1.1-win32-x64.zip.sha
+total 470320
+-rw-rw-rw- 1 ilg ilg 234639449 May 15 15:35 xpack-arm-none-eabi-gcc-11.2.1-1.1-linux-x64.tar.gz
+-rw-rw-rw- 1 ilg ilg       118 May 15 15:35 xpack-arm-none-eabi-gcc-11.2.1-1.1-linux-x64.tar.gz.sha
+-rw-rw-rw- 1 ilg ilg 246953724 May 15 15:54 xpack-arm-none-eabi-gcc-11.2.1-1.1-win32-x64.zip
+-rw-rw-rw- 1 ilg ilg       115 May 15 15:54 xpack-arm-none-eabi-gcc-11.2.1-1.1-win32-x64.zip.sha
 ```
 
 ### Build the Arm GNU/Linux binaries
@@ -293,11 +293,18 @@ archives and their SHA signatures, created in the `deploy` folder:
 
 ```console
 $ ls -l ~/Work/arm-none-eabi-gcc-*/deploy
-total 325316
--rw-rw-r-- 1 ilg ilg 168517506 Oct 23 01:08 xpack-arm-none-eabi-gcc-11.2.1-1.1-linux-arm64.tar.gz
--rw-rw-r-- 1 ilg ilg       119 Oct 23 01:08 xpack-arm-none-eabi-gcc-11.2.1-1.1-linux-arm64.tar.gz.sha
--rw-rw-r-- 1 ilg ilg 164591258 Oct 23 08:19 xpack-arm-none-eabi-gcc-11.2.1-1.1-linux-arm.tar.gz
--rw-rw-r-- 1 ilg ilg       117 Oct 23 08:19 xpack-arm-none-eabi-gcc-11.2.1-1.1-linux-arm.tar.gz.sha
+total 227572
+-rw-rw-rw- 1 ilg ilg 233025589 May 15 23:28 xpack-arm-none-eabi-gcc-11.2.1-1.1-linux-arm64.tar.gz
+-rw-rw-rw- 1 ilg ilg       120 May 15 23:28 xpack-arm-none-eabi-gcc-11.2.1-1.1-linux-arm64.tar.gz.sha
+```
+
+and:
+
+```console
+$ ls -l ~/Work/arm-none-eabi-gcc-*/deploy
+total 221220
+-rw-rw-rw- 1 ilg ilg 226520982 May 15 23:57 xpack-arm-none-eabi-gcc-11.2.1-1.1-linux-arm.tar.gz
+-rw-rw-rw- 1 ilg ilg       118 May 15 23:57 xpack-arm-none-eabi-gcc-11.2.1-1.1-linux-arm.tar.gz.sha
 ```
 
 ### Build the macOS binaries
@@ -338,9 +345,18 @@ and its SHA signature, created in the `deploy` folder:
 
 ```console
 $ ls -l ~/Work/arm-none-eabi-gcc-*/deploy
-total 321872
--rw-r--r--  1 ilg  staff  164794316 Oct 23 00:27 xpack-arm-none-eabi-gcc-11.2.1-1.1-darwin-x64.tar.gz
--rw-r--r--  1 ilg  staff        118 Oct 23 00:27 xpack-arm-none-eabi-gcc-11.2.1-1.1-darwin-x64.tar.gz.sha
+total 459272
+-rw-r--r--  1 ilg  staff  231906304 May 15 22:10 xpack-arm-none-eabi-gcc-11.2.1-1.1-darwin-x64.tar.gz
+-rw-r--r--  1 ilg  staff        119 May 15 22:10 xpack-arm-none-eabi-gcc-11.2.1-1.1-darwin-x64.tar.gz.sha
+```
+
+and:
+
+```console
+$ ls -l ~/Work/arm-none-eabi-gcc-*/deploy
+total 460424
+-rw-r--r--  1 ilg  staff  231236234 May 15 15:10 xpack-arm-none-eabi-gcc-11.2.1-1.1-darwin-arm64.tar.gz
+-rw-r--r--  1 ilg  staff        121 May 15 15:10 xpack-arm-none-eabi-gcc-11.2.1-1.1-darwin-arm64.tar.gz.sha
 ```
 
 ## Subsequent runs
@@ -426,9 +442,7 @@ look like:
 ```console
 $ .../Downloads/xpack-arm-none-eabi-gcc-11.2.1-1.1/bin/arm-none-eabi-gcc --version
 arm-none-eabi-gcc (xPack GNU Arm Embedded GCC x86_64) 11.2.1 20220111
-Copyright (C) 2021 Free Software Foundation, Inc.
-This is free software; see the source for copying conditions.  There is NO
-warranty; not even for MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+...
 ```
 
 ## Installed folders
