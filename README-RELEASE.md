@@ -192,14 +192,14 @@ page.
 
 These commands use the `xpack-develop` branch of this repo.
 
-The full builds take about 16 hours (about 6 hours without multi-libs)
+The full builds take about 11 hours (about 4-5 hours without multi-libs)
 to complete.
 
-- `xbbmi`: ?
-- `xbbma`: ?
-- `xbbli`: ? (including Windows)
-- `xbbla64`: ?
-- `xbbla32`: ?
+- `xbbmi`: 9h
+- `xbbma`: 2h
+- `xbbli`: 2h45 (including Windows)
+- `xbbla64`: 10h20
+- `xbbla32`: 10h50
 
 The workflows results and logs are available from the
 [Actions](https://github.com/xpack-dev-tools/arm-none-eabi-gcc-xpack/actions/) page.
@@ -489,3 +489,8 @@ Add a new topic in the **Compilers and Libraries** forum of the
   - The **xPack GNU Arm Embedded GCC** is an alternate binary distribution that complements the official GNU Arm Embedded Toolchain maintained by Arm.
   - The latest release is [11.2.1-1.1]() following Arm release from October 21, 2021 (version 10.3-2021.10).
 - tags: xpack, gnu, gcc, arm, toolchain
+
+NOTE: do not use markdown, but format the text with the blog editor.
+
+Update with actual details from
+[Arm GNU Toolchain](https://developer.arm.com/tools-and-software/open-source-software/developer-tools/gnu-toolchain/downloads-1/)
