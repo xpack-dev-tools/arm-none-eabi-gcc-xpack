@@ -6,12 +6,13 @@ TODO: select one summary
 summary: "Version **{{ RELEASE_VERSION }}** is a maintenance release; it updates to
 the latest upstream master."
 
-summary: "Version **{{ RELEASE_VERSION }}** is a new release; it follows the upstream Arm release."
+summary: "Version **{{ RELEASE_VERSION }}** is a new release; it follows the Arm release."
 
-arm_version: 10.3-2021.10
-arm_date: October 21, 2021
+arm_version: 11.2-2022.02
+arm_date: February 15, 2022
 version: {{ RELEASE_VERSION }}
 npm_subversion: 1
+python_version: 10
 download_url: https://github.com/xpack-dev-tools/arm-none-eabi-gcc-xpack/releases/tag/v{{ RELEASE_VERSION }}/
 
 date:   {{ RELEASE_DATE }}
@@ -130,12 +131,7 @@ The current version is based on:
 
 - [GNU Arm Embedded Toolchain](https://developer.arm.com/open-source/gnu-toolchain/gnu-rm)
 release **{% raw %}{{ page.arm_version }}{% endraw %}** from {% raw %}{{ page.arm_date }}{% endraw %} and uses the
-`gcc-arm-none-eabi-{% raw %}{{ page.arm_version }}{% endraw %}-src.tar.bz2` source invariant.
-
-For more details see the original Arm release text files:
-
-- `distro-info/arm-readme.txt`
-- `distro-info/arm-release.txt`
+same sources.
 
 ## Supported libraries
 
@@ -176,7 +172,7 @@ Compared to the Arm version, there should be no functional changes.
 
 Support for Python scripting was added to GDB. This distribution provides
 a separate binary, `arm-none-eabi-gdb-py3` with
-support for **Python 3.7**.
+support for **Python 3.{% raw %}{{ page.python_version }}{% endraw %}**.
 
 The Python 3 run-time is included, so GDB does not need any version of
 Python to be installed, and is insensitive to the presence of other
