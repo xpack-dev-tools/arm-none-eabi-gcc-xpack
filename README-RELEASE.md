@@ -277,14 +277,14 @@ functional.
 
 For this, on each platform (Mac, GNU/Linux 64/32, Windows 64/32):
 
-- unpack the archive in `Desktop` or in `Downloads`, and rename the version
+- unpack the archive in `Downloads`, and rename the version
   folder, by replacing a dash with a space; this will test paths with spaces;
   on Windows the current paths always use spaces, so renaming is not needed;
 - on macOS it is necessary to remove the `com.apple.quarantine`
   attribute of archive and possibly the expanded folder:
 
 ```sh
-xattr -dr com.apple.quarantine xpack-arm-none-eabi-gcc-*
+xattr -dr com.apple.quarantine ~/Downloads/xpack-arm-none-eabi-gcc-*
 ```
 
 - clone this repo locally; on Windows use the Git console;
