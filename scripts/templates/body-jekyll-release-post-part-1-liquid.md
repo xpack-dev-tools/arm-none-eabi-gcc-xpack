@@ -148,6 +148,16 @@ thumb/v7+fp/softfp;@mthumb@march=armv7+fp@mfloat-abi=softfp
 thumb/v7+fp/hard;@mthumb@march=armv7+fp@mfloat-abi=hard
 thumb/v7-r+fp.sp/softfp;@mthumb@march=armv7-r+fp.sp@mfloat-abi=softfp
 thumb/v7-r+fp.sp/hard;@mthumb@march=armv7-r+fp.sp@mfloat-abi=hard
+thumb/v7-a/nofp;@mthumb@march=armv7-a@mfloat-abi=soft
+thumb/v7-a+fp/softfp;@mthumb@march=armv7-a+fp@mfloat-abi=softfp
+thumb/v7-a+fp/hard;@mthumb@march=armv7-a+fp@mfloat-abi=hard
+thumb/v7-a+simd/softfp;@mthumb@march=armv7-a+simd@mfloat-abi=softfp
+thumb/v7-a+simd/hard;@mthumb@march=armv7-a+simd@mfloat-abi=hard
+thumb/v7ve+simd/softfp;@mthumb@march=armv7ve+simd@mfloat-abi=softfp
+thumb/v7ve+simd/hard;@mthumb@march=armv7ve+simd@mfloat-abi=hard
+thumb/v8-a/nofp;@mthumb@march=armv8-a@mfloat-abi=soft
+thumb/v8-a+simd/softfp;@mthumb@march=armv8-a+simd@mfloat-abi=softfp
+thumb/v8-a+simd/hard;@mthumb@march=armv8-a+simd@mfloat-abi=hard
 thumb/v6-m/nofp;@mthumb@march=armv6s-m@mfloat-abi=soft
 thumb/v7-m/nofp;@mthumb@march=armv7-m@mfloat-abi=soft
 thumb/v7e-m/nofp;@mthumb@march=armv7e-m@mfloat-abi=soft
