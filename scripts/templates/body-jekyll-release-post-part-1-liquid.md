@@ -235,7 +235,7 @@ relative path.
 
 ## Documentation
 
-The original documentation is available
+The original GNU GCC documentation is available
 [online](https://gcc.gnu.org/onlinedocs/).
 
 ## Build
