@@ -116,7 +116,7 @@ bash ${HOME}/Work/arm-none-eabi-gcc-xpack.git/scripts/helper/build.sh --develop 
 bash ${HOME}/Work/arm-none-eabi-gcc-xpack.git/scripts/helper/build.sh --develop --arm32 --disable-multilib
 ```
 
-The builds may take up to 3.5h:
+The builds may take up to 3h30:
 
 - `xbbmi`: 82 min
 - `xbbma`: 32 min
@@ -192,14 +192,14 @@ page.
 
 These commands use the `xpack-develop` branch of this repo.
 
-The full builds take about 11 hours (about 4-5 hours without multi-libs)
-to complete.
+The full builds take about 11 hours (about 3h30 without multi-libs)
+to complete:
 
-- `xbbmi`: 9h
-- `xbbma`: 2h
-- `xbbli`: 2h45 (including Windows)
-- `xbbla64`: 10h20
-- `xbbla32`: 10h50
+- `xbbmi`: 9h (2h20)
+- `xbbma`: 2h (32m)
+- `xbbli`: 2h45 (including Windows) (1h00)
+- `xbbla64`: 10h20 (3h20)
+- `xbbla32`: 10h50 (3h30)
 
 The workflows results and logs are available from the
 [Actions](https://github.com/xpack-dev-tools/arm-none-eabi-gcc-xpack/actions/) page.
