@@ -2,6 +2,11 @@
 
 Entries in this file are in reverse chronological order.
 
+## 2022-05-28
+
+- v11.2.1-2.1 prepared
+- `--with-expat` added to GDB
+
 ## 2022-05-16
 
 - v11.2.1-1.1.1 published on npmjs.com
