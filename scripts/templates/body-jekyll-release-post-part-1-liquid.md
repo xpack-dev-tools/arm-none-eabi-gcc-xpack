@@ -180,11 +180,11 @@ Compared to the Arm version, there should be no functional changes.
 
 ### XML parsing in GDB
 
-Some advanced GDB servers, like the one provided by SEGGER J-Link,
-are capable of passing an XML with the target capabilities to the GDB client.
+Some advanced GDB servers, like the one provided with SEGGER J-Link, are
+capable of passing an XML with the target capabilities to the GDB client.
 For unknown reasons, the Arm toolchain distribution came without XML
 parsing support. The xPack distribution brings back support for
-XM parsing and full integration with the SEGGER J-Link GDB server.
+XML parsing and full integration with the SEGGER J-Link GDB server.
 
 ### Python
 
@@ -200,10 +200,15 @@ Support for Python 2 was discontinued.
 
 ### Text User Interface (TUI)
 
-Support for TUI was added to GDB. The `ncurses` library (v6.2) was added to
+Support for TUI was added to GDB. The `ncurses` library was added to
 the distribution.
 
 {% raw %}{% include note.html content="TUI is not available on Windows." %}{% endraw %}
+
+### No Guile
+
+Due to the difficulties of building standalone Guile libraries on all
+platforms, support for Guile scripting in GDB is currently not available.
 
 ## Bug fixes
 
