@@ -178,6 +178,14 @@ thumb/v8.1-m.main+mve/hard;@mthumb@march=armv8.1-m.main+mve@mfloat-abi=hard
 
 Compared to the Arm version, there should be no functional changes.
 
+### XML parsing in GDB
+
+Some advanced GDB servers, like the one provided by SEGGER J-Link,
+are capable of passing an XML with the target capabilities to the GDB client.
+For unknown reasons, the Arm toolchain distribution came without XML
+parsing support. The xPack distribution brings back support for
+XM parsing and full integration with the SEGGER J-Link GDB server.
+
 ### Python
 
 Support for Python scripting was added to GDB. This distribution provides
