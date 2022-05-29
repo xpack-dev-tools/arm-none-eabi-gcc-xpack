@@ -66,6 +66,7 @@
     "readelf",
     "refs",
     "runpath",
+    "sysroot",
     "wksi",
     "xattr",
     "xbbla",
