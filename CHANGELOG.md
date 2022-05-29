@@ -2,13 +2,13 @@
 
 Entries in this file are in reverse chronological order.
 
-## 2022-05-29
+## 2022-05-30
 
-- v11.2.1-2.1 released
+- v11.2.1-1.2 released
 
 ## 2022-05-28
 
-- v11.2.1-2.1 prepared
+- v11.2.1-1.2 prepared
 - `--with-expat` added to GDB
 
 ## 2022-05-16
