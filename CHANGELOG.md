@@ -2,6 +2,11 @@
 
 Entries in this file are in reverse chronological order.
 
+## 2022-05-30
+
+- v11.2.1-1.3 released
+- fix gcov via sysroot & system-header
+
 ## 2022-05-29
 
 - v11.2.1-1.2.1 published on npmjs.com

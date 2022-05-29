@@ -113,7 +113,7 @@ not be accepted by bash.
 
 ## Versioning
 
-The version string is an extension to semver, the format looks like `11.2.1-1.2`.
+The version string is an extension to semver, the format looks like `11.2.1-1.3`.
 It includes the three digits with the original GCC version, a fourth
 digit with the Arm release, a fifth digit with the xPack release number.
 
@@ -220,10 +220,10 @@ their SHA signatures, created in the `deploy` folder:
 ```console
 $ ls -l ~/Work/arm-none-eabi-gcc-*/deploy
 total 470320
--rw-rw-rw- 1 ilg ilg 234639449 May 15 15:35 xpack-arm-none-eabi-gcc-11.2.1-1.2-linux-x64.tar.gz
--rw-rw-rw- 1 ilg ilg       118 May 15 15:35 xpack-arm-none-eabi-gcc-11.2.1-1.2-linux-x64.tar.gz.sha
--rw-rw-rw- 1 ilg ilg 246953724 May 15 15:54 xpack-arm-none-eabi-gcc-11.2.1-1.2-win32-x64.zip
--rw-rw-rw- 1 ilg ilg       115 May 15 15:54 xpack-arm-none-eabi-gcc-11.2.1-1.2-win32-x64.zip.sha
+-rw-rw-rw- 1 ilg ilg 234639449 May 15 15:35 xpack-arm-none-eabi-gcc-11.2.1-1.3-linux-x64.tar.gz
+-rw-rw-rw- 1 ilg ilg       118 May 15 15:35 xpack-arm-none-eabi-gcc-11.2.1-1.3-linux-x64.tar.gz.sha
+-rw-rw-rw- 1 ilg ilg 246953724 May 15 15:54 xpack-arm-none-eabi-gcc-11.2.1-1.3-win32-x64.zip
+-rw-rw-rw- 1 ilg ilg       115 May 15 15:54 xpack-arm-none-eabi-gcc-11.2.1-1.3-win32-x64.zip.sha
 ```
 
 ### Build the Arm GNU/Linux binaries
@@ -294,8 +294,8 @@ archives and their SHA signatures, created in the `deploy` folder:
 ```console
 $ ls -l ~/Work/arm-none-eabi-gcc-*/deploy
 total 227572
--rw-rw-rw- 1 ilg ilg 233025589 May 15 23:28 xpack-arm-none-eabi-gcc-11.2.1-1.2-linux-arm64.tar.gz
--rw-rw-rw- 1 ilg ilg       120 May 15 23:28 xpack-arm-none-eabi-gcc-11.2.1-1.2-linux-arm64.tar.gz.sha
+-rw-rw-rw- 1 ilg ilg 233025589 May 15 23:28 xpack-arm-none-eabi-gcc-11.2.1-1.3-linux-arm64.tar.gz
+-rw-rw-rw- 1 ilg ilg       120 May 15 23:28 xpack-arm-none-eabi-gcc-11.2.1-1.3-linux-arm64.tar.gz.sha
 ```
 
 and:
@@ -303,8 +303,8 @@ and:
 ```console
 $ ls -l ~/Work/arm-none-eabi-gcc-*/deploy
 total 221220
--rw-rw-rw- 1 ilg ilg 226520982 May 15 23:57 xpack-arm-none-eabi-gcc-11.2.1-1.2-linux-arm.tar.gz
--rw-rw-rw- 1 ilg ilg       118 May 15 23:57 xpack-arm-none-eabi-gcc-11.2.1-1.2-linux-arm.tar.gz.sha
+-rw-rw-rw- 1 ilg ilg 226520982 May 15 23:57 xpack-arm-none-eabi-gcc-11.2.1-1.3-linux-arm.tar.gz
+-rw-rw-rw- 1 ilg ilg       118 May 15 23:57 xpack-arm-none-eabi-gcc-11.2.1-1.3-linux-arm.tar.gz.sha
 ```
 
 ### Build the macOS binaries
@@ -346,8 +346,8 @@ and its SHA signature, created in the `deploy` folder:
 ```console
 $ ls -l ~/Work/arm-none-eabi-gcc-*/deploy
 total 459272
--rw-r--r--  1 ilg  staff  231906304 May 15 22:10 xpack-arm-none-eabi-gcc-11.2.1-1.2-darwin-x64.tar.gz
--rw-r--r--  1 ilg  staff        119 May 15 22:10 xpack-arm-none-eabi-gcc-11.2.1-1.2-darwin-x64.tar.gz.sha
+-rw-r--r--  1 ilg  staff  231906304 May 15 22:10 xpack-arm-none-eabi-gcc-11.2.1-1.3-darwin-x64.tar.gz
+-rw-r--r--  1 ilg  staff        119 May 15 22:10 xpack-arm-none-eabi-gcc-11.2.1-1.3-darwin-x64.tar.gz.sha
 ```
 
 and:
@@ -355,8 +355,8 @@ and:
 ```console
 $ ls -l ~/Work/arm-none-eabi-gcc-*/deploy
 total 460424
--rw-r--r--  1 ilg  staff  231236234 May 15 15:10 xpack-arm-none-eabi-gcc-11.2.1-1.2-darwin-arm64.tar.gz
--rw-r--r--  1 ilg  staff        121 May 15 15:10 xpack-arm-none-eabi-gcc-11.2.1-1.2-darwin-arm64.tar.gz.sha
+-rw-r--r--  1 ilg  staff  231236234 May 15 15:10 xpack-arm-none-eabi-gcc-11.2.1-1.3-darwin-arm64.tar.gz
+-rw-r--r--  1 ilg  staff        121 May 15 15:10 xpack-arm-none-eabi-gcc-11.2.1-1.3-darwin-arm64.tar.gz.sha
 ```
 
 ## Subsequent runs
@@ -440,7 +440,7 @@ program from there. For example on macOS the output should
 look like:
 
 ```console
-$ .../Downloads/xpack-arm-none-eabi-gcc-11.2.1-1.2/bin/arm-none-eabi-gcc --version
+$ .../Downloads/xpack-arm-none-eabi-gcc-11.2.1-1.3/bin/arm-none-eabi-gcc --version
 arm-none-eabi-gcc (xPack GNU Arm Embedded GCC x86_64) 11.2.1 20220111
 ...
 ```
@@ -451,8 +451,8 @@ After install, the package should create a structure like this (only the
 first two depth levels are shown):
 
 ```console
-$ tree -L 2 /Users/ilg/Library/xPacks/\@xpack-dev-tools/arm-none-eabi-gcc/11.2.1-1.2/.content/
-/Users/ilg/Library/xPacks/\@xpack-dev-tools/arm-none-eabi-gcc/11.2.1-1.2/.content/
+$ tree -L 2 /Users/ilg/Library/xPacks/\@xpack-dev-tools/arm-none-eabi-gcc/11.2.1-1.3/.content/
+/Users/ilg/Library/xPacks/\@xpack-dev-tools/arm-none-eabi-gcc/11.2.1-1.3/.content/
 ├── README.md
 ├── arm-none-eabi
 │   ├── bin

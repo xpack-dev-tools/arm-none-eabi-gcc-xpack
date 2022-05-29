@@ -122,13 +122,13 @@ like `11.2.1`; to this string the xPack distribution adds a four number,
 as the Arm version,
 but since semver allows only three numbers, all additional ones can
 be added only as pre-release strings, separated by a dash,
-like `11.2.1-1.2`. The fifth number is the xPack release.
+like `11.2.1-1.3`. The fifth number is the xPack release.
 When published as a npm package, the version gets
-a sixth number, like `11.2.1-1.2.1`.
+a sixth number, like `11.2.1-1.3.1`.
 
 Since adherence of third party packages to semver is not guaranteed,
 it is recommended to use semver expressions like `^11.2.1` and `~11.2.1`
-with caution, and prefer exact matches, like `11.2.1-1.2.1`.
+with caution, and prefer exact matches, like `11.2.1-1.3.1`.
 
 ## Maintainer info
 
