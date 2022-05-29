@@ -12,7 +12,9 @@
   "cSpell.ignoreWords": [
     "DT_RPATH",
     "DT_RUNPATH",
+    "Ionescu",
     "Linaro",
+    "Liviu",
     "RPATH",
     "SEGGER",
     "Somsubhra",
@@ -71,6 +73,8 @@
     "xbbla64",
     "xbbli",
     "xbbma",
-    "xbbmi"
+    "xbbmi",
+    "xpack",
+    "xpacks"
   ]
 }
