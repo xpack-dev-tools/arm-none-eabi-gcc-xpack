@@ -60,9 +60,10 @@ jobs:
           omitBodyDuringUpdate: true
           omitDraftDuringUpdate: true
           omitNameDuringUpdate: true
+          omitPrereleaseDuringUpdate: true
           owner: 'xpack-dev-tools'
           prerelease: true
-          replacesArtifacts: true
+          replacesArtifacts: false
           repo: 'arm-none-eabi-gcc-xpack'
           tag: 'v${{ github.event.inputs.version }}'
           token: ${{ secrets.PUBLISH_TOKEN }}
@@ -100,9 +101,10 @@ jobs:
           omitBodyDuringUpdate: true
           omitDraftDuringUpdate: true
           omitNameDuringUpdate: true
+          omitPrereleaseDuringUpdate: true
           owner: 'xpack-dev-tools'
           prerelease: true
-          replacesArtifacts: true
+          replacesArtifacts: false
           repo: 'arm-none-eabi-gcc-xpack'
           tag: 'v${{ github.event.inputs.version }}'
           token: ${{ secrets.PUBLISH_TOKEN }}
@@ -140,9 +142,10 @@ jobs:
           omitBodyDuringUpdate: true
           omitDraftDuringUpdate: true
           omitNameDuringUpdate: true
+          omitPrereleaseDuringUpdate: true
           owner: 'xpack-dev-tools'
           prerelease: true
-          replacesArtifacts: true
+          replacesArtifacts: false
           repo: 'arm-none-eabi-gcc-xpack'
           tag: 'v${{ github.event.inputs.version }}'
           token: ${{ secrets.PUBLISH_TOKEN }}
@@ -182,9 +185,10 @@ jobs:
           omitBodyDuringUpdate: true
           omitDraftDuringUpdate: true
           omitNameDuringUpdate: true
+          omitPrereleaseDuringUpdate: true
           owner: 'xpack-dev-tools'
           prerelease: true
-          replacesArtifacts: true
+          replacesArtifacts: false
           repo: 'arm-none-eabi-gcc-xpack'
           tag: 'v${{ github.event.inputs.version }}'
           token: ${{ secrets.PUBLISH_TOKEN }}
@@ -229,9 +233,10 @@ jobs:
           omitBodyDuringUpdate: true
           omitDraftDuringUpdate: true
           omitNameDuringUpdate: true
+          omitPrereleaseDuringUpdate: true
           owner: 'xpack-dev-tools'
           prerelease: true
-          replacesArtifacts: true
+          replacesArtifacts: false
           repo: 'arm-none-eabi-gcc-xpack'
           tag: 'v${{ github.event.inputs.version }}'
           token: ${{ secrets.PUBLISH_TOKEN }}
