@@ -22,7 +22,7 @@ The binaries can be installed automatically as **binary xPacks** or manually as
 ## Release schedule
 
 This distribution plans to follow the official
-[Arm GNU Toolchain](https://developer.arm.com/tools-and-software/open-source-software/developer-tools/gnu-toolchain/downloads-1/)
+[Arm GNU Toolchain](https://developer.arm.com/tools-and-software/open-source-software/developer-tools/gnu-toolchain/downloads/)
 distribution, by Arm.
 
 ## User info
@@ -72,7 +72,7 @@ The central xPacks store is a platform dependent
 folder; check the output of the `xpm` command for the actual
 folder used on your platform).
 This location is configurable via the environment variable
-`XPACKS_REPO_FOLDER`; for more details please check the
+`XPACKS_STORE_FOLDER`; for more details please check the
 [xpm folders](https://xpack.github.io/xpm/folders/) page.
 
 For xPacks aware tools, like the **Eclipse Embedded C/C++ plug-ins**,
@@ -118,17 +118,17 @@ For more details please read the
 ### Versioning
 
 The version strings used by the GCC project are three number strings
-like `11.2.1`; to this string the xPack distribution adds a four number,
+like `11.3.1`; to this string the xPack distribution adds a four number,
 as the Arm version,
 but since semver allows only three numbers, all additional ones can
 be added only as pre-release strings, separated by a dash,
-like `11.2.1-1.2`. The fifth number is the xPack release.
+like `11.3.1-1.1`. The fifth number is the xPack release.
 When published as a npm package, the version gets
-a sixth number, like `11.2.1-1.2.1`.
+a sixth number, like `11.3.1-1.1.1`.
 
 Since adherence of third party packages to semver is not guaranteed,
-it is recommended to use semver expressions like `^11.2.1` and `~11.2.1`
-with caution, and prefer exact matches, like `11.2.1-1.2.1`.
+it is recommended to use semver expressions like `^11.3.1` and `~11.3.1`
+with caution, and prefer exact matches, like `11.3.1-1.1.1`.
 
 ## Maintainer info
 
