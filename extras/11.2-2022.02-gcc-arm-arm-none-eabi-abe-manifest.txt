@@ -1,0 +1,98 @@
+manifest_format=1.5
+
+# Component data for dejagnu
+dejagnu_url=http://git.linaro.org/git/toolchain
+dejagnu_branch=linaro-local/stable
+dejagnu_revision=21f2ff7c065d7ead6aec3e5ed528ecb0f9eadbac
+dejagnu_filespec=dejagnu.git
+dejagnu_mingw_only="no"
+dejagnu_linuxhost_only="no"
+dejagnu_staticlink="yes"
+
+# Component data for python
+python_url=http://snapshots.linaro.org/components/toolchain/infrastructure/
+python_filespec=python-2.7.4-mingw32.tar.xz
+python_md5sum=9b3092eff5508c4802936dfe4f5225ef
+python_mingw_only="yes"
+python_linuxhost_only="no"
+python_staticlink="yes"
+
+# Component data for gmp
+gmp_url=https://developer.arm.com/-/media/Files/downloads/gnu/11.2-2022.02/src
+gmp_filespec=gmp.tar.xz
+gmp_mingw_only="no"
+gmp_linuxhost_only="no"
+gmp_configure="--enable-cxx --enable-fft"
+gmp_staticlink="yes"
+
+# Component data for mpfr
+mpfr_url=https://developer.arm.com/-/media/Files/downloads/gnu/11.2-2022.02/src
+mpfr_filespec=mpfr.tar.xz
+mpfr_mingw_only="no"
+mpfr_linuxhost_only="no"
+mpfr_configure="--with-gmp=${local_builds}/destdir/${host}"
+mpfr_staticlink="yes"
+
+# Component data for mpc
+mpc_url=https://developer.arm.com/-/media/Files/downloads/gnu/11.2-2022.02/src
+mpc_filespec=mpc.tar.xz
+mpc_mingw_only="no"
+mpc_linuxhost_only="no"
+mpc_configure="--with-gmp=${local_builds}/destdir/${host} --with-mpfr=${local_builds}/destdir/${host}"
+mpc_staticlink="yes"
+
+# Component data for expat
+expat_url=https://developer.arm.com/-/media/Files/downloads/gnu/11.2-2022.02/src
+expat_filespec=libexpat.tar.xz
+expat_mingw_only="yes"
+expat_linuxhost_only="no"
+expat_staticlink="yes"
+
+# Component data for libiconv
+libiconv_url=https://developer.arm.com/-/media/Files/downloads/gnu/11.2-2022.02/src
+libiconv_filespec=libiconv.tar.xz
+libiconv_mingw_only="yes"
+libiconv_linuxhost_only="no"
+libiconv_staticlink="yes"
+
+# Component data for gcc
+gcc_url=https://developer.arm.com/-/media/Files/downloads/gnu/11.2-2022.02/src
+gcc_filespec=gcc.tar.xz
+gcc_makeflags="MAKEINFOFLAGS=--force"
+gcc_mingw_only="no"
+gcc_linuxhost_only="no"
+gcc_configure=
+gcc_mingw_extraconf="--with-libiconv-prefix=${local_builds}/destdir/${host}/usr --with-system-zlib=no"
+gcc_staticlink="no"
+gcc_stage1_flags="--with-mpc=${local_builds}/destdir/${host} --with-mpfr=${local_builds}/destdir/${host} --with-gmp=${local_builds}/destdir/${host} --disable-libatomic --disable-libsanitizer --disable-libssp --disable-libgomp --disable-libmudflap --disable-libquadmath --disable-shared --disable-nls --disable-threads --disable-tls --enable-checking=release --enable-languages=c --without-cloog --without-isl --with-newlib --without-headers --enable-multilib --with-multilib-list=aprofile,rmprofile --with-sysroot=${local_builds}/sysroot-arm-none-eabi"
+gcc_stage2_flags="--with-mpc=${local_builds}/destdir/${host} --with-mpfr=${local_builds}/destdir/${host} --with-gmp=${local_builds}/destdir/${host} --disable-shared --disable-nls --disable-threads --disable-tls --enable-checking=release --enable-languages=c,c++ --with-newlib --with-multilib-list=aprofile,rmprofile --with-build-sysroot=${sysroots} --with-sysroot=${local_builds}/destdir/${host}/arm-none-eabi/libc"
+
+# Component data for newlib
+newlib_url=https://developer.arm.com/-/media/Files/downloads/gnu/11.2-2022.02/src
+newlib_filespec=newlib-cygwin.tar.xz
+newlib_mingw_only="no"
+newlib_linuxhost_only="no"
+newlib_staticlink="yes"
+newlib_configure="--disable-newlib-supplied-syscalls --enable-newlib-io-long-long --enable-newlib-io-c99-formats --enable-newlib-mb --enable-newlib-reent-check-verify"
+
+# Component data for binutils
+binutils_url=git://sourceware.org/git
+binutils_filespec=binutils-gdb.git
+binutils_revision=5f62caec8175cf80a29f2bcab2c5077cbfae8c89
+binutils_mingw_only="no"
+binutils_linuxhost_only="no"
+binutils_staticlink="yes"
+binutils_configure="--enable-initfini-array --disable-nls --without-x --disable-gdbtk --without-tcl --without-tk --enable-plugins --disable-gdb --without-gdb  --with-sysroot=${sysroots}"
+
+# Component data for gdb
+gdb_url=git://sourceware.org/git
+gdb_filespec=binutils-gdb.git
+gdb_revision=a10d1f2c33a9a329f3a3006e07cfe872a7cc965b
+gdb_mingw_only="no"
+gdb_linuxhost_only="no"
+gdb_configure="--with-gnu-ld --enable-plugins --enable-tui --with-pkgversion=Linaro_GDB-2019.12 --disable-gas --disable-binutils --disable-ld --disable-gold --disable-gprof --with-python=yes"
+gdb_mingw_extraconf="--disable-tui --with-python=${local_snapshots}/python-2.7.4-mingw32 CFLAGS=-I${local_builds}/destdir/${host}/usr/include LDFLAGS=-L${local_builds}/destdir/${host}/usr/lib"
+gdb_staticlink="yes"
+
+clibrary=newlib
+target=arm-none-eabi

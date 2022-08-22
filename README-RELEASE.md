@@ -30,9 +30,6 @@ Download the latest Darwin archive (like
 and copy the file with the configurations
 (`*-darwin-x86_64-arm-none-eabi-manifest.txt`) to extras.
 
-Download the latest manifest file with the Git commit IDs
-(`arm-gnu-toolchain-src-snapshot-*-manifest.txt`) to extras.
-
 Download the ABE manifest with the individual source URLs
 (`arm-gnu-toolchain-arm-none-eabi-abe-manifest.txt`), rename to
 add the release, and copy to extras.

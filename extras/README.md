@@ -11,8 +11,6 @@ Although the names end with `-manifest.txt`, the contents are different:
   `arm-gnu-toolchain-*-darwin-x86_64-arm-none-eabi.tar.xz` archive, and
   include the configurations used to build the various libraries and
   components
-- the `*-src-snapshot-*-manifest.txt` file is from the download page, and
-  includes the Git commit IDs of various repositories used during the build.
 
 For updated content, see the release note for the relevant release, on:
 
