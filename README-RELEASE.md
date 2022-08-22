@@ -77,13 +77,33 @@ Note: if you missed to update the `CHANGELOG.md` before starting the build,
 edit the file and rerun the build, it should take only a few minutes to
 recreate the archives with the correct file.
 
+### Update local binutils-gdb fork
+
+With a Git client:
+
+- checkout the branch mentioned in the release notes
+  (like `binutils-2_38-branch`)
+- identify the commit ID
+- add a tag like `binutils-2.38-arm-none-eabi-11.3.rel1`
+- push the tag to origin
+- check the tag at <https://github.com/xpack-dev-tools/binutils-gdb/tags/>
+
+Similarly for GDB:
+
+- checkout the branch mentioned in the release notes
+  (like `gdb-12-branch`)
+- identify the commit ID
+- add a tag like `gdb-12-arm-none-eabi-11.3.rel1`
+- push the tag to origin
+- check the tag at <https://github.com/xpack-dev-tools/binutils-gdb/tags/>
+
 ### Update the version specific code
 
 - open the `common-versions-source.sh` file
 - add a new `if` with the new version before the existing code
 
 To find the actual versions of the dependent libraries, check the
-snapshot archive provided by Arm.
+snapshot archive and the ABE manifest provided by Arm.
 
 ### Update helper
 
