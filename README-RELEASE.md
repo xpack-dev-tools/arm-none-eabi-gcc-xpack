@@ -97,6 +97,20 @@ Similarly for GDB:
 - push the tag to origin
 - check the tag at <https://github.com/xpack-dev-tools/binutils-gdb/tags/>
 
+### Update local gdb fork
+
+With a Git client:
+
+- checkout the branch mentioned in the release notes
+  (like `ARM/arm-11`)
+- identify the commit ID
+- create a branch like `arm-11-arm-none-eabi-11.3.rel1`
+- cherry pick the commits
+  (like _Try to get support for Apple Silicon_)
+- select the new commit
+- right click -> Save as Patch...
+- copy to `patches/gcc-11.3.1.patch.diff`
+
 ### Update the version specific code
 
 - open the `common-versions-source.sh` file
