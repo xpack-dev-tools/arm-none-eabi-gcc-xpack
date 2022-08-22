@@ -3,7 +3,7 @@
 ## Release schedule
 
 The xPack GNU Arm Embedded GCC release schedule generally follows the
-[Arm GNU Toolchain](https://developer.arm.com/tools-and-software/open-source-software/developer-tools/gnu-toolchain/downloads-1/)
+[Arm GNU Toolchain](https://developer.arm.com/tools-and-software/open-source-software/developer-tools/gnu-toolchain/downloads/)
 release schedule, which is about two releases per year.
 
 ## Prepare the build
@@ -22,7 +22,7 @@ No need to add a tag here, it'll be added when the release is created.
 ### Update to latest Arm release
 
 Download the new _Source code_ archive (like
-`gcc-arm-toolchain-src-snapshot-*.tar.xz` from
+`arm-toolchain-src-snapshot-*.tar.xz` from
 [Arm](https://developer.arm.com/tools-and-software/open-source-software/developer-tools/gnu-toolchain/downloads)
 
 Download the latest Darwin archive (like
