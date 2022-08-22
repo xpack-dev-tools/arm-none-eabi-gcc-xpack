@@ -177,7 +177,7 @@ function build_versions()
           build_libxcrypt "4.4.28"
 
           # https://www.openssl.org/source/
-          build_openssl "1.1.1n"
+          build_openssl "1.1.1q" # "1.1.1n"
 
           build_python3 "${PYTHON3_VERSION}"
 
