@@ -220,7 +220,7 @@ function build_versions()
       GCC_ARCHIVE_NAME="gcc-arm-none-eabi-${ARM_RELEASE}.tar.xz"
       GCC_ARCHIVE_URL="${ARM_URL_BASE}/gcc.tar.xz"
 
-      GCC_PATCH_FILE_NAME="gcc-${GCC_VERSION}.patch.diff"
+      GCC_PATCH_FILE_NAME="gcc-${GCC_VERSION}-cross.patch.diff"
       GCC_MULTILIB_LIST="aprofile,rmprofile"
 
       if [ "${TARGET_PLATFORM}" != "win32" ]
@@ -274,12 +274,13 @@ function build_versions()
       # From `gdb/version.in`
       GDB_VERSION="12.1"
       GDB_TAG_NAME="gdb-12-arm-none-eabi-${ARM_RELEASE}"
+      
       GDB_SRC_FOLDER_NAME="binutils-gdb-${GDB_TAG_NAME}"
       GDB_ARCHIVE_NAME="${GDB_TAG_NAME}.tar.gz"
       GDB_ARCHIVE_URL="https://github.com/xpack-dev-tools/binutils-gdb/archive/refs/tags/${GDB_ARCHIVE_NAME}"
 
       # Mandatory, otherwise gdb-py3 is not relocatable.
-      GDB_PATCH_FILE_NAME="gdb-${GDB_VERSION}.patch.diff"
+      GDB_PATCH_FILE_NAME="gdb-${GDB_VERSION}-cross.patch.diff"
 
       # Task [III-6] /$HOST_NATIVE/gdb/
       # Task [IV-4] /$HOST_MINGW/gdb/
@@ -437,7 +438,7 @@ function build_versions()
       GCC_ARCHIVE_NAME="gcc-arm-none-eabi-${ARM_RELEASE}.tar.xz"
       GCC_ARCHIVE_URL="${ARM_URL_BASE}/gcc.tar.xz"
 
-      GCC_PATCH_FILE_NAME="gcc-${GCC_VERSION}.patch.diff"
+      GCC_PATCH_FILE_NAME="gcc-${GCC_VERSION}-cross.patch.diff"
       GCC_MULTILIB_LIST="aprofile,rmprofile"
 
       if [ "${TARGET_PLATFORM}" != "win32" ]
@@ -494,7 +495,7 @@ function build_versions()
       GDB_ARCHIVE_URL="https://github.com/xpack-dev-tools/binutils-gdb/archive/refs/tags/${GDB_ARCHIVE_NAME}"
 
       # Mandatory, otherwise gdb-py3 is not relocatable.
-      GDB_PATCH_FILE_NAME="gdb-${GDB_VERSION}.patch.diff"
+      GDB_PATCH_FILE_NAME="gdb-${GDB_VERSION}-cross.patch.diff"
 
       # Task [III-6] /$HOST_NATIVE/gdb/
       # Task [IV-4] /$HOST_MINGW/gdb/
