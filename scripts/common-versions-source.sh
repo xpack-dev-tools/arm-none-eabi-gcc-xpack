@@ -274,7 +274,7 @@ function build_versions()
       # From `gdb/version.in`
       GDB_VERSION="12.1"
       GDB_TAG_NAME="gdb-12-arm-none-eabi-${ARM_RELEASE}"
-      
+
       GDB_SRC_FOLDER_NAME="binutils-gdb-${GDB_TAG_NAME}"
       GDB_ARCHIVE_NAME="${GDB_TAG_NAME}.tar.gz"
       GDB_ARCHIVE_URL="https://github.com/xpack-dev-tools/binutils-gdb/archive/refs/tags/${GDB_ARCHIVE_NAME}"
@@ -395,7 +395,7 @@ function build_versions()
           build_libxcrypt "4.4.28" # "4.4.17"
 
           # https://www.openssl.org/source/
-          build_openssl "1.1.1n" # "1.1.1l" # "1.1.1h"
+          build_openssl "1.1.1q" # "1.1.1n" # "1.1.1l" # "1.1.1h"
 
           build_python3 "${PYTHON3_VERSION}"
 
