@@ -22,7 +22,7 @@ No need to add a tag here, it'll be added when the release is created.
 ### Update to latest Arm release
 
 Download the new _Source code_ archive (like
-`arm-toolchain-src-snapshot-*.tar.xz` from
+`arm-gnu-toolchain-src-snapshot-*.tar.xz` from
 [Arm](https://developer.arm.com/tools-and-software/open-source-software/developer-tools/gnu-toolchain/downloads)
 
 Download the latest Darwin archive (like
@@ -109,7 +109,7 @@ With a Git client:
   (like _Try to get support for Apple Silicon_)
 - select the new commit
 - right click -> Save as Patch...
-- copy to `patches/gcc-11.3.1.patch.diff`
+- copy to `patches/gcc-11.3.1-cross.patch.diff`
 
 ### Update the version specific code
 
