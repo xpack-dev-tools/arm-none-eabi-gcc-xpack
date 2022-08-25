@@ -344,7 +344,6 @@ function build_versions()
           download_python3_win "${PYTHON3_VERSION}"
 
           add_python3_win_syslibs
-        fi
         else # linux or darwin
           # We cannot rely on a python shared library in the system, even
           # the custom build from sources does not have one.
