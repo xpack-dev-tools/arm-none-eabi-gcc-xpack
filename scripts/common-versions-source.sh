@@ -59,6 +59,8 @@ function build_versions()
 
   NCURSES_DISABLE_WIDEC="y"
 
+  WITH_GDB_PY3=""
+
   # ---------------------------------------------------------------------------
 
   GCC_VERSION="$(echo "${RELEASE_VERSION}" | sed -e 's|-.*||')"
@@ -81,7 +83,7 @@ function build_versions()
       if [[ "${RELEASE_VERSION}" =~ 11\.3\.1-* ]]
       then
         # https://developer.arm.com/-/media/Files/downloads/gnu/11.3.rel1/manifest/arm-gnu-toolchain-arm-none-eabi-abe-manifest.txt
-        
+
         ARM_RELEASE="11.3.rel1"
         ARM_URL_BASE="https://developer.arm.com/-/media/Files/downloads/gnu/${ARM_RELEASE}/src"
 
@@ -95,6 +97,10 @@ function build_versions()
 
         BINUTILS_VERSION="2.38"
         BINUTILS_TAG_NAME="binutils-${BINUTILS_VERSION}-arm-none-eabi-${ARM_RELEASE}"
+
+        BINUTILS_SRC_FOLDER_NAME="binutils-gdb-${BINUTILS_TAG_NAME}"
+        BINUTILS_ARCHIVE_NAME="${BINUTILS_TAG_NAME}.tar.gz"
+        BINUTILS_ARCHIVE_URL="https://github.com/xpack-dev-tools/binutils-gdb/archive/refs/tags/${BINUTILS_ARCHIVE_NAME}"
 
         # ---------------------------------------------------------------------
 
@@ -159,6 +165,10 @@ function build_versions()
 
         BINUTILS_VERSION="2.37"
         BINUTILS_TAG_NAME="binutils-${BINUTILS_VERSION}-arm-none-eabi-${ARM_RELEASE}"
+
+        BINUTILS_SRC_FOLDER_NAME="binutils-gdb-${BINUTILS_TAG_NAME}"
+        BINUTILS_ARCHIVE_NAME="${BINUTILS_TAG_NAME}.tar.gz"
+        BINUTILS_ARCHIVE_URL="https://github.com/xpack-dev-tools/binutils-gdb/archive/refs/tags/${BINUTILS_ARCHIVE_NAME}"
 
         # ---------------------------------------------------------------------
 
@@ -234,84 +244,12 @@ function build_versions()
       # Arm: In `configure`, search for `PACKAGE_VERSION=`.
       build_isl "0.15"
 
-      # https://www.bytereef.org/mpdecimal/download.html
-      build_libmpdec "2.5.1" # "2.5.0" # Used by Python
-
-      # https://github.com/libexpat/libexpat/releases
-      # Arm: from release notes
-      # https://developer.arm.com/tools-and-software/open-source-software/developer-tools/gnu-toolchain/downloads-1
-      build_expat "2.2.5" # "2.1.1"
-
       # https://ftp.gnu.org/pub/gnu/libiconv/
       # Arm: In `configure`, search for `PACKAGE_VERSION=`.
       build_libiconv "1.15"
 
       # https://sourceforge.net/projects/lzmautils/files/
       build_xz "5.2.5" # "5.2.3"
-
-      # Fails on mingw. 0.8.13 is deprecated. Not used anyway.
-      # build_libelf "0.8.13"
-
-      # http://ftp.gnu.org/pub/gnu/gettext/
-      build_gettext "0.21"
-
-      # https://www.python.org/ftp/python/
-      # Requires `scripts/helper/extras/python/pyconfig-win-3.10.4.h` &
-      # `python3-config.sh`
-      PYTHON3_VERSION="3.10.4"
-      WITH_GDB_PY3="y"
-
-      if [ "${TARGET_PLATFORM}" == "win32" ]
-      then
-        if [ "${WITH_GDB_PY3}" == "y" ]
-        then
-          # Shortcut, use the existing pyton.exe instead of building
-          # if from sources. It also downloads the sources.
-          download_python3_win "${PYTHON3_VERSION}"
-
-          add_python3_win_syslibs
-        fi
-      else # linux or darwin
-        # Used by ncurses. Fails on macOS.
-        if [ "${TARGET_PLATFORM}" == "linux" ]
-        then
-          # https://github.com/telmich/gpm/tags
-          # https://github.com/xpack-dev-tools/gpm/tags
-          build_gpm "1.20.7-1" # "1.20.7"
-        fi
-
-        # https://ftp.gnu.org/gnu/ncurses/
-        build_ncurses "6.3" # "6.2"
-
-        # https://ftp.gnu.org/gnu/readline/
-        build_readline "8.1" # "8.0" # requires ncurses
-
-        # https://sourceware.org/pub/bzip2/
-        build_bzip2 "1.0.8"
-        # https://github.com/libffi/libffi/releases
-        build_libffi  "3.4.2" # "3.3"
-
-        # We cannot rely on a python shared library in the system, even
-        # the custom build from sources does not have one.
-
-        if [ "${WITH_GDB_PY3}" == "y" ]
-        then
-          # Required by a Python 3 module.
-          # https://www.sqlite.org/download.html
-          build_sqlite  "3380200" # "3.32.3"
-
-          # Replacement for the old libcrypt.so.1; required by Python 3.
-          # https://github.com/besser82/libxcrypt/releases
-          build_libxcrypt "4.4.28" # "4.4.17"
-
-          # https://www.openssl.org/source/
-          build_openssl "1.1.1q" # "1.1.1n" # "1.1.1l" # "1.1.1h"
-
-          build_python3 "${PYTHON3_VERSION}"
-
-          add_python3_syslibs
-        fi
-      fi
 
       # -----------------------------------------------------------------------
 
@@ -320,19 +258,13 @@ function build_versions()
       # Task [III-0] /$HOST_NATIVE/binutils/
       # Task [IV-1] /$HOST_MINGW/binutils/
 
-      BINUTILS_SRC_FOLDER_NAME="binutils-gdb-${BINUTILS_TAG_NAME}"
-      BINUTILS_ARCHIVE_NAME="${BINUTILS_TAG_NAME}.tar.gz"
-      BINUTILS_ARCHIVE_URL="https://github.com/xpack-dev-tools/binutils-gdb/archive/refs/tags/${BINUTILS_ARCHIVE_NAME}"
-
       build_cross_binutils
       # The nano requirement (copy_dir to libs) included above.
 
       # -----------------------------------------------------------------------
 
-
-      if [ "${TARGET_PLATFORM}" != "win32" ]
+      if [ "${TARGET_PLATFORM}" == "linux" -o "${TARGET_PLATFORM}" == "darwin" ]
       then
-
         # Task [III-1] /$HOST_NATIVE/gcc-first/
         build_cross_gcc_first
 
@@ -348,25 +280,94 @@ function build_versions()
 
         # Task [III-5] /$HOST_NATIVE/gcc-size-libstdcxx/
         build_cross_gcc_final "-nano"
-
-      else
-
+      elif [ "${TARGET_PLATFORM}" == "win32" ]
+      then
         # Task [IV-2] /$HOST_MINGW/copy_libs/
         copy_cross_linux_libs
 
         # Task [IV-3] /$HOST_MINGW/gcc-final/
         build_cross_gcc_final ""
-
       fi
 
       # -----------------------------------------------------------------------
+
+      # https://github.com/libexpat/libexpat/releases
+      # Arm: from release notes
+      # https://developer.arm.com/tools-and-software/open-source-software/developer-tools/gnu-toolchain/downloads-1
+      build_expat "2.2.5" # "2.1.1"
+
+      # Fails on mingw. 0.8.13 is deprecated. Not used anyway.
+      # build_libelf "0.8.13"
+
+      # http://ftp.gnu.org/pub/gnu/gettext/
+      build_gettext "0.21"
+
+      # Used by ncurses. Fails on macOS.
+      if [ "${TARGET_PLATFORM}" == "linux" ]
+      then
+        # https://github.com/telmich/gpm/tags
+        # https://github.com/xpack-dev-tools/gpm/tags
+        build_gpm "1.20.7-1" # "1.20.7"
+      fi
+
+      if [ "${TARGET_PLATFORM}" == "linux" -o "${TARGET_PLATFORM}" == "darwin" ]
+      then
+        # https://ftp.gnu.org/gnu/ncurses/
+        build_ncurses "6.3" # "6.2"
+
+        # https://ftp.gnu.org/gnu/readline/
+        build_readline "8.1" # "8.0" # requires ncurses
+
+        # https://sourceware.org/pub/bzip2/
+        build_bzip2 "1.0.8"
+        # https://github.com/libffi/libffi/releases
+        build_libffi  "3.4.2" # "3.3"
+      fi
 
       # Task [III-6] /$HOST_NATIVE/gdb/
       # Task [IV-4] /$HOST_MINGW/gdb/
       build_cross_gdb ""
 
+
+      # https://www.python.org/ftp/python/
+      # Requires `scripts/helper/extras/python/pyconfig-win-3.10.4.h` &
+      # `python3-config.sh`
+      PYTHON3_VERSION="3.10.4"
+      WITH_GDB_PY3="y"
+
       if [ "${WITH_GDB_PY3}" == "y" ]
       then
+        if [ "${TARGET_PLATFORM}" == "win32" ]
+        then
+          # Shortcut, use the existing pyton.exe instead of building
+          # if from sources. It also downloads the sources.
+          download_python3_win "${PYTHON3_VERSION}"
+
+          add_python3_win_syslibs
+        fi
+        else # linux or darwin
+          # We cannot rely on a python shared library in the system, even
+          # the custom build from sources does not have one.
+
+          # https://www.bytereef.org/mpdecimal/download.html
+          build_libmpdec "2.5.1" # "2.5.0" # Used by Python
+
+          # Required by a Python 3 module.
+          # https://www.sqlite.org/download.html
+          build_sqlite  "3380200" # "3.32.3"
+
+          # Replacement for the old libcrypt.so.1; required by Python 3.
+          # https://github.com/besser82/libxcrypt/releases
+          build_libxcrypt "4.4.28" # "4.4.17"
+
+          # https://www.openssl.org/source/
+          build_openssl "1.1.1q" # "1.1.1n" # "1.1.1l" # "1.1.1h"
+
+          build_python3 "${PYTHON3_VERSION}"
+
+          add_python3_syslibs
+        fi
+
         build_cross_gdb "-py3"
       fi
     )
