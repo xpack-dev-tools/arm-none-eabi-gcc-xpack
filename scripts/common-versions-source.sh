@@ -81,6 +81,7 @@ function build_versions()
       if [[ "${RELEASE_VERSION}" =~ 11\.3\.1-* ]]
       then
         # https://developer.arm.com/-/media/Files/downloads/gnu/11.3.rel1/manifest/arm-gnu-toolchain-arm-none-eabi-abe-manifest.txt
+        
         ARM_RELEASE="11.3.rel1"
         ARM_URL_BASE="https://developer.arm.com/-/media/Files/downloads/gnu/${ARM_RELEASE}/src"
 
