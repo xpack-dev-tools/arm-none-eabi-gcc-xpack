@@ -30,10 +30,9 @@ on:
         default: 'current'
 
 jobs:
-
-  linux-x64:
-    name: 'Linux Intel - GNU Arm Embedded GCC ${{ github.event.inputs.version }} publish release'
-    runs-on: [self-hosted, linux, x64]
+  create-release:
+    name: 'Create the pre-release'
+    runs-on: ubuntu-latest
     steps:
       - name: 'Machine'
         run: uname -a
@@ -51,12 +50,38 @@ jobs:
         # https://github.com/ncipollo/release-action
         uses: ncipollo/release-action@v1
         with:
-          allowUpdates: true
-          artifacts: '~/Work/arm-none-eabi-gcc-${{ github.event.inputs.version }}/deploy/*'
+          allowUpdates: false
           bodyFile: '.github/workflows/body-github-release.md'
           commit: 'xpack-develop'
           draft: true
           name: 'xPack GNU Arm Embedded GCC v${{ github.event.inputs.version }}'
+          omitBodyDuringUpdate: true
+          omitDraftDuringUpdate: true
+          omitNameDuringUpdate: true
+          omitPrereleaseDuringUpdate: true
+          owner: 'xpack-dev-tools'
+          prerelease: true
+          replacesArtifacts: false
+          repo: 'arm-none-eabi-gcc-xpack'
+          tag: 'v${{ github.event.inputs.version }}'
+          token: ${{ secrets.PUBLISH_TOKEN }}
+
+
+  linux-x64:
+    needs: create-release
+    name: 'Linux Intel - GNU Arm Embedded GCC ${{ github.event.inputs.version }} publish release'
+    runs-on: [self-hosted, linux, x64]
+    steps:
+      - name: 'Machine'
+        run: uname -a
+      - name: 'Publish release'
+        # https://github.com/ncipollo/release-action
+        uses: ncipollo/release-action@v1
+        with:
+          allowUpdates: true
+          artifacts: '~/Work/arm-none-eabi-gcc-${{ github.event.inputs.version }}/deploy/*'
+          commit: 'xpack-develop'
+          draft: true
           omitBodyDuringUpdate: true
           omitDraftDuringUpdate: true
           omitNameDuringUpdate: true
@@ -73,31 +98,20 @@ jobs:
 
 
   linux-arm:
+    needs: create-release
     name: 'Linux Arm 32 - GNU Arm Embedded GCC ${{ github.event.inputs.version }} publish release'
     runs-on: [self-hosted, linux, arm, xbbla32]
     steps:
       - name: 'Machine'
         run: uname -a
-      - name: 'Checkout'
-        uses: actions/checkout@v2
-        with:
-          fetch-depth: 3
-          submodules: true
-      - name: 'Create body'
-        run: |
-          npm install
-          cat scripts/templates/body-github-release-liquid.md | npm run liquidjs --silent -- '{ "RELEASE_VERSION": "${{ github.event.inputs.version }}" }' >.github/workflows/body-github-release.md
-          cat .github/workflows/body-github-release.md
       - name: 'Publish release'
         # https://github.com/ncipollo/release-action
         uses: ncipollo/release-action@v1
         with:
           allowUpdates: true
           artifacts: '~/Work/arm-none-eabi-gcc-${{ github.event.inputs.version }}/deploy/*'
-          bodyFile: '.github/workflows/body-github-release.md'
           commit: 'xpack-develop'
           draft: true
-          name: 'xPack GNU Arm Embedded GCC v${{ github.event.inputs.version }}'
           omitBodyDuringUpdate: true
           omitDraftDuringUpdate: true
           omitNameDuringUpdate: true
@@ -114,31 +128,20 @@ jobs:
 
 
   linux-arm64:
+    needs: create-release
     name: 'Linux Arm 64 - GNU Arm Embedded GCC ${{ github.event.inputs.version }} publish release'
     runs-on: [self-hosted, linux, arm64, xbbla64]
     steps:
       - name: 'Machine'
         run: uname -a
-      - name: 'Checkout'
-        uses: actions/checkout@v2
-        with:
-          fetch-depth: 3
-          submodules: true
-      - name: 'Create body'
-        run: |
-          npm install
-          cat scripts/templates/body-github-release-liquid.md | npm run liquidjs --silent -- '{ "RELEASE_VERSION": "${{ github.event.inputs.version }}" }' >.github/workflows/body-github-release.md
-          cat .github/workflows/body-github-release.md
       - name: 'Publish release'
         # https://github.com/ncipollo/release-action
         uses: ncipollo/release-action@v1
         with:
           allowUpdates: true
           artifacts: '~/Work/arm-none-eabi-gcc-${{ github.event.inputs.version }}/deploy/*'
-          bodyFile: '.github/workflows/body-github-release.md'
           commit: 'xpack-develop'
           draft: true
-          name: 'xPack GNU Arm Embedded GCC v${{ github.event.inputs.version }}'
           omitBodyDuringUpdate: true
           omitDraftDuringUpdate: true
           omitNameDuringUpdate: true
@@ -155,6 +158,7 @@ jobs:
 
 
   macos-x64:
+    needs: create-release
     name: 'macOS Intel - GNU Arm Embedded GCC ${{ github.event.inputs.version }} publish release'
 
     runs-on: [self-hosted, macos, intel]
@@ -162,26 +166,14 @@ jobs:
     steps:
       - name: 'Machine'
         run: uname -a
-      - name: 'Checkout'
-        uses: actions/checkout@v2
-        with:
-          fetch-depth: 3
-          submodules: true
-      - name: 'Create body'
-        run: |
-          npm install
-          cat scripts/templates/body-github-release-liquid.md | npm run liquidjs --silent -- '{ "RELEASE_VERSION": "${{ github.event.inputs.version }}" }' >.github/workflows/body-github-release.md
-          cat .github/workflows/body-github-release.md
       - name: 'Publish release'
         # https://github.com/ncipollo/release-action
         uses: ncipollo/release-action@v1
         with:
           allowUpdates: true
           artifacts: '~/Work/arm-none-eabi-gcc-${{ github.event.inputs.version }}/deploy/*'
-          bodyFile: '.github/workflows/body-github-release.md'
           commit: 'xpack-develop'
           draft: true
-          name: 'xPack GNU Arm Embedded GCC v${{ github.event.inputs.version }}'
           omitBodyDuringUpdate: true
           omitDraftDuringUpdate: true
           omitNameDuringUpdate: true
@@ -198,6 +190,7 @@ jobs:
 
 
   macos-arm64:
+    needs: create-release
     name: 'macOS Arm - GNU Arm Embedded GCC ${{ github.event.inputs.version }} publish release'
 
     runs-on: [self-hosted, macos, apple]
@@ -210,23 +203,12 @@ jobs:
       - name: 'Machine'
         run: uname -a
 
-      - name: 'Checkout'
-        uses: actions/checkout@v2
-        with:
-          fetch-depth: 3
-          submodules: true
-      - name: 'Create body'
-        run: |
-          npm install
-          cat scripts/templates/body-github-release-liquid.md | npm run liquidjs --silent -- '{ "RELEASE_VERSION": "${{ github.event.inputs.version }}" }' >.github/workflows/body-github-release.md
-          cat .github/workflows/body-github-release.md
       - name: 'Publish release'
         # https://github.com/ncipollo/release-action
         uses: ncipollo/release-action@v1
         with:
           allowUpdates: true
           artifacts: '~/Work/arm-none-eabi-gcc-${{ github.event.inputs.version }}/deploy/*'
-          bodyFile: '.github/workflows/body-github-release.md'
           commit: 'xpack-develop'
           draft: true
           name: 'xPack GNU Arm Embedded GCC v${{ github.event.inputs.version }}'
