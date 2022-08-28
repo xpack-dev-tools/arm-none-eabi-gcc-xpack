@@ -38,32 +38,32 @@
     "minimumXpmRequired": "0.10.2",
     "binaries": {
       "destination": "./.content",
-      "baseUrl": "https://github.com/xpack-dev-tools/arm-none-eabi-gcc-xpack/releases/download/v11.2.1-1.2",
+      "baseUrl": "https://github.com/xpack-dev-tools/arm-none-eabi-gcc-xpack/releases/download/v11.3.1-1.1",
       "skip": 1,
       "platforms": {
         "darwin-arm64": {
-          "fileName": "xpack-arm-none-eabi-gcc-11.2.1-1.2-darwin-arm64.tar.gz",
-          "sha256": "85afae936d84b5ed94ad15300d2333d4b0af34b53bbf92283e558a96209d0dd7"
+          "fileName": "xpack-arm-none-eabi-gcc-11.3.1-1.1-darwin-arm64.tar.gz",
+          "sha256": "99de78184f5548c65b980130c9438a31a602ddbbe9515f3d82bf000b67f8c835"
         },
         "darwin-x64": {
-          "fileName": "xpack-arm-none-eabi-gcc-11.2.1-1.2-darwin-x64.tar.gz",
-          "sha256": "f2910d5ec4971baee9cd9cd3efe13fc8573b2f1c8185a6f18a7bb7fb3787a60d"
+          "fileName": "xpack-arm-none-eabi-gcc-11.3.1-1.1-darwin-x64.tar.gz",
+          "sha256": "16dd4af277c488eae8a1f7bc8348f772fb0442946d767ea1ee77485ffe2ff848"
         },
         "linux-arm64": {
-          "fileName": "xpack-arm-none-eabi-gcc-11.2.1-1.2-linux-arm64.tar.gz",
-          "sha256": "e5bd60f5aaaf498e01d7fa4e2d2bd64671330217f8c6b0437208be42eac4c837"
+          "fileName": "xpack-arm-none-eabi-gcc-11.3.1-1.1-linux-arm64.tar.gz",
+          "sha256": "393baf6c478fd65ebb826b0f21a40f168d32600e16a2cb926c1fb288e8de3958"
         },
         "linux-arm": {
-          "fileName": "xpack-arm-none-eabi-gcc-11.2.1-1.2-linux-arm.tar.gz",
-          "sha256": "cce74d7f5c96099595b7f28c34ed91bfbf88c3e85db61645f944522c74f73cfd"
+          "fileName": "xpack-arm-none-eabi-gcc-11.3.1-1.1-linux-arm.tar.gz",
+          "sha256": "2a7dcad87cc1b8498038a3e8263defa4fd61bc0e6179fe7a1eef0e09c79f30bd"
         },
         "linux-x64": {
-          "fileName": "xpack-arm-none-eabi-gcc-11.2.1-1.2-linux-x64.tar.gz",
-          "sha256": "7479becc1ea98fbceecadf1f036ddaba8dc39c9cce5cb45f0a7a36e923d33c9a"
+          "fileName": "xpack-arm-none-eabi-gcc-11.3.1-1.1-linux-x64.tar.gz",
+          "sha256": "df515ea5b2efb625f1cf1e11c3d096c4ddf800408ee2bd061a67b7739a5febff"
         },
         "win32-x64": {
-          "fileName": "xpack-arm-none-eabi-gcc-11.2.1-1.2-win32-x64.zip",
-          "sha256": "4a45e1df1c621f0a97a2bcb63977a3745ffcff7afc0e31ad2f3d5cc1272acf4b"
+          "fileName": "xpack-arm-none-eabi-gcc-11.3.1-1.1-win32-x64.zip",
+          "sha256": "d3906baa7a845bb8f341b67da8185e48fb9dc2746963bf40c2caea825c73ee5c"
         }
       }
     },
