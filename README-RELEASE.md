@@ -475,7 +475,7 @@ The tests results are available from the
 When the release is considered stable, promote it as `latest`:
 
 - `npm dist-tag ls @xpack-dev-tools/arm-none-eabi-gcc`
-- `npm dist-tag add @xpack-dev-tools/arm-none-eabi-gcc@11.3.1-1.1.2 latest`
+- `npm dist-tag add @xpack-dev-tools/arm-none-eabi-gcc@11.3.1-1.1.1 latest`
 - `npm dist-tag ls @xpack-dev-tools/arm-none-eabi-gcc`
 
 In case the previous version is not functional and needs to be unpublished:
