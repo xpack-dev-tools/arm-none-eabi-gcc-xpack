@@ -235,11 +235,11 @@ These commands use the `xpack-develop` branch of this repo.
 The full builds take about 11 hours (about 3h30 without multi-libs)
 to complete:
 
-- `xbbmi`: 9h (2h20)
-- `xbbma`: 2h (32m)
-- `xbbli`: 2h45 (including Windows) (1h00)
-- `xbbla64`: 10h20 (3h20)
-- `xbbla32`: 10h50 (3h30)
+- `xbbmi`: 5h10 (1h14)
+- `xbbma`: 1h55 (32m)
+- `xbbli`: 2h42 (including Windows) (1h00)
+- `xbbla64`: 10h45 (3h30)
+- `xbbla32`: 11h12 (3h30)
 
 The workflows results and logs are available from the
 [Actions](https://github.com/xpack-dev-tools/arm-none-eabi-gcc-xpack/actions/) page.
