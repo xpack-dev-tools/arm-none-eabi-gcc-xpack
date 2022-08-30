@@ -97,7 +97,7 @@ Similarly for GDB:
 - push the tag to origin
 - check the tag at <https://github.com/xpack-dev-tools/binutils-gdb/tags/>
 
-### Update local gdb fork
+### Update local gcc fork
 
 With a Git client:
 
