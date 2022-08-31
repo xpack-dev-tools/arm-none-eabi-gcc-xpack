@@ -10,7 +10,7 @@ summary: "Version **{{ RELEASE_VERSION }}** is a new release; it follows the Arm
 
 arm_version: 11.3.Rel1
 arm_date: August 8, 2022
-version: {{ RELEASE_VERSION }}
+version: "{{ RELEASE_VERSION }}"
 npm_subversion: 1
 python_version: 10
 download_url: https://github.com/xpack-dev-tools/arm-none-eabi-gcc-xpack/releases/tag/v{{ RELEASE_VERSION }}/
