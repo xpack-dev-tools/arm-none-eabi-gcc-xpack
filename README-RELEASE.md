@@ -10,6 +10,26 @@ release schedule, which is about two releases per year.
 
 Before starting the build, perform some checks and tweaks.
 
+### Download the build scripts repo
+
+The build scripts are available in the `scripts` folder of the
+[`xpack-dev-tools/arm-none-eabi-gcc-xpack`](https://github.com/xpack-dev-tools/arm-none-eabi-gcc-xpack)
+Git repo.
+
+To download them on a new machine, clone the `xpack-develop` branch:
+
+```sh
+rm -rf ${HOME}/Work/arm-none-eabi-gcc-xpack.git; \
+git clone \
+  --branch xpack-develop \
+  https://github.com/xpack-dev-tools/arm-none-eabi-gcc-xpack.git \
+  ${HOME}/Work/arm-none-eabi-gcc-xpack.git; \
+git -C ${HOME}/Work/arm-none-eabi-gcc-xpack.git submodule update --init --recursive
+```
+
+> Note: the repository uses submodules; for a successful build it is
+> mandatory to recurse the submodules.
+
 ### Check Git
 
 In the `xpack-dev-tools/arm-none-eabi-gcc-xpack` Git repo:
@@ -18,6 +38,10 @@ In the `xpack-dev-tools/arm-none-eabi-gcc-xpack` Git repo:
 - if needed, merge the `xpack` branch
 
 No need to add a tag here, it'll be added when the release is created.
+
+### Update helper
+
+With a git client, go to the helper repo and update to the latest master commit.
 
 ### Update to latest Arm release
 
@@ -119,10 +143,6 @@ With a Git client:
 To find the actual versions of the dependent libraries, check the
 snapshot archive and the ABE manifest provided by Arm.
 
-### Update helper
-
-With a git client, go to the helper repo and update to the latest master commit.
-
 ## Build
 
 ### Development run the build scripts
@@ -131,7 +151,7 @@ Before the real build, run a test build on the development machine (`wksi`)
 or the production machines (`xbbma`, `xbbmi`):
 
 ```sh
-sudo rm -rf ~/Work/arm-none-eabi-gcc-*-*
+rm -rf ~/Work/arm-none-eabi-gcc-*-*
 
 caffeinate bash ${HOME}/Work/arm-none-eabi-gcc-xpack.git/scripts/helper/build.sh --develop --macos --disable-multilib
 ```
@@ -139,6 +159,8 @@ caffeinate bash ${HOME}/Work/arm-none-eabi-gcc-xpack.git/scripts/helper/build.sh
 Similarly on the Intel Linux (`xbbli`):
 
 ```sh
+sudo rm -rf ~/Work/arm-none-eabi-gcc-*-*
+
 bash ${HOME}/Work/arm-none-eabi-gcc-xpack.git/scripts/helper/build.sh --develop --linux64 --disable-multilib
 
 bash ${HOME}/Work/arm-none-eabi-gcc-xpack.git/scripts/helper/build.sh --develop --win64 --disable-multilib

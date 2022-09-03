@@ -74,8 +74,7 @@ git -C ${HOME}/Work/arm-none-eabi-gcc-xpack.git submodule update --init --recurs
 > Note: the repository uses submodules; for a successful build it is
 > mandatory to recurse the submodules.
 
-For development purposes, clone the `xpack-develop`
-branch:
+For development purposes, clone the `xpack-develop` branch:
 
 ```sh
 rm -rf ${HOME}/Work/arm-none-eabi-gcc-xpack.git; \
