@@ -10,6 +10,10 @@ summary: "Version **{{ RELEASE_VERSION }}** is a new release; it follows the Arm
 
 arm_version: 11.3.Rel1
 arm_date: August 8, 2022
+gcc_version: "11.3.1"
+binutils_version: "2.38"
+newlib_version: "4.1.0"
+gdb_version: "12.1"
 version: "{{ RELEASE_VERSION }}"
 npm_subversion: 1
 python_version: 10
@@ -130,8 +134,12 @@ The xPack GNU Arm Embedded GCC generally follows the official
 The current version is based on:
 
 - [GNU Arm Embedded Toolchain](https://developer.arm.com/open-source/gnu-toolchain/gnu-rm)
-release **{% raw %}{{ page.arm_version }}{% endraw %}** from {% raw %}{{ page.arm_date }}{% endraw %} and uses the
-same sources.
+release **{% raw %}{{ page.arm_version }}{% endraw %}** from {% raw %}{{ page.arm_date }}{% endraw %}
+and uses the same sources. It includes:
+  - GCC {% raw %}{{ page.gcc_version }}{% endraw %}
+  - binutils {% raw %}{{ page.binutils_version }}{% endraw %}
+  - newlib {% raw %}{{ page.newlib_version }}{% endraw %}
+  - GDB {% raw %}{{ page.gdb_version }}{% endraw %}
 
 ## Supported libraries
 
