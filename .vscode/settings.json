@@ -56,6 +56,7 @@
     "liquidjs",
     "multilib",
     "ncipollo",
+    "newlib",
     "npmignore",
     "npmjs",
     "objcopy",
