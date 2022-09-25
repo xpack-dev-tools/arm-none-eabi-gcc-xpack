@@ -223,7 +223,11 @@ caffeinate ssh xbbla32
 Start the runner on all machines:
 
 ```sh
+screen -S ga
+
 ~/actions-runners/xpack-dev-tools/run.sh &
+
+# Ctrl-a Ctrl-d
 ```
 
 Check that both the project Git and the submodule are pushed to GitHub.
