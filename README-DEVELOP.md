@@ -1,4 +1,6 @@
-TODO
+# Developer info
+
+To access the ARM branch in the upstream repo:
 
 ```sh
 git remote add upstream git://gcc.gnu.org/git/gcc.git

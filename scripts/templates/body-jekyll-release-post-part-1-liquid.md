@@ -1,12 +1,12 @@
 ---
-title:  xPack GNU Arm Embedded GCC v{{ RELEASE_VERSION }} released
+title:  xPack GNU Arm Embedded GCC v{{ XBB_RELEASE_VERSION }} released
 
 TODO: select one summary
 
-summary: "Version **{{ RELEASE_VERSION }}** is a maintenance release; it updates to
+summary: "Version **{{ XBB_RELEASE_VERSION }}** is a maintenance release; it updates to
 the latest upstream master."
 
-summary: "Version **{{ RELEASE_VERSION }}** is a new release; it follows the Arm release."
+summary: "Version **{{ XBB_RELEASE_VERSION }}** is a new release; it follows the Arm release."
 
 arm_version: 11.3.Rel1
 arm_date: August 8, 2022
@@ -14,10 +14,10 @@ gcc_version: "11.3.1"
 binutils_version: "2.38"
 newlib_version: "4.1.0"
 gdb_version: "12.1"
-version: "{{ RELEASE_VERSION }}"
+version: "{{ XBB_RELEASE_VERSION }}"
 npm_subversion: 1
 python_version: 10
-download_url: https://github.com/xpack-dev-tools/arm-none-eabi-gcc-xpack/releases/tag/v{{ RELEASE_VERSION }}/
+download_url: https://github.com/xpack-dev-tools/arm-none-eabi-gcc-xpack/releases/tag/v{{ XBB_RELEASE_VERSION }}/
 
 date:   {{ RELEASE_DATE }}
 
@@ -112,7 +112,7 @@ identify binaries installed with
 
 ### Uninstall
 
-To remove the links from the current project:
+To remove the links created by xpm in the current project:
 
 ```sh
 cd my-project

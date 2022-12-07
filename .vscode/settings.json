@@ -74,6 +74,7 @@
     "runpath",
     "sysroot",
     "wksi",
+    "writable",
     "xattr",
     "xbbla",
     "xbbla32",

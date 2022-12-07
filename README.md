@@ -1,5 +1,7 @@
-[![GitHub release (latest by date)](https://img.shields.io/github/v/release/xpack-dev-tools/arm-none-eabi-gcc-xpack)](https://github.com/xpack-dev-tools/arm-none-eabi-gcc-xpack/releases)
-[![npm (scoped)](https://img.shields.io/npm/v/@xpack-dev-tools/arm-none-eabi-gcc.svg)](https://www.npmjs.com/package/@xpack-dev-tools/arm-none-eabi-gcc)
+[![GitHub package.json version](https://img.shields.io/github/package-json/v/xpack-dev-tools/arm-none-eabi-gcc-xpack)](https://github.com/xpack-dev-tools/arm-none-eabi-gcc-xpack/blob/xpack/package.json)
+[![GitHub release (latest by date)](https://img.shields.io/github/v/release/xpack-dev-tools/arm-none-eabi-gcc-xpack)](https://github.com/xpack-dev-tools/arm-none-eabi-gcc-xpack/releases/)
+[![npm (scoped)](https://img.shields.io/npm/v/@xpack-dev-tools/arm-none-eabi-gcc.svg?color=blue)](https://www.npmjs.com/package/@xpack-dev-tools/arm-none-eabi-gcc/)
+[![license](https://img.shields.io/github/license/xpack-dev-tools/arm-none-eabi-gcc-xpack)](https://github.com/xpack-dev-tools/arm-none-eabi-gcc-xpack/blob/xpack/LICENSE)
 
 # The xPack GNU Arm Embedded GCC
 
@@ -39,11 +41,17 @@ from the [`npmjs.com`](https://www.npmjs.com) registry.
 
 #### Prerequisites
 
-The only requirement is a recent
-`xpm`, which is a portable
-[Node.js](https://nodejs.org) command line application. To install it,
-follow the instructions from the
-[xpm](https://xpack.github.io/xpm/install/) page.
+A recent [xpm](https://xpack.github.io/xpm/),
+which is a portable [Node.js](https://nodejs.org/) command line application.
+
+It is recommended to update to the latest version with:
+
+```sh
+npm install --location=global xpm@latest
+```
+
+For details please follow the instructions in the
+[xPack install](https://xpack.github.io/install/) page.
 
 #### Install
 
@@ -86,9 +94,101 @@ Eclipse will automatically
 identify binaries installed with
 `xpm` and provide a convenient method to manage paths.
 
+After install, the package should create a structure like this (macOS files;
+only the first two depth levels are shown):
+
+```console
+$ tree -L 2 /Users/ilg/Library/xPacks/\@xpack-dev-tools/arm-none-eabi-gcc/11.3.1-1.1/.content/
+/Users/ilg/Library/xPacks/\@xpack-dev-tools/arm-none-eabi-gcc/11.3.1-1.1/.content/
+├── README.md
+├── arm-none-eabi
+│   ├── bin
+│   ├── include
+│   ├── lib
+│   └── share
+├── bin
+│   ├── arm-none-eabi-addr2line
+│   ├── arm-none-eabi-ar
+│   ├── arm-none-eabi-as
+│   ├── arm-none-eabi-as-py3
+│   ├── arm-none-eabi-c++
+│   ├── arm-none-eabi-c++filt
+│   ├── arm-none-eabi-cpp
+│   ├── arm-none-eabi-elfedit
+│   ├── arm-none-eabi-g++
+│   ├── arm-none-eabi-gcc
+│   ├── arm-none-eabi-gcc-11.3.1
+│   ├── arm-none-eabi-gcc-ar
+│   ├── arm-none-eabi-gcc-nm
+│   ├── arm-none-eabi-gcc-ranlib
+│   ├── arm-none-eabi-gcov
+│   ├── arm-none-eabi-gcov-dump
+│   ├── arm-none-eabi-gcov-tool
+│   ├── arm-none-eabi-gdb
+│   ├── arm-none-eabi-gdb-add-index
+│   ├── arm-none-eabi-gdb-add-index-py3
+│   ├── arm-none-eabi-gdb-py3
+│   ├── arm-none-eabi-gfortran
+│   ├── arm-none-eabi-gprof
+│   ├── arm-none-eabi-gprof-py3
+│   ├── arm-none-eabi-ld
+│   ├── arm-none-eabi-ld.bfd
+│   ├── arm-none-eabi-lto-dump
+│   ├── arm-none-eabi-nm
+│   ├── arm-none-eabi-objcopy
+│   ├── arm-none-eabi-objdump
+│   ├── arm-none-eabi-ranlib
+│   ├── arm-none-eabi-readelf
+│   ├── arm-none-eabi-size
+│   ├── arm-none-eabi-strings
+│   └── arm-none-eabi-strip
+├── distro-info
+│   ├── CHANGELOG.md
+│   ├── licenses
+│   ├── patches
+│   └── scripts
+├── include
+│   └── gdb
+├── lib
+│   ├── bfd-plugins
+│   ├── gcc
+│   ├── libcc1.0.so
+│   ├── libcc1.so -> libcc1.0.so
+│   └── python3.10
+├── libexec
+│   ├── gcc
+│   ├── libcrypt.2.dylib
+│   ├── libcrypto.1.1.dylib
+│   ├── libffi.8.dylib
+│   ├── libgcc_s.1.dylib
+│   ├── libgmp.10.dylib
+│   ├── libiconv.2.dylib
+│   ├── libisl.15.dylib
+│   ├── liblzma.5.dylib
+│   ├── libmpc.3.dylib
+│   ├── libmpfr.4.dylib
+│   ├── libncurses.6.dylib
+│   ├── libpanel.6.dylib
+│   ├── libpython3.10.dylib
+│   ├── libreadline.8.1.dylib
+│   ├── libreadline.8.dylib -> libreadline.8.1.dylib
+│   ├── libsqlite3.0.dylib
+│   ├── libssl.1.1.dylib
+│   ├── libstdc++.6.dylib
+│   ├── libz.1.2.12.dylib
+│   └── libz.1.dylib -> libz.1.2.12.dylib
+└── share
+    ├── doc
+    └── gcc-11.3.1
+
+21 directories, 59 files
+```
+
+No other files are installed in any system folders or other locations.
+
 #### Uninstall
 
-To remove the links from the current project:
+To remove the links created by xpm in the current project:
 
 ```sh
 cd my-project
@@ -132,13 +232,12 @@ with caution, and prefer exact matches, like `11.3.1-1.1.2`.
 
 ## Maintainer info
 
-- [How to build](https://github.com/xpack-dev-tools/arm-none-eabi-gcc-xpack/blob/xpack/README-BUILD.md)
-- [How to make new releases](https://github.com/xpack-dev-tools/arm-none-eabi-gcc-xpack/blob/xpack/README-RELEASE.md)
-- [Developer info](https://github.com/xpack-dev-tools/arm-none-eabi-gcc-xpack/blob/xpack/README-DEVELOP.md)
+For maintainer info, please see the
+[README-MAINTAINER](https://github.com/xpack-dev-tools/arm-none-eabi-gcc-xpack/blob/xpack/README-MAINTAINER.md)
 
 ## Support
 
-The quick answer is to use the GitHub
+The quick advice for getting support is to use the GitHub
 [Discussions](https://github.com/xpack-dev-tools/arm-none-eabi-gcc-xpack/discussions/).
 
 For more details please read the

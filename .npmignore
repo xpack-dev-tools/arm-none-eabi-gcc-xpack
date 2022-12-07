@@ -13,5 +13,6 @@ tests/
 extras/
 
 README-*
-*.tgz
 LICENSE-*
+
+*.tgz

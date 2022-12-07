@@ -8,33 +8,24 @@
 # -----------------------------------------------------------------------------
 
 # -----------------------------------------------------------------------------
-# Common functions used in various tests.
-#
-# Requires
-# - app_folder_path
-# - test_folder_path
-# - archive_platform (win32|linux|darwin)
 
-# -----------------------------------------------------------------------------
-
-function run_tests()
+function tests_run_all()
 {
-  GCC_VERSION="$(echo "${RELEASE_VERSION}" | sed -e 's|-.*||')"
-  GCC_VERSION_MAJOR=$(echo ${GCC_VERSION} | sed -e 's|\([0-9][0-9]*\)\..*|\1|')
+  local test_bin_path="$1"
 
-  echo
-  env | sort
+  # XBB_GCC_VERSION="$(echo "${XBB_RELEASE_VERSION}" | sed -e 's|-.*||')"
+  # XBB_GCC_VERSION_MAJOR=$(echo ${XBB_GCC_VERSION} | sed -e 's|\([0-9][0-9]*\)\..*|\1|')
 
-  test_cross_binutils
+  test_cross_binutils "${test_bin_path}"
 
-  test_cross_gcc
+  test_cross_gcc "${test_bin_path}"
 
-  test_cross_gdb
+  test_cross_gdb "${test_bin_path}"
 
-  test_cross_gdb_py3
+  test_cross_gdb_py3 "${test_bin_path}"
 }
 
-function update_image()
+function _tests_update_system()
 {
   local image_name="$1"
 
@@ -49,7 +40,7 @@ function update_image()
     run_verbose apt-get -qq install -y libc6-dev libstdc++6 # TODO: get rid of them
   elif [[ ${image_name} == *centos* ]] || [[ ${image_name} == *redhat* ]] || [[ ${image_name} == *fedora* ]]
   then
-    run_verbose yum install -y -q git curl tar gzip redhat-lsb-core binutils
+    run_verbose yum install -y -q git curl tar gzip redhat-lsb-core binutils which
     run_verbose yum install -y -q glibc-devel glibc-static libstdc++-devel # TODO: get rid of them
   elif [[ ${image_name} == *suse* ]]
   then
@@ -62,7 +53,7 @@ function update_image()
 
     # Update even if up to date (-yy) & upgrade (-u).
     # pacman -S -yy -u -q --noconfirm
-    run_verbose pacman -S -q --noconfirm --noprogressbar git curl tar gzip lsb-release binutils
+    run_verbose pacman -S -q --noconfirm --noprogressbar git curl tar gzip lsb-release binutils which
     run_verbose pacman -S -q --noconfirm --noprogressbar gcc-libs # TODO: get rid of them
   elif [[ ${image_name} == *archlinux* ]]
   then
@@ -70,7 +61,7 @@ function update_image()
 
     # Update even if up to date (-yy) & upgrade (-u).
     # pacman -S -yy -u -q --noconfirm
-    run_verbose pacman -S -q --noconfirm --noprogressbar git curl tar gzip lsb-release binutils
+    run_verbose pacman -S -q --noconfirm --noprogressbar git curl tar gzip lsb-release binutils which
     run_verbose pacman -S -q --noconfirm --noprogressbar gcc-libs
   fi
 
