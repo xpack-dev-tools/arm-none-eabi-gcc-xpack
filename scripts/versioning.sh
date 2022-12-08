@@ -74,8 +74,8 @@ function build_application_versioned_components()
     then
       # https://developer.arm.com/-/media/Files/downloads/gnu/11.3.rel1/manifest/arm-gnu-toolchain-arm-none-eabi-abe-manifest.txt
 
-      ARM_RELEASE="11.3.rel1"
-      XBB_ARM_URL_BASE="https://developer.arm.com/-/media/Files/downloads/gnu/${ARM_RELEASE}/src"
+      XBB_ARM_RELEASE="11.3.rel1"
+      XBB_ARM_URL_BASE="https://developer.arm.com/-/media/Files/downloads/gnu/${XBB_ARM_RELEASE}/src"
 
       # ---------------------------------------------------------------------
 
@@ -86,7 +86,7 @@ function build_application_versioned_components()
       # https://github.com/xpack-dev-tools/binutils-gdb/tags
 
       XBB_BINUTILS_VERSION="2.38"
-      XBB_BINUTILS_TAG_NAME="binutils-${XBB_BINUTILS_VERSION}-arm-none-eabi-${ARM_RELEASE}"
+      XBB_BINUTILS_TAG_NAME="binutils-${XBB_BINUTILS_VERSION}-arm-none-eabi-${XBB_ARM_RELEASE}"
 
       XBB_BINUTILS_SRC_FOLDER_NAME="binutils-gdb-${XBB_BINUTILS_TAG_NAME}"
       XBB_BINUTILS_ARCHIVE_NAME="${XBB_BINUTILS_TAG_NAME}.tar.gz"
@@ -103,7 +103,7 @@ function build_application_versioned_components()
 
       # XBB_GCC_VERSION computer from XBB_RELEASE_VERSION
       XBB_GCC_SRC_FOLDER_NAME="gcc"
-      XBB_GCC_ARCHIVE_NAME="gcc-arm-none-eabi-${ARM_RELEASE}.tar.xz"
+      XBB_GCC_ARCHIVE_NAME="gcc-arm-none-eabi-${XBB_ARM_RELEASE}.tar.xz"
       XBB_GCC_ARCHIVE_URL="${XBB_ARM_URL_BASE}/gcc.tar.xz"
 
       XBB_GCC_PATCH_FILE_NAME="gcc-${XBB_GCC_VERSION}-cross.patch.diff"
@@ -118,7 +118,7 @@ function build_application_versioned_components()
 
       XBB_NEWLIB_VERSION="4.1.0"
       XBB_NEWLIB_SRC_FOLDER_NAME="newlib-cygwin"
-      XBB_NEWLIB_ARCHIVE_NAME="newlib-arm-none-eabi-${ARM_RELEASE}.tar.xz"
+      XBB_NEWLIB_ARCHIVE_NAME="newlib-arm-none-eabi-${XBB_ARM_RELEASE}.tar.xz"
       XBB_NEWLIB_ARCHIVE_URL="${XBB_ARM_URL_BASE}/newlib-cygwin.tar.xz"
 
       # ---------------------------------------------------------------------
@@ -132,7 +132,7 @@ function build_application_versioned_components()
 
       # From `gdb/version.in`
       XBB_GDB_VERSION="12.1"
-      XBB_GDB_TAG_NAME="gdb-12-arm-none-eabi-${ARM_RELEASE}"
+      XBB_GDB_TAG_NAME="gdb-12-arm-none-eabi-${XBB_ARM_RELEASE}"
 
       XBB_GDB_SRC_FOLDER_NAME="binutils-gdb-${XBB_GDB_TAG_NAME}"
       XBB_GDB_ARCHIVE_NAME="${XBB_GDB_TAG_NAME}.tar.gz"
@@ -144,8 +144,8 @@ function build_application_versioned_components()
     elif [[ "${XBB_RELEASE_VERSION}" =~ 11\.2\.1-* ]]
     then
       # https://developer.arm.com/-/media/Files/downloads/gnu/11.2-2022.02/manifest/gcc-arm-arm-none-eabi-abe-manifest.txt
-      ARM_RELEASE="11.2-2022.02"
-      XBB_ARM_URL_BASE="https://developer.arm.com/-/media/Files/downloads/gnu/${ARM_RELEASE}/src"
+      XBB_ARM_RELEASE="11.2-2022.02"
+      XBB_ARM_URL_BASE="https://developer.arm.com/-/media/Files/downloads/gnu/${XBB_ARM_RELEASE}/src"
 
       # ---------------------------------------------------------------------
 
@@ -158,7 +158,7 @@ function build_application_versioned_components()
       XBB_BINUTILS_VERSION="2.37"
 
       # Tag in the local binutils fork.
-      XBB_BINUTILS_TAG_NAME="binutils-${XBB_BINUTILS_VERSION}-arm-none-eabi-${ARM_RELEASE}"
+      XBB_BINUTILS_TAG_NAME="binutils-${XBB_BINUTILS_VERSION}-arm-none-eabi-${XBB_ARM_RELEASE}"
 
       XBB_BINUTILS_SRC_FOLDER_NAME="binutils-gdb-${XBB_BINUTILS_TAG_NAME}"
       XBB_BINUTILS_ARCHIVE_NAME="${XBB_BINUTILS_TAG_NAME}.tar.gz"
@@ -173,7 +173,7 @@ function build_application_versioned_components()
 
       # XBB_GCC_VERSION computer from XBB_RELEASE_VERSION
       XBB_GCC_SRC_FOLDER_NAME="gcc"
-      XBB_GCC_ARCHIVE_NAME="gcc-arm-none-eabi-${ARM_RELEASE}.tar.xz"
+      XBB_GCC_ARCHIVE_NAME="gcc-arm-none-eabi-${XBB_ARM_RELEASE}.tar.xz"
       XBB_GCC_ARCHIVE_URL="${XBB_ARM_URL_BASE}/gcc.tar.xz"
 
       XBB_GCC_PATCH_FILE_NAME="gcc-${XBB_GCC_VERSION}-cross.patch.diff"
@@ -187,7 +187,7 @@ function build_application_versioned_components()
 
       XBB_NEWLIB_VERSION="4.1.0"
       XBB_NEWLIB_SRC_FOLDER_NAME="newlib-cygwin"
-      XBB_NEWLIB_ARCHIVE_NAME="newlib-arm-none-eabi-${ARM_RELEASE}.tar.xz"
+      XBB_NEWLIB_ARCHIVE_NAME="newlib-arm-none-eabi-${XBB_ARM_RELEASE}.tar.xz"
       XBB_NEWLIB_ARCHIVE_URL="${XBB_ARM_URL_BASE}/newlib-cygwin.tar.xz"
 
       # ---------------------------------------------------------------------
@@ -201,7 +201,7 @@ function build_application_versioned_components()
 
       # From `gdb/version.in`
       XBB_GDB_VERSION="11.2"
-      XBB_GDB_TAG_NAME="gdb-11-arm-none-eabi-${ARM_RELEASE}"
+      XBB_GDB_TAG_NAME="gdb-11-arm-none-eabi-${XBB_ARM_RELEASE}"
 
       XBB_GDB_SRC_FOLDER_NAME="binutils-gdb-${XBB_GDB_TAG_NAME}"
       XBB_GDB_ARCHIVE_NAME="${XBB_GDB_TAG_NAME}.tar.gz"
@@ -221,8 +221,6 @@ function build_application_versioned_components()
     XBB_PYTHON3_VERSION="3.10.4"
     XBB_PYTHON3_VERSION_MAJOR=$(echo ${XBB_PYTHON3_VERSION} | sed -e 's|\([0-9]\)\..*|\1|')
     XBB_PYTHON3_VERSION_MINOR=$(echo ${XBB_PYTHON3_VERSION} | sed -e 's|\([0-9]\)\.\([0-9][0-9]*\)\..*|\2|')
-
-    XBB_ARM_URL_BASE="https://developer.arm.com/-/media/Files/downloads/gnu/${ARM_RELEASE}/src"
 
     # -------------------------------------------------------------------------
     # Build the native dependencies.
