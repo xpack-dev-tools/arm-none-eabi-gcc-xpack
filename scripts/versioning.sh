@@ -325,6 +325,11 @@ function build_application_versioned_components()
 
         # https://www.openssl.org/source/
         build_openssl "1.1.1q" # "1.1.1n" # "1.1.1l" # "1.1.1h"
+
+        # Since the executables are not needed,
+        # Python is built as a dependency, then the libraries
+        # are copied to the application folder.
+        build_python3 "${XBB_PYTHON3_VERSION}"
       fi
     fi
 
@@ -347,7 +352,8 @@ function build_application_versioned_components()
 
       # ---------------------------------------------------------------------
       # The nano version is practically a new build installed in a
-      # separate folder.
+      # separate folder. Only the libraries are relevant; they are
+      # copied in a separate step.
       (
         xbb_set_executables_install_path "${XBB_APPLICATION_NANO_INSTALL_FOLDER_PATH}"
 
@@ -368,9 +374,6 @@ function build_application_versioned_components()
 
     build_cross_gdb "${XBB_APPLICATION_TARGET_TRIPLET}" ""
 
-  if true
-  then
-
     if [ "${XBB_WITH_GDB_PY3}" == "y" ]
     then
       if [ "${XBB_HOST_PLATFORM}" == "win32" ]
@@ -378,15 +381,14 @@ function build_application_versioned_components()
         # Shortcut, use the existing python.exe instead of building
         # if from sources. It also downloads the sources.
         python3_download_win "${XBB_PYTHON3_VERSION}"
-        python3_add_win_syslibs
+        python3_copy_win_syslibs
       else # linux or darwin
-        build_python3 "${XBB_PYTHON3_VERSION}"
-        python3_add_syslibs
+        # Copy libraries from sources and dependencies.
+        python3_copy_syslibs
       fi
 
       build_cross_gdb "${XBB_APPLICATION_TARGET_TRIPLET}" "-py3"
     fi
-  fi
 
   else
     echo "Unsupported ${XBB_APPLICATION_LOWER_CASE_NAME} version ${XBB_RELEASE_VERSION}"
