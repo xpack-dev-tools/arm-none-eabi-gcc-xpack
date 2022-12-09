@@ -236,11 +236,6 @@ function build_application_versioned_components()
     xbb_reset_env
     xbb_set_target "requested"
 
-    if [ "${XBB_HOST_PLATFORM}" == "win32" ]
-    then
-      prepare_gcc_env "${XBB_APPLICATION_TARGET_TRIPLET}-"
-    fi
-
     # For better control, without it some components pick the lib packed
     # inside the archive.
     build_zlib "1.2.12" # "1.2.8"
