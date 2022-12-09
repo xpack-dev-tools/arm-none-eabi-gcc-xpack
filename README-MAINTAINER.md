@@ -315,14 +315,14 @@ xpm install --config darwin-arm64 -C ~/Work/arm-none-eabi-gcc-xpack.git && \
 caffeinate xpm run build-develop --config darwin-arm64 -C ~/Work/arm-none-eabi-gcc-xpack.git
 ```
 
-About 31 minutes later, the output of the build script is a compressed
+About 1h05 later, the output of the build script is a compressed
 archive and its SHA signature, created in the `deploy` folder:
 
 ```console
 $ ls -l ~/Work/arm-none-eabi-gcc-xpack.git/build/darwin-arm64/deploy
-total 165464
--rw-r--r--  1 ilg  staff  110761767 Aug 20 12:48 xpack-arm-none-eabi-gcc-11.3.1-1.1-darwin-arm64.tar.gz
--rw-r--r--  1 ilg  staff        107 Aug 20 12:48 xpack-arm-none-eabi-gcc-11.3.1-1.1-darwin-arm64.tar.gz.sha
+total 198456
+-rw-r--r--  1 ilg  staff  90569191 Dec  8 13:00 xpack-arm-none-eabi-gcc-11.3.1-1.2-darwin-arm64.tar.gz
+-rw-r--r--  1 ilg  staff       121 Dec  8 13:00 xpack-arm-none-eabi-gcc-11.3.1-1.2-darwin-arm64.tar.gz.sha
 ```
 
 #### Intel GNU/Linux
