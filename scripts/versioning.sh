@@ -38,15 +38,15 @@ function build_application_versioned_components()
   # ---------------------------------------------------------------------------
 
   # Redefine to "y" to create the LTO plugin links.
-  if [ "${XBB_HOST_PLATFORM}" == "darwin" ]
+  if [ "${XBB_REQUESTED_HOST_PLATFORM}" == "darwin" ]
   then
     XBB_LTO_PLUGIN_ORIGINAL_NAME="liblto_plugin.so"
     XBB_LTO_PLUGIN_BFD_PATH="lib/bfd-plugins/liblto_plugin.so"
-  elif [ "${XBB_HOST_PLATFORM}" == "linux" ]
+  elif [ "${XBB_REQUESTED_HOST_PLATFORM}" == "linux" ]
   then
     XBB_LTO_PLUGIN_ORIGINAL_NAME="liblto_plugin.so"
     XBB_LTO_PLUGIN_BFD_PATH="lib/bfd-plugins/liblto_plugin.so"
-  elif [ "${XBB_HOST_PLATFORM}" == "win32" ]
+  elif [ "${XBB_REQUESTED_HOST_PLATFORM}" == "win32" ]
   then
     XBB_LTO_PLUGIN_ORIGINAL_NAME="liblto_plugin.dll"
     XBB_LTO_PLUGIN_BFD_PATH="lib/bfd-plugins/liblto_plugin.dll"
@@ -284,14 +284,14 @@ function build_application_versioned_components()
     build_gettext "0.21"
 
     # Used by ncurses. Fails on macOS.
-    if [ "${XBB_HOST_PLATFORM}" == "linux" ]
+    if [ "${XBB_REQUESTED_HOST_PLATFORM}" == "linux" ]
     then
       # https://github.com/telmich/gpm/tags
       # https://github.com/xpack-dev-tools/gpm/tags
       build_gpm "1.20.7-1" # "1.20.7"
     fi
 
-    if [ "${XBB_HOST_PLATFORM}" == "linux" -o "${XBB_HOST_PLATFORM}" == "darwin" ]
+    if [ "${XBB_REQUESTED_HOST_PLATFORM}" == "linux" -o "${XBB_REQUESTED_HOST_PLATFORM}" == "darwin" ]
     then
       # https://ftp.gnu.org/gnu/ncurses/
       build_ncurses "6.3" # "6.2"
@@ -307,7 +307,7 @@ function build_application_versioned_components()
 
     if [ "${XBB_WITH_GDB_PY3}" == "y" ]
     then
-      if [ "${XBB_HOST_PLATFORM}" == "linux" -o "${XBB_HOST_PLATFORM}" == "darwin" ]
+      if [ "${XBB_REQUESTED_HOST_PLATFORM}" == "linux" -o "${XBB_REQUESTED_HOST_PLATFORM}" == "darwin" ]
       then
         # We cannot rely on a python shared library in the system, even
         # the custom build from sources does not have one.
@@ -343,7 +343,7 @@ function build_application_versioned_components()
 
     # -----------------------------------------------------------------------
 
-    if [ "${XBB_HOST_PLATFORM}" == "linux" -o "${XBB_HOST_PLATFORM}" == "darwin" ]
+    if [ "${XBB_REQUESTED_HOST_PLATFORM}" == "linux" -o "${XBB_REQUESTED_HOST_PLATFORM}" == "darwin" ]
     then
       build_cross_gcc_first "${XBB_GCC_VERSION}" "${XBB_APPLICATION_TARGET_TRIPLET}"
 
@@ -366,7 +366,7 @@ function build_application_versioned_components()
 
         cross_gcc_copy_nano_multilibs "${XBB_APPLICATION_TARGET_TRIPLET}"
       )
-    elif [ "${XBB_HOST_PLATFORM}" == "win32" ]
+    elif [ "${XBB_REQUESTED_HOST_PLATFORM}" == "win32" ]
     then
       copy_cross_linux_libs "${XBB_APPLICATION_TARGET_TRIPLET}"
       build_cross_gcc_final ""
@@ -376,7 +376,7 @@ function build_application_versioned_components()
 
     if [ "${XBB_WITH_GDB_PY3}" == "y" ]
     then
-      if [ "${XBB_HOST_PLATFORM}" == "win32" ]
+      if [ "${XBB_REQUESTED_HOST_PLATFORM}" == "win32" ]
       then
         # Shortcut, use the existing python.exe instead of building
         # if from sources. It also downloads the sources.
@@ -399,7 +399,7 @@ function build_application_versioned_components()
 
   cross_gcc_tidy_up
 
-  if [ "${XBB_HOST_PLATFORM}" != "win32" ]
+  if [ "${XBB_REQUESTED_HOST_PLATFORM}" != "win32" ]
   then
     cross_gcc_strip_libs "${XBB_APPLICATION_TARGET_TRIPLET}"
   fi
