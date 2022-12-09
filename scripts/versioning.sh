@@ -363,8 +363,14 @@ function build_application_versioned_components()
       )
     elif [ "${XBB_REQUESTED_HOST_PLATFORM}" == "win32" ]
     then
-      copy_cross_linux_libs "${XBB_APPLICATION_TARGET_TRIPLET}"
-      build_cross_gcc_final ""
+
+      cross_gcc_copy_linux_libs "${XBB_APPLICATION_TARGET_TRIPLET}"
+
+      (
+        cross_gcc_add_linux_install_path "${XBB_APPLICATION_TARGET_TRIPLET}"
+        build_cross_gcc_final "${XBB_GCC_VERSION}" "${XBB_APPLICATION_TARGET_TRIPLET}"
+      )
+
     fi
 
     build_cross_gdb "${XBB_APPLICATION_TARGET_TRIPLET}" ""
