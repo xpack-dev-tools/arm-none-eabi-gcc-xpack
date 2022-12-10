@@ -11,8 +11,8 @@
 
 function build_application_versioned_components()
 {
-  # XBB_APPLICATION_PREFIX_NANO="${XBB_APPLICATION_INSTALL_FOLDER_PATH}-nano"
-  XBB_APPLICATION_NANO_INSTALL_FOLDER_PATH="${XBB_APPLICATION_INSTALL_FOLDER_PATH}-nano"
+  # This definition also enables building newlib-nano.
+  XBB_NEWLIB_NANO_SUFFIX="-nano"
 
   # Don't use a comma since the regular expression
   # that processes this string in bfd/Makefile, silently fails and the
@@ -225,10 +225,41 @@ function build_application_versioned_components()
     # Explicit, since it is also used in python3_copy_syslibs
     export XBB_PYTHON3_SRC_FOLDER_NAME="Python-${XBB_PYTHON3_VERSION}"
 
+    # https://ftp.gnu.org/pub/gnu/libiconv/
+    XBB_LIBICONV_VERSION="1.15"
+    # http://zlib.net/fossils/
+    XBB_ZLIB_VERSION="1.2.12"
+    # https://gmplib.org/download/gmp/
+    # Arm: In `gmp-h.in` search for `__GNU_MP_VERSION`.
+    XBB_GMP_VERSION="6.2.1"
+    # http://www.mpfr.org/history.html
+    # Arm: In `VERSION`.
+    XBB_MPFR_VERSION="3.1.6"
+    # https://www.multiprecision.org/mpc/download.html
+    # Arm: In `configure`, search for `VERSION=`.
+    XBB_MPC_VERSION="1.0.3"
+    # https://sourceforge.net/projects/libisl/files/
+    # Arm: In `configure`, search for `PACKAGE_VERSION=`.
+    XBB_ISL_VERSION="0.15"
+    # https://sourceforge.net/projects/lzmautils/files/
+    XBB_XZ_VERSION="5.2.5"
+    # https://github.com/facebook/zstd/releases
+    XBB_ZSTD_VERSION="1.5.2"
+
     # -------------------------------------------------------------------------
     # Build the native dependencies.
 
-    # None.
+    if [ "${XBB_REQUESTED_HOST_PLATFORM}" == "win32" ]
+    then
+
+      echo
+      echo "# Building a bootstrap compiler..."
+
+      build_cross_gcc_dependencies
+
+      build_cross_gcc_all "${XBB_APPLICATION_TARGET_TRIPLET}"
+
+    fi
 
     # -------------------------------------------------------------------------
     # Build the target dependencies.
@@ -236,33 +267,7 @@ function build_application_versioned_components()
     xbb_reset_env
     xbb_set_target "requested"
 
-    # For better control, without it some components pick the lib packed
-    # inside the archive.
-    build_zlib "1.2.12" # "1.2.8"
-
-    # The classical GCC libraries.
-    # https://gmplib.org/download/gmp/
-    # Arm: In `gmp-h.in` search for `__GNU_MP_VERSION`.
-    build_gmp "6.2.1"
-
-    # http://www.mpfr.org/history.html
-    # Arm: In `VERSION`.
-    build_mpfr "3.1.6"
-
-    # https://www.multiprecision.org/mpc/download.html
-    # Arm: In `configure`, search for `VERSION=`.
-    build_mpc "1.0.3"
-
-    # https://sourceforge.net/projects/libisl/files/
-    # Arm: In `configure`, search for `PACKAGE_VERSION=`.
-    build_isl "0.15"
-
-    # https://ftp.gnu.org/pub/gnu/libiconv/
-    # Arm: In `configure`, search for `PACKAGE_VERSION=`.
-    build_libiconv "1.15"
-
-    # https://sourceforge.net/projects/lzmautils/files/
-    build_xz "5.2.5" # "5.2.3"
+    build_cross_gcc_dependencies
 
     # -----------------------------------------------------------------------
     # GDB dependencies
@@ -334,42 +339,28 @@ function build_application_versioned_components()
     xbb_set_executables_install_path "${XBB_APPLICATION_INSTALL_FOLDER_PATH}"
     xbb_set_libraries_install_path "${XBB_DEPENDENCIES_INSTALL_FOLDER_PATH}"
 
-    build_binutils_cross "${XBB_BINUTILS_VERSION}" "${XBB_APPLICATION_TARGET_TRIPLET}"
-
     # -----------------------------------------------------------------------
 
-    if [ "${XBB_REQUESTED_HOST_PLATFORM}" == "linux" -o "${XBB_REQUESTED_HOST_PLATFORM}" == "darwin" ]
-    then
-      build_cross_gcc_first "${XBB_GCC_VERSION}" "${XBB_APPLICATION_TARGET_TRIPLET}"
-
-      build_cross_newlib "${XBB_NEWLIB_VERSION}" "${XBB_APPLICATION_TARGET_TRIPLET}"
-      build_cross_gcc_final "${XBB_GCC_VERSION}" "${XBB_APPLICATION_TARGET_TRIPLET}"
-
-      # ---------------------------------------------------------------------
-      # The nano version is practically a new build installed in a
-      # separate folder. Only the libraries are relevant; they are
-      # copied in a separate step.
-      (
-        xbb_set_executables_install_path "${XBB_APPLICATION_NANO_INSTALL_FOLDER_PATH}"
-
-        # Although in the initial versions this was a copy, it is cleaner
-        # to do it again.
-        build_binutils_cross "${XBB_BINUTILS_VERSION}" "${XBB_APPLICATION_TARGET_TRIPLET}" --nano
-
-        build_cross_newlib "${XBB_NEWLIB_VERSION}" "${XBB_APPLICATION_TARGET_TRIPLET}" --nano
-        build_cross_gcc_final "${XBB_GCC_VERSION}" "${XBB_APPLICATION_TARGET_TRIPLET}" --nano
-
-        cross_gcc_copy_nano_multilibs "${XBB_APPLICATION_TARGET_TRIPLET}"
-      )
-    elif [ "${XBB_REQUESTED_HOST_PLATFORM}" == "win32" ]
+    if [ "${XBB_REQUESTED_HOST_PLATFORM}" == "win32" ]
     then
 
+      build_binutils_cross "${XBB_BINUTILS_VERSION}" "${XBB_APPLICATION_TARGET_TRIPLET}"
+
+      # As usual, for Windows things require more innovtive solutions.
+      # In this case the libraries are copied from the bootstrap,
+      # and only the executables are build for Windows.
       cross_gcc_copy_linux_libs "${XBB_APPLICATION_TARGET_TRIPLET}"
 
       (
-        cross_gcc_add_linux_install_path "${XBB_APPLICATION_TARGET_TRIPLET}"
+        # To access the bootstrap compiler.
+        xbb_activate_installed_bin
+
         build_cross_gcc_final "${XBB_GCC_VERSION}" "${XBB_APPLICATION_TARGET_TRIPLET}"
       )
+    else
+
+      # For macOS & GNU/Linux build the toolchain natively.
+      build_cross_gcc_all "${XBB_APPLICATION_TARGET_TRIPLET}"
 
     fi
 
