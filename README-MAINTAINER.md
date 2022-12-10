@@ -255,7 +255,7 @@ Run the native build:
 caffeinate xpm run build-develop --config darwin-x64 -C ~/Work/arm-none-eabi-gcc-xpack.git
 ```
 
-The build takes about 1h22 minutes.
+The build takes about 1h30 minutes (without multilibs).
 
 When functional, push the `xpack-develop` branch to GitHub.
 
@@ -281,7 +281,7 @@ xpm install --config darwin-x64 -C ~/Work/arm-none-eabi-gcc-xpack.git && \
 caffeinate xpm run build-develop --config darwin-x64 -C ~/Work/arm-none-eabi-gcc-xpack.git
 ```
 
-About 1h26 minutes later, the output of the build script is a compressed
+About 1h30 minutes later, the output of the build script is a compressed
 archive and its SHA signature, created in the `deploy` folder:
 
 ```console
@@ -369,14 +369,14 @@ xpm run docker-link-deps --config win32-x64 -C ~/Work/arm-none-eabi-gcc-xpack.gi
 xpm run docker-build-develop --config win32-x64 -C ~/Work/arm-none-eabi-gcc-xpack.git
 ```
 
-About 50 minutes later, the output of the build script is a compressed
+About 30 minutes later, the output of the build script is a compressed
 archive and its SHA signature, created in the `deploy` folder:
 
 ```console
 $ ls -l ~/Work/arm-none-eabi-gcc-xpack.git/build/win32-x64/deploy
-total 41300
--rw-rw-rw- 1 ilg ilg 297910243 Aug 20 15:32 xpack-arm-none-eabi-gcc-11.3.1-1.1-win32-x64.zip
--rw-rw-rw- 1 ilg ilg       101 Aug 20 15:32 xpack-arm-none-eabi-gcc-11.3.1-1.1-win32-x64.zip.sha
+total 101784
+-rw-r--r-- 1 ilg ilg 104214825 Dec 10 14:37 xpack-arm-none-eabi-gcc-11.3.1-1.2-win32-x64.zip
+-rw-r--r-- 1 ilg ilg       115 Dec 10 14:37 xpack-arm-none-eabi-gcc-11.3.1-1.2-win32-x64.zip.sha
 ```
 
 #### Arm GNU/Linux 64-bit
