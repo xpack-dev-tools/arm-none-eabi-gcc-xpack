@@ -286,9 +286,9 @@ archive and its SHA signature, created in the `deploy` folder:
 
 ```console
 $ ls -l ~/Work/arm-none-eabi-gcc-xpack.git/build/darwin-x64/deploy
-total 197704
--rw-r--r--  1 ilg  staff  132413536 Aug 20 13:48 xpack-arm-none-eabi-gcc-11.3.1-1.1-darwin-x64.tar.gz
--rw-r--r--  1 ilg  staff        105 Aug 20 13:48 xpack-arm-none-eabi-gcc-11.3.1-1.1-darwin-x64.tar.gz.sha
+total 196816
+-rw-r--r--  1 ilg  staff  96097205 Dec 11 00:07 xpack-arm-none-eabi-gcc-11.3.1-1.2-darwin-x64.tar.gz
+-rw-r--r--  1 ilg  staff       119 Dec 11 00:07 xpack-arm-none-eabi-gcc-11.3.1-1.2-darwin-x64.tar.gz.sha
 ```
 
 #### Apple Silicon macOS
@@ -315,14 +315,14 @@ xpm install --config darwin-arm64 -C ~/Work/arm-none-eabi-gcc-xpack.git && \
 caffeinate xpm run build-develop --config darwin-arm64 -C ~/Work/arm-none-eabi-gcc-xpack.git
 ```
 
-About 1h05 later, the output of the build script is a compressed
+About 25 minutes later, the output of the build script is a compressed
 archive and its SHA signature, created in the `deploy` folder:
 
 ```console
 $ ls -l ~/Work/arm-none-eabi-gcc-xpack.git/build/darwin-arm64/deploy
-total 198456
--rw-r--r--  1 ilg  staff  90569191 Dec  8 13:00 xpack-arm-none-eabi-gcc-11.3.1-1.2-darwin-arm64.tar.gz
--rw-r--r--  1 ilg  staff       121 Dec  8 13:00 xpack-arm-none-eabi-gcc-11.3.1-1.2-darwin-arm64.tar.gz.sha
+total 198336
+-rw-r--r--  1 ilg  staff  89834866 Dec 10 19:30 xpack-arm-none-eabi-gcc-11.3.1-1.2-darwin-arm64.tar.gz
+-rw-r--r--  1 ilg  staff       121 Dec 10 19:30 xpack-arm-none-eabi-gcc-11.3.1-1.2-darwin-arm64.tar.gz.sha
 ```
 
 #### Intel GNU/Linux
@@ -348,14 +348,14 @@ xpm run docker-link-deps --config linux-x64 -C ~/Work/arm-none-eabi-gcc-xpack.gi
 xpm run docker-build-develop --config linux-x64 -C ~/Work/arm-none-eabi-gcc-xpack.git
 ```
 
-About 38 minutes later, the output of the build script is a compressed
+About 35 minutes later, the output of the build script is a compressed
 archive and its SHA signature, created in the `deploy` folder:
 
 ```console
 $ ls -l ~/Work/arm-none-eabi-gcc-xpack.git/build/linux-x64/deploy
-total 196820
--rw-rw-rw- 1 ilg ilg 101828916 Aug 20 13:42 xpack-arm-none-eabi-gcc-11.3.1-1.1-linux-x64.tar.gz
--rw-rw-rw- 1 ilg ilg       104 Aug 20 13:42 xpack-arm-none-eabi-gcc-11.3.1-1.1-linux-x64.tar.gz.sha
+total 100248
+-rw-r--r-- 1 ilg ilg 102647164 Dec 10 17:19 xpack-arm-none-eabi-gcc-11.3.1-1.2-linux-x64.tar.gz
+-rw-r--r-- 1 ilg ilg       118 Dec 10 17:19 xpack-arm-none-eabi-gcc-11.3.1-1.2-linux-x64.tar.gz.sha
 ```
 
 ##### Build the Windows binaries
