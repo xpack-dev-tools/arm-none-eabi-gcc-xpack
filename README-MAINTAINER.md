@@ -400,7 +400,7 @@ xpm run docker-link-deps --config linux-arm64 -C ~/Work/arm-none-eabi-gcc-xpack.
 xpm run docker-build-develop --config linux-arm64 -C ~/Work/arm-none-eabi-gcc-xpack.git
 ```
 
-About 3h30 later, the output of the build script is a compressed
+About 3h50 later, the output of the build script is a compressed
 archive and its SHA signature, created in the `deploy` folder:
 
 ```console
