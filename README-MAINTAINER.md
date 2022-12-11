@@ -436,9 +436,9 @@ archive and its SHA signature, created in the `deploy` folder:
 
 ```console
 $ ls -l ~/Work/arm-none-eabi-gcc-xpack.git/build/linux-arm/deploy
-total 154256
--rw-rw-rw- 1 ilg ilg 89795445 Aug 20 20:16 xpack-arm-none-eabi-gcc-11.3.1-1.1-linux-arm.tar.gz
--rw-rw-rw- 1 ilg ilg      104 Aug 20 20:16 xpack-arm-none-eabi-gcc-11.3.1-1.1-linux-arm.tar.gz.sha
+total 97460
+-rw-r--r-- 1 ilg ilg 99793275 Dec 11 15:51 xpack-arm-none-eabi-gcc-11.3.1-1.2-linux-arm64.tar.gz
+-rw-r--r-- 1 ilg ilg      120 Dec 11 15:51 xpack-arm-none-eabi-gcc-11.3.1-1.2-linux-arm64.tar.gz.sha
 ```
 
 ### Files cache
