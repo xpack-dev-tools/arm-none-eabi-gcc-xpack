@@ -62,7 +62,7 @@ function build_application_versioned_components()
       XBB_ARM_RELEASE="11.3.rel1"
       XBB_ARM_URL_BASE="https://developer.arm.com/-/media/Files/downloads/gnu/${XBB_ARM_RELEASE}/src"
 
-      # ---------------------------------------------------------------------
+      # -----------------------------------------------------------------------
 
       # Arm: abe-manifest.txt (release notes).
       # Repository: git://sourceware.org/git/binutils-gdb.git
@@ -79,7 +79,7 @@ function build_application_versioned_components()
 
       XBB_BINUTILS_PATCH_FILE_NAME="binutils-${XBB_BINUTILS_VERSION}.patch"
 
-      # ---------------------------------------------------------------------
+      # -----------------------------------------------------------------------
 
       # Arm: release notes.
       # Repository: git://gcc.gnu.org/git/gcc.git
@@ -94,7 +94,7 @@ function build_application_versioned_components()
       XBB_GCC_PATCH_FILE_NAME="gcc-${XBB_GCC_VERSION}-cross.patch.diff"
       XBB_GCC_MULTILIB_LIST="aprofile,rmprofile"
 
-      # ---------------------------------------------------------------------
+      # -----------------------------------------------------------------------
 
       # Arm: release notes.
       # http://www.sourceware.org/newlib/
@@ -106,7 +106,7 @@ function build_application_versioned_components()
       XBB_NEWLIB_ARCHIVE_NAME="newlib-arm-none-eabi-${XBB_ARM_RELEASE}.tar.xz"
       XBB_NEWLIB_ARCHIVE_URL="${XBB_ARM_URL_BASE}/newlib-cygwin.tar.xz"
 
-      # ---------------------------------------------------------------------
+      # -----------------------------------------------------------------------
 
       # Arm: release notes.
       # Repository: git://sourceware.org/git/binutils-gdb.git
@@ -212,22 +212,29 @@ function build_application_versioned_components()
 
     # https://ftp.gnu.org/pub/gnu/libiconv/
     XBB_LIBICONV_VERSION="1.15"
+
     # http://zlib.net/fossils/
     XBB_ZLIB_VERSION="1.2.12"
+
     # https://gmplib.org/download/gmp/
     # Arm: In `gmp-h.in` search for `__GNU_MP_VERSION`.
     XBB_GMP_VERSION="6.2.1"
+
     # http://www.mpfr.org/history.html
     # Arm: In `VERSION`.
     XBB_MPFR_VERSION="3.1.6"
+
     # https://www.multiprecision.org/mpc/download.html
     # Arm: In `configure`, search for `VERSION=`.
     XBB_MPC_VERSION="1.0.3"
+
     # https://sourceforge.net/projects/libisl/files/
     # Arm: In `configure`, search for `PACKAGE_VERSION=`.
     XBB_ISL_VERSION="0.15"
+
     # https://sourceforge.net/projects/lzmautils/files/
     XBB_XZ_VERSION="5.2.5"
+
     # https://github.com/facebook/zstd/releases
     XBB_ZSTD_VERSION="1.5.2"
 
@@ -236,14 +243,12 @@ function build_application_versioned_components()
 
     if [ "${XBB_REQUESTED_HOST_PLATFORM}" == "win32" ]
     then
-
       echo
       echo "# Building a bootstrap compiler..."
 
       build_cross_gcc_dependencies
 
       build_cross_gcc_all "${XBB_APPLICATION_TARGET_TRIPLET}"
-
     fi
 
     # -------------------------------------------------------------------------
@@ -254,7 +259,7 @@ function build_application_versioned_components()
 
     build_cross_gcc_dependencies
 
-    # -----------------------------------------------------------------------
+    # -------------------------------------------------------------------------
     # GDB dependencies
 
     # https://github.com/libexpat/libexpat/releases
@@ -297,17 +302,16 @@ function build_application_versioned_components()
 
     build_cross_gdb_dependencies
 
-    # -----------------------------------------------------------------------
+    # -------------------------------------------------------------------------
     # Build the application binaries.
 
     xbb_set_executables_install_path "${XBB_APPLICATION_INSTALL_FOLDER_PATH}"
     xbb_set_libraries_install_path "${XBB_DEPENDENCIES_INSTALL_FOLDER_PATH}"
 
-    # -----------------------------------------------------------------------
+    # -------------------------------------------------------------------------
 
     if [ "${XBB_REQUESTED_HOST_PLATFORM}" == "win32" ]
     then
-
       build_binutils_cross "${XBB_BINUTILS_VERSION}" "${XBB_APPLICATION_TARGET_TRIPLET}"
 
       # As usual, for Windows things require more innovtive solutions.
@@ -322,10 +326,8 @@ function build_application_versioned_components()
         build_cross_gcc_final "${XBB_GCC_VERSION}" "${XBB_APPLICATION_TARGET_TRIPLET}"
       )
     else
-
       # For macOS & GNU/Linux build the toolchain natively.
       build_cross_gcc_all "${XBB_APPLICATION_TARGET_TRIPLET}"
-
     fi
 
     build_cross_gdb "${XBB_APPLICATION_TARGET_TRIPLET}" ""
