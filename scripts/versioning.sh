@@ -275,63 +275,42 @@ function build_application_versioned_components()
     # https://github.com/libexpat/libexpat/releases
     # Arm: from release notes
     # https://developer.arm.com/tools-and-software/open-source-software/developer-tools/gnu-toolchain/downloads-1
-    build_expat "2.2.5" # "2.1.1"
-
-    # Fails on mingw. 0.8.13 is deprecated. Not used anyway.
-    # build_libelf "0.8.13"
+    XBB_EXPAT_VERSION="2.2.5"
 
     # http://ftp.gnu.org/pub/gnu/gettext/
-    build_gettext "0.21"
+    XBB_GETTEXT_VERSION="0.21"
 
-    # Used by ncurses. Fails on macOS.
-    if [ "${XBB_REQUESTED_HOST_PLATFORM}" == "linux" ]
-    then
-      # https://github.com/telmich/gpm/tags
-      # https://github.com/xpack-dev-tools/gpm/tags
-      build_gpm "1.20.7-1" # "1.20.7"
-    fi
+    # https://github.com/telmich/gpm/tags
+    # https://github.com/xpack-dev-tools/gpm/tags
+    XBB_GPM_VERSION="1.20.7-1"
 
-    if [ "${XBB_REQUESTED_HOST_PLATFORM}" == "linux" -o "${XBB_REQUESTED_HOST_PLATFORM}" == "darwin" ]
-    then
-      # https://ftp.gnu.org/gnu/ncurses/
-      build_ncurses "6.3" # "6.2"
+    # https://ftp.gnu.org/gnu/ncurses/
+    XBB_NCURSES_VERSION="6.3"
 
-      # https://ftp.gnu.org/gnu/readline/
-      build_readline "8.1" # "8.0" # requires ncurses
+    # https://ftp.gnu.org/gnu/readline/
+    XBB_READLINE_VERSION="8.1"
 
-      # https://sourceware.org/pub/bzip2/
-      build_bzip2 "1.0.8"
-      # https://github.com/libffi/libffi/releases
-      build_libffi  "3.4.2" # "3.3"
-    fi
+    # https://sourceware.org/pub/bzip2/
+    XBB_BZIP2_VERSION="1.0.8"
 
-    if [ "${XBB_WITH_GDB_PY3}" == "y" ]
-    then
-      if [ "${XBB_REQUESTED_HOST_PLATFORM}" == "linux" -o "${XBB_REQUESTED_HOST_PLATFORM}" == "darwin" ]
-      then
-        # We cannot rely on a python shared library in the system, even
-        # the custom build from sources does not have one.
+    # https://github.com/libffi/libffi/releases
+    XBB_LIBFFI_VERSION="3.4.2"
 
-        # https://www.bytereef.org/mpdecimal/download.html
-        build_mpdecimal "2.5.1" # "2.5.0" # Used by Python
+    # https://www.bytereef.org/mpdecimal/download.html
+    XBB_MPDECIMAL_VERSION="2.5.1"
 
-        # Required by a Python 3 module.
-        # https://www.sqlite.org/download.html
-        build_sqlite  "3380200" # "3.32.3"
+    # Required by a Python 3 module.
+    # https://www.sqlite.org/download.html
+    XBB_SQLITE_VERSION="3380200"
 
-        # Replacement for the old libcrypt.so.1; required by Python 3.
-        # https://github.com/besser82/libxcrypt/releases
-        build_libxcrypt "4.4.28" # "4.4.17"
+    # Replacement for the old libcrypt.so.1; required by Python 3.
+    # https://github.com/besser82/libxcrypt/releases
+    XBB_LIBXCRYPT_VERSION="4.4.28"
 
-        # https://www.openssl.org/source/
-        build_openssl "1.1.1q" # "1.1.1n" # "1.1.1l" # "1.1.1h"
+    # https://www.openssl.org/source/
+    XBB_OPENSSL_VERSION="1.1.1q"
 
-        # Since the executables are not needed,
-        # Python is built as a dependency, then the libraries
-        # are copied to the application folder.
-        build_python3 "${XBB_PYTHON3_VERSION}"
-      fi
-    fi
+    build_cross_gdb_dependencies
 
     # -----------------------------------------------------------------------
     # Build the application binaries.
