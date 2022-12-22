@@ -4,6 +4,8 @@
 
 # Maintainer info
 
+## Get project sources
+
 The project is hosted on GitHub:
 
 - <https://github.com/xpack-dev-tools/arm-none-eabi-gcc-xpack.git>
@@ -28,7 +30,16 @@ git clone \
   ~/Work/arm-none-eabi-gcc-xpack.git
 ```
 
-Same for the helper and link it to the central xPacks store:
+Or, if the repo was already cloned:
+
+```sh
+git -C ~/Work/arm-none-eabi-gcc-xpack.git pull
+```
+
+## Get helper sources
+
+The project has a dependency to a common **helper**; clone the
+`xpack-develop` branch and link it to the central xPacks store:
 
 ```sh
 rm -rf ~/Work/xbb-helper-xpack.git && \
@@ -40,11 +51,9 @@ git clone \
 xpm link -C ~/Work/xbb-helper-xpack.git
 ```
 
-Or, if the repos were already cloned:
+Or, if the repo was already cloned:
 
 ```sh
-git -C ~/Work/arm-none-eabi-gcc-xpack.git pull
-
 git -C ~/Work/xbb-helper-xpack.git pull
 xpm link -C ~/Work/xbb-helper-xpack.git
 ```
@@ -83,9 +92,10 @@ In the `xpack-dev-tools/arm-none-eabi-gcc-xpack` Git repo:
 
 No need to add a tag here, it'll be added when the release is created.
 
-### Update helper
+### Update helper & other dependencies
 
-With a git client, go to the helper repo and update to the latest master commit.
+Check the latest versions at <https://github.com/xpack-dev-tools/> and
+update the dependencies in `package.json`.
 
 ### Update to latest Arm release
 
@@ -255,7 +265,7 @@ Run the native build:
 caffeinate xpm run build-develop --config darwin-x64 -C ~/Work/arm-none-eabi-gcc-xpack.git
 ```
 
-The build takes about 1h30 minutes (without multilibs).
+The build takes about 1h30 (without multilibs).
 
 When functional, push the `xpack-develop` branch to GitHub.
 
@@ -277,11 +287,11 @@ git -C ~/Work/xbb-helper-xpack.git pull && \
 xpm link -C ~/Work/xbb-helper-xpack.git && \
 xpm run link-deps -C ~/Work/arm-none-eabi-gcc-xpack.git && \
 xpm run deep-clean --config darwin-x64  -C ~/Work/arm-none-eabi-gcc-xpack.git && \
-xpm install --config darwin-x64 -C ~/Work/arm-none-eabi-gcc-xpack.git && \
+xpm install --config darwin-x64 -C ~/Work/arm-none-eabi-gcc-xpack.git
 caffeinate xpm run build-develop --config darwin-x64 -C ~/Work/arm-none-eabi-gcc-xpack.git
 ```
 
-About 1h30 minutes later, the output of the build script is a compressed
+About 1h30 later, the output of the build script is a compressed
 archive and its SHA signature, created in the `deploy` folder:
 
 ```console
@@ -311,7 +321,7 @@ git -C ~/Work/xbb-helper-xpack.git pull && \
 xpm link -C ~/Work/xbb-helper-xpack.git && \
 xpm run link-deps -C ~/Work/arm-none-eabi-gcc-xpack.git && \
 xpm run deep-clean --config darwin-arm64  -C ~/Work/arm-none-eabi-gcc-xpack.git && \
-xpm install --config darwin-arm64 -C ~/Work/arm-none-eabi-gcc-xpack.git && \
+xpm install --config darwin-arm64 -C ~/Work/arm-none-eabi-gcc-xpack.git
 caffeinate xpm run build-develop --config darwin-arm64 -C ~/Work/arm-none-eabi-gcc-xpack.git
 ```
 
@@ -344,7 +354,7 @@ xpm run deep-clean -C ~/Work/arm-none-eabi-gcc-xpack.git && \
 xpm run deep-clean --config linux-x64 -C ~/Work/arm-none-eabi-gcc-xpack.git && \
 xpm run docker-prepare --config linux-x64 -C ~/Work/arm-none-eabi-gcc-xpack.git && \
 git -C ~/Work/xbb-helper-xpack.git pull && \
-xpm run docker-link-deps --config linux-x64 -C ~/Work/arm-none-eabi-gcc-xpack.git && \
+xpm run docker-link-deps --config linux-x64 -C ~/Work/arm-none-eabi-gcc-xpack.git
 xpm run docker-build-develop --config linux-x64 -C ~/Work/arm-none-eabi-gcc-xpack.git
 ```
 
@@ -365,7 +375,7 @@ Clean the build folder and prepare the docker container:
 ```sh
 xpm run deep-clean --config win32-x64 -C ~/Work/arm-none-eabi-gcc-xpack.git && \
 xpm run docker-prepare --config win32-x64 -C ~/Work/arm-none-eabi-gcc-xpack.git && \
-xpm run docker-link-deps --config win32-x64 -C ~/Work/arm-none-eabi-gcc-xpack.git && \
+xpm run docker-link-deps --config win32-x64 -C ~/Work/arm-none-eabi-gcc-xpack.git
 xpm run docker-build-develop --config win32-x64 -C ~/Work/arm-none-eabi-gcc-xpack.git
 ```
 
@@ -396,7 +406,7 @@ xpm run deep-clean -C ~/Work/arm-none-eabi-gcc-xpack.git && \
 xpm run deep-clean --config linux-arm64 -C ~/Work/arm-none-eabi-gcc-xpack.git && \
 xpm run docker-prepare --config linux-arm64 -C ~/Work/arm-none-eabi-gcc-xpack.git && \
 git -C ~/Work/xbb-helper-xpack.git pull && \
-xpm run docker-link-deps --config linux-arm64 -C ~/Work/arm-none-eabi-gcc-xpack.git && \
+xpm run docker-link-deps --config linux-arm64 -C ~/Work/arm-none-eabi-gcc-xpack.git
 xpm run docker-build-develop --config linux-arm64 -C ~/Work/arm-none-eabi-gcc-xpack.git
 ```
 
@@ -427,7 +437,7 @@ xpm run deep-clean -C ~/Work/arm-none-eabi-gcc-xpack.git && \
 xpm run deep-clean --config linux-arm -C ~/Work/arm-none-eabi-gcc-xpack.git && \
 xpm run docker-prepare --config linux-arm -C ~/Work/arm-none-eabi-gcc-xpack.git && \
 git -C ~/Work/xbb-helper-xpack.git pull && \
-xpm run docker-link-deps --config linux-arm -C ~/Work/arm-none-eabi-gcc-xpack.git && \
+xpm run docker-link-deps --config linux-arm -C ~/Work/arm-none-eabi-gcc-xpack.git
 xpm run docker-build-develop --config linux-arm -C ~/Work/arm-none-eabi-gcc-xpack.git
 ```
 
@@ -492,6 +502,13 @@ screen -S ga
 ~/actions-runners/xpack-dev-tools/run.sh &
 
 # Ctrl-a Ctrl-d
+```
+
+For `xbbli` & `xbbla64` start two runners:
+
+```sh
+~/actions-runners/xpack-dev-tools/1/run.sh &
+~/actions-runners/xpack-dev-tools/2/run.sh &
 ```
 
 Check that the project is pushed to GitHub.
@@ -588,10 +605,23 @@ The test results are available from
 
 ### Manual tests
 
-Install the binaries on all supported platforms and check if they are
-functional.
+To download the pre-released archive for the specific platform
+and run the tests, use:
 
-For this, on each platform (Mac, GNU/Linux, Windows):
+```sh
+xpm run test-pre-release
+```
+
+For even more tests, on each platform (MacOS, GNU/Linux, Windows),
+download the archive from
+[pre-releases/test](https://github.com/xpack-dev-tools/pre-releases/releases/tag/test/)
+and check the binaries.
+
+On macOS, remove the `com.apple.quarantine` flag:
+
+```sh
+xattr -dr com.apple.quarantine ${HOME}/Downloads/xpack-*
+```
 
 - unpack the archive in `Downloads`, and rename the version
   folder, by replacing a dash with a space; this will test paths with spaces;
@@ -611,8 +641,7 @@ mkdir -p ~/Work && \
 git clone \
   --branch xpack-develop \
   https://github.com/xpack-dev-tools/arm-none-eabi-gcc-xpack.git \
-  ~/Work/arm-none-eabi-gcc-xpack.git && \
-git -C ~/Work/arm-none-eabi-gcc-xpack.git submodule update --init --recursive
+  ~/Work/arm-none-eabi-gcc-xpack.git
 ```
 
 - in a separate workspace, Import → General → Existing Projects into Workspace
