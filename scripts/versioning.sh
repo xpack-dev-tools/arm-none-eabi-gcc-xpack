@@ -37,21 +37,6 @@ function build_application_versioned_components()
 
   # ---------------------------------------------------------------------------
 
-  # Redefine to "y" to create the LTO plugin links.
-  if [ "${XBB_REQUESTED_HOST_PLATFORM}" == "darwin" ]
-  then
-    XBB_LTO_PLUGIN_ORIGINAL_NAME="liblto_plugin.so"
-    XBB_LTO_PLUGIN_BFD_PATH="lib/bfd-plugins/liblto_plugin.so"
-  elif [ "${XBB_REQUESTED_HOST_PLATFORM}" == "linux" ]
-  then
-    XBB_LTO_PLUGIN_ORIGINAL_NAME="liblto_plugin.so"
-    XBB_LTO_PLUGIN_BFD_PATH="lib/bfd-plugins/liblto_plugin.so"
-  elif [ "${XBB_REQUESTED_HOST_PLATFORM}" == "win32" ]
-  then
-    XBB_LTO_PLUGIN_ORIGINAL_NAME="liblto_plugin.dll"
-    XBB_LTO_PLUGIN_BFD_PATH="lib/bfd-plugins/liblto_plugin.dll"
-  fi
-
   XBB_FIX_LTO_PLUGIN="y"
 
   XBB_NCURSES_DISABLE_WIDEC="y"
