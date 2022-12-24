@@ -104,7 +104,7 @@
       "arm-none-eabi-strip": "./.content/bin/arm-none-eabi-strip"
     },
     "devDependencies": {
-      "@xpack-dev-tools/xbb-helper": "^0.11.36"
+      "@xpack-dev-tools/xbb-helper": "^0.11.39"
     },
     "properties": {
       "appName": "GNU Arm Embedded GCC",
@@ -313,7 +313,7 @@
     }
   },
   "bundleDependencies": [],
-  "_devDependenciesUrls": [
+  "$devDependenciesUrls": [
     "https://www.npmjs.com/package/liquidjs"
   ],
   "devDependencies": {
