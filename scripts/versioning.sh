@@ -91,7 +91,7 @@ function application_build_versioned_components()
       XBB_GCC_ARCHIVE_NAME="gcc-arm-none-eabi-${XBB_ARM_RELEASE}.tar.xz"
       XBB_GCC_ARCHIVE_URL="${XBB_ARM_URL_BASE}/gcc.tar.xz"
 
-      XBB_GCC_PATCH_FILE_NAME="gcc-${XBB_GCC_VERSION}-cross.patch.diff"
+      XBB_GCC_PATCH_FILE_NAME="gcc-${XBB_GCC_VERSION}-cross.git.patch"
       XBB_GCC_MULTILIB_LIST="aprofile,rmprofile"
 
       # -----------------------------------------------------------------------
@@ -124,7 +124,7 @@ function application_build_versioned_components()
       XBB_GDB_ARCHIVE_URL="https://github.com/xpack-dev-tools/binutils-gdb/archive/refs/tags/${XBB_GDB_ARCHIVE_NAME}"
 
       # Mandatory, otherwise gdb-py3 is not relocatable.
-      XBB_GDB_PATCH_FILE_NAME="gdb-${XBB_GDB_VERSION}-cross.patch.diff"
+      XBB_GDB_PATCH_FILE_NAME="gdb-${XBB_GDB_VERSION}-cross.git.patch"
 
     elif [[ "${XBB_RELEASE_VERSION}" =~ 11\.2\.1-* ]]
     then
@@ -161,7 +161,7 @@ function application_build_versioned_components()
       XBB_GCC_ARCHIVE_NAME="gcc-arm-none-eabi-${XBB_ARM_RELEASE}.tar.xz"
       XBB_GCC_ARCHIVE_URL="${XBB_ARM_URL_BASE}/gcc.tar.xz"
 
-      XBB_GCC_PATCH_FILE_NAME="gcc-${XBB_GCC_VERSION}-cross.patch.diff"
+      XBB_GCC_PATCH_FILE_NAME="gcc-${XBB_GCC_VERSION}-cross.git.patch"
       XBB_GCC_MULTILIB_LIST="aprofile,rmprofile"
 
       # ---------------------------------------------------------------------
@@ -193,7 +193,7 @@ function application_build_versioned_components()
       XBB_GDB_ARCHIVE_URL="https://github.com/xpack-dev-tools/binutils-gdb/archive/refs/tags/${XBB_GDB_ARCHIVE_NAME}"
 
       # Mandatory, otherwise gdb-py3 is not relocatable.
-      XBB_GDB_PATCH_FILE_NAME="gdb-${XBB_GDB_VERSION}-cross.patch.diff"
+      XBB_GDB_PATCH_FILE_NAME="gdb-${XBB_GDB_VERSION}-cross.git.patch"
 
     fi
 
