@@ -182,7 +182,7 @@ With a Git client:
   (like _Try to get support for Apple Silicon_)
 - select the new commit
 - right click -> Save as Patch...
-- copy to `patches/gcc-11.3.1-cross.patch.diff`
+- copy to `patches/gcc-11.3.1-cross.git.patch`
 
 ### Update the version specific code
 
