@@ -46,16 +46,16 @@ function application_build_versioned_components()
   # ---------------------------------------------------------------------------
 
   XBB_GCC_VERSION="$(echo "${XBB_RELEASE_VERSION}" | sed -e 's|-.*||')"
-  XBB_GCC_VERSION_MAJOR=$(echo ${XBB_GCC_VERSION} | sed -e 's|\([0-9][0-9]*\)\..*|\1|')
+  XBB_GCC_VERSION_MAJOR=$(echo ${XBB_GCC_VERSION} | sed -e 's|\([0-9][0-9]*\)[.].*|\1|')
 
   # In reverse chronological order.
   # Keep them in sync with the release manifest.txt file.
   # https://developer.arm.com/tools-and-software/open-source-software/developer-tools/gnu-toolchain/downloads
 
-  if [[ "${XBB_RELEASE_VERSION}" =~ 11\.*\.*-* ]]
+  if [[ "${XBB_RELEASE_VERSION}" =~ 11[.].*[.]*-.* ]]
   then
 
-    if [[ "${XBB_RELEASE_VERSION}" =~ 11\.3\.1-* ]]
+    if [[ "${XBB_RELEASE_VERSION}" =~ 11[.]3[.]1-.* ]]
     then
       # https://developer.arm.com/-/media/Files/downloads/gnu/11.3.rel1/manifest/arm-gnu-toolchain-arm-none-eabi-abe-manifest.txt
 
@@ -126,7 +126,7 @@ function application_build_versioned_components()
       # Mandatory, otherwise gdb-py3 is not relocatable.
       XBB_GDB_PATCH_FILE_NAME="gdb-${XBB_GDB_VERSION}-cross.git.patch"
 
-    elif [[ "${XBB_RELEASE_VERSION}" =~ 11\.2\.1-* ]]
+    elif [[ "${XBB_RELEASE_VERSION}" =~ 11[.]2[.]1-.* ]]
     then
       # https://developer.arm.com/-/media/Files/downloads/gnu/11.2-2022.02/manifest/gcc-arm-arm-none-eabi-abe-manifest.txt
       XBB_ARM_RELEASE="11.2-2022.02"
@@ -204,8 +204,8 @@ function application_build_versioned_components()
     XBB_WITH_GDB_PY3="y"
 
     export XBB_PYTHON3_VERSION="3.10.4"
-    export XBB_PYTHON3_VERSION_MAJOR=$(echo ${XBB_PYTHON3_VERSION} | sed -e 's|\([0-9]\)\..*|\1|')
-    export XBB_PYTHON3_VERSION_MINOR=$(echo ${XBB_PYTHON3_VERSION} | sed -e 's|\([0-9]\)\.\([0-9][0-9]*\)\..*|\2|')
+    export XBB_PYTHON3_VERSION_MAJOR=$(echo ${XBB_PYTHON3_VERSION} | sed -e 's|\([0-9]\)[.].*|\1|')
+    export XBB_PYTHON3_VERSION_MINOR=$(echo ${XBB_PYTHON3_VERSION} | sed -e 's|\([0-9]\)[.]\([0-9][0-9]*\)[.].*|\2|')
 
     # Explicit, since it is also used in python3_copy_syslibs
     export XBB_PYTHON3_SRC_FOLDER_NAME="Python-${XBB_PYTHON3_VERSION}"
