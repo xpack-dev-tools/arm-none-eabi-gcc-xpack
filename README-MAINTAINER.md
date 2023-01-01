@@ -290,7 +290,7 @@ xpm install --config darwin-x64 -C ~/Work/arm-none-eabi-gcc-xpack.git
 caffeinate xpm run build-develop --config darwin-x64 -C ~/Work/arm-none-eabi-gcc-xpack.git
 ```
 
-About 1h30 later, the output of the build script is a compressed
+About 60 minutes later, the output of the build script is a compressed
 archive and its SHA signature, created in the `deploy` folder:
 
 ```console
@@ -446,7 +446,7 @@ xpm run docker-link-deps --config linux-arm -C ~/Work/arm-none-eabi-gcc-xpack.gi
 xpm run docker-build-develop --config linux-arm -C ~/Work/arm-none-eabi-gcc-xpack.git
 ```
 
-About 3h40 later, the output of the build script is a compressed
+About 3h35 later, the output of the build script is a compressed
 archive and its SHA signature, created in the `deploy` folder:
 
 ```console
