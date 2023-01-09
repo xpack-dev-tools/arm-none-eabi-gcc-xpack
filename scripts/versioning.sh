@@ -52,7 +52,7 @@ function application_build_versioned_components()
   # Keep them in sync with the release manifest.txt file.
   # https://developer.arm.com/tools-and-software/open-source-software/developer-tools/gnu-toolchain/downloads
 
-  if [[ "${XBB_RELEASE_VERSION}" =~ 11[.].*[.]*-.* ]]
+  if [[ "${XBB_RELEASE_VERSION}" =~ 11[.].*[.].*-.* ]]
   then
 
     if [[ "${XBB_RELEASE_VERSION}" =~ 11[.]3[.]1-.* ]]
