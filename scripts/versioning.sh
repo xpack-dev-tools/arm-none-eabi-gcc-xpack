@@ -349,7 +349,7 @@ function application_build_versioned_components()
     fi
 
   else
-    echo "Unsupported ${XBB_APPLICATION_LOWER_CASE_NAME} version ${XBB_RELEASE_VERSION}"
+    echo "Unsupported ${XBB_APPLICATION_LOWER_CASE_NAME} version ${XBB_RELEASE_VERSION}in ${FUNCNAME[0]}()"
     exit 1
   fi
 
