@@ -45,8 +45,8 @@ function application_build_versioned_components()
 
   # ---------------------------------------------------------------------------
 
-  XBB_GCC_VERSION="$(echo "${XBB_RELEASE_VERSION}" | sed -e 's|-.*||')"
-  XBB_GCC_VERSION_MAJOR=$(echo ${XBB_GCC_VERSION} | sed -e 's|\([0-9][0-9]*\)[.].*|\1|')
+  XBB_GCC_VERSION="$(xbb_strip_version_pre_release "${XBB_RELEASE_VERSION}")"
+  XBB_GCC_VERSION_MAJOR=$(xbb_get_version_major "${XBB_GCC_VERSION}")
 
   # In reverse chronological order.
   # Keep them in sync with the release manifest.txt file.
@@ -204,8 +204,8 @@ function application_build_versioned_components()
     XBB_WITH_GDB_PY3="y"
 
     export XBB_PYTHON3_VERSION="3.10.4"
-    export XBB_PYTHON3_VERSION_MAJOR=$(echo ${XBB_PYTHON3_VERSION} | sed -e 's|\([0-9]\)[.].*|\1|')
-    export XBB_PYTHON3_VERSION_MINOR=$(echo ${XBB_PYTHON3_VERSION} | sed -e 's|\([0-9]\)[.]\([0-9][0-9]*\)[.].*|\2|')
+    export XBB_PYTHON3_VERSION_MAJOR=$(xbb_get_version_major "${XBB_PYTHON3_VERSION}" )
+    export XBB_PYTHON3_VERSION_MINOR=$(xbb_get_version_minor "${XBB_PYTHON3_VERSION}")
 
     # Explicit, since it is also used in python3_copy_syslibs
     export XBB_PYTHON3_SRC_FOLDER_NAME="Python-${XBB_PYTHON3_VERSION}"
