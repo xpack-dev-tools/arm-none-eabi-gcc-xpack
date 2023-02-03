@@ -98,8 +98,8 @@ After install, the package should create a structure like this (macOS files;
 only the first two depth levels are shown):
 
 ```console
-$ tree -L 2 /Users/ilg/Library/xPacks/\@xpack-dev-tools/arm-none-eabi-gcc/11.3.1-1.1/.content/
-/Users/ilg/Library/xPacks/\@xpack-dev-tools/arm-none-eabi-gcc/11.3.1-1.1/.content/
+$ tree -L 2 /Users/ilg/Library/xPacks/\@xpack-dev-tools/arm-none-eabi-gcc/12.2.1-1.1/.content/
+/Users/ilg/Library/xPacks/\@xpack-dev-tools/arm-none-eabi-gcc/12.2.1-1.1/.content/
 ├── README.md
 ├── arm-none-eabi
 │   ├── bin
@@ -117,7 +117,7 @@ $ tree -L 2 /Users/ilg/Library/xPacks/\@xpack-dev-tools/arm-none-eabi-gcc/11.3.1
 │   ├── arm-none-eabi-elfedit
 │   ├── arm-none-eabi-g++
 │   ├── arm-none-eabi-gcc
-│   ├── arm-none-eabi-gcc-11.3.1
+│   ├── arm-none-eabi-gcc-12.2.1
 │   ├── arm-none-eabi-gcc-ar
 │   ├── arm-none-eabi-gcc-nm
 │   ├── arm-none-eabi-gcc-ranlib
@@ -179,7 +179,7 @@ $ tree -L 2 /Users/ilg/Library/xPacks/\@xpack-dev-tools/arm-none-eabi-gcc/11.3.1
 │   └── libz.1.dylib -> libz.1.2.12.dylib
 └── share
     ├── doc
-    └── gcc-11.3.1
+    └── gcc-12.2.1
 
 21 directories, 59 files
 ```
@@ -218,17 +218,17 @@ For more details please read the
 ### Versioning
 
 The version strings used by the GCC project are three number strings
-like `11.3.1`; to this string the xPack distribution adds a four number,
+like `12.2.1`; to this string the xPack distribution adds a four number,
 as the Arm version,
 but since semver allows only three numbers, all additional ones can
 be added only as pre-release strings, separated by a dash,
-like `11.3.1-1.1`. The fifth number is the xPack release.
+like `12.2.1-1.1`. The fifth number is the xPack release.
 When published as a npm package, the version gets
-a sixth number, like `11.3.1-1.1.2`.
+a sixth number, like `12.2.1-1.1.2`.
 
 Since adherence of third party packages to semver is not guaranteed,
-it is recommended to use semver expressions like `^11.3.1` and `~11.3.1`
-with caution, and prefer exact matches, like `11.3.1-1.1.2`.
+it is recommended to use semver expressions like `^12.2.1` and `~12.2.1`
+with caution, and prefer exact matches, like `12.2.1-1.1.2`.
 
 ## Maintainer info
 

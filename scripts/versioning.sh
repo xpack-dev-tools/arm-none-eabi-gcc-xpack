@@ -52,7 +52,229 @@ function application_build_versioned_components()
   # Keep them in sync with the release manifest.txt file.
   # https://developer.arm.com/tools-and-software/open-source-software/developer-tools/gnu-toolchain/downloads
 
-  if [[ "${XBB_RELEASE_VERSION}" =~ 11[.].*[.].*-.* ]]
+  if [[ "${XBB_RELEASE_VERSION}" =~ 12[.].*[.].*-.* ]]
+  then
+
+      # Arm: release notes.
+      # Repository: git://sourceware.org/git/binutils-gdb.git
+      # Branch: binutils-2_39-branch
+      # Revision: 6df169f352d9596ac210c5e39f49aa83c1ae46e5
+
+      # https://github.com/xpack-dev-tools/binutils-gdb/tags
+
+      XBB_BINUTILS_VERSION="2.39"
+      XBB_BINUTILS_TAG_NAME="binutils-${XBB_BINUTILS_VERSION}-aarch64-none-elf-${XBB_ARM_RELEASE}"
+
+      XBB_BINUTILS_SRC_FOLDER_NAME="binutils-gdb-${XBB_BINUTILS_TAG_NAME}"
+      XBB_BINUTILS_ARCHIVE_NAME="${XBB_BINUTILS_TAG_NAME}.tar.gz"
+      XBB_BINUTILS_ARCHIVE_URL="https://github.com/xpack-dev-tools/binutils-gdb/archive/refs/tags/${XBB_BINUTILS_ARCHIVE_NAME}"
+
+      XBB_BINUTILS_PATCH_FILE_NAME="binutils-${XBB_BINUTILS_VERSION}.patch"
+
+      # -----------------------------------------------------------------------
+
+      # Arm: release notes.
+      # Repository: git://sourceware.org/git/binutils-gdb.git
+      # Branch: gdb-12-branch
+      # Revision: ed9b90db517c3e900481d4c9eadca736870f7871
+
+      # https://github.com/xpack-dev-tools/binutils-gdb/tags/
+
+      # From `gdb/version.in`
+      XBB_GDB_VERSION="12.1"
+      XBB_GDB_TAG_NAME="gdb-12-aarch64-none-elf-${XBB_ARM_RELEASE}"
+
+      XBB_GDB_SRC_FOLDER_NAME="binutils-gdb-${XBB_GDB_TAG_NAME}"
+      XBB_GDB_ARCHIVE_NAME="${XBB_GDB_TAG_NAME}.tar.gz"
+      XBB_GDB_ARCHIVE_URL="https://github.com/xpack-dev-tools/binutils-gdb/archive/refs/tags/${XBB_GDB_ARCHIVE_NAME}"
+
+      # Mandatory, otherwise gdb-py3 is not relocatable.
+      XBB_GDB_PATCH_FILE_NAME="gdb-${XBB_GDB_VERSION}-cross.git.patch"
+
+      # -----------------------------------------------------------------------
+
+      # Arm: release notes.
+      # Repository: git://gcc.gnu.org/git/gcc.git
+      # Branch: refs/vendors/ARM/heads/arm-12
+      # Revision: ed5092f464a08af47b8a75a3601e7bd6f7e14e8b
+
+      # XBB_GCC_VERSION computer from XBB_RELEASE_VERSION
+      XBB_GCC_SRC_FOLDER_NAME="gcc"
+      XBB_GCC_ARCHIVE_NAME="gcc-aarch64-none-elf-${XBB_ARM_RELEASE}.tar.xz"
+      XBB_GCC_ARCHIVE_URL="${XBB_ARM_URL_BASE}/gcc.tar.xz"
+
+      XBB_GCC_PATCH_FILE_NAME="gcc-${XBB_GCC_VERSION}-cross.git.patch"
+
+      # -----------------------------------------------------------------------
+
+      # Arm: release notes.
+      # http://www.sourceware.org/newlib/
+      # Repository: git://sourceware.org/git/newlib-cygwin.git
+      # Revision: faac79783c27c030ab17a6f298f8aa89c51a03c5
+
+      # From newlib/configure PACKAGE_VERSION=
+      XBB_NEWLIB_VERSION="4.2.0"
+      XBB_NEWLIB_SRC_FOLDER_NAME="newlib-cygwin"
+      XBB_NEWLIB_ARCHIVE_NAME="newlib-aarch64-none-elf-${XBB_ARM_RELEASE}.tar.xz"
+      XBB_NEWLIB_ARCHIVE_URL="${XBB_ARM_URL_BASE}/newlib-cygwin.tar.xz"
+
+    else
+      echo "Unsupported ${XBB_APPLICATION_LOWER_CASE_NAME} version ${XBB_RELEASE_VERSION} in ${FUNCNAME[0]}()"
+      exit 1
+    fi
+
+
+    # https://www.python.org/ftp/python/
+    # Requires `scripts/helper/extras/python/pyconfig-win-3.10.4.h` &
+    # `python3-config.sh`
+
+    XBB_WITH_GDB_PY3="y"
+
+    export XBB_PYTHON3_VERSION="3.11.1" # "3.10.4"
+    export XBB_PYTHON3_VERSION_MAJOR=$(xbb_get_version_major "${XBB_PYTHON3_VERSION}" )
+    export XBB_PYTHON3_VERSION_MINOR=$(xbb_get_version_minor "${XBB_PYTHON3_VERSION}")
+
+    # Explicit, since it is also used in python3_copy_syslibs
+    export XBB_PYTHON3_SRC_FOLDER_NAME="Python-${XBB_PYTHON3_VERSION}"
+
+    # https://ftp.gnu.org/pub/gnu/libiconv/
+    XBB_LIBICONV_VERSION="1.15" # Arm
+
+    # http://zlib.net/fossils/
+    XBB_ZLIB_VERSION="1.2.13" # "1.2.12"
+
+    # https://gmplib.org/download/gmp/
+    # Arm: In `gmp-h.in` search for `__GNU_MP_VERSION`.
+    XBB_GMP_VERSION="6.2.1" # Arm 6.2
+
+    # http://www.mpfr.org/history.html
+    # Arm: In `VERSION`.
+    XBB_MPFR_VERSION="3.1.6" # Arm
+
+    # https://www.multiprecision.org/mpc/download.html
+    # Arm: In `configure`, search for `VERSION=`.
+    XBB_MPC_VERSION="1.0.3" # Arm
+
+    # https://sourceforge.net/projects/libisl/files/
+    # Arm: In `configure`, search for `PACKAGE_VERSION=`.
+    XBB_ISL_VERSION="0.15" # arm
+
+    # https://sourceforge.net/projects/lzmautils/files/
+    XBB_XZ_VERSION="5.4.1" # "5.2.5"
+
+    # https://github.com/facebook/zstd/releases
+    XBB_ZSTD_VERSION="1.5.2"
+
+    # -------------------------------------------------------------------------
+    # Build the native dependencies.
+
+    if [ "${XBB_REQUESTED_HOST_PLATFORM}" == "win32" ]
+    then
+      echo
+      echo "# Building a bootstrap compiler..."
+
+      gcc_cross_build_dependencies
+
+      gcc_cross_build_all "${XBB_APPLICATION_TARGET_TRIPLET}"
+    fi
+
+    # -------------------------------------------------------------------------
+    # Build the target dependencies.
+
+    xbb_reset_env
+    xbb_set_target "requested"
+
+    gcc_cross_build_dependencies
+
+    # -------------------------------------------------------------------------
+    # GDB dependencies
+
+    # https://github.com/libexpat/libexpat/releases
+    # Arm: from release notes
+    # https://developer.arm.com/tools-and-software/open-source-software/developer-tools/gnu-toolchain/downloads-1
+    XBB_EXPAT_VERSION="2.2.5"
+
+    # http://ftp.gnu.org/pub/gnu/gettext/
+    XBB_GETTEXT_VERSION="0.21"
+
+    # https://github.com/telmich/gpm/tags
+    # https://github.com/xpack-dev-tools/gpm/tags
+    XBB_GPM_VERSION="1.20.7-1"
+
+    # https://ftp.gnu.org/gnu/ncurses/
+    XBB_NCURSES_VERSION="6.4" # "6.3"
+
+    # https://ftp.gnu.org/gnu/readline/
+    XBB_READLINE_VERSION="8.2" # "8.1"
+
+    # https://sourceware.org/pub/bzip2/
+    XBB_BZIP2_VERSION="1.0.8"
+
+    # https://github.com/libffi/libffi/releases
+    XBB_LIBFFI_VERSION="3.4.4" # "3.4.2"
+
+    # https://www.bytereef.org/mpdecimal/download.html
+    XBB_MPDECIMAL_VERSION="2.5.1"
+
+    # Required by a Python 3 module.
+    # https://www.sqlite.org/download.html
+    XBB_SQLITE_VERSION="3400100" # "3380200"
+
+    # Replacement for the old libcrypt.so.1; required by Python 3.
+    # https://github.com/besser82/libxcrypt/releases
+    XBB_LIBXCRYPT_VERSION="4.4.33" # "4.4.28"
+
+    # https://www.openssl.org/source/
+    XBB_OPENSSL_VERSION="1.1.1s" # "1.1.1q"
+
+    gdb_cross_build_dependencies
+
+    # -------------------------------------------------------------------------
+    # Build the application binaries.
+
+    xbb_set_executables_install_path "${XBB_APPLICATION_INSTALL_FOLDER_PATH}"
+    xbb_set_libraries_install_path "${XBB_DEPENDENCIES_INSTALL_FOLDER_PATH}"
+
+    # -------------------------------------------------------------------------
+
+    if [ "${XBB_REQUESTED_HOST_PLATFORM}" == "win32" ]
+    then
+      binutils_cross_build "${XBB_BINUTILS_VERSION}" "${XBB_APPLICATION_TARGET_TRIPLET}"
+
+      # As usual, for Windows things require more innovtive solutions.
+      # In this case the libraries are copied from the bootstrap,
+      # and only the executables are build for Windows.
+      gcc_cross_copy_linux_libs "${XBB_APPLICATION_TARGET_TRIPLET}"
+
+      (
+        # To access the bootstrap compiler.
+        xbb_activate_installed_bin
+
+        gcc_cross_build_final "${XBB_GCC_VERSION}" "${XBB_APPLICATION_TARGET_TRIPLET}"
+      )
+    else
+      # For macOS & GNU/Linux build the toolchain natively.
+      gcc_cross_build_all "${XBB_APPLICATION_TARGET_TRIPLET}"
+    fi
+
+    gdb_cross_build "${XBB_APPLICATION_TARGET_TRIPLET}" ""
+
+    if [ "${XBB_WITH_GDB_PY3}" == "y" ]
+    then
+      if [ "${XBB_REQUESTED_HOST_PLATFORM}" == "win32" ]
+      then
+        # Shortcut, use the existing python.exe instead of building
+        # if from sources. It also downloads the sources.
+        python3_download_win "${XBB_PYTHON3_VERSION}"
+        python3_copy_win_syslibs
+      else # linux or darwin
+        # Copy libraries from sources and dependencies.
+        python3_copy_syslibs
+      fi
+
+      gdb_cross_build "${XBB_APPLICATION_TARGET_TRIPLET}" "-py3"
+    fi
+  elif [[ "${XBB_RELEASE_VERSION}" =~ 11[.].*[.].*-.* ]]
   then
 
     if [[ "${XBB_RELEASE_VERSION}" =~ 11[.]3[.]1-.* ]]
