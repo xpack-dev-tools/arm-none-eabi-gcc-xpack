@@ -5,7 +5,6 @@
   "main": "",
   "scripts": {
     "npm-install": "npm install",
-    "git-log": "git log --pretty='%cd * %h %s' --date=short",
     "npm-pack": "npm pack",
     "npm-version-patch": "npm version patch",
     "npm-version-minor": "npm version minor",
@@ -104,7 +103,7 @@
       "arm-none-eabi-strip": "./.content/bin/arm-none-eabi-strip"
     },
     "devDependencies": {
-      "@xpack-dev-tools/xbb-helper": "^1.1.4"
+      "@xpack-dev-tools/xbb-helper": "^1.4.4"
     },
     "properties": {
       "appName": "GNU Arm Embedded GCC",
@@ -133,6 +132,7 @@
       "git-pull-helper": [
         "git -C ${HOME}/Work/xbb-helper-xpack.git pull"
       ],
+      "git-log": "git log --pretty='%cd * %h %s' --date=short",
       "generate-workflows": [
         "mkdir -p .github/workflows/",
         "cp xpacks/xpack-dev-tools-xbb-helper/templates/body-github-pre-releases-test.md .github/workflows/",
@@ -180,10 +180,10 @@
       "common-dependencies": {
         "hidden": true,
         "devDependencies": {
-          "@xpack-dev-tools/cmake": "3.22.6-1.1",
-          "@xpack-dev-tools/m4": "1.4.19-1.1",
-          "@xpack-dev-tools/ninja-build": "1.11.1-1.1",
-          "@xpack-dev-tools/pkg-config": "0.29.2-1.1"
+          "@xpack-dev-tools/cmake": "3.23.5-1.1",
+          "@xpack-dev-tools/m4": "1.4.19-2.1",
+          "@xpack-dev-tools/ninja-build": "1.11.1-2.1",
+          "@xpack-dev-tools/pkg-config": "0.29.2-2.1"
         }
       },
       "common-actions": {
@@ -249,9 +249,9 @@
           "common-actions-native"
         ],
         "devDependencies": {
-          "@xpack-dev-tools/clang": "14.0.6-2.1",
-          "@xpack-dev-tools/realpath": "9.1.0-1.1",
-          "@xpack-dev-tools/sed": "4.9.0-1.1"
+          "@xpack-dev-tools/clang": "15.0.7-2.1",
+          "@xpack-dev-tools/realpath": "9.1.0-2.1",
+          "@xpack-dev-tools/sed": "4.9.0-2.1"
         },
         "actions": {
           "build": "caffeinate {{ properties.commandBashBuild }}",
@@ -273,7 +273,7 @@
         ],
         "devDependencies": {
           "@xpack-dev-tools/gcc": "12.2.0-2.1",
-          "@xpack-dev-tools/patchelf": "0.17.0-1.1"
+          "@xpack-dev-tools/patchelf": "0.17.2-1.1"
         },
         "properties": {
           "dockerImage": "ilegeul/ubuntu:amd64-18.04-xbb-v5.0.0"
