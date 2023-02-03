@@ -17,6 +17,7 @@
   "cSpell.ignoreWords": [
     "DT_RPATH",
     "DT_RUNPATH",
+    "FUNCNAME",
     "Ionescu",
     "Linaro",
     "Liviu",
@@ -24,6 +25,7 @@
     "SEGGER",
     "Somsubhra",
     "UCRT",
+    "aarch",
     "aarch64",
     "armhf",
     "armv6",
@@ -31,6 +33,8 @@
     "binutils",
     "caffeinate",
     "cleanall",
+    "cleanup",
+    "cleanups",
     "dylib",
     "eabi",
     "elfedit",
@@ -62,6 +66,7 @@
     "libz",
     "linux",
     "liquidjs",
+    "loglevel",
     "multilib",
     "multilibs",
     "ncipollo",
@@ -90,6 +95,7 @@
     "xbbma",
     "xbbmi",
     "xpack",
-    "xpacks"
+    "xpacks",
+    "zstd"
   ]
 }
