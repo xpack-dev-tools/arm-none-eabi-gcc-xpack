@@ -55,6 +55,15 @@ function application_build_versioned_components()
   if [[ "${XBB_RELEASE_VERSION}" =~ 12[.].*[.].*-.* ]]
   then
 
+    if [[ "${XBB_RELEASE_VERSION}" =~ 12[.]2[.]1-.* ]]
+    then
+      # https://developer.arm.com/-/media/Files/downloads/gnu/12.2.rel1/manifest/arm-gnu-toolchain-arm-none-eabi-abe-manifest.txt
+
+      XBB_ARM_RELEASE="12.2.rel1"
+      XBB_ARM_URL_BASE="https://developer.arm.com/-/media/Files/downloads/gnu/${XBB_ARM_RELEASE}/src"
+
+      # -----------------------------------------------------------------------
+
       # Arm: release notes.
       # Repository: git://sourceware.org/git/binutils-gdb.git
       # Branch: binutils-2_39-branch
@@ -63,7 +72,7 @@ function application_build_versioned_components()
       # https://github.com/xpack-dev-tools/binutils-gdb/tags
 
       XBB_BINUTILS_VERSION="2.39"
-      XBB_BINUTILS_TAG_NAME="binutils-${XBB_BINUTILS_VERSION}-aarch64-none-elf-${XBB_ARM_RELEASE}"
+      XBB_BINUTILS_TAG_NAME="binutils-${XBB_BINUTILS_VERSION}-arm-none-eabi-${XBB_ARM_RELEASE}"
 
       XBB_BINUTILS_SRC_FOLDER_NAME="binutils-gdb-${XBB_BINUTILS_TAG_NAME}"
       XBB_BINUTILS_ARCHIVE_NAME="${XBB_BINUTILS_TAG_NAME}.tar.gz"
@@ -82,7 +91,7 @@ function application_build_versioned_components()
 
       # From `gdb/version.in`
       XBB_GDB_VERSION="12.1"
-      XBB_GDB_TAG_NAME="gdb-12-aarch64-none-elf-${XBB_ARM_RELEASE}"
+      XBB_GDB_TAG_NAME="gdb-12-arm-none-eabi-${XBB_ARM_RELEASE}"
 
       XBB_GDB_SRC_FOLDER_NAME="binutils-gdb-${XBB_GDB_TAG_NAME}"
       XBB_GDB_ARCHIVE_NAME="${XBB_GDB_TAG_NAME}.tar.gz"
@@ -100,7 +109,7 @@ function application_build_versioned_components()
 
       # XBB_GCC_VERSION computer from XBB_RELEASE_VERSION
       XBB_GCC_SRC_FOLDER_NAME="gcc"
-      XBB_GCC_ARCHIVE_NAME="gcc-aarch64-none-elf-${XBB_ARM_RELEASE}.tar.xz"
+      XBB_GCC_ARCHIVE_NAME="gcc-arm-none-eabi-${XBB_ARM_RELEASE}.tar.xz"
       XBB_GCC_ARCHIVE_URL="${XBB_ARM_URL_BASE}/gcc.tar.xz"
 
       XBB_GCC_PATCH_FILE_NAME="gcc-${XBB_GCC_VERSION}-cross.git.patch"
@@ -115,7 +124,7 @@ function application_build_versioned_components()
       # From newlib/configure PACKAGE_VERSION=
       XBB_NEWLIB_VERSION="4.2.0"
       XBB_NEWLIB_SRC_FOLDER_NAME="newlib-cygwin"
-      XBB_NEWLIB_ARCHIVE_NAME="newlib-aarch64-none-elf-${XBB_ARM_RELEASE}.tar.xz"
+      XBB_NEWLIB_ARCHIVE_NAME="newlib-arm-none-eabi-${XBB_ARM_RELEASE}.tar.xz"
       XBB_NEWLIB_ARCHIVE_URL="${XBB_ARM_URL_BASE}/newlib-cygwin.tar.xz"
 
     else
