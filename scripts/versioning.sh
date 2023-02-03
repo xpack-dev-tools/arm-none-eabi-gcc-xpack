@@ -114,6 +114,8 @@ function application_build_versioned_components()
 
       XBB_GCC_PATCH_FILE_NAME="gcc-${XBB_GCC_VERSION}-cross.git.patch"
 
+      XBB_GCC_MULTILIB_LIST="aprofile,rmprofile"
+
       # -----------------------------------------------------------------------
 
       # Arm: release notes.
