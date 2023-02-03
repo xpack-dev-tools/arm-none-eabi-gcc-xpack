@@ -7,7 +7,7 @@ maintained by Arm.
 For more details, please read the corresponding release pages:
 
 - <https://xpack.github.io/arm-none-eabi-gcc/releases/>
-- <https://developer.arm.com/tools-and-software/open-source-software/developer-tools/gnu-toolchain>
+- <https://developer.arm.com/downloads/-/arm-gnu-toolchain-downloads/>
 
 Thank you for using open source software,
 

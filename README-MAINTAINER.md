@@ -66,7 +66,7 @@ A recent [xpm](https://xpack.github.io/xpm/), which is a portable
 ## Release schedule
 
 The xPack GNU Arm Embedded GCC release schedule generally follows the
-[Arm GNU Toolchain](https://developer.arm.com/tools-and-software/open-source-software/developer-tools/gnu-toolchain/downloads/)
+[Arm GNU Toolchain](https://developer.arm.com/downloads/-/arm-gnu-toolchain-downloads/)
 release schedule, which is about two releases per year.
 
 ## How to make new releases
@@ -473,27 +473,24 @@ location (like
 <https://github.com/xpack-dev-tools/files-cache/tree/master/libs>),
 place them in the XBB cache (`Work/cache`) and restart the build.
 
-## Push the build scripts
-
-In this Git repo:
-
-- push the `xpack-develop` branch to GitHub
-- possibly push the helper project too
-
-From here it'll be cloned on the production machines.
-
 ## Run the CI build
 
 The automation is provided by GitHub Actions and three self-hosted runners.
+
+### Temporarily disable multi-lib
 
 It is recommended to do **a first run without the multi-libs**
 (see the `application.sh` file), test it,
 and, when ready, rerun the full build.
 
+### Generate the GitHub workflows
+
 Run the `generate-workflows` to re-generate the
 GitHub workflow files; commit and push if necessary.
 
-- on a permanently running machine (`berry`) open ssh sessions to the build
+### Start the self-hosted runners
+
+- on the development machine (`wksi`) open ssh sessions to the build
 machines (`xbbma`, `xbbli`, `xbbla64` and `xbbla32`):
 
 ```sh
@@ -520,9 +517,18 @@ For `xbbli` & `xbbla64` start two runners:
 ~/actions-runners/xpack-dev-tools/2/run.sh &
 ```
 
-Check that the project is pushed to GitHub.
+## Push the build scripts
 
-To trigger the GitHub Actions build, use the xPack actions:
+In this Git repo:
+
+- push the `xpack-develop` branch to GitHub
+- possibly push the helper project too
+
+From here it'll be cloned on the production machines.
+
+### Manually trigger the build GitHub Actions
+
+To trigger the GitHub Actions builds, use the xPack actions:
 
 - `trigger-workflow-build-xbbli`
 - `trigger-workflow-build-xbbla64`
@@ -547,6 +553,22 @@ Settings → Action →
 page.
 
 These commands use the `xpack-develop` branch of this repo.
+
+### Re-enable multi-lib
+
+- comment out `XBB_APPLICATION_WITHOUT_MULTILIB` in `application.sh`
+- commit and push the repo
+
+#### Test multilib builds
+
+Multilib builds take too long to run tests on all platforms,
+run them only on the fast machines, like `xbbma` and `xbbli`.
+
+### Manually trigger the multilib build GitHub Actions
+
+To trigger the GitHub Actions builds, use the same xPack actions as before.
+
+## Durations & results
 
 The full builds take about 11 hours (about 3h30 without multi-libs)
 to complete:
@@ -854,4 +876,4 @@ Add a new topic in the **Compilers and Libraries** forum of the
 NOTE: do not use markdown, but format the text with the blog editor.
 
 Update with actual details from
-[Arm GNU Toolchain](https://developer.arm.com/tools-and-software/open-source-software/developer-tools/gnu-toolchain/downloads/)
+[Arm GNU Toolchain](https://developer.arm.com/downloads/-/arm-gnu-toolchain-downloads/)
