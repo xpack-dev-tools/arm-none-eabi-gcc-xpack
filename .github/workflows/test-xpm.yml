@@ -28,7 +28,7 @@ on:
       version:
         description: 'The semver of the npm release'
         required: false
-        default: 'latest'
+        default: 'next'
       helper-git-ref:
         description: 'The helper branch, tag or SHA to checkout'
         required: false
@@ -53,7 +53,7 @@ jobs:
       - name: 'Checkout project'
         uses: actions/checkout@v3
         with:
-          fetch-depth: 1
+          fetch-depth: 3
 
       - name: 'Checkout helper ${{ github.event.inputs.helper-git-ref }}'
         uses: actions/checkout@v3
@@ -61,7 +61,7 @@ jobs:
           repository: xpack-dev-tools/xbb-helper-xpack
           path: xpacks/xpack-dev-tools-xbb-helper
           ref: ${{ github.event.inputs.helper-git-ref }}
-          fetch-depth: 1
+          fetch-depth: 3
 
       - name: 'Run ${{ github.event.inputs.version }} xpm docker test'
         uses: docker://node:lts-slim
@@ -91,7 +91,7 @@ jobs:
       - name: 'Checkout project'
         uses: actions/checkout@v3
         with:
-          fetch-depth: 1
+          fetch-depth: 3
 
       - name: 'Checkout helper ${{ github.event.inputs.helper-git-ref }}'
         uses: actions/checkout@v3
@@ -99,7 +99,7 @@ jobs:
           repository: xpack-dev-tools/xbb-helper-xpack
           path: xpacks/xpack-dev-tools-xbb-helper
           ref: ${{ github.event.inputs.helper-git-ref }}
-          fetch-depth: 1
+          fetch-depth: 3
 
       - name: 'Run ${{ github.event.inputs.version }} xpm docker test'
         uses: docker://node:lts-slim
@@ -129,7 +129,7 @@ jobs:
       - name: 'Checkout project'
         uses: actions/checkout@v3
         with:
-          fetch-depth: 1
+          fetch-depth: 3
 
       - name: 'Checkout helper ${{ github.event.inputs.helper-git-ref }}'
         uses: actions/checkout@v3
@@ -137,7 +137,7 @@ jobs:
           repository: xpack-dev-tools/xbb-helper-xpack
           path: xpacks/xpack-dev-tools-xbb-helper
           ref: ${{ github.event.inputs.helper-git-ref }}
-          fetch-depth: 1
+          fetch-depth: 3
 
       - name: 'Run ${{ github.event.inputs.version }} xpm docker test'
         uses: docker://arm32v7/node:lts-slim
@@ -166,7 +166,7 @@ jobs:
       - name: 'Checkout project'
         uses: actions/checkout@v3
         with:
-          fetch-depth: 1
+          fetch-depth: 3
 
       - name: 'Checkout helper ${{ github.event.inputs.helper-git-ref }}'
         uses: actions/checkout@v3
@@ -174,7 +174,7 @@ jobs:
           repository: xpack-dev-tools/xbb-helper-xpack
           path: xpacks/xpack-dev-tools-xbb-helper
           ref: ${{ github.event.inputs.helper-git-ref }}
-          fetch-depth: 1
+          fetch-depth: 3
 
       - name: 'Run ${{ github.event.inputs.version }} xpm test'
         run: bash scripts/test.sh --version ${{ github.event.inputs.version }} --xpm
@@ -200,7 +200,7 @@ jobs:
       - name: 'Checkout project'
         uses: actions/checkout@v3
         with:
-          fetch-depth: 1
+          fetch-depth: 3
 
       - name: 'Checkout helper ${{ github.event.inputs.helper-git-ref }}'
         uses: actions/checkout@v3
@@ -208,7 +208,7 @@ jobs:
           repository: xpack-dev-tools/xbb-helper-xpack
           path: xpacks/xpack-dev-tools-xbb-helper
           ref: ${{ github.event.inputs.helper-git-ref }}
-          fetch-depth: 1
+          fetch-depth: 3
 
       - name: 'Run ${{ github.event.inputs.version }} xpm test'
         run: bash scripts/test.sh --version ${{ github.event.inputs.version }} --xpm
@@ -235,7 +235,7 @@ jobs:
       - name: 'Checkout project'
         uses: actions/checkout@v3
         with:
-          fetch-depth: 1
+          fetch-depth: 3
 
       - name: 'Checkout helper ${{ github.event.inputs.helper-git-ref }}'
         uses: actions/checkout@v3
@@ -243,7 +243,7 @@ jobs:
           repository: xpack-dev-tools/xbb-helper-xpack
           path: xpacks/xpack-dev-tools-xbb-helper
           ref: ${{ github.event.inputs.helper-git-ref }}
-          fetch-depth: 1
+          fetch-depth: 3
 
       - name: 'Run ${{ github.event.inputs.version }} xpm test'
         run: bash scripts/test.sh --version ${{ github.event.inputs.version }} --xpm

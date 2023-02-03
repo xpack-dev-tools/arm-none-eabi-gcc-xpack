@@ -64,7 +64,7 @@ jobs:
   # https://hub.docker.com/_/ubuntu
   # The ubuntu:12.04 image fails to update.
   ubuntu-arm64:
-    name: 'arm64 GNU Arm Embedded GCC ${{ github.event.inputs.version }} test on Ubuntu stable'
+    name: 'arm64 arm-none-eabi-gcc ${{ github.event.inputs.version }} test on Ubuntu stable'
     # runs-on: [self-hosted, linux, arm64, xbbla]
     runs-on: [self-hosted, linux, arm64, xbbla64]
 
@@ -85,7 +85,7 @@ jobs:
       - name: 'Checkout project'
         uses: actions/checkout@v3
         with:
-          fetch-depth: 1
+          fetch-depth: 3
 
       - name: 'Checkout helper ${{ github.event.inputs.helper-git-ref }}'
         uses: actions/checkout@v3
@@ -93,7 +93,7 @@ jobs:
           repository: xpack-dev-tools/xbb-helper-xpack
           path: xpacks/xpack-dev-tools-xbb-helper
           ref: ${{ github.event.inputs.helper-git-ref }}
-          fetch-depth: 1
+          fetch-depth: 3
 
       - name: 'Ubuntu 22.04 arm64'
         uses: docker://ubuntu:22.04
@@ -116,7 +116,7 @@ jobs:
   # https://en.wikipedia.org/wiki/Debian_version_history
   # https://hub.docker.com/_/debian
   debian-arm64:
-    name: 'arm64 GNU Arm Embedded GCC ${{ github.event.inputs.version }} test on Debian stable'
+    name: 'arm64 arm-none-eabi-gcc ${{ github.event.inputs.version }} test on Debian stable'
     # runs-on: [self-hosted, linux, arm64, xbbla]
     runs-on: [self-hosted, linux, arm64, xbbla64]
 
@@ -137,7 +137,7 @@ jobs:
       - name: 'Checkout project'
         uses: actions/checkout@v3
         with:
-          fetch-depth: 1
+          fetch-depth: 3
 
       - name: 'Checkout helper ${{ github.event.inputs.helper-git-ref }}'
         uses: actions/checkout@v3
@@ -145,7 +145,7 @@ jobs:
           repository: xpack-dev-tools/xbb-helper-xpack
           path: xpacks/xpack-dev-tools-xbb-helper
           ref: ${{ github.event.inputs.helper-git-ref }}
-          fetch-depth: 1
+          fetch-depth: 3
 
       - name: 'Debian 11 arm64'
         uses: docker://debian:bullseye
@@ -163,7 +163,7 @@ jobs:
   # https://hub.docker.com/r/redhat/ubi8
   # `-static` disabled, there is no static libc.a.
   redhat-arm64:
-    name: 'arm64 GNU Arm Embedded GCC ${{ github.event.inputs.version }} test on RedHat stable'
+    name: 'arm64 arm-none-eabi-gcc ${{ github.event.inputs.version }} test on RedHat stable'
     # runs-on: [self-hosted, linux, arm64, xbbla]
     runs-on: [self-hosted, linux, arm64, xbbla64]
 
@@ -184,7 +184,7 @@ jobs:
       - name: 'Checkout project'
         uses: actions/checkout@v3
         with:
-          fetch-depth: 1
+          fetch-depth: 3
 
       - name: 'Checkout helper ${{ github.event.inputs.helper-git-ref }}'
         uses: actions/checkout@v3
@@ -192,7 +192,7 @@ jobs:
           repository: xpack-dev-tools/xbb-helper-xpack
           path: xpacks/xpack-dev-tools-xbb-helper
           ref: ${{ github.event.inputs.helper-git-ref }}
-          fetch-depth: 1
+          fetch-depth: 3
 
       - name: 'RedHat 8 arm64'
         uses: docker://redhat/ubi8
@@ -204,7 +204,7 @@ jobs:
   # https://hub.docker.com/_/fedora
   # `-static` disabled, there is no static libc.a.
   fedora-arm64:
-    name: 'arm64 GNU Arm Embedded GCC ${{ github.event.inputs.version }} test on Fedora stable'
+    name: 'arm64 arm-none-eabi-gcc ${{ github.event.inputs.version }} test on Fedora stable'
     # runs-on: [self-hosted, linux, arm64, xbbla]
     runs-on: [self-hosted, linux, arm64, xbbla64]
 
@@ -225,7 +225,7 @@ jobs:
       - name: 'Checkout project'
         uses: actions/checkout@v3
         with:
-          fetch-depth: 1
+          fetch-depth: 3
 
       - name: 'Checkout helper ${{ github.event.inputs.helper-git-ref }}'
         uses: actions/checkout@v3
@@ -233,7 +233,7 @@ jobs:
           repository: xpack-dev-tools/xbb-helper-xpack
           path: xpacks/xpack-dev-tools-xbb-helper
           ref: ${{ github.event.inputs.helper-git-ref }}
-          fetch-depth: 1
+          fetch-depth: 3
 
       - name: 'Fedora 37 arm64'
         uses: docker://fedora:37
@@ -257,7 +257,7 @@ jobs:
   # https://hub.docker.com/u/opensuse
   # `-static` disabled, there is no static libc.a.
   opensuse-arm64:
-    name: 'arm64 GNU Arm Embedded GCC ${{ github.event.inputs.version }} test on OpenSUSE stable'
+    name: 'arm64 arm-none-eabi-gcc ${{ github.event.inputs.version }} test on OpenSUSE stable'
     # runs-on: [self-hosted, linux, arm64, xbbla]
     runs-on: [self-hosted, linux, arm64, xbbla64]
 
@@ -278,7 +278,7 @@ jobs:
       - name: 'Checkout project'
         uses: actions/checkout@v3
         with:
-          fetch-depth: 1
+          fetch-depth: 3
 
       - name: 'Checkout helper ${{ github.event.inputs.helper-git-ref }}'
         uses: actions/checkout@v3
@@ -286,7 +286,7 @@ jobs:
           repository: xpack-dev-tools/xbb-helper-xpack
           path: xpacks/xpack-dev-tools-xbb-helper
           ref: ${{ github.event.inputs.helper-git-ref }}
-          fetch-depth: 1
+          fetch-depth: 3
 
       - name: 'OpenSUSE 15.4 arm64'
         uses: docker://opensuse/leap:15.4
@@ -303,7 +303,7 @@ jobs:
   # ---------------------------------------------------------------------------
 
   ubuntu-arm64-latest:
-    name: 'arm64 GNU Arm Embedded GCC ${{ github.event.inputs.version }} test on Ubuntu latest'
+    name: 'arm64 arm-none-eabi-gcc ${{ github.event.inputs.version }} test on Ubuntu latest'
     # runs-on: [self-hosted, linux, arm64, xbbla]
     runs-on: [self-hosted, linux, arm64, xbbla64]
 
@@ -324,7 +324,7 @@ jobs:
       - name: 'Checkout project'
         uses: actions/checkout@v3
         with:
-          fetch-depth: 1
+          fetch-depth: 3
 
       - name: 'Checkout helper ${{ github.event.inputs.helper-git-ref }}'
         uses: actions/checkout@v3
@@ -332,7 +332,7 @@ jobs:
           repository: xpack-dev-tools/xbb-helper-xpack
           path: xpacks/xpack-dev-tools-xbb-helper
           ref: ${{ github.event.inputs.helper-git-ref }}
-          fetch-depth: 1
+          fetch-depth: 3
 
       - name: 'Ubuntu latest arm64'
         uses: docker://ubuntu:latest
@@ -342,7 +342,7 @@ jobs:
       # ubuntu:rolling fails during update
 
   debian-arm64-latest:
-    name: 'arm64 GNU Arm Embedded GCC ${{ github.event.inputs.version }} test on Debian latest'
+    name: 'arm64 arm-none-eabi-gcc ${{ github.event.inputs.version }} test on Debian latest'
     # runs-on: [self-hosted, linux, arm64, xbbla]
     runs-on: [self-hosted, linux, arm64, xbbla64]
 
@@ -363,7 +363,7 @@ jobs:
       - name: 'Checkout project'
         uses: actions/checkout@v3
         with:
-          fetch-depth: 1
+          fetch-depth: 3
 
       - name: 'Checkout helper ${{ github.event.inputs.helper-git-ref }}'
         uses: actions/checkout@v3
@@ -371,7 +371,7 @@ jobs:
           repository: xpack-dev-tools/xbb-helper-xpack
           path: xpacks/xpack-dev-tools-xbb-helper
           ref: ${{ github.event.inputs.helper-git-ref }}
-          fetch-depth: 1
+          fetch-depth: 3
 
       - name: 'Debian testing arm64'
         uses: docker://debian:testing
@@ -389,7 +389,7 @@ jobs:
   # https://hub.docker.com/_/fedora
   # `-static` disabled, there is no static libc.a.
   fedora-arm64-latest:
-    name: 'arm64 GNU Arm Embedded GCC ${{ github.event.inputs.version }} test on Fedora latest'
+    name: 'arm64 arm-none-eabi-gcc ${{ github.event.inputs.version }} test on Fedora latest'
     # runs-on: [self-hosted, linux, arm64, xbbla]
     runs-on: [self-hosted, linux, arm64, xbbla64]
 
@@ -410,7 +410,7 @@ jobs:
       - name: 'Checkout project'
         uses: actions/checkout@v3
         with:
-          fetch-depth: 1
+          fetch-depth: 3
 
       - name: 'Checkout helper ${{ github.event.inputs.helper-git-ref }}'
         uses: actions/checkout@v3
@@ -418,7 +418,7 @@ jobs:
           repository: xpack-dev-tools/xbb-helper-xpack
           path: xpacks/xpack-dev-tools-xbb-helper
           ref: ${{ github.event.inputs.helper-git-ref }}
-          fetch-depth: 1
+          fetch-depth: 3
 
       - name: 'Fedora latest arm64'
         uses: docker://fedora:latest
@@ -428,7 +428,7 @@ jobs:
 
   # - https://hub.docker.com/r/opensuse/tumbleweed
   opensuse-arm64-latest:
-    name: 'arm64 GNU Arm Embedded GCC ${{ github.event.inputs.version }} test on OpenSUSE latest'
+    name: 'arm64 arm-none-eabi-gcc ${{ github.event.inputs.version }} test on OpenSUSE latest'
     # runs-on: [self-hosted, linux, arm64, xbbla]
     runs-on: [self-hosted, linux, arm64, xbbla64]
 
@@ -449,7 +449,7 @@ jobs:
       - name: 'Checkout project'
         uses: actions/checkout@v3
         with:
-          fetch-depth: 1
+          fetch-depth: 3
 
       - name: 'Checkout helper ${{ github.event.inputs.helper-git-ref }}'
         uses: actions/checkout@v3
@@ -457,7 +457,7 @@ jobs:
           repository: xpack-dev-tools/xbb-helper-xpack
           path: xpacks/xpack-dev-tools-xbb-helper
           ref: ${{ github.event.inputs.helper-git-ref }}
-          fetch-depth: 1
+          fetch-depth: 3
 
       - name: 'OpenSUSE tumbleweed arm64'
         uses: docker://opensuse/tumbleweed
@@ -467,7 +467,7 @@ jobs:
   
   # https://hub.docker.com/r/arm32v7/ubuntu/
   ubuntu-arm:
-    name: 'arm GNU Arm Embedded GCC ${{ github.event.inputs.version }} test on Ubuntu stable'
+    name: 'arm arm-none-eabi-gcc ${{ github.event.inputs.version }} test on Ubuntu stable'
     # runs-on: [self-hosted, linux, arm64, xbbla]
     runs-on: [self-hosted, linux, arm, xbbla32]
 
@@ -488,7 +488,7 @@ jobs:
       - name: 'Checkout project'
         uses: actions/checkout@v3
         with:
-          fetch-depth: 1
+          fetch-depth: 3
 
       - name: 'Checkout helper ${{ github.event.inputs.helper-git-ref }}'
         uses: actions/checkout@v3
@@ -496,7 +496,7 @@ jobs:
           repository: xpack-dev-tools/xbb-helper-xpack
           path: xpacks/xpack-dev-tools-xbb-helper
           ref: ${{ github.event.inputs.helper-git-ref }}
-          fetch-depth: 1
+          fetch-depth: 3
 
       - name: 'Ubuntu 22.04 arm'
         uses: docker://arm32v7/ubuntu:22.04
@@ -518,7 +518,7 @@ jobs:
 
   # https://hub.docker.com/r/arm32v7/debian
   debian-arm:
-    name: 'arm GNU Arm Embedded GCC ${{ github.event.inputs.version }} test on Debian stable'
+    name: 'arm arm-none-eabi-gcc ${{ github.event.inputs.version }} test on Debian stable'
     # runs-on: [self-hosted, linux, arm64, xbbla]
     runs-on: [self-hosted, linux, arm, xbbla32]
 
@@ -539,7 +539,7 @@ jobs:
       - name: 'Checkout project'
         uses: actions/checkout@v3
         with:
-          fetch-depth: 1
+          fetch-depth: 3
 
       - name: 'Checkout helper ${{ github.event.inputs.helper-git-ref }}'
         uses: actions/checkout@v3
@@ -547,7 +547,7 @@ jobs:
           repository: xpack-dev-tools/xbb-helper-xpack
           path: xpacks/xpack-dev-tools-xbb-helper
           ref: ${{ github.event.inputs.helper-git-ref }}
-          fetch-depth: 1
+          fetch-depth: 3
 
       - name: 'Debian 11 arm'
         uses: docker://arm32v7/debian:bullseye
@@ -563,7 +563,7 @@ jobs:
 
   # https://hub.docker.com/r/arm32v7/ubuntu/
   ubuntu-arm-latest:
-    name: 'arm GNU Arm Embedded GCC ${{ github.event.inputs.version }} test on Ubuntu latest'
+    name: 'arm arm-none-eabi-gcc ${{ github.event.inputs.version }} test on Ubuntu latest'
     # runs-on: [self-hosted, linux, arm64, xbbla]
     runs-on: [self-hosted, linux, arm, xbbla32]
 
@@ -584,7 +584,7 @@ jobs:
       - name: 'Checkout project'
         uses: actions/checkout@v3
         with:
-          fetch-depth: 1
+          fetch-depth: 3
 
       - name: 'Checkout helper ${{ github.event.inputs.helper-git-ref }}'
         uses: actions/checkout@v3
@@ -592,7 +592,7 @@ jobs:
           repository: xpack-dev-tools/xbb-helper-xpack
           path: xpacks/xpack-dev-tools-xbb-helper
           ref: ${{ github.event.inputs.helper-git-ref }}
-          fetch-depth: 1
+          fetch-depth: 3
 
       - name: 'Ubuntu latest arm'
         uses: docker://arm32v7/ubuntu:latest
@@ -602,7 +602,7 @@ jobs:
 
   # https://hub.docker.com/r/arm32v7/debian
   debian-arm-latest:
-    name: 'arm GNU Arm Embedded GCC ${{ github.event.inputs.version }} test on Debian latest'
+    name: 'arm arm-none-eabi-gcc ${{ github.event.inputs.version }} test on Debian latest'
     # runs-on: [self-hosted, linux, arm64, xbbla]
     runs-on: [self-hosted, linux, arm, xbbla32]
 
@@ -623,7 +623,7 @@ jobs:
       - name: 'Checkout project'
         uses: actions/checkout@v3
         with:
-          fetch-depth: 1
+          fetch-depth: 3
 
       - name: 'Checkout helper ${{ github.event.inputs.helper-git-ref }}'
         uses: actions/checkout@v3
@@ -631,7 +631,7 @@ jobs:
           repository: xpack-dev-tools/xbb-helper-xpack
           path: xpacks/xpack-dev-tools-xbb-helper
           ref: ${{ github.event.inputs.helper-git-ref }}
-          fetch-depth: 1
+          fetch-depth: 3
 
       - name: 'Debian testing arm'
         uses: docker://arm32v7/debian:testing
@@ -649,7 +649,7 @@ jobs:
   # https://hub.docker.com/r/arm32v7/fedora
   # `-static` disabled, there is no static libc.a.
   fedora-arm-latest:
-    name: 'arm GNU Arm Embedded GCC ${{ github.event.inputs.version }} test on Fedora latest'
+    name: 'arm arm-none-eabi-gcc ${{ github.event.inputs.version }} test on Fedora latest'
     # runs-on: [self-hosted, linux, arm64, xbbla]
     runs-on: [self-hosted, linux, arm, xbbla32]
 
@@ -670,7 +670,7 @@ jobs:
       - name: 'Checkout project'
         uses: actions/checkout@v3
         with:
-          fetch-depth: 1
+          fetch-depth: 3
 
       - name: 'Checkout helper ${{ github.event.inputs.helper-git-ref }}'
         uses: actions/checkout@v3
@@ -678,7 +678,7 @@ jobs:
           repository: xpack-dev-tools/xbb-helper-xpack
           path: xpacks/xpack-dev-tools-xbb-helper
           ref: ${{ github.event.inputs.helper-git-ref }}
-          fetch-depth: 1
+          fetch-depth: 3
 
       - name: 'Fedora latest arm'
         uses: docker://arm32v7/fedora:latest

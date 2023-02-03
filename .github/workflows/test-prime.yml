@@ -41,7 +41,7 @@ on:
 jobs:
 
   linux-x64:
-    name: 'Linux x64 GNU Arm Embedded GCC ${{ github.event.inputs.version }} test'
+    name: 'Linux x64 arm-none-eabi-gcc ${{ github.event.inputs.version }} test'
     runs-on: ubuntu-20.04
 
     steps:
@@ -57,7 +57,7 @@ jobs:
       - name: 'Checkout project'
         uses: actions/checkout@v3
         with:
-          fetch-depth: 1
+          fetch-depth: 3
 
       - name: 'Checkout helper ${{ github.event.inputs.helper-git-ref }}'
         uses: actions/checkout@v3
@@ -65,13 +65,13 @@ jobs:
           repository: xpack-dev-tools/xbb-helper-xpack
           path: xpacks/xpack-dev-tools-xbb-helper
           ref: ${{ github.event.inputs.helper-git-ref }}
-          fetch-depth: 1
+          fetch-depth: 3
 
       - name: 'Run ${{ github.event.inputs.version }} native test'
         run: bash scripts/test.sh --image github-actions-ubuntu-latest --version ${{ github.event.inputs.version }} --base-url ${{ github.event.inputs.base_url }}
   
   linux-arm64:
-    name: 'Linux arm64 GNU Arm Embedded GCC ${{ github.event.inputs.version }} test'
+    name: 'Linux arm64 arm-none-eabi-gcc ${{ github.event.inputs.version }} test'
     # runs-on: [self-hosted, linux, arm64, xbbla]
     runs-on: [self-hosted, linux, arm64, xbbla64]
 
@@ -92,7 +92,7 @@ jobs:
       - name: 'Checkout project'
         uses: actions/checkout@v3
         with:
-          fetch-depth: 1
+          fetch-depth: 3
 
       - name: 'Checkout helper ${{ github.event.inputs.helper-git-ref }}'
         uses: actions/checkout@v3
@@ -100,7 +100,7 @@ jobs:
           repository: xpack-dev-tools/xbb-helper-xpack
           path: xpacks/xpack-dev-tools-xbb-helper
           ref: ${{ github.event.inputs.helper-git-ref }}
-          fetch-depth: 1
+          fetch-depth: 3
 
       - name: 'Run ${{ github.event.inputs.version }} docker test'
         uses: docker://ubuntu:latest
@@ -109,7 +109,7 @@ jobs:
           args: /github/workspace/scripts/test.sh --image ubuntu:latest --version ${{ github.event.inputs.version }} --base-url ${{ github.event.inputs.base_url }}
   
   linux-arm32:
-    name: 'Linux arm32 GNU Arm Embedded GCC ${{ github.event.inputs.version }} test'
+    name: 'Linux arm32 arm-none-eabi-gcc ${{ github.event.inputs.version }} test'
     # runs-on: [self-hosted, linux, arm64, xbbla]
     runs-on: [self-hosted, linux, arm, xbbla32]
 
@@ -130,7 +130,7 @@ jobs:
       - name: 'Checkout project'
         uses: actions/checkout@v3
         with:
-          fetch-depth: 1
+          fetch-depth: 3
 
       - name: 'Checkout helper ${{ github.event.inputs.helper-git-ref }}'
         uses: actions/checkout@v3
@@ -138,7 +138,7 @@ jobs:
           repository: xpack-dev-tools/xbb-helper-xpack
           path: xpacks/xpack-dev-tools-xbb-helper
           ref: ${{ github.event.inputs.helper-git-ref }}
-          fetch-depth: 1
+          fetch-depth: 3
 
       - name: 'Run ${{ github.event.inputs.version }} docker test'
         uses: docker://arm32v7/ubuntu:latest
@@ -147,7 +147,7 @@ jobs:
           args: /github/workspace/scripts/test.sh --image arm32v7/ubuntu:latest --version ${{ github.event.inputs.version }} --base-url ${{ github.event.inputs.base_url }}
   
   macos-x64:
-    name: 'macOS x64 GNU Arm Embedded GCC ${{ github.event.inputs.version }} test'
+    name: 'macOS x64 arm-none-eabi-gcc ${{ github.event.inputs.version }} test'
     runs-on: macos-10.15
 
     steps:
@@ -167,7 +167,7 @@ jobs:
       - name: 'Checkout project'
         uses: actions/checkout@v3
         with:
-          fetch-depth: 1
+          fetch-depth: 3
 
       - name: 'Checkout helper ${{ github.event.inputs.helper-git-ref }}'
         uses: actions/checkout@v3
@@ -175,13 +175,13 @@ jobs:
           repository: xpack-dev-tools/xbb-helper-xpack
           path: xpacks/xpack-dev-tools-xbb-helper
           ref: ${{ github.event.inputs.helper-git-ref }}
-          fetch-depth: 1
+          fetch-depth: 3
 
       - name: 'Run ${{ github.event.inputs.version }} native test'
         run: bash scripts/test.sh --version ${{ github.event.inputs.version }} --base-url ${{ github.event.inputs.base_url }}
   
   macos-arm64:
-    name: 'macOS arm64 GNU Arm Embedded GCC ${{ github.event.inputs.version }} test'
+    name: 'macOS arm64 arm-none-eabi-gcc ${{ github.event.inputs.version }} test'
     runs-on: [self-hosted, macos, apple]
 
     steps:
@@ -201,7 +201,7 @@ jobs:
       - name: 'Checkout project'
         uses: actions/checkout@v3
         with:
-          fetch-depth: 1
+          fetch-depth: 3
 
       - name: 'Checkout helper ${{ github.event.inputs.helper-git-ref }}'
         uses: actions/checkout@v3
@@ -209,13 +209,13 @@ jobs:
           repository: xpack-dev-tools/xbb-helper-xpack
           path: xpacks/xpack-dev-tools-xbb-helper
           ref: ${{ github.event.inputs.helper-git-ref }}
-          fetch-depth: 1
+          fetch-depth: 3
 
       - name: 'Run ${{ github.event.inputs.version }} native test'
         run: bash scripts/test.sh --version ${{ github.event.inputs.version }} --base-url ${{ github.event.inputs.base_url }}
   
   windows-x64:
-    name: 'Windows x64 GNU Arm Embedded GCC ${{ github.event.inputs.version }} test'
+    name: 'Windows x64 arm-none-eabi-gcc ${{ github.event.inputs.version }} test'
     runs-on: windows-2022
     defaults:
       run:
@@ -236,7 +236,7 @@ jobs:
       - name: 'Checkout project'
         uses: actions/checkout@v3
         with:
-          fetch-depth: 1
+          fetch-depth: 3
 
       - name: 'Checkout helper ${{ github.event.inputs.helper-git-ref }}'
         uses: actions/checkout@v3
@@ -244,7 +244,7 @@ jobs:
           repository: xpack-dev-tools/xbb-helper-xpack
           path: xpacks/xpack-dev-tools-xbb-helper
           ref: ${{ github.event.inputs.helper-git-ref }}
-          fetch-depth: 1
+          fetch-depth: 3
 
       - name: 'Run ${{ github.event.inputs.version }} native test'
         run: bash scripts/test.sh --version ${{ github.event.inputs.version }} --base-url ${{ github.event.inputs.base_url }}
