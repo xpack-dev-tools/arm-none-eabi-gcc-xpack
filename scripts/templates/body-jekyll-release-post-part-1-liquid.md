@@ -3,20 +3,21 @@ title:  xPack GNU Arm Embedded GCC v{{ XBB_RELEASE_VERSION }} released
 
 TODO: select one summary
 
-summary: "Version **{{ XBB_RELEASE_VERSION }}** is a maintenance release; it updates to
-the latest upstream master."
+summary: "Version **{{ XBB_RELEASE_VERSION }}** is a maintenance release; it fixes <...>."
 
 summary: "Version **{{ XBB_RELEASE_VERSION }}** is a new release; it follows the Arm release."
 
-arm_version: 11.3.Rel1
-arm_date: August 8, 2022
+arm_version: "11.3.Rel1"
+arm_date: "August 8, 2022"
 gcc_version: "11.3.1"
 binutils_version: "2.38"
 newlib_version: "4.1.0"
 gdb_version: "12.1"
+python_version: "3.10"
+
 version: "{{ XBB_RELEASE_VERSION }}"
-npm_subversion: 1
-python_version: 10
+npm_subversion: "1"
+
 download_url: https://github.com/xpack-dev-tools/arm-none-eabi-gcc-xpack/releases/tag/v{{ XBB_RELEASE_VERSION }}/
 
 date:   {{ RELEASE_DATE }}
@@ -129,11 +130,11 @@ xpm uninstall --global @xpack-dev-tools/arm-none-eabi-gcc
 ## Compliance
 
 The xPack GNU Arm Embedded GCC generally follows the official
-[Arm Embedded GCC](https://developer.arm.com/tools-and-software/open-source-software/developer-tools/gnu-toolchain/downloads/) releases.
+[Arm GNU Toolchain](https://developer.arm.com/downloads/-/arm-gnu-toolchain-downloads/) releases.
 
 The current version is based on:
 
-- [GNU Arm Embedded Toolchain](https://developer.arm.com/open-source/gnu-toolchain/gnu-rm)
+- [Arm GNU Toolchain](https://developer.arm.com/downloads/-/arm-gnu-toolchain-downloads/)
 release **{% raw %}{{ page.arm_version }}{% endraw %}** from {% raw %}{{ page.arm_date }}{% endraw %}
 and uses the same sources. It includes:
   - GCC {% raw %}{{ page.gcc_version }}{% endraw %}
@@ -198,7 +199,7 @@ XML parsing and full integration with the SEGGER J-Link GDB server.
 
 Support for Python scripting was added to GDB. This distribution provides
 a separate binary, `arm-none-eabi-gdb-py3` with
-support for **Python 3.{% raw %}{{ page.python_version }}{% endraw %}**.
+support for **Python {% raw %}{{ page.python_version }}{% endraw %}**.
 
 The Python 3 run-time is included, so GDB does not need any version of
 Python to be installed, and is insensitive to the presence of other
