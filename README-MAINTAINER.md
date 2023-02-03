@@ -157,9 +157,9 @@ versions in:
 With a Git client:
 
 - checkout the branch mentioned in the release notes
-  (like `binutils-2_38-branch`)
+  (like `binutils-2_39-branch`)
 - identify the commit ID
-- add a tag like `binutils-2.38-arm-none-eabi-11.3.rel1`
+- add a tag like `binutils-2.39-arm-none-eabi-12.2.rel1`
 - push the tag to origin
 - check the tag at <https://github.com/xpack-dev-tools/binutils-gdb/tags/>
 
@@ -168,7 +168,7 @@ Similarly for GDB:
 - checkout the branch mentioned in the release notes
   (like `gdb-12-branch`)
 - identify the commit ID
-- add a tag like `gdb-12-arm-none-eabi-11.3.rel1`
+- add a tag like `gdb-12-arm-none-eabi-12.2.rel1`
 - push the tag to origin
 - check the tag at <https://github.com/xpack-dev-tools/binutils-gdb/tags/>
 
@@ -177,14 +177,9 @@ Similarly for GDB:
 With a Git client:
 
 - checkout the branch mentioned in the release notes
-  (like `ARM/arm-11`)
+  (like `ARM/arm-12`)
 - identify the commit ID
-- create a branch like `arm-11-arm-none-eabi-11.3.rel1`
-- cherry pick the commits
-  (like _Try to get support for Apple Silicon_)
-- select the new commit
-- right click -> Save as Patch...
-- copy to `patches/gcc-12.2.1-cross.git.patch`
+- create a branch like `arm-12-arm-none-eabi-12.2.rel1`
 
 ### Update the version specific code
 
@@ -211,7 +206,7 @@ triggered via the VS Code graphical interface, using the
 
 #### Temporarily disable multilib
 
-In the `scripts.application.sh` enable the `WITHOUT_MULTILIB="y"` definition.
+In the `scripts/application.sh` enable the `WITHOUT_MULTILIB="y"` definition.
 
 #### Patches
 
@@ -872,7 +867,7 @@ Add a new topic in the **Compilers and Libraries** forum of the
 - title: xPack GNU Arm Embedded GCC v12.2.1-1.1 released
 - content:
   - The **xPack GNU Arm Embedded GCC** is an alternate binary distribution that complements the official Arm GNU Toolchain maintained by Arm.
-  - The latest release is [12.2.1-1.1]() following Arm release from August 8, 2022 (version 11.3.Rel1).
+  - The latest release is [12.2.1-1.1]() following Arm release from August 8, 2022 (version 12.2.Rel1).
 - tags: xpack, gnu, gcc, arm, toolchain
 
 NOTE: do not use markdown, but format the text with the blog editor.
