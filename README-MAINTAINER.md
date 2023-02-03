@@ -287,14 +287,14 @@ xpm install --config darwin-x64 -C ~/Work/arm-none-eabi-gcc-xpack.git
 xpm run build-develop --config darwin-x64 -C ~/Work/arm-none-eabi-gcc-xpack.git
 ```
 
-About 60 minutes later, the output of the build script is a compressed
+About 1h05 later, the output of the build script is a compressed
 archive and its SHA signature, created in the `deploy` folder:
 
 ```console
 $ ls -l ~/Work/arm-none-eabi-gcc-xpack.git/build/darwin-x64/deploy
-total 196816
--rw-r--r--  1 ilg  staff  96097205 Dec 11 00:07 xpack-arm-none-eabi-gcc-12.2.1-1.1-darwin-x64.tar.gz
--rw-r--r--  1 ilg  staff       119 Dec 11 00:07 xpack-arm-none-eabi-gcc-12.2.1-1.1-darwin-x64.tar.gz.sha
+total 230472
+-rw-r--r--  1 ilg  staff  106831733 Feb  3 13:05 xpack-arm-none-eabi-gcc-12.2.1-1.1-darwin-x64.tar.gz
+-rw-r--r--  1 ilg  staff        119 Feb  3 13:05 xpack-arm-none-eabi-gcc-12.2.1-1.1-darwin-x64.tar.gz.sha
 ```
 
 #### Apple Silicon macOS
@@ -320,14 +320,14 @@ xpm install --config darwin-arm64 -C ~/Work/arm-none-eabi-gcc-xpack.git
 xpm run build-develop --config darwin-arm64 -C ~/Work/arm-none-eabi-gcc-xpack.git
 ```
 
-About 25 minutes later, the output of the build script is a compressed
+About 30 minutes later, the output of the build script is a compressed
 archive and its SHA signature, created in the `deploy` folder:
 
 ```console
 $ ls -l ~/Work/arm-none-eabi-gcc-xpack.git/build/darwin-arm64/deploy
-total 198336
--rw-r--r--  1 ilg  staff  89834866 Dec 10 19:30 xpack-arm-none-eabi-gcc-12.2.1-1.1-darwin-arm64.tar.gz
--rw-r--r--  1 ilg  staff       121 Dec 10 19:30 xpack-arm-none-eabi-gcc-12.2.1-1.1-darwin-arm64.tar.gz.sha
+total 231088
+-rw-r--r--  1 ilg  staff  103580367 Feb  3 12:29 xpack-arm-none-eabi-gcc-12.2.1-1.1-darwin-arm64.tar.gz
+-rw-r--r--  1 ilg  staff        121 Feb  3 12:29 xpack-arm-none-eabi-gcc-12.2.1-1.1-darwin-arm64.tar.gz.sha
 ```
 
 #### Intel GNU/Linux
@@ -355,14 +355,14 @@ xpm run docker-link-deps --config linux-x64 -C ~/Work/arm-none-eabi-gcc-xpack.gi
 xpm run docker-build-develop --config linux-x64 -C ~/Work/arm-none-eabi-gcc-xpack.git
 ```
 
-About 35 minutes later, the output of the build script is a compressed
+About 40 minutes later, the output of the build script is a compressed
 archive and its SHA signature, created in the `deploy` folder:
 
 ```console
 $ ls -l ~/Work/arm-none-eabi-gcc-xpack.git/build/linux-x64/deploy
-total 100248
--rw-r--r-- 1 ilg ilg 102647164 Dec 10 17:19 xpack-arm-none-eabi-gcc-12.2.1-1.1-linux-x64.tar.gz
--rw-r--r-- 1 ilg ilg       118 Dec 10 17:19 xpack-arm-none-eabi-gcc-12.2.1-1.1-linux-x64.tar.gz.sha
+total 111192
+-rw-r--r-- 1 ilg ilg 113855812 Feb  3 10:42 xpack-arm-none-eabi-gcc-12.2.1-1.1-linux-x64.tar.gz
+-rw-r--r-- 1 ilg ilg       118 Feb  3 10:42 xpack-arm-none-eabi-gcc-12.2.1-1.1-linux-x64.tar.gz.sha
 ```
 
 ##### Build the Windows binaries
@@ -381,14 +381,14 @@ xpm run docker-link-deps --config win32-x64 -C ~/Work/arm-none-eabi-gcc-xpack.gi
 xpm run docker-build-develop --config win32-x64 -C ~/Work/arm-none-eabi-gcc-xpack.git
 ```
 
-About 30 minutes later, the output of the build script is a compressed
+About 35 minutes later, the output of the build script is a compressed
 archive and its SHA signature, created in the `deploy` folder:
 
 ```console
 $ ls -l ~/Work/arm-none-eabi-gcc-xpack.git/build/win32-x64/deploy
-total 101784
--rw-r--r-- 1 ilg ilg 104214825 Dec 10 14:37 xpack-arm-none-eabi-gcc-12.2.1-1.1-win32-x64.zip
--rw-r--r-- 1 ilg ilg       115 Dec 10 14:37 xpack-arm-none-eabi-gcc-12.2.1-1.1-win32-x64.zip.sha
+total 109804
+-rw-r--r-- 1 ilg ilg 112431185 Feb  3 10:35 xpack-arm-none-eabi-gcc-12.2.1-1.1-win32-x64.zip
+-rw-r--r-- 1 ilg ilg       115 Feb  3 10:35 xpack-arm-none-eabi-gcc-12.2.1-1.1-win32-x64.zip.sha
 ```
 
 #### Arm GNU/Linux 64-bit
@@ -414,14 +414,14 @@ xpm run docker-link-deps --config linux-arm64 -C ~/Work/arm-none-eabi-gcc-xpack.
 xpm run docker-build-develop --config linux-arm64 -C ~/Work/arm-none-eabi-gcc-xpack.git
 ```
 
-About 3h50 later, the output of the build script is a compressed
+About 4h10 later, the output of the build script is a compressed
 archive and its SHA signature, created in the `deploy` folder:
 
 ```console
 $ ls -l ~/Work/arm-none-eabi-gcc-xpack.git/build/linux-arm64/deploy
-total 169440
--rw-rw-rw- 1 root root 94181557 Aug 21 05:04 xpack-arm-none-eabi-gcc-12.2.1-1.1-linux-arm64.tar.gz
--rw-rw-rw- 1 root root      106 Aug 21 05:04 xpack-arm-none-eabi-gcc-12.2.1-1.1-linux-arm64.tar.gz.sha
+total 108344
+-rw-r--r-- 1 ilg ilg 110933122 Feb  3 14:10 xpack-arm-none-eabi-gcc-12.2.1-1.1-linux-arm64.tar.gz
+-rw-r--r-- 1 ilg ilg       120 Feb  3 14:10 xpack-arm-none-eabi-gcc-12.2.1-1.1-linux-arm64.tar.gz.sha
 ```
 
 #### Arm GNU/Linux 32-bit
@@ -447,14 +447,14 @@ xpm run docker-link-deps --config linux-arm -C ~/Work/arm-none-eabi-gcc-xpack.gi
 xpm run docker-build-develop --config linux-arm -C ~/Work/arm-none-eabi-gcc-xpack.git
 ```
 
-About 3h35 later, the output of the build script is a compressed
+About 4h10 later, the output of the build script is a compressed
 archive and its SHA signature, created in the `deploy` folder:
 
 ```console
 $ ls -l ~/Work/arm-none-eabi-gcc-xpack.git/build/linux-arm/deploy
-total 97460
--rw-r--r-- 1 ilg ilg 99793275 Dec 11 15:51 xpack-arm-none-eabi-gcc-12.2.1-1.1-linux-arm64.tar.gz
--rw-r--r-- 1 ilg ilg      120 Dec 11 15:51 xpack-arm-none-eabi-gcc-12.2.1-1.1-linux-arm64.tar.gz.sha
+total 101320
+-rw-r--r-- 1 ilg ilg 103742127 Feb  3 14:10 xpack-arm-none-eabi-gcc-12.2.1-1.1-linux-arm.tar.gz
+-rw-r--r-- 1 ilg ilg       118 Feb  3 14:10 xpack-arm-none-eabi-gcc-12.2.1-1.1-linux-arm.tar.gz.sha
 ```
 
 ### Files cache
@@ -570,9 +570,9 @@ To trigger the GitHub Actions builds, use the same xPack actions as before.
 The full builds take about 11 hours (about 3h30 without multi-libs)
 to complete:
 
-- `xbbmi`: 5h10 (1h14)
-- `xbbma`: 1h55 (32m)
-- `xbbli`: 2h42 (including Windows) (1h00)
+- `xbbmi`: 5h10 (1h10)
+- `xbbma`: 1h55 (0h26)
+- `xbbli`: 2h42 (including Windows; without multi-libs: 0h42 Linux, 0h35 Windows without multilibs)
 - `xbbla64`: 10h45 (3h30)
 - `xbbla32`: 11h12 (3h30)
 
