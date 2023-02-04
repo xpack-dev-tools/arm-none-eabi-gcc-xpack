@@ -2,9 +2,27 @@
 
 Entries in this file are in reverse chronological order.
 
+## 2023-02-04
+
+* v12.2.1-1.1 released
+* 5a5885e README update
+* b8b67fa body-jekyll update
+
 ## 2023-02-03
 
-* v12.2.1-1.1 prepared
+* d45f7f6 versioning.sh: add XBB_GCC_MULTILIB_LIST
+* 778a402 application.sh: enable multi-libs
+* 3df0afb README update
+* ae0aca9 package.json: update bins
+* 7c4749f README update
+* 67223d4 package.json: bump deps
+* 9b908e0 .vscode/settings.json: ignoreWords
+* 6d4509d versioning.sh: fix bad aarch64 refs
+* 26a5aeb README update
+* 766bd42 prepare v12.2.1-1.1
+* 032974e .vscode/settings.json: ignoreWords
+* a56eec0 add extras/12.2.rel1
+* 2be73cb move extras to subfolders
 * ed7bfa6 READMEs updates
 * fcbdc5c templates updates
 * de6a7ec ISSUE_TEMPLATE update
