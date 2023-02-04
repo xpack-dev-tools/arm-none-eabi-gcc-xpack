@@ -786,7 +786,7 @@ watching this project.
 
 - select the `xpack-develop` branch
 - check the latest commits `npm run git-log`
-- update `CHANGELOG.md`, add a line like _* v12.2.1-1.1.2 published on npmjs.com_
+- update `CHANGELOG.md`, add a line like _* v12.2.1-1.1.1 published on npmjs.com_
 - commit with a message like _CHANGELOG: publish npm v12.2.1-1.1.1_
 - `npm pack` and check the content of the archive, which should list
   only the `package.json`, the `README.md`, `LICENSE` and `CHANGELOG.md`;
@@ -820,12 +820,12 @@ The tests results are available from the
 When the release is considered stable, promote it as `latest`:
 
 - `npm dist-tag ls @xpack-dev-tools/arm-none-eabi-gcc`
-- `npm dist-tag add @xpack-dev-tools/arm-none-eabi-gcc@12.2.1-1.1.2 latest`
+- `npm dist-tag add @xpack-dev-tools/arm-none-eabi-gcc@12.2.1-1.1.1 latest`
 - `npm dist-tag ls @xpack-dev-tools/arm-none-eabi-gcc`
 
 In case the previous version is not functional and needs to be unpublished:
 
-- `npm unpublish @xpack-dev-tools/arm-none-eabi-gcc@12.2.1-1.1.2`
+- `npm unpublish @xpack-dev-tools/arm-none-eabi-gcc@12.2.1-1.1.1`
 
 ## Update the Web
 
