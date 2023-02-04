@@ -523,6 +523,11 @@ In this Git repo:
 
 From here it'll be cloned on the production machines.
 
+### Check for disk space
+
+Check if the build machines have enough free space and eventually
+do some cleanups.
+
 ### Manually trigger the build GitHub Actions
 
 To trigger the GitHub Actions builds, use the xPack actions:
@@ -570,11 +575,11 @@ To trigger the GitHub Actions builds, use the same xPack actions as before.
 The full builds take about 11 hours (about 3h30 without multi-libs)
 to complete:
 
-- `xbbmi`: 5h10 (1h10)
-- `xbbma`: 1h55 (0h26)
-- `xbbli`: 2h42 (including Windows; without multi-libs: 0h42 Linux, 0h35 Windows without multilibs)
-- `xbbla64`: 10h45 (3h30)
-- `xbbla32`: 11h12 (3h30)
+- `xbbmi`: 5h12 (1h10)
+- `xbbma`: 1h50 (0h26)
+- `xbbli`: 1h54 (1h54 Linux, 1h52 Windows; without multi-libs: 0h42 Linux, 0h35 Windows without multilibs)
+- `xbbla64`: 12h07 (4h00)
+- `xbbla32`: 12h40 (4h10)
 
 The workflows results and logs are available from the
 [Actions](https://github.com/xpack-dev-tools/arm-none-eabi-gcc-xpack/actions/) page.
@@ -718,6 +723,7 @@ with all binaries attached.
 ## Prepare a new blog post
 
 - check and possibly update the `templates/body-jekyll-release-*-liquid.md`
+  (for the release dates, use <https://developer.arm.com/downloads/-/arm-gnu-toolchain-downloads/>)
 - run the xPack action `generate-jekyll-post`; this will leave a file
 on the Desktop.
 
