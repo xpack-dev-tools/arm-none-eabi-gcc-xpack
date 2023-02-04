@@ -9,7 +9,7 @@ summary: "Version **{{ XBB_RELEASE_VERSION }}** is a new release; it follows the
 
 arm_version: "12.2.Rel1"
 arm_date: "December 22, 2022"
-gcc_version: "11.3.1"
+gcc_version: "12.2.1"
 binutils_version: "2.39"
 newlib_version: "4.2.0"
 gdb_version: "12.1"
