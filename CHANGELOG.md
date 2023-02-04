@@ -4,6 +4,7 @@ Entries in this file are in reverse chronological order.
 
 ## 2023-02-04
 
+* v12.2.1-1.2 prepared
 * v12.2.1-1.1.1 published on npmjs.com
 * d1ef02a package.json: update urls for 12.2.1-1.1 release
 * ae5c31f body-jekyll update
