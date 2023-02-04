@@ -33,7 +33,7 @@ XBB_APPLICATION_TARGET_TRIPLET=${XBB_APPLICATION_TARGET_TRIPLET:-"arm-none-eabi"
 
 # Normally should be commented out. Enable it only during tests,
 # to save some build time.
-# XBB_APPLICATION_WITHOUT_MULTILIB="y"
+XBB_APPLICATION_WITHOUT_MULTILIB="y"
 
 # -----------------------------------------------------------------------------
 
