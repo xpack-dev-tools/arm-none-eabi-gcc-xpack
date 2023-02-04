@@ -292,9 +292,9 @@ archive and its SHA signature, created in the `deploy` folder:
 
 ```console
 $ ls -l ~/Work/arm-none-eabi-gcc-xpack.git/build/darwin-x64/deploy
-total 230472
--rw-r--r--  1 ilg  staff  106831733 Feb  3 13:05 xpack-arm-none-eabi-gcc-12.2.1-1.2-darwin-x64.tar.gz
--rw-r--r--  1 ilg  staff        119 Feb  3 13:05 xpack-arm-none-eabi-gcc-12.2.1-1.2-darwin-x64.tar.gz.sha
+total 229400
+-rw-r--r--  1 ilg  staff  107218229 Feb  4 14:04 xpack-arm-none-eabi-gcc-12.2.1-1.2-darwin-x64.tar.gz
+-rw-r--r--  1 ilg  staff        119 Feb  4 14:04 xpack-arm-none-eabi-gcc-12.2.1-1.2-darwin-x64.tar.gz.sha
 ```
 
 #### Apple Silicon macOS
@@ -325,9 +325,9 @@ archive and its SHA signature, created in the `deploy` folder:
 
 ```console
 $ ls -l ~/Work/arm-none-eabi-gcc-xpack.git/build/darwin-arm64/deploy
-total 231088
--rw-r--r--  1 ilg  staff  103580367 Feb  3 12:29 xpack-arm-none-eabi-gcc-12.2.1-1.2-darwin-arm64.tar.gz
--rw-r--r--  1 ilg  staff        121 Feb  3 12:29 xpack-arm-none-eabi-gcc-12.2.1-1.2-darwin-arm64.tar.gz.sha
+total 229400
+-rw-r--r--  1 ilg  staff  103973446 Feb  4 14:03 xpack-arm-none-eabi-gcc-12.2.1-1.2-darwin-arm64.tar.gz
+-rw-r--r--  1 ilg  staff        121 Feb  4 14:03 xpack-arm-none-eabi-gcc-12.2.1-1.2-darwin-arm64.tar.gz.sha
 ```
 
 #### Intel GNU/Linux
@@ -386,9 +386,9 @@ archive and its SHA signature, created in the `deploy` folder:
 
 ```console
 $ ls -l ~/Work/arm-none-eabi-gcc-xpack.git/build/win32-x64/deploy
-total 109804
--rw-r--r-- 1 ilg ilg 112431185 Feb  3 10:35 xpack-arm-none-eabi-gcc-12.2.1-1.2-win32-x64.zip
--rw-r--r-- 1 ilg ilg       115 Feb  3 10:35 xpack-arm-none-eabi-gcc-12.2.1-1.2-win32-x64.zip.sha
+total 109876
+-rw-rw-rw- 1 ilg ilg 112508676 Feb  4 12:03 xpack-arm-none-eabi-gcc-12.2.1-1.1-win32-x64.zip
+-rw-rw-rw- 1 ilg ilg       115 Feb  4 12:03 xpack-arm-none-eabi-gcc-12.2.1-1.1-win32-x64.zip.sha
 ```
 
 #### Arm GNU/Linux 64-bit
@@ -419,9 +419,9 @@ archive and its SHA signature, created in the `deploy` folder:
 
 ```console
 $ ls -l ~/Work/arm-none-eabi-gcc-xpack.git/build/linux-arm64/deploy
-total 108344
--rw-r--r-- 1 ilg ilg 110933122 Feb  3 14:10 xpack-arm-none-eabi-gcc-12.2.1-1.2-linux-arm64.tar.gz
--rw-r--r-- 1 ilg ilg       120 Feb  3 14:10 xpack-arm-none-eabi-gcc-12.2.1-1.2-linux-arm64.tar.gz.sha
+total 108340
+-rw-rw-rw- 1 ilg ilg 110934706 Feb  4 12:07 xpack-arm-none-eabi-gcc-12.2.1-1.1-linux-arm64.tar.gz
+-rw-rw-rw- 1 ilg ilg       120 Feb  4 12:07 xpack-arm-none-eabi-gcc-12.2.1-1.1-linux-arm64.tar.gz.sha
 ```
 
 #### Arm GNU/Linux 32-bit
@@ -452,9 +452,9 @@ archive and its SHA signature, created in the `deploy` folder:
 
 ```console
 $ ls -l ~/Work/arm-none-eabi-gcc-xpack.git/build/linux-arm/deploy
-total 101320
--rw-r--r-- 1 ilg ilg 103742127 Feb  3 14:10 xpack-arm-none-eabi-gcc-12.2.1-1.2-linux-arm.tar.gz
--rw-r--r-- 1 ilg ilg       118 Feb  3 14:10 xpack-arm-none-eabi-gcc-12.2.1-1.2-linux-arm.tar.gz.sha
+total 101316
+-rw-rw-rw- 1 ilg ilg 103735499 Feb  4 12:07 xpack-arm-none-eabi-gcc-12.2.1-1.1-linux-arm.tar.gz
+-rw-rw-rw- 1 ilg ilg       118 Feb  4 12:07 xpack-arm-none-eabi-gcc-12.2.1-1.1-linux-arm.tar.gz.sha
 ```
 
 ### Files cache
