@@ -2,8 +2,18 @@
 
 Entries in this file are in reverse chronological order.
 
+## 2023-02-05
+
+* v12.2.1-1.2 released
+* 81f3eec README update
+* 97816e4 body-jekyll update
+
 ## 2023-02-04
 
+* 8c0a474 application.sh: enable multi-libs
+* 13a9f6c CHANGELOG update
+* 0a73ab8 README update
+* 5ebef9e package.json: bump deps
 * d15cef8 prepare v12.2.1-1.2
 * 946eb2e application.sh: disable multi-libs
 * 31aec68 bump deps* aee7b5b 12.2.1-1.1.1
