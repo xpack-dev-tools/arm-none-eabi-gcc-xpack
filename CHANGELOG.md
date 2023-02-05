@@ -4,6 +4,10 @@ Entries in this file are in reverse chronological order.
 
 ## 2023-02-05
 
+* v12.2.1-1.2.1 published on npmjs.com
+* f4518da CHANGELOG update
+* 81f3eec README update
+* 97816e4 body-jekyll update
 * v12.2.1-1.2 released
 * 81f3eec README update
 * 97816e4 body-jekyll update
