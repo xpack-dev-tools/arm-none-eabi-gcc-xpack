@@ -14,26 +14,26 @@ To clone the stable branch (`xpack`), run the following commands in a
 terminal (on Windows use the _Git Bash_ console):
 
 ```sh
-rm -rf ~/Work/arm-none-eabi-gcc-xpack.git && \
+rm -rf ~/Work/xpacks/arm-none-eabi-gcc-xpack.git && \
 git clone https://github.com/xpack-dev-tools/arm-none-eabi-gcc-xpack.git \
-  ~/Work/arm-none-eabi-gcc-xpack.git
+  ~/Work/xpacks/arm-none-eabi-gcc-xpack.git
 ```
 
 For development purposes, clone the `xpack-develop` branch:
 
 ```sh
-rm -rf ~/Work/arm-none-eabi-gcc-xpack.git && \
-mkdir -p ~/Work && \
+rm -rf ~/Work/xpacks/arm-none-eabi-gcc-xpack.git && \
+mkdir -p ~/Work/xpacks && \
 git clone \
   --branch xpack-develop \
   https://github.com/xpack-dev-tools/arm-none-eabi-gcc-xpack.git \
-  ~/Work/arm-none-eabi-gcc-xpack.git
+  ~/Work/xpacks/arm-none-eabi-gcc-xpack.git
 ```
 
 Or, if the repo was already cloned:
 
 ```sh
-git -C ~/Work/arm-none-eabi-gcc-xpack.git pull
+git -C ~/Work/xpacks/arm-none-eabi-gcc-xpack.git pull
 ```
 
 ## Get helper sources
@@ -42,20 +42,20 @@ The project has a dependency to a common **helper**; clone the
 `xpack-develop` branch and link it to the central xPacks store:
 
 ```sh
-rm -rf ~/Work/xbb-helper-xpack.git && \
-mkdir -p ~/Work && \
+rm -rf ~/Work/xpacks/xbb-helper-xpack.git && \
+mkdir -p ~/Work/xpacks && \
 git clone \
   --branch xpack-develop \
   https://github.com/xpack-dev-tools/xbb-helper-xpack.git \
-  ~/Work/xbb-helper-xpack.git && \
-xpm link -C ~/Work/xbb-helper-xpack.git
+  ~/Work/xpacks/xbb-helper-xpack.git && \
+xpm link -C ~/Work/xpacks/xbb-helper-xpack.git
 ```
 
 Or, if the repo was already cloned:
 
 ```sh
-git -C ~/Work/xbb-helper-xpack.git pull
-xpm link -C ~/Work/xbb-helper-xpack.git
+git -C ~/Work/xpacks/xbb-helper-xpack.git pull
+xpm link -C ~/Work/xpacks/xbb-helper-xpack.git
 ```
 
 ## Prerequisites
@@ -220,46 +220,46 @@ For Intel macOS, first run the build on the development machine
 Update the build scripts (or clone them at the first use):
 
 ```sh
-git -C ~/Work/arm-none-eabi-gcc-xpack.git pull
+git -C ~/Work/xpacks/arm-none-eabi-gcc-xpack.git pull
 
-xpm run deep-clean -C ~/Work/arm-none-eabi-gcc-xpack.git
+xpm run deep-clean -C ~/Work/xpacks/arm-none-eabi-gcc-xpack.git
 ```
 
 If the helper is also under development and needs changes,
 update it too:
 
 ```sh
-git -C ~/Work/xbb-helper-xpack.git pull
+git -C ~/Work/xpacks/xbb-helper-xpack.git pull
 ```
 
 Install project dependencies:
 
 ```sh
-xpm run install -C ~/Work/arm-none-eabi-gcc-xpack.git
+xpm run install -C ~/Work/xpacks/arm-none-eabi-gcc-xpack.git
 ```
 
 If the writable helper is used,
 link it in the place of the read-only package:
 
 ```sh
-xpm link -C ~/Work/xbb-helper-xpack.git
+xpm link -C ~/Work/xpacks/xbb-helper-xpack.git
 
-xpm run link-deps -C ~/Work/arm-none-eabi-gcc-xpack.git
+xpm run link-deps -C ~/Work/xpacks/arm-none-eabi-gcc-xpack.git
 ```
 
 For repeated builds, clean the build folder and install de
 build configuration dependencies:
 
 ```sh
-xpm run deep-clean --config darwin-x64  -C ~/Work/arm-none-eabi-gcc-xpack.git
+xpm run deep-clean --config darwin-x64  -C ~/Work/xpacks/arm-none-eabi-gcc-xpack.git
 
-xpm install --config darwin-x64 -C ~/Work/arm-none-eabi-gcc-xpack.git
+xpm install --config darwin-x64 -C ~/Work/xpacks/arm-none-eabi-gcc-xpack.git
 ```
 
 Run the native build:
 
 ```sh
-xpm run build-develop --config darwin-x64 -C ~/Work/arm-none-eabi-gcc-xpack.git
+xpm run build-develop --config darwin-x64 -C ~/Work/xpacks/arm-none-eabi-gcc-xpack.git
 ```
 
 The build takes about 1h30 (without multilibs).
@@ -277,21 +277,21 @@ caffeinate ssh xbbmi
 Repeat the same steps as before.
 
 ```sh
-git -C ~/Work/arm-none-eabi-gcc-xpack.git pull && \
-xpm run install -C ~/Work/arm-none-eabi-gcc-xpack.git && \
-git -C ~/Work/xbb-helper-xpack.git pull && \
-xpm link -C ~/Work/xbb-helper-xpack.git && \
-xpm run link-deps -C ~/Work/arm-none-eabi-gcc-xpack.git && \
-xpm run deep-clean --config darwin-x64  -C ~/Work/arm-none-eabi-gcc-xpack.git && \
-xpm install --config darwin-x64 -C ~/Work/arm-none-eabi-gcc-xpack.git
-xpm run build-develop --config darwin-x64 -C ~/Work/arm-none-eabi-gcc-xpack.git
+git -C ~/Work/xpacks/arm-none-eabi-gcc-xpack.git pull && \
+xpm run install -C ~/Work/xpacks/arm-none-eabi-gcc-xpack.git && \
+git -C ~/Work/xpacks/xbb-helper-xpack.git pull && \
+xpm link -C ~/Work/xpacks/xbb-helper-xpack.git && \
+xpm run link-deps -C ~/Work/xpacks/arm-none-eabi-gcc-xpack.git && \
+xpm run deep-clean --config darwin-x64  -C ~/Work/xpacks/arm-none-eabi-gcc-xpack.git && \
+xpm install --config darwin-x64 -C ~/Work/xpacks/arm-none-eabi-gcc-xpack.git
+xpm run build-develop --config darwin-x64 -C ~/Work/xpacks/arm-none-eabi-gcc-xpack.git
 ```
 
 About 1h05 later, the output of the build script is a compressed
 archive and its SHA signature, created in the `deploy` folder:
 
 ```console
-$ ls -l ~/Work/arm-none-eabi-gcc-xpack.git/build/darwin-x64/deploy
+$ ls -l ~/Work/xpacks/arm-none-eabi-gcc-xpack.git/build/darwin-x64/deploy
 total 229400
 -rw-r--r--  1 ilg  staff  107218229 Feb  4 14:04 xpack-arm-none-eabi-gcc-12.2.1-1.2-darwin-x64.tar.gz
 -rw-r--r--  1 ilg  staff        119 Feb  4 14:04 xpack-arm-none-eabi-gcc-12.2.1-1.2-darwin-x64.tar.gz.sha
@@ -310,21 +310,21 @@ caffeinate ssh xbbma
 Update the build scripts (or clone them at the first use):
 
 ```sh
-git -C ~/Work/arm-none-eabi-gcc-xpack.git pull && \
-xpm run install -C ~/Work/arm-none-eabi-gcc-xpack.git && \
-git -C ~/Work/xbb-helper-xpack.git pull && \
-xpm link -C ~/Work/xbb-helper-xpack.git && \
-xpm run link-deps -C ~/Work/arm-none-eabi-gcc-xpack.git && \
-xpm run deep-clean --config darwin-arm64  -C ~/Work/arm-none-eabi-gcc-xpack.git && \
-xpm install --config darwin-arm64 -C ~/Work/arm-none-eabi-gcc-xpack.git
-xpm run build-develop --config darwin-arm64 -C ~/Work/arm-none-eabi-gcc-xpack.git
+git -C ~/Work/xpacks/arm-none-eabi-gcc-xpack.git pull && \
+xpm run install -C ~/Work/xpacks/arm-none-eabi-gcc-xpack.git && \
+git -C ~/Work/xpacks/xbb-helper-xpack.git pull && \
+xpm link -C ~/Work/xpacks/xbb-helper-xpack.git && \
+xpm run link-deps -C ~/Work/xpacks/arm-none-eabi-gcc-xpack.git && \
+xpm run deep-clean --config darwin-arm64  -C ~/Work/xpacks/arm-none-eabi-gcc-xpack.git && \
+xpm install --config darwin-arm64 -C ~/Work/xpacks/arm-none-eabi-gcc-xpack.git
+xpm run build-develop --config darwin-arm64 -C ~/Work/xpacks/arm-none-eabi-gcc-xpack.git
 ```
 
 About 30 minutes later, the output of the build script is a compressed
 archive and its SHA signature, created in the `deploy` folder:
 
 ```console
-$ ls -l ~/Work/arm-none-eabi-gcc-xpack.git/build/darwin-arm64/deploy
+$ ls -l ~/Work/xpacks/arm-none-eabi-gcc-xpack.git/build/darwin-arm64/deploy
 total 229400
 -rw-r--r--  1 ilg  staff  103973446 Feb  4 14:03 xpack-arm-none-eabi-gcc-12.2.1-1.2-darwin-arm64.tar.gz
 -rw-r--r--  1 ilg  staff        121 Feb  4 14:03 xpack-arm-none-eabi-gcc-12.2.1-1.2-darwin-arm64.tar.gz.sha
@@ -344,22 +344,22 @@ caffeinate ssh xbbli
 Update the build scripts (or clone them at the first use):
 
 ```sh
-git -C ~/Work/arm-none-eabi-gcc-xpack.git pull && \
-xpm run install -C ~/Work/arm-none-eabi-gcc-xpack.git && \
-git -C ~/Work/xbb-helper-xpack.git pull && \
-xpm link -C ~/Work/xbb-helper-xpack.git && \
-xpm run link-deps -C ~/Work/arm-none-eabi-gcc-xpack.git && \
-xpm run deep-clean --config linux-x64 -C ~/Work/arm-none-eabi-gcc-xpack.git && \
-xpm run docker-prepare --config linux-x64 -C ~/Work/arm-none-eabi-gcc-xpack.git && \
-xpm run docker-link-deps --config linux-x64 -C ~/Work/arm-none-eabi-gcc-xpack.git
-xpm run docker-build-develop --config linux-x64 -C ~/Work/arm-none-eabi-gcc-xpack.git
+git -C ~/Work/xpacks/arm-none-eabi-gcc-xpack.git pull && \
+xpm run install -C ~/Work/xpacks/arm-none-eabi-gcc-xpack.git && \
+git -C ~/Work/xpacks/xbb-helper-xpack.git pull && \
+xpm link -C ~/Work/xpacks/xbb-helper-xpack.git && \
+xpm run link-deps -C ~/Work/xpacks/arm-none-eabi-gcc-xpack.git && \
+xpm run deep-clean --config linux-x64 -C ~/Work/xpacks/arm-none-eabi-gcc-xpack.git && \
+xpm run docker-prepare --config linux-x64 -C ~/Work/xpacks/arm-none-eabi-gcc-xpack.git && \
+xpm run docker-link-deps --config linux-x64 -C ~/Work/xpacks/arm-none-eabi-gcc-xpack.git
+xpm run docker-build-develop --config linux-x64 -C ~/Work/xpacks/arm-none-eabi-gcc-xpack.git
 ```
 
 About 40 minutes later, the output of the build script is a compressed
 archive and its SHA signature, created in the `deploy` folder:
 
 ```console
-$ ls -l ~/Work/arm-none-eabi-gcc-xpack.git/build/linux-x64/deploy
+$ ls -l ~/Work/xpacks/arm-none-eabi-gcc-xpack.git/build/linux-x64/deploy
 total 111192
 -rw-r--r-- 1 ilg ilg 113855812 Feb  3 10:42 xpack-arm-none-eabi-gcc-12.2.1-1.2-linux-x64.tar.gz
 -rw-r--r-- 1 ilg ilg       118 Feb  3 10:42 xpack-arm-none-eabi-gcc-12.2.1-1.2-linux-x64.tar.gz.sha
@@ -370,22 +370,22 @@ total 111192
 Clean the build folder and prepare the docker container:
 
 ```sh
-git -C ~/Work/arm-none-eabi-gcc-xpack.git pull && \
-xpm run install -C ~/Work/arm-none-eabi-gcc-xpack.git && \
-git -C ~/Work/xbb-helper-xpack.git pull && \
-xpm link -C ~/Work/xbb-helper-xpack.git && \
-xpm run link-deps -C ~/Work/arm-none-eabi-gcc-xpack.git && \
-xpm run deep-clean --config win32-x64 -C ~/Work/arm-none-eabi-gcc-xpack.git && \
-xpm run docker-prepare --config win32-x64 -C ~/Work/arm-none-eabi-gcc-xpack.git && \
-xpm run docker-link-deps --config win32-x64 -C ~/Work/arm-none-eabi-gcc-xpack.git
-xpm run docker-build-develop --config win32-x64 -C ~/Work/arm-none-eabi-gcc-xpack.git
+git -C ~/Work/xpacks/arm-none-eabi-gcc-xpack.git pull && \
+xpm run install -C ~/Work/xpacks/arm-none-eabi-gcc-xpack.git && \
+git -C ~/Work/xpacks/xbb-helper-xpack.git pull && \
+xpm link -C ~/Work/xpacks/xbb-helper-xpack.git && \
+xpm run link-deps -C ~/Work/xpacks/arm-none-eabi-gcc-xpack.git && \
+xpm run deep-clean --config win32-x64 -C ~/Work/xpacks/arm-none-eabi-gcc-xpack.git && \
+xpm run docker-prepare --config win32-x64 -C ~/Work/xpacks/arm-none-eabi-gcc-xpack.git && \
+xpm run docker-link-deps --config win32-x64 -C ~/Work/xpacks/arm-none-eabi-gcc-xpack.git
+xpm run docker-build-develop --config win32-x64 -C ~/Work/xpacks/arm-none-eabi-gcc-xpack.git
 ```
 
 About 35 minutes later, the output of the build script is a compressed
 archive and its SHA signature, created in the `deploy` folder:
 
 ```console
-$ ls -l ~/Work/arm-none-eabi-gcc-xpack.git/build/win32-x64/deploy
+$ ls -l ~/Work/xpacks/arm-none-eabi-gcc-xpack.git/build/win32-x64/deploy
 total 109876
 -rw-rw-rw- 1 ilg ilg 112508676 Feb  4 12:03 xpack-arm-none-eabi-gcc-12.2.1-1.1-win32-x64.zip
 -rw-rw-rw- 1 ilg ilg       115 Feb  4 12:03 xpack-arm-none-eabi-gcc-12.2.1-1.1-win32-x64.zip.sha
@@ -403,22 +403,22 @@ caffeinate ssh xbbla64
 Update the build scripts (or clone them at the first use):
 
 ```sh
-git -C ~/Work/arm-none-eabi-gcc-xpack.git pull && \
-xpm run install -C ~/Work/arm-none-eabi-gcc-xpack.git && \
-git -C ~/Work/xbb-helper-xpack.git pull && \
-xpm link -C ~/Work/xbb-helper-xpack.git && \
-xpm run link-deps -C ~/Work/arm-none-eabi-gcc-xpack.git && \
-xpm run deep-clean --config linux-arm64 -C ~/Work/arm-none-eabi-gcc-xpack.git && \
-xpm run docker-prepare --config linux-arm64 -C ~/Work/arm-none-eabi-gcc-xpack.git && \
-xpm run docker-link-deps --config linux-arm64 -C ~/Work/arm-none-eabi-gcc-xpack.git
-xpm run docker-build-develop --config linux-arm64 -C ~/Work/arm-none-eabi-gcc-xpack.git
+git -C ~/Work/xpacks/arm-none-eabi-gcc-xpack.git pull && \
+xpm run install -C ~/Work/xpacks/arm-none-eabi-gcc-xpack.git && \
+git -C ~/Work/xpacks/xbb-helper-xpack.git pull && \
+xpm link -C ~/Work/xpacks/xbb-helper-xpack.git && \
+xpm run link-deps -C ~/Work/xpacks/arm-none-eabi-gcc-xpack.git && \
+xpm run deep-clean --config linux-arm64 -C ~/Work/xpacks/arm-none-eabi-gcc-xpack.git && \
+xpm run docker-prepare --config linux-arm64 -C ~/Work/xpacks/arm-none-eabi-gcc-xpack.git && \
+xpm run docker-link-deps --config linux-arm64 -C ~/Work/xpacks/arm-none-eabi-gcc-xpack.git
+xpm run docker-build-develop --config linux-arm64 -C ~/Work/xpacks/arm-none-eabi-gcc-xpack.git
 ```
 
 About 4h10 later, the output of the build script is a compressed
 archive and its SHA signature, created in the `deploy` folder:
 
 ```console
-$ ls -l ~/Work/arm-none-eabi-gcc-xpack.git/build/linux-arm64/deploy
+$ ls -l ~/Work/xpacks/arm-none-eabi-gcc-xpack.git/build/linux-arm64/deploy
 total 108340
 -rw-rw-rw- 1 ilg ilg 110934706 Feb  4 12:07 xpack-arm-none-eabi-gcc-12.2.1-1.1-linux-arm64.tar.gz
 -rw-rw-rw- 1 ilg ilg       120 Feb  4 12:07 xpack-arm-none-eabi-gcc-12.2.1-1.1-linux-arm64.tar.gz.sha
@@ -436,22 +436,22 @@ caffeinate ssh xbbla32
 Update the build scripts (or clone them at the first use):
 
 ```sh
-git -C ~/Work/arm-none-eabi-gcc-xpack.git pull && \
-xpm run install -C ~/Work/arm-none-eabi-gcc-xpack.git && \
-git -C ~/Work/xbb-helper-xpack.git pull && \
-xpm link -C ~/Work/xbb-helper-xpack.git && \
-xpm run link-deps -C ~/Work/arm-none-eabi-gcc-xpack.git && \
-xpm run deep-clean --config linux-arm -C ~/Work/arm-none-eabi-gcc-xpack.git && \
-xpm run docker-prepare --config linux-arm -C ~/Work/arm-none-eabi-gcc-xpack.git && \
-xpm run docker-link-deps --config linux-arm -C ~/Work/arm-none-eabi-gcc-xpack.git
-xpm run docker-build-develop --config linux-arm -C ~/Work/arm-none-eabi-gcc-xpack.git
+git -C ~/Work/xpacks/arm-none-eabi-gcc-xpack.git pull && \
+xpm run install -C ~/Work/xpacks/arm-none-eabi-gcc-xpack.git && \
+git -C ~/Work/xpacks/xbb-helper-xpack.git pull && \
+xpm link -C ~/Work/xpacks/xbb-helper-xpack.git && \
+xpm run link-deps -C ~/Work/xpacks/arm-none-eabi-gcc-xpack.git && \
+xpm run deep-clean --config linux-arm -C ~/Work/xpacks/arm-none-eabi-gcc-xpack.git && \
+xpm run docker-prepare --config linux-arm -C ~/Work/xpacks/arm-none-eabi-gcc-xpack.git && \
+xpm run docker-link-deps --config linux-arm -C ~/Work/xpacks/arm-none-eabi-gcc-xpack.git
+xpm run docker-build-develop --config linux-arm -C ~/Work/xpacks/arm-none-eabi-gcc-xpack.git
 ```
 
 About 4h10 later, the output of the build script is a compressed
 archive and its SHA signature, created in the `deploy` folder:
 
 ```console
-$ ls -l ~/Work/arm-none-eabi-gcc-xpack.git/build/linux-arm/deploy
+$ ls -l ~/Work/xpacks/arm-none-eabi-gcc-xpack.git/build/linux-arm/deploy
 total 101316
 -rw-rw-rw- 1 ilg ilg 103735499 Feb  4 12:07 xpack-arm-none-eabi-gcc-12.2.1-1.1-linux-arm.tar.gz
 -rw-rw-rw- 1 ilg ilg       118 Feb  4 12:07 xpack-arm-none-eabi-gcc-12.2.1-1.1-linux-arm.tar.gz.sha
@@ -541,11 +541,11 @@ To trigger the GitHub Actions builds, use the xPack actions:
 This is equivalent to:
 
 ```sh
-bash ~/Work/arm-none-eabi-gcc-xpack.git/xpacks/xpack-dev-tools-xbb-helper/github-actions/trigger-workflow-build.sh --machine xbbli
-bash ~/Work/arm-none-eabi-gcc-xpack.git/xpacks/xpack-dev-tools-xbb-helper/github-actions/trigger-workflow-build.sh --machine xbbla64
-bash ~/Work/arm-none-eabi-gcc-xpack.git/xpacks/xpack-dev-tools-xbb-helper/github-actions/trigger-workflow-build.sh --machine xbbla32
-bash ~/Work/arm-none-eabi-gcc-xpack.git/xpacks/xpack-dev-tools-xbb-helper/github-actions/trigger-workflow-build.sh --machine xbbmi
-bash ~/Work/arm-none-eabi-gcc-xpack.git/xpacks/xpack-dev-tools-xbb-helper/github-actions/trigger-workflow-build.sh --machine xbbma
+bash ~/Work/xpacks/arm-none-eabi-gcc-xpack.git/xpacks/xpack-dev-tools-xbb-helper/github-actions/trigger-workflow-build.sh --machine xbbli
+bash ~/Work/xpacks/arm-none-eabi-gcc-xpack.git/xpacks/xpack-dev-tools-xbb-helper/github-actions/trigger-workflow-build.sh --machine xbbla64
+bash ~/Work/xpacks/arm-none-eabi-gcc-xpack.git/xpacks/xpack-dev-tools-xbb-helper/github-actions/trigger-workflow-build.sh --machine xbbla32
+bash ~/Work/xpacks/arm-none-eabi-gcc-xpack.git/xpacks/xpack-dev-tools-xbb-helper/github-actions/trigger-workflow-build.sh --machine xbbmi
+bash ~/Work/xpacks/arm-none-eabi-gcc-xpack.git/xpacks/xpack-dev-tools-xbb-helper/github-actions/trigger-workflow-build.sh --machine xbbma
 ```
 
 These scripts require the `GITHUB_API_DISPATCH_TOKEN` variable to be present
@@ -602,9 +602,9 @@ To trigger the GitHub Actions tests, use the xPack actions:
 These are equivalent to:
 
 ```sh
-bash ~/Work/arm-none-eabi-gcc-xpack.git/xpacks/xpack-dev-tools-xbb-helper/github-actions/trigger-workflow-test-prime.sh
-bash ~/Work/arm-none-eabi-gcc-xpack.git/xpacks/xpack-dev-tools-xbb-helper/github-actions/trigger-workflow-test-docker-linux-intel.sh
-bash ~/Work/arm-none-eabi-gcc-xpack.git/xpacks/xpack-dev-tools-xbb-helper/github-actions/trigger-workflow-test-docker-linux-arm.sh
+bash ~/Work/xpacks/arm-none-eabi-gcc-xpack.git/xpacks/xpack-dev-tools-xbb-helper/github-actions/trigger-workflow-test-prime.sh
+bash ~/Work/xpacks/arm-none-eabi-gcc-xpack.git/xpacks/xpack-dev-tools-xbb-helper/github-actions/trigger-workflow-test-docker-linux-intel.sh
+bash ~/Work/xpacks/arm-none-eabi-gcc-xpack.git/xpacks/xpack-dev-tools-xbb-helper/github-actions/trigger-workflow-test-docker-linux-arm.sh
 ```
 
 These scripts require the `GITHUB_API_DISPATCH_TOKEN` variable to be present
@@ -627,7 +627,7 @@ To trigger the Travis test, use the xPack action:
 This is equivalent to:
 
 ```sh
-bash ~/Work/arm-none-eabi-gcc-xpack.git/xpacks/xpack-dev-tools-xbb-helper/github-actions/trigger-travis-macos.sh
+bash ~/Work/xpacks/arm-none-eabi-gcc-xpack.git/xpacks/xpack-dev-tools-xbb-helper/github-actions/trigger-travis-macos.sh
 ```
 
 This script requires the `TRAVIS_COM_TOKEN` variable to be present
@@ -642,9 +642,9 @@ To download the pre-released archive for the specific platform
 and run the tests, use:
 
 ```sh
-git -C ~/Work/arm-none-eabi-gcc-xpack.git pull
-xpm run install -C ~/Work/arm-none-eabi-gcc-xpack.git
-xpm run test-pre-release -C ~/Work/arm-none-eabi-gcc-xpack.git
+git -C ~/Work/xpacks/arm-none-eabi-gcc-xpack.git pull
+xpm run install -C ~/Work/xpacks/arm-none-eabi-gcc-xpack.git
+xpm run test-pre-release -C ~/Work/xpacks/arm-none-eabi-gcc-xpack.git
 ```
 
 For even more tests, on each platform (MacOS, GNU/Linux, Windows),
@@ -671,12 +671,12 @@ xattr -dr com.apple.quarantine ~/Downloads/xpack-arm-none-eabi-gcc-*
 - clone this repo locally; on Windows use the Git console;
 
 ```sh
-rm -rf ~/Work/arm-none-eabi-gcc-xpack.git && \
-mkdir -p ~/Work && \
+rm -rf ~/Work/xpacks/arm-none-eabi-gcc-xpack.git && \
+mkdir -p ~/Work/xpacks && \
 git clone \
   --branch xpack-develop \
   https://github.com/xpack-dev-tools/arm-none-eabi-gcc-xpack.git \
-  ~/Work/arm-none-eabi-gcc-xpack.git
+  ~/Work/xpacks/arm-none-eabi-gcc-xpack.git
 ```
 
 - in a separate workspace, Import → General → Existing Projects into Workspace
@@ -872,11 +872,17 @@ Add a new topic in the **Compilers and Libraries** forum of the
 
 - title: xPack GNU Arm Embedded GCC v12.2.1-1.2 released
 - content:
-  - The **xPack GNU Arm Embedded GCC** is an alternate binary distribution that complements the official Arm GNU Toolchain maintained by Arm.
-  - The latest release is [12.2.1-1.2]() following Arm release from August 8, 2022 (version 12.2.Rel1).
-- tags: xpack, gnu, gcc, arm, toolchain
 
-NOTE: do not use markdown, but format the text with the blog editor.
+```html
+<p>The <strong>xPack GNU Arm Embedded GCC</strong> and <strong>xPack GNU AArch64 Embedded GCC</strong> packages are part of the alternate xPack binary distribution that complements the official Arm GNU Toolchains maintained by Arm.</p>
+<p>The latest release is 12.2.1-1.2 following the Arm release 12.2.Rel1 from December 22, 2022.</p>
+<ul>
+<li><a href="https://github.com/xpack-dev-tools/arm-none-eabi-gcc-xpack/releases/tag/v12.2.1-1.2/" rel="noopener noreferrer" target="_blank">xPack GNU Arm Embedded GCC v12.2.1-1.2</a></li>
+<li><a href="https://github.com/xpack-dev-tools/aarch64-none-elf-gcc-xpack/releases/tag/v12.2.1-1.2" rel="noopener noreferrer" target="_blank">xPack GNU AArch64 Embedded GCC v12.2.1-1.2</a></li>
+</ul>
+```
+
+Tags: xpack, gnu, gcc, arm, toolchain
 
 Update with actual details from
 [Arm GNU Toolchain](https://developer.arm.com/downloads/-/arm-gnu-toolchain-downloads/)
