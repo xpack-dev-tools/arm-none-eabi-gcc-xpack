@@ -16,7 +16,7 @@ Build all three configurations:
 
 The results should look like:
 
-```
+```console
 Invoking: GNU ARM Cross Print Size
 arm-none-eabi-size --format=berkeley "f4b-fs.elf"
    text	   data	    bss	    dec	    hex	filename

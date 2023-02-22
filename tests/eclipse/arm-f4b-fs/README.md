@@ -1,6 +1,6 @@
 ## arm-f4b-fs
 
-Freestanding blinky for STM32F4DISCOVERY, with and without LTO. 
+Freestanding blinky for STM32F4DISCOVERY, with and without LTO.
 
 Note: The POSIX case does not pass the link with LTO. To be investigated.
 
@@ -15,7 +15,7 @@ Build all three configurations:
 
 The results should look like:
 
-```
+```console
 Invoking: GNU ARM Cross Print Size
 arm-none-eabi-size --format=berkeley "f4b-fs.elf"
    text	   data	    bss	    dec	    hex	filename
