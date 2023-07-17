@@ -473,6 +473,16 @@ total 101316
 -rw-rw-rw- 1 ilg ilg       118 Feb  4 12:07 xpack-arm-none-eabi-gcc-12.2.1-1.1-linux-arm.tar.gz.sha
 ```
 
+### Building a debug version
+
+In some cases it is necessary to run a debug session in the library
+functions, or even in the binaries themselves.
+
+For these cases, the build script accepts the `--debug` options.
+
+There are also xPack actions that use this option (`build-develop-debug`
+and `docker-build-develop-debug`).
+
 ### Files cache
 
 The XBB build scripts use a local cache such that files are downloaded only
