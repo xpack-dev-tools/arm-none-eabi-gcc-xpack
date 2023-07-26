@@ -42,9 +42,12 @@ from the [`npmjs.com`](https://www.npmjs.com) registry.
 #### Prerequisites
 
 A recent [xpm](https://xpack.github.io/xpm/),
-which is a portable [Node.js](https://nodejs.org/) command line application.
+which is a portable [Node.js](https://nodejs.org/) command line application
+that complements [npm](https://docs.npmjs.com)
+with several extra features specific to
+**C/C++ projects**.
 
-It is recommended to update to the latest version with:
+It is recommended to install/update to the latest version with:
 
 ```sh
 npm install --location=global xpm@latest
@@ -61,7 +64,7 @@ a development dependency for a project is quite easy:
 
 ```sh
 cd my-project
-xpm init # Only at first use.
+xpm init # Add a package.json if not already present
 
 xpm install @xpack-dev-tools/arm-none-eabi-gcc@latest --verbose
 
@@ -77,8 +80,9 @@ into the central xPacks store, if not already there
 the local `xpacks/.bin` folder.
 
 The central xPacks store is a platform dependent
-folder; check the output of the `xpm` command for the actual
-folder used on your platform).
+location in the home folder;
+check the output of the `xpm` command for the actual
+folder used on your platform.
 This location is configurable via the environment variable
 `XPACKS_STORE_FOLDER`; for more details please check the
 [xpm folders](https://xpack.github.io/xpm/folders/) page.
@@ -195,7 +199,7 @@ cd my-project
 xpm uninstall @xpack-dev-tools/arm-none-eabi-gcc
 ```
 
-To completely remove the package from the global store:
+To completely remove the package from the central xPack store:
 
 ```sh
 xpm uninstall --global @xpack-dev-tools/arm-none-eabi-gcc
@@ -244,9 +248,10 @@ For more details please read the
 
 ## License
 
-The original content is released under the
-[MIT License](https://opensource.org/licenses/MIT), with all rights
-reserved to [Liviu Ionescu](https://github.com/ilg-ul/).
+Unless otherwise stated, the content is released under the terms of the
+[MIT License](https://opensource.org/licenses/mit/),
+with all rights reserved to
+[Liviu Ionescu](https://github.com/ilg-ul).
 
 The binary distributions include several open-source components; the
 corresponding licenses are available in the installed
