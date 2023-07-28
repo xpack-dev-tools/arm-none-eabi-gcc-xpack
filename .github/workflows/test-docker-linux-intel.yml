@@ -1,6 +1,6 @@
 
 # -----------------------------------------------------------------------------
-# DO NOT EDIT! Generated from xpacks/xpack-dev-tools-xbb-helper/templates/*.
+# DO NOT EDIT! Generated from xpacks/@xpack-dev-tools/xbb-helper/templates/*.
 #
 # This file is part of the xPack distribution.
 #   (https://xpack.github.io)
@@ -65,7 +65,7 @@ jobs:
   # The ubuntu:12.04 image fails to update.
   ubuntu-x64:
     name: 'x64 arm-none-eabi-gcc ${{ github.event.inputs.version }} test on Ubuntu stable'
-    runs-on: ubuntu-20.04
+    runs-on: ubuntu-22.04
 
     steps:
       - name: 'Environment'
@@ -87,7 +87,7 @@ jobs:
         uses: actions/checkout@v3
         with:
           repository: xpack-dev-tools/xbb-helper-xpack
-          path: xpacks/xpack-dev-tools-xbb-helper
+          path: xpacks/@xpack-dev-tools/xbb-helper
           ref: ${{ github.event.inputs.helper-git-ref }}
           fetch-depth: 3
 
@@ -113,7 +113,7 @@ jobs:
   # https://hub.docker.com/_/debian
   debian-x64:
     name: 'x64 arm-none-eabi-gcc ${{ github.event.inputs.version }} test on Debian stable'
-    runs-on: ubuntu-20.04
+    runs-on: ubuntu-22.04
 
     steps:
       - name: 'Environment'
@@ -135,7 +135,7 @@ jobs:
         uses: actions/checkout@v3
         with:
           repository: xpack-dev-tools/xbb-helper-xpack
-          path: xpacks/xpack-dev-tools-xbb-helper
+          path: xpacks/@xpack-dev-tools/xbb-helper
           ref: ${{ github.event.inputs.helper-git-ref }}
           fetch-depth: 3
 
@@ -155,7 +155,7 @@ jobs:
   # `-static` disabled, there is no static libc.a.
   redhat-x64:
     name: 'x64 arm-none-eabi-gcc ${{ github.event.inputs.version }} test on RedHat stable'
-    runs-on: ubuntu-20.04
+    runs-on: ubuntu-22.04
 
     steps:
       - name: 'Environment'
@@ -177,7 +177,7 @@ jobs:
         uses: actions/checkout@v3
         with:
           repository: xpack-dev-tools/xbb-helper-xpack
-          path: xpacks/xpack-dev-tools-xbb-helper
+          path: xpacks/@xpack-dev-tools/xbb-helper
           ref: ${{ github.event.inputs.helper-git-ref }}
           fetch-depth: 3
 
@@ -192,7 +192,7 @@ jobs:
   # `-static` disabled, there is no static libc.a.
   fedora-x64:
     name: 'x64 arm-none-eabi-gcc ${{ github.event.inputs.version }} test on Fedora stable'
-    runs-on: ubuntu-20.04
+    runs-on: ubuntu-22.04
 
     steps:
       - name: 'Environment'
@@ -214,7 +214,7 @@ jobs:
         uses: actions/checkout@v3
         with:
           repository: xpack-dev-tools/xbb-helper-xpack
-          path: xpacks/xpack-dev-tools-xbb-helper
+          path: xpacks/@xpack-dev-tools/xbb-helper
           ref: ${{ github.event.inputs.helper-git-ref }}
           fetch-depth: 3
 
@@ -241,7 +241,7 @@ jobs:
   # `-static` disabled, there is no static libc.a.
   opensuse-x64:
     name: 'x64 arm-none-eabi-gcc ${{ github.event.inputs.version }} test on OpenSUSE stable'
-    runs-on: ubuntu-20.04
+    runs-on: ubuntu-22.04
 
     steps:
       - name: 'Environment'
@@ -263,7 +263,7 @@ jobs:
         uses: actions/checkout@v3
         with:
           repository: xpack-dev-tools/xbb-helper-xpack
-          path: xpacks/xpack-dev-tools-xbb-helper
+          path: xpacks/@xpack-dev-tools/xbb-helper
           ref: ${{ github.event.inputs.helper-git-ref }}
           fetch-depth: 3
 
@@ -281,7 +281,7 @@ jobs:
 
   ubuntu-x64-latest:
     name: 'x64 arm-none-eabi-gcc ${{ github.event.inputs.version }} test on Ubuntu latest'
-    runs-on: ubuntu-20.04
+    runs-on: ubuntu-22.04
 
     steps:
       - name: 'Environment'
@@ -303,20 +303,20 @@ jobs:
         uses: actions/checkout@v3
         with:
           repository: xpack-dev-tools/xbb-helper-xpack
-          path: xpacks/xpack-dev-tools-xbb-helper
+          path: xpacks/@xpack-dev-tools/xbb-helper
           ref: ${{ github.event.inputs.helper-git-ref }}
           fetch-depth: 3
 
       - name: 'Ubuntu latest x64'
-        uses: docker://ubuntu:latest
+        uses: docker://ubuntu:22.04
         with:
           entrypoint: /bin/bash
-          args: /github/workspace/scripts/test.sh --image ubuntu:latest --version ${{ github.event.inputs.version }} --base-url ${{ github.event.inputs.base_url }}
+          args: /github/workspace/scripts/test.sh --image ubuntu:22.04 --version ${{ github.event.inputs.version }} --base-url ${{ github.event.inputs.base_url }}
       # ubuntu:rolling fails during update
 
   debian-x64-latest:
     name: 'x64 arm-none-eabi-gcc ${{ github.event.inputs.version }} test on Debian latest'
-    runs-on: ubuntu-20.04
+    runs-on: ubuntu-22.04
 
     steps:
       - name: 'Environment'
@@ -338,7 +338,7 @@ jobs:
         uses: actions/checkout@v3
         with:
           repository: xpack-dev-tools/xbb-helper-xpack
-          path: xpacks/xpack-dev-tools-xbb-helper
+          path: xpacks/@xpack-dev-tools/xbb-helper
           ref: ${{ github.event.inputs.helper-git-ref }}
           fetch-depth: 3
 
@@ -365,7 +365,7 @@ jobs:
   # `-static` disabled, there is no static libc.a.
   fedora-x64-latest:
     name: 'x64 arm-none-eabi-gcc ${{ github.event.inputs.version }} test on Fedora latest'
-    runs-on: ubuntu-20.04
+    runs-on: ubuntu-22.04
 
     steps:
       - name: 'Environment'
@@ -387,7 +387,7 @@ jobs:
         uses: actions/checkout@v3
         with:
           repository: xpack-dev-tools/xbb-helper-xpack
-          path: xpacks/xpack-dev-tools-xbb-helper
+          path: xpacks/@xpack-dev-tools/xbb-helper
           ref: ${{ github.event.inputs.helper-git-ref }}
           fetch-depth: 3
 
@@ -400,7 +400,7 @@ jobs:
   # - https://hub.docker.com/_/archlinux
   arch-x64-latest:
     name: 'x64 arm-none-eabi-gcc ${{ github.event.inputs.version }} test on Arch latest'
-    runs-on: ubuntu-20.04
+    runs-on: ubuntu-22.04
 
     steps:
       - name: 'Environment'
@@ -422,7 +422,7 @@ jobs:
         uses: actions/checkout@v3
         with:
           repository: xpack-dev-tools/xbb-helper-xpack
-          path: xpacks/xpack-dev-tools-xbb-helper
+          path: xpacks/@xpack-dev-tools/xbb-helper
           ref: ${{ github.event.inputs.helper-git-ref }}
           fetch-depth: 3
 
