@@ -572,20 +572,20 @@ do some cleanups (`df -BG -H /` on Linux, `df -gH /` on macOS).
 
 To trigger the GitHub Actions builds, use the xPack actions:
 
+- `trigger-workflow-build-xbbmi`
+- `trigger-workflow-build-xbbma`
 - `trigger-workflow-build-xbbli`
 - `trigger-workflow-build-xbbla64`
 - `trigger-workflow-build-xbbla32`
-- `trigger-workflow-build-xbbmi`
-- `trigger-workflow-build-xbbma`
 
 This is equivalent to:
 
 ```sh
+bash ~/Work/xpack-dev-tools/arm-none-eabi-gcc-xpack.git/xpacks/@xpack-dev-tools/xbb-helper/github-actions/trigger-workflow-build.sh --machine xbbmi
+bash ~/Work/xpack-dev-tools/arm-none-eabi-gcc-xpack.git/xpacks/@xpack-dev-tools/xbb-helper/github-actions/trigger-workflow-build.sh --machine xbbma
 bash ~/Work/xpack-dev-tools/arm-none-eabi-gcc-xpack.git/xpacks/@xpack-dev-tools/xbb-helper/github-actions/trigger-workflow-build.sh --machine xbbli
 bash ~/Work/xpack-dev-tools/arm-none-eabi-gcc-xpack.git/xpacks/@xpack-dev-tools/xbb-helper/github-actions/trigger-workflow-build.sh --machine xbbla64
 bash ~/Work/xpack-dev-tools/arm-none-eabi-gcc-xpack.git/xpacks/@xpack-dev-tools/xbb-helper/github-actions/trigger-workflow-build.sh --machine xbbla32
-bash ~/Work/xpack-dev-tools/arm-none-eabi-gcc-xpack.git/xpacks/@xpack-dev-tools/xbb-helper/github-actions/trigger-workflow-build.sh --machine xbbmi
-bash ~/Work/xpack-dev-tools/arm-none-eabi-gcc-xpack.git/xpacks/@xpack-dev-tools/xbb-helper/github-actions/trigger-workflow-build.sh --machine xbbma
 ```
 
 These scripts require the `GITHUB_API_DISPATCH_TOKEN` variable to be present
