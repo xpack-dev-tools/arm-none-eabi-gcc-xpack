@@ -485,8 +485,8 @@ total 101316
 
 ### Building a debug version
 
-In some cases it is necessary to run a debug session in the library
-functions, or even in the binaries themselves.
+In some cases it is necessary to run a debug session in the binaries,
+or even in the libraries functions.
 
 For these cases, the build script accepts the `--debug` options.
 
