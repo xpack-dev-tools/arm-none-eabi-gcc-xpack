@@ -171,6 +171,7 @@
       "test-xpm": "bash {{ properties.dbg }} scripts/test.sh --xpm",
       "build-native": "bash {{ properties.dbg }} scripts/build.sh",
       "build-native-develop": "bash {{ properties.dbg }} scripts/build.sh --develop",
+      "build-native-develop-debug": "bash {{ properties.dbg }} scripts/build.sh --develop --debug",
       "build-native-win": "bash {{ properties.dbg }} scripts/build.sh --windows",
       "build-native-win-develop": "bash {{ properties.dbg }} scripts/build.sh --develop --windows"
     },
@@ -259,7 +260,8 @@
         },
         "actions": {
           "build": "caffeinate {{ properties.commandBashBuild }}",
-          "build-develop": "caffeinate {{ properties.commandBashBuild }} --develop --debug",
+          "build-develop": "caffeinate {{ properties.commandBashBuild }} --develop",
+          "build-develop-debug": "caffeinate {{ properties.commandBashBuild }} --develop --debug",
           "build-develop-tests-only": "caffeinate {{ properties.commandBashBuild }} --develop --tests-only"
         }
       },
@@ -316,6 +318,7 @@
         "actions": {
           "build": "{{ properties.commandBashBuild }} --windows",
           "build-develop": "{{ properties.commandBashBuild }} --windows --develop",
+          "build-develop-debug": "{{ properties.commandBashBuild }} --windows --develop --debug",
           "build-develop-tests-only": "{{ properties.commandBashBuild }} --windows --develop --tests-only"
         }
       }
