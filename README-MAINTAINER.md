@@ -430,11 +430,11 @@ total 109876
 
 #### Arm GNU/Linux 64-bit
 
-Run the docker build on the production machine (`xbbla64`);
+Run the docker build on the production machine (`xbbla`);
 start a VS Code remote session, or connect with a terminal:
 
 ```sh
-caffeinate ssh xbbla64
+caffeinate ssh xbbla
 ```
 
 Update the build scripts (or clone them at the first use):
@@ -535,17 +535,17 @@ GitHub workflow files; commit and push if necessary.
 ### Start the self-hosted runners
 
 - on the development machine (`wksi`) open ssh sessions to the build
-machines (`xbbmi`, `xbbma`, `xbbli`, `xbbla64` and `xbbla32`):
+machines (`xbbmi`, `xbbma`, `xbbli`, `xbbla` and `xbbla32`):
 
 ```sh
 caffeinate ssh xbbmi
 caffeinate ssh xbbma
 caffeinate ssh xbbli
-caffeinate ssh xbbla64
+caffeinate ssh xbbla
 caffeinate ssh xbbla32
 ```
 
-For `xbbli` & `xbbla64` start two runners:
+For `xbbli` & `xbbla` start two runners:
 
 ```sh
 screen -S ga
@@ -587,7 +587,7 @@ To trigger the GitHub Actions builds, use the xPack actions:
 - `trigger-workflow-build-xbbmi`
 - `trigger-workflow-build-xbbma`
 - `trigger-workflow-build-xbbli`
-- `trigger-workflow-build-xbbla64`
+- `trigger-workflow-build-xbbla`
 - `trigger-workflow-build-xbbla32`
 
 This is equivalent to:
@@ -596,7 +596,7 @@ This is equivalent to:
 bash ~/Work/xpack-dev-tools/arm-none-eabi-gcc-xpack.git/xpacks/@xpack-dev-tools/xbb-helper/github-actions/trigger-workflow-build.sh --machine xbbmi
 bash ~/Work/xpack-dev-tools/arm-none-eabi-gcc-xpack.git/xpacks/@xpack-dev-tools/xbb-helper/github-actions/trigger-workflow-build.sh --machine xbbma
 bash ~/Work/xpack-dev-tools/arm-none-eabi-gcc-xpack.git/xpacks/@xpack-dev-tools/xbb-helper/github-actions/trigger-workflow-build.sh --machine xbbli
-bash ~/Work/xpack-dev-tools/arm-none-eabi-gcc-xpack.git/xpacks/@xpack-dev-tools/xbb-helper/github-actions/trigger-workflow-build.sh --machine xbbla64
+bash ~/Work/xpack-dev-tools/arm-none-eabi-gcc-xpack.git/xpacks/@xpack-dev-tools/xbb-helper/github-actions/trigger-workflow-build.sh --machine xbbla
 bash ~/Work/xpack-dev-tools/arm-none-eabi-gcc-xpack.git/xpacks/@xpack-dev-tools/xbb-helper/github-actions/trigger-workflow-build.sh --machine xbbla32
 ```
 
@@ -630,7 +630,7 @@ to complete:
 - `xbbmi`: 5h12 (1h10)
 - `xbbma`: 1h50 (0h26)
 - `xbbli`: 1h54 (1h54 Linux, 1h52 Windows; without multi-libs: 0h42 Linux, 0h35 Windows without multilibs)
-- `xbbla64`: 12h07 (4h00)
+- `xbbla`: 12h07 (4h00)
 - `xbbla32`: 12h40 (4h10)
 
 The workflows results and logs are available from the
