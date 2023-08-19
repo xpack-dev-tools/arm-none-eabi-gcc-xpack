@@ -4,7 +4,16 @@ Entries in this file are in reverse chronological order.
 
 ## 2034-08-19
 
-* v12.3.1-1.1 prepared
+* f9f8906 dot.* update
+* e18fe0b re-generate workflows
+* 84bf7fa application.sh: comment out WITHOUT_MULTILIB
+* 6053d69 version.sh: fix 12.3
+* abe7fdb README updates
+* 082538a prepare v12.3.1-1.1
+* 2cf831e application.sh:  XBB_APPLICATION_USE_CLANG_ON_LINUX
+* dfa4e13 versioning.sh: define XBB_LIBUNISTRING_VERSION
+* 4e6151b application.sh: add libunistring
+* 09318db versioning.sh: add XBB_FLEX_PACKAGE_PATH
 
 ## 2023-08-15
 
