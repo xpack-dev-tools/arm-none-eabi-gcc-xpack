@@ -1,6 +1,6 @@
 {
   "name": "@xpack-dev-tools/arm-none-eabi-gcc",
-  "version": "12.2.1-1.2.1",
+  "version": "12.3.1-1.1.pre",
   "description": "A binary xPack with the GNU Arm Embedded GCC toolchain executables",
   "main": "",
   "scripts": {
@@ -97,7 +97,7 @@
       "arm-none-eabi-strip": "./.content/bin/arm-none-eabi-strip"
     },
     "devDependencies": {
-      "@xpack-dev-tools/xbb-helper": "^1.5.2"
+      "@xpack-dev-tools/xbb-helper": "^1.7.5"
     },
     "properties": {
       "appName": "GNU Arm Embedded GCC",
@@ -179,7 +179,9 @@
       "common-dependencies": {
         "hidden": true,
         "devDependencies": {
+          "@xpack-dev-tools/bison": "3.8.2-1.1",
           "@xpack-dev-tools/cmake": "3.23.5-1.1",
+          "@xpack-dev-tools/flex": "2.6.4-1.1",
           "@xpack-dev-tools/m4": "1.4.19-2.1",
           "@xpack-dev-tools/ninja-build": "1.11.1-2.1",
           "@xpack-dev-tools/pkg-config": "0.29.2-2.1"

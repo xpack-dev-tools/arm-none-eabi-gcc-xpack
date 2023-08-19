@@ -2,9 +2,95 @@
 
 Entries in this file are in reverse chronological order.
 
+## 2034-08-19
+
+* v12.3.1-1.1 prepared
+
+## 2023-08-15
+
+* 98728b5 .vscode/settings.json ignoreWords
+* da87165 re-generate workflows
+* 9344105 README-MAINTAINER rename xbbla
+* ee94c77 package.json: rename xbbla
+* 416e7fa package.json: bump deps
+* c994d6f READMEs update
+* ec69858 package.json: bump deps
+2023-08-05 * a31dc0c READMEs update
+
+## 2023-08-04
+
+* 7405f10 READMEs update
+* a1de238 READMEs update
+* d007b15 package.json: add build-develop-debug
+* 2e13e70 READMEs update
+
+## 2023-08-03
+
+* 2e634ab package.json: reorder build actions
+* 4d53a2f READMEs update
+* 61168cf package.json: bump deps
+
+## 2023-07-28
+
+* 23e2893 READMEs update
+* 083e8f7 package.json: bump deps
+* a2b310d package.json: liquidjs --context --template
+* b4eab1f scripts cosmetics
+* ec4ce46 re-generate workflows
+* 366100f READMEs update
+* 1ccd1b9 package.json: minXpm 0.16.3 & @xpack-dev-tools/xbb-helper
+* 80b6fe0 READMEs update
+* 1b9ecea package.json: bump deps
+
+## 2023-07-26
+
+* 1d72be4 package.json: move scripts to actions
+* f0e0906 package.json: update xpack-dev-tools path
+* 5efe7c2 READMEs update xpack-dev-tools path
+* fddff7a body-jekyll update
+* 6e4664a READMEs update
+
+## 2023-07-17
+
+* eb453ed README update
+* 0d315fd package.json: xbb-helper 1.4.9
+* 0c91bcc #29: package.json: add build-develop-debug
+
+## 2023-07-15
+
+* 0a88b37 package.json: helper 1.4.8
+
+## 2023-03-25
+
+* e36daf8 READMEs update
+* 52437d9 READMEs update prerequisites
+* c62620d package.json: mkdir -pv cache
+
+## 2023-02-22
+
+* 5ed3c03 tests/README updates
+* 5d26e73 READMEs update
+
+## 2023-02-14
+
+* 792dcbf body-jekyll update
+
+## 2023-02-10
+
+* add0c3d package.json: update Work/xpacks
+* 3100782 READMEs update
+
+## 2023-02-07
+
+* 0927d13 READMEs update
+* d9b919a versioning.sh: update for https
+* f24a593 body-jekyll update
+
 ## 2023-02-05
 
-* v12.2.1-1.2.1 published on npmjs.com
+* 7a16e25 12.2.1-1.2.1
+* ea59a22 CHANGELOG: publish npm v12.2.1-1.2.1
+* 6364bd7 package.json: update urls for 12.2.1-1.2 release
 * f4518da CHANGELOG update
 * 81f3eec README update
 * 97816e4 body-jekyll update
