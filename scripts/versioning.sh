@@ -55,7 +55,7 @@ function application_build_versioned_components()
   if [[ "${XBB_RELEASE_VERSION}" =~ 12[.].*[.].*-.* ]]
   then
 
-    if [[ "${XBB_RELEASE_VERSION}" =~ 12[.]2[.]1-.* ]]
+    if [[ "${XBB_RELEASE_VERSION}" =~ 12[.]3[.]1-.* ]]
     then
       # https://developer.arm.com/-/media/Files/downloads/gnu/12.3.rel1/manifest/arm-gnu-toolchain-arm-none-eabi-abe-manifest.txt
 
