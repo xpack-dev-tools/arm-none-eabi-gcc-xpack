@@ -25,6 +25,11 @@ XBB_APPLICATION_DESCRIPTION="${XBB_APPLICATION_DISTRO_NAME} ${XBB_APPLICATION_NA
 declare -a XBB_APPLICATION_DEPENDENCIES=( )
 declare -a XBB_APPLICATION_COMMON_DEPENDENCIES=( zlib gmp mpfr mpc isl libiconv xz zstd binutils-cross gcc-cross newlib-cross expat gettext gpm ncurses readline bzip2 libffi mpdecimal sqlite libxcrypt openssl python3 libunistring gdb-cross )
 
+# XBB_APPLICATION_USE_CLANG_ON_LINUX="y"
+
+# Unfortunately libtool creates shared libraries that use the gcc libraries.
+# XBB_APPLICATION_USE_CLANG_LIBCXX="y"
+
 # -----------------------------------------------------------------------------
 
 XBB_APPLICATION_TARGET_TRIPLET=${XBB_APPLICATION_TARGET_TRIPLET:-"arm-none-eabi"}
