@@ -139,6 +139,12 @@ Download the ABE manifest with the individual source URLs
 From the ABE manifest, identify the `gcc_url` and `gcc_filespec`,
 compose the url (like `https://developer.arm.com/-/media/Files/downloads/gnu/12.3.rel1/src/gcc.tar.xz) and download the archive.
 
+To get the **newlib** version, check the manifest.txt; download the archive from:
+
+- <https://developer.arm.com/-/media/Files/downloads/gnu/12.3.rel1/src/newlib-cygwin.tar.xz>
+
+and search for `VERSION=` in `newlib/configure`.
+
 ### Increase the version
 
 From `gcc/BASE-VER`, determine the GCC version (like `12.3.1`)
@@ -186,22 +192,22 @@ Use a new version, suffixed by `.pre`.
 With a Git client:
 
 - checkout the branch mentioned in the release notes
-  (like `binutils-2_39-branch`)
+  (like `binutils-2_40-branch`)
 - identify the commit ID
-- add a tag like `binutils-2.39-arm-none-eabi-12.3.rel1`
+- add a tag like `binutils-2.40-arm-none-eabi-12.3.rel1`
 - push the tag to origin
 - check the tag at <https://github.com/xpack-dev-tools/binutils-gdb/tags/>
 
 Similarly for GDB:
 
 - checkout the branch mentioned in the release notes
-  (like `gdb-12-branch`)
+  (like `gdb-13-branch`)
 - identify the commit ID
-- add a tag like `gdb-12-arm-none-eabi-12.3.rel1`
+- add a tag like `gdb-13-arm-none-eabi-12.3.rel1`
 - push the tag to origin
 - check the tag at <https://github.com/xpack-dev-tools/binutils-gdb/tags/>
 
-### Update local gcc fork
+### Update local gcc fork (if the commit ID present in manifest.txt)
 
 With a Git client:
 
@@ -209,6 +215,11 @@ With a Git client:
   (like `ARM/arm-12`)
 - identify the commit ID
 - create a branch like `arm-12-arm-none-eabi-12.3.rel1`
+
+
+### Update the gdb-*-cross.git.patch in helper
+
+Copy/paste a previous one; adjust if necessary.
 
 ### Update the version specific code
 
@@ -251,43 +262,16 @@ Update the build scripts (or clone them at the first use):
 ```sh
 git -C ~/Work/xpack-dev-tools/arm-none-eabi-gcc-xpack.git pull
 
-xpm run deep-clean -C ~/Work/xpack-dev-tools/arm-none-eabi-gcc-xpack.git
-```
-
-If the helper is also under development and needs changes,
-update it too:
-
-```sh
-git -C ~/Work/xpack-dev-tools/xbb-helper-xpack.git pull
-```
-
-Install project dependencies:
-
-```sh
 xpm run install -C ~/Work/xpack-dev-tools/arm-none-eabi-gcc-xpack.git
-```
 
-If the writable helper is used,
-link it in the place of the read-only package:
-
-```sh
-xpm link -C ~/Work/xpack-dev-tools/xbb-helper-xpack.git
-
+git -C ~/Work/xpack-dev-tools/xbb-helper-xpack.git pull
 xpm run link-deps -C ~/Work/xpack-dev-tools/arm-none-eabi-gcc-xpack.git
-```
 
-For repeated builds, clean the build folder and install de
-build configuration dependencies:
-
-```sh
-xpm run deep-clean --config darwin-x64  -C ~/Work/xpack-dev-tools/arm-none-eabi-gcc-xpack.git
+# For backup overhead reasons, on the development machine
+# the builds happen on a separate Work folder.
+rm -rf ~/Work/xpack-dev-tools-build/arm-none-eabi-gcc-[0-9]*-*
 
 xpm install --config darwin-x64 -C ~/Work/xpack-dev-tools/arm-none-eabi-gcc-xpack.git
-```
-
-Run the native build:
-
-```sh
 xpm run build-develop --config darwin-x64 -C ~/Work/xpack-dev-tools/arm-none-eabi-gcc-xpack.git
 ```
 
@@ -298,7 +282,6 @@ xpm run build-develop-debug --config darwin-x64 -C ~/Work/xpack-dev-tools/arm-no
 ```
 
 The build takes about 1h30 (without multilibs).
-
 
 When functional, push the `xpack-develop` branch to GitHub.
 
