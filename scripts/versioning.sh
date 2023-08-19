@@ -217,6 +217,9 @@ function application_build_versioned_components()
     # https://developer.arm.com/tools-and-software/open-source-software/developer-tools/gnu-toolchain/downloads-1
     XBB_EXPAT_VERSION="2.2.5"
 
+    # https://ftp.gnu.org/gnu/libunistring/
+    XBB_LIBUNISTRING_VERSION="1.1"
+
     # https://ftp.gnu.org/pub/gnu/gettext/
     XBB_GETTEXT_VERSION="0.21"
 
