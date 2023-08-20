@@ -2,8 +2,17 @@
 
 Entries in this file are in reverse chronological order.
 
+## 2023-08-20
+
+* 1b0b677 application.sh: temporarily disable multilib
+* 5c411ce README update
+
 ## 2034-08-19
 
+* 87b2f24 READMEs update
+* c74e7ce package.json: bump deps
+* 5a79fbe CHANGELOG update
+* d0845f3 README update
 * f9f8906 dot.* update
 * e18fe0b re-generate workflows
 * 84bf7fa application.sh: comment out WITHOUT_MULTILIB
