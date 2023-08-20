@@ -4,6 +4,9 @@ Entries in this file are in reverse chronological order.
 
 ## 2023-08-20
 
+* f4f4604 package.json: bump deps
+* f1978a9 README updates
+* adf3685 CHANGELOG update
 * 1b0b677 application.sh: temporarily disable multilib
 * 5c411ce README update
 
