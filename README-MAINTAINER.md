@@ -243,7 +243,7 @@ All actions are defined as **xPack actions** and can be conveniently
 triggered via the VS Code graphical interface, using the
 [xPack extension](https://marketplace.visualstudio.com/items?itemName=ilg-vscode.xpack).
 
-#### Temporarily disable multilib
+#### Temporarily disable multi-lib
 
 In the `scripts/application.sh` enable the `WITHOUT_MULTILIB="y"` definition.
 
@@ -280,7 +280,7 @@ For a debug build:
 xpm run build-develop-debug --config darwin-x64 -C ~/Work/xpack-dev-tools/arm-none-eabi-gcc-xpack.git
 ```
 
-The build takes about 1h30 (without multilibs).
+The build takes about 1h30 (without multi-libs).
 
 When functional, push the `xpack-develop` branch to GitHub.
 
@@ -506,8 +506,10 @@ The automation is provided by GitHub Actions and three self-hosted runners.
 ### Temporarily disable multi-lib
 
 It is recommended to do **a first run without the multi-libs**
-(see the `application.sh` file), test it,
-and, when ready, rerun the full build.
+(see the `application.sh` file), **test** it,
+and, when ready, rerun the full build (no kidding,
+this usually saves time, given that a full build takes
+more than half day).
 
 ### Generate the GitHub workflows
 
@@ -594,30 +596,16 @@ page.
 
 These commands use the `xpack-develop` branch of this repo.
 
-### Re-enable multi-lib
-
-- comment out `XBB_APPLICATION_WITHOUT_MULTILIB` in `application.sh`
-- commit and push the repo
-
-#### Test multilib builds
-
-Multilib builds take too long to run tests on all platforms,
-run them only on the fast machines, like `xbbma` and `xbbli`.
-
-### Manually trigger the multilib build GitHub Actions
-
-To trigger the GitHub Actions builds, use the same xPack actions as before.
-
 ## Durations & results
 
-The full builds take about 11 hours (about 3h30 without multi-libs)
+The full builds take about 13 hours (about 4h30 without multi-libs)
 to complete:
 
-- `xbbmi`: 5h12 (1h10)
-- `xbbma`: 1h51 (0h26)
-- `xbbli`: 1h54 (1h54 Linux, 1h52 Windows; with multi-libs: 0h42 Linux, 0h35 Windows without multilibs)
-- `xbbla`: 12h07 (4h00)
-- `xbbla32`: 12h40 (4h10)
+- `xbbmi`: 5h12 (1h05)
+- `xbbma`: 1h51 (0h33)
+- `xbbli`: 1h54 Linux, 1h52 Windows (0h40 Linux, 0h31 Windows)
+- `xbbla`: 12h07 (4h34)
+- `xbbla32`: 12h40 (4h20)
 
 The workflows results and logs are available from the
 [Actions](https://github.com/xpack-dev-tools/arm-none-eabi-gcc-xpack/actions/) page.
@@ -673,6 +661,14 @@ in the environment.
 
 The test results are available from
 [Travis CI](https://app.travis-ci.com/github/xpack-dev-tools/arm-none-eabi-gcc-xpack/builds/).
+
+### Re-enable multi-lib, build and test again
+
+Once the simple build passed tests, enable multi-lib and rerun:
+
+- comment out `XBB_APPLICATION_WITHOUT_MULTILIB` in `application.sh`
+- commit and push the repo
+- go back to _Push the build scripts_, build and test again.
 
 ### Manual tests
 
