@@ -614,8 +614,8 @@ The full builds take about 11 hours (about 3h30 without multi-libs)
 to complete:
 
 - `xbbmi`: 5h12 (1h10)
-- `xbbma`: 1h50 (0h26)
-- `xbbli`: 1h54 (1h54 Linux, 1h52 Windows; without multi-libs: 0h42 Linux, 0h35 Windows without multilibs)
+- `xbbma`: 1h51 (0h26)
+- `xbbli`: 1h54 (1h54 Linux, 1h52 Windows; with multi-libs: 0h42 Linux, 0h35 Windows without multilibs)
 - `xbbla`: 12h07 (4h00)
 - `xbbla32`: 12h40 (4h10)
 
