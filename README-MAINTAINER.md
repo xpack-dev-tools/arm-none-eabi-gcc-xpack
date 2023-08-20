@@ -667,7 +667,7 @@ The test results are available from
 Once the simple build passed tests, enable multi-lib and rerun:
 
 - comment out `XBB_APPLICATION_WITHOUT_MULTILIB` in `application.sh`
-- commit and push the repo
+- commit and push the `xpack-develop` branch to the repo
 - go back to _Push the build scripts_, build and test again.
 
 ### Manual tests
