@@ -932,12 +932,12 @@ The results are available from the
 Add a new topic in the **Compilers and Libraries** forum of the
 [Arm Developer Community](https://community.arm.com/support-forums/f/compilers-and-libraries-forum)
 
-- title: xPack GNU Arm Embedded GCC v12.3.1-1.1 released
+- title: xPack GNU Arm & AArch64 Embedded GCC v12.3.1-1.1 released
 - content:
 
 ```html
 <p>The <strong>xPack GNU Arm Embedded GCC</strong> and <strong>xPack GNU AArch64 Embedded GCC</strong> packages are part of the alternate xPack binary distribution that complements the official Arm GNU Toolchains maintained by Arm.</p>
-<p>The latest release is 12.3.1-1.1 following the Arm release 12.3.Rel1 from December 22, 2022.</p>
+<p>The latest release is 12.3.1-1.1 following the Arm release 12.3.Rel1 from December July 28, 2023.</p>
 <ul>
 <li><a href="https://github.com/xpack-dev-tools/arm-none-eabi-gcc-xpack/releases/tag/v12.3.1-1.1/" rel="noopener noreferrer" target="_blank">xPack GNU Arm Embedded GCC v12.3.1-1.1</a></li>
 <li><a href="https://github.com/xpack-dev-tools/aarch64-none-elf-gcc-xpack/releases/tag/v12.3.1-1.1" rel="noopener noreferrer" target="_blank">xPack GNU AArch64 Embedded GCC v12.3.1-1.1</a></li>
