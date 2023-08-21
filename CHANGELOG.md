@@ -2,10 +2,17 @@
 
 Entries in this file are in reverse chronological order.
 
+## 2023-08-21
+
+* v12.3.1-1.1.1 published on npmjs.com
+* 9778b8c READMEs updates
+* 7f2e329 package.json: update urls for 12.3.1-1.1 release
+* 0c3347f templates/jekyll update
+* 2a46619 CHANGELOG update
+* 43fca24 README update
+
 ## 2023-08-20
 
-* v12.3.1-1.1 released
-* 43fca24 README update
 * 3280995 application.sh: comment out WITHOUT_MULTILIB
 * cfd6d87 README updates
 * be551aa CHANGELOG update
