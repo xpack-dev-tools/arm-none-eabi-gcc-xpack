@@ -4,6 +4,11 @@ Entries in this file are in reverse chronological order.
 
 ## 2023-08-20
 
+* v12.3.1-1.1 released
+* 43fca24 README update
+* 3280995 application.sh: comment out WITHOUT_MULTILIB
+* cfd6d87 README updates
+* be551aa CHANGELOG update
 * f4f4604 package.json: bump deps
 * f1978a9 README updates
 * adf3685 CHANGELOG update
