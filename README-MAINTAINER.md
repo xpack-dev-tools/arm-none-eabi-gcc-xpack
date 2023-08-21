@@ -476,7 +476,19 @@ total 102068
 -rw-r--r-- 1 ilg ilg       118 Aug 19 17:50 xpack-arm-none-eabi-gcc-12.3.1-1.1-linux-arm.tar.gz.sha
 ```
 
-### Building a debug version
+### Update README-MAINTAINER listing output
+
+- check and possibly update the `ls -l` output in README-MAINTAINER
+
+### Update the list of links in package.json
+
+Copy/paste the full list of links displayed at the end of the build, in
+sequence, for each platform (GNU/Linux, macOS, Windows), and check the
+differences compared to the repository.
+
+Commit if necessary.
+
+### How to build a debug version
 
 In some cases it is necessary to run a debug session in the binaries,
 or even in the libraries functions.
@@ -503,7 +515,7 @@ place them in the XBB cache (`Work/cache`) and restart the build.
 
 The automation is provided by GitHub Actions and three self-hosted runners.
 
-### Temporarily disable multi-lib
+### Do a test run without the multi-libs
 
 It is recommended to do **a first run without the multi-libs**
 (see the `application.sh` file), **test** it,
@@ -719,6 +731,13 @@ git clone \
   ~/Work/xpack-dev-tools/arm-none-eabi-gcc-xpack.git
 ```
 
+- check version:
+
+```sh
+.../arm-none-eabi-gcc-12.3.1-1.1/bin/arm-none-eabi-gcc --version
+arm-none-eabi-gcc (xPack GNU Arm Embedded GCC x86_64) 12.3.1 20230626
+```
+
 - in a separate workspace, Import → General → Existing Projects into Workspace
   the Eclipse projects available in the
   `tests/eclipse` folder of the build repo; more details in the
@@ -798,12 +817,11 @@ watching this project.
 
 ## Update the READMEs listings and examples
 
-- check and possibly update the `ls -l` output
-- check and possibly update the output of the `--version` runs
-- check and possibly update the output of `tree -L 2`
+- check and possibly update the output of `tree -L 2` in README
+- check and possibly update the output of the `--version` runs in README-MAINTAINER
 - commit changes
 
-## Check the list of links
+## Check the list of links in package.json
 
 - open the `package.json` file
 - check if the links in the `bin` property cover the actual binaries
