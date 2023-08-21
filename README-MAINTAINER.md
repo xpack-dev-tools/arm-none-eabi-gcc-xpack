@@ -568,6 +568,12 @@ Publish a new release of the helper and update the reference in `package.json`.
 Check if the build machines have enough free space and eventually
 do some cleanups (`df -BG -H /` on Linux, `df -gH /` on macOS).
 
+To remove previous builds, use:
+
+```sh
+rm -rf ~/Work/xpack-dev-tools/*/build
+```
+
 ### Manually trigger the build GitHub Actions
 
 To trigger the GitHub Actions builds, use the xPack actions:
@@ -598,14 +604,14 @@ These commands use the `xpack-develop` branch of this repo.
 
 ## Durations & results
 
-The full builds take about 13 hours (about 4h30 without multi-libs)
+The full builds take about 13 hours (4h40 without multi-libs)
 to complete:
 
-- `xbbmi`: 5h12 (1h05)
-- `xbbma`: 1h51 (0h33)
-- `xbbli`: 1h54 Linux, 1h52 Windows (0h40 Linux, 0h31 Windows)
-- `xbbla`: 12h07 (4h34)
-- `xbbla32`: 12h40 (4h20)
+- `xbbmi`: 4h01 (1h05)
+- `xbbma`: 1h54 (0h33)
+- `xbbli`: 2h10 (0h40) Linux, 2h04 (0h31) Windows
+- `xbbla`: 12h46 (4h34)
+- `xbbla32`: 12h00 (4h20)
 
 The workflows results and logs are available from the
 [Actions](https://github.com/xpack-dev-tools/arm-none-eabi-gcc-xpack/actions/) page.
