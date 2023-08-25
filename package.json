@@ -97,7 +97,7 @@
       "arm-none-eabi-strip": "./.content/bin/arm-none-eabi-strip"
     },
     "devDependencies": {
-      "@xpack-dev-tools/xbb-helper": "^1.8.1"
+      "@xpack-dev-tools/xbb-helper": "^1.10.0"
     },
     "properties": {
       "appName": "GNU Arm Embedded GCC",
