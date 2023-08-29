@@ -269,18 +269,6 @@ function application_build_versioned_components()
     xbb_reset_env
     xbb_set_target "requested"
 
-    # Adjust environent to refer to the flex dependency.
-    local realpath="$(which_realpath)"
-    local flex_realpath="$(${realpath} "$(which flex)")"
-    XBB_FLEX_PACKAGE_PATH="$(dirname $(dirname "${flex_realpath}"))"
-
-    export XBB_CPPFLAGS+=" -I${XBB_FLEX_PACKAGE_PATH}/include"
-    export XBB_LDFLAGS+=" -L${XBB_FLEX_PACKAGE_PATH}/lib"
-    export XBB_LDFLAGS_LIB+=" -L${XBB_FLEX_PACKAGE_PATH}/lib"
-    export XBB_LDFLAGS_APP+=" -L${XBB_FLEX_PACKAGE_PATH}/lib"
-    export XBB_LDFLAGS_APP_STATIC_GCC+=" -L${XBB_FLEX_PACKAGE_PATH}/lib"
-    echo_develop "XBB_FLEX_PACKAGE_PATH=${XBB_FLEX_PACKAGE_PATH}"
-
     gcc_cross_build_dependencies
 
     # -------------------------------------------------------------------------
