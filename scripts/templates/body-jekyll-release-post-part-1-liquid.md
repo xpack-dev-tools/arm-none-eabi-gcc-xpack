@@ -8,7 +8,7 @@ summary: "Version **{{ XBB_RELEASE_VERSION }}** is a maintenance release; it fix
 summary: "Version **{{ XBB_RELEASE_VERSION }}** is a new release; it follows the Arm release."
 
 arm_version: "12.3.Rel1"
-arm_date: "July 28, 2023"
+arm_date: "28 Jul 2023"
 gcc_version: "12.3.1"
 binutils_version: "2.40"
 gdb_version: "13.2"
@@ -24,10 +24,12 @@ comments: true
 
 date:   {{ RELEASE_DATE }}
 
+# For Jekyll releases selection.
 categories:
   - releases
   - arm-none-eabi-gcc
 
+# For navigation; use scripts/createtag.sh in Jekyll.
 tags:
   - releases
   - arm
