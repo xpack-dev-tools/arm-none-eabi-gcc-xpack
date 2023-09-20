@@ -2,8 +2,62 @@
 
 Entries in this file are in reverse chronological order.
 
+## 2023-09-20
+
+* v12.3.1-2.1 released
+* b44acc2 package.json: bump deps
+
+## 2023-09-16
+
+* 9f81e23 package.json: add linux32
+* f110abf body-jekyll update
+
+## 2023-09-11
+
+* f6bad5f package.json: bump deps
+
+## 2023-09-08
+
+* ad56cd6 package.json: bump deps
+
+## 2023-09-06
+
+* 3db5718 package-lock.json update
+* e3542c1 application.sh: temporarily disable multi-lib
+* 10ae66a package.json: bump deps
+* d31fefb READMEs update
+* d74cc71 body-jekyll update
+
+## 2023-09-05
+
+* d8665d6 re-generate workflows
+* 451ea78 READMEs update
+* b802a45 package.json: bump deps
+
+## 2023-09-03
+
+* 1fe53eb package.json: bump deps
+
+## 2023-08-29
+
+* 964b779 application.sh: add XBB_APPLICATION_HAS_FLEX_PACKAGE="y"
+* 892a7f2 versioning.sh: remove FLEX explicit code
+
+## 2023-08-28
+
+* 6441360 READMEs update
+
+## 2023-08-25
+
+* e1a7f97 package.json: rm xpack-dev-tools-build/*
+* df5c532 package.json: bump deps
+
 ## 2023-08-21
 
+* 214c55b README update
+* 87b0d36 12.3.1-1.1.1
+* 3ff1a10 .npmignore extras
+* 7c77ddd CHANGELOG: publish npm v12.3.1-1.1.1
 * v12.3.1-1.1.1 published on npmjs.com
 * 9778b8c READMEs updates
 * 7f2e329 package.json: update urls for 12.3.1-1.1 release
