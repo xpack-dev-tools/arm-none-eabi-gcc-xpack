@@ -4,7 +4,7 @@ Entries in this file are in reverse chronological order.
 
 ## 2023-09-20
 
-* v12.3.1-2.1 released
+* v12.3.1-1.2 released
 * b44acc2 package.json: bump deps
 
 ## 2023-09-16
