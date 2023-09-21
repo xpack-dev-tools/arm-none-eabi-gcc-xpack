@@ -2,9 +2,16 @@
 
 Entries in this file are in reverse chronological order.
 
+## 2023-09-21
+
+* v12.3.1-1.2.1 published on npmjs.com
+* 51d67c3 package.json: update urls for 12.3.1-1.2 release
+* 2fcd97d application.sh: enable multi-lib
+* dad3e36 fix version 12.3.1-1.2
+
 ## 2023-09-20
 
-* v12.3.1-1.2 released
+* 730329d prepare v12.3.1-2.1
 * b44acc2 package.json: bump deps
 
 ## 2023-09-16
