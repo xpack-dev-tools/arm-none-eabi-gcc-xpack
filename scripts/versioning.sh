@@ -178,6 +178,29 @@ function application_build_versioned_components()
     # https://github.com/facebook/zstd/tags
     XBB_ZSTD_VERSION="1.5.5"
 
+    # https://ftp.gnu.org/gnu/ncurses/
+    XBB_NCURSES_VERSION="6.4" # "6.3"
+
+    # https://github.com/westes/texinfo/releases
+    XBB_TEXINFO_VERSION="7.0.3"
+
+    # -------------------------------------------------------------------------
+
+    libiconv_build "${XBB_LIBICONV_VERSION}"
+
+    (
+      XBB_NCURSES_DISABLE_WIDEC="y"
+
+      ncurses_build "${XBB_NCURSES_VERSION}"
+    )
+
+    # new makeinfo needed by binutils 2.41 and up
+    # checking for suffix of object files...   MAKEINFO doc/bfd.info
+    # /Users/ilg/Work/xpack-dev-tools-build/riscv-none-elf-gcc-13.2.0-1/darwin-x64/sources/binutils-2.41/bfd/doc/bfd.texi:245: Node `Sections' requires a sectioning command (e.g., @unnumberedsubsec).
+
+    # Requires libiconf & ncurses.
+    texinfo_build "${XBB_TEXINFO_VERSION}"
+
     # -------------------------------------------------------------------------
     # Build the native dependencies.
 
