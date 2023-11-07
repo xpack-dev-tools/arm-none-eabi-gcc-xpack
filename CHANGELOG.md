@@ -2,9 +2,22 @@
 
 Entries in this file are in reverse chronological order.
 
+## 2023-11-07
+
+* v13.2.1-1.1 prepared
+
+## 2023-09-25
+
+* 31a9b19 body-jekyll update
+
+## 2023-09-22
+
+* 9c34a4f application.sh: disable multi-lib
+
 ## 2023-09-21
 
-* v12.3.1-1.2.1 published on npmjs.com
+* 7055e52 12.3.1-1.2.1
+* 9b2c843 CHANGELOG: publish npm v12.3.1-1.2.1
 * 51d67c3 package.json: update urls for 12.3.1-1.2 release
 * 2fcd97d application.sh: enable multi-lib
 * dad3e36 fix version 12.3.1-1.2
