@@ -173,10 +173,10 @@ function application_build_versioned_components()
     XBB_ISL_VERSION="0.15" # arm
 
     # https://sourceforge.net/projects/lzmautils/files/
-    XBB_XZ_VERSION="5.4.5" # "5.4.1" # "5.2.5"
+    XBB_XZ_VERSION="5.4.5" # "5.4.1"
 
     # https://github.com/facebook/zstd/tags
-    XBB_ZSTD_VERSION="1.5.5"
+    XBB_ZSTD_VERSION="1.5.5" # "1.5.2"
 
     # https://ftp.gnu.org/gnu/ncurses/
     XBB_NCURSES_VERSION="6.4" # "6.3"
@@ -234,14 +234,11 @@ function application_build_versioned_components()
     XBB_LIBUNISTRING_VERSION="1.1"
 
     # https://ftp.gnu.org/pub/gnu/gettext/
-    XBB_GETTEXT_VERSION="0.22"
+    XBB_GETTEXT_VERSION="0.22" # "0.21"
 
     # https://github.com/telmich/gpm/tags
     # https://github.com/xpack-dev-tools/gpm/tags
     XBB_GPM_VERSION="1.20.7-1"
-
-    # https://ftp.gnu.org/gnu/ncurses/
-    XBB_NCURSES_VERSION="6.4"
 
     # https://ftp.gnu.org/gnu/readline/
     XBB_READLINE_VERSION="8.2"
