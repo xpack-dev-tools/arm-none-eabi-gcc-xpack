@@ -4,6 +4,9 @@
 
 # Maintainer info
 
+Preferably build arm-none-eabi-gcc after aarch64-none-elf-gcc, which does
+not have multi-libs and the builds take less time.
+
 ## Prerequisites
 
 The build scripts run on GNU/Linux and macOS. The Windows binaries are
@@ -170,9 +173,10 @@ Use the new version, suffixed by `pre`, like `13.2.1-1.1.1.pre`.
 With a Git client:
 
 - checkout the branch mentioned in the release notes
-  (like `binutils-2_40-branch`)
+  (like `binutils-2_41-branch`)
+- push it to origin with the same name
 - identify the commit ID
-- add a tag like `binutils-2.40-arm-none-eabi-13.2.rel1`
+- add a tag like `binutils-2.41-arm-none-eabi-13.2.rel1`
 - push the tag to origin
 - check the tag at <https://github.com/xpack-dev-tools/binutils-gdb/tags/>
 
@@ -192,7 +196,7 @@ With a Git client:
 - checkout the branch mentioned in the release notes
   (like `ARM/arm-12`)
 - identify the commit ID
-- create a branch like `arm-12-arm-none-eabi-13.2.rel1`
+- create a branch like `arm-13-arm-none-eabi-13.2.rel1`
 
 ### Update the gdb-*-cross.git.patch in helper
 
@@ -287,9 +291,9 @@ archive and its SHA signature, created in the `deploy` folder:
 
 ```console
 $ ls -l ~/Work/xpack-dev-tools/arm-none-eabi-gcc-xpack.git/build/darwin-x64/deploy
-total 229480
--rw-r--r--  1 ilg  staff  107426547 Aug 19 17:29 xpack-arm-none-eabi-gcc-13.2.1-1.1-darwin-x64.tar.gz
--rw-r--r--  1 ilg  staff        119 Aug 19 17:29 xpack-arm-none-eabi-gcc-13.2.1-1.1-darwin-x64.tar.gz.sha
+total 229400
+-rw-r--r--  1 ilg  staff  110873021 Nov  8 07:13 xpack-arm-none-eabi-gcc-13.2.1-1.1-darwin-x64.tar.gz
+-rw-r--r--  1 ilg  staff        119 Nov  8 07:13 xpack-arm-none-eabi-gcc-13.2.1-1.1-darwin-x64.tar.gz.sha
 ```
 
 #### Apple Silicon macOS
@@ -321,9 +325,9 @@ archive and its SHA signature, created in the `deploy` folder:
 
 ```console
 $ ls -l ~/Work/xpack-dev-tools/arm-none-eabi-gcc-xpack.git/build/darwin-arm64/deploy
-total 230480
--rw-r--r--  1 ilg  staff  103576156 Aug 19 17:04 xpack-arm-none-eabi-gcc-13.2.1-1.1-darwin-arm64.tar.gz
--rw-r--r--  1 ilg  staff        121 Aug 19 17:04 xpack-arm-none-eabi-gcc-13.2.1-1.1-darwin-arm64.tar.gz.sha
+total 229400
+-rw-r--r--  1 ilg  staff  106928623 Nov  8 07:14 xpack-arm-none-eabi-gcc-13.2.1-1.1-darwin-arm64.tar.gz
+-rw-r--r--  1 ilg  staff        121 Nov  8 07:14 xpack-arm-none-eabi-gcc-13.2.1-1.1-darwin-arm64.tar.gz.sha
 ```
 
 #### Intel GNU/Linux
@@ -357,9 +361,9 @@ archive and its SHA signature, created in the `deploy` folder:
 
 ```console
 $ ls -l ~/Work/xpack-dev-tools/arm-none-eabi-gcc-xpack.git/build/linux-x64/deploy
-total 111984
--rw-r--r-- 1 ilg ilg 114665185 Aug 19 14:11 xpack-arm-none-eabi-gcc-13.2.1-1.1-linux-x64.tar.gz
--rw-r--r-- 1 ilg ilg       118 Aug 19 14:11 xpack-arm-none-eabi-gcc-13.2.1-1.1-linux-x64.tar.gz.sha
+total 115796
+-rw-rw-rw- 1 ilg ilg 118566318 Nov  8 05:15 xpack-arm-none-eabi-gcc-13.2.1-1.1-linux-x64.tar.gz
+-rw-rw-rw- 1 ilg ilg       118 Nov  8 05:15 xpack-arm-none-eabi-gcc-13.2.1-1.1-linux-x64.tar.gz.sha
 ```
 
 ##### Build the Intel Windows binaries
@@ -384,9 +388,9 @@ archive and its SHA signature, created in the `deploy` folder:
 
 ```console
 $ ls -l ~/Work/xpack-dev-tools/arm-none-eabi-gcc-xpack.git/build/win32-x64/deploy
-total 111248
--rw-r--r-- 1 ilg ilg 113912789 Aug 19 14:03 xpack-arm-none-eabi-gcc-13.2.1-1.1-win32-x64.zip
--rw-r--r-- 1 ilg ilg       115 Aug 19 14:03 xpack-arm-none-eabi-gcc-13.2.1-1.1-win32-x64.zip.sha
+total 119488
+-rw-rw-rw- 1 ilg ilg 122344335 Nov  8 05:17 xpack-arm-none-eabi-gcc-13.2.1-1.1-win32-x64.zip
+-rw-rw-rw- 1 ilg ilg       115 Nov  8 05:17 xpack-arm-none-eabi-gcc-13.2.1-1.1-win32-x64.zip.sha
 ```
 
 #### Arm GNU/Linux 64-bit
@@ -418,9 +422,9 @@ archive and its SHA signature, created in the `deploy` folder:
 
 ```console
 $ ls -l ~/Work/xpack-dev-tools/arm-none-eabi-gcc-xpack.git/build/linux-arm64/deploy
-total 108932
--rw-r--r-- 1 ilg ilg 111535746 Aug 19 18:04 xpack-arm-none-eabi-gcc-13.2.1-1.1-linux-arm64.tar.gz
--rw-r--r-- 1 ilg ilg       120 Aug 19 18:04 xpack-arm-none-eabi-gcc-13.2.1-1.1-linux-arm64.tar.gz.sha
+total 112760
+-rw-rw-rw- 1 ilg ilg 115457790 Nov  8 05:20 xpack-arm-none-eabi-gcc-13.2.1-1.1-linux-arm64.tar.gz
+-rw-rw-rw- 1 ilg ilg       120 Nov  8 05:20 xpack-arm-none-eabi-gcc-13.2.1-1.1-linux-arm64.tar.gz.sha
 ```
 
 #### Arm GNU/Linux 32-bit
@@ -452,9 +456,9 @@ archive and its SHA signature, created in the `deploy` folder:
 
 ```console
 $ ls -l ~/Work/xpack-dev-tools/arm-none-eabi-gcc-xpack.git/build/linux-arm/deploy
-total 102068
--rw-r--r-- 1 ilg ilg 104508664 Aug 19 17:50 xpack-arm-none-eabi-gcc-13.2.1-1.1-linux-arm.tar.gz
--rw-r--r-- 1 ilg ilg       118 Aug 19 17:50 xpack-arm-none-eabi-gcc-13.2.1-1.1-linux-arm.tar.gz.sha
+total 105368
+-rw-rw-rw- 1 ilg ilg 107887519 Nov  8 05:24 xpack-arm-none-eabi-gcc-13.2.1-1.1-linux-arm.tar.gz
+-rw-rw-rw- 1 ilg ilg       118 Nov  8 05:24 xpack-arm-none-eabi-gcc-13.2.1-1.1-linux-arm.tar.gz.sha
 ```
 
 ### Update README-MAINTAINER listing output
