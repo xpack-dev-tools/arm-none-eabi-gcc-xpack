@@ -2,9 +2,20 @@
 
 Entries in this file are in reverse chronological order.
 
+## 2023-11-08
+
+* 37318d5 application.sh: enable multi-libs
+* b706a8b README update
+* b9d81ee package.json: bump deps
+* 3f90acb README update
+* de60823 versioning.sh cleanups
+
 ## 2023-11-07
 
-* v13.2.1-1.1 prepared
+* b047de6 application.sh: add texinfo
+* 0b6ef59 versioning.sh: texinfo_build
+* b7cce67 versioning.sh: add 13.*
+* 03a83ad prepare v13.2.1-1.1
 
 ## 2023-09-25
 
