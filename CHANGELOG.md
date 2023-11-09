@@ -4,10 +4,16 @@ Entries in this file are in reverse chronological order.
 
 ## 2023-11-09
 
-* v13.2.1-1.1 released
+* v13.2.1-1.1.1 published on npmjs.com
+* 374ceb3 package.json: update urls for 13.2.1-1.1 release
+* 753f799 README update
+* 45eaa7a body jekyll update
+* 64c4601 README update
+* ad514cf CHANGELOG update
 
 ## 2023-11-08
 
+* ac8d574 CHANGELOG update
 * 37318d5 application.sh: enable multi-libs
 * b706a8b README update
 * b9d81ee package.json: bump deps
