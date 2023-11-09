@@ -7,13 +7,13 @@ summary: "Version **{{ XBB_RELEASE_VERSION }}** is a maintenance release; it fix
 
 summary: "Version **{{ XBB_RELEASE_VERSION }}** is a new release; it follows the Arm release."
 
-arm_version: "12.3.Rel1"
-arm_date: "28 Jul 2023"
-gcc_version: "12.3.1"
-binutils_version: "2.40"
+arm_version: "13.2.Rel1"
+arm_date: "30 Oct, 2023"
+gcc_version: "13.2.1"
+binutils_version: "2.41"
 gdb_version: "13.2"
 newlib_version: "4.3.0"
-python_version: "3.11.1"
+python_version: "3.11.4"
 
 version: "{{ XBB_RELEASE_VERSION }}"
 npm_subversion: "1"
