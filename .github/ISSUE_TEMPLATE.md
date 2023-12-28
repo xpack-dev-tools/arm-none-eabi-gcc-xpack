@@ -29,6 +29,15 @@ distribution, not to GNU Arm Embedded GCC itself (if you have doubts,
 use the forum), or you have a pertinent suggestion how to enhance the
 xPack GNU Arm Embedded GCC distribution, continue and register a new issue.
 
+### Test with the original Arm GNU Toolchain distribution
+
+Run your build with the original [Arm GNU Toolchain](https://developer.arm.com/Tools%20and%20Software/GNU%20Toolchain) distribution.
+
+If the problem is still there, report the issue to Arm.
+
+If the problem does not occur with the original Arm toolchain, but occur
+with the xPack toolchain, proceed and report it here.
+
 ### Description
 
 [Description of the bug or feature]
