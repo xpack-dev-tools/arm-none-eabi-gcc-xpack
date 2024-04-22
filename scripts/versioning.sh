@@ -173,6 +173,7 @@ function application_build_versioned_components()
     XBB_ISL_VERSION="0.15" # arm
 
     # https://sourceforge.net/projects/lzmautils/files/
+    # Avoid 5.6.[01]!
     XBB_XZ_VERSION="5.4.5" # "5.4.1"
 
     # https://github.com/facebook/zstd/tags
