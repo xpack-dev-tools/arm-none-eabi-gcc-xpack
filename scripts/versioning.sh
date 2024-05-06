@@ -39,8 +39,6 @@ function application_build_versioned_components()
 
   XBB_FIX_LTO_PLUGIN="y"
 
-  XBB_NCURSES_DISABLE_WIDEC="y"
-
   XBB_WITH_GDB_PY3=""
 
   # ---------------------------------------------------------------------------
@@ -189,11 +187,7 @@ function application_build_versioned_components()
 
     libiconv_build "${XBB_LIBICONV_VERSION}"
 
-    (
-      XBB_NCURSES_DISABLE_WIDEC="y"
-
-      ncurses_build "${XBB_NCURSES_VERSION}"
-    )
+    ncurses_build "${XBB_NCURSES_VERSION}"
 
     # new makeinfo needed by binutils 2.41 and up
     # checking for suffix of object files...   MAKEINFO doc/bfd.info
@@ -284,7 +278,7 @@ function application_build_versioned_components()
       gcc_cross_copy_linux_libs "${XBB_APPLICATION_TARGET_TRIPLET}"
 
       (
-        # To access the bootstrap compiler.
+        # To access the bootstrap compiler (via CC_FOR_TARGET & Co).
         xbb_activate_installed_bin
 
         gcc_cross_build_final "${XBB_GCC_VERSION}" "${XBB_APPLICATION_TARGET_TRIPLET}"
@@ -594,7 +588,7 @@ function application_build_versioned_components()
       gcc_cross_copy_linux_libs "${XBB_APPLICATION_TARGET_TRIPLET}"
 
       (
-        # To access the bootstrap compiler.
+        # To access the bootstrap compiler (via CC_FOR_TARGET & Co).
         xbb_activate_installed_bin
 
         gcc_cross_build_final "${XBB_GCC_VERSION}" "${XBB_APPLICATION_TARGET_TRIPLET}"
@@ -889,7 +883,7 @@ function application_build_versioned_components()
       gcc_cross_copy_linux_libs "${XBB_APPLICATION_TARGET_TRIPLET}"
 
       (
-        # To access the bootstrap compiler.
+        # To access the bootstrap compiler (via CC_FOR_TARGET & Co).
         xbb_activate_installed_bin
 
         gcc_cross_build_final "${XBB_GCC_VERSION}" "${XBB_APPLICATION_TARGET_TRIPLET}"
