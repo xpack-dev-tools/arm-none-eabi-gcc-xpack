@@ -32,6 +32,8 @@ XBB_APPLICATION_HAS_FLEX_PACKAGE="y"
 # Unfortunately libtool creates shared libraries that use the gcc libraries.
 # XBB_APPLICATION_USE_CLANG_LIBCXX="y"
 
+# XBB_APPLICATION_BOOTSTRAP_ONLY="y"
+
 # -----------------------------------------------------------------------------
 
 XBB_APPLICATION_TARGET_TRIPLET=${XBB_APPLICATION_TARGET_TRIPLET:-"arm-none-eabi"}
