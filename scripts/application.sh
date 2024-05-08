@@ -34,6 +34,8 @@ XBB_APPLICATION_HAS_FLEX_PACKAGE="y"
 
 # XBB_APPLICATION_BOOTSTRAP_ONLY="y"
 
+XBB_APPLICATION_USE_GCC_FOR_GCC_ON_MACOS="y"
+
 # -----------------------------------------------------------------------------
 
 XBB_APPLICATION_TARGET_TRIPLET=${XBB_APPLICATION_TARGET_TRIPLET:-"arm-none-eabi"}
