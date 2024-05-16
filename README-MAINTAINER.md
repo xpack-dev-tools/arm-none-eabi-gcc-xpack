@@ -239,6 +239,8 @@ For Intel macOS, first run the build on the development machine
 (`wksi`, a recent macOS):
 
 ```sh
+export XBB_ENVIRONMENT_WITH_TESTS="n"
+
 # Update the build scripts.
 rm -f ~/Work/xpack-dev-tools/arm-none-eabi-gcc-xpack.git/package-lock.json
 git -C ~/Work/xpack-dev-tools/arm-none-eabi-gcc-xpack.git pull
