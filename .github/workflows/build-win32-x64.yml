@@ -16,10 +16,14 @@
 # https://docs.github.com/en/developers/webhooks-and-events/webhooks/webhook-events-and-payloads#workflow_dispatch
 # https://docs.github.com/en/rest/reference/actions#create-a-workflow-dispatch-event
 
+# https://github.com/actions/checkout
+# https://github.com/actions/upload-artifact
+# https://github.com/actions/download-artifact
+
 # -----------------------------------------------------------------------------
 
 
-name: 'Build xPack GNU Arm Embedded GCC xbbli'
+name: 'Build xPack GNU Arm Embedded GCC win32-x64'
 
 on:
   workflow_dispatch:
@@ -52,21 +56,25 @@ on:
         required: false
         type: string
         default: ''
+      helper-git-ref:
+        description: 'The helper branch, tag or SHA to checkout'
+        required: false
+        default: 'xpack-develop'
 
 jobs:
 
-  linux-x64-x:
-    name: 'Linux Intel X - arm-none-eabi-gcc ${{ github.event.inputs.version }} build'
+  win32-x64-build:
+    name: 'win32-x64 arm-none-eabi-gcc ${{ github.event.inputs.version }} build'
     timeout-minutes: 5760 # 4 days
-    runs-on: [self-hosted, linux, x64]
+    runs-on: [self-hosted, linux, x64, xbbliw]
     container:
-      image: ilegeul/ubuntu:amd64-18.04-xbb-v5.1.1
+      image: ilegeul/ubuntu:amd64-18.04-xbb-v5.2.1
     defaults:
       run:
         shell: bash
 
     steps:
-      - name: 'Environment'
+      - name: 'Show environment'
         run: |
           uname -a
           lsb_release -sd
@@ -75,13 +83,15 @@ jobs:
           echo "node: $(node --version)"
           echo "npm: $(npm --version)"
           ls -lLA
-          env | sort | egrep '^[^ \t]+='
+          env | sort | grep -E '^[^ \t]+='
 
-      - name: 'Clean working area'
-        run: rm -rf * .git*
+      - name: 'Clean working area' # Mandatory for self-hosted runners.
+        run: |
+          chmod -Rf a+w * || true
+          rm -rf * .git*
 
       - name: 'Checkout project'
-        uses: actions/checkout@v1
+        uses: actions/checkout@v1 # v1 for old Git
         with:
           fetch-depth: 3
 
@@ -95,85 +105,43 @@ jobs:
         timeout-minutes: 1440
         run: xpm install --loglevel ${{ github.event.inputs.xpm_install_loglevel }} ${{ github.event.inputs.xpm_install_options }}
 
-      - name: 'Build Linux x64 binary'
-        timeout-minutes: 1440
-        run: |
-          xpm install --config linux-x64 --loglevel ${{ github.event.inputs.xpm_install_loglevel }} ${{ github.event.inputs.xpm_install_options }}
-          xpm run build --config linux-x64
-
-      - name: 'Publish pre-release'
-        # https://github.com/ncipollo/release-action
-        uses: ncipollo/release-action@v1
-        with:
-          allowUpdates: true
-          artifacts: 'build/linux-x64/deploy/*'
-          bodyFile: '.github/workflows/body-github-pre-releases-test.md'
-          commit: 'master'
-          draft: false
-          name: 'Test binaries'
-          omitBodyDuringUpdate: true
-          omitDraftDuringUpdate: true
-          omitNameDuringUpdate: true
-          owner: 'xpack-dev-tools'
-          prerelease: true
-          replacesArtifacts: true
-          repo: 'pre-releases'
-          tag: 'test'
-          token: ${{ secrets.PUBLISH_TOKEN }}
-
-      - name: 'Rename working area'
-        # For just in case absolute paths remain unprocessed.
-        run: mv -v build build-$(date -u +%Y%m%d-%H%M%S)
-
-  linux-x64-w:
-    name: 'Linux Intel W - arm-none-eabi-gcc ${{ github.event.inputs.version }} build'
-    timeout-minutes: 5760 # 4 days
-    runs-on: [self-hosted, linux, x64]
-    container:
-      image: ilegeul/ubuntu:amd64-18.04-xbb-v5.1.1
-    defaults:
-      run:
-        shell: bash
-
-    steps:
-      - name: 'Environment'
-        run: |
-          uname -a
-          lsb_release -sd
-          echo "whoami: $(whoami)"
-          echo "pwd: $(pwd)"
-          echo "node: $(node --version)"
-          echo "npm: $(npm --version)"
-          ls -lLA
-          env | sort | egrep '^[^ \t]+='
-
-      - name: 'Clean working area'
-        run: rm -rf * .git*
-
-      - name: 'Checkout project'
-        uses: actions/checkout@v1
-        with:
-          fetch-depth: 3
-
-      - name: 'Install xpm'
-        timeout-minutes: 1440
-        run: |
-          npm install --location=global xpm@${{ github.event.inputs.xpm_version }}
-          xpm --version
-
-      - name: 'Install project dependencies'
-        timeout-minutes: 1440
-        run: xpm install --loglevel ${{ github.event.inputs.xpm_install_loglevel }} ${{ github.event.inputs.xpm_install_options }}
-
-      - name: 'Build Windows x64 binary'
+      - name: 'Build win32-x64 binaries'
         timeout-minutes: 1440
         run: |
           xpm install --config win32-x64 --loglevel ${{ github.event.inputs.xpm_install_loglevel }} ${{ github.event.inputs.xpm_install_options }}
           xpm run build --config win32-x64
 
+  win32-x64-upload:
+    name: 'win32-x64 arm-none-eabi-gcc ${{ github.event.inputs.version }} upload'
+    timeout-minutes: 5760 # 4 days
+    runs-on: [self-hosted, linux, x64, xbbliw]
+    defaults:
+      run:
+        shell: bash
+    needs: [win32-x64-build]
+
+    steps:
+      - name: 'Show environment'
+        run: |
+          uname -a
+          lsb_release -sd
+          echo "whoami: $(whoami)"
+          echo "pwd: $(pwd)"
+          echo "node: $(node --version)"
+          echo "npm: $(npm --version)"
+          ls -lLA
+          env | sort | grep -E '^[^ \t]+='
+
+      - name: Upload platform artefacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: deploy-win32-x64
+          path: ${{ github.workspace }}/build/win32-x64/deploy/*
+          overwrite: true
+
       - name: 'Publish pre-release'
         # https://github.com/ncipollo/release-action
-        uses: ncipollo/release-action@v1
+        uses: ncipollo/release-action@v1.13.0 # v1.13 for 18.04
         with:
           allowUpdates: true
           artifacts: 'build/win32-x64/deploy/*'
@@ -193,4 +161,47 @@ jobs:
 
       - name: 'Rename working area'
         # For just in case absolute paths remain unprocessed.
-        run: mv -v build build-$(date -u +%Y%m%d-%H%M%S)
+        run: echo mv -v build build-$(date -u +%Y%m%d-%H%M%S)
+
+  win32-x64-test:
+    name: 'win32-x64 arm-none-eabi-gcc ${{ github.event.inputs.version }} test'
+    runs-on: windows-2022
+    needs: [win32-x64-upload]
+    defaults:
+      run:
+        # https://docs.github.com/en/actions/using-workflows/workflow-syntax-for-github-actions#jobsjob_idstepsshell
+        shell: bash # for --
+
+    steps:
+      - name: 'Show environment'
+        run: |
+          uname -a
+          systeminfo # lsb_release -sd
+          echo "whoami: $(whoami)"
+          echo "pwd: $(pwd)"
+          ls -lLA
+          env | sort | grep -E '^[^ \t]+='
+
+      # https://github.com/actions/checkout
+      - name: 'Checkout project'
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 3
+
+      - name: 'Checkout helper ${{ github.event.inputs.helper-git-ref }}'
+        uses: actions/checkout@v4
+        with:
+          repository: xpack-dev-tools/xbb-helper-xpack
+          path: xpacks/@xpack-dev-tools/xbb-helper
+          ref: ${{ github.event.inputs.helper-git-ref }}
+          fetch-depth: 3
+
+      - name: 'Run ${{ github.event.inputs.version }} native test'
+        run: bash scripts/test.sh --version ${{ github.event.inputs.version }} --base-url pre-release
+
+      - name: Upload platform tests report
+        uses: actions/upload-artifact@v4
+        with:
+          name: tests-report-win32-x64
+          path: ${{ github.workspace }}/build/win32-x64/artefacts/tests-report-*.md
+          overwrite: true
