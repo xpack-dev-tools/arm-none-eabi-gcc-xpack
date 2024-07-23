@@ -11,6 +11,9 @@
 
 function tests_run_all()
 {
+  echo
+  echo "[${FUNCNAME[0]} $@]"
+
   local test_bin_path="$1"
 
   binutils_cross_test "${test_bin_path}" "${XBB_APPLICATION_TARGET_TRIPLET}"
