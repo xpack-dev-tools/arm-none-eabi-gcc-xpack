@@ -556,7 +556,11 @@ screen -S ga
 # Ctrl-a Ctrl-d
 ```
 
-## Push the build scripts
+Check if the runners are active:
+
+- <https://github.com/organizations/xpack-dev-tools/settings/actions/runners>
+
+### Push the build scripts
 
 In this Git repo:
 
