@@ -97,7 +97,7 @@
       "arm-none-eabi-strip": "./.content/bin/arm-none-eabi-strip"
     },
     "devDependencies": {
-      "@xpack-dev-tools/xbb-helper": "^2.1.37"
+      "@xpack-dev-tools/xbb-helper": "^2.1.38"
     },
     "properties": {
       "appName": "GNU Arm Embedded GCC",
@@ -144,13 +144,16 @@
         "{{ properties.LIQUIDJS }} --template @xpacks/@xpack-dev-tools/xbb-helper/templates/workflows/test-docker-linux-intel-liquid.yml --output .github/workflows/test-docker-linux-intel.yml",
         "{{ properties.LIQUIDJS }} --template @xpacks/@xpack-dev-tools/xbb-helper/templates/workflows/test-docker-linux-arm-liquid.yml --output .github/workflows/test-docker-linux-arm.yml",
         "{{ properties.LIQUIDJS }} --template @xpacks/@xpack-dev-tools/xbb-helper/templates/workflows/publish-release-liquid.yml --output .github/workflows/publish-release.yml",
-        "{{ properties.LIQUIDJS }} --template @xpacks/@xpack-dev-tools/xbb-helper/templates/workflows/test-xpm-liquid.yml  --output .github/workflows/test-xpm.yml",
-        "{{ properties.LIQUIDJS }} --template @xpacks/@xpack-dev-tools/xbb-helper/templates/workflows/deep-clean-liquid.yml  --output .github/workflows/deep-clean.yml",
+        "{{ properties.LIQUIDJS }} --template @xpacks/@xpack-dev-tools/xbb-helper/templates/workflows/test-xpm-liquid.yml --output .github/workflows/test-xpm.yml",
+        "{{ properties.LIQUIDJS }} --template @xpacks/@xpack-dev-tools/xbb-helper/templates/workflows/deep-clean-liquid.yml --output .github/workflows/deep-clean.yml",
+        "cp xpacks/@xpack-dev-tools/xbb-helper/templates/workflows/publish-github-pages.yml .github/workflows/publish-github-pages.yml",
         "cp xpacks/@xpack-dev-tools/xbb-helper/templates/dot.gitignore .gitignore",
         "cp xpacks/@xpack-dev-tools/xbb-helper/templates/dot.npmignore .npmignore",
         "cp xpacks/@xpack-dev-tools/xbb-helper/templates/build.sh scripts/",
         "cp xpacks/@xpack-dev-tools/xbb-helper/templates/test.sh scripts/"
       ],
+      "website-generate-commons": "bash xpacks/@xpack-dev-tools/xbb-helper/maintainer-scripts/website-generate-commons.sh",
+      "website-import-releases": "bash xpacks/@xpack-dev-tools/xbb-helper/maintainer-scripts/website-import-releases.sh",
       "trigger-workflow-build-darwin-x64": "bash xpacks/@xpack-dev-tools/xbb-helper/github-actions/trigger-workflow-build.sh --workflow build-darwin-x64.yml --xpm-version {{ properties.xpm-version }} --loglevel {{ properties.xpm-install-loglevel }}",
       "trigger-workflow-build-darwin-arm64": "bash xpacks/@xpack-dev-tools/xbb-helper/github-actions/trigger-workflow-build.sh --workflow build-darwin-arm64.yml --xpm-version {{ properties.xpm-version }} --loglevel {{ properties.xpm-install-loglevel }}",
       "trigger-workflow-build-linux-x64": "bash xpacks/@xpack-dev-tools/xbb-helper/github-actions/trigger-workflow-build.sh --workflow build-linux-x64.yml --xpm-version {{ properties.xpm-version }} --loglevel {{ properties.xpm-install-loglevel }}",
@@ -168,6 +171,7 @@
       "trigger-workflow-deep-clean": "bash xpacks/@xpack-dev-tools/xbb-helper/github-actions/trigger-workflow-deep-clean.sh",
       "test-native": "bash {{ properties.dbg }} scripts/test.sh",
       "test-pre-release": "bash {{ properties.dbg }} scripts/test.sh --base-url pre-release --develop --cache",
+      "test-release": "bash {{ properties.dbg }} scripts/test.sh --base-url pre-release --develop --cache",
       "test-xpm": "bash {{ properties.dbg }} scripts/test.sh --xpm",
       "build-native": "bash {{ properties.dbg }} scripts/build.sh",
       "build-native-develop": "bash {{ properties.dbg }} scripts/build.sh --develop",
