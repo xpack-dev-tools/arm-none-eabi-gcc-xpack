@@ -1,0 +1,745 @@
+---
+
+# DO NOT EDIT!
+# Automatically generated from xbb-helper/templates/docusaurus/common.
+
+title: Information for xPack GNU Arm Embedded GCC maintainers
+
+date: 2024-07-12 20:11:00 +0300
+
+---
+
+import CodeBlock from '@theme/CodeBlock';
+
+import customField from '@site/src/libs/customField';
+
+import MoreRepos from './_more-repos.mdx';
+import ReleaseSchedule from './_release-schedule.mdx';
+import CheckUpstreamRelease from './_check-upstream-release.mdx'
+import UpdateVersionSpecific from './_update-version-specific.mdx'
+import GitHubActionsDurations from './_github-actions-durations.mdx'
+import FunctionalTests from './_functional-tests.mdx'
+import ShareCustom from './_share-custom.mdx'
+
+import { durations } from './_durations.mdx'
+import Patches from './_patches.mdx'
+
+import PlatformNativeBuild from './_common/_platform-native-build.mdx'
+import PlatformDockerBuild from './_common/_platform-docker-build.mdx'
+
+{/* ------------------------------------------------------------------------ */}
+
+[![license](https://img.shields.io/github/license/xpack-dev-tools/arm-none-eabi-gcc-xpack)](https://github.com/xpack-dev-tools/arm-none-eabi-gcc-xpack/blob/xpack/LICENSE)
+[![GitHub issues](https://img.shields.io/github/issues/xpack-dev-tools/arm-none-eabi-gcc-xpack.svg)](https://github.com/xpack-dev-tools/arm-none-eabi-gcc-xpack/issues/)
+[![GitHub pulls](https://img.shields.io/github/issues-pr/xpack-dev-tools/arm-none-eabi-gcc-xpack.svg)](https://github.com/xpack-dev-tools/arm-none-eabi-gcc-xpack/pulls)
+
+This page is intended for those who maintain
+**xPack GNU Arm Embedded GCC**
+and documents how to make new releases.
+
+## Prerequisites
+
+The build scripts run on GNU/Linux and macOS. The Windows binaries are
+compiled on x64 GNU/Linux, using [mingw-w64](https://mingw-w64.org).
+
+For details on installing the prerequisites, please read the
+[XBB prerequisites page](https://xpack.github.io/xbb/prerequisites/).
+
+## Get project sources
+
+The project is hosted on GitHub:
+
+- https://github.com/xpack-dev-tools/arm-none-eabi-gcc-xpack.git
+
+To clone the **stable** branch (`xpack`), run the following commands in a
+terminal (on Windows use the _Git Bash_ console):
+
+```sh
+rm -rf ~/Work/xpack-dev-tools/arm-none-eabi-gcc-xpack.git && \
+git clone https://github.com/xpack-dev-tools/arm-none-eabi-gcc-xpack.git \
+  ~/Work/xpack-dev-tools/arm-none-eabi-gcc-xpack.git
+```
+
+For **development** purposes, clone the `xpack-development` branch:
+
+```sh
+rm -rf ~/Work/xpack-dev-tools/arm-none-eabi-gcc-xpack.git && \
+mkdir -p ~/Work/xpack-dev-tools && \
+git clone \
+  --branch xpack-development \
+  https://github.com/xpack-dev-tools/arm-none-eabi-gcc-xpack.git \
+  ~/Work/xpack-dev-tools/arm-none-eabi-gcc-xpack.git
+```
+
+Or, if the repo was already cloned:
+
+```sh
+git -C ~/Work/xpack-dev-tools/arm-none-eabi-gcc-xpack.git pull
+```
+
+## Get the writable helper sources
+
+The project has a dependency to a common **helper**, that is
+normally installed as a read-only dependency; for **development
+purposes**, to be able to make changes to the scripts located inside the helper,
+clone the `xpack-development` branch and link it to
+the central xPacks store:
+
+```sh
+rm -rf ~/Work/xpack-dev-tools/xbb-helper-xpack.git && \
+mkdir -p ~/Work/xpack-dev-tools && \
+git clone \
+  --branchxpack-development \
+  https://github.com/xpack-dev-tools/xbb-helper-xpack.git \
+  ~/Work/xpack-dev-tools/xbb-helper-xpack.git && \
+xpm link -C ~/Work/xpack-dev-tools/xbb-helper-xpack.git
+```
+
+Or, if the repo was already cloned:
+
+```sh
+git -C ~/Work/xpack-dev-tools/xbb-helper-xpack.git pull
+xpm link -C ~/Work/xpack-dev-tools/xbb-helper-xpack.git
+```
+
+<MoreRepos/>
+
+<ReleaseSchedule/>
+
+## Prepare the new releases
+
+Before starting the build, perform some checks and tweaks.
+
+### Download the build scripts
+
+The build scripts are available in the `build-assets/scripts` folder of the
+[`xpack-dev-tools/arm-none-eabi-gcc-xpack`](https://github.com/xpack-dev-tools/arm-none-eabi-gcc-xpack)
+Git repo.
+
+To download them on a new machine, clone the `xpack-development` branch,
+as seen above.
+
+### Check Git
+
+In the `xpack-dev-tools/arm-none-eabi-gcc-xpack` Git repo:
+
+- switch to the `xpack-development` branch
+- pull new changes
+- if needed, merge the `xpack` branch
+
+### Update helper & other dependencies
+
+Check the latest versions at https://github.com/xpack-dev-tools/ and
+update the dependencies in `build-assets/package.json`.
+
+<CheckUpstreamRelease/>
+
+### Fix possible open issues
+
+Check GitHub issues and pull requests:
+
+- https://github.com/xpack-dev-tools/arm-none-eabi-gcc-xpack/issues/
+
+and fix them; assign them to a milestone (like <code>{ customField('upstreamVersion') }-{ customField('xpackSubversion') }</code>).
+
+### Increase the version and update VERSION
+
+Determine the version (like <code>{ customField('upstreamVersion') }</code>)
+and update the `build-assets/scripts/VERSION` file; the format
+is <code>{ customField('upstreamVersion') }-{ customField('xpackSubversion') }</code>.
+The fourth number is the xPack release number
+of this version. A fifth number will be added to the version in `package.json`
+when the package is published to the `npm` server.
+
+### Update the version in top `package.json` to a pre-release
+
+Use the new version, suffixed by `.pre`,
+like <code>{ customField('upstreamVersion') }-{ customField('xpackSubversion') }.{ customField('npmSubversion') }.pre</code>.
+
+### Start the local web server
+
+Execute the npm script `clean` then `start` in the website sub-project,
+or run the following in a terminal:
+
+```sh
+(cd ~/Work/xpack-dev-tools/xbb-helper-xpack.git/website; npm run clean; npm run start)
+```
+
+Navigate to the **Maintainer Info** page,
+the **Update the version specific code** section.
+
+<UpdateVersionSpecific/>
+
+### Update `CHANGELOG.md`
+
+- open the `CHANGELOG.md` file
+- check if all previous fixed issues are in
+- add a new entry like _**\* v{ customField('upstreamVersion') }-{ customField('xpackSubversion') } prepared**_
+- commit with a message like _**prepare v{ customField('upstreamVersion') }-{ customField('xpackSubversion') }**_
+
+### Push the changes to Git
+
+Be sure that the latest commit that updates `VERSION` is pushed
+to the `xpack-development` branch!
+
+:::caution
+
+This is really important, otherwise the next steps
+will build again the previous release!
+
+:::
+
+## Run the development builds
+
+The builds currently run on 5 dedicated machines (x64 GNU/Linux,
+arm64 GNU/Linux, arm GNU/Linux, x64 macOS and arm64 macOS).
+
+Before the real build, run test builds on all platforms.
+
+### Visual Studio Code
+
+All actions are defined as **xPack actions** and can be conveniently
+triggered via the VS Code graphical interface, using the
+[xPack extension](https://marketplace.visualstudio.com/items?itemName=ilg-vscode.xpack).
+
+<Patches/>
+
+### Restart the docker daemons
+
+If, for any reasons, the docker builds need to be canceled, it is very
+likely that some processes will continue to run in the background.
+
+To completely terminate them, and ensure that docker runs
+from a clean slate, restart the docker daemons on all GNU/Linux
+machines:
+
+```sh
+sudo systemctl restart docker
+```
+
+### Build the x64 macOS binaries
+
+For x64 macOS, first run the build on the development machine
+(`wksi`, a recent macOS):
+
+```sh
+export XBB_ENVIRONMENT_SKIP_CHECKS="y"
+```
+
+```sh
+rm -f ~/Work/xpack-dev-tools/arm-none-eabi-gcc-xpack.git/package-lock.json
+git -C ~/Work/xpack-dev-tools/arm-none-eabi-gcc-xpack.git pull
+
+xpm run install -C ~/Work/xpack-dev-tools/arm-none-eabi-gcc-xpack.git/build-assets
+
+git -C ~/Work/xpack-dev-tools/xbb-helper-xpack.git pull
+xpm link -C ~/Work/xpack-dev-tools/xbb-helper-xpack.git
+
+xpm run link-deps -C ~/Work/xpack-dev-tools/arm-none-eabi-gcc-xpack.git/build-assets
+
+xpm run deep-clean --config darwin-x64  -C ~/Work/xpack-dev-tools/arm-none-eabi-gcc-xpack.git/build-assets && \
+xpm install --config darwin-x64 -C ~/Work/xpack-dev-tools/arm-none-eabi-gcc-xpack.git/build-assets && \
+xpm run build-development --config darwin-x64 -C ~/Work/xpack-dev-tools/arm-none-eabi-gcc-xpack.git/build-assets
+```
+
+For a debug build:
+
+```sh
+xpm run build-development-debug --config darwin-x64 -C ~/Work/xpack-dev-tools/arm-none-eabi-gcc-xpack.git/build-assets
+```
+
+The build takes { durations["work"] }.
+
+When functional, push the `xpack-development` branch to GitHub.
+
+Run the native build on the production machine
+(`xbbmi`, an older macOS);
+start a VS Code remote session, or connect with a terminal:
+
+```sh
+caffeinate ssh xbbmi
+```
+
+<PlatformNativeBuild platform="darwin-x64"/>
+
+### Build the arm64 macOS binaries
+
+Run the native build on the production machine
+(`xbbma`, an older macOS);
+start a VS Code remote session, or connect with a terminal:
+
+```sh
+caffeinate ssh xbbma
+```
+
+<PlatformNativeBuild platform="darwin-arm64"/>
+
+### Build the x64 GNU/Linux binaries
+
+Run the docker build on the production machine (`xbbli`);
+start a VS Code remote session, or connect with a terminal:
+
+```sh
+caffeinate ssh xbbli
+```
+
+<PlatformDockerBuild platform="linux-x64"/>
+
+### Build the x64 Windows binaries
+
+Run the docker build on the production machine (`xbbli`);
+start a VS Code remote session, or connect with a terminal:
+
+```sh
+caffeinate ssh xbbli
+```
+
+<PlatformDockerBuild platform="win32-x64"/>
+
+### Build the arm64 GNU/Linux binaries
+
+Run the docker build on the production machine (`xbbla`);
+start a VS Code remote session, or connect with a terminal:
+
+```sh
+caffeinate ssh xbbla
+```
+
+<PlatformDockerBuild platform="linux-arm64"/>
+
+### Build the arm GNU/Linux (32-bit) binaries
+
+Run the docker build on the production machine (`xbbla32`);
+start a VS Code remote session, or connect with a terminal:
+
+```sh
+caffeinate ssh xbbla32
+```
+
+<PlatformDockerBuild platform="linux-arm"/>
+
+### Update the trees in the Install Guide page
+
+Copy the trees displayed at the end of the test builds and paste to
+**Folder hierarchy** section in the web file:
+
+- `website/docs/install/_miscellaneous.mdx`
+
+Replace **{ customField('upstreamVersion') }** with
+`${ customField('upstreamVersion') }` (there must be 6 occurences).
+
+:::tip
+
+macOS does not have a `tree` command; either compile it from
+[sources](https://github.com/Old-Man-Programmer/tree), or install it
+via HomeBrew, and make a link to `/usr/local/bin`.
+
+:::
+
+### Update the list of links in package.json
+
+Copy/paste the full list of links displayed at the end of the build, in
+sequence, for each platform (GNU/Linux, macOS, Windows), and check the
+differences compared to the repository.
+
+Commit if necessary.
+
+### How to build a debug version
+
+In some cases it is necessary to run a debug session with the binaries.
+
+For these cases, the build script accepts the `--debug` options.
+
+There are also xPack actions that use this option (`build-development-debug`
+and `docker-build-development-debug`).
+
+### Files cache
+
+The XBB build scripts use a local cache such that files are downloaded only
+during the first run, later runs being able to use the cached files.
+
+However, occasionally some servers may not be available, and the builds
+may fail.
+
+The workaround is to manually download the files from alternate
+locations (like
+https://github.com/xpack-dev-tools/files-cache/tree/master/libs),
+place them in the XBB cache (`Work/cache`) and restart the build.
+
+## Run the production builds
+
+The automation is provided by GitHub Actions and three self-hosted runners.
+
+
+### Start the self-hosted runners
+
+- on the development machine (`wksi`) open ssh sessions to the build
+machines (`xbbmi`, `xbbma`, `xbbli`, `xbbla` and `xbbla32`):
+
+```sh
+caffeinate ssh xbbmi
+caffeinate ssh xbbma
+caffeinate ssh xbbli
+caffeinate ssh xbbla
+caffeinate ssh xbbla32
+```
+
+Create a `screen` session, to provide a persistent standard output for
+the runners:
+
+```sh
+screen -S ga
+```
+
+To quit it, use `# Ctrl-a Ctrl-d`.
+
+For `xbbli` & `xbbla`, which have more memory, start two runners:
+
+```sh
+~/actions-runners/xpack-dev-tools/1/run.sh &
+~/actions-runners/xpack-dev-tools/2/run.sh &
+```
+
+On all other machines start a single runner:
+
+```sh
+~/actions-runners/xpack-dev-tools/run.sh &
+```
+
+To check the status of the runners locally:
+
+```sh
+ps -a | grep 'Runner.Listener'
+```
+
+To kill them:
+
+```sh
+killall Runner.Listener
+```
+
+### Check the status of the runners
+
+The status of all self-hosted runners is available at the [GitHub Runners](https://github.com/organizations/xpack-dev-tools/settings/actions/runners) page.
+
+### Publish the helper
+
+Publish a new release of the helper on **npmjs**.
+
+### Update the dependency to the new helper
+
+In `build-assets/package.json`, update the reference
+to `"@xpack-dev-tools/xbb-helper":`
+(possibly in all xPack projects).
+
+### Commit the changes to `build-assets/package.json`
+
+Use the message **build-assets/package.json: bump deps**.
+
+### Check for disk space
+
+Check if the build machines have enough free space and eventually
+do some cleanups
+
+GNU/Linux:
+
+```sh
+df -BG -H /
+```
+
+macOS:
+```
+df -gH /
+```
+
+To free the space used by previous builds:
+
+```sh
+rm -rf ~/Work/xpack-dev-tools/*/build-assets/build ~/Work/xpack-dev-tools/*/build
+```
+
+### Generate the GitHub workflows
+
+Run the **`generate-workflows`** to update the
+GitHub workflow files.
+
+### Commit and push
+
+- commit with the message **Re-generate workflows**
+- push the `xpack-dependency` branch to GitHub
+
+### Manually trigger the build GitHub Actions
+
+To trigger the GitHub Actions builds, use the xPack actions:
+
+- **`trigger-workflow-build-darwin-x64`**
+- **`trigger-workflow-build-darwin-arm64`**
+- **`trigger-workflow-build-linux-x64`**
+- **`trigger-workflow-build-win32-x64`**
+- **`trigger-workflow-build-linux-arm64`**
+- **`trigger-workflow-build-linux-arm`**
+
+The scripts behind these actions require the `GITHUB_API_DISPATCH_TOKEN`
+variable to be present
+in the environment, and the organization `PUBLISH_TOKEN` to be visible in the
+Settings → Action →
+[Secrets](https://github.com/xpack-dev-tools/arm-none-eabi-gcc-xpack/settings/secrets/actions)
+page.
+
+These commands use the `xpack-development` branch of this repo.
+
+### Durations & resulting binaries
+
+<GitHubActionsDurations/>
+
+The workflow result and logs are available from the
+[GitHub Actions](https://github.com/xpack-dev-tools/arm-none-eabi-gcc-xpack/actions/) page.
+
+The resulting binaries are available for testing from
+[pre-releases/test](https://github.com/xpack-dev-tools/pre-releases/releases/tag/test/).
+
+## Run the tests
+
+### Automated tests
+
+The automation is provided by GitHub Actions.
+
+To trigger the GitHub Actions tests, use the xPack actions:
+
+- **`trigger-workflow-test-prime`**
+- **`trigger-workflow-test-docker-linux-intel`**
+- **`trigger-workflow-test-docker-linux-arm`**
+
+The scripts behind these accesible require the `GITHUB_API_DISPATCH_TOKEN` variable to be present
+in the environment.
+
+These actions use the `xpack-development` branch of this repo and the
+[pre-releases/test](https://github.com/xpack-dev-tools/pre-releases/releases/tag/test/)
+binaries.
+
+The tests results are available from the
+[GitHub Actions](https://github.com/xpack-dev-tools/openocd-xpack/actions/) page.
+
+Since GitHub Actions provides a limited range of versions for the macOS
+runner, the multi-version macOS tests run on Travis.
+
+To trigger the Travis test, use the xPack action:
+
+- **`trigger-travis-macos`**
+
+This is equivalent to:
+
+```sh
+bash ~/Work/xpack-dev-tools/arm-none-eabi-gcc-xpack.git/build-assets/xpacks/@xpack-dev-tools/xbb-helper/github-actions/trigger-travis-macos.sh
+```
+
+This script requires the `TRAVIS_COM_TOKEN` variable to be present
+in the environment.
+
+The test results are available from
+[Travis CI](https://app.travis-ci.com/github/xpack-dev-tools/arm-none-eabi-gcc-xpack/builds/).
+
+### Manual tests
+
+To download the pre-released archive for the specific platform
+and run the tests, use:
+
+```sh
+git -C ~/Work/xpack-dev-tools/arm-none-eabi-gcc-xpack.git pull
+xpm run install -C ~/Work/xpack-dev-tools/arm-none-eabi-gcc-xpack.git/build-assets
+xpm run test-pre-release -C ~/Work/xpack-dev-tools/arm-none-eabi-gcc-xpack.git/build-assets
+```
+
+For even more tests, on each platform (MacOS, GNU/Linux, Windows),
+download the archive from
+[pre-releases/test](https://github.com/xpack-dev-tools/pre-releases/releases/tag/test/)
+and check the binaries.
+
+On macOS, remove the `com.apple.quarantine` flag:
+
+```sh
+xattr -cr ${HOME}/Downloads/xpack-*
+```
+
+<FunctionalTests/>
+
+## Publish the release
+
+### Create a new GitHub pre-release draft
+
+- in `CHANGELOG.md`, add the release date and a message
+  like _**\* v{ customField('upstreamVersion') }-{ customField('xpackSubversion') } released**_
+- commit with _**CHANGELOG update**_
+- check and possibly update the `build-assets/templates/body-github-release-liquid.mdx`
+- push the `xpack-development` branch to GitHub
+- run the xPack action
+  - **`trigger-workflow-publish-release`**
+
+The workflow result and logs are available from the
+[GitHub Actions](https://github.com/xpack-dev-tools/openocd-xpack/actions/) page.
+
+The result is a
+[draft pre-release](https://github.com/xpack-dev-tools/arm-none-eabi-gcc-xpack/releases/)
+tagged like **v{ customField('upstreamVersion') }-{ customField('xpackSubversion') }** (mind the dash in the middle!) and
+named like **xPack GNU Arm Embedded GCC v{ customField('upstreamVersion') }-{ customField('xpackSubversion') }** (mind the dash),
+with all binaries attached.
+
+- edit the draft and attach it to the `xpack-development` branch (important!)
+- save the draft (do **not** publish yet!)
+
+### Prepare a new blog post
+
+- check and possibly update the `build-assets/templates/body-blog-release-*-liquid.md`
+- run the xPack action
+  - **`generate-website-blog-post`**; this will add a file
+in the `website/blog` folder.
+- edit the front matter properties
+- select the summary
+
+### Create the GitHub pre-release
+
+- go to the [GitHub Releases](https://github.com/xpack-dev-tools/arm-none-eabi-gcc-xpack/releases/) page
+- perform the final edits and check if everything is fine
+- **keep the pre-release button enabled**
+- do not enable Discussions yet
+- publish the release
+
+Note: at this moment the system should send a notification to all clients
+watching this project.
+
+### Update the web install page
+
+- check and possibly update the output of the `--version` runs in `website/docs/install/_install-*.mdx`
+- commit changes
+
+### Check the list of links in package.json
+
+- open the `package.json` file
+- check if the links in the `bin` property cover the actual binaries
+- if necessary, also check on Windows
+
+### Update the package.json list of binaries
+
+- select the `xpack-development` branch
+- run the xPack action
+  - **`update-package-binaries`**
+- open the top `package.json` file
+- check the `baseUrl:` it should match the file URLs (including the tag/version);
+  no terminating `/` is required
+- from the release, check the SHA & file names
+- compare the SHA sums with those shown by `cat *.sha`
+- check the executable names
+- commit all changes, use a message like
+  _**package.json: update urls for { customField('upstreamVersion') }-{ customField('xpackSubversion') }.{ customField('npmSubversion') } release**_ (without _v_)
+
+### Publish on the npmjs.com server
+
+- select the `xpack-development` branch
+- check the latest commits `npm run git-log`
+- update `CHANGELOG.md`, add a line like _**\* v{ customField('upstreamVersion') }-{ customField('xpackSubversion') } published on npmjs.com**_
+- commit with a message like _**CHANGELOG: publish npm v{ customField('upstreamVersion') }-{ customField('xpackSubversion') }.{ customField('npmSubversion') }**_
+- `npm pack` and check the content of the archive, which should list
+  only the `package.json`, the `README.md`, `LICENSE` and `CHANGELOG.md`;
+  possibly adjust `.npmignore`
+- <code><b>npm version { customField('upstreamVersion') }-{ customField('xpackSubversion') }.{ customField('npmSubversion') }</b></code>; the first 4 numbers are the same as the
+  GitHub release; the fifth number is the npm specific version
+- the commits and the tag should have been pushed by the `postversion` script;
+  if not, push them with `git push origin --tags` to GitHub
+- **`npm publish --tag next`** (use `npm publish --access public`
+  when publishing for the first time; add the `next` tag)
+
+After a few moments the version will be visible at:
+
+- https://www.npmjs.com/package/@xpack-dev-tools/arm-none-eabi-gcc?activeTab=versions
+
+### Test if the binaries can be installed with xpm
+
+Run the xPack action
+
+- **`trigger-workflow-test-xpm`**
+
+This will install the package via `xpm install` on all supported platforms.
+
+The tests results are available from the
+[GitHub Actions](https://github.com/xpack-dev-tools/arm-none-eabi-gcc-xpack/actions/) page.
+
+### Tag the npm package as `latest`
+
+When the release is considered stable, promote it as `latest`:
+
+- <code>npm dist-tag ls @xpack-dev-tools/arm-none-eabi-gcc</code>
+- <code>npm dist-tag add @xpack-dev-tools/arm-none-eabi-gcc@{ customField('upstreamVersion') }-{ customField('xpackSubversion') }.{ customField('npmSubversion') } latest</code>
+- <code>npm dist-tag ls @xpack-dev-tools/arm-none-eabi-gcc</code>
+
+In case the previous version is not functional and needs to be unpublished:
+
+- <code>npm unpublish @xpack-dev-tools/arm-none-eabi-gcc@{ customField('upstreamVersion') }-{ customField('xpackSubversion') }.{ customField('npmSubversion') }</code>
+
+### Update the repo & publish the website
+
+- merge `xpack-development` into `xpack`
+- push the `xpack` branch to GitHub
+
+At this moment the website is also generated.
+
+- the result is in https://xpack-dev-tools.github.io/arm-none-eabi-gcc-xpack/blog/
+- remember the post URL, since it must be updated in the release page
+
+### Create the final GitHub release
+
+- go to the [GitHub Releases](https://github.com/xpack-dev-tools/arm-none-eabi-gcc-xpack/releases/) page
+- check the download counter, it should match the number of tests
+- add a link to the Web blog `[Continue reading »]()`; use an same blog URL
+- remove the _tests only_ notice
+- **disable** the **pre-release** button
+- click the **Update Release** button
+
+### Check SourceForge mirror
+
+- https://sourceforge.net/projects/arm-none-eabi-gcc-xpack/files/
+
+## Cleanups
+
+### Remove the pre-release binaries
+
+- go to https://github.com/xpack-dev-tools/pre-releases/releases/tag/test/
+- remove the test binaries
+
+### Clean the work area
+
+Run the xPack action
+
+  - **`trigger-workflow-deep-clean`**
+
+This will remove the build folders on all self-hosted runners.
+
+The results are available from the
+[GitHub Actions](https://github.com/xpack-dev-tools/arm-none-eabi-gcc-xpack/actions/) page.
+
+## Share on Twitter
+
+- in a separate browser windows, open [X/Twitter](https://twitter.com)
+- using the **`@xpack_project`** account
+- paste the release name like _**xPack GNU Arm Embedded GCC v{ customField('upstreamVersion') }-{ customField('xpackSubversion') } released**_
+- paste the link to the blog post
+  [release](https://xpack.github.io/arm-none-eabi-gcc/releases/)
+- click the **Tweet** button
+
+<ShareCustom/>
+
+## Analytics
+
+- GitHub [`xpack-dev-tools/arm-none-eabi-gcc-xpack`](https://github.com/xpack-dev-tools/arm-none-eabi-gcc-xpack/) repo
+  - latest xPack release
+[![Github All Releases](https://img.shields.io/github/downloads/xpack-dev-tools/arm-none-eabi-gcc-xpack/latest/total.svg)](https://github.com/xpack-dev-tools/arm-none-eabi-gcc-xpack/releases/)
+  - all xPack releases [![Github All Releases](https://img.shields.io/github/downloads/xpack-dev-tools/arm-none-eabi-gcc-xpack/total.svg)](https://github.com/xpack-dev-tools/arm-none-eabi-gcc-xpack/releases/)
+  - [individual file counters](https://somsubhra.github.io/github-release-stats/?username=xpack-dev-tools&repository=arm-none-eabi-gcc-xpack) (grouped per release)
+- npmjs.com [`@xpack-dev-tools/arm-none-eabi-gcc`](https://www.npmjs.com/package/@xpack-dev-tools/arm-none-eabi-gcc/) xPack
+  - latest release, per month
+[![npm (scoped)](https://img.shields.io/npm/v/@xpack-dev-tools/arm-none-eabi-gcc.svg)](https://www.npmjs.com/package/@xpack-dev-tools/arm-none-eabi-gcc/)
+[![npm](https://img.shields.io/npm/dm/@xpack-dev-tools/arm-none-eabi-gcc.svg)](https://www.npmjs.com/package/@xpack-dev-tools/arm-none-eabi-gcc/)
+  - all releases [![npm](https://img.shields.io/npm/dt/@xpack-dev-tools/arm-none-eabi-gcc.svg)](https://www.npmjs.com/package/@xpack-dev-tools/arm-none-eabi-gcc/)
+
+Credit to [Shields IO](https://shields.io) for the badges and to
+[Somsubhra/github-release-stats](https://github.com/Somsubhra/github-release-stats)
+for the individual file counters.

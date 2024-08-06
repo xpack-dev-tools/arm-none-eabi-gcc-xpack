@@ -1,0 +1,30 @@
+{
+  "version.label": {
+    "message": "Next",
+    "description": "The label for version current"
+  },
+  "sidebar.docsSidebar.doc.Getting Started": {
+    "message": "Getting Started",
+    "description": "The label for the doc item Getting Started in sidebar docsSidebar, linking to the doc overview"
+  },
+  "sidebar.docsSidebar.doc.Install": {
+    "message": "Install",
+    "description": "The label for the doc item Install in sidebar docsSidebar, linking to the doc install/index"
+  },
+  "sidebar.docsSidebar.doc.User Info": {
+    "message": "User Info",
+    "description": "The label for the doc item User Info in sidebar docsSidebar, linking to the doc user-info"
+  },
+  "sidebar.docsSidebar.doc.FAQ": {
+    "message": "FAQ",
+    "description": "The label for the doc item FAQ in sidebar docsSidebar, linking to the doc faq"
+  },
+  "sidebar.docsSidebar.doc.Support": {
+    "message": "Support",
+    "description": "The label for the doc item Support in sidebar docsSidebar, linking to the doc support"
+  },
+  "sidebar.docsSidebar.doc.Releases": {
+    "message": "Releases",
+    "description": "The label for the doc item Releases in sidebar docsSidebar, linking to the doc releases"
+  }
+}

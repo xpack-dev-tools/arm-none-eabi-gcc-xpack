@@ -1,0 +1,17 @@
+/*
+ * DO NOT EDIT!
+ * Automatically generated from xbb-helper/templates/docusaurus/common.
+ *
+ */
+ 
+.features {
+  display: flex;
+  align-items: center;
+  padding: 2rem 0 0.5rem 0;
+  width: 100%;
+}
+
+.featureSvg {
+  height: 100px;
+  width: 100px;
+}

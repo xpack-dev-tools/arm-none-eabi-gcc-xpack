@@ -1,0 +1,40 @@
+/**
+ * DO NOT EDIT!
+ * Automatically generated from xbb-helper/templates/docusaurus/common.
+ *
+ * CSS files with the .module.css suffix will be treated as CSS modules
+ * and scoped locally.
+ */
+
+ .heroBanner {
+  padding: 2rem 0; /* 4rem 0; */
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+
+@media screen and (max-width: 996px) {
+  .heroBanner {
+    padding: 2rem;
+  }
+}
+
+.buttons {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* -------------------------------------------------------------------------- */
+
+/** Reduce the width of the install code */
+.installWithCopy {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.installWithCopy > div > div {
+  padding: 0 2em;
+}
+
+/* -------------------------------------------------------------------------- */
