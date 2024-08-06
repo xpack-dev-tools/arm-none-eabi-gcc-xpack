@@ -286,7 +286,7 @@
           "linux-x64"
         ],
         "properties": {
-          "dockerImage": "ilegeul/ubuntu:arm32v7-18.04-xbb-v5.1.1",
+          "dockerImage": "ilegeul/ubuntu:arm32v7-18.04-xbb-v5.2.2",
           "force32": "linux32"
         }
       },
