@@ -6,79 +6,13 @@
   },
   "xpack": {
     "minimumXpmRequired": "0.16.3",
-    "binaries": {
-      "destination": "./.content",
-      "baseUrl": "https://github.com/xpack-dev-tools/arm-none-eabi-gcc-xpack/releases/download/v13.2.1-1.1",
-      "skip": 1,
-      "platforms": {
-        "darwin-arm64": {
-          "fileName": "xpack-arm-none-eabi-gcc-13.2.1-1.1-darwin-arm64.tar.gz",
-          "sha256": "d4ce0de062420daab140161086ba017642365977e148d20f55a8807b1eacd703"
-        },
-        "darwin-x64": {
-          "fileName": "xpack-arm-none-eabi-gcc-13.2.1-1.1-darwin-x64.tar.gz",
-          "sha256": "1ecc0fd6c31020aff702204f51459b4b00ff0d12b9cd95e832399881d819aa57"
-        },
-        "linux-arm64": {
-          "fileName": "xpack-arm-none-eabi-gcc-13.2.1-1.1-linux-arm64.tar.gz",
-          "sha256": "ab7f75d95ead0b1efb7432e7f034f9575cc3d23dc1b03d41af1ec253486d19de"
-        },
-        "linux-arm": {
-          "fileName": "xpack-arm-none-eabi-gcc-13.2.1-1.1-linux-arm.tar.gz",
-          "sha256": "9a6db147c34f7ea668cc37a139d2667a58f8b2bbee2359f23e48ffd300f8fc2f"
-        },
-        "linux-x64": {
-          "fileName": "xpack-arm-none-eabi-gcc-13.2.1-1.1-linux-x64.tar.gz",
-          "sha256": "1252a8cafe9237de27a765376697230368eec21db44dc3f1edeb8d838dabd530"
-        },
-        "win32-x64": {
-          "fileName": "xpack-arm-none-eabi-gcc-13.2.1-1.1-win32-x64.zip",
-          "sha256": "56b18ccb0a50f536332ec5de57799342ff0cd005ca2c54288c74759b51929e4f"
-        }
-      }
-    },
-    "bin": {
-      "arm-none-eabi-addr2line": "./.content/bin/arm-none-eabi-addr2line",
-      "arm-none-eabi-ar": "./.content/bin/arm-none-eabi-ar",
-      "arm-none-eabi-as": "./.content/bin/arm-none-eabi-as",
-      "arm-none-eabi-c++": "./.content/bin/arm-none-eabi-c++",
-      "arm-none-eabi-c++filt": "./.content/bin/arm-none-eabi-c++filt",
-      "arm-none-eabi-cpp": "./.content/bin/arm-none-eabi-cpp",
-      "arm-none-eabi-elfedit": "./.content/bin/arm-none-eabi-elfedit",
-      "arm-none-eabi-g++": "./.content/bin/arm-none-eabi-g++",
-      "arm-none-eabi-gcc": "./.content/bin/arm-none-eabi-gcc",
-      "arm-none-eabi-gcc-ar": "./.content/bin/arm-none-eabi-gcc-ar",
-      "arm-none-eabi-gcc-nm": "./.content/bin/arm-none-eabi-gcc-nm",
-      "arm-none-eabi-gcc-ranlib": "./.content/bin/arm-none-eabi-gcc-ranlib",
-      "arm-none-eabi-gcov": "./.content/bin/arm-none-eabi-gcov",
-      "arm-none-eabi-gcov-dump": "./.content/bin/arm-none-eabi-gcov-dump",
-      "arm-none-eabi-gcov-tool": "./.content/bin/arm-none-eabi-gcov-tool",
-      "arm-none-eabi-gdb": "./.content/bin/arm-none-eabi-gdb",
-      "arm-none-eabi-gdb-add-index": "./.content/bin/arm-none-eabi-gdb-add-index",
-      "arm-none-eabi-gdb-add-index-py3": "./.content/bin/arm-none-eabi-gdb-add-index-py3",
-      "arm-none-eabi-gdb-py3": "./.content/bin/arm-none-eabi-gdb-py3",
-      "arm-none-eabi-gfortran": "./.content/bin/arm-none-eabi-gfortran",
-      "arm-none-eabi-gprof": "./.content/bin/arm-none-eabi-gprof",
-      "arm-none-eabi-ld": "./.content/bin/arm-none-eabi-ld",
-      "arm-none-eabi-ld.bfd": "./.content/bin/arm-none-eabi-ld.bfd",
-      "arm-none-eabi-lto-dump": "./.content/bin/arm-none-eabi-lto-dump",
-      "arm-none-eabi-nm": "./.content/bin/arm-none-eabi-nm",
-      "arm-none-eabi-objcopy": "./.content/bin/arm-none-eabi-objcopy",
-      "arm-none-eabi-objdump": "./.content/bin/arm-none-eabi-objdump",
-      "arm-none-eabi-ranlib": "./.content/bin/arm-none-eabi-ranlib",
-      "arm-none-eabi-readelf": "./.content/bin/arm-none-eabi-readelf",
-      "arm-none-eabi-size": "./.content/bin/arm-none-eabi-size",
-      "arm-none-eabi-strings": "./.content/bin/arm-none-eabi-strings",
-      "arm-none-eabi-strip": "./.content/bin/arm-none-eabi-strip"
-    },
     "devDependencies": {
-      "@xpack-dev-tools/xbb-helper": "^3.0.3"
+      "@xpack-dev-tools/xbb-helper": "^3.0.7"
     },
     "properties": {
       "appName": "GNU Arm Embedded GCC",
       "appLcName": "arm-none-eabi-gcc",
       "platforms": "all",
-      "LIQUIDJS": "liquidjs --context '{ \"XBB_APPLICATION_NAME\": \"{{ properties.appName }}\", \"XBB_APPLICATION_LOWER_CASE_NAME\": \"{{ properties.appLcName }}\", \"platforms\": \"{{ properties.platforms }}\" }'",
       "buildFolderRelativePath": "{{ 'build' | path_join: configuration.name | to_filename | downcase }}",
       "buildFolderRelativePathPosix": "{{ 'build' | path_posix_join: configuration.name | downcase }}",
       "commandBashBuild": "bash {{ properties.dbg }} scripts/build.sh --target {{ configuration.name }} --build-folder {{ properties.buildFolderRelativePathPosix }}",
