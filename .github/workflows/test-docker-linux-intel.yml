@@ -43,7 +43,7 @@
 
 # -----------------------------------------------------------------------------
 
-name: 'Test xPack GNU Arm Embedded GCC on Intel Docker platforms'
+name: 'Test xPack GNU Arm Embedded GCC on x64 Docker platforms'
 
 on:
   workflow_dispatch:
