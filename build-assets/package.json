@@ -13,7 +13,6 @@
       "appName": "GNU Arm Embedded GCC",
       "appLcName": "arm-none-eabi-gcc",
       "platforms": "all",
-      "showDeprecatedGnuMcuAnalytics": "true",
       "customFields": {
         "showDeprecatedGnuMcuAnalytics": "true",
         "programName": "arm-none-eabi-gcc",
