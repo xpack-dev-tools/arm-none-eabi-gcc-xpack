@@ -14,6 +14,7 @@ import UpgradeNotice from './_upgrade-notice.mdx';
 import Compatibility from './_compatibility.mdx';
 import Documentation from './_documentation.mdx'
 import ReleaseSchedule from './_release-schedule.mdx'
+import More from './_more.mdx'
 
 {/* ------------------------------------------------------------------------ */}
 
@@ -30,14 +31,14 @@ intended for reproducible builds.
 
 <Overview/>
 
-**xPack GNU Arm Embedded GCC** is an open source project hosted on GitHub as
+The open source **xPack GNU Arm Embedded GCC** project is hosted on GitHub as
 [`xpack-dev-tools/arm-none-eabi-gcc-xpack`](https://github.com/xpack-dev-tools/arm-none-eabi-gcc-xpack);
 it provides the platform specific binaries as
 [release assets](https://github.com/xpack-dev-tools/arm-none-eabi-gcc-xpack/releases).
 
 In addition to the binary archives and the package metadata,
 this project also includes the
-[build scripts](https://github.com/xpack-dev-tools/arm-none-eabi-gcc-xpack/tree/xpack/scripts).
+[build scripts](https://github.com/xpack-dev-tools/arm-none-eabi-gcc-xpack/tree/xpack/build-assets/scripts).
 
 <UpgradeNotice/>
 
@@ -92,13 +93,15 @@ The details of installing the **xPack GNU Arm Embedded GCC** on various platform
 presented in the
 [Install Guide](/docs/install/).
 
+## Documentation
+
 <Documentation/>
 
 <ReleaseSchedule/>
 
-## Support
+## Support & feedback
 
-The quick advice for getting support is to use the
+The quick advice for getting support and providing feedback is to use the
 [GitHub Discussions](https://github.com/xpack-dev-tools/arm-none-eabi-gcc-xpack/discussions/).
 
 For additional information, please refer to the
@@ -109,17 +112,17 @@ For additional information, please refer to the
 The release and change log is available in the repository
 [`CHANGELOG.md`](https://github.com/xpack-dev-tools/arm-none-eabi-gcc-xpack/blob/xpack/CHANGELOG.md) file.
 
-## Maintainer & Developer info
+## Maintainer & Developer information
 
 For information on the workflow used to make releases, please see the
-[Maintainer Info](/docs/maintainer-info/) page.
+[Maintainer Info](/docs/maintainer/) page.
 
 For information on how to build the binaries, please see the
-[Developer Info](/docs/developer-info/) page.
+[Developer Info](/docs/developer/) page.
 
 However, the ultimate source for details are the build scripts themselves,
 all available from the
-[`arm-none-eabi-gcc-xpack.git/scripts`](https://github.com/xpack-dev-tools/arm-none-eabi-gcc-xpack/tree/xpack/scripts/)
+[`arm-none-eabi-gcc-xpack.git/build-assets/scripts`](https://github.com/xpack-dev-tools/arm-none-eabi-gcc-xpack/tree/xpack/build-assets/scripts/)
 folder. The scripts include common code from the [`@xpack-dev-tools/xbb-helper`](https://github.com/xpack-dev-tools/xbb-helper-xpack) package.
 
 ## License
@@ -136,3 +139,5 @@ corresponding licenses are available in each archive in the
 ## Releases
 
 The list of releases is available in the [Releases](/docs/releases/) pages.
+
+<More/>

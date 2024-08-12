@@ -3,12 +3,14 @@
 # DO NOT EDIT!
 # Automatically generated from xbb-helper/templates/docusaurus/common.
 
-title: Information for xPack GNU Arm Embedded GCC developers
+title: How to build the xPack GNU Arm Embedded GCC
 
 date: 2024-11-12 20:33:00 +0300
 
 ---
 
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
 import CodeBlock from '@theme/CodeBlock';
 
 import customField from '@site/src/libs/customField';
@@ -16,7 +18,7 @@ import customField from '@site/src/libs/customField';
 import PlatformNativeSection from './_common/_platform-native-section.mdx'
 import PlatformDockerSection from './_common/_platform-docker-section.mdx'
 import OtherRepositories from './_other-repositories.mdx';
-import ManualTests from './_manual-tests.mdx'
+import More from './_more.mdx'
 
 {/* ------------------------------------------------------------------------ */}
 
@@ -192,16 +194,20 @@ The project is hosted on GitHub:
 <details>
 <summary>Branches</summary>
 
-Apart from the unused `master` branch, there are two active branches:
+Apart from the unused `master` branch, there are three active branches:
 
 - `xpack`, with the latest stable version (default)
-- <code>xpack-development</code>, with the current development version
+- `xpack-development`, with the current development version
+- `website`, with the current content of the website
 
-All development is done in the <code>xpack-development</code> branch, and contributions via
+All development is done in the `xpack-development` branch, and contributions via
 Pull Requests should be directed to this branch.
 
-When new releases are published, the <code>xpack-development</code> branch is merged
+When new releases are published, the `xpack-development` branch is merged
 into `xpack`.
+
+Pushes to the `website` branch trigger a GitHub Action to generate
+and publish the project web site.
 
 </details>
 
@@ -215,7 +221,7 @@ git clone https://github.com/xpack-dev-tools/arm-none-eabi-gcc-xpack.git \
 ```
 
 <details>
-<summary>For development purposes, clone the <code>xpack-development</code> branch.</summary>
+<summary>For development purposes, clone the `xpack-development` branch.</summary>
 
 ```sh
 rm -rf ~/Work/xpack-dev-tools/arm-none-eabi-gcc-xpack.git && \
@@ -234,14 +240,14 @@ git clone \
 The project has a dependency to a common **helper**, that is
 normally installed as a read-only dependency; **for development
 purposes**, to be able to make changes to the scripts located inside the helper,
-clone the <code>xpack-development</code> branch and link it to
-the central xPacks store:
+clone the `xpack-development` branch and link it to
+the user global xPacks store:
 
 ```sh
 rm -rf ~/Work/xpack-dev-tools/xbb-helper-xpack.git && \
 mkdir -p ~/Work/xpack-dev-tools && \
 git clone \
-  --branchxpack-development \
+  --branch xpack-development \
   https://github.com/xpack-dev-tools/xbb-helper-xpack.git \
   ~/Work/xpack-dev-tools/xbb-helper-xpack.git && \
 xpm link -C ~/Work/xpack-dev-tools/xbb-helper-xpack.git
@@ -276,29 +282,35 @@ git -C ~/Work/xpack-dev-tools/xbb-helper-xpack.git pull
 
 </details>
 
-### Build the x64 macOS binaries
+### Build the binaries
 
+<Tabs groupId="platforms">
+
+<TabItem value="darwin-x64" label="macOS x64" default>
 <PlatformNativeSection platform="darwin-x64"/>
+</TabItem>
 
-### Build the arm64 macOS binaries
-
+<TabItem value="darwin-arm64" label="macOS arm64" default>
 <PlatformNativeSection platform="darwin-arm64"/>
+</TabItem>
 
-### Build the x64 GNU/Linux binaries
-
+<TabItem value="linux-x64" label="GNU/Linux x64" default>
 <PlatformDockerSection platform="linux-x64"/>
+</TabItem>
 
-### Build the x64 Windows binaries
-
-<PlatformDockerSection platform="win32-x64"/>
-
-### Build the arm64 GNU/Linux binaries
-
+<TabItem value="linux-arm64" label="GNU/Linux arm64" default>
 <PlatformDockerSection platform="linux-arm64"/>
+</TabItem>
 
-### Build the arm GNU/Linux (32-bit) binaries
-
+<TabItem value="linux-arm" label="GNU/Linux arm" default>
 <PlatformDockerSection platform="linux-arm"/>
+</TabItem>
+
+<TabItem value="win32-x64" label="Windows" default>
+<PlatformDockerSection platform="win32-x64"/>
+</TabItem>
+
+</Tabs>
 
 ### Compile with debug info
 
@@ -322,4 +334,4 @@ locations (like
 https://github.com/xpack-dev-tools/files-cache/tree/master/libs),
 place them in the XBB cache (`Work/cache`) and restart the build.
 
-<ManualTests/>
+<More/>

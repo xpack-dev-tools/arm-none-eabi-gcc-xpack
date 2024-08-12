@@ -1,3 +1,4 @@
+
 import CodeBlock from '@theme/CodeBlock';
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
@@ -8,7 +9,6 @@ import customField from '@site/src/libs/customField';
 
 ## Miscellaneous
 
-
 <details>
 <summary>Folder hierarchy</summary>
 
@@ -16,6 +16,7 @@ After install, the package creates a folder hierarchy like the following
 (only the first two depth levels are shown):
 
 <Tabs groupId="operating-systems">
+
 <TabItem value="windows" label="Windows" default>
 
 <CodeBlock language="console"> {
@@ -28,17 +29,94 @@ TODO
 `} </CodeBlock>
 
 </TabItem>
+
 <TabItem value="macos" label="macOS">
 
 <CodeBlock language="console"> {
 `$ tree -L 2 ~/Library/xPacks/\@xpack-dev-tools/arm-none-eabi-gcc/${ customField('upstreamVersion') }-${ customField('xpackSubversion') }.${ customField('npmSubversion') }/.content/
 /Users/ilg/Library/xPacks/\@xpack-dev-tools/arm-none-eabi-gcc/${ customField('upstreamVersion') }-${ customField('xpackSubversion') }.${ customField('npmSubversion') }/.content/
 ├── README.md
+├── arm-none-eabi
+│   ├── bin
+│   ├── include
+│   ├── lib
+│   └── share
 ├── bin
-TODO
+│   ├── arm-none-eabi-addr2line
+│   ├── arm-none-eabi-ar
+│   ├── arm-none-eabi-as
+│   ├── arm-none-eabi-c++
+│   ├── arm-none-eabi-c++filt
+│   ├── arm-none-eabi-cpp
+│   ├── arm-none-eabi-elfedit
+│   ├── arm-none-eabi-g++
+│   ├── arm-none-eabi-gcc
+│   ├── arm-none-eabi-gcc-13.2.1
+│   ├── arm-none-eabi-gcc-ar
+│   ├── arm-none-eabi-gcc-nm
+│   ├── arm-none-eabi-gcc-ranlib
+│   ├── arm-none-eabi-gcov
+│   ├── arm-none-eabi-gcov-dump
+│   ├── arm-none-eabi-gcov-tool
+│   ├── arm-none-eabi-gdb
+│   ├── arm-none-eabi-gdb-add-index
+│   ├── arm-none-eabi-gdb-add-index-py3
+│   ├── arm-none-eabi-gdb-py3
+│   ├── arm-none-eabi-gfortran
+│   ├── arm-none-eabi-gprof
+│   ├── arm-none-eabi-ld
+│   ├── arm-none-eabi-ld.bfd
+│   ├── arm-none-eabi-lto-dump
+│   ├── arm-none-eabi-nm
+│   ├── arm-none-eabi-objcopy
+│   ├── arm-none-eabi-objdump
+│   ├── arm-none-eabi-ranlib
+│   ├── arm-none-eabi-readelf
+│   ├── arm-none-eabi-size
+│   ├── arm-none-eabi-strings
+│   └── arm-none-eabi-strip
+├── distro-info
+│   └── licenses
+├── include
+│   └── gdb
+├── lib
+│   ├── bfd-plugins
+│   ├── gcc
+│   ├── libcc1.0.so
+│   ├── libcc1.so -> libcc1.0.so
+│   └── python3.11
+├── libexec
+│   ├── gcc
+│   ├── libbz2.1.0.8.dylib
+│   ├── libcrypt.2.dylib
+│   ├── libcrypto.1.1.dylib
+│   ├── libexpat.1.6.7.dylib
+│   ├── libexpat.1.dylib -> libexpat.1.6.7.dylib
+│   ├── libffi.8.dylib
+│   ├── libgmp.10.dylib
+│   ├── libiconv.2.dylib
+│   ├── libisl.15.dylib
+│   ├── liblzma.5.dylib
+│   ├── libmpc.3.dylib
+│   ├── libmpfr.4.dylib
+│   ├── libncurses.6.dylib
+│   ├── libpanel.6.dylib
+│   ├── libpython3.11.dylib
+│   ├── libreadline.8.2.dylib
+│   ├── libreadline.8.dylib -> libreadline.8.2.dylib
+│   ├── libsqlite3.0.dylib
+│   ├── libssl.1.1.dylib
+│   ├── libz.1.2.13.dylib
+│   ├── libz.1.dylib -> libz.1.2.13.dylib
+│   └── libzstd.1.5.5.dylib
+└── share
+    └── gcc-13.2.1
+
+19 directories, 58 files
 `} </CodeBlock>
 
 </TabItem>
+
 <TabItem value="linux" label="GNU/Linux">
 
 <CodeBlock language="console"> {
@@ -50,6 +128,7 @@ TODO
 `} </CodeBlock>
 
 </TabItem>
+
 </Tabs>
 
 </details>

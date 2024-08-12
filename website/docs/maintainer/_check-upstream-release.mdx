@@ -1,0 +1,48 @@
+
+import versionMajor from '@site/src/libs/versionMajor';
+import versionMinor from '@site/src/libs/versionMinor';
+
+{/* ------------------------------------------------------------------------ */}
+
+### Check the latest upstream release
+
+The current release must be announced in
+[Arm GNU Toolchain Downloads](https://developer.arm.com/downloads/-/arm-gnu-toolchain-downloads).
+Compare the latest release with the current xPack
+[release](https://github.com/xpack-dev-tools/arm-none-eabi-gcc-xpack/releases).
+If necessary, update the triplet, otherwise increase the fourth & fifth numbers,
+as below.
+
+:::note
+
+Preferably build arm-none-eabi-gcc after aarch64-none-elf-gcc, which does
+not have multi-libs and the builds take less time.
+
+:::
+
+### Update to the latest Arm release
+
+Download the new _Source code_ archive (like
+`arm-gnu-toolchain-src-snapshot-*.tar.xz` from
+[Arm GNU Toolchain Downloads](https://developer.arm.com/downloads/-/arm-gnu-toolchain-downloads/).
+
+Download the latest **macOS (x86_64) hosted cross toolchains** archive (like
+`arm-gnu-toolchain-*-darwin-x86_64-arm-none-eabi.tar.xz`)
+and copy the file with the configurations
+(`*-darwin-x86_64-arm-none-eabi-manifest.txt`) to extras.
+
+Download the ABE manifest with the individual source URLs
+(`arm-gnu-toolchain-arm-none-eabi-abe-manifest.txt`) and copy to extras.
+
+From the ABE manifest, identify the `gcc_url` and `gcc_filespec`,
+compose the url
+(like <code>{ `https://developer.arm.com/-/media/Files/downloads/gnu/${ versionMajor() }.${ versionMinor() }.rel1/src/gcc.tar.xz `}</code>)
+and download the archive.
+
+To get the **newlib** version, check the manifest.txt; download the archive from:
+
+<ul>
+<li><a href={ `https://developer.arm.com/-/media/Files/downloads/gnu/${ versionMajor() }.${ versionMinor() }.rel1/src/newlib-cygwin.tar.xz `}>{ `https://developer.arm.com/-/media/Files/downloads/gnu/${ versionMajor() }.${ versionMinor() }.rel1/src/newlib-cygwin.tar.xz `}</a></li>
+</ul>
+
+and search for `VERSION=` in `newlib/configure`.

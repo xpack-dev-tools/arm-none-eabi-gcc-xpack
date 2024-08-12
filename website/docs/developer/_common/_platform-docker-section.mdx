@@ -4,17 +4,19 @@
 import CodeBlock from '@theme/CodeBlock';
 
 import customField from '@site/src/libs/customField';
-import { durations } from '../_durations.mdx'
+import { developmentDurations } from '../../maintainer/_development-durations.mdx'
 
 {/* ------------------------------------------------------------------------ */}
 
 {/* Arguments: props.platform */}
 
-To prepare the native build:
+{ props.platform == "win32-x64" ? ( <p>The Windows builds run on GNU/Linux, using <a href="https://mingw-w64.org">mingw-w64</a>.</p> ) : ''}
+
+To prepare the docker build:
 
 <CodeBlock language="sh"> {
 `xpm run install -C ~/Work/xpack-dev-tools/arm-none-eabi-gcc-xpack.git/build-assets && \\
-xpm install --config ${ props.platform } -C ~/Work/xpack-dev-tools/arm-none-eabi-gcc-xpack.git/build-assets`
+xpm run docker-prepare --config ${ props.platform } -C ~/Work/xpack-dev-tools/arm-none-eabi-gcc-xpack.git/build-assets`
 } </CodeBlock>
 
 <details>
@@ -23,24 +25,25 @@ xpm install --config ${ props.platform } -C ~/Work/xpack-dev-tools/arm-none-eabi
 <CodeBlock language="sh"> {
 `xpm run install -C ~/Work/xpack-dev-tools/arm-none-eabi-gcc-xpack.git/build-assets && \\
 xpm run link-deps -C ~/Work/xpack-dev-tools/arm-none-eabi-gcc-xpack.git/build-assets && \\
-xpm install --config ${ props.platform } -C ~/Work/xpack-dev-tools/arm-none-eabi-gcc-xpack.git/build-assets`
+xpm run docker-prepare --config ${ props.platform } -C ~/Work/xpack-dev-tools/arm-none-eabi-gcc-xpack.git/build-assets && \\
+xpm run docker-link-deps --config ${ props.platform } -C ~/Work/xpack-dev-tools/arm-none-eabi-gcc-xpack.git/build-assets`
 } </CodeBlock>
 
 </details>
 
-To run the native build:
+To run the docker build:
 
 <CodeBlock language="sh"> {
-`xpm run build --config ${ props.platform } -C ~/Work/xpack-dev-tools/arm-none-eabi-gcc-xpack.git/build-assets`
+`xpm run docker-build --config ${ props.platform } -C ~/Work/xpack-dev-tools/arm-none-eabi-gcc-xpack.git/build-assets`
 } </CodeBlock>
 
 or, for more verbosity, run the similar development build:
 
 <CodeBlock language="sh"> {
-`xpm run build-development --config ${ props.platform } -C ~/Work/xpack-dev-tools/arm-none-eabi-gcc-xpack.git/build-assets`
+`xpm run docker-build-development --config ${ props.platform } -C ~/Work/xpack-dev-tools/arm-none-eabi-gcc-xpack.git/build-assets`
 } </CodeBlock>
 
-{ durations[ props.platform ] }, the output of the build script is a compressed
+{ developmentDurations[ props.platform ] }, the output of the build script is a compressed
 archive and its SHA signature, created in
 the <code>buils-assets/build/{ props.platform }/deploy</code> folder:
 
