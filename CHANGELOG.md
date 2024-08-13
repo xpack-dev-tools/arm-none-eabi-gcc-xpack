@@ -2,9 +2,161 @@
 
 Entries in this file are in reverse chronological order.
 
+## 2024-08-13
+
+* v13.3.1-1.1 prepared
+* 356a895 website update
+
+## 2024-08-12
+
+* b09b726 website re-generate commons (svg stroke-width
+* 96d5dda re-generate workflows
+* 3a1b2ec build-assets/package.json: cleanups
+* 83934e9 README cleanups
+* 086c988 website: updates
+* 9eea4c1 build-assets/package.json: add customFields
+
+## 2024-08-10
+
+* 05ea74c re-generate workflows
+
+## 2024-08-09
+
+* 4c4eaff READMEs update
+* 478b0b1 package.json: git+https
+* 79264d6 build-assets/package.json: updates
+* 5267c40 templates/body-blog update
+
+## 2024-08-07
+
+* 36042fd build-assets/package.json: updates
+* 7093930 build-assets/package.json: updates
+* f9d5986 website: preliminary content
+* 746dba2 re-generate workflows
+* c493c5f move to build-assets
+
+## 2024-08-06
+
+* 09e38dd package.json: bump deps
+
+## 2024-08-04
+
+* e50187d package.json: bump deps
+* 1fb0c12 package.json: update generate-workflows
+* f3d7fca templates/jekyll update
+* 404df52 READMEs update
+* db72dea package.json: add actions, bump deps
+
+## 2024-07-27
+
+* 443cd55 package.json: add actions, bump deps
+* 88e0448 templates/jekyll update
+
+## 2024-07-23
+
+* daa89d8 READMEs update
+* 7583459 .npmignore update
+* 59f8c73 re-generate scripts
+* 9beaeb4 body-jekyll update
+* 2b85fee re-generate workflows
+* 20eef4f package.json: rework generate workflows
+* 773092d package.json: loglevel info
+* 3f8b698 package.json: bump deps
+
+## 2024-06-18
+
+* e581868 READMEs update
+
+## 2024-06-17
+
+* 3323131 package.json: rework generate workflows
+* eeefdad package.json: bump deps
+* 2f2eabf application.sh: update
+
+## 2024-05-23
+
+* 5c7719d package.json: clang 16.0.6-1.1
+
+## 2024-05-20
+
+* 66b7077 package.json: remove gcc from darwin
+
+## 2024-05-18
+
+* 91b05a0 READMEs update
+* 97aaf16 package.json: XBB_ENVIRONMENT_SKIP_CHECKS
+
+## 2024-05-16
+
+* 9b9da91 READMEs update
+* d980726 application.sh: no need for USE_GCC_FOR_GCC_ON_MACOS
+
+## 2024-05-09
+
+* 8ea1ee0 USE_GCC_FOR_GCC_ON_MACOS="y"
+* 5294f93 package.json: add gcc to macOS
+
+## 2024-05-08
+
+* 6e628ea README update
+
+## 2024-05-07
+
+* c7798c2 versioning.sh: update texinfo url
+
+## 2024-05-06
+
+* 2d456d7 WITHOUT_MULTILIB
+* b559c90 application.sh: add XBB_APPLICATION_BOOTSTRAP_ONLY
+* cc18252 versioning.sh: use gcc_cross_build_common
+* 6a0261f versioning.sh: no need for WIDEC="y"
+
+## 2024-05-02
+
+* 1ce0426 package.json: clang 17.0.6-1.1
+
+## 2024-04-22
+
+* 8c20d72 package.json: bump deps
+* 40d06ba versioning.sh: avoid xz 5.6
+
+## 2024-03-22
+
+* fbe69fe package.json: xpm-version 0.18.0
+
+## 2024-03-08
+
+* 56064b7 package.json: xpm-version 0.18.0
+
+## 2024-03-07
+
+* e211441 package.json: xpm-version 0.18.0
+* 7864c62 package.json: bump deps
+
+## 2024-03-06
+
+* a85e289 body-jekyll update
+* c41b9a8 package.json: bump deps
+
+## 2024-02-07
+
+* a15b28e READMEs update
+* 24a14ac package.json: bump deps
+
+## 2023-12-28
+
+* b0c658b update ISSUE_TEMPLATE.md
+
+## 2023-12-03
+
+* 900979d package.json: bump deps
+* 51b7f3f re-generate workflows
+
 ## 2023-11-09
 
-* v13.2.1-1.1.1 published on npmjs.com
+2023-11-09 * 846e857 README update
+2023-11-09 * 1fe02ed 13.2.1-1.1.1
+2023-11-09 * 3041cec CHANGELOG: publish npm v13.2.1-1.1.1
 * 374ceb3 package.json: update urls for 13.2.1-1.1 release
 * 753f799 README update
 * 45eaa7a body jekyll update

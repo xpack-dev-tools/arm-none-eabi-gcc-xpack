@@ -53,7 +53,83 @@ function application_build_versioned_components()
   if [[ "${XBB_RELEASE_VERSION}" =~ 13[.].*[.].*-.* ]]
   then
 
-    if [[ "${XBB_RELEASE_VERSION}" =~ 13[.]2[.]1-.* ]]
+    if [[ "${XBB_RELEASE_VERSION}" =~ 13[.]3[.]1-.* ]]
+    then
+      # https://developer.arm.com/-/media/Files/downloads/gnu/13.2.rel1/manifest/arm-gnu-toolchain-arm-none-eabi-abe-manifest.txt
+
+      XBB_ARM_RELEASE="13.3.rel1"
+      XBB_ARM_URL_BASE="https://developer.arm.com/-/media/Files/downloads/gnu/${XBB_ARM_RELEASE}/src"
+
+      # -----------------------------------------------------------------------
+
+      # Arm: release notes.
+      # Repository: git://sourceware.org/git/binutils-gdb.git
+      # Branch: binutils-2_42-branch
+      # Revision: e830307135a1cb6410613641a893a3cd9e6bd6b0 (from manifest.txt
+      # or release notes)
+
+      # https://github.com/xpack-dev-tools/binutils-gdb/tags
+
+      XBB_BINUTILS_VERSION="2.42"
+      XBB_BINUTILS_TAG_NAME="binutils-${XBB_BINUTILS_VERSION}-arm-none-eabi-${XBB_ARM_RELEASE}"
+
+      XBB_BINUTILS_SRC_FOLDER_NAME="binutils-gdb-${XBB_BINUTILS_TAG_NAME}"
+      XBB_BINUTILS_ARCHIVE_NAME="${XBB_BINUTILS_TAG_NAME}.tar.gz"
+      XBB_BINUTILS_ARCHIVE_URL="https://github.com/xpack-dev-tools/binutils-gdb/archive/refs/tags/${XBB_BINUTILS_ARCHIVE_NAME}"
+
+      XBB_BINUTILS_PATCH_FILE_NAME="binutils-${XBB_BINUTILS_VERSION}.patch"
+
+      # -----------------------------------------------------------------------
+
+      # Arm: release notes.
+      # Repository: git://sourceware.org/git/binutils-gdb.git
+      # Branch: gdb-14-branch
+      # Revision: b74fd1875e2d5381a61a4c8b67684ce5a45bbd62 (from manifext.txt
+      # or release notes)
+
+      # https://github.com/xpack-dev-tools/binutils-gdb/tags/
+
+      # From `gdb/version.in`
+      XBB_GDB_VERSION="14.2"
+      XBB_GDB_TAG_NAME="gdb-13-arm-none-eabi-${XBB_ARM_RELEASE}"
+
+      XBB_GDB_SRC_FOLDER_NAME="binutils-gdb-${XBB_GDB_TAG_NAME}"
+      XBB_GDB_ARCHIVE_NAME="${XBB_GDB_TAG_NAME}.tar.gz"
+      XBB_GDB_ARCHIVE_URL="https://github.com/xpack-dev-tools/binutils-gdb/archive/refs/tags/${XBB_GDB_ARCHIVE_NAME}"
+
+      # Mandatory, otherwise gdb-py3 is not relocatable.
+      XBB_GDB_PATCH_FILE_NAME="gdb-${XBB_GDB_VERSION}-cross.git.patch"
+
+      # -----------------------------------------------------------------------
+
+      # Arm: release notes.
+      # Repository: git://gcc.gnu.org/git/gcc.git
+      # Branch: refs/vendors/ARM/heads/arm-14
+      # Revision: ?
+
+      # XBB_GCC_VERSION computer from XBB_RELEASE_VERSION
+      XBB_GCC_SRC_FOLDER_NAME="gcc"
+      XBB_GCC_ARCHIVE_NAME="gcc-arm-none-eabi-${XBB_ARM_RELEASE}.tar.xz"
+      XBB_GCC_ARCHIVE_URL="${XBB_ARM_URL_BASE}/gcc.tar.xz"
+
+      XBB_GCC_PATCH_FILE_NAME="gcc-${XBB_GCC_VERSION}-cross.git.patch"
+
+      XBB_GCC_MULTILIB_LIST="aprofile,rmprofile"
+
+      # -----------------------------------------------------------------------
+
+      # Arm: release notes.
+      # https://www.sourceware.org/newlib/
+      # Repository: git://sourceware.org/git/newlib-cygwin.git
+      # Revision: ?
+
+      # From newlib/configure PACKAGE_VERSION=
+      XBB_NEWLIB_VERSION="4.4.0"
+      XBB_NEWLIB_SRC_FOLDER_NAME="newlib-cygwin"
+      XBB_NEWLIB_ARCHIVE_NAME="newlib-arm-none-eabi-${XBB_ARM_RELEASE}.tar.xz"
+      XBB_NEWLIB_ARCHIVE_URL="${XBB_ARM_URL_BASE}/newlib-cygwin.tar.xz"
+
+    elif [[ "${XBB_RELEASE_VERSION}" =~ 13[.]2[.]1-.* ]]
     then
       # https://developer.arm.com/-/media/Files/downloads/gnu/13.2.rel1/manifest/arm-gnu-toolchain-arm-none-eabi-abe-manifest.txt
 
