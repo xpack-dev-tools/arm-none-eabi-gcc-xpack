@@ -22,7 +22,7 @@ import GitHubActionsDurations from './_github-actions-durations.mdx'
 import MoreTests from './_more-tests.mdx'
 import ShareCustom from './_share-custom.mdx'
 import FirstProductionRun from './_first-production-run.mdx'
-import { developmentDurations } from './_development-durations.mdx'
+import {developmentDurations} from './_development-durations.mdx'
 import Patches from './_patches.mdx'
 
 import PlatformNativeBuild from './_common/_platform-native-build.mdx'
@@ -126,44 +126,27 @@ In the `xpack-dev-tools/arm-none-eabi-gcc-xpack` Git repo:
 
 - switch to the `xpack-development` branch
 - pull new changes
-- if needed, merge the `website` branch
+- if necessary, merge the `website` branch
 
 The `xpack` branch should be unchanged since the previous release
 and will be updated when the new release is out.
-
-### Fix possible open issues
-
-Check GitHub issues and pull requests:
-
-- https://github.com/xpack-dev-tools/arm-none-eabi-gcc-xpack/issues/
-
-and fix them; assign them to a milestone (like <code>{ customField('upstreamVersion') }-{ customField('xpackSubversion') }</code>).
 
 ### Update helper & other dependencies
 
 Check the latest versions at https://github.com/xpack-dev-tools/ and
 update the dependencies in `build-assets/package.json`.
 
-<CheckUpstreamRelease/>
+### Increase the version and update the version in top `package.json`
 
-### Increase the version and update VERSION
+- determine the version (like <code>{customField('upstreamVersion')}</code>)
+- update the version in top `package.json`
+- use the new version, suffixed by `.pre`,
+like <code>{customField('upstreamVersion')}-{customField('xpackSubversion')}.{customField('npmSubversion')}.pre</code>.
 
-Determine the version (like <code>{ customField('upstreamVersion') }</code>)
-and update the `build-assets/scripts/VERSION` file; the format
-is <code>{ customField('upstreamVersion') }-{ customField('xpackSubversion') }</code>.
-{ isXpackSubversionDouble() ?
-'The fourth & fifth numbers are the xPack release number of this version. A sixth number will be added to the version in `package.json` when the package is published to the `npm` server' :
-'The fourth number is the xPack release number of this version. A fifth number will be added to the version in `package.json` when the package is published to the `npm` server' }.
+### Update the `customFields` in `build-assets/package.json` (if necessary)
 
-### Update the version in top `package.json` to a pre-release
-
-Use the new version, suffixed by `.pre`,
-like <code>{ customField('upstreamVersion') }-{ customField('xpackSubversion') }.{ customField('npmSubversion') }.pre</code>.
-
-### Update the `customFields` (if needed)
-
-If the project uses `customFierlds` in `build-assets/package.json`,
-update the release specific properties (if any).
+If the project uses `customFields` in `build-assets/package.json`,
+update them (for example `armSubRelease` for Arm toolchains).
 
 ### Start the local web server
 
@@ -177,14 +160,41 @@ or run the following in a terminal:
 Navigate to the **Maintainer Info** page,
 the **Update the version specific code** section.
 
+### Increase the version and update VERSION
+
+Determine the version (like <code>{customField('upstreamVersion')}</code>)
+and update the `build-assets/scripts/VERSION` file; the format
+is <code>{customField('upstreamVersion')}-{customField('xpackSubversion')}</code>.
+{isXpackSubversionDouble() ?
+'The fourth & fifth numbers are the xPack release number of this version. A sixth number will be added to the version in `package.json` when the package is published to the `npm` server' :
+'The fourth number is the xPack release number of this version. A fifth number will be added to the version in `package.json` when the package is published to the `npm` server'}.
+
+<CheckUpstreamRelease/>
+
+### Update the `customFields` (if necessary)
+
+If the project uses `customFields` in `build-assets/package.json`
+
+- update the release specific properties (if any)
+- restart the local web server
+
+
 <UpdateVersionSpecific/>
+
+### Fix possible open issues
+
+Check GitHub issues and pull requests:
+
+- https://github.com/xpack-dev-tools/arm-none-eabi-gcc-xpack/issues/
+
+and fix them; assign them to a milestone (like <code>{customField('upstreamVersion')}-{customField('xpackSubversion')}</code>).
 
 ### Update `CHANGELOG.md`
 
 - open the `CHANGELOG.md` file
 - check if all previous fixed issues are in
-- add a new entry like _**\* v{ customField('upstreamVersion') }-{ customField('xpackSubversion') } prepared**_
-- commit with a message like _**prepare v{ customField('upstreamVersion') }-{ customField('xpackSubversion') }**_
+- add a new entry like _**\* v{customField('upstreamVersion')}-{customField('xpackSubversion')} prepared**_
+- commit with a message like _**prepare v{customField('upstreamVersion')}-{customField('xpackSubversion')}**_
 
 ### Push the changes to Git
 
@@ -257,7 +267,7 @@ For a debug build:
 xpm run build-development-debug --config darwin-x64 -C ~/Work/xpack-dev-tools/arm-none-eabi-gcc-xpack.git/build-assets
 ```
 
-The build takes { developmentDurations["work"] }.
+The build takes {developmentDurations["work"]}.
 
 When functional, push the `xpack-development` branch to GitHub.
 
@@ -334,8 +344,8 @@ Copy the trees displayed at the end of the test builds and paste to
 
 - `website/docs/install/_miscellaneous.mdx`
 
-Replace **{ customField('upstreamVersion') }** with
-`${ customField('upstreamVersion') }`.
+Replace **{customField('upstreamVersion')}** with
+`${customField('upstreamVersion')}`.
 
 :::tip
 
@@ -601,7 +611,7 @@ xattr -cr ${HOME}/Downloads/xpack-*
 ### Create a new GitHub pre-release draft
 
 - in `CHANGELOG.md`, add the release date and a message
-  like _**\* v{ customField('upstreamVersion') }-{ customField('xpackSubversion') } released**_
+  like _**\* v{customField('upstreamVersion')}-{customField('xpackSubversion')} released**_
 - commit with _**CHANGELOG update**_
 - check and possibly update the `build-assets/templates/body-github-release-liquid.mdx`
 - push the `xpack-development` branch to GitHub
@@ -616,8 +626,8 @@ The workflow result and logs are available from the
 
 The result is a
 [draft pre-release](https://github.com/xpack-dev-tools/arm-none-eabi-gcc-xpack/releases/)
-tagged like **v{ customField('upstreamVersion') }-{ customField('xpackSubversion') }** (mind the dash in the middle!) and
-named like **xPack GNU Arm Embedded GCC v{ customField('upstreamVersion') }-{ customField('xpackSubversion') }** (mind the dash),
+tagged like **v{customField('upstreamVersion')}-{customField('xpackSubversion')}** (mind the dash in the middle!) and
+named like **xPack GNU Arm Embedded GCC v{customField('upstreamVersion')}-{customField('xpackSubversion')}** (mind the dash),
 with all binaries attached.
 
 - edit the draft and attach it to the `xpack-development` branch (important!)
@@ -635,7 +645,7 @@ xpm run generate-website-blog-post -C ~/Work/xpack-dev-tools/arm-none-eabi-gcc-x
 
 - edit the front matter properties
 - select the correct summary
-- commit with _**blog post release { customField('upstreamVersion') }-{ customField('xpackSubversion') } published**_
+- commit with _**blog post release {customField('upstreamVersion')}-{customField('xpackSubversion')} published**_
 
 ### Create the GitHub pre-release
 
@@ -677,14 +687,14 @@ xpm run update-package-binaries -C ~/Work/xpack-dev-tools/arm-none-eabi-gcc-xpac
 - compare the SHA sums with those shown by `cat *.sha`
 - check the executable names
 - commit all changes, use a message like
-  _**package.json: update urls for { customField('upstreamVersion') }-{ customField('xpackSubversion') }.{ customField('npmSubversion') } release**_
+  _**package.json: update urls for {customField('upstreamVersion')}-{customField('xpackSubversion')}.{customField('npmSubversion')} release**_
 
 ### Publish on the npmjs.com server
 
 - select the `xpack-development` branch
 - check the latest commits `npm run git-log`
-- update `CHANGELOG.md`, add a line like _**\* v{ customField('upstreamVersion') }-{ customField('xpackSubversion') } published on npmjs.com**_
-- commit with a message like _**CHANGELOG: publish npm v{ customField('upstreamVersion') }-{ customField('xpackSubversion') }.{ customField('npmSubversion') }**_
+- update `CHANGELOG.md`, add a line like _**\* v{customField('upstreamVersion')}-{customField('xpackSubversion')} published on npmjs.com**_
+- commit with a message like _**CHANGELOG: publish npm v{customField('upstreamVersion')}-{customField('xpackSubversion')}.{customField('npmSubversion')}**_
 - `npm pack` and check the content of the archive, which should list
   only the `package.json`, the `README.md`, `LICENSE` and `CHANGELOG.md`;
   possibly adjust `.npmignore`
@@ -692,7 +702,7 @@ xpm run update-package-binaries -C ~/Work/xpack-dev-tools/arm-none-eabi-gcc-xpac
   GitHub release; the fifth number is the npm specific version:
 
 <CodeBlock language="sh"> {
-`npm version ${ customField('upstreamVersion') }-${ customField('xpackSubversion') }.${ customField('npmSubversion') }
+`npm version ${customField('upstreamVersion')}-${customField('xpackSubversion')}.${customField('npmSubversion')}
 `} </CodeBlock>
 
 - the commits and the tag should have been pushed by the `postversion` script;
@@ -741,15 +751,15 @@ When the release is considered stable, promote it as `latest`:
 
 <CodeBlock language="sh"> {
 `npm dist-tag ls @xpack-dev-tools/arm-none-eabi-gcc
-npm dist-tag add @xpack-dev-tools/arm-none-eabi-gcc@${ customField('upstreamVersion') }-${ customField('xpackSubversion') }.${ customField('npmSubversion') } latest
-npm dist-tag ls @xpack-dev-tools/arm-none-eabi-gcc`
-} </CodeBlock>
+npm dist-tag add @xpack-dev-tools/arm-none-eabi-gcc@${customField('upstreamVersion')}-${customField('xpackSubversion')}.${customField('npmSubversion')} latest
+npm dist-tag ls @xpack-dev-tools/arm-none-eabi-gcc
+`} </CodeBlock>
 
 In case the previous version is not functional and needs to be unpublished:
 
 <CodeBlock language="sh"> {
-`npm unpublish @xpack-dev-tools/arm-none-eabi-gcc@${ customField('upstreamVersion') }-${ customField('xpackSubversion') }.${ customField('npmSubversion') }`
-} </CodeBlock>
+`npm unpublish @xpack-dev-tools/arm-none-eabi-gcc@${customField('upstreamVersion')}-${customField('xpackSubversion')}.${customField('npmSubversion')}
+`} </CodeBlock>
 
 ### Build the static website locally
 
@@ -822,7 +832,7 @@ The results are available from the
 
 - in a separate browser windows, open [X/Twitter](https://twitter.com)
 - using the **`@xpack_project`** account
-- paste the release name like _**xPack GNU Arm Embedded GCC v{ customField('upstreamVersion') }-{ customField('xpackSubversion') } released**_
+- paste the release name like _**xPack GNU Arm Embedded GCC v{customField('upstreamVersion')}-{customField('xpackSubversion')} released**_
 - paste the link to the blog post
   [release](https://xpack.github.io/arm-none-eabi-gcc/releases/)
 - click the **Tweet** button

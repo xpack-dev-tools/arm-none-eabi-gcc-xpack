@@ -1,8 +1,8 @@
 // DO NOT EDIT!
 // Automatically generated from xbb-helper/templates/docusaurus/common.
 
-import { themes as prismThemes } from 'prism-react-renderer';
-import type { Config } from '@docusaurus/types';
+import {themes as prismThemes} from 'prism-react-renderer';
+import type {Config} from '@docusaurus/types';
 import type * as Preset from '@docusaurus/preset-classic';
 import logger from '@docusaurus/logger';
 
@@ -11,7 +11,7 @@ import logger from '@docusaurus/logger';
 // so the entire initialisation code must be in this file, that is
 // not processed by webpack.
 
-import { fileURLToPath } from 'node:url';
+import {fileURLToPath} from 'node:url';
 import path from 'node:path';
 import fs from 'node:fs';
 

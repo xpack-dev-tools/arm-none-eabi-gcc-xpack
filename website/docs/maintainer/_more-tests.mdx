@@ -8,8 +8,8 @@ import customField from '@site/src/libs/customField';
 - check version:
 
 <CodeBlock language="sh"> {
-`.../arm-none-eabi-${ customField('upstreamVersion') }-${ customField('xpackSubversion') }/bin/arm-none-eabi-gcc --version
-arm-none-eabi-gcc (xPack GNU Arm Embedded GCC x86_64) ${ customField('upstreamVersion') }
+`.../arm-none-eabi-${customField('upstreamVersion')}-${customField('xpackSubversion')}/bin/arm-none-eabi-gcc --version
+arm-none-eabi-gcc (xPack GNU Arm Embedded GCC x86_64) ${customField('upstreamVersion')}
 `} </CodeBlock>
 
 - in a separate workspace, Import → General → Existing Projects into Workspace

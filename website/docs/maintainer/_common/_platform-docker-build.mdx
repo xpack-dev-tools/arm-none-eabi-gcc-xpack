@@ -5,7 +5,7 @@ import CodeBlock from '@theme/CodeBlock';
 
 import customField from '@site/src/libs/customField';
 
-import { developmentDurations } from '../_development-durations.mdx'
+import {developmentDurations} from '../_development-durations.mdx'
 
 {/* ------------------------------------------------------------------------ */}
 
@@ -19,18 +19,18 @@ git -C ~/Work/xpack-dev-tools/xbb-helper-xpack.git pull && \\
 xpm link -C ~/Work/xpack-dev-tools/xbb-helper-xpack.git && \\
 xpm run link-deps -C ~/Work/xpack-dev-tools/arm-none-eabi-gcc-xpack.git/build-assets && \\
 \\
-xpm run deep-clean --config ${ props.platform }  -C ~/Work/xpack-dev-tools/arm-none-eabi-gcc-xpack.git/build-assets && \\
-xpm run docker-prepare --config ${ props.platform } -C ~/Work/xpack-dev-tools/arm-none-eabi-gcc-xpack.git/build-assets && \\
-xpm run docker-link-deps --config ${ props.platform } -C ~/Work/xpack-dev-tools/arm-none-eabi-gcc-xpack.git/build-assets && \\
-xpm run docker-build-development --config ${ props.platform } -C ~/Work/xpack-dev-tools/arm-none-eabi-gcc-xpack.git/build-assets`
-} </CodeBlock>
+xpm run deep-clean --config ${props.platform}  -C ~/Work/xpack-dev-tools/arm-none-eabi-gcc-xpack.git/build-assets && \\
+xpm run docker-prepare --config ${props.platform} -C ~/Work/xpack-dev-tools/arm-none-eabi-gcc-xpack.git/build-assets && \\
+xpm run docker-link-deps --config ${props.platform} -C ~/Work/xpack-dev-tools/arm-none-eabi-gcc-xpack.git/build-assets && \\
+xpm run docker-build-development --config ${props.platform} -C ~/Work/xpack-dev-tools/arm-none-eabi-gcc-xpack.git/build-assets
+`} </CodeBlock>
 
-{ developmentDurations[ props.platform ] }, the output of the build script is a compressed
+{developmentDurations[ props.platform ]}, the output of the build script is a compressed
 archive and its SHA signature, created in
-the <code>buils-assets/build/{ props.platform }/deploy</code> folder:
+the <code>buils-assets/build/{props.platform}/deploy</code> folder:
 
-* <code>xpack-arm-none-eabi-gcc-{ customField('upstreamVersion') }-{ customField('xpackSubversion') }-{ props.platform }.{ props.platform === 'win32-x64' ? 'zip' : 'tar.gz' }</code>
-* <code>xpack-arm-none-eabi-gcc-{ customField('upstreamVersion') }-{ customField('xpackSubversion') }-{ props.platform }.{ props.platform === 'win32-x64' ? 'zip' : 'tar.gz' }.sha</code>
+* <code>xpack-arm-none-eabi-gcc-{customField('upstreamVersion')}-{customField('xpackSubversion')}-{props.platform}.{props.platform === 'win32-x64' ? 'zip' : 'tar.gz'}</code>
+* <code>xpack-arm-none-eabi-gcc-{customField('upstreamVersion')}-{customField('xpackSubversion')}-{props.platform}.{props.platform === 'win32-x64' ? 'zip' : 'tar.gz'}.sha</code>
 
 To update the build scripts and build the release binaries:
 
@@ -39,7 +39,7 @@ To update the build scripts and build the release binaries:
 git -C ~/Work/xpack-dev-tools/arm-none-eabi-gcc-xpack.git pull && \\
 xpm run install -C ~/Work/xpack-dev-tools/arm-none-eabi-gcc-xpack.git/build-assets && \\
 \\
-xpm run deep-clean --config ${ props.platform }  -C ~/Work/xpack-dev-tools/arm-none-eabi-gcc-xpack.git/build-assets && \\
-xpm run docker-prepare --config ${ props.platform } -C ~/Work/xpack-dev-tools/arm-none-eabi-gcc-xpack.git/build-assets && \\
-xpm run docker-build-development --config ${ props.platform } -C ~/Work/xpack-dev-tools/arm-none-eabi-gcc-xpack.git/build-assets`
-} </CodeBlock>
+xpm run deep-clean --config ${props.platform}  -C ~/Work/xpack-dev-tools/arm-none-eabi-gcc-xpack.git/build-assets && \\
+xpm run docker-prepare --config ${props.platform} -C ~/Work/xpack-dev-tools/arm-none-eabi-gcc-xpack.git/build-assets && \\
+xpm run docker-build-development --config ${props.platform} -C ~/Work/xpack-dev-tools/arm-none-eabi-gcc-xpack.git/build-assets
+`} </CodeBlock>
