@@ -91,7 +91,7 @@ function application_build_versioned_components()
 
       # From `gdb/version.in`
       XBB_GDB_VERSION="14.2"
-      XBB_GDB_TAG_NAME="gdb-13-arm-none-eabi-${XBB_ARM_RELEASE}"
+      XBB_GDB_TAG_NAME="gdb-14-arm-none-eabi-${XBB_ARM_RELEASE}"
 
       XBB_GDB_SRC_FOLDER_NAME="binutils-gdb-${XBB_GDB_TAG_NAME}"
       XBB_GDB_ARCHIVE_NAME="${XBB_GDB_TAG_NAME}.tar.gz"
