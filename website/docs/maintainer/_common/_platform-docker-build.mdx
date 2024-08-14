@@ -9,6 +9,18 @@ import {developmentDurations} from '../_development-durations.mdx'
 
 {/* ------------------------------------------------------------------------ */}
 
+To check the available space:
+
+```sh
+xpm run check-space -C ~/Work/xpack-dev-tools/arm-none-eabi-gcc-xpack.git/build-assets
+```
+
+To free the space used by all previous builds of all `xpack-dev-tools` packages:
+
+```sh
+xpm run clear-all-project-builds -C ~/Work/xpack-dev-tools/arm-none-eabi-gcc-xpack.git/build-assets
+```
+
 To update the build scripts and build the development binaries:
 
 <CodeBlock language="sh"> {

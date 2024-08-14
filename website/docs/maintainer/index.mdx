@@ -9,6 +9,9 @@ date: 2024-07-12 20:11:00 +0300
 
 ---
 
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+
 import CodeBlock from '@theme/CodeBlock';
 
 import customField from '@site/src/libs/customField';
@@ -481,23 +484,44 @@ Use the message **build-assets/package.json: bump deps**.
 ### Check for disk space
 
 Check if the build machines have enough free space and eventually
-do some cleanups
+do some cleanups:
 
-GNU/Linux:
+```sh
+xpm run check-space -C ~/Work/xpack-dev-tools/arm-none-eabi-gcc-xpack.git/build-assets
+```
+
+This is equivalent to running a `df` command.
+
+<Tabs groupId="operating-systems">
+
+<TabItem value="macos" label="macOS">
+
+```
+df -gH /
+```
+
+</TabItem>
+
+<TabItem value="linux" label="GNU/Linux">
 
 ```sh
 df -BG -H /
 ```
 
-macOS:
-```
-df -gH /
-```
+</TabItem>
 
-To free the space used by previous builds:
+</Tabs>
+
+To free the space used by all previous builds of all `xpack-dev-tools` packages:
 
 ```sh
-rm -rf ~/Work/xpack-dev-tools/*/build-assets/build ~/Work/xpack-dev-tools/*/build
+xpm run clear-all-project-builds -C ~/Work/xpack-dev-tools/arm-none-eabi-gcc-xpack.git/build-assets
+```
+
+This is equivalent to running a wide `rm` to remove the `build` folders:
+
+```sh
+rm -rf ~/Work/xpack-dev-tools/*/build-assets/build
 ```
 
 ### Generate the GitHub workflows
