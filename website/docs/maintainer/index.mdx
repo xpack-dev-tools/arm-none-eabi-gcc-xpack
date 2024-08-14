@@ -129,6 +129,12 @@ In the `xpack-dev-tools/arm-none-eabi-gcc-xpack` Git repo:
 - pull new changes
 - if necessary, merge the `website` branch
 
+:::caution
+
+This is really important, otherwise the next steps will build again the previous release!
+
+:::
+
 The `xpack` branch should be unchanged since the previous release
 and will be updated when the new release is out.
 
@@ -196,7 +202,7 @@ and fix them; assign them to a milestone (like <code>{customField('upstreamVersi
 - add a new entry like _**\* v{customField('upstreamVersion')}-{customField('xpackSubversion')} prepared**_
 - commit with a message like _**prepare v{customField('upstreamVersion')}-{customField('xpackSubversion')}**_
 
-### Push the changes to Git
+### Push the changes to the `xpack-development` branch
 
 Be sure that the latest commit that updates `VERSION` is pushed
 to the `xpack-development` branch!
@@ -217,11 +223,11 @@ Before the real build, run test builds on all platforms.
 
 <FirstDevelopmentRun/>
 
-### Visual Studio Code
+### Visual Studio Code extension
 
 All actions are defined as **xPack actions** and can be conveniently
 triggered via the VS Code graphical interface, using the
-[xPack extension](https://marketplace.visualstudio.com/items?itemName=ilg-vscode.xpack).
+[xPack C/C++ Managed Build Tools extension](https://marketplace.visualstudio.com/items?itemName=ilg-vscode.xpack).
 
 <Patches/>
 
