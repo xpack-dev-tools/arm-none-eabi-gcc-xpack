@@ -1,8 +1,46 @@
 
+import customField from '@site/src/libs/customField';
+
 {/* ------------------------------------------------------------------------ */}
+
+## Miscellaneous
+
+### XML parsing in GDB
+
+Some advanced GDB servers, like the one provided with SEGGER J-Link, are
+capable of passing an XML with the target capabilities to the GDB client.
+For unknown reasons, the Arm toolchain distribution came without XML
+parsing support. The xPack distribution brings back support for
+XML parsing and full integration with the SEGGER J-Link GDB server.
+
+### Python
+
+Support for Python scripting was added to GDB. This distribution provides
+a separate binary, `arm-none-eabi-gdb-py3` with
+support for **Python {customField('python_version')}**.
+
+The Python 3 run-time is included, so GDB does not need any version of
+Python to be installed, and is insensitive to the presence of other
+versions.
+
+Support for Python 2 was discontinued.
+
+### Text User Interface (TUI)
+
+Support for TUI was added to GDB. The `ncurses` library was added to
+the distribution.
+
+:::note
+
+TUI is not available on Windows
+
+:::
+
+### No Guile
+
+Due to the difficulties of building standalone Guile libraries on all
+platforms, support for Guile scripting in GDB is currently not available.
 
 ## Using arm-none-eabi-gcc in testing
 
 TODO
-
-(`_more.mdx`)
