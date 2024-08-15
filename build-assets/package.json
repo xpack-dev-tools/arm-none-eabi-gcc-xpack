@@ -18,11 +18,15 @@
         "programName": "arm-none-eabi-gcc",
         "branding": "arm-none-eabi-gcc (xPack GNU Arm Embedded GCC x86_64) ",
         "triplet": "arm-none-eabi",
+        "armMajorMinorRelease": "13.3",
         "armSubRelease": "1",
+        "armReleaseDate": "4 July, 2024",
         "gdbVersionMajor": "14",
         "gdbVersionMinor": "2",
         "binutilsVersionMajor": "2",
-        "binutilsVersionMinor": "42"
+        "binutilsVersionMinor": "42",
+        "pythonVersion": "3.11.4",
+        "newlibVersion": "4.4.0"
       },
       "buildFolderRelativePath": "{{ 'build' | path_join: configuration.name | to_filename | downcase }}",
       "buildFolderRelativePathPosix": "{{ 'build' | path_posix_join: configuration.name | downcase }}",
