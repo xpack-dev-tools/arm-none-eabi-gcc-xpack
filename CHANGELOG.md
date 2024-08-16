@@ -2,9 +2,43 @@
 
 Entries in this file are in reverse chronological order.
 
+## 2024-08-16
+
+* v13.3.1-1.1 released
+* 5a4ee4e website updates
+
+## 2024-08-15
+
+* 296b72b website updates
+* 23829c6 build-assets/package.json: customFields updates
+* 787d75a build-assets/templates updates
+* 7fd634f website update
+* df6c7f5 application.sh: re-enable multilibs
+* 02a9553 build-assets/package.json: bump deps
+* 2a144f7 application.sh: disable multilib
+* 9f6f95c website: re-generate commons
+* c132b52 build-assets/package.json: bump deps
+
+## 2024-08-14
+
+* d53140e application.sh: with multilib
+* f874cba website: re-generate commons
+* 7436c5c build-assets/package.json: bump deps
+* 00a23cf build-assets/package.json: updates
+* f45db8a website update
+* 43c0501 website update
+* 4e2ff0e website: re-generate commons
+* c1c4cc7 website: re-generate commons
+* 0d0bd5c website update
+* 8bd18bd website update
+* b221ebd add nano manifest
+* 3d3dd10 versioning.sh: fix gdb tag
+* eb674c6 build-assets/package-lock.json update
+
 ## 2024-08-13
 
-* v13.3.1-1.1 prepared
+* 21b0040 website update
+* 20318dc prepare v13.3.1-1.1
 * 356a895 website update
 
 ## 2024-08-12
