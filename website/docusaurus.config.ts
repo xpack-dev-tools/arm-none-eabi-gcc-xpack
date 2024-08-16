@@ -25,7 +25,7 @@ function getCustomFields() {
   const topFileContent = fs.readFileSync(topFilePath);
 
   const topPackageJson = JSON.parse(topFileContent.toString());
-  const jsonVersion = topPackageJson.version.replace(".pre", "");
+  const jsonVersion = topPackageJson.version.replace(/[.-]pre/, '');
 
   logger.info(`package version: ${topPackageJson.version}`);
 
@@ -56,6 +56,7 @@ function getCustomFields() {
   return {
     appName: rootPackageJson.xpack.properties.appName,
     appLcName: rootPackageJson.xpack.properties.appLcName,
+    version: jsonVersion,
     upstreamVersion,
     xpackSubversion,
     npmSubversion,
