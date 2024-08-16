@@ -146,7 +146,7 @@ and will be updated when the new release is out.
 Check the latest versions at https://github.com/xpack-dev-tools/ and
 update the dependencies in `build-assets/package.json`.
 
-### Increase the version and update the version in top `package.json`
+### Increase the version and update it in the top `package.json`
 
 - determine the version (like <code>{customField('upstreamVersion')}</code>)
 - update the version in top `package.json`
@@ -156,7 +156,7 @@ like <code>{customField('upstreamVersion')}-{customField('xpackSubversion')}.{cu
 ### Update the `customFields` in `build-assets/package.json` (if necessary)
 
 If the project uses `customFields` in `build-assets/package.json`,
-update them (for example `armSubRelease` for Arm toolchains).
+update them.
 
 ### Start the local web server
 
@@ -375,7 +375,7 @@ via HomeBrew, and make a link to `/usr/local/bin`.
 
 :::
 
-### Update the list of links in package.json
+### Update the list of links in top package.json
 
 Copy/paste the full list of links displayed at the end of the build, in
 sequence, for each platform (GNU/Linux, macOS, Windows), and check the
@@ -713,7 +713,7 @@ watching this project.
   - `website/docs/install/_manual-install-quick-test.mdx`
 - commit changes
 
-### Check the list of links in package.json
+### Check the list of links in top package.json
 
 - open the `package.json` file
 - check if the links in the `bin` property cover the actual binaries
@@ -832,7 +832,7 @@ and the X/Twitter announcement
 The `website` branch may be subsequently updated, as long as the
 version in `package.json` is not changed.
 
-### Update the repo main branch
+### Update the `xpack` branch
 
 - merge `xpack-development` into `xpack`
 - push the `xpack` branch to GitHub

@@ -34,13 +34,13 @@ Similarly for GDB:
 - push the tag to origin
 - check the tag at https://github.com/xpack-dev-tools/binutils-gdb/tags/
 
-### Update local gcc fork (if the commit ID present in manifest.txt)
+### Update the local gcc fork (if the commit ID present in manifest.txt)
 
 With a Git client:
 
 - checkout the branch mentioned in the release notes
   (like <code>ARM/arm-{versionMajor()}</code>)
-- identify the commit ID (search upwards)
+- identify the commit ID (filter by branch and search downwards)
 - create a branch like <code>arm-{customField('gdbVersionMajor')}-arm-none-eabi-{versionMajor()}.{versionMinor()}.rel{customField('armSubRelease')}</code>
 
 ### Update the gdb-*-cross.git.patch in helper
