@@ -656,7 +656,7 @@ xattr -cr ${HOME}/Downloads/xpack-*
 
 ## Publish the release
 
-### Create a new GitHub pre-release draft
+### Create a new GitHub pre-release
 
 - in `CHANGELOG.md`, add the release date and a message
   like _**\* v{customField('upstreamVersion')}-{customField('xpackSubversion')} released**_
@@ -679,7 +679,13 @@ named like **xPack GNU Arm Embedded GCC v{customField('upstreamVersion')}-{custo
 with all binaries attached.
 
 - edit the draft and attach it to the `xpack-development` branch (important!)
-- save the draft (do **not** publish yet!)
+- perform the final edits and check if everything is fine
+- **keep the pre-release button enabled**
+- do **not** enable Discussions yet
+- click the **Publish release** button
+
+Note: at this moment the system should send a notification to all clients
+watching this project.
 
 ### Prepare a new blog post
 
@@ -695,16 +701,6 @@ xpm run generate-website-blog-post -C ~/Work/xpack-dev-tools/arm-none-eabi-gcc-x
 - select the correct summary
 - commit with _**blog post release {customField('upstreamVersion')}-{customField('xpackSubversion')} published**_
 
-### Create the GitHub pre-release
-
-- go to the [GitHub Releases](https://github.com/xpack-dev-tools/arm-none-eabi-gcc-xpack/releases/) page
-- perform the final edits and check if everything is fine
-- **keep the pre-release button enabled**
-- do not enable Discussions yet
-- click the **Publish release** button
-
-Note: at this moment the system should send a notification to all clients
-watching this project.
 
 ### Update the web install page
 
@@ -722,6 +718,7 @@ watching this project.
 ### Update the package.json list of binaries
 
 - select the `xpack-development` branch
+- be sure that the binaries were attached to the pre-release
 - run the **update-package-binaries** xPack action:
 
 ```sh
