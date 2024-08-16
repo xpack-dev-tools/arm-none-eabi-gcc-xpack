@@ -1,0 +1,204 @@
+---
+title:  xPack GNU Arm Embedded GCC v13.3.1-1.1 released
+
+date: 2024-08-16 10:14:30 +0300
+
+authors: ilg-ul
+
+# To be listed in the Releases page.
+tags:
+  - releases
+
+# ----- Custom properties -----------------------------------------------------
+
+arm_version: "13.3.Rel1"
+arm_date: "4 July, 2024"
+
+gcc_version: "13.3.1"
+binutils_version: "2.42"
+gdb_version: "14.2"
+newlib_version: "4.4.0"
+python_version: "3.11.4"
+
+version: "13.3.1-1.1"
+npm_subversion: "1"
+
+download_url: https://github.com/xpack-dev-tools/arm-none-eabi-gcc-xpack/releases/tag/v13.3.1-1.1/
+
+---
+
+Version **13.3.1-1.1** is a new release; it follows the Arm release.
+
+<!-- truncate -->
+
+import Image from '@theme/IdealImage';
+import CodeBlock from '@theme/CodeBlock';
+
+import Prerequisites from './_common/_prerequisites-glib-2.27.mdx'
+import DeprecationNotices from './_common/_deprecation-notices-glib-2.27.mdx'
+import DownloadAnalytics from './_common/_download-analytics.mdx'
+
+The [xPack GNU Arm Embedded GCC](https://xpack-dev-tools.github.io/arm-none-eabi-gcc-xpack/)
+is a standalone cross-platform binary distribution of
+[Arm GNU Toolchain](https://developer.arm.com/Tools%20and%20Software/GNU%20Toolchain).
+
+There are separate binaries for **Windows** (x64),
+**macOS** (x64 and arm64) and **GNU/Linux** (x64, arm64 and arm).
+
+:::note Raspberry Pi
+
+The main targets for the GNU/Linux Arm
+binaries are the **Raspberry Pi** class devices (armv7l and aarch64;
+armv6 is not supported).
+
+:::
+
+## Download
+
+The binary files are available from <a href={frontMatter.download_url}>GitHub Releases</a>.
+
+<Prerequisites/>
+
+## Install
+
+The full details of installing the **xPack GNU AArch64 Embedded GCC** on various platforms
+are presented in the [Install Guide](/docs/install/).
+
+## Compliance
+
+The xPack GNU Arm Embedded GCC generally follows the official
+[Arm GNU Toolchain](https://developer.arm.com/tools-and-software/open-source-software/developer-tools/gnu-toolchain/downloads/)
+releases.
+
+The current version is based on:
+
+- [Arm GNU Toolchain](https://developer.arm.com/downloads/-/arm-gnu-toolchain-downloads/)
+release **{frontMatter.arm_version}** from {frontMatter.arm_date}
+and uses the same sources. It includes:
+  - GCC {frontMatter.gcc_version}
+  - binutils {frontMatter.binutils_version}
+  - newlib {frontMatter.newlib_version}
+  - GDB {frontMatter.gdb_version}
+  - Python {frontMatter.python_version}
+
+## Supported libraries
+
+The supported libraries are:
+
+```console
+$ arm-none-eabi-gcc -print-multi-lib
+.;
+arm/v5te/softfp;@marm@march=armv5te+fp@mfloat-abi=softfp
+arm/v5te/hard;@marm@march=armv5te+fp@mfloat-abi=hard
+thumb/nofp;@mthumb@mfloat-abi=soft
+thumb/v7/nofp;@mthumb@march=armv7@mfloat-abi=soft
+thumb/v7+fp/softfp;@mthumb@march=armv7+fp@mfloat-abi=softfp
+thumb/v7+fp/hard;@mthumb@march=armv7+fp@mfloat-abi=hard
+thumb/v7-r+fp.sp/softfp;@mthumb@march=armv7-r+fp.sp@mfloat-abi=softfp
+thumb/v7-r+fp.sp/hard;@mthumb@march=armv7-r+fp.sp@mfloat-abi=hard
+thumb/v7-a/nofp;@mthumb@march=armv7-a@mfloat-abi=soft
+thumb/v7-a+fp/softfp;@mthumb@march=armv7-a+fp@mfloat-abi=softfp
+thumb/v7-a+fp/hard;@mthumb@march=armv7-a+fp@mfloat-abi=hard
+thumb/v7-a+simd/softfp;@mthumb@march=armv7-a+simd@mfloat-abi=softfp
+thumb/v7-a+simd/hard;@mthumb@march=armv7-a+simd@mfloat-abi=hard
+thumb/v7ve+simd/softfp;@mthumb@march=armv7ve+simd@mfloat-abi=softfp
+thumb/v7ve+simd/hard;@mthumb@march=armv7ve+simd@mfloat-abi=hard
+thumb/v8-a/nofp;@mthumb@march=armv8-a@mfloat-abi=soft
+thumb/v8-a+simd/softfp;@mthumb@march=armv8-a+simd@mfloat-abi=softfp
+thumb/v8-a+simd/hard;@mthumb@march=armv8-a+simd@mfloat-abi=hard
+thumb/v6-m/nofp;@mthumb@march=armv6s-m@mfloat-abi=soft
+thumb/v7-m/nofp;@mthumb@march=armv7-m@mfloat-abi=soft
+thumb/v7e-m/nofp;@mthumb@march=armv7e-m@mfloat-abi=soft
+thumb/v7e-m+fp/softfp;@mthumb@march=armv7e-m+fp@mfloat-abi=softfp
+thumb/v7e-m+fp/hard;@mthumb@march=armv7e-m+fp@mfloat-abi=hard
+thumb/v7e-m+dp/softfp;@mthumb@march=armv7e-m+fp.dp@mfloat-abi=softfp
+thumb/v7e-m+dp/hard;@mthumb@march=armv7e-m+fp.dp@mfloat-abi=hard
+thumb/v8-m.base/nofp;@mthumb@march=armv8-m.base@mfloat-abi=soft
+thumb/v8-m.main/nofp;@mthumb@march=armv8-m.main@mfloat-abi=soft
+thumb/v8-m.main+fp/softfp;@mthumb@march=armv8-m.main+fp@mfloat-abi=softfp
+thumb/v8-m.main+fp/hard;@mthumb@march=armv8-m.main+fp@mfloat-abi=hard
+thumb/v8-m.main+dp/softfp;@mthumb@march=armv8-m.main+fp.dp@mfloat-abi=softfp
+thumb/v8-m.main+dp/hard;@mthumb@march=armv8-m.main+fp.dp@mfloat-abi=hard
+thumb/v8.1-m.main+mve/hard;@mthumb@march=armv8.1-m.main+mve@mfloat-abi=hard
+thumb/v8.1-m.main+pacbti/bp/nofp;@mthumb@march=armv8.1-m.main+pacbti@mbranch-protection=standard@mfloat-abi=soft
+thumb/v8.1-m.main+pacbti+fp/bp/softfp;@mthumb@march=armv8.1-m.main+pacbti+fp@mbranch-protection=standard@mfloat-abi=softfp
+thumb/v8.1-m.main+pacbti+fp/bp/hard;@mthumb@march=armv8.1-m.main+pacbti+fp@mbranch-protection=standard@mfloat-abi=hard
+thumb/v8.1-m.main+pacbti+dp/bp/softfp;@mthumb@march=armv8.1-m.main+pacbti+fp.dp@mbranch-protection=standard@mfloat-abi=softfp
+thumb/v8.1-m.main+pacbti+dp/bp/hard;@mthumb@march=armv8.1-m.main+pacbti+fp.dp@mbranch-protection=standard@mfloat-abi=hard
+thumb/v8.1-m.main+pacbti+mve/bp/hard;@mthumb@march=armv8.1-m.main+pacbti+mve@mbranch-protection=standard@mfloat-abi=hard
+```
+
+## Changes
+
+Compared to the Arm version, there should be no functional changes.
+
+## Bug fixes
+
+- none
+
+## Enhancements
+
+- none
+
+## Known problems
+
+- none
+
+## Documentation
+
+The original GNU Arm Embedded GCC documentation is available from the
+[GCC online documentation](https://gcc.gnu.org/onlinedocs/) web site.
+
+## Build
+
+The binaries for all supported platforms
+(Windows, macOS and GNU/Linux) were built using the
+[xPack Build Box (XBB)](https://xpack.github.io/xbb/), a set
+of build environments based on slightly older distributions, that should be
+compatible with most recent systems.
+
+For the prerequisites and more details on the build procedure, please see the
+[Maintainer Info](/docs/maintainer/) page.
+
+## CI tests
+
+Before publishing, a set of simple tests were performed on an exhaustive
+set of platforms. The results are available from:
+
+- [GitHub Actions](https://github.com/xpack-dev-tools/arm-none-eabi-gcc-xpack/actions/)
+- [Travis CI](https://app.travis-ci.com/github/xpack-dev-tools/arm-none-eabi-gcc-xpack/builds/)
+
+## Tests
+
+The binaries were tested on a variety of platforms,
+but mainly to check the integrity of the
+build, not the compiler functionality.
+
+## Checksums
+
+The SHA-256 hashes for the files are:
+
+```txt
+e37c379cbc423353902aada84b2b4d5a9316c2c8746c9608e69c8ac23e654aa3
+xpack-arm-none-eabi-gcc-13.3.1-1.1-darwin-arm64.tar.gz
+
+afd69764478275ee3e5b9a12d61250ae348a79a4d1fa767e5fa2762ae8b77b2a
+xpack-arm-none-eabi-gcc-13.3.1-1.1-darwin-x64.tar.gz
+
+4599172754809efaca49fb27f3b4e3c6622bd172d5240f0b9f412cc9d4f05e04
+xpack-arm-none-eabi-gcc-13.3.1-1.1-linux-arm.tar.gz
+
+34fa25d7dcd57bfdd3aeff5c595eac20dbf21a2d84b72e6c2db3bc67d556a1af
+xpack-arm-none-eabi-gcc-13.3.1-1.1-linux-arm64.tar.gz
+
+006c89337eced277fdf4c1c3bf3aebe55c85e8d52cba8d412009717fb781b959
+xpack-arm-none-eabi-gcc-13.3.1-1.1-linux-x64.tar.gz
+
+49cda1bf01215f3df0613972d21f9fec3eb79dca82506365e7da2ff74b921733
+xpack-arm-none-eabi-gcc-13.3.1-1.1-win32-x64.zip
+
+```
+
+<DeprecationNotices/>
+
+<DownloadAnalytics version={ frontMatter.version }/>
