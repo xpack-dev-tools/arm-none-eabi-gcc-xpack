@@ -4,7 +4,11 @@ Entries in this file are in reverse chronological order.
 
 ## 2024-08-16
 
-* v13.3.1-1.1 released
+* v13.3.1-1.1 published on npmjs.com
+* b3638f7 package.json: update urls for 13.3.1-1.1.1 release
+* b617e64 package.json: update bins
+* 390bcb6 blog post release 13.3.1-1.1 published
+* fc8e9bf CHANGELOG update
 * 5a4ee4e website updates
 
 ## 2024-08-15
