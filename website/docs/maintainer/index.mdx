@@ -803,7 +803,7 @@ npm dist-tag add @xpack-dev-tools/arm-none-eabi-gcc@${customField('upstreamVersi
 npm dist-tag ls @xpack-dev-tools/arm-none-eabi-gcc
 `} </CodeBlock>
 
-In case the previous version is not functional and needs to be unpublished:
+In case the release proves problematic and needs to be unpublished:
 
 <CodeBlock language="sh"> {
 `npm unpublish @xpack-dev-tools/arm-none-eabi-gcc@${customField('upstreamVersion')}-${customField('xpackSubversion')}.${customField('npmSubversion')}
