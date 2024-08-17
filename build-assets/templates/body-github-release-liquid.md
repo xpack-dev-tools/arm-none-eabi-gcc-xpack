@@ -1,10 +1,10 @@
-![Github Releases (by Release)](https://img.shields.io/github/downloads/xpack-dev-tools/arm-none-eabi-gcc-xpack/v{{ XBB_RELEASE_VERSION }}/total.svg)
+![Github Releases (by Release)](https://img.shields.io/github/downloads/xpack-dev-tools/arm-none-eabi-gcc-xpack/v{{releaseVersion}}/total.svg)
 
-Version **{{ XBB_RELEASE_VERSION }}** is a maintenance release of the **xPack GNU Arm Embedded GCC** package; it fixes <...>.
+TODO: select one
 
-Or (TODO: edit!):
+Version **{{releaseVersion}}** is a maintenance release of the **xPack GNU Arm Embedded GCC** package; it fixes ...
 
-Version **{{ XBB_RELEASE_VERSION }}** is a new release of the **xPack GNU Arm Embedded GCC** package, following the Arm [release](https://developer.arm.com/downloads/-/arm-gnu-toolchain-downloads/).
+Version **{{releaseVersion}}** is a new release of the **xPack GNU Arm Embedded GCC** package, following the Arm [release](https://developer.arm.com/downloads/-/arm-gnu-toolchain-downloads/).
 
 [Continue reading »](will-be-updated-shortly)
 
