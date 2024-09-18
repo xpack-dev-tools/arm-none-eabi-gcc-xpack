@@ -21,10 +21,18 @@ import LinksVsForwarders from '@site/src/components/LinksVsForwarders'
 
 import AutomaticInstallQuickTest from './_automatic-install-quick-test.mdx'
 import ManualInstallQuickTest from './_manual-install-quick-test.mdx'
+import FolderHierarchies from './_folder-hierarchies.mdx'
 import Miscellaneous from './_miscellaneous.mdx'
 import Testing from './_testing.mdx';
 
 {/* ------------------------------------------------------------------------ */}
+
+[![GitHub package.json version](https://img.shields.io/github/package-json/v/xpack-dev-tools/arm-none-eabi-gcc-xpack)](https://github.com/xpack-dev-tools/arm-none-eabi-gcc-xpack/blob/xpack/package.json)
+[![GitHub release (latest by date)](https://img.shields.io/github/v/release/xpack-dev-tools/arm-none-eabi-gcc-xpack)](https://github.com/xpack-dev-tools/arm-none-eabi-gcc-xpack/releases/)
+[![GitHub Release Date](https://img.shields.io/github/release-date/xpack-dev-tools/arm-none-eabi-gcc-xpack)](https://github.com/xpack-dev-tools/arm-none-eabi-gcc-xpack/releases/)
+[![npm (scoped)](https://img.shields.io/npm/v/%40xpack-dev-tools%2Farm-none-eabi-gcc?label=xpm&color=blue)](https://www.npmjs.com/package/@xpack-dev-tools/arm-none-eabi-gcc/)
+![GitHub Downloads (all assets, all releases)](https://img.shields.io/github/downloads/xpack-dev-tools/arm-none-eabi-gcc-xpack/total)
+[![npm](https://img.shields.io/npm/dm/%40xpack-dev-tools%2Farm-none-eabi-gcc?label=xpm%20downloads)](https://www.npmjs.com/package/@xpack-dev-tools/arm-none-eabi-gcc/)
 
 The **xPack GNU Arm Embedded GCC** can be installed automatically, using the `xpm` command
 (the recommended method), or manually, by downloading and unpacking one of the
@@ -348,7 +356,7 @@ The result looks like this:
     "dependencies": {},
     "devDependencies": {
       "@xpack-dev-tools/arm-none-eabi-gcc": {
-        "specifier": "${customField('upstreamVersion')}-${customField('xpackSubversion')}.${customField('npmSubversion')}",
+        "specifier": "${customField('xpackVersion')}.${customField('npmSubversion')}",
         "local": "link",
         "platforms": "all"
       }
@@ -392,7 +400,6 @@ install the packages globally will fail with _already installed_.
 
 :::
 
-
 <details>
 <summary>PATH setup</summary>
 
@@ -405,7 +412,7 @@ the project build configurations need a PATH adjustment:
 <TabItem value="windows" label="Windows" default>
 
 <CodeBlock language="sh"> {
-`export PATH=$HOME/AppData/Roaming/xPacks/\@pack-dev-tools/arm-none-eabi-gcc /${customField('upstreamVersion')}-${customField('xpackSubversion')}.${customField('npmSubversion')}/.content/bin:$PATH
+`export PATH=$HOME/AppData/Roaming/xPacks/\@pack-dev-tools/arm-none-eabi-gcc/${customField('xpackVersion')}.${customField('npmSubversion')}/.content/bin:$PATH
 `} </CodeBlock>
 
 :::tip
@@ -420,7 +427,7 @@ corresponding shell.
 <TabItem value="macos" label="macOS">
 
 <CodeBlock language="sh"> {
-`export PATH=$HOME/Library/xPacks/\@pack-dev-tools/arm-none-eabi-gcc /${customField('upstreamVersion')}-${customField('xpackSubversion')}.${customField('npmSubversion')}/.content/bin:$PATH
+`export PATH=$HOME/Library/xPacks/\@pack-dev-tools/arm-none-eabi-gcc/${customField('xpackVersion')}.${customField('npmSubversion')}/.content/bin:$PATH
 `} </CodeBlock>
 
 </TabItem>
@@ -428,7 +435,7 @@ corresponding shell.
 <TabItem value="linux" label="GNU/Linux">
 
 <CodeBlock language="sh"> {
-`export PATH=$HOME/.local/xPacks/@xpack-dev-tools/arm-none-eabi-gcc /${customField('upstreamVersion')}-${customField('xpackSubversion')}.${customField('npmSubversion')}/.content/bin:$PATH
+`export PATH=$HOME/.local/xPacks/@xpack-dev-tools/arm-none-eabi-gcc/${customField('xpackVersion')}.${customField('npmSubversion')}/.content/bin:$PATH
 `} </CodeBlock>
 
 </TabItem>
@@ -436,7 +443,6 @@ corresponding shell.
 </Tabs>
 
 </details>
-
 
 ### Uninstall
 
@@ -525,7 +531,7 @@ The Windows versions of **xPack GNU Arm Embedded GCC**
 are packed as `.zip` files.
 Download the latest version named like:
 
-* <code>xpack-arm-none-eabi-gcc-{customField('upstreamVersion')}-{customField('xpackSubversion')}-win32-x64.zip</code>
+- <code>xpack-arm-none-eabi-gcc-{customField('xpackVersion')}-win32-x64.zip</code>
 
 :::note
 
@@ -540,7 +546,7 @@ unpack the archive and move it to a location of your choice.
 
 The recommended location is
 the <code>%USERPROFILE%\\AppData\\Roaming\\xPacks\\arm-none-eabi-gcc</code> folder, for
-example <code>C:\\Users\\ilg\\AppData\\Roaming\\xPacks\\arm-none-eabi-gcc\\xpack-arm-none-eabi-gcc-{customField('upstreamVersion')}-{customField('xpackSubversion')}</code>.
+example <code>C:\\Users\\ilg\\AppData\\Roaming\\xPacks\\arm-none-eabi-gcc\\xpack-arm-none-eabi-gcc-{customField('xpackVersion')}</code>.
 
 :::note
 
@@ -557,8 +563,7 @@ The macOS versions of **xPack GNU Arm Embedded GCC**
 are packed as `.tar.gz` archives.
 Download the latest version named like:
 
-* <code>xpack-arm-none-eabi-gcc-{customField('upstreamVersion')}-{customField('xpackSubversion')}-darwin-x64.tar.gz</code>
-* <code>xpack-arm-none-eabi-gcc-{customField('upstreamVersion')}-{customField('xpackSubversion')}-darwin-arm64.tar.gz</code>
+- <code>xpack-arm-none-eabi-gcc-{customField('xpackVersion')}-darwin-x64.tar.gz</code>- <code>xpack-arm-none-eabi-gcc-{customField('xpackVersion')}-darwin-arm64.tar.gz</code>
 
 :::note
 
@@ -572,14 +577,14 @@ unpack the archive and move it to a location of your choice.
 
 The recommended location is
 the <code>~/Library/xPacks/arm-none-eabi-gcc</code> folder, for
-example <code>/Users/ilg/Library/xPacks/arm-none-eabi-gcc/xpack-arm-none-eabi-gcc-{customField('upstreamVersion')}-{customField('xpackSubversion')}</code>:
+example <code>/Users/ilg/Library/xPacks/arm-none-eabi-gcc/xpack-arm-none-eabi-gcc-{customField('xpackVersion')}</code>:
 
 <CodeBlock language="console"> {
 `mkdir -p ~/Library/xPacks/arm-none-eabi-gcc
 cd ~/Library/xPacks/arm-none-eabi-gcc
 
-tar xvf ~/Downloads/xpack-arm-none-eabi-gcc-${customField('upstreamVersion')}-${customField('xpackSubversion')}-darwin-x64.tar.gz
-chmod -R -w xpack-arm-none-eabi-gcc-${customField('upstreamVersion')}-${customField('xpackSubversion')}
+tar xvf ~/Downloads/xpack-arm-none-eabi-gcc-${customField('xpackVersion')}-darwin-x64.tar.gz
+chmod -R -w xpack-arm-none-eabi-gcc-${customField('xpackVersion')}
 `} </CodeBlock>
 
 </TabItem>
@@ -590,9 +595,7 @@ The GNU/Linux versions of **xPack GNU Arm Embedded GCC**
 are packed as `.tar.gz` archives.
 Download the latest version named like:
 
-* <code>xpack-arm-none-eabi-gcc-{customField('upstreamVersion')}-{customField('xpackSubversion')}-darwin-x64.tar.gz</code>
-* <code>xpack-arm-none-eabi-gcc-{customField('upstreamVersion')}-{customField('xpackSubversion')}-darwin-arm64.tar.gz</code>
-* <code>xpack-arm-none-eabi-gcc-{customField('upstreamVersion')}-{customField('xpackSubversion')}-darwin-arm.tar.gz</code>
+- <code>xpack-arm-none-eabi-gcc-{customField('xpackVersion')}-linux-x64.tar.gz</code>- <code>xpack-arm-none-eabi-gcc-{customField('xpackVersion')}-linux-arm64.tar.gz</code>- <code>xpack-arm-none-eabi-gcc-{customField('xpackVersion')}-linux-arm.tar.gz</code>
 
 :::note
 
@@ -606,14 +609,14 @@ unpack the archive and move it to a location of your choice.
 
 The recommended location is
 the <code>~/.local/xPacks/arm-none-eabi-gcc</code> folder, for
-example <code>/home/ilg/.local/xPacks/arm-none-eabi-gcc/xpack-arm-none-eabi-gcc-{customField('upstreamVersion')}-{customField('xpackSubversion')}</code>:
+example <code>/home/ilg/.local/xPacks/arm-none-eabi-gcc/xpack-arm-none-eabi-gcc-{customField('xpackVersion')}</code>:
 
 <CodeBlock language="console"> {
 `mkdir -p ~/.local/xPacks/arm-none-eabi-gcc
 cd ~/.local/xPacks/arm-none-eabi-gcc
 
-tar xvf ~/Downloads/xpack-arm-none-eabi-gcc-${customField('upstreamVersion')}-${customField('xpackSubversion')}-linux-x64.tar.gz
-chmod -R -w xpack-arm-none-eabi-gcc-${customField('upstreamVersion')}-${customField('xpackSubversion')}
+tar xvf ~/Downloads/xpack-arm-none-eabi-gcc-${customField('xpackVersion')}-linux-x64.tar.gz
+chmod -R -w xpack-arm-none-eabi-gcc-${customField('xpackVersion')}
 `} </CodeBlock>
 
 </TabItem>
@@ -630,6 +633,8 @@ and `.content` to store the unpacked archive.
 :::
 
 <ManualInstallQuickTest/>
+
+<FolderHierarchies/>
 
 <Miscellaneous/>
 

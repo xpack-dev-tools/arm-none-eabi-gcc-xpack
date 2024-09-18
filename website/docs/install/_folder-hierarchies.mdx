@@ -1,0 +1,353 @@
+
+import CodeBlock from '@theme/CodeBlock';
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+
+import customField from '@site/src/libs/customField';
+
+{/* ------------------------------------------------------------------------ */}
+
+## Folder hierarchy
+
+After install, the package creates a folder hierarchy like the following
+(only the first two depth levels are shown):
+
+<Tabs groupId="operating-systems">
+
+<TabItem value="windows" label="Windows" default>
+
+<CodeBlock language="console"> {
+`C:\> tree /f %USERPROFILE%\\AppData\\Roaming\\xPacks\\@xpack-dev-tools\\arm-none-eabi-gcc\\${customField('xpackVersion')}\\.content
+Folder PATH listing
+Volume serial number is B02D-925C
+├── README.md
+├── arm-none-eabi
+│   ├── bin
+│   ├── include
+│   ├── lib
+│   └── share
+├── bin
+│   ├── DLLs
+│   ├── arm-none-eabi-addr2line.exe
+│   ├── arm-none-eabi-ar.exe
+│   ├── arm-none-eabi-as.exe
+│   ├── arm-none-eabi-c++.exe
+│   ├── arm-none-eabi-c++filt.exe
+│   ├── arm-none-eabi-cpp.exe
+│   ├── arm-none-eabi-dwp.exe
+│   ├── arm-none-eabi-elfedit.exe
+│   ├── arm-none-eabi-g++.exe
+│   ├── arm-none-eabi-gcc-${customField('upstreamVersion')}.exe
+│   ├── arm-none-eabi-gcc-ar.exe
+│   ├── arm-none-eabi-gcc-nm.exe
+│   ├── arm-none-eabi-gcc-ranlib.exe
+│   ├── arm-none-eabi-gcc.exe
+│   ├── arm-none-eabi-gcov-dump.exe
+│   ├── arm-none-eabi-gcov-tool.exe
+│   ├── arm-none-eabi-gcov.exe
+│   ├── arm-none-eabi-gdb-add-index
+│   ├── arm-none-eabi-gdb-add-index-py3
+│   ├── arm-none-eabi-gdb-py3.exe
+│   ├── arm-none-eabi-gdb.exe
+│   ├── arm-none-eabi-gprof.exe
+│   ├── arm-none-eabi-ld.bfd.exe
+│   ├── arm-none-eabi-ld.exe
+│   ├── arm-none-eabi-ld.gold.exe
+│   ├── arm-none-eabi-lto-dump.exe
+│   ├── arm-none-eabi-nm.exe
+│   ├── arm-none-eabi-objcopy.exe
+│   ├── arm-none-eabi-objdump.exe
+│   ├── arm-none-eabi-ranlib.exe
+│   ├── arm-none-eabi-readelf.exe
+│   ├── arm-none-eabi-size.exe
+│   ├── arm-none-eabi-strings.exe
+│   ├── arm-none-eabi-strip.exe
+│   ├── libgcc_s_seh-1.dll
+│   ├── libgmp-10.dll
+│   ├── libmpc-3.dll
+│   ├── libmpfr-4.dll
+│   ├── libstdc++-6.dll
+│   ├── libwinpthread-1.dll
+│   ├── libzstd.dll
+│   ├── python311.dll
+│   └── python311.zip
+├── distro-info
+│   └── licenses
+├── include
+│   ├── curses.h
+│   ├── cursesapp.h
+│   ├── cursesf.h
+│   ├── cursesm.h
+│   ├── cursesp.h
+│   ├── cursesw.h
+│   ├── cursslk.h
+│   ├── eti.h
+│   ├── etip.h
+│   ├── form.h
+│   ├── gdb
+│   ├── gmp.h
+│   ├── gmpxx.h
+│   ├── iconv.h
+│   ├── isl
+│   ├── libcharset.h
+│   ├── localcharset.h
+│   ├── lzma
+│   ├── lzma.h
+│   ├── menu.h
+│   ├── mpc.h
+│   ├── mpf2mpfr.h
+│   ├── mpfr.h
+│   ├── nc_tparm.h
+│   ├── ncurses_dll.h
+│   ├── panel.h
+│   ├── term.h
+│   ├── term_entry.h
+│   ├── termcap.h
+│   ├── tic.h
+│   ├── unctrl.h
+│   ├── zconf.h
+│   ├── zdict.h
+│   ├── zlib.h
+│   ├── zstd.h
+│   └── zstd_errors.h
+├── lib
+│   ├── bfd-plugins
+│   ├── charset.alias
+│   ├── cmake
+│   ├── gcc
+│   ├── libcharset.a
+│   ├── libform.a
+│   ├── libgmp.a
+│   ├── libgmpxx.a
+│   ├── libiconv.a
+│   ├── libisl.a
+│   ├── libisl.so.15.0.0-gdb.py
+│   ├── liblzma.a
+│   ├── libmenu.a
+│   ├── libmpc.a
+│   ├── libmpfr.a
+│   ├── libncurses++.a
+│   ├── libncurses.a
+│   ├── libpanel.a
+│   ├── libz.a
+│   ├── libzstd.a
+│   ├── libzstd.so.1.5.5
+│   ├── pkgconfig
+│   ├── preloadable_libiconv.so
+│   └── texinfo
+├── libexec
+│   └── gcc
+└── share
+    ├── doc
+    ├── gcc-${customField('upstreamVersion')}
+    ├── info
+    ├── man
+    └── texinfo
+
+27 directories, 96 files
+`} </CodeBlock>
+
+</TabItem>
+
+<TabItem value="macos" label="macOS">
+
+<CodeBlock language="console"> {
+`$ tree -L 2 ~/Library/xPacks/\@xpack-dev-tools/arm-none-eabi-gcc/${customField('xpackVersion')}/.content/
+/Users/ilg/Library/xPacks/\@xpack-dev-tools/arm-none-eabi-gcc/${customField('xpackVersion')}/.content/
+├── README.md
+├── arm-none-eabi
+│   ├── bin
+│   ├── include
+│   ├── lib
+│   └── share
+├── bin
+│   ├── arm-none-eabi-addr2line
+│   ├── arm-none-eabi-ar
+│   ├── arm-none-eabi-as
+│   ├── arm-none-eabi-c++
+│   ├── arm-none-eabi-c++filt
+│   ├── arm-none-eabi-cpp
+│   ├── arm-none-eabi-dwp
+│   ├── arm-none-eabi-elfedit
+│   ├── arm-none-eabi-g++
+│   ├── arm-none-eabi-gcc
+│   ├── arm-none-eabi-gcc-${customField('upstreamVersion')}
+│   ├── arm-none-eabi-gcc-ar
+│   ├── arm-none-eabi-gcc-nm
+│   ├── arm-none-eabi-gcc-ranlib
+│   ├── arm-none-eabi-gcov
+│   ├── arm-none-eabi-gcov-dump
+│   ├── arm-none-eabi-gcov-tool
+│   ├── arm-none-eabi-gdb
+│   ├── arm-none-eabi-gdb-add-index
+│   ├── arm-none-eabi-gdb-add-index-py3
+│   ├── arm-none-eabi-gdb-py3
+│   ├── arm-none-eabi-gprof
+│   ├── arm-none-eabi-ld
+│   ├── arm-none-eabi-ld.bfd
+│   ├── arm-none-eabi-ld.gold
+│   ├── arm-none-eabi-lto-dump
+│   ├── arm-none-eabi-nm
+│   ├── arm-none-eabi-objcopy
+│   ├── arm-none-eabi-objdump
+│   ├── arm-none-eabi-ranlib
+│   ├── arm-none-eabi-readelf
+│   ├── arm-none-eabi-size
+│   ├── arm-none-eabi-strings
+│   └── arm-none-eabi-strip
+├── distro-info
+│   └── licenses
+├── include
+│   └── gdb
+├── lib
+│   ├── bfd-plugins
+│   ├── gcc
+│   ├── libcc1.0.so
+│   ├── libcc1.so -> libcc1.0.so
+│   └── python3.11
+├── libexec
+│   ├── gcc
+│   ├── libbz2.1.0.8.dylib
+│   ├── libc++.1.0.dylib
+│   ├── libc++abi.1.0.dylib
+│   ├── libcrypt.2.dylib
+│   ├── libcrypto.1.1.dylib
+│   ├── libexpat.1.6.7.dylib
+│   ├── libexpat.1.dylib -> libexpat.1.6.7.dylib
+│   ├── libffi.8.dylib
+│   ├── libgmp.10.dylib
+│   ├── libiconv.2.dylib
+│   ├── libisl.15.dylib
+│   ├── liblzma.5.dylib
+│   ├── libmpc.3.dylib
+│   ├── libmpfr.4.dylib
+│   ├── libncurses.6.dylib
+│   ├── libpanel.6.dylib
+│   ├── libpython3.11.dylib
+│   ├── libreadline.8.2.dylib
+│   ├── libreadline.8.dylib -> libreadline.8.2.dylib
+│   ├── libsqlite3.0.dylib
+│   ├── libssl.1.1.dylib
+│   ├── libunwind.1.0.dylib
+│   ├── libz.1.2.13.dylib
+│   ├── libz.1.dylib -> libz.1.2.13.dylib
+│   ├── libzstd.1.5.5.dylib
+│   └── libzstd.1.dylib -> libzstd.1.5.5.dylib
+└── share
+    └── gcc-${customField('upstreamVersion')}
+
+19 directories, 63 files
+`} </CodeBlock>
+
+</TabItem>
+
+<TabItem value="linux" label="GNU/Linux">
+
+<CodeBlock language="console"> {
+`$ tree -L 2 ~/.local/xPacks/\@xpack-dev-tools/arm-none-eabi-gcc/${customField('xpackVersion')}/.content/
+/home/ilg/.local/xPacks/\@xpack-dev-tools/arm-none-eabi-gcc/${customField('xpackVersion')}/.content/
+├── README.md
+├── arm-none-eabi
+│   ├── bin
+│   ├── include
+│   ├── lib
+│   └── share
+├── bin
+│   ├── arm-none-eabi-addr2line
+│   ├── arm-none-eabi-ar
+│   ├── arm-none-eabi-as
+│   ├── arm-none-eabi-c++
+│   ├── arm-none-eabi-c++filt
+│   ├── arm-none-eabi-cpp
+│   ├── arm-none-eabi-dwp
+│   ├── arm-none-eabi-elfedit
+│   ├── arm-none-eabi-g++
+│   ├── arm-none-eabi-gcc
+│   ├── arm-none-eabi-gcc-${customField('upstreamVersion')}
+│   ├── arm-none-eabi-gcc-ar
+│   ├── arm-none-eabi-gcc-nm
+│   ├── arm-none-eabi-gcc-ranlib
+│   ├── arm-none-eabi-gcov
+│   ├── arm-none-eabi-gcov-dump
+│   ├── arm-none-eabi-gcov-tool
+│   ├── arm-none-eabi-gdb
+│   ├── arm-none-eabi-gdb-add-index
+│   ├── arm-none-eabi-gdb-add-index-py3
+│   ├── arm-none-eabi-gdb-py3
+│   ├── arm-none-eabi-gprof
+│   ├── arm-none-eabi-ld
+│   ├── arm-none-eabi-ld.bfd
+│   ├── arm-none-eabi-ld.gold
+│   ├── arm-none-eabi-lto-dump
+│   ├── arm-none-eabi-nm
+│   ├── arm-none-eabi-objcopy
+│   ├── arm-none-eabi-objdump
+│   ├── arm-none-eabi-ranlib
+│   ├── arm-none-eabi-readelf
+│   ├── arm-none-eabi-size
+│   ├── arm-none-eabi-strings
+│   └── arm-none-eabi-strip
+├── distro-info
+│   └── licenses
+├── include
+│   └── gdb
+├── lib
+│   ├── bfd-plugins
+│   ├── gcc
+│   └── python3.11
+├── lib64
+│   ├── libcc1.so -> libcc1.so.0.0.0
+│   ├── libcc1.so.0 -> libcc1.so.0.0.0
+│   └── libcc1.so.0.0.0
+├── libexec
+│   ├── gcc
+│   ├── libcrypt.so.2 -> libcrypt.so.2.0.0
+│   ├── libcrypt.so.2.0.0
+│   ├── libcrypto.so.1.1
+│   ├── libexpat.so.1 -> libexpat.so.1.6.7
+│   ├── libexpat.so.1.6.7
+│   ├── libffi.so.8 -> libffi.so.8.1.2
+│   ├── libffi.so.8.1.2
+│   ├── libfl.so.2 -> libfl.so.2.0.0
+│   ├── libfl.so.2.0.0
+│   ├── libgcc_s.so.1
+│   ├── libgmp.so.10 -> libgmp.so.10.4.1
+│   ├── libgmp.so.10.4.1
+│   ├── libiconv.so.2 -> libiconv.so.2.6.0
+│   ├── libiconv.so.2.6.0
+│   ├── libisl.so.15 -> libisl.so.15.0.0
+│   ├── libisl.so.15.0.0
+│   ├── liblzma.so.5 -> liblzma.so.5.4.5
+│   ├── liblzma.so.5.4.5
+│   ├── libmpc.so.3 -> libmpc.so.3.0.0
+│   ├── libmpc.so.3.0.0
+│   ├── libmpfr.so.4 -> libmpfr.so.4.1.6
+│   ├── libmpfr.so.4.1.6
+│   ├── libncurses.so.6 -> libncurses.so.6.4
+│   ├── libncurses.so.6.4
+│   ├── libnsl-2.27.so
+│   ├── libnsl.so.1 -> libnsl-2.27.so
+│   ├── libpanel.so.6 -> libpanel.so.6.4
+│   ├── libpanel.so.6.4
+│   ├── libpython3.11.so.1.0
+│   ├── libreadline.so.8 -> libreadline.so.8.2
+│   ├── libreadline.so.8.2
+│   ├── libsqlite3.so.0 -> libsqlite3.so.0.8.6
+│   ├── libsqlite3.so.0.8.6
+│   ├── libssl.so.1.1
+│   ├── libstdc++.so.6 -> libstdc++.so.6.0.32
+│   ├── libstdc++.so.6.0.32
+│   ├── libz.so.1 -> libz.so.1.2.13
+│   ├── libz.so.1.2.13
+│   ├── libzstd.so.1 -> libzstd.so.1.5.5
+│   └── libzstd.so.1.5.5
+└── share
+    └── gcc-${customField('upstreamVersion')}
+
+19 directories, 78 files
+`} </CodeBlock>
+
+</TabItem>
+
+</Tabs>
+

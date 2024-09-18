@@ -10,22 +10,21 @@ date: 2020-09-28 17:49:00 +0300
 ---
 
 import Overview from './_overview.mdx';
+import OtherBenefits from './_other-benefits.mdx';
 import UpgradeNotice from './_upgrade-notice.mdx';
 import Compatibility from './_compatibility.mdx';
 import Documentation from './_documentation.mdx'
 import ReleaseSchedule from './_release-schedule.mdx'
-import More from './_more.mdx'
 
 {/* ------------------------------------------------------------------------ */}
 
-[![GitHub package.json version](https://img.shields.io/github/package-json/v/xpack-dev-tools/arm-none-eabi-gcc-xpack)](https://github.com/xpack-dev-tools/arm-none-eabi-gcc-xpack/blob/xpack/package.json)
-[![GitHub release (latest by date)](https://img.shields.io/github/v/release/xpack-dev-tools/arm-none-eabi-gcc-xpack)](https://github.com/xpack-dev-tools/arm-none-eabi-gcc-xpack/releases/)
-[![npm (scoped)](https://img.shields.io/npm/v/@xpack-dev-tools/arm-none-eabi-gcc.svg?color=blue)](https://www.npmjs.com/package/@xpack-dev-tools/arm-none-eabi-gcc/)
 [![license](https://img.shields.io/github/license/xpack-dev-tools/arm-none-eabi-gcc-xpack)](https://github.com/xpack-dev-tools/arm-none-eabi-gcc-xpack/blob/xpack/LICENSE)
+![GitHub Repo stars](https://img.shields.io/github/stars/xpack-dev-tools/arm-none-eabi-gcc-xpack)
 
 ## Overview
 
-**xPack GNU Arm Embedded GCC** is a standalone cross-platform (Windows, macOS, GNU/Linux)
+**xPack GNU Arm Embedded GCC** is a standalone
+cross-platform (Windows, macOS, GNU/Linux)
 binary distribution of GNU Arm Embedded GCC,
 intended for reproducible builds.
 
@@ -66,14 +65,9 @@ feasible.
 
 The main advantages of using the **xPack GNU Arm Embedded GCC** are:
 
-- a convenient, uniform and portable install/uninstall/upgrade procedure;
-  the same procedure is used for all major
-  platforms (**x86_64 Windows**,
-  **x86_64 GNU/Linux**,
-  **aarch64 GNU/Linux**,
-  **armhf GNU/Linux**,
-  **x86_64 macOS**,
-  **arm64 macOS**)
+- a convenient, uniform and portable install/uninstall/upgrade
+procedure; the same procedure is used for all major
+  platforms (**x64 Windows**, **x64 macOS**, **arm64 macOS**, **x64 GNU/Linux**, **arm64 GNU/Linux**, **arm GNU/Linux**)
 - multiple versions of the same package can be installed at the same time on
   the same system
 - no need to worry about dependent libraries, all are included
@@ -81,6 +75,8 @@ The main advantages of using the **xPack GNU Arm Embedded GCC** are:
   similar functionality and are GNU/Linux centric
 - projects can be tied to specific tools versions; this provides a good
   reproducibility, especially useful in **CI/CD** environments.
+
+<OtherBenefits/>
 
 <Compatibility/>
 
@@ -139,5 +135,3 @@ corresponding licenses are available in each archive in the
 ## Releases
 
 The list of releases is available in the [Releases](/docs/releases/) pages.
-
-<More/>
