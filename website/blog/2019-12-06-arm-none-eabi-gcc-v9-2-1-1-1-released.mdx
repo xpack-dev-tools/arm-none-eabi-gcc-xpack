@@ -23,6 +23,7 @@ Version 9.2.1-1.1 is a new release of **xPack GNU Arm Embedded GCC**, following 
 <!-- truncate -->
 
 import Image from '@theme/IdealImage';
+import CodeBlock from '@theme/CodeBlock';
 
 ## Download
 
@@ -30,8 +31,14 @@ The binary files are available from <a href={frontMatter.download_url}>GitHub Re
 
 ## Install
 
+The easiest way to install this specific version, is by using **xpm**:
+
+<CodeBlock language="console"> {
+`xpm install @xpack-dev-tools/arm-none-eabi-gcc@${frontMatter.version}.${frontMatter.npm_subversion} -verbose
+`} </CodeBlock>
+
 The full details of installing the **xPack GNU Arm Embedded GCC** on
-various platforms are presented in the [Install Guide](/docs/install/).
+various platforms can be found in the [Install Guide](/docs/install/).
 
 ## Compliance
 
