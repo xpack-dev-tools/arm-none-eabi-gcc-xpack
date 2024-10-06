@@ -15,18 +15,17 @@ official [Launchpad tracker](https://bugs.launchpad.net/gcc-arm-embedded/).
 Before entering a new ticket, please consider the following:
 
 - [ ] read the documentation pages carefully (`share/doc/pdf/gcc/gcc.pdf`)
-- [ ] check the [xPack Forums](https://www.tapatalk.com/groups/xpack/) for similar problems
+- [ ] check the [GitHub Discussions](https://github.com/xpack-dev-tools/arm-none-eabi-gcc-xpack/discussions/) for similar problems
 - [ ] check the [GitHub Issues](https://github.com/xpack-dev-tools/arm-none-eabi-gcc-xpack/issues/)
 
 If you still could not find an answer, if you have interesting use
 cases, if you have custom configurations, and generally if you have
 any experience that you would like to share with others, use the
-[xPack Forums](https://www.tapatalk.com/groups/xpack/), the
-GNU Arm Embedded GCC section.
+[GitHub Discussions](https://github.com/xpack-dev-tools/arm-none-eabi-gcc-xpack/discussions/).
 
 If you are convinced that you identified a bug related to the binary
 distribution, not to GNU Arm Embedded GCC itself (if you have doubts,
-use the forum), or you have a pertinent suggestion how to enhance the
+use the discussions), or you have a pertinent suggestion how to enhance the
 xPack GNU Arm Embedded GCC distribution, continue and register a new issue.
 
 ### Test with the original Arm GNU Toolchain distribution
