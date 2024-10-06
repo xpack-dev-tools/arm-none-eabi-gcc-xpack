@@ -232,7 +232,7 @@ const config: Config = {
         alt: 'xPack Logo',
         src: 'img/components-256.png',
         // href: 'https://xpack.github.io/',
-        // href: 'https://xpack-dev-tools.github.io/arm-none-eabi-gcc-xpack/'
+        href: 'https://xpack-dev-tools.github.io/'
       },
       items: [
         {
