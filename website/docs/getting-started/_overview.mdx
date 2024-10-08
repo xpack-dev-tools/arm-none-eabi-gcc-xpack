@@ -1,6 +1,15 @@
 
 {/* ------------------------------------------------------------------------ */}
 
+
+:::info
+
+In this context, _**embedded**_ refers exclusively to **bare-metal** systems,
+not embedded Linux, which necessitates a different toolchain for building
+Linux user space applications.
+
+:::
+
 GNU Arm Embedded GCC is the **arm-none-eabi** cross-compiler variant of
 [Arm GNU Toolchain](https://developer.arm.com/Tools%20and%20Software/GNU%20Toolchain),
 an open source project based on
@@ -10,8 +19,9 @@ maintained by the
 
 :::info
 
-In this context, _**embedded**_ refers exclusively to **bare-metal** systems,
-not embedded Linux, which necessitates a different toolchain for building
-Linux user space applications.
+This project covers only the 32-bit variant of the Arm toolchain.
+For the 64-bit, please see the related
+[xPack GNU AArch64 Embedded GCC](https://xpack-dev-tools.github.io/aarch64-none-elf-gcc-xpack)
+project.
 
 :::
