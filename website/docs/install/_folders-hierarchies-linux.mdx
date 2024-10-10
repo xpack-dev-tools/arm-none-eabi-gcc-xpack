@@ -1,0 +1,110 @@
+
+import CodeBlock from '@theme/CodeBlock';
+
+import customField from '@site/src/libs/customField';
+
+{/* ------------------------------------------------------------------------ */}
+
+<CodeBlock language="console"> {
+`$ tree -L 2 ~/.local/xPacks/\@xpack-dev-tools/arm-none-eabi-gcc/${customField('xpackVersion')}/.content/
+/home/ilg/.local/xPacks/\@xpack-dev-tools/arm-none-eabi-gcc/${customField('xpackVersion')}/.content/
+├── README.md
+├── arm-none-eabi
+│   ├── bin
+│   ├── include
+│   ├── lib
+│   └── share
+├── bin
+│   ├── arm-none-eabi-addr2line
+│   ├── arm-none-eabi-ar
+│   ├── arm-none-eabi-as
+│   ├── arm-none-eabi-c++
+│   ├── arm-none-eabi-c++filt
+│   ├── arm-none-eabi-cpp
+│   ├── arm-none-eabi-dwp
+│   ├── arm-none-eabi-elfedit
+│   ├── arm-none-eabi-g++
+│   ├── arm-none-eabi-gcc
+│   ├── arm-none-eabi-gcc-${customField('upstreamVersion')}
+│   ├── arm-none-eabi-gcc-ar
+│   ├── arm-none-eabi-gcc-nm
+│   ├── arm-none-eabi-gcc-ranlib
+│   ├── arm-none-eabi-gcov
+│   ├── arm-none-eabi-gcov-dump
+│   ├── arm-none-eabi-gcov-tool
+│   ├── arm-none-eabi-gdb
+│   ├── arm-none-eabi-gdb-add-index
+│   ├── arm-none-eabi-gdb-add-index-py3
+│   ├── arm-none-eabi-gdb-py3
+│   ├── arm-none-eabi-gprof
+│   ├── arm-none-eabi-ld
+│   ├── arm-none-eabi-ld.bfd
+│   ├── arm-none-eabi-ld.gold
+│   ├── arm-none-eabi-lto-dump
+│   ├── arm-none-eabi-nm
+│   ├── arm-none-eabi-objcopy
+│   ├── arm-none-eabi-objdump
+│   ├── arm-none-eabi-ranlib
+│   ├── arm-none-eabi-readelf
+│   ├── arm-none-eabi-size
+│   ├── arm-none-eabi-strings
+│   └── arm-none-eabi-strip
+├── distro-info
+│   └── licenses
+├── include
+│   └── gdb
+├── lib
+│   ├── bfd-plugins
+│   ├── gcc
+│   └── python3.11
+├── lib64
+│   ├── libcc1.so -> libcc1.so.0.0.0
+│   ├── libcc1.so.0 -> libcc1.so.0.0.0
+│   └── libcc1.so.0.0.0
+├── libexec
+│   ├── gcc
+│   ├── libcrypt.so.2 -> libcrypt.so.2.0.0
+│   ├── libcrypt.so.2.0.0
+│   ├── libcrypto.so.1.1
+│   ├── libexpat.so.1 -> libexpat.so.1.6.7
+│   ├── libexpat.so.1.6.7
+│   ├── libffi.so.8 -> libffi.so.8.1.2
+│   ├── libffi.so.8.1.2
+│   ├── libfl.so.2 -> libfl.so.2.0.0
+│   ├── libfl.so.2.0.0
+│   ├── libgcc_s.so.1
+│   ├── libgmp.so.10 -> libgmp.so.10.4.1
+│   ├── libgmp.so.10.4.1
+│   ├── libiconv.so.2 -> libiconv.so.2.6.0
+│   ├── libiconv.so.2.6.0
+│   ├── libisl.so.15 -> libisl.so.15.0.0
+│   ├── libisl.so.15.0.0
+│   ├── liblzma.so.5 -> liblzma.so.5.4.5
+│   ├── liblzma.so.5.4.5
+│   ├── libmpc.so.3 -> libmpc.so.3.0.0
+│   ├── libmpc.so.3.0.0
+│   ├── libmpfr.so.4 -> libmpfr.so.4.1.6
+│   ├── libmpfr.so.4.1.6
+│   ├── libncurses.so.6 -> libncurses.so.6.4
+│   ├── libncurses.so.6.4
+│   ├── libnsl-2.27.so
+│   ├── libnsl.so.1 -> libnsl-2.27.so
+│   ├── libpanel.so.6 -> libpanel.so.6.4
+│   ├── libpanel.so.6.4
+│   ├── libpython3.11.so.1.0
+│   ├── libreadline.so.8 -> libreadline.so.8.2
+│   ├── libreadline.so.8.2
+│   ├── libsqlite3.so.0 -> libsqlite3.so.0.8.6
+│   ├── libsqlite3.so.0.8.6
+│   ├── libssl.so.1.1
+│   ├── libstdc++.so.6 -> libstdc++.so.6.0.32
+│   ├── libstdc++.so.6.0.32
+│   ├── libz.so.1 -> libz.so.1.2.13
+│   ├── libz.so.1.2.13
+│   ├── libzstd.so.1 -> libzstd.so.1.5.5
+│   └── libzstd.so.1.5.5
+└── share
+    └── gcc-${customField('upstreamVersion')}
+
+19 directories, 78 files
+`} </CodeBlock>

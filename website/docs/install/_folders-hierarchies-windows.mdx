@@ -1,0 +1,139 @@
+
+import CodeBlock from '@theme/CodeBlock';
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+
+import customField from '@site/src/libs/customField';
+
+{/* ------------------------------------------------------------------------ */}
+
+<CodeBlock language="console"> {
+`C:\> tree /f %USERPROFILE%\\AppData\\Roaming\\xPacks\\@xpack-dev-tools\\arm-none-eabi-gcc\\${customField('xpackVersion')}\\.content
+Folder PATH listing
+Volume serial number is B02D-925C
+├── README.md
+├── arm-none-eabi
+│   ├── bin
+│   ├── include
+│   ├── lib
+│   └── share
+├── bin
+│   ├── DLLs
+│   ├── arm-none-eabi-addr2line.exe
+│   ├── arm-none-eabi-ar.exe
+│   ├── arm-none-eabi-as.exe
+│   ├── arm-none-eabi-c++.exe
+│   ├── arm-none-eabi-c++filt.exe
+│   ├── arm-none-eabi-cpp.exe
+│   ├── arm-none-eabi-dwp.exe
+│   ├── arm-none-eabi-elfedit.exe
+│   ├── arm-none-eabi-g++.exe
+│   ├── arm-none-eabi-gcc-${customField('upstreamVersion')}.exe
+│   ├── arm-none-eabi-gcc-ar.exe
+│   ├── arm-none-eabi-gcc-nm.exe
+│   ├── arm-none-eabi-gcc-ranlib.exe
+│   ├── arm-none-eabi-gcc.exe
+│   ├── arm-none-eabi-gcov-dump.exe
+│   ├── arm-none-eabi-gcov-tool.exe
+│   ├── arm-none-eabi-gcov.exe
+│   ├── arm-none-eabi-gdb-add-index
+│   ├── arm-none-eabi-gdb-add-index-py3
+│   ├── arm-none-eabi-gdb-py3.exe
+│   ├── arm-none-eabi-gdb.exe
+│   ├── arm-none-eabi-gprof.exe
+│   ├── arm-none-eabi-ld.bfd.exe
+│   ├── arm-none-eabi-ld.exe
+│   ├── arm-none-eabi-ld.gold.exe
+│   ├── arm-none-eabi-lto-dump.exe
+│   ├── arm-none-eabi-nm.exe
+│   ├── arm-none-eabi-objcopy.exe
+│   ├── arm-none-eabi-objdump.exe
+│   ├── arm-none-eabi-ranlib.exe
+│   ├── arm-none-eabi-readelf.exe
+│   ├── arm-none-eabi-size.exe
+│   ├── arm-none-eabi-strings.exe
+│   ├── arm-none-eabi-strip.exe
+│   ├── libgcc_s_seh-1.dll
+│   ├── libgmp-10.dll
+│   ├── libmpc-3.dll
+│   ├── libmpfr-4.dll
+│   ├── libstdc++-6.dll
+│   ├── libwinpthread-1.dll
+│   ├── libzstd.dll
+│   ├── python311.dll
+│   └── python311.zip
+├── distro-info
+│   └── licenses
+├── include
+│   ├── curses.h
+│   ├── cursesapp.h
+│   ├── cursesf.h
+│   ├── cursesm.h
+│   ├── cursesp.h
+│   ├── cursesw.h
+│   ├── cursslk.h
+│   ├── eti.h
+│   ├── etip.h
+│   ├── form.h
+│   ├── gdb
+│   ├── gmp.h
+│   ├── gmpxx.h
+│   ├── iconv.h
+│   ├── isl
+│   ├── libcharset.h
+│   ├── localcharset.h
+│   ├── lzma
+│   ├── lzma.h
+│   ├── menu.h
+│   ├── mpc.h
+│   ├── mpf2mpfr.h
+│   ├── mpfr.h
+│   ├── nc_tparm.h
+│   ├── ncurses_dll.h
+│   ├── panel.h
+│   ├── term.h
+│   ├── term_entry.h
+│   ├── termcap.h
+│   ├── tic.h
+│   ├── unctrl.h
+│   ├── zconf.h
+│   ├── zdict.h
+│   ├── zlib.h
+│   ├── zstd.h
+│   └── zstd_errors.h
+├── lib
+│   ├── bfd-plugins
+│   ├── charset.alias
+│   ├── cmake
+│   ├── gcc
+│   ├── libcharset.a
+│   ├── libform.a
+│   ├── libgmp.a
+│   ├── libgmpxx.a
+│   ├── libiconv.a
+│   ├── libisl.a
+│   ├── libisl.so.15.0.0-gdb.py
+│   ├── liblzma.a
+│   ├── libmenu.a
+│   ├── libmpc.a
+│   ├── libmpfr.a
+│   ├── libncurses++.a
+│   ├── libncurses.a
+│   ├── libpanel.a
+│   ├── libz.a
+│   ├── libzstd.a
+│   ├── libzstd.so.1.5.5
+│   ├── pkgconfig
+│   ├── preloadable_libiconv.so
+│   └── texinfo
+├── libexec
+│   └── gcc
+└── share
+    ├── doc
+    ├── gcc-${customField('upstreamVersion')}
+    ├── info
+    ├── man
+    └── texinfo
+
+27 directories, 96 files
+`} </CodeBlock>

@@ -1,0 +1,94 @@
+
+import CodeBlock from '@theme/CodeBlock';
+
+import customField from '@site/src/libs/customField';
+
+{/* ------------------------------------------------------------------------ */}
+
+<CodeBlock language="console"> {
+`$ tree -L 2 ~/Library/xPacks/\@xpack-dev-tools/arm-none-eabi-gcc/${customField('xpackVersion')}/.content/
+/Users/ilg/Library/xPacks/\@xpack-dev-tools/arm-none-eabi-gcc/${customField('xpackVersion')}/.content/
+├── README.md
+├── arm-none-eabi
+│   ├── bin
+│   ├── include
+│   ├── lib
+│   └── share
+├── bin
+│   ├── arm-none-eabi-addr2line
+│   ├── arm-none-eabi-ar
+│   ├── arm-none-eabi-as
+│   ├── arm-none-eabi-c++
+│   ├── arm-none-eabi-c++filt
+│   ├── arm-none-eabi-cpp
+│   ├── arm-none-eabi-dwp
+│   ├── arm-none-eabi-elfedit
+│   ├── arm-none-eabi-g++
+│   ├── arm-none-eabi-gcc
+│   ├── arm-none-eabi-gcc-${customField('upstreamVersion')}
+│   ├── arm-none-eabi-gcc-ar
+│   ├── arm-none-eabi-gcc-nm
+│   ├── arm-none-eabi-gcc-ranlib
+│   ├── arm-none-eabi-gcov
+│   ├── arm-none-eabi-gcov-dump
+│   ├── arm-none-eabi-gcov-tool
+│   ├── arm-none-eabi-gdb
+│   ├── arm-none-eabi-gdb-add-index
+│   ├── arm-none-eabi-gdb-add-index-py3
+│   ├── arm-none-eabi-gdb-py3
+│   ├── arm-none-eabi-gprof
+│   ├── arm-none-eabi-ld
+│   ├── arm-none-eabi-ld.bfd
+│   ├── arm-none-eabi-ld.gold
+│   ├── arm-none-eabi-lto-dump
+│   ├── arm-none-eabi-nm
+│   ├── arm-none-eabi-objcopy
+│   ├── arm-none-eabi-objdump
+│   ├── arm-none-eabi-ranlib
+│   ├── arm-none-eabi-readelf
+│   ├── arm-none-eabi-size
+│   ├── arm-none-eabi-strings
+│   └── arm-none-eabi-strip
+├── distro-info
+│   └── licenses
+├── include
+│   └── gdb
+├── lib
+│   ├── bfd-plugins
+│   ├── gcc
+│   ├── libcc1.0.so
+│   ├── libcc1.so -> libcc1.0.so
+│   └── python3.11
+├── libexec
+│   ├── gcc
+│   ├── libbz2.1.0.8.dylib
+│   ├── libc++.1.0.dylib
+│   ├── libc++abi.1.0.dylib
+│   ├── libcrypt.2.dylib
+│   ├── libcrypto.1.1.dylib
+│   ├── libexpat.1.6.7.dylib
+│   ├── libexpat.1.dylib -> libexpat.1.6.7.dylib
+│   ├── libffi.8.dylib
+│   ├── libgmp.10.dylib
+│   ├── libiconv.2.dylib
+│   ├── libisl.15.dylib
+│   ├── liblzma.5.dylib
+│   ├── libmpc.3.dylib
+│   ├── libmpfr.4.dylib
+│   ├── libncurses.6.dylib
+│   ├── libpanel.6.dylib
+│   ├── libpython3.11.dylib
+│   ├── libreadline.8.2.dylib
+│   ├── libreadline.8.dylib -> libreadline.8.2.dylib
+│   ├── libsqlite3.0.dylib
+│   ├── libssl.1.1.dylib
+│   ├── libunwind.1.0.dylib
+│   ├── libz.1.2.13.dylib
+│   ├── libz.1.dylib -> libz.1.2.13.dylib
+│   ├── libzstd.1.5.5.dylib
+│   └── libzstd.1.dylib -> libzstd.1.5.5.dylib
+└── share
+    └── gcc-${customField('upstreamVersion')}
+
+19 directories, 63 files
+`} </CodeBlock>
