@@ -42,7 +42,7 @@ export default function Home(): JSX.Element {
   const {siteConfig} = useDocusaurusContext();
   return (
     <Layout 
-      title={`Hello from arm-none-eabi-gcc`}
+      title={`Welcome to arm-none-eabi-gcc`}
       description="A binary package with the arm-none-eabi-gcc executables">
       <HomepageHeader />
       <main>
