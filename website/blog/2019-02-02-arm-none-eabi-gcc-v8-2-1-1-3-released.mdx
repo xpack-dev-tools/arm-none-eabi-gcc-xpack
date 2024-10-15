@@ -1,5 +1,6 @@
 ---
 title: GNU MCU Eclipse ARM Embedded GCC v8.2.1-1.3 released
+seo_title: Version 8.2.1-1.3 released
 description: Version 8.2.1-1.3 is a maintenance release of GNU MCU Eclipse ARM Embedded GCC.
 keywords:
   - xpack
@@ -16,28 +17,23 @@ tags:
 
 # ----- Custom properties -----------------------------------------------------
 
-app_name: "GNU MCU Eclipse ARM Embedded GCC"
-
 download_url: https://github.com/gnu-mcu-eclipse/arm-none-eabi-gcc/releases/tag/v8.2.1-1.3/
 
 ---
 
-<head>
-  <title>{frontMatter.title}</title>
-  <meta property="og:title" content={frontMatter.title} />
-</head>
+import {PageMetadata} from '@docusaurus/theme-common';
+import Image from '@theme/IdealImage';
+import CodeBlock from '@theme/CodeBlock';
 
-Version **8.2.1-1.3** is a maintenance release.
-
-<!-- truncate -->
-
-Version **8.2.1-1.3** is a maintenance release of
-**GNU MCU Eclipse ARM Embedded GCC** that fixes the GDB and liblto_plugin
-bugs present in the previous release.
+Version **8.2.1-1.3** is a maintenance release of **GNU MCU Eclipse ARM Embedded GCC** that fixes the GDB and liblto_plugin bugs present in the previous release.
 
 <!-- truncate -->
 
-<p><a href={frontMatter.download_url}>Binary files »</a></p>
+<PageMetadata title={frontMatter.seo_title} />
+
+## Download
+
+The binary files are available from <a href={frontMatter.download_url}>GitHub Releases</a>.
 
 ## Deprecated
 

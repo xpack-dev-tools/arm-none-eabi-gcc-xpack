@@ -1,5 +1,6 @@
 ---
 title: xPack GNU Arm Embedded GCC v9.3.1-1.2 released
+seo_title: Version 9.3.1-1.2 released
 description: Version 9.3.1-1.2 is a maintenance release of xPack GNU Arm Embedded GCC.
 keywords:
   - xpack
@@ -25,17 +26,15 @@ download_url: https://github.com/xpack-dev-tools/arm-none-eabi-gcc-xpack/release
 
 ---
 
-<head>
-  <title>{frontMatter.title}</title>
-  <meta property="og:title" content={frontMatter.title} />
-</head>
+import {PageMetadata} from '@docusaurus/theme-common';
+import Image from '@theme/IdealImage';
+import CodeBlock from '@theme/CodeBlock';
 
-Version 9.3.1-1.2 is a maintenance release of **xPack GNU Arm Embedded GCC**, intended to **fix C++ exceptions** support for non-nano libraries, and to use **DT_RPATH** to make the binaries immune to custom LD_LIBRARY_PATH.
+Version **9.3.1-1.2** is a maintenance release of **xPack GNU Arm Embedded GCC**, intended to **fix C++ exceptions** support for non-nano libraries, and to use **DT_RPATH** to make the binaries immune to custom LD_LIBRARY_PATH.
 
 <!-- truncate -->
 
-import Image from '@theme/IdealImage';
-import CodeBlock from '@theme/CodeBlock';
+<PageMetadata title={frontMatter.seo_title} />
 
 This is the **xPack** distribution of the
 [GNU Arm Embedded Toolchain](https://developer.arm.com/open-source/gnu-toolchain/gnu-rm).

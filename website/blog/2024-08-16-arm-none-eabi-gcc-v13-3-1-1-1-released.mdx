@@ -32,18 +32,19 @@ download_url: https://github.com/xpack-dev-tools/arm-none-eabi-gcc-xpack/release
 
 ---
 
-<head><title>{frontMatter.title}</title></head>
-
-Version **13.3.1-1.1** is a new release; it follows the Arm release.
-
-<!-- truncate -->
-
+import {PageMetadata} from '@docusaurus/theme-common';
 import Image from '@theme/IdealImage';
 import CodeBlock from '@theme/CodeBlock';
 
 import Prerequisites from './_common/_prerequisites-glib-2.27.mdx'
 import DeprecationNotices from './_common/_deprecation-notices-glib-2.27.mdx'
 import DownloadAnalytics from './_common/_download-analytics.mdx'
+
+Version **13.3.1-1.1** is a new release; it follows the Arm release.
+
+<!-- truncate -->
+
+<PageMetadata title={frontMatter.seo_title} />
 
 The [xPack GNU Arm Embedded GCC](https://xpack-dev-tools.github.io/arm-none-eabi-gcc-xpack/)
 is a standalone cross-platform binary distribution of
