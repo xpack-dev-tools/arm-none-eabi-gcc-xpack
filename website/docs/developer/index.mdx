@@ -33,9 +33,9 @@ import More from './_more.mdx'
 
 [![license](https://img.shields.io/github/license/xpack-dev-tools/arm-none-eabi-gcc-xpack)](https://github.com/xpack-dev-tools/arm-none-eabi-gcc-xpack/blob/xpack/LICENSE)
 
-This page is intended for those who want to build the
+This page is designed for developers of the
 **xPack GNU Arm Embedded GCC**
-binaries themselves.
+project and provides documentation on how to build and test the package.
 
 <details>
 <summary>The xPack Build Box</summary>
@@ -43,7 +43,7 @@ binaries themselves.
 The build scripts in this project use the **xPack Build Box** (**XBB**)
 tools, which require the usual native development tools
 (packed as a Docker image for GNU/Linux builds), complemented with
-several binary xPacks, installed with `xpm` as development dependencies.
+several binary packages, installed with `xpm` as development dependencies.
 
 For those interested in understanding how things work, a good starting point
 would be to read the [XBB](https://xpack.github.io/xbb/) page.
@@ -144,9 +144,9 @@ xpm run build --config darwin-x64
 </details>
 
 <details>
-<summary>xPack actions</summary>
+<summary>xpm/xPack actions</summary>
 
-The xPack actions are extensions of npm scripts, i.e. named sequences
+The xpm actions are extensions of npm scripts, i.e. named sequences
 of commands that are invoked via `xpm run <name>` to perform specific
 operations.
 together in a sub-shell .
@@ -154,7 +154,7 @@ together in a sub-shell .
 The commands are invoked in a sub-shell with an adjusted PATH,
 having the `xpacks/.bin`
 folder prepended. This ensures the locally installed tools are
-prefered to the system tools.
+preferred to the system tools.
 
 Actions can be defined for the entire project or for a specific build
 configuration.
@@ -177,10 +177,10 @@ commands.
 <details>
 <summary>Visual Studio Code integration</summary>
 
-xPack actions and build configurations are supported in Visual Studio via the
+xpm/xPack actions and build configurations are supported in Visual Studio via the
 [xPack C/C++ Managed Build Tools](https://marketplace.visualstudio.com/items?itemName=ilg-vscode.xpack) extension.
 
-With this extension installed, xPack actions can be very conveniently
+With this extension installed, xpm/xPack actions can be very conveniently
 invoked via a single mouse click, for example:
 
 ![xPack actions](https://github.com/xpack/vscode-xpack-extension-ts/raw/master/assets/docs-images/xpack-actions.png)
@@ -328,7 +328,7 @@ In some cases it is necessary to run a debug session with the binaries.
 
 For these cases, the build script accepts the `--debug` options.
 
-There are also xPack actions that use this option (`build-development-debug`
+There are also xpm actions that use this option (`build-development-debug`
 and `docker-build-development-debug`).
 
 ### Use a local cache

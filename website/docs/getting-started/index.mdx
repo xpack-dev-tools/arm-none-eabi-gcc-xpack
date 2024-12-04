@@ -95,12 +95,12 @@ same repositories as **npm**, whether public or private.
 The packages (usually regular archives, but also git repositories),
 are extracted into separate folders within the project.
 
-Based on the content, there are two types of packets:
+Based on the content, there are two types of packages:
 
-- **source xPacks** (that install source files, usually libraries) and
-- **binary xPacks** (that install executables/binary files, usually tools).
+- **source packages** (that install source files, usually libraries) and
+- **binary packages** (that install executables/binary files, usually tools).
 
-The binary xPacks include references to archives with the platform specific
+Binary packages include references to archives with the platform specific
 binaries (such as `.tar.gz` for Unix or `.zip` for Windows).
 
 These archives are also expanded along the package metadata. Since they
@@ -108,7 +108,7 @@ include executables, links/forwarders to
 these executables are created in a `.bin` folder,
 eliminating the need to add multiple folders to the `PATH`.
 
-Given that some binary xPacks, such as toolchains, can have very large
+Given that some binary packages, such as toolchains, can have very large
 archives, the packages are extracted only once into a user global location to
 conserve space. In projects, instead of duplicating the content of these
 archives, symbolic links are created.
@@ -139,7 +139,7 @@ feasible.
 </details>
 
 Similarly to [flatpacks](https://flatpak.org) or [snap](https://snapcraft.io),
-but significantly simpler, xPacks include all dependent shared libraries
+but significantly simpler, xpm packages include all dependent shared libraries
 within the distributed archives, making the binaries independent of
 any similar libraries installed on the system. This ensures they
 can run on any system without needing specific libraries to be

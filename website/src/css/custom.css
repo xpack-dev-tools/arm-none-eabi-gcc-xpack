@@ -34,6 +34,8 @@
   --docusaurus-svg-color: #CDCDCD;
 }
 
+/* ------------------------------------------------------------------------- */
+
 /* For the home page xpm install field */
 p.hero__code code  {
   color: var(--ifm-font-color-base)
@@ -115,3 +117,5 @@ img.mac-stadium-img {
   float: right;
   width: 200px;
 }
+
+/* ------------------------------------------------------------------------- */

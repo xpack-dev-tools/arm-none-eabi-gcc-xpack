@@ -15,8 +15,6 @@ import {fileURLToPath} from 'node:url';
 import path from 'node:path';
 import fs from 'node:fs';
 
-
-
 // ----------------------------------------------------------------------------
 
 function getCustomFields() {
@@ -85,8 +83,6 @@ function getCustomFields() {
 const customFields = getCustomFields();
 logger.info(customFields);
 
-
-
 // ----------------------------------------------------------------------------
 
 const config: Config = {
@@ -139,7 +135,7 @@ const config: Config = {
           // Please change this to your repo.
           // Remove this to remove the "edit this page" links.
           editUrl:
-            'https://github.com/facebook/docusaurus/tree/main/packages/create-docusaurus/templates/shared/',
+            'https://github.com/xpack-dev-tools/arm-none-eabi-gcc-xpack/edit/xpack/website/',
           showLastUpdateTime: true,
           blogSidebarCount: 8,
           authorsMapPath: '../authors.yml',
@@ -295,7 +291,7 @@ const config: Config = {
     metadata: [
       {
         name: 'keywords',
-        content: 'xpack, binary, development, tools, arm-none-eabi-gcc'
+        content: 'xpack, binary, development, tools, reproducibility, arm-none-eabi-gcc'
       }
     ],
     navbar: {

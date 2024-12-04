@@ -18,7 +18,7 @@ xpm run check-space -C ~/Work/xpack-dev-tools/arm-none-eabi-gcc-xpack.git/build-
 To free the space used by all previous builds of all `xpack-dev-tools` packages:
 
 ```sh
-xpm run clear-all-project-builds -C ~/Work/xpack-dev-tools/arm-none-eabi-gcc-xpack.git/build-assets
+xpm run clear-all-projects-builds -C ~/Work/xpack-dev-tools/arm-none-eabi-gcc-xpack.git/build-assets
 ```
 
 To update the build scripts and build the development binaries:
@@ -39,7 +39,7 @@ xpm run docker-build-development --config ${props.platform} -C ~/Work/xpack-dev-
 
 {developmentDurations[ props.platform ]}, the output of the build script is a compressed
 archive and its SHA signature, created in
-the <code>buils-assets/build/{props.platform}/deploy</code> folder:
+the <code>build-assets/build/{props.platform}/deploy</code> folder:
 
 * <code>xpack-arm-none-eabi-gcc-{customField('xpackVersion')}-{props.platform}.{props.platform === 'win32-x64' ? 'zip' : 'tar.gz'}</code>
 * <code>xpack-arm-none-eabi-gcc-{customField('xpackVersion')}-{props.platform}.{props.platform === 'win32-x64' ? 'zip' : 'tar.gz'}.sha</code>
