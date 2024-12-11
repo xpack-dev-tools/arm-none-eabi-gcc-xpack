@@ -65,22 +65,23 @@ this project also includes the
 
 <UpgradeNotice/>
 
-## xPacks
+## What are xpm packages? (xPacks)
 
-**xPacks** (short for **xpm packages**) are general-purpose,
-language-neutral software packages.
+**xpm packages**, abbreviated as **xPacks**, are versatile,
+language-neutral software packages. They have been successfully
+utilised in C/C++ projects.
 
 <details>
-<summary>What the heck are xPacks? Please, do not introduce another package format!</summary>
+<summary>What the heck are xpm packages / xPacks? Please, do not introduce another package format!</summary>
 
-While the initial appearance may seem complex, utilizing xPacks
-(xpm packages) is, in fact, straightforward.
+While the initial appearance may seem complex, utilizing
+xpm packages is, in fact, straightforward.
 The design rationale is to automate frequent
 operations that occur during software development, in this case the
 installation of
 dependencies, and to ensure reproducibility.
 
-xPacks are managed by **[xpm](https://xpack.github.io/xpm/)**
+These packages are managed by **[xpm](https://xpack.github.io/xpm/)**
 (the xPack Project Manager),
 a program that complements the **[npm](https://docs.npmjs.com/cli/)** CLI
 (the popular JavaScript package manager), with new language-neutral features.
@@ -95,7 +96,7 @@ same repositories as **npm**, whether public or private.
 The packages (usually regular archives, but also git repositories),
 are extracted into separate folders within the project.
 
-Based on the content, there are two types of packages:
+Based on the content, there are two types of xpm packages:
 
 - **source packages** (that install source files, usually libraries) and
 - **binary packages** (that install executables/binary files, usually tools).
@@ -113,8 +114,8 @@ archives, the packages are extracted only once into a user global location to
 conserve space. In projects, instead of duplicating the content of these
 archives, symbolic links are created.
 
-Simply put, xPacks can be used to further automate the installation of source
-libraries and tools.
+Simply put, xpm packages can be used to further automate the
+installation of source libraries and tools.
 
 </details>
 

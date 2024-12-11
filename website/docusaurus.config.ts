@@ -286,8 +286,9 @@ const config: Config = {
   ],
   // https://docusaurus.io/docs/seo
   themeConfig: {
-    // Replace with your project's social card
-    // image: 'img/docusaurus-social-card.jpg',
+    // The project's social card, og:image, twitter:image, 1200x630
+    image: 'img/sunrise-og-image.jpg',
+
     metadata: [
       {
         name: 'keywords',
@@ -326,8 +327,20 @@ const config: Config = {
               to: '/docs/install'
             },
             {
-              label: 'User Information',
+              label: 'User\'s Guide',
               to: '/docs/user'
+            },
+            {
+              label: 'Contributor\'s Guide',
+              to: '/docs/developer'
+            },
+            {
+              label: 'Maintainer\'s Guide',
+              to: '/docs/maintainer'
+            },
+            {
+              label: 'FAQ',
+              to: '/docs/faq'
             },
             {
               label: 'Help Centre',
