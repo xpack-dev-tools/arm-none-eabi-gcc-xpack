@@ -13,13 +13,13 @@
  */
 
 import {usePluginData} from '@docusaurus/useGlobalData';
-import logger from '@docusaurus/logger'
+import util from 'node:util';
 import useBaseUrl from '@docusaurus/useBaseUrl';
 
 export function ReleasesList({items}): JSX.Element {
   const pluginData = usePluginData('select-releases');
 
-  pluginData.releasesTable.forEach((item) => logger.info(item))
+  pluginData.releasesTable.forEach((item) => console.log(`${item.permalink} - ${item.title}`))
   return (
     <ul>
       {

@@ -4,7 +4,10 @@
 import {themes as prismThemes} from 'prism-react-renderer';
 import type {Config} from '@docusaurus/types';
 import type * as Preset from '@docusaurus/preset-classic';
-import logger from '@docusaurus/logger';
+// import logger from '@docusaurus/logger';
+import util from 'node:util';
+
+import {redirects} from './docusaurus-config-redirects'
 
 // The node.js modules cannot be used in modules imported in browser code:
 // webpack < 5 used to include polyfills for node.js core modules by default.
@@ -19,17 +22,17 @@ import fs from 'node:fs';
 
 function getCustomFields() {
   const pwd = fileURLToPath(import.meta.url);
-  // logger.info(pwd);
+  // console.log(pwd);
 
   // First get the version from the top package.json.
   const topFilePath = path.join(path.dirname(path.dirname(pwd)), 'package.json');
-  // logger.info(filePath);
+  // console.log(filePath);
   const topFileContent = fs.readFileSync(topFilePath);
 
   const topPackageJson = JSON.parse(topFileContent.toString());
   const jsonVersion = topPackageJson.version.replace(/[.-]pre/, '');
 
-  logger.info(`package version: ${topPackageJson.version}`);
+  console.log(`package version: ${topPackageJson.version}`);
 
   // Remove the first part, up to the last dot.
   const npmSubversion = jsonVersion.replace(/^.*[.]/, '');
@@ -46,7 +49,7 @@ function getCustomFields() {
   let rootPackageJson
   try {
     const rootFilePath = path.join(path.dirname(path.dirname(pwd)), 'build-assets', 'package.json');
-    // logger.info(filePath);
+    // console.log(filePath);
     const rootFileContent = fs.readFileSync(rootFilePath);
     rootPackageJson = JSON.parse(rootFileContent.toString());
   } catch (error) {
@@ -81,7 +84,7 @@ function getCustomFields() {
 // ----------------------------------------------------------------------------
 
 const customFields = getCustomFields();
-logger.info(customFields);
+console.log('customFields: ' + util.inspect(customFields));
 
 // ----------------------------------------------------------------------------
 
@@ -182,65 +185,7 @@ const config: Config = {
     [
       // https://docusaurus.io/docs/next/api/plugins/@docusaurus/plugin-client-redirects#redirects
       '@docusaurus/plugin-client-redirects',
-      {
-        // fromExtensions: ['html', 'htm'], // /myPage.html -> /myPage
-        // toExtensions: ['exe', 'zip'], // /myAsset -> /myAsset.zip (if latter exists)
-        redirects: [
-          //   // /docs/oldDoc -> /docs/newDoc
-          //   {
-          //     to: '/docs/newDoc',
-          //     from: '/docs/oldDoc',
-          //   },
-          //   // Redirect from multiple old paths to the new path
-          //   {
-          //     to: '/docs/newDoc2',
-          //     from: ['/docs/oldDocFrom2019', '/docs/legacyDocFrom2016'],
-          //   },
-          {
-            to: '/docs/developer',
-            from: '/docs/developer-info'
-          },
-          {
-            to: '/docs/maintainer',
-            from: '/docs/maintainer-info'
-          },
-          {
-            to: '/docs/user',
-            from: '/docs/user-info'
-          }
-        ],
-        createRedirects(existingPath) {
-          logger.info(existingPath);
-          //   if (existingPath.includes('/evenimente')) {
-          //     // logger.info(`to ${existingPath} from ${existingPath.replace('/evenimente', '/events')}`);
-          //     // Redirect from /events/X to /evenimente/X
-          //     return [
-          //       existingPath.replace('/evenimente', '/events')
-          //     ];
-          //   } else if (existingPath.includes('/amintiri')) {
-          //     // logger.info(`to ${existingPath} from ${existingPath.replace('/amintiri', '/blog')}`);
-          //     // Redirect from /blog/Z to /amintiri/X
-          //     return [
-          //       existingPath.replace('/amintiri', '/blog')
-          //     ];
-          //   }
-          //   return undefined; // Return a falsy value: no redirect created
-          //   },
-          if (existingPath.includes('/user-info')) {
-            return [
-              existingPath.replace('/user-info', '/user')
-            ];
-          } else if (existingPath.includes('/developer-info')) {
-            return [
-              existingPath.replace('/developer-info', '/developer')
-            ];
-          } else if (existingPath.includes('/maintainer-info')) {
-            return [
-              existingPath.replace('/maintainer-info', '/maintainer')
-            ];
-          }
-        }
-      }
+      redirects
     ],
     './src/plugins/SelectReleasesPlugin',
   ],
