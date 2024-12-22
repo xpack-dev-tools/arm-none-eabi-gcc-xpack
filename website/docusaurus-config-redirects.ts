@@ -39,12 +39,12 @@ export const redirects = {
       to: '/docs/user',
     },
     {
-      from: '/2019/01/19/arm-none-eabi-gcc-v8-2-1-1-2-released/',
-      to: '/2019/01/20/arm-none-eabi-gcc-v8-2-1-1-2-released/',
+      from: '/blog/2019/01/19/arm-none-eabi-gcc-v8-2-1-1-2-released/',
+      to: '/blog/2019/01/20/arm-none-eabi-gcc-v8-2-1-1-2-released/',
     },
     {
-      from: '/2019/05/10/arm-none-eabi-gcc-v8-2-1-1-6-released/',
-      to: '/2019/05/13/arm-none-eabi-gcc-v8-2-1-1-6-released/',
+      from: '/blog/2019/05/10/arm-none-eabi-gcc-v8-2-1-1-6-released/',
+      to: '/blog/2019/05/13/arm-none-eabi-gcc-v8-2-1-1-6-released/',
     },
   ],
   createRedirects(existingPath) {
