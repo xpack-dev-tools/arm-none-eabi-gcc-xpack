@@ -25,7 +25,7 @@ export const redirects = {
     //     to: '/docs/newDoc2',
     //     from: ['/docs/oldDocFrom2019', '/docs/legacyDocFrom2016'],
     //   },
-    
+
     {
       from: '/docs/developer-info',
       to: '/docs/developer',
@@ -37,7 +37,15 @@ export const redirects = {
     {
       from: '/docs/user-info',
       to: '/docs/user',
-    }
+    },
+    {
+      from: '/2019/01/19/arm-none-eabi-gcc-v8-2-1-1-2-released/',
+      to: '/2019/01/20/arm-none-eabi-gcc-v8-2-1-1-2-released/',
+    },
+    {
+      from: '/2019/05/10/arm-none-eabi-gcc-v8-2-1-1-6-released/',
+      to: '/2019/05/13/arm-none-eabi-gcc-v8-2-1-1-6-released/',
+    },
   ],
   createRedirects(existingPath) {
     console.log(existingPath);
@@ -56,7 +64,7 @@ export const redirects = {
     //   }
     //   return undefined; // Return a falsy value: no redirect created
     //   },
-    
+
     if (existingPath.includes('/user-info')) {
       return [
         existingPath.replace('/user-info', '/user')
