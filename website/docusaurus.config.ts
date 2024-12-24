@@ -232,6 +232,10 @@ const config: Config = {
       }
     }
   ],
+
+  // No longer needed.
+  // themes: [ '@docusaurus/theme-search-algolia' ],
+
   // https://docusaurus.io/docs/seo
   themeConfig: {
     // The project's social card, og:image, twitter:image, 1200x630
@@ -419,6 +423,25 @@ const config: Config = {
     prism: {
       theme: prismThemes.github,
       darkTheme: prismThemes.dracula,
+    },
+    algolia: {
+      // https://docsearch.algolia.com/docs/docsearch-v3/
+      appId: "KIDD7R4CL1",
+      apiKey: "ca2ffc431941284609f2d50202fc5506",
+      indexName: "xpackio",
+
+      // It ensures that search results are relevant to the current
+      // language and version. Enabled by default.
+      contextualSearch: false, // true,
+      // Optional: Replace parts of the item URLs from Algolia.
+      // Useful when using the same search index for multiple deployments
+      // using a different baseUrl. You can use regexp or string in the
+      // `from` param. For example: localhost:3000 vs myCompany.com/docs
+      // replaceSearchResultPathname: undefined,
+      // Optional: Algolia search parameters
+      searchParameters: {},
+      // Optional: path for search page that enabled by default (`false` to disable it)
+      searchPagePath: false, // 'search',
     },
   } satisfies Preset.ThemeConfig,
 
