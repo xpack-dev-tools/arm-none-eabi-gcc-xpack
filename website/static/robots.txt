@@ -1,0 +1,7 @@
+Sitemap: https://xpack-dev-tools.github.io/arm-none-eabi-gcc-xpack/sitemap.xml
+
+User-agent: *
+Disallow: /arm-none-eabi-gcc-xpack/blog/archive/
+Disallow: /arm-none-eabi-gcc-xpack/blog/authors/
+Disallow: /arm-none-eabi-gcc-xpack/blog/page/
+Disallow: /arm-none-eabi-gcc-xpack/blog/tags/

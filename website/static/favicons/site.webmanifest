@@ -3,13 +3,13 @@
   "short_name": "xPack",
   "icons": [
     {
-      "src": "/arm-none-eabi-gcc/favicons/web-app-manifest-192x192.png",
+      "src": "/arm-none-eabi-gcc-xpack/favicons/web-app-manifest-192x192.png",
       "sizes": "192x192",
       "type": "image/png",
       "purpose": "maskable"
     },
     {
-      "src": "/arm-none-eabi-gcc/favicons/web-app-manifest-512x512.png",
+      "src": "/arm-none-eabi-gcc-xpack/favicons/web-app-manifest-512x512.png",
       "sizes": "512x512",
       "type": "image/png",
       "purpose": "maskable"
