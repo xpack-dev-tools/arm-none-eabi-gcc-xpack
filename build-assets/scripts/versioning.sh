@@ -216,7 +216,8 @@ function application_build_versioned_components()
 
     # Required by a Python 3 module.
     # https://www.sqlite.org/download.html
-    XBB_SQLITE_VERSION="3470200" "2024"
+    XBB_SQLITE_VERSION="3470200"
+    XBB_SQLITE_YEAR="2024"
 
     # Replacement for the old libcrypt.so.1; required by Python 3.
     # https://github.com/besser82/libxcrypt/tags
@@ -224,7 +225,7 @@ function application_build_versioned_components()
 
     # https://www.openssl.org/source/
     XBB_OPENSSL_VERSION="3.4.0" # "1.1.1w"
-    
+
     gcc_cross_build_common
 
   elif [[ "${XBB_RELEASE_VERSION}" =~ 13[.].*[.].*-.* ]]
