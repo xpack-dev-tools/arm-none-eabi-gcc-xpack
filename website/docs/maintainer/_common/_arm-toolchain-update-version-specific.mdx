@@ -46,9 +46,14 @@ With a Git client:
 - push it to origin with the same name
 - enable a filter on the current branch
 - identify the commit ID from release notes or manifest.txt (search back in time)
+- create a branch like <code>arm-{versionMajor()}-arm-none-eabi-{versionMajor()}.{versionMinor()}.rel{customField('armSubRelease')}-xpack</code>
 - create a tag like <code>arm-{versionMajor()}-arm-none-eabi-{versionMajor()}.{versionMinor()}.rel{customField('armSubRelease')}</code>
 - push the tag to origin
 - check the tag at https://github.com/xpack-dev-tools/gcc/tags/
+- cherry pick the `system.h: do not define abort() on mingw` commit
+- push the *-xpack branch to origin
+- save as Patches into the helper `patches` folder
+- rename as <code>gcc-{customField('upstreamVersion')}-cross.git.patch</code>
 
 ### Update the local newlib-cygwin fork (optional, normally the archive is used)
 
@@ -73,5 +78,5 @@ Check the release notes and updates the `libgmp`, `libisl`, `libmpfr`, `libmpc`,
 ### Check configure options
 
 Verify if the configure options used in
-the <code>arm-gnu-toolchain-arm-none-eabi-manifest.txt</code> file
+the <code>{versionMajor()}.{versionMinor()}.rel{customField('armSubRelease')}-darwin-x86_64-arm-none-eabi-manifest.txt</code> file
 are used in the build scripts.
