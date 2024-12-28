@@ -196,7 +196,10 @@ function application_build_versioned_components()
     XBB_LIBUNISTRING_VERSION="1.3" # "1.1"
 
     # https://ftp.gnu.org/pub/gnu/gettext/
-    XBB_GETTEXT_VERSION="0.23" # "0.22" # "0.21"
+    # 0.23 fails on macOS with:
+    # gettext-tools/src/msgcmp.c:109:36: error: expected expression
+    # bindtextdomain ("bison-runtime", relocate (BISON_LOCALEDIR));
+    XBB_GETTEXT_VERSION="0.22" # "0.21"
 
     # https://github.com/telmich/gpm/tags
     # https://github.com/xpack-dev-tools/gpm/tags
