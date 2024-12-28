@@ -161,6 +161,8 @@ and will be updated when the new release is out.
 Check the latest versions at https://github.com/xpack-dev-tools/ and
 update the dependencies in `build-assets/package.json`.
 
+<CheckUpstreamRelease/>
+
 ### Increase the version and update it in the top `package.json`
 
 - determine the version (like <code>{customField('xpackVersion')}</code>)
@@ -172,6 +174,10 @@ like <code>{customField('xpackVersion')}.{customField('npmSubversion')}.pre</cod
 
 If the project uses `customFields` in `build-assets/package.json`,
 update them.
+
+### Update the website commons
+
+Run the `website-generate-commons` actions from `build-assets`.
 
 ### Start the local web server
 
@@ -191,10 +197,8 @@ Determine the version (like <code>{customField('xpackVersion')}</code>)
 and update the `build-assets/scripts/VERSION` file; the format
 is <code>{customField('xpackVersion')}</code>.
 {isXpackSubversionDouble() ?
-'The fourth & fifth numbers are the xPack release number of this version. A sixth number will be added to the version in `package.json` when the package is published to the `npm` server' :
-'The fourth number is the xPack release number of this version. A fifth number will be added to the version in `package.json` when the package is published to the `npm` server'}.
-
-<CheckUpstreamRelease/>
+'The fourth & fifth numbers are the xPack release number of this version. A sixth' :
+'The fourth number is the xPack release number of this version. A fifth'} number will be added to the version in `package.json` when the package is published to the `npm` server.
 
 ### Update the `customFields` (if necessary)
 

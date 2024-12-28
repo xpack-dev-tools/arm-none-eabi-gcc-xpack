@@ -22,7 +22,9 @@ as below.
 - download the new _Source code_ archive (like
 <code>arm-gnu-toolchain-src-snapshot-{versionMajor()}.{versionMinor()}.rel{customField('armSubRelease')}.tar.xz</code>) from
 [Arm GNU Toolchain Downloads](https://developer.arm.com/downloads/-/arm-gnu-toolchain-downloads/)
+- unpack the archive
 - the GCC version is in `gcc/gcc/BASE-VER`
+- the binutils version is in `binutils-gdb/bfd/version.m4`
 - the GDB version is in `binutils-gdb--gdb/gdb/version.in`
 - the newlib version is in `newlib-cygwin/newlib/configure`, search for `VERSION=`
 - download the latest **macOS (x86_64) hosted cross toolchains** archive (like
@@ -31,6 +33,12 @@ as below.
 - create a folder <code>build-assets/extras/{versionMajor()}.{versionMinor()}.rel{customField('armSubRelease')}</code>
 - copy the file with the configurations
 (<code>{versionMajor()}.{versionMinor()}.rel{customField('armSubRelease')}-darwin-x86_64-arm-none-eabi-manifest.txt</code>) to the new folder in extras
-- download the ABE manifest with the individual source URLs
-(<code>arm-gnu-toolchain-arm-none-eabi-abe-manifest.txt</code>)
+- download the manifest.txt with the individual source URLs
+(<code>arm-gnu-toolchain-src-snapshot-arm-none-eabi-manifest.txt</code>)
 - copy to the new folder in extras
+
+:::info
+
+Starting with 14.2.Rel1 there is a link to a [README](https://gitlab.arm.com/tooling/gnu-devtools-for-arm/-/blob/main/README.md) explaining the new build scripts.
+
+:::

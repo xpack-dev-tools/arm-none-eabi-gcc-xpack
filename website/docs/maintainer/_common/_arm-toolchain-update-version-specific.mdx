@@ -18,9 +18,10 @@ import versionMinor from '@site/src/libs/versionMinor';
 With a Git client:
 
 - checkout the branch mentioned in the release notes
-  (like <code>binutils-{customField('binutilsVersionMajor')}_{customField('binutilsVersionMinor')}-branch</code>)
+  (like <code>users/ARM/binutils-{customField('binutilsVersionMajor')}_{customField('binutilsVersionMinor')}-branch</code>)
 - push it to origin with the same name
-- identify the commit ID (search back in time)
+- enable a filter on the current branch
+- identify the commit ID from release notes or manifest.txt (search back in time)
 - add a tag like <code>binutils-{customField('binutilsVersionMajor')}.{customField('binutilsVersionMinor')}-arm-none-eabi-{versionMajor()}.{versionMinor()}.rel{customField('armSubRelease')}</code>
 - push the tag to origin
 - check the tag at https://github.com/xpack-dev-tools/binutils-gdb/tags/
@@ -29,26 +30,48 @@ Similarly for GDB:
 
 - checkout the branch mentioned in the release notes
   (like <code>gdb-{customField('gdbVersionMajor')}-branch</code>)
-- identify the commit ID (search back in time)
+- push it to origin with the same name
+- enable a filter on the current branch
+- identify the commit ID from release notes or manifest.txt (search back in time)
 - add a tag like <code>gdb-{customField('gdbVersionMajor')}-arm-none-eabi-{versionMajor()}.{versionMinor()}.rel{customField('armSubRelease')}</code>
 - push the tag to origin
 - check the tag at https://github.com/xpack-dev-tools/binutils-gdb/tags/
 
-### Update the local gcc fork (if the commit ID present in manifest.txt)
+### Update the local gcc fork (optional, normally the archive is used)
 
 With a Git client:
 
 - checkout the branch mentioned in the release notes
   (like <code>ARM/arm-{versionMajor()}</code>)
-- identify the commit ID (filter by branch and search downwards)
-- create a branch like <code>arm-{customField('gdbVersionMajor')}-arm-none-eabi-{versionMajor()}.{versionMinor()}.rel{customField('armSubRelease')}</code>
+- push it to origin with the same name
+- enable a filter on the current branch
+- identify the commit ID from release notes or manifest.txt (search back in time)
+- create a tag like <code>arm-{versionMajor()}-arm-none-eabi-{versionMajor()}.{versionMinor()}.rel{customField('armSubRelease')}</code>
+- push the tag to origin
+- check the tag at https://github.com/xpack-dev-tools/gcc/tags/
+
+### Update the local newlib-cygwin fork (optional, normally the archive is used)
+
+With a Git client:
+
+- pull from the `master` branch (none mentioned in the release notes)
+- push it to origin with the same name
+- enable a filter on the current branch
+- identify the commit ID from release notes or manifest.txt (search back in time)
+- create a tag like <code>newlib-{customField('newlibVersion')}-arm-none-eabi-{versionMajor()}.{versionMinor()}.rel{customField('armSubRelease')}</code>
+- push the tag to origin
+- check the tag at https://github.com/xpack-dev-tools/newlib-cygwin/tags/
 
 ### Update the gdb-*-cross.git.patch in helper
 
 Copy/paste a previous one; adjust if necessary.
 
+### Update other dependencies versions
+
+Check the release notes and updates the `libgmp`, `libisl`, `libmpfr`, `libmpc`, `libiconv` versions.
+
 ### Check configure options
 
 Verify if the configure options used in
-the <code>arm-gnu-toolchain-arm-none-eabi-abe-manifest.txt</code> file
+the <code>arm-gnu-toolchain-arm-none-eabi-manifest.txt</code> file
 are used in the build scripts.

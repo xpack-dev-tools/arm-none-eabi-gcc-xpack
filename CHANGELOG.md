@@ -2,8 +2,123 @@
 
 Entries in this file are in reverse chronological order.
 
+## 2024-12-28
+
+* v14.2.1-1.1 prepared
+
+## 2024-12-24
+
+* 7a6dd64 website: updates
+* ac085b2 website: updates
+
+## 2024-12-22
+
+* 81b03fa website redirects update
+* f58bc84 website: redirects update
+* 72dec13 website: updates
+* de23e78 website: add _xpack.github.io
+
+## 2024-12-20
+
+* 90e61da website: updates
+* 4475223 website: updates
+
+## 2024-12-20
+
+* b295854 website: updates
+
+## 2024-12-11
+
+* 1a97e2d website: updates
+* 299daaa website/blog updates
+* 7f89b43 website/blog/_templates/blog-post-release*
+
+## 2024-12-04
+
+* 93e83da website: updates
+* 9df33e6 build-assets/package.json: bump deps
+
+## 2024-10-15
+
+* 1f81d8a website: updates
+* 719b6fc website: updates
+
+## 2024-10-14
+
+* 51a67ac website: updates
+
+## 2024-10-13
+
+* 479cb0b website: updates
+* d30b058 website: updates
+* 8b73e88 website: updates
+
+## 2024-10-11
+
+* 28d3f74 website: updates
+* 2263fdd website/blog/_templates/blog-post-release*
+* 8ffe3c1 website/blog/_templates/blog-post-release*
+
+## 2024-10-10
+
+* 207c385 website: updates
+* 9b5d24c website: updates
+
+## 2024-10-09
+
+* a4a9fd0 website move blog post templates
+* db9fe30 website: updates
+* 7523939 website: updates
+
+## 2024-10-08
+
+* c717605 website getting started update
+
+## 2024-10-07
+
+* 17b4ec8 website: updates
+* 1337880 ISSUE_TEMPLATE update
+* 003467a body-blog* update
+* e93e43c website: updates
+
+## 2024-10-06
+
+* 476d0ba website: updates
+* 380fe2e website: updates
+* 6dbe940 re-generate workflows
+
+## 2024-10-04
+
+* 2d44891 website: updates
+* e6de8da templates/body-blog update
+
+## 2024-09-18
+
+* f1c4016 website: updates
+* 16da0fd website update
+* 11c721c build-assets/package.json: bump deps
+* c693d2e build-assets/package.json: update customFields
+* cfd9cc0 build-assets/templates updates
+
+## 2024-09-12
+
+* af27e97 update scripts copyright notices
+
+## 2024-08-17
+
+* 5da4c1e website updates
+* d04b4c4 templates updates
+* dd2613e re-generate workflows
+
 ## 2024-08-16
 
+* 176bfa7 templates/body-github: update
+* 7fe82b0 website: re-generate commons
+* c2f4122 website update
+* ce4fb24 website: re-generate commons
+* 945625e website updates
+* d5d98e1 13.3.1-1.1.1
+* cb13054 CHANGELOG: publish npm v13.3.1-1.1.1
 * v13.3.1-1.1 published on npmjs.com
 * b3638f7 package.json: update urls for 13.3.1-1.1.1 release
 * b617e64 package.json: update bins
@@ -192,9 +307,11 @@ Entries in this file are in reverse chronological order.
 
 ## 2023-11-09
 
-2023-11-09 * 846e857 README update
-2023-11-09 * 1fe02ed 13.2.1-1.1.1
-2023-11-09 * 3041cec CHANGELOG: publish npm v13.2.1-1.1.1
+## 2023-11-09
+
+* 846e857 README update
+* 1fe02ed 13.2.1-1.1.1
+* 3041cec CHANGELOG: publish npm v13.2.1-1.1.1
 * 374ceb3 package.json: update urls for 13.2.1-1.1 release
 * 753f799 README update
 * 45eaa7a body jekyll update
@@ -333,7 +450,7 @@ Entries in this file are in reverse chronological order.
 * 416e7fa package.json: bump deps
 * c994d6f READMEs update
 * ec69858 package.json: bump deps
-2023-08-05 * a31dc0c READMEs update
+* a31dc0c READMEs update
 
 ## 2023-08-04
 
