@@ -142,7 +142,7 @@ function application_build_versioned_components()
 
     XBB_WITH_GDB_PY3="y"
 
-    export XBB_PYTHON3_VERSION="3.11.4" # "3.11.1"
+    export XBB_PYTHON3_VERSION="3.12.8" # "3.11.4"
     export XBB_PYTHON3_VERSION_MAJOR=$(xbb_get_version_major "${XBB_PYTHON3_VERSION}" )
     export XBB_PYTHON3_VERSION_MINOR=$(xbb_get_version_minor "${XBB_PYTHON3_VERSION}")
 
