@@ -182,7 +182,10 @@ function application_build_versioned_components()
     XBB_NCURSES_VERSION="6.5" # "6.4"
 
     # https://ftp.gnu.org/gnu/texinfo/
-    XBB_TEXINFO_VERSION="7.2" # "7.0.3"
+    # 7.2 fails on x64 linux with
+    # /bin/bash: parsetexi/Parsetexi.xsc: No such file or directory
+    # Makefile:5576: recipe for target 'parsetexi/Parsetexi.c' failed
+    XBB_TEXINFO_VERSION="7.1.1" # "7.0.3"
 
     # -------------------------------------------------------------------------
     # GDB dependencies
