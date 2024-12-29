@@ -25,7 +25,7 @@
         "gdbVersionMinor": "2",
         "binutilsVersionMajor": "2",
         "binutilsVersionMinor": "43",
-        "pythonVersion": "3.11.4",
+        "pythonVersion": "3.12.8",
         "newlibVersion": "4.4.0"
       },
       "buildFolderRelativePath": "{{ 'build' | path_join: configuration.name | to_filename | downcase }}",
