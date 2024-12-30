@@ -2,9 +2,33 @@
 
 Entries in this file are in reverse chronological order.
 
+## 2024-12-30
+
+* 66bba9a application.sh: re-enable multi-libs
+* f96c6ad website: updates
+* 3c281bc re-generate workflows
+* 4e8b54b re-generate workflows
+* df801af application.sh: temporarily disable multilib
+* 11f2df9 re-generate workflows
+* d3e3c1b build-assets/package.json: bump deps
+* 522b993 package.json: update executables links
+* e2b7530 website: re-generate commons
+* bf7e165 website: update folder hierarchies
+
+## 2024-12-29
+
+* 77d3459 application.sh: re-enable multilib
+* f157e40 build-assets/package.json update customFields
+* ef53cd2 application.sh: temporarily WITHOUT_MULTILIB
+* f394de4 versioning.sh: revert texinfo to 7.1.1
+* 8f17138 website: re-generate commons
+* 9f433d6 versioning.sh: python 3.12.8
+* 5a16b08 versioning.sh: revert gettext to 0.22
+
 ## 2024-12-28
 
-* v14.2.1-1.1 prepared
+* b1c8a82 versioning.sh: use XBB_SQLITE_YEAR
+* ef1417c prepare v14.2.1-1.1
 
 ## 2024-12-24
 
