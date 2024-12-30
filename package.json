@@ -83,6 +83,7 @@
       "arm-none-eabi-gdb-add-index": "./.content/bin/arm-none-eabi-gdb-add-index",
       "arm-none-eabi-gdb-add-index-py3": "./.content/bin/arm-none-eabi-gdb-add-index-py3",
       "arm-none-eabi-gdb-py3": "./.content/bin/arm-none-eabi-gdb-py3",
+      "arm-none-eabi-gfortran": "./.content/bin/arm-none-eabi-gfortran",
       "arm-none-eabi-gprof": "./.content/bin/arm-none-eabi-gprof",
       "arm-none-eabi-ld": "./.content/bin/arm-none-eabi-ld",
       "arm-none-eabi-ld.bfd": "./.content/bin/arm-none-eabi-ld.bfd",
