@@ -159,8 +159,8 @@ jobs:
 
   darwin-x64-test:
     name: 'darwin-x64 arm-none-eabi-gcc ${{github.event.inputs.version}} test'
-    # https://github.com/actions/runner-images/blob/main/images/macos/macos-12-Readme.md
-    runs-on: macos-12
+    # https://github.com/actions/runner-images/blob/main/images/macos/macos-13-Readme.md
+    runs-on: macos-13
     needs: [darwin-x64-build]
 
     steps:
