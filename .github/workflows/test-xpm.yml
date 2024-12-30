@@ -53,7 +53,7 @@ jobs:
 
   linux-x64-test:
     name: 'linux-x64 GNU Arm Embedded GCC@${{github.event.inputs.version}} test'
-    runs-on: ubuntu-22.04
+    runs-on: ubuntu-24.04
 
     steps:
       - name: 'Show environment'
@@ -176,7 +176,7 @@ jobs:
 
   darwin-x64-test:
     name: 'darwin-x64 GNU Arm Embedded GCC@${{github.event.inputs.version}} test'
-    runs-on: macos-12
+    runs-on: macos-13
 
     steps:
       - name: 'Show environment'

@@ -170,7 +170,7 @@ jobs:
 
   linux-x64-test:
     name: 'linux-x64 arm-none-eabi-gcc ${{github.event.inputs.version}} test'
-    runs-on: ubuntu-22.04
+    runs-on: ubuntu-24.04
     needs: [linux-x64-upload]
 
     steps:
