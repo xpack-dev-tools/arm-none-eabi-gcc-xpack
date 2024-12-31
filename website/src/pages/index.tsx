@@ -22,6 +22,7 @@ import styles from './index.module.css';
 import HomepageFeatures from '@site/src/components/HomepageFeatures';
 
 import InstallWithCopy from '@site/src/components/InstallWithCopy';
+import customField from '@site/src/libs/customField';
 
 function HomepageHeader() {
   const {siteConfig} = useDocusaurusContext();
@@ -33,7 +34,7 @@ function HomepageHeader() {
         <p className="hero__subtitle">{siteConfig.tagline}</p>
 
         <div className={styles.installWithCopy}>
-          <InstallWithCopy>xpm install @xpack-dev-tools/arm-none-eabi-gcc@latest --verbose</InstallWithCopy>
+          <InstallWithCopy>xpm install @xpack-dev-tools/arm-none-eabi-gcc@{customField('version')} --verbose</InstallWithCopy>
         </div>
 
       </div>
