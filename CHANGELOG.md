@@ -2,6 +2,19 @@
 
 Entries in this file are in reverse chronological order.
 
+## 2024-12-31
+
+* v14.2.1-1.1 released
+* ea8f4b8 package.json: cosmetics
+* 63a9dcd website: update actions durations
+* fcb6a46 website: updates
+
+## 2024-12-30
+
+* 5f4eb65 website: maintainer update development durations
+* 85fa4ca CHANGELOG update
+* 66bba9a application.sh: re-enable multi-libs
+
 ## 2024-12-30
 
 * 66bba9a application.sh: re-enable multi-libs
