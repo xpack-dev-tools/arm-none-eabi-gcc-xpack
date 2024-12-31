@@ -225,7 +225,7 @@ and fix them; assign them to a milestone (like <code>{customField('xpackVersion'
 - check the latest commits `xpm run git-log`; if necessary, copy/paste lines,
   group by dates and edit them using the below regular expressions
 - add a new entry like _**\* v{customField('xpackVersion')} prepared**_
-- commit with a message like _**prepare v{customField('xpackVersion')}**_
+- commit with the message _**prepare v{customField('xpackVersion')}**_
 
 To turn the dates into headings, change from:
 
@@ -430,7 +430,7 @@ via HomeBrew, and make a link to `/usr/local/bin`.
 
 :::
 
-- commit with _**website: update folder hierarchies**_.
+Commit with the message _**website: update folder hierarchies**_.
 
 ### Update the list of links in top package.json
 
@@ -439,14 +439,14 @@ sequence, for each platform (Windows, macOS, GNU/Linux),
 and check the
 differences compared to the repository.
 
-Commit if necessary with _**package.json: update executables links**_
+Commit if necessary with the message _**package.json: update executables links**_.
 
 ### Update the durations of the development builds
 
 In `website/docs/maintainer/_development-durations.mdx`, update
 the durations of the builds.
 
-Commit if necessary with _**website: update development durations**_
+Commit with the message _**website: update development durations**_.
 
 ### How to build a debug version
 
@@ -537,7 +537,7 @@ to `"@xpack-dev-tools/xbb-helper":`
 
 ### Commit the changes to `build-assets/package.json`
 
-Use the message **build-assets/package.json: bump deps**.
+Commit with the message _**build-assets/package.json: bump deps**_.
 
 ### Check for disk space
 
@@ -593,7 +593,7 @@ xpm run generate-workflows -C ~/Work/xpack-dev-tools/arm-none-eabi-gcc-xpack.git
 
 ### Commit and push
 
-- commit with the message **Re-generate workflows**
+- commit with the message **re-generate workflows**
 - push the `xpack-development` branch to GitHub
 
 <FirstProductionRun/>
@@ -638,6 +638,8 @@ The workflow results and logs are available from the
 Update the values in `website/docs/maintainer/_github-actions-durations.mdx`
 with those shown by GitHub Actions.
 
+Commit with the message _**website: update actions durations**_.
+
 The resulting binaries are available for testing from
 [pre-releases/test](https://github.com/xpack-dev-tools/pre-releases/releases/tag/test/).
 
@@ -667,6 +669,13 @@ in the environment.
 These actions use the `xpack-development` branch of this repo and the
 [pre-releases/test](https://github.com/xpack-dev-tools/pre-releases/releases/tag/test/)
 binaries.
+
+:::caution
+
+Some of the `docker-linux-arm` tests have an issue on Debian and the
+**Clean working area** step fails.
+
+:::
 
 The tests results are available from the
 [GitHub Actions](https://github.com/xpack-dev-tools/arm-none-eabi-gcc-xpack/actions/) page.
@@ -721,7 +730,7 @@ xattr -cr ${HOME}/Downloads/xpack-*
 
 - in `CHANGELOG.md`, add the release date and a message
   like _**\* v{customField('xpackVersion')} released**_
-- commit with _**CHANGELOG update**_
+- commit with the message _**CHANGELOG update**_
 - check and possibly update the `build-assets/templates/body-github-release-liquid.mdx`
 - push the `xpack-development` branch to GitHub
 - run the **trigger-workflow-publish-release** xPack action:
@@ -760,14 +769,14 @@ xpm run generate-website-blog-post -C ~/Work/xpack-dev-tools/arm-none-eabi-gcc-x
 
 - edit the front matter properties
 - select the correct summary
-- commit with _**blog post release {customField('xpackVersion')} published**_
+- commit with the message _**blog post release {customField('xpackVersion')} published**_
 
 ### Update the web install page
 
 - check and possibly update the output of the `--version` runs in
   - `website/docs/install/_automatic-install-quick-test.mdx`
   - `website/docs/install/_manual-install-quick-test.mdx`
-- commit changes
+- commit with the message _**website: update quick tests**_
 
 ### Check the list of links in top package.json
 
@@ -791,7 +800,7 @@ xpm run update-package-binaries -C ~/Work/xpack-dev-tools/arm-none-eabi-gcc-xpac
 - from the release, check the SHA & file names
 - compare the SHA sums with those shown by `cat *.sha`
 - check the executable names
-- commit all changes, use a message like
+- commit all changes with the message
   _**package.json: update urls for {customField('xpackVersion')}.{customField('npmSubversion')} release**_
 
 ### Publish on the npmjs.com server
@@ -799,7 +808,7 @@ xpm run update-package-binaries -C ~/Work/xpack-dev-tools/arm-none-eabi-gcc-xpac
 - select the `xpack-development` branch
 - check the latest commits `xpm run git-log`
 - update `CHANGELOG.md`, add a line like _**\* v{customField('xpackVersion')} published on npmjs.com**_
-- commit with a message like _**CHANGELOG: publish npm v{customField('xpackVersion')}.{customField('npmSubversion')}**_
+- commit with the message _**CHANGELOG: publish npm v{customField('xpackVersion')}.{customField('npmSubversion')}**_
 - `npm pack` and check the content of the archive, which should list
   only the `package.json`, the `README.md`, `LICENSE` and `CHANGELOG.md`;
   possibly adjust `.npmignore`
