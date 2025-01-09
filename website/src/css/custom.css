@@ -93,6 +93,46 @@ h2[class*="title"]
     no-repeat;
 }
 
+.getting-started-link::before {
+  content: '';
+  width: 36px;
+  height: 36px;
+  display: inline-flex;
+  vertical-align: bottom;
+  margin-right: 0.5em;
+  background: url("/img/bulb-on-svgrepo-com.svg") no-repeat;
+}
+
+.getting-started-link::after {
+  content: '\0000a0 ';
+  width: 36px;
+  height: 36px;
+  display: inline-flex;
+  vertical-align: bottom;
+  margin-left: 0.5em;
+  background: url("/img/bulb-on-svgrepo-com.svg") no-repeat;
+}
+
+[data-theme='dark'] .getting-started-link::before {
+  content: '';
+  width: 36px;
+  height: 36px;
+  display: inline-flex;
+  vertical-align: bottom;
+  margin-right: 0.5em;
+  background: url("/img/bulb-on-svgrepo-com-dark.svg") no-repeat;
+}
+
+[data-theme='dark'] .getting-started-link::after {
+  content: '\0000a0 ';
+  width: 36px;
+  height: 36px;
+  display: inline-flex;
+  vertical-align: bottom;
+  margin-left: 0.5em;
+  background: url("/img/bulb-on-svgrepo-com-dark.svg") no-repeat;
+}
+
 /* --- */
 
 .header-github-link:hover {
