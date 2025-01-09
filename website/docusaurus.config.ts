@@ -434,25 +434,46 @@ const config: Config = {
       theme: prismThemes.github,
       darkTheme: prismThemes.dracula,
     },
-    // algolia: {
-    //   // https://docsearch.algolia.com/docs/docsearch-v3/
-    //   appId: "KIDD7R4CL1",
-    //   apiKey: "ca2ffc431941284609f2d50202fc5506",
-    //   indexName: "xpackio",
+    // https://docusaurus.io/docs/search#using-algolia-docsearch
+    // https://docsearch.algolia.com/docs/docsearch-v3/
+    algolia: {
+      // The application ID provided by Algolia
+      appId: "KIDD7R4CL1",
 
-    //   // It ensures that search results are relevant to the current
-    //   // language and version. Enabled by default.
-    //   contextualSearch: false, // true,
-    //   // Optional: Replace parts of the item URLs from Algolia.
-    //   // Useful when using the same search index for multiple deployments
-    //   // using a different baseUrl. You can use regexp or string in the
-    //   // `from` param. For example: localhost:3000 vs myCompany.com/docs
-    //   // replaceSearchResultPathname: undefined,
-    //   // Optional: Algolia search parameters
-    //   searchParameters: {},
-    //   // Optional: path for search page that enabled by default (`false` to disable it)
-    //   searchPagePath: false, // 'search',
-    // },
+      // Public API key: it is safe to commit it
+      apiKey: "ca2ffc431941284609f2d50202fc5506",
+
+      indexName: "xpackio",
+
+      // It ensures that search results are relevant to the current
+      // language and version. Enabled by default.
+      contextualSearch: true,
+
+      // Optional: Specify domains where the navigation should occur
+      // through window.location instead on history.push. Useful when
+      // our Algolia config crawls multiple documentation sites and
+      // we want to navigate with window.location.href to them.
+      // externalUrlRegex: 'external\\.com|domain\\.com',
+      externalUrlRegex: 'xpack\\.github\\.io|xpack-dev-tools\\.github\\.io',
+
+      // Optional: Replace parts of the item URLs from Algolia.
+      // Useful when using the same search index for multiple deployments
+      // using a different baseUrl. You can use regexp or string in the
+      // `from` param. For example: localhost:3000 vs myCompany.com/docs
+      // replaceSearchResultPathname: {
+      //  from: '/docs/', // or as RegExp: /\/docs\//
+      //  to: '/',
+      // },
+
+      // Optional: Algolia search parameters
+      searchParameters: {},
+
+      // Optional: path for search page that enabled by default (`false` to disable it)
+      searchPagePath: 'search',
+
+      // Optional: whether the insights feature is enabled or not on Docsearch (`false` by default)
+      insights: false,
+    },
   } satisfies Preset.ThemeConfig,
 
   customFields: customFields,
