@@ -99,7 +99,8 @@ const config: Config = {
   url: 'https://xpack-dev-tools.github.io',
   // Set the /<baseUrl>/ pathname under which your site is served
   // For GitHub pages deployment, it is often '/<projectName>/'
-  baseUrl: '/arm-none-eabi-gcc-xpack/',
+  baseUrl: process.env.DOCUSAURUS_BASEURL ??
+    '/arm-none-eabi-gcc-xpack/',
 
   // GitHub pages deployment config.
   // If you aren't using GitHub pages, you don't need these.
@@ -249,8 +250,7 @@ const config: Config = {
       }
     ],
     navbar: {
-      // Overriden by i18n/en/docusaurus-theme-classic.
-      title: 'The xPack Binary Development Tools',
+      title: 'The xPack Binary Tools',
 
       logo: {
         alt: 'xPack Logo',
