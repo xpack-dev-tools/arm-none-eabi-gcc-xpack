@@ -71,10 +71,10 @@ jobs:
           node-version: 20
 
       - name: Install dependencies
-        run: cd website; npm ci
+        run: npm ci -C website
 
       - name: Generate Docusaurus
-        run: cd website; npm run build
+        run: npm run build -C website
 
       - name: Setup Pages
         # https://github.com/actions/configure-pages
