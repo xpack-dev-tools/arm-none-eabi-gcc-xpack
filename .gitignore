@@ -129,20 +129,32 @@ dist
 .yarn/install-state.gz
 .pnp.*
 
-# added for xPack
+# ----- custom -----
+
+xpacks/
+
+.tap
+
+cjs/
+**/*.js.map
+**/*.d.ts
+**/*.d.ts.map
+
+# /docs/
+
+tsconfig.tsbuildinfo
+
+tmp/
 
 .vscode/c_cpp_properties.json
 
-# xpm
-xpacks/
-build/
+build*/
+!build-assets/
 
-/*.tgz
-
-# Windows
 Thumbs.db
-
-# macOS
 .DS_Store
 
-# end
+website/.docusaurus
+website/build
+
+# ----- end -----

@@ -1,3 +1,31 @@
+# https://docs.npmjs.com/files/package.json#files
+# Certain files are always included, regardless of settings:
+# - package.json
+# - README
+# - CHANGES / CHANGELOG / HISTORY
+# - LICENSE / LICENCE
+# - NOTICE
+# - The file in the "main" field
+# README, CHANGES, LICENSE & NOTICE can have any case and extension.
+#
+# Conversely, some files are always ignored:
+# - .git
+# - CVS
+# - .svn
+# - .hg
+# - .lock-wscript
+# - .wafpickle-N
+# - .*.swp
+# - .DS_Store
+# - ._*
+# - npm-debug.log
+# - .npmrc
+# - node_modules
+# - config.gypi
+# - *.orig
+# -----------------------------------------------------------------------------
+# .gitignore is not automatically included, add relevant lines again.
+
 .DS_Store
 .git/
 .github/
@@ -6,28 +34,58 @@
 .clang-*
 .cmake-format
 
-.vscode/
-
-patches/
-pkgconfig/
-scripts/
-test*/
-build*/
-ci/
-docs/
-example*/
-
-xpacks/
-node_modules/
-
+# npm pack archives
 /*.tgz
 
-README-*
+# tap
+coverage/
+tests/
+.tap/
+
+# nyc test coverage
+.nyc_output/
+
+# VS Code
+.vscode/
+
+# CI
+.travis.yml
+.appveyor.yml
+
+README-*.md
 LICENSE-*
+!LICENSE-XPACK
 CONTRIBUTING**
 NOTES.md
 
+*.ts
+lib/**/*.ts
+# The above removes all TypeScript including the .d.ts files.
+# Bring those later back.
+!*.d.ts
+!lib/*.d.ts
+
+**/tsconfig*.json
+typedoc.json
+tsconfig.tsbuildinfo
+
+src/
+xpacks/
+node_modules/
+docs/
+# /assets/ # keep it, xpm needs it.
+scripts/
 website/
+tmp/
+patches/
+pkgconfig/
+ci/
+example*/
+test*/
+build*/
+docs/
 build-assets/
 wrappers/
 extras/
+
+#end

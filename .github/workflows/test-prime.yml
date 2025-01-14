@@ -1,7 +1,7 @@
 
 # -----------------------------------------------------------------------------
 # DO NOT EDIT!
-# Generated from xpacks/@xpack-dev-tools/xbb-helper/templates/workflows/*.
+# Automatically generated from npm-packages-helper/templates/*.
 #
 # This file is part of the xPack project (http://xpack.github.io).
 # Copyright (c) 2021 Liviu Ionescu. All rights reserved.
@@ -26,9 +26,6 @@
 # https://github.com/actions/download-artifact
 
 # -----------------------------------------------------------------------------
-
-
-
 
 
 

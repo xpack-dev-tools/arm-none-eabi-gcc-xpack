@@ -2,7 +2,13 @@
   "name": "build-assets",
   "version": "0.0.0",
   "private": true,
-  "scripts": {
+  "scripts": {},
+  "bundleDependencies": [],
+  "$devDependenciesUrls": [
+    "https://www.npmjs.com/package/liquidjs"
+  ],
+  "devDependencies": {
+    "liquidjs": "^10.20.1"
   },
   "xpack": {
     "minimumXpmRequired": "0.16.3",
@@ -36,10 +42,6 @@
       "dbg": ""
     },
     "actions": {
-      "npm-install": "npm install",
-      "npm-pack": "cd .. && npm pack",
-      "npm-version-patch": "cd .. && npm version patch",
-      "npm-version-minor": "cd .. && npm version minor",
       "deep-clean": [
         "rm -rf build xpacks node_modules package-lock.json",
         "rm -rf ${HOME}/Work/xpack-dev-tools-build/{{ properties.appLcName }}-[0-9]*-*"
@@ -111,9 +113,9 @@
         "hidden": true,
         "actions": {
           "build": "{{ properties.commandBashBuild }}",
-          "build-development": "{{ properties.commandBashBuild }} --develop",
-          "build-development-debug": "{{ properties.commandBashBuild }} --develop --debug",
-          "build-development-tests-only": "{{ properties.commandBashBuild }} --develop --tests-only"
+          "build-development": "{{ properties.commandBashBuild }} --development",
+          "build-development-debug": "{{ properties.commandBashBuild }} --development --debug",
+          "build-development-tests-only": "{{ properties.commandBashBuild }} --development --tests-only"
         }
       },
       "common-docker": {
@@ -174,9 +176,9 @@
         },
         "actions": {
           "build": "caffeinate {{ properties.commandBashBuild }}",
-          "build-development": "caffeinate {{ properties.commandBashBuild }} --develop",
-          "build-development-debug": "caffeinate {{ properties.commandBashBuild }} --develop --debug",
-          "build-development-tests-only": "caffeinate {{ properties.commandBashBuild }} --develop --tests-only"
+          "build-development": "caffeinate {{ properties.commandBashBuild }} --development",
+          "build-development-debug": "caffeinate {{ properties.commandBashBuild }} --development --debug",
+          "build-development-tests-only": "caffeinate {{ properties.commandBashBuild }} --development --tests-only"
         }
       },
       "darwin-arm64": {
@@ -232,18 +234,11 @@
         },
         "actions": {
           "build": "{{ properties.commandBashBuild }} --windows",
-          "build-development": "{{ properties.commandBashBuild }} --windows --develop",
-          "build-development-debug": "{{ properties.commandBashBuild }} --windows --develop --debug",
-          "build-development-tests-only": "{{ properties.commandBashBuild }} --windows --develop --tests-only"
+          "build-development": "{{ properties.commandBashBuild }} --windows --development",
+          "build-development-debug": "{{ properties.commandBashBuild }} --windows --development --debug",
+          "build-development-tests-only": "{{ properties.commandBashBuild }} --windows --development --tests-only"
         }
       }
     }
-  },
-  "bundleDependencies": [],
-  "$devDependenciesUrls": [
-    "https://www.npmjs.com/package/liquidjs"
-  ],
-  "devDependencies": {
-    "liquidjs": "^10.16.1"
   }
 }

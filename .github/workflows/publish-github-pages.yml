@@ -1,6 +1,6 @@
 # -----------------------------------------------------------------------------
 # DO NOT EDIT!
-# Generated from xpacks/@xpack-dev-tools/xbb-helper/templates/workflows/*.
+# Automatically generated from npm-packages-helper/templates/*.
 #
 # This file is part of the xPack project (http://xpack.github.io).
 # Copyright (c) 2021 Liviu Ionescu. All rights reserved.
@@ -29,6 +29,10 @@ on:
     # ... any of these files changes ...
     paths:
       - 'website/**'
+      - 'typedoc.json'
+      - '**/tsconfig*.json'
+      - 'src/**/*.ts'
+      - 'README.md'
       - '.github/workflows/publish-github-pages.yml'
       - 'package.json'
       - 'build-assets/package.json'
@@ -73,7 +77,7 @@ jobs:
       - name: Install dependencies
         run: npm ci -C website
 
-      - name: Generate Docusaurus
+      - name: Build the Docusaurus site
         run: npm run build -C website
 
       - name: Setup Pages
