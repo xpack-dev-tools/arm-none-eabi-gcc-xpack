@@ -34,9 +34,9 @@
         "pythonVersion": "3.12.8",
         "newlibVersion": "4.4.0"
       },
-      "buildFolderRelativePath": "{{ 'build' | path_join: configuration.name | to_filename | downcase }}",
-      "buildFolderRelativePathPosix": "{{ 'build' | path_posix_join: configuration.name | downcase }}",
-      "commandBashBuild": "bash {{ properties.dbg }} scripts/build.sh --target {{ configuration.name }} --build-folder {{ properties.buildFolderRelativePathPosix }}",
+      "buildFolderRelativePath": "{{'build' | path_join: configuration.name | to_filename | downcase}}",
+      "buildFolderRelativePathPosix": "{{'build' | path_posix_join: configuration.name | downcase}}",
+      "commandBashBuild": "bash {{properties.dbg}} scripts/build.sh --target {{configuration.name}} --build-folder {{properties.buildFolderRelativePathPosix}}",
       "xpm-version": "0.18.0",
       "xpm-install-loglevel": "info",
       "dbg": ""
@@ -44,7 +44,7 @@
     "actions": {
       "deep-clean": [
         "rm -rf build xpacks node_modules package-lock.json",
-        "rm -rf ${HOME}/Work/xpack-dev-tools-build/{{ properties.appLcName }}-[0-9]*-*"
+        "rm -rf ${HOME}/Work/xpack-dev-tools-build/{{properties.appLcName}}-[0-9]*-*"
       ],
       "install": [
         "npm install",
@@ -62,12 +62,12 @@
       "website-import-releases": "bash xpacks/@xpack-dev-tools/xbb-helper/maintainer-scripts/website-import-releases.sh",
       "check-space": "{% if os.platform == 'darwin' %}df -gH /{% else %}df -BG -H /{% endif %}",
       "clear-all-projects-builds": "rm -rf ~/Work/xpack-dev-tools/*/build-assets/build",
-      "trigger-workflow-build-darwin-x64": "bash xpacks/@xpack-dev-tools/xbb-helper/github-actions/trigger-workflow-build.sh --workflow build-darwin-x64.yml --xpm-version {{ properties.xpm-version }} --loglevel {{ properties.xpm-install-loglevel }}",
-      "trigger-workflow-build-darwin-arm64": "bash xpacks/@xpack-dev-tools/xbb-helper/github-actions/trigger-workflow-build.sh --workflow build-darwin-arm64.yml --xpm-version {{ properties.xpm-version }} --loglevel {{ properties.xpm-install-loglevel }}",
-      "trigger-workflow-build-linux-x64": "bash xpacks/@xpack-dev-tools/xbb-helper/github-actions/trigger-workflow-build.sh --workflow build-linux-x64.yml --xpm-version {{ properties.xpm-version }} --loglevel {{ properties.xpm-install-loglevel }}",
-      "trigger-workflow-build-win32-x64": "bash xpacks/@xpack-dev-tools/xbb-helper/github-actions/trigger-workflow-build.sh --workflow build-win32-x64.yml --xpm-version {{ properties.xpm-version }} --loglevel {{ properties.xpm-install-loglevel }}",
-      "trigger-workflow-build-linux-arm64": "bash xpacks/@xpack-dev-tools/xbb-helper/github-actions/trigger-workflow-build.sh --workflow build-linux-arm64.yml --xpm-version {{ properties.xpm-version }} --loglevel {{ properties.xpm-install-loglevel }}",
-      "trigger-workflow-build-linux-arm": "bash xpacks/@xpack-dev-tools/xbb-helper/github-actions/trigger-workflow-build.sh --workflow build-linux-arm.yml --xpm-version {{ properties.xpm-version }} --loglevel {{ properties.xpm-install-loglevel }}",
+      "trigger-workflow-build-darwin-x64": "bash xpacks/@xpack-dev-tools/xbb-helper/github-actions/trigger-workflow-build.sh --workflow build-darwin-x64.yml --xpm-version {{properties.xpm-version}} --loglevel {{properties.xpm-install-loglevel}}",
+      "trigger-workflow-build-darwin-arm64": "bash xpacks/@xpack-dev-tools/xbb-helper/github-actions/trigger-workflow-build.sh --workflow build-darwin-arm64.yml --xpm-version {{properties.xpm-version}} --loglevel {{properties.xpm-install-loglevel}}",
+      "trigger-workflow-build-linux-x64": "bash xpacks/@xpack-dev-tools/xbb-helper/github-actions/trigger-workflow-build.sh --workflow build-linux-x64.yml --xpm-version {{properties.xpm-version}} --loglevel {{properties.xpm-install-loglevel}}",
+      "trigger-workflow-build-win32-x64": "bash xpacks/@xpack-dev-tools/xbb-helper/github-actions/trigger-workflow-build.sh --workflow build-win32-x64.yml --xpm-version {{properties.xpm-version}} --loglevel {{properties.xpm-install-loglevel}}",
+      "trigger-workflow-build-linux-arm64": "bash xpacks/@xpack-dev-tools/xbb-helper/github-actions/trigger-workflow-build.sh --workflow build-linux-arm64.yml --xpm-version {{properties.xpm-version}} --loglevel {{properties.xpm-install-loglevel}}",
+      "trigger-workflow-build-linux-arm": "bash xpacks/@xpack-dev-tools/xbb-helper/github-actions/trigger-workflow-build.sh --workflow build-linux-arm.yml --xpm-version {{properties.xpm-version}} --loglevel {{properties.xpm-install-loglevel}}",
       "trigger-workflow-test-prime": "bash xpacks/@xpack-dev-tools/xbb-helper/github-actions/trigger-workflow-test-prime.sh",
       "trigger-workflow-test-docker-linux-x64": "bash xpacks/@xpack-dev-tools/xbb-helper/github-actions/trigger-workflow-test-docker-linux-x64.sh",
       "trigger-workflow-test-docker-linux-arm": "bash xpacks/@xpack-dev-tools/xbb-helper/github-actions/trigger-workflow-test-docker-linux-arm.sh",
@@ -77,15 +77,15 @@
       "update-package-binaries": "bash xpacks/@xpack-dev-tools/xbb-helper/github-actions/update-package-binaries.sh",
       "trigger-workflow-test-xpm": "bash xpacks/@xpack-dev-tools/xbb-helper/github-actions/trigger-workflow-test-xpm.sh",
       "trigger-workflow-deep-clean": "bash xpacks/@xpack-dev-tools/xbb-helper/github-actions/trigger-workflow-deep-clean.sh",
-      "test-native": "bash {{ properties.dbg }} scripts/test.sh",
-      "test-pre-release": "bash {{ properties.dbg }} scripts/test.sh --base-url pre-release --development --cache",
-      "test-release": "bash {{ properties.dbg }} scripts/test.sh --base-url pre-release --development --cache",
-      "test-xpm": "bash {{ properties.dbg }} scripts/test.sh --xpm",
-      "build-native": "bash {{ properties.dbg }} scripts/build.sh",
-      "build-native-develop": "bash {{ properties.dbg }} scripts/build.sh --development",
-      "build-native-develop-debug": "bash {{ properties.dbg }} scripts/build.sh --development --debug",
-      "build-native-win": "bash {{ properties.dbg }} scripts/build.sh --windows",
-      "build-native-win-develop": "bash {{ properties.dbg }} scripts/build.sh --development --windows"
+      "test-native": "bash {{properties.dbg}} scripts/test.sh",
+      "test-pre-release": "bash {{properties.dbg}} scripts/test.sh --base-url pre-release --development --cache",
+      "test-release": "bash {{properties.dbg}} scripts/test.sh --base-url pre-release --development --cache",
+      "test-xpm": "bash {{properties.dbg}} scripts/test.sh --xpm",
+      "build-native": "bash {{properties.dbg}} scripts/build.sh",
+      "build-native-develop": "bash {{properties.dbg}} scripts/build.sh --development",
+      "build-native-develop-debug": "bash {{properties.dbg}} scripts/build.sh --development --debug",
+      "build-native-win": "bash {{properties.dbg}} scripts/build.sh --windows",
+      "build-native-win-develop": "bash {{properties.dbg}} scripts/build.sh --development --windows"
     },
     "buildConfigurations": {
       "common-dependencies": {
@@ -103,25 +103,25 @@
         "hidden": true,
         "actions": {
           "deep-clean": [
-            "rm -rf {{ properties.buildFolderRelativePathPosix }}",
-            "rm -rf ${HOME}/Work/xpack-dev-tools-build/{{ properties.appLcName }}-[0-9]*-*/{{ configuration.name }}"
+            "rm -rf {{properties.buildFolderRelativePathPosix}}",
+            "rm -rf ${HOME}/Work/xpack-dev-tools-build/{{properties.appLcName}}-[0-9]*-*/{{configuration.name}}"
           ],
-          "install": "xpm install --config {{ configuration.name }}"
+          "install": "xpm install --config {{configuration.name}}"
         }
       },
       "common-actions-native": {
         "hidden": true,
         "actions": {
-          "build": "{{ properties.commandBashBuild }}",
-          "build-development": "{{ properties.commandBashBuild }} --development",
-          "build-development-debug": "{{ properties.commandBashBuild }} --development --debug",
-          "build-development-tests-only": "{{ properties.commandBashBuild }} --development --tests-only"
+          "build": "{{properties.commandBashBuild}}",
+          "build-development": "{{properties.commandBashBuild}} --development",
+          "build-development-debug": "{{properties.commandBashBuild}} --development --debug",
+          "build-development-tests-only": "{{properties.commandBashBuild}} --development --tests-only"
         }
       },
       "common-docker": {
         "hidden": true,
         "properties": {
-          "containerName": "{{ properties.appLcName }}-{{ package.version }}-{{ configuration.name }}",
+          "containerName": "{{properties.appLcName}}-{{package.version}}-{{configuration.name}}",
           "force32": ""
         },
         "actions": {
@@ -129,37 +129,37 @@
             "mkdir -pv ${HOME}/Work/xpack-dev-tools/xbb-helper-xpack.git",
             "mkdir -pv ${HOME}/.local/xPacks ${HOME}/.cache/xPacks ${HOME}/Work/cache",
             "mkdir -pv ${HOME}/.wine",
-            "docker rm --force {{ properties.containerName }}",
-            "docker create --name {{ properties.containerName }} --tty --hostname docker --env XBB_ENVIRONMENT_SKIP_CHECKS=${XBB_ENVIRONMENT_SKIP_CHECKS:-} --volume $(pwd):$(pwd) --volume ${HOME}/Work/xpack-dev-tools/xbb-helper-xpack.git:${HOME}/Work/xpack-dev-tools/xbb-helper-xpack.git --volume ${HOME}/.cache/xPacks:${HOME}/.cache/xPacks --volume ${HOME}/Work/cache:${HOME}/Work/cache --volume ${HOME}/.wine:${HOME}/.wine --workdir $(pwd) {{ properties.dockerImage }}",
-            "docker start {{ properties.containerName }}",
-            "docker exec {{ properties.containerName }} {{ properties.force32 }} npm install --location=global xpm@{{ properties.xpm-version }}",
-            "docker exec {{ properties.containerName }} {{ properties.force32 }} userdel node",
-            "docker exec {{ properties.containerName }} {{ properties.force32 }} groupadd --gid $(id -g) --force $(id -gn)",
-            "docker exec {{ properties.containerName }} {{ properties.force32 }} useradd --home-dir ${HOME} --uid $(id -u) --gid $(id -g) $(id -un) --create-home",
-            "docker exec {{ properties.containerName }} {{ properties.force32 }} chown --recursive $(id -u):$(id -g) ${HOME}",
-            "docker exec --user $(id -un) {{ properties.containerName }} {{ properties.force32 }} bash -c 'lsb_release -sd && whoami && pwd && ls -lLA && ls -l ${HOME}'",
-            "docker exec --user $(id -un) {{ properties.containerName }} {{ properties.force32 }} xpm install",
-            "docker exec --user $(id -un) {{ properties.containerName }} {{ properties.force32 }} xpm install --config {{ configuration.name }}"
+            "docker rm --force {{properties.containerName}}",
+            "docker create --name {{properties.containerName}} --tty --hostname docker --env XBB_ENVIRONMENT_SKIP_CHECKS=${XBB_ENVIRONMENT_SKIP_CHECKS:-} --volume $(pwd):$(pwd) --volume ${HOME}/Work/xpack-dev-tools/xbb-helper-xpack.git:${HOME}/Work/xpack-dev-tools/xbb-helper-xpack.git --volume ${HOME}/.cache/xPacks:${HOME}/.cache/xPacks --volume ${HOME}/Work/cache:${HOME}/Work/cache --volume ${HOME}/.wine:${HOME}/.wine --workdir $(pwd) {{properties.dockerImage}}",
+            "docker start {{properties.containerName}}",
+            "docker exec {{properties.containerName}} {{properties.force32}} npm install --location=global xpm@{{properties.xpm-version}}",
+            "docker exec {{properties.containerName}} {{properties.force32}} userdel node",
+            "docker exec {{properties.containerName}} {{properties.force32}} groupadd --gid $(id -g) --force $(id -gn)",
+            "docker exec {{properties.containerName}} {{properties.force32}} useradd --home-dir ${HOME} --uid $(id -u) --gid $(id -g) $(id -un) --create-home",
+            "docker exec {{properties.containerName}} {{properties.force32}} chown --recursive $(id -u):$(id -g) ${HOME}",
+            "docker exec --user $(id -un) {{properties.containerName}} {{properties.force32}} bash -c 'lsb_release -sd && whoami && pwd && ls -lLA && ls -l ${HOME}'",
+            "docker exec --user $(id -un) {{properties.containerName}} {{properties.force32}} xpm install",
+            "docker exec --user $(id -un) {{properties.containerName}} {{properties.force32}} xpm install --config {{configuration.name}}"
           ],
           "docker-link-deps": [
-            "docker exec --user $(id -un) {{ properties.containerName }} {{ properties.force32 }} xpm link -C ${HOME}/Work/xpack-dev-tools/xbb-helper-xpack.git",
-            "docker exec --user $(id -un) {{ properties.containerName }} {{ properties.force32 }} xpm run link-deps"
+            "docker exec --user $(id -un) {{properties.containerName}} {{properties.force32}} xpm link -C ${HOME}/Work/xpack-dev-tools/xbb-helper-xpack.git",
+            "docker exec --user $(id -un) {{properties.containerName}} {{properties.force32}} xpm run link-deps"
           ],
           "docker-build": [
-            "docker exec --user $(id -un) {{ properties.containerName }} {{ properties.force32 }} xpm run build --config {{ configuration.name }}"
+            "docker exec --user $(id -un) {{properties.containerName}} {{properties.force32}} xpm run build --config {{configuration.name}}"
           ],
           "docker-build-development": [
-            "docker exec --user $(id -un) {{ properties.containerName }} {{ properties.force32 }} xpm run build-development --config {{ configuration.name }}"
+            "docker exec --user $(id -un) {{properties.containerName}} {{properties.force32}} xpm run build-development --config {{configuration.name}}"
           ],
           "docker-build-development-debug": [
-            "docker exec --user $(id -un) {{ properties.containerName }} {{ properties.force32 }} xpm run build-development-debug --config {{ configuration.name }}"
+            "docker exec --user $(id -un) {{properties.containerName}} {{properties.force32}} xpm run build-development-debug --config {{configuration.name}}"
           ],
           "docker-build-development-tests-only": [
-            "docker exec --user $(id -un) {{ properties.containerName }} {{ properties.force32 }} xpm run build-development-tests-only --config {{ configuration.name }}"
+            "docker exec --user $(id -un) {{properties.containerName}} {{properties.force32}} xpm run build-development-tests-only --config {{configuration.name}}"
           ],
           "docker-remove": [
-            "docker stop {{ properties.containerName }}",
-            "docker rm {{ properties.containerName }}"
+            "docker stop {{properties.containerName}}",
+            "docker rm {{properties.containerName}}"
           ]
         }
       },
@@ -175,10 +175,10 @@
           "@xpack-dev-tools/sed": "4.9.0-3.1"
         },
         "actions": {
-          "build": "caffeinate {{ properties.commandBashBuild }}",
-          "build-development": "caffeinate {{ properties.commandBashBuild }} --development",
-          "build-development-debug": "caffeinate {{ properties.commandBashBuild }} --development --debug",
-          "build-development-tests-only": "caffeinate {{ properties.commandBashBuild }} --development --tests-only"
+          "build": "caffeinate {{properties.commandBashBuild}}",
+          "build-development": "caffeinate {{properties.commandBashBuild}} --development",
+          "build-development-debug": "caffeinate {{properties.commandBashBuild}} --development --debug",
+          "build-development-tests-only": "caffeinate {{properties.commandBashBuild}} --development --tests-only"
         }
       },
       "darwin-arm64": {
@@ -233,10 +233,10 @@
           "dockerImage": "ilegeul/ubuntu:amd64-18.04-xbb-v5.2.2"
         },
         "actions": {
-          "build": "{{ properties.commandBashBuild }} --windows",
-          "build-development": "{{ properties.commandBashBuild }} --windows --development",
-          "build-development-debug": "{{ properties.commandBashBuild }} --windows --development --debug",
-          "build-development-tests-only": "{{ properties.commandBashBuild }} --windows --development --tests-only"
+          "build": "{{properties.commandBashBuild}} --windows",
+          "build-development": "{{properties.commandBashBuild}} --windows --development",
+          "build-development-debug": "{{properties.commandBashBuild}} --windows --development --debug",
+          "build-development-tests-only": "{{properties.commandBashBuild}} --windows --development --tests-only"
         }
       }
     }
