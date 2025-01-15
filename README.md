@@ -5,8 +5,7 @@
 
 # The xPack GNU Arm Embedded GCC
 
-A standalone cross-platform (Windows, macOS, GNU/Linux)
-binary distribution of GNU Arm Embedded GCC,
+A standalone, cross-platform (Windows, macOS, GNU/Linux) binary distribution of GNU Arm Embedded GCC,
 intended for reproducible builds.
 
 ## Project documentation

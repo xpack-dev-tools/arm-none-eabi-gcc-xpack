@@ -57,7 +57,6 @@
         "git -C ${HOME}/Work/xpack-dev-tools/xbb-helper-xpack.git pull"
       ],
       "git-log": "git -C .. log --pretty='%cd * %h %s' --date=short",
-      "generate-workflows": "bash xpacks/@xpack-dev-tools/xbb-helper/maintainer-scripts/generate-workflows.sh",
       "website-generate-commons": "bash xpacks/@xpack-dev-tools/xbb-helper/maintainer-scripts/website-generate-commons.sh",
       "website-import-releases": "bash xpacks/@xpack-dev-tools/xbb-helper/maintainer-scripts/website-import-releases.sh",
       "check-space": "{% if os.platform == 'darwin' %}df -gH /{% else %}df -BG -H /{% endif %}",
