@@ -127,7 +127,7 @@ and macOS; not yet available on Windows
 
 ## Known problems
 
-- [[#5]](https://github.com/xpack-dev-tools/arm-none-eabi-gcc-xpack/issues/5)
+- [[#5](https://github.com/xpack-dev-tools/arm-none-eabi-gcc-xpack/issues/5)]:
 the `arm-none-eabi-gdb-py` fails to start on Ubuntu (and possibly
 other Debian) systems, it fails with a message like:
 ```console

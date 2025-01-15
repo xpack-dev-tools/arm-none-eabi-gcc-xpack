@@ -94,18 +94,18 @@ thumb/v8-m.main+dp/hard;@mthumb@march=armv8-m.main+fp.dp@mfloat-abi=hard
 
 ## Bug fixes
 
-- [[#4]](https://github.com/xpack-dev-tools/arm-none-eabi-gcc-xpack/issues/4)
-Due to a bug in the build scripts, the Windows `gdb-py` had a hard-wired
+- [[#4](https://github.com/xpack-dev-tools/arm-none-eabi-gcc-xpack/issues/4)]:
+due to a bug in the build scripts, the Windows `gdb-py` had a hard-wired
 dependency to Python 2.7.13 and failed to start on other versions; fixed;
-- [[#3]](https://github.com/xpack-dev-tools/arm-none-eabi-gcc-xpack/issues/3)
-Due to a bug in the build scripts, the macOS `gdb-py` had a wrong
+- [[#3](https://github.com/xpack-dev-tools/arm-none-eabi-gcc-xpack/issues/3)]:
+due to a bug in the build scripts, the macOS `gdb-py` had a wrong
 dependency and failed to start; fixed;
-- [[#2]](https://github.com/xpack-dev-tools/arm-none-eabi-gcc-xpack/issues/2)
-Due to a bug in the build scripts, the Windows binaries included two
+- [[#2](https://github.com/xpack-dev-tools/arm-none-eabi-gcc-xpack/issues/2)]:
+due to a bug in the build scripts, the Windows binaries included two
 copies of the `docs` folder, one in root and one in the `share` folder;
 the script was fixed and now there is only one copy in `share/docs`.
-- [[#1]](https://github.com/xpack-dev-tools/arm-none-eabi-gcc-xpack/issues/1)
-Due to an omission in the build scripts, the content of the `libgcov`
+- [[#1](https://github.com/xpack-dev-tools/arm-none-eabi-gcc-xpack/issues/1)]:
+due to an omission in the build scripts, the content of the `libgcov`
 library was mostly empty; the script was fixed and now the library has the
 expected content.
 
@@ -137,7 +137,7 @@ and macOS; not yet available on Windows
 
 ## Known problems
 
-- [[#5]](https://github.com/xpack-dev-tools/arm-none-eabi-gcc-xpack/issues/5)
+- [[#5](https://github.com/xpack-dev-tools/arm-none-eabi-gcc-xpack/issues/5)]:
 the `arm-none-eabi-gdb-py` fails to start on Ubuntu (and possibly
 other Debian) systems, it fails with a message like:
 ```console

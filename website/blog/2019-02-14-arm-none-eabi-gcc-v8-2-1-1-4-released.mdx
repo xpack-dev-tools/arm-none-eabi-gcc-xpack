@@ -60,10 +60,10 @@ bug fixes:
 - GDB was built the Git commit ad0f979c9 from 2019-01-29, to fix the bugs
   affecting C++ LTO projects
   [24145](https://sourceware.org/bugzilla/show_bug.cgi?id=24145)
-- [Issue:[#3](https://github.com/gnu-mcu-eclipse/arm-none-eabi-gcc-build/issues/3)]
+- [[#3](https://github.com/gnu-mcu-eclipse/arm-none-eabi-gcc-build/issues/3)]:
   by default, the GCC build script fails to create `liblto_plugin-0.dll`
   for static builds with mingw; code to create the plugin was added
-- [Issue:[#1](https://github.com/gnu-mcu-eclipse/arm-none-eabi-gcc-build/issues/1)]
+- [[#1](https://github.com/gnu-mcu-eclipse/arm-none-eabi-gcc-build/issues/1)]:
   the `liblto_plugin` copied/linked to the `lib/bdf-plugins` for `ar`
   to find it and be able to process archives with LTO objects
 - a patch was applied to gcc to fix the Windows LTO with -g bug

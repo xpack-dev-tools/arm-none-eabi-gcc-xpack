@@ -125,8 +125,8 @@ The issue was reported to Arm as bug [1838049](https://bugs.launchpad.net/gcc-ar
   `system/src/newlib/_syscalls.c`. The problem was in the project template
   [#317](https://github.com/gnu-mcu-eclipse/eclipse-plugins/issues/317), and
   was fixed in GNU MCU Eclipse plug-ins v4.4.2 (2018-08-27).
-- [[#1]](https://github.com/xpack-dev-tools/arm-none-eabi-gcc-xpack/issues/1)
-  Due to an omission in the build scripts, the content of the `libgcov`
+- [[#1](https://github.com/xpack-dev-tools/arm-none-eabi-gcc-xpack/issues/1)]:
+  due to an omission in the build scripts, the content of the `libgcov`
   library is mostly empty; the problem was fixed starting with v8.3.1-1.2.
 
 ## Documentation

@@ -104,8 +104,8 @@ There should be no functional changes.
 
 ### `libgcov`
 
-[[#1]](https://github.com/xpack-dev-tools/arm-none-eabi-gcc-xpack/issues/1)
-Due to an omission in the build scripts, the content of the `libgcov`
+- [[#1](https://github.com/xpack-dev-tools/arm-none-eabi-gcc-xpack/issues/1)]:
+due to an omission in the build scripts, the content of the `libgcov`
 library was mostly empty; the script was fixed and now the library has the
 expected content.
 

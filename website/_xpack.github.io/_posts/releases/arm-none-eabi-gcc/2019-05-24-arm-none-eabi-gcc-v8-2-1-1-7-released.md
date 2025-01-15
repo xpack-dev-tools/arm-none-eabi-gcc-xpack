@@ -47,17 +47,17 @@ Compared to the ARM distribution, the build procedure is more or less the
 same and there should be no functional differences, except the following
 bug fixes:
 
-- [Issue:[#4](https://github.com/gnu-mcu-eclipse/arm-none-eabi-gcc-build/issues/4)]
+- [[#4](https://github.com/gnu-mcu-eclipse/arm-none-eabi-gcc-build/issues/4)]:
   the Windows paths with spaces bug apparently was caused by an old version of
   and with the new version (5.0.4) the
   [89249](https://gcc.gnu.org/bugzilla/show_bug.cgi?id=89249)
   `gcc.c` patch is no longer needed;
-- [Issue:[#3](https://github.com/gnu-mcu-eclipse/arm-none-eabi-gcc-build/issues/3)]
+- [[#3](https://github.com/gnu-mcu-eclipse/arm-none-eabi-gcc-build/issues/3)]:
   due to a problem in the GCC configure script and the specifics of the static
   build, LTO was not effective on Windows, and the initial workaround proved
   not effective either; in the new build environment the configure script is
   enables LTO and it is functional on windows too;
-- [Issue:[#1](https://github.com/gnu-mcu-eclipse/arm-none-eabi-gcc-build/issues/1)]
+- [[#1](https://github.com/gnu-mcu-eclipse/arm-none-eabi-gcc-build/issues/1)]:
   the `liblto_plugin` copied/linked to the `lib/bdf-plugins` for `ar`
   to find it and be able to process archives with LTO objects
 - a patch was applied to binutils to fix the 32-bit objcopy bug

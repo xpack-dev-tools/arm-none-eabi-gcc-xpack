@@ -223,7 +223,7 @@ platforms, support for Guile scripting in GDB is currently not available.
 
 ## Bug fixes
 
-- [[#33](https://github.com/xpack-dev-tools/arm-none-eabi-gcc-xpack/issues/33)]
+- [[#33](https://github.com/xpack-dev-tools/arm-none-eabi-gcc-xpack/issues/33)]:
   due to a an issue in the build scripts, on GNU/Linux,
   the `arm-none-eabi-gdb` was built without ELF support; fixed
 
