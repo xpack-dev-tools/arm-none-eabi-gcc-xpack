@@ -71,6 +71,12 @@ on:
 jobs:
 
 
+
+
+
+
+
+
   # https://en.wikipedia.org/wiki/Ubuntu_version_history
   # https://hub.docker.com/_/ubuntu
   # The ubuntu:12.04 image fails to update.
@@ -448,12 +454,6 @@ jobs:
 
   # - https://hub.docker.com/r/gentoo/portage
   # docker://gentoo/portage - exec: "/bin/bash": stat /bin/bash: no such file or directory: unknown.
-
-
-
-
-
-
 
 
 

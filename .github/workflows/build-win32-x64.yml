@@ -70,16 +70,6 @@ on:
 jobs:
 
 
-
-
-
-
-
-
-
-
-
-
   win32-x64-build:
     name: 'win32-x64 arm-none-eabi-gcc ${{github.event.inputs.version}} build'
     timeout-minutes: 5760 # 4 days
@@ -215,6 +205,16 @@ jobs:
 
       - name: 'Run ${{github.event.inputs.version}} native test'
         run: bash build-assets/scripts/test.sh --version ${{github.event.inputs.version}} --base-url pre-release
+
+
+
+
+
+
+
+
+
+
 
 
 

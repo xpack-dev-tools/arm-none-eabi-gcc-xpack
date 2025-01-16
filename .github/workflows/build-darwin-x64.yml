@@ -72,10 +72,6 @@ jobs:
 
 
 
-
-
-
-
   darwin-x64-build:
     name: 'darwin-x64 arm-none-eabi-gcc ${{github.event.inputs.version}} build'
     timeout-minutes: 2880 # 2 days

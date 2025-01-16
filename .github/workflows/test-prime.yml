@@ -51,6 +51,177 @@ on:
 jobs:
 
 
+  win32-x64-test:
+    name: 'win32-x64 arm-none-eabi-gcc ${{github.event.inputs.version}} test'
+    runs-on: windows-2022
+    defaults:
+      run:
+        # https://docs.github.com/en/actions/using-workflows/workflow-syntax-for-github-actions#jobsjob_idstepsshell
+        shell: bash # for --
+
+    steps:
+      - name: 'Show environment'
+        run: |
+          uname -a
+          systeminfo # lsb_release -sd
+          echo "whoami: $(whoami)"
+          echo "pwd: $(pwd)"
+          ls -lLA
+          env | sort | grep -E '^[^ \t]+='
+
+      # https://github.com/actions/checkout
+      - name: 'Checkout project'
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 3
+
+      - name: 'Checkout helper ${{github.event.inputs.helper-git-ref}}'
+        uses: actions/checkout@v4
+        with:
+          repository: xpack-dev-tools/xbb-helper-xpack
+          path: build-assets/xpacks/@xpack-dev-tools/xbb-helper
+          ref: ${{github.event.inputs.helper-git-ref}}
+          fetch-depth: 3
+
+      - name: 'Run ${{github.event.inputs.version}} native test'
+        run: bash build-assets/scripts/test.sh --version ${{github.event.inputs.version}} --base-url ${{github.event.inputs.base_url}}
+
+
+
+  # One more run with the oldest Windows available.
+  win32-x64-test2:
+    name: 'win32-x64 arm-none-eabi-gcc ${{github.event.inputs.version}} test 2019'
+    runs-on: windows-2019
+    defaults:
+      run:
+        # https://docs.github.com/en/actions/using-workflows/workflow-syntax-for-github-actions#jobsjob_idstepsshell
+        shell: bash # for --
+
+    steps:
+      - name: 'Show environment'
+        run: |
+          uname -a
+          systeminfo # lsb_release -sd
+          echo "whoami: $(whoami)"
+          echo "pwd: $(pwd)"
+          ls -lLA
+          env | sort | grep -E '^[^ \t]+='
+
+      # https://github.com/actions/checkout
+      - name: 'Checkout project'
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 3
+
+      - name: 'Checkout helper ${{github.event.inputs.helper-git-ref}}'
+        uses: actions/checkout@v4
+        with:
+          repository: xpack-dev-tools/xbb-helper-xpack
+          path: build-assets/xpacks/@xpack-dev-tools/xbb-helper
+          ref: ${{github.event.inputs.helper-git-ref}}
+          fetch-depth: 3
+
+      - name: 'Run ${{github.event.inputs.version}} native test'
+        run: bash build-assets/scripts/test.sh --version ${{github.event.inputs.version}} --base-url ${{github.event.inputs.base_url}}
+
+
+
+  darwin-x64-test:
+    name: 'darwin-x64 arm-none-eabi-gcc ${{github.event.inputs.version}} test'
+    # https://github.com/actions/runner-images/blob/main/images/macos/macos-13-Readme.md
+    runs-on: macos-13
+
+    steps:
+      - name: 'Show environment'
+        run: |
+          uname -a
+          sw_vers
+          ls -lA /Library/Developer/CommandLineTools/SDKs || true
+          ls -lA /Applications
+          sudo xcode-select --switch /Applications/Xcode_14.2.app
+          xcode-select --print-path
+          xcodebuild -version || true
+          pkgutil --pkg-info=com.apple.pkg.CLTools_Executables || true
+          clang++ -v
+          echo "whoami: $(whoami)"
+          echo "pwd: $(pwd)"
+          ls -lLA
+          env | sort | grep -E '^[^ \t]+='
+
+      - name: 'Clean working area' # Mandatory for self-hosted runners.
+        run: |
+          chmod -Rf a+w * || true
+          rm -rf * .git*
+
+      # https://github.com/actions/checkout
+      - name: 'Checkout project'
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 3
+
+      - name: 'Checkout helper ${{github.event.inputs.helper-git-ref}}'
+        uses: actions/checkout@v4
+        with:
+          repository: xpack-dev-tools/xbb-helper-xpack
+          path: build-assets/xpacks/@xpack-dev-tools/xbb-helper
+          ref: ${{github.event.inputs.helper-git-ref}}
+          fetch-depth: 3
+
+      - name: 'Run ${{github.event.inputs.version}} native test'
+        run: bash build-assets/scripts/test.sh --version ${{github.event.inputs.version}} --base-url ${{github.event.inputs.base_url}}
+
+
+
+
+
+  darwin-arm64-test:
+    name: 'darwin-arm64 arm-none-eabi-gcc ${{github.event.inputs.version}} test'
+    # https://github.com/actions/runner-images/blob/main/images/macos/macos-14-Readme.md
+    runs-on: macos-14
+
+    steps:
+      - name: 'Show environment'
+        run: |
+          uname -a
+          sw_vers
+          ls -lA /Library/Developer/CommandLineTools/SDKs || true
+          ls -lA /Applications
+          sudo xcode-select --switch /Applications/Xcode_15.4.app
+          xcode-select --print-path
+          xcodebuild -version || true
+          pkgutil --pkg-info=com.apple.pkg.CLTools_Executables || true
+          clang++ -v
+          echo "whoami: $(whoami)"
+          echo "pwd: $(pwd)"
+          ls -lLA
+          env | sort | grep -E '^[^ \t]+='
+
+      - name: 'Clean working area' # Mandatory for self-hosted runners.
+        run: |
+          chmod -Rf a+w * || true
+          rm -rf * .git*
+
+      # https://github.com/actions/checkout
+      - name: 'Checkout project'
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 3
+
+      - name: 'Checkout helper ${{github.event.inputs.helper-git-ref}}'
+        uses: actions/checkout@v4
+        with:
+          repository: xpack-dev-tools/xbb-helper-xpack
+          path: build-assets/xpacks/@xpack-dev-tools/xbb-helper
+          ref: ${{github.event.inputs.helper-git-ref}}
+          fetch-depth: 3
+
+      - name: 'Run ${{github.event.inputs.version}} native test'
+        run: bash build-assets/scripts/test.sh --version ${{github.event.inputs.version}} --base-url ${{github.event.inputs.base_url}}
+
+
+
+
+
   linux-x64-test:
     name: 'linux-x64 arm-none-eabi-gcc ${{github.event.inputs.version}} test'
     runs-on: ubuntu-24.04
@@ -168,177 +339,6 @@ jobs:
           args: /github/workspace/build-assets/scripts/test.sh --image debian --version ${{github.event.inputs.version}} --base-url ${{github.event.inputs.base_url}}
 
 
-
-
-
-  darwin-x64-test:
-    name: 'darwin-x64 arm-none-eabi-gcc ${{github.event.inputs.version}} test'
-    # https://github.com/actions/runner-images/blob/main/images/macos/macos-13-Readme.md
-    runs-on: macos-13
-
-    steps:
-      - name: 'Show environment'
-        run: |
-          uname -a
-          sw_vers
-          ls -lA /Library/Developer/CommandLineTools/SDKs || true
-          ls -lA /Applications
-          sudo xcode-select --switch /Applications/Xcode_14.2.app
-          xcode-select --print-path
-          xcodebuild -version || true
-          pkgutil --pkg-info=com.apple.pkg.CLTools_Executables || true
-          clang++ -v
-          echo "whoami: $(whoami)"
-          echo "pwd: $(pwd)"
-          ls -lLA
-          env | sort | grep -E '^[^ \t]+='
-
-      - name: 'Clean working area' # Mandatory for self-hosted runners.
-        run: |
-          chmod -Rf a+w * || true
-          rm -rf * .git*
-
-      # https://github.com/actions/checkout
-      - name: 'Checkout project'
-        uses: actions/checkout@v4
-        with:
-          fetch-depth: 3
-
-      - name: 'Checkout helper ${{github.event.inputs.helper-git-ref}}'
-        uses: actions/checkout@v4
-        with:
-          repository: xpack-dev-tools/xbb-helper-xpack
-          path: build-assets/xpacks/@xpack-dev-tools/xbb-helper
-          ref: ${{github.event.inputs.helper-git-ref}}
-          fetch-depth: 3
-
-      - name: 'Run ${{github.event.inputs.version}} native test'
-        run: bash build-assets/scripts/test.sh --version ${{github.event.inputs.version}} --base-url ${{github.event.inputs.base_url}}
-
-
-
-
-
-  darwin-arm64-test:
-    name: 'darwin-arm64 arm-none-eabi-gcc ${{github.event.inputs.version}} test'
-    # https://github.com/actions/runner-images/blob/main/images/macos/macos-14-Readme.md
-    runs-on: macos-14
-
-    steps:
-      - name: 'Show environment'
-        run: |
-          uname -a
-          sw_vers
-          ls -lA /Library/Developer/CommandLineTools/SDKs || true
-          ls -lA /Applications
-          sudo xcode-select --switch /Applications/Xcode_15.4.app
-          xcode-select --print-path
-          xcodebuild -version || true
-          pkgutil --pkg-info=com.apple.pkg.CLTools_Executables || true
-          clang++ -v
-          echo "whoami: $(whoami)"
-          echo "pwd: $(pwd)"
-          ls -lLA
-          env | sort | grep -E '^[^ \t]+='
-
-      - name: 'Clean working area' # Mandatory for self-hosted runners.
-        run: |
-          chmod -Rf a+w * || true
-          rm -rf * .git*
-
-      # https://github.com/actions/checkout
-      - name: 'Checkout project'
-        uses: actions/checkout@v4
-        with:
-          fetch-depth: 3
-
-      - name: 'Checkout helper ${{github.event.inputs.helper-git-ref}}'
-        uses: actions/checkout@v4
-        with:
-          repository: xpack-dev-tools/xbb-helper-xpack
-          path: build-assets/xpacks/@xpack-dev-tools/xbb-helper
-          ref: ${{github.event.inputs.helper-git-ref}}
-          fetch-depth: 3
-
-      - name: 'Run ${{github.event.inputs.version}} native test'
-        run: bash build-assets/scripts/test.sh --version ${{github.event.inputs.version}} --base-url ${{github.event.inputs.base_url}}
-
-
-
-
-
-  win32-x64-test:
-    name: 'win32-x64 arm-none-eabi-gcc ${{github.event.inputs.version}} test'
-    runs-on: windows-2022
-    defaults:
-      run:
-        # https://docs.github.com/en/actions/using-workflows/workflow-syntax-for-github-actions#jobsjob_idstepsshell
-        shell: bash # for --
-
-    steps:
-      - name: 'Show environment'
-        run: |
-          uname -a
-          systeminfo # lsb_release -sd
-          echo "whoami: $(whoami)"
-          echo "pwd: $(pwd)"
-          ls -lLA
-          env | sort | grep -E '^[^ \t]+='
-
-      # https://github.com/actions/checkout
-      - name: 'Checkout project'
-        uses: actions/checkout@v4
-        with:
-          fetch-depth: 3
-
-      - name: 'Checkout helper ${{github.event.inputs.helper-git-ref}}'
-        uses: actions/checkout@v4
-        with:
-          repository: xpack-dev-tools/xbb-helper-xpack
-          path: build-assets/xpacks/@xpack-dev-tools/xbb-helper
-          ref: ${{github.event.inputs.helper-git-ref}}
-          fetch-depth: 3
-
-      - name: 'Run ${{github.event.inputs.version}} native test'
-        run: bash build-assets/scripts/test.sh --version ${{github.event.inputs.version}} --base-url ${{github.event.inputs.base_url}}
-
-
-
-  # One more run with the oldest Windows available.
-  win32-x64-test2:
-    name: 'win32-x64 arm-none-eabi-gcc ${{github.event.inputs.version}} test 2019'
-    runs-on: windows-2019
-    defaults:
-      run:
-        # https://docs.github.com/en/actions/using-workflows/workflow-syntax-for-github-actions#jobsjob_idstepsshell
-        shell: bash # for --
-
-    steps:
-      - name: 'Show environment'
-        run: |
-          uname -a
-          systeminfo # lsb_release -sd
-          echo "whoami: $(whoami)"
-          echo "pwd: $(pwd)"
-          ls -lLA
-          env | sort | grep -E '^[^ \t]+='
-
-      # https://github.com/actions/checkout
-      - name: 'Checkout project'
-        uses: actions/checkout@v4
-        with:
-          fetch-depth: 3
-
-      - name: 'Checkout helper ${{github.event.inputs.helper-git-ref}}'
-        uses: actions/checkout@v4
-        with:
-          repository: xpack-dev-tools/xbb-helper-xpack
-          path: build-assets/xpacks/@xpack-dev-tools/xbb-helper
-          ref: ${{github.event.inputs.helper-git-ref}}
-          fetch-depth: 3
-
-      - name: 'Run ${{github.event.inputs.version}} native test'
-        run: bash build-assets/scripts/test.sh --version ${{github.event.inputs.version}} --base-url ${{github.event.inputs.base_url}}
 
 
 
