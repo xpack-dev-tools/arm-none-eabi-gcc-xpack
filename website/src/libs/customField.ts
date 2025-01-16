@@ -12,8 +12,8 @@
  * be obtained from https://opensource.org/licenses/MIT/.
  */
 
-import customField from '@site/src/libs/customField';
+import useDocusaurusContext from '@docusaurus/useDocusaurusContext';
 
-export default function isXpackSubversionDouble() {
-  return (customField('xpackSubversion').indexOf('.') !== -1);
+export default function customField(name: string): string {
+  return useDocusaurusContext().siteConfig.customFields[name];
 }

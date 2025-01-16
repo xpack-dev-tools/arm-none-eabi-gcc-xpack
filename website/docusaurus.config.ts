@@ -1,5 +1,5 @@
 // DO NOT EDIT!
-// Automatically generated from xbb-helper/templates/docusaurus/common.
+// Automatically generated from docusaurus-template-liquid/templates/docusaurus.
 
 import {themes as prismThemes} from 'prism-react-renderer';
 import type {Config} from '@docusaurus/types';
@@ -146,7 +146,6 @@ const config: Config = {
             'https://github.com/xpack-dev-tools/arm-none-eabi-gcc-xpack/edit/xpack/website/',
           showLastUpdateTime: true,
           blogSidebarCount: 8,
-          authorsMapPath: '../authors.yml',
         },
         theme: {
           customCss: './src/css/custom.css',

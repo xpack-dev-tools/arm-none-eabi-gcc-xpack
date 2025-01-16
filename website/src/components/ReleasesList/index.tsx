@@ -1,6 +1,6 @@
 /*
  * DO NOT EDIT!
- * Automatically generated from xbb-helper/templates/docusaurus/common.
+ * Automatically generated from docusaurus-template-liquid/templates/docusaurus.
  *
  * This file is part of the xPack project (http://xpack.github.io).
  * Copyright (c) 2024 Liviu Ionescu. All rights reserved.
@@ -23,11 +23,17 @@ export function ReleasesList({items}): JSX.Element {
   return (
     <ul>
       {
-        pluginData.releasesTable.map(release => (
-          <li>
-            <a href={release.permalink}>{release.title}</a> (<a href={release.downloadUrl}>download</a>)
-          </li>
-        ))
+        pluginData.releasesTable.length > 0 ?
+          pluginData.releasesTable.map(release => (
+            <li>
+              <a href={release.permalink}>{release.title}</a> {release.downloadUrl === "true" ? (<>(<a href={release.downloadUrl}>download</a>)</>) : (<></>)}
+            </li>
+          )) :
+          (
+            <li>
+              none yet
+            </li>
+          )
       }
     </ul>
   )

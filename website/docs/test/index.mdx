@@ -1,16 +1,22 @@
 ---
 
 # DO NOT EDIT!
-# Automatically generated from xbb-helper/templates/docusaurus/common.
+# Automatically generated from docusaurus-template-liquid/templates/docusaurus.
 
 title: A test page
 description: Some markdown examples.
+
+unlisted: true
 
 something: "Some text"
 
 # https://docusaurus.io/docs/api/plugins/@docusaurus/plugin-content-docs#markdown-front-matter
 
 ---
+
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+import Heading from '@theme/Heading';
 
 import CodeBlock from '@theme/CodeBlock';
 
@@ -62,7 +68,7 @@ Eight
 
 :::note
 
-Some **content** with _Markdown_ `syntax`. Check [this `api`](#).
+Some white **content** with _Markdown_ `syntax`. Check [this `api`](#).
 
 :::
 
@@ -72,29 +78,31 @@ Some **content** with _Markdown_ `syntax`. Check [this `api`](#).
 
 :::
 
-:::tip
+:::info
 
-Some **content** with _Markdown_ `syntax`. Check [this `api`](#).
+Some blue **content** with _Markdown_ `syntax`. Check [this `api`](#).
 
 :::
 
-:::info
+:::tip
 
-Some **content** with _Markdown_ `syntax`. Check [this `api`](#).
+Some green **content** with _Markdown_ `syntax`. Check [this `api`](#).
 
 :::
 
 :::caution
 
-Some **content** with _Markdown_ `syntax`. Check [this `api`](#).
+Some orange **content** with _Markdown_ `syntax`. Check [this `api`](#).
 
 :::
 
 :::danger
 
-Some **content** with _Markdown_ `syntax`. Check [this `api`](#).
+Some red **content** with _Markdown_ `syntax`. Check [this `api`](#).
 
 :::
+
+Jekyll `{% include note.html` must be replaced by `:::info`.
 
 ---
 
@@ -149,3 +157,53 @@ const visit = require('unist-util-visit');
 21 directories, 62 files
 `}</code></pre>
 
+---
+
+## Tabs
+
+<Tabs groupId="operating-systems">
+
+<TabItem value="windows" label="Windows" default>
+
+...
+
+</TabItem>
+
+<TabItem value="macos" label="macOS">
+
+...
+
+</TabItem>
+
+<TabItem value="linux" label="GNU/Linux">
+
+...
+
+</TabItem>
+
+</Tabs>
+
+## Headers in tabs
+
+To display headings not showing in the TOC:
+
+<Heading as="h3">My Heading</Heading>
+
+## Conditional markdown
+
+```
+### Edit the {props.doReconstruct === "true" ? (`LICENSE-XPACK`) : (`LICENSE`)} file
+```
+
+or
+
+```
+<ul>
+<li>select the `master` branch</li>
+<li>create a new `xpack` branch</li>
+<li>switch to it</li>
+{props.doReconstruct === "true" ? (<li>rename <code>LICENSE</code> to <code>LICENSE-XPACK</code>.</li>) : (<></>)}
+{props.doReconstruct === "true" ? (<li>rename <code>README.md</code> to <code>README-XPACK.md</code>.</li>) : (<></>)}
+<li>Push the `xpack` branch</li>
+</ul>
+```

@@ -1,7 +1,7 @@
 ---
 
 # DO NOT EDIT!
-# Automatically generated from xbb-helper/templates/docusaurus/common.
+# Automatically generated from docusaurus-template-liquid/templates/docusaurus.
 
 title: Releases
 description: The full list of project releases.
