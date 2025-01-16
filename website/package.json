@@ -1,9 +1,10 @@
 {
-  "DO NOT EDIT": "Automatically generated from xbb-helper/templates/docusaurus/common",
+  "DO NOT EDIT": "Automatically generated from docusaurus-template-liquid/templates/docusaurus",
   "name": "website",
   "version": "0.0.0",
   "private": true,
   "scripts": {
+    "generate-website-commons": "bash node_modules/@xpack/docusaurus-template-liquid/maintenance-scripts/generate-commons.sh --xpack-dev-tools",
     "docusaurus": "docusaurus",
     "start": "docusaurus start",
     "build": "docusaurus build",
@@ -17,6 +18,7 @@
     "typecheck": "tsc",
     "npm-outdated": "npm outdated",
     "npm-install": "npm install",
+    "npm-link-helpers": "npm link @xpack/docusaurus-template-liquid @xpack/npm-packages-helper",
     "npm-ci": "npm ci",
     "deep-clean": "del-cli .docusaurus build node_modules package-lock.json"
   },
@@ -29,7 +31,6 @@
     "@mdx-js/react": "^3.1.0",
     "clean-css": "~5.3.3",
     "clsx": "^2.1.1",
-    "del-cli": "^6.0.0",
     "prism-react-renderer": "^2.4.0",
     "react": "^18.0.0",
     "react-dom": "^18.0.0"
@@ -38,7 +39,9 @@
     "@docusaurus/module-type-aliases": "3.6.3",
     "@docusaurus/tsconfig": "3.6.3",
     "@docusaurus/types": "3.6.3",
+    "del-cli": "^6.0.0",
     "json": "^11.0.0",
+    "liquidjs": "^10.20.1",
     "typescript": "~5.2.2"
   },
   "browserslist": {
@@ -53,8 +56,10 @@
       "last 5 safari version"
     ]
   },
+  "websiteConfig": {
+    "isArmToolchain": "true"
+  },
   "engines": {
     "node": ">=18.0"
-  },
-  "websiteConfig": {}
+  }
 }
