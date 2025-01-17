@@ -16,8 +16,6 @@
       "@xpack-dev-tools/xbb-helper": "^3.1.3"
     },
     "properties": {
-      "appName": "GNU Arm Embedded GCC",
-      "appLcName": "arm-none-eabi-gcc",
       "platforms": "all",
       "customFields": {
         "showDeprecatedGnuMcuAnalytics": "true",
@@ -44,7 +42,7 @@
     "actions": {
       "deep-clean": [
         "rm -rf build xpacks node_modules package-lock.json",
-        "rm -rf ${HOME}/Work/xpack-dev-tools-build/{{properties.appLcName}}-[0-9]*-*"
+        "rm -rf ${HOME}/Work/xpack-dev-tools-build/arm-none-eabi-gcc-[0-9]*-*"
       ],
       "install": [
         "npm install",
@@ -103,7 +101,7 @@
         "actions": {
           "deep-clean": [
             "rm -rf {{properties.buildFolderRelativePathPosix}}",
-            "rm -rf ${HOME}/Work/xpack-dev-tools-build/{{properties.appLcName}}-[0-9]*-*/{{configuration.name}}"
+            "rm -rf ${HOME}/Work/xpack-dev-tools-build/arm-none-eabi-gcc-[0-9]*-*/{{configuration.name}}"
           ],
           "install": "xpm install --config {{configuration.name}}"
         }
@@ -120,7 +118,7 @@
       "common-docker": {
         "hidden": true,
         "properties": {
-          "containerName": "{{properties.appLcName}}-{{package.version}}-{{configuration.name}}",
+          "containerName": "arm-none-eabi-gcc-{{package.version}}-{{configuration.name}}",
           "force32": ""
         },
         "actions": {

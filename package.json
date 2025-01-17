@@ -110,7 +110,8 @@
     "liquidjs": "^10.19.1"
   },
   "topConfig": {
-    "longName": "GNU Arm Embedded GCC"
+    "longName": "GNU Arm Embedded GCC",
+    "shortName": "arm-none-eabi-gcc"
   },
   "engines": {
     "node": " >=18.0.0"
