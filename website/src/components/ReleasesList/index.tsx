@@ -26,7 +26,7 @@ export function ReleasesList({items}): JSX.Element {
         pluginData.releasesTable.length > 0 ?
           pluginData.releasesTable.map(release => (
             <li>
-              <a href={release.permalink}>{release.title}</a> {release.downloadUrl === "true" ? (<>(<a href={release.downloadUrl}>download</a>)</>) : (<></>)}
+              <a href={release.permalink}>{release.title}</a> {release.downloadUrl ? (<>(<a href={release.downloadUrl}>download</a>)</>) : (<></>)}
             </li>
           )) :
           (

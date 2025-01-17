@@ -1,10 +1,10 @@
 ---
-title: xPack {{appName}} v{{releaseVersion}} released
+title: xPack {{packageConfig.longName}} v{{releaseVersion}} released
 seo_title: Version {{releaseVersion}} released
 description: Version {{releaseVersion}} is a TODO new/maintenance release.
 keywords:
   - xpack
-  - {{appLcName}}
+  - {{packageConfig.shortName}}
   - release
 
 date: {{releaseDate}}
@@ -78,10 +78,10 @@ The binary files are available from <a href={frontMatter.download_url}>GitHub Re
 The easiest way to install this specific version, is by using **xpm**:
 
 <CodeBlock language="console"> {
-`xpm install @xpack-dev-tools/{{appLcName}}@${frontMatter.version}.${frontMatter.npm_subversion} -verbose
+`xpm install @xpack-dev-tools/{{packageConfig.shortName}}@${frontMatter.version}.${frontMatter.npm_subversion} -verbose
 `} </CodeBlock>
 
-Comprehensive instructions for installing **xPack {{appName}}** on different platforms
+Comprehensive instructions for installing **xPack {{packageConfig.longName}}** on different platforms
 can be found in the [Install Guide](/docs/install/).
 
 ## Compliance

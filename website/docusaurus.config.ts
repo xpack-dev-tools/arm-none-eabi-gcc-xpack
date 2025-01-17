@@ -67,8 +67,6 @@ function getCustomFields() {
   }
 
   return {
-    appName: rootPackageJson.xpack.properties.appName,
-    appLcName: rootPackageJson.xpack.properties.appLcName,
     version: jsonVersion,
     xpackVersion,
     xpackSemver,
