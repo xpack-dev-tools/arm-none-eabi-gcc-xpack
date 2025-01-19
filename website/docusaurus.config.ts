@@ -46,17 +46,16 @@ function getCustomFields() {
   // Remove the first part, up to the dash.
   const xpackSubversion = xpackVersion.replace(/^.*[-]/, '');
 
-  let rootPackageJson
+  let websitePackageJson = {}
   try {
-    const rootFilePath = path.join(path.dirname(path.dirname(pwd)), 'build-assets', 'package.json');
+    const websiteFilePath = path.join(path.dirname(path.dirname(pwd)), 'website', 'package.json');
     // console.log(filePath);
-    const rootFileContent = fs.readFileSync(rootFilePath);
-    rootPackageJson = JSON.parse(rootFileContent.toString());
+    const websiteFileContent = fs.readFileSync(websiteFilePath);
+    websitePackageJson = JSON.parse(websiteFileContent.toString());
   } catch (error) {
-    rootPackageJson = topPackageJson;
   }
 
-  const customFields = rootPackageJson?.xpack?.properties?.customFields ?? {};
+  const customFields = websitePackageJson?.websiteConfig?.customFields ?? {};
 
   let upstreamVersion
   if (customFields.hasTwoNumbersVersion === 'true' && xpackSemver.endsWith('.0')) {

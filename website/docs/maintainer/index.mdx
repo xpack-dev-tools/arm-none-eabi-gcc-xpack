@@ -170,10 +170,9 @@ update the dependencies in `build-assets/package.json`.
 - use the new version, suffixed by `.pre`,
 like <code>{customField('xpackVersion')}.{customField('npmSubversion')}.pre</code>.
 
-### Update the `customFields` in `build-assets/package.json` (if necessary)
+### Update the `websiteConfig` in `website/package.json` (if necessary)
 
-If the project uses `customFields` in `build-assets/package.json`,
-update them.
+Update the custom fields.
 
 ### Update the website commons
 
@@ -200,9 +199,7 @@ is <code>{customField('xpackVersion')}</code>.
 'The fourth & fifth numbers are the xPack release number of this version. A sixth' :
 'The fourth number is the xPack release number of this version. A fifth'} number will be added to the version in `package.json` when the package is published to the `npm` server.
 
-### Update the `customFields` (if necessary)
-
-If the project uses `customFields` in `build-assets/package.json`
+### Update the `websiteConfig` in `website/package.json` (if necessary)
 
 - update the release specific properties (if any)
 - restart the local web server
