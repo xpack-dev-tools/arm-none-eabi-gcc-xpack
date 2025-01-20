@@ -57,13 +57,7 @@ function getCustomFields() {
 
   const customFields = websitePackageJson?.websiteConfig?.customFields ?? {};
 
-  let upstreamVersion
-  if (customFields.hasTwoNumbersVersion === 'true' && xpackSemver.endsWith('.0')) {
-    // Remove the patch number if zero (wine uses both 2 and 3 numbers).
-    upstreamVersion = xpackSemver.replace(/[.]0*$/, '');
-  } else {
-    upstreamVersion = xpackSemver;
-  }
+  let upstreamVersion = xpackSemver;
 
   return {
     version: jsonVersion,
