@@ -8,69 +8,12 @@ import type * as Preset from '@docusaurus/preset-classic';
 import util from 'node:util';
 
 import {redirects} from './docusaurus-config-redirects'
+import {getCustomFields} from './customFields'
 
 // The node.js modules cannot be used in modules imported in browser code:
 // webpack < 5 used to include polyfills for node.js core modules by default.
 // so the entire initialisation code must be in this file, that is
 // not processed by webpack.
-
-import {fileURLToPath} from 'node:url';
-import path from 'node:path';
-import fs from 'node:fs';
-
-// ----------------------------------------------------------------------------
-
-function getCustomFields() {
-  const pwd = fileURLToPath(import.meta.url);
-  // console.log(pwd);
-
-  // First get the version from the top package.json.
-  const topFilePath = path.join(path.dirname(path.dirname(pwd)), 'package.json');
-  // console.log(filePath);
-  const topFileContent = fs.readFileSync(topFilePath);
-
-  const topPackageJson = JSON.parse(topFileContent.toString());
-  const jsonVersion = topPackageJson.version.replace(/[.-]pre/, '');
-
-  console.log(`package version: ${topPackageJson.version}`);
-
-  // Remove the first part, up to the last dot.
-  const npmSubversion = jsonVersion.replace(/^.*[.]/, '');
-
-  // Remove from the last dot to the end.
-  const xpackVersion = jsonVersion.replace(/[.][0-9]*$/, '');
-
-  // Remove the pre-release.
-  const xpackSemver = xpackVersion.replace(/[-].*$/, '');
-
-  // Remove the first part, up to the dash.
-  const xpackSubversion = xpackVersion.replace(/^.*[-]/, '');
-
-  let websitePackageJson = {}
-  try {
-    const websiteFilePath = path.join(path.dirname(path.dirname(pwd)), 'website', 'package.json');
-    // console.log(filePath);
-    const websiteFileContent = fs.readFileSync(websiteFilePath);
-    websitePackageJson = JSON.parse(websiteFileContent.toString());
-  } catch (error) {
-  }
-
-  const customFields = websitePackageJson?.websiteConfig?.customFields ?? {};
-
-  let upstreamVersion = xpackSemver;
-
-  return {
-    version: jsonVersion,
-    xpackVersion,
-    xpackSemver,
-    xpackSubversion,
-    npmSubversion,
-    upstreamVersion,
-    docusaurusVersion: require('@docusaurus/core/package.json').version,
-    buildTime: new Date().getTime(),
-    ...customFields,
-  }
-}
 
 // ----------------------------------------------------------------------------
 
