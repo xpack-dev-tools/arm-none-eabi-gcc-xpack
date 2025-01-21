@@ -40,8 +40,6 @@
         "git -C ${HOME}/Work/xpack-dev-tools/xbb-helper-xpack.git pull"
       ],
       "git-log": "git -C .. log --pretty='%cd * %h %s' --date=short",
-      "website-generate-commons": "bash xpacks/@xpack-dev-tools/xbb-helper/maintainer-scripts/website-generate-commons.sh",
-      "website-import-releases": "bash xpacks/@xpack-dev-tools/xbb-helper/maintainer-scripts/website-import-releases.sh",
       "check-space": "{% if os.platform == 'darwin' %}df -gH /{% else %}df -BG -H /{% endif %}",
       "clear-all-projects-builds": "rm -rf ~/Work/xpack-dev-tools/*/build-assets/build",
       "trigger-workflow-build-darwin-x64": "bash xpacks/@xpack-dev-tools/xbb-helper/github-actions/trigger-workflow-build.sh --workflow build-darwin-x64.yml --xpm-version {{properties.xpm-version}} --loglevel {{properties.xpm-install-loglevel}}",
