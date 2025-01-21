@@ -15,12 +15,12 @@ import LinksVsForwarders from '@site/src/components/LinksVsForwarders'
 The version string used by the
 upstream {props.upstreamName ? props.upstreamName : 'GNU Arm Embedded GCC'} project
 is a three number string
-like <code>{customField('xpackSemver')}</code>;
+like <code>{customField('releaseSemver')}</code>;
 to this string the xPack distribution adds a fourth number,
 but since [SemVer](https://semver.org) allows only three numbers,
 all additional ones can
 be added only as pre-release strings, separated by a dash,
-like <code>{customField('xpackSemver')}-<b>{customField('xpackSubversion')}</b></code>. When
+like <code>{customField('releaseSemver')}-<b>{customField('xpackSubversion')}</b></code>. When
 published as a npm package, the version gets
 a fifth number,
 like <code>{customField('xpackVersion')}.<b>{customField('npmSubversion')}</b></code>.

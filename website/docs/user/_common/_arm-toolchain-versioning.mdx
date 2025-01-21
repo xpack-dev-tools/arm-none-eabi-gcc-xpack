@@ -20,14 +20,14 @@ upstream **Arm GNU Toolchain** project is a bit unusual and unstable in time,
 (like <code>{versionMajor()}.{versionMinor()}.Rel1</code>)
 therefore the upstream GCC version is preferred, which
 is a three number string
-like <code>{customField('xpackSemver')}</code>;
+like <code>{customField('releaseSemver')}</code>;
 to this string the xPack distribution adds a fourth number that represents
 the Arm release with the same GCC release, and a fifth number
 that represents the xPack release of the same Arm release;
 since [SemVer](https://semver.org) allows only three numbers,
 all additional ones can
 be added only as pre-release strings, separated by a dash,
-like <code>{customField('xpackSemver')}-<b>{customField('xpackSubversion')}</b></code>. When
+like <code>{customField('releaseSemver')}-<b>{customField('xpackSubversion')}</b></code>. When
 published as a npm package, the version gets
 a sixth number,
 like <code>{customField('xpackVersion')}.<b>{customField('npmSubversion')}</b></code>.
