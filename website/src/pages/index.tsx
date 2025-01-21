@@ -34,7 +34,7 @@ function HomepageHeader() {
         <p className="hero__subtitle">{siteConfig.tagline}</p>
 
         <div className={styles.installWithCopy}>
-          <InstallWithCopy>xpm install @xpack-dev-tools/arm-none-eabi-gcc@{customField('releaseVersion')} --verbose</InstallWithCopy>
+          <InstallWithCopy>xpm install @xpack-dev-tools/arm-none-eabi-gcc@14.2.1-1.1.1 --verbose</InstallWithCopy>
         </div>
 
       </div>

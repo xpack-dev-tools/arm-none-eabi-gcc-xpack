@@ -53,7 +53,7 @@ With a Git client:
 - cherry pick the `system.h: do not define abort() on mingw` commit
 - push the *-xpack branch to origin
 - save as Patches into the helper `patches` folder
-- rename as <code>gcc-{customField('upstreamVersion')}-cross.git.patch</code>
+- rename as <code>gcc-14.2.1-cross.git.patch</code>
 
 ### Update the local newlib-cygwin fork (optional, normally the archive is used)
 
@@ -63,7 +63,7 @@ With a Git client:
 - push it to origin with the same name
 - enable a filter on the current branch
 - identify the commit ID from release notes or manifest.txt (search back in time)
-- create a tag like <code>newlib-{customField('newlibVersion')}-arm-none-eabi-{versionMajor()}.{versionMinor()}.rel1</code>
+- create a tag like <code>newlib-4.4.0-arm-none-eabi-{versionMajor()}.{versionMinor()}.rel1</code>
 - push the tag to origin
 - check the tag at https://github.com/xpack-dev-tools/newlib-cygwin/tags/
 
