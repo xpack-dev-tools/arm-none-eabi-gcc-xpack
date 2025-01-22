@@ -57,7 +57,7 @@ platform specific archives.
 
 ## Automated install
 
-The easiest (and recommended) way to install GNU Arm Embedded GCC
+The easiest (and recommended) way to install xPack GNU Arm Embedded GCC
 is via **xpm** and the package available
 as <a href={`https://www.npmjs.com/package/@xpack-dev-tools/arm-none-eabi-gcc`}><code>@xpack-dev-tools/arm-none-eabi-gcc</code></a> from
 the [`npmjs.com`](https://www.npmjs.com) registry.
@@ -349,7 +349,7 @@ The above `xpm install` command will do the following:
   <code>xpacks/@xpack-dev-tools/arm-none-eabi-gcc/.content/bin</code>;
 * add <code>@xpack-dev-tools/arm-none-eabi-gcc</code> to
   `package.json` as a
-  development dependency; this associates a specific version of GNU Arm Embedded GCC with
+  development dependency; this associates a specific version of xPack GNU Arm Embedded GCC with
   the current project (details below).
 
 :::tip
@@ -405,7 +405,7 @@ This is particularly useful for CI/CD environments.
 ### Install globally
 
 For older development environments,
-it is also possible to install GNU Arm Embedded GCC only globally in
+it is also possible to install xPack GNU Arm Embedded GCC only globally in
 the **user global xPacks store**, without any
 local links/forwarders; it
 is the developer's responsibility to configure the path to the tools.
@@ -427,7 +427,7 @@ install the packages globally will fail with _already installed_.
 <details>
 <summary>PATH setup</summary>
 
-In order to access the GNU Arm Embedded GCC binaries installed in
+In order to access the xPack GNU Arm Embedded GCC binaries installed in
 the user global xPacks store,
 the project build configurations need a PATH adjustment:
 

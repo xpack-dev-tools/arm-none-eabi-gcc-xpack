@@ -39,6 +39,10 @@ export const redirects = {
       to: '/docs/user',
     },
     {
+      from: '/docs/about',
+      to: '/docs/project/about',
+    },
+    {
       from: '/blog/2019/01/19/arm-none-eabi-gcc-v8-2-1-1-2-released/',
       to: '/blog/2019/01/20/arm-none-eabi-gcc-v8-2-1-1-2-released/',
     },
@@ -78,5 +82,5 @@ export const redirects = {
         existingPath.replace('/maintainer-info', '/maintainer')
       ];
     }
-}
+  }
 }

@@ -188,7 +188,6 @@ const config: Config = {
       logo: {
         alt: 'xPack Logo',
         src: 'img/components-256.png',
-        // href: 'https://xpack.github.io/',
         href: 'https://xpack-dev-tools.github.io/'
       },
       items: [
@@ -238,10 +237,11 @@ const config: Config = {
             },
             {
               label: 'About',
-              to: '/docs/about'
-            }
+              to: '/docs/project/about'
+            },
           ]
         },
+        
         {
           type: 'dropdown',
           to: '/blog',

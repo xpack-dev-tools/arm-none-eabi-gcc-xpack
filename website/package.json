@@ -44,6 +44,12 @@
     "liquidjs": "^10.20.1",
     "typescript": "~5.2.2"
   },
+  "$devDependenciesUrls": [
+    "https://www.npmjs.com/package/del-cli",
+    "https://www.npmjs.com/package/json",
+    "https://www.npmjs.com/package/liquidjs",
+    "https://www.npmjs.com/package/typescript"
+  ],
   "browserslist": {
     "production": [
       ">0.5%",
