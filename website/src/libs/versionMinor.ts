@@ -12,8 +12,8 @@
  * be obtained from https://opensource.org/licenses/MIT/.
  */
 
-export default function HistoryXpm({specifier}): JSX.Element {
-    return (
-        <>The xPack metadata has been added, and the package can now be more conveniently installed via <b>xpm</b>. It is  available from <code>npmjs.com</code> as <code>{specifier ? specifier : '@xpack-dev-tools/arm-none-eabi-gcc'}</code></>
-    );
+export default function getVersionMinor(version: string): number {
+  // Remove from the beginning to the first dot and, in the remaining string
+  // from the first dot to the end.
+  return parseInt(version.replace(/^[0-9]*[.]/, '').replace(/[.].*/, ''), 10);
 }

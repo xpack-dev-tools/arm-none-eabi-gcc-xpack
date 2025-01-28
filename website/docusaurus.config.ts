@@ -20,6 +20,9 @@ import {getCustomFields} from './customFields';
 const customFields = getCustomFields();
 console.log('customFields: ' + util.inspect(customFields));
 
+const actualBaseUrl = process.env.DOCUSAURUS_BASEURL ??
+    '/arm-none-eabi-gcc-xpack/';
+
 // ----------------------------------------------------------------------------
 
 const config: Config = {
@@ -30,11 +33,10 @@ const config: Config = {
   // favicon: '/img/favicon.ico',
 
   // Set the production url of your site here
-  url: 'https://xpack-dev-tools.github.io',
+  url: 'https://xpack-dev-tools.github.io/',
   // Set the /<baseUrl>/ pathname under which your site is served
   // For GitHub pages deployment, it is often '/<projectName>/'
-  baseUrl: process.env.DOCUSAURUS_BASEURL ??
-    '/arm-none-eabi-gcc-xpack/',
+  baseUrl: actualBaseUrl,
 
   // GitHub pages deployment config.
   // If you aren't using GitHub pages, you don't need these.
@@ -132,7 +134,7 @@ const config: Config = {
       attributes: {
         rel: 'icon',
         type: 'image/png',
-        href: '/arm-none-eabi-gcc-xpack/favicons/favicon-48x48.png',
+        href: actualBaseUrl + 'favicons/favicon-48x48.png',
         sizes: '48x48'
       }
     },
@@ -141,14 +143,14 @@ const config: Config = {
       attributes: {
         rel: 'icon',
         type: 'image/svg+xml',
-        href: '/arm-none-eabi-gcc-xpack/favicons/favicon.svg'
+        href: actualBaseUrl + 'favicons/favicon.svg'
       }
     },
     {
       tagName: 'link',
       attributes: {
         rel: 'shortcut icon',
-        href: '/arm-none-eabi-gcc-xpack/favicons/favicon.ico'
+        href: actualBaseUrl + 'favicons/favicon.ico'
       }
     },
     {
@@ -163,7 +165,7 @@ const config: Config = {
       tagName: 'link',
       attributes: {
         rel: 'manifest',
-        href: '/arm-none-eabi-gcc-xpack/favicons/site.webmanifest'
+        href: actualBaseUrl + 'favicons/site.webmanifest'
       }
     }
   ],

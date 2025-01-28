@@ -14,53 +14,14 @@
 
 import clsx from 'clsx';
 import Heading from '@theme/Heading';
-import styles from './styles.module.css';
 import Link from '@docusaurus/Link';
+import styles from './styles.module.css';
 
-type FeatureItem = {
-  title: string;
-  Svg: React.ComponentType<React.ComponentProps<'svg'>>;
-  description: JSX.Element;
-};
+import type { FeatureItem } from './FeatureItem';
 
-const FeatureList: FeatureItem[] = [
-  {
-    title: 'Multi-version, cross-platform',
-    Svg: require('@site/static/img/mosaic.svg').default,
-    description: (
-      <>
-        The <b>xPack Framework</b> aims to automate the installation of <b>multiple versions</b> of development tools that are otherwise not easily available in common software distributions, across multiple platforms (<b>Windows</b>, <b>macOS</b>, <b>GNU/Linux</b>).
-      </>
-    ),
-  },
-  {
-    title: 'Easy to Use & Reproducible',
-    Svg: require('@site/static/img/check-badge.svg').default,
-    description: (
-      <>
-        The binary packages can be added to projects
-        as <b>development dependencies</b>,
-        and conveniently installed with <code>xpm install</code>.
-        This feature also ensures reproducibility, which is particularly
-        beneficial in <b>CI/CD</b> environments.
-      </>
-    ),
-  },
-  {
-    title: 'Part of the Node.js ecosystem',
-    Svg: require('@site/static/img/globe.svg').default,
-    description: (
-      <>
-        The <b><Link to="https://xpack.github.io/xpm/">xpm</Link></b> CLI tool
-        complements <b><Link to="https://docs.npmjs.com/cli/">npm</Link></b> with
-        several extra features specific to <b>C/C++ projects</b>.
-        This allows the
-        binary packages to nicely integrate into the Node.js ecosystem,
-        while still allowing the binary archives to be installed manually.
-      </>
-    ),
-  },
-];
+
+import { FeatureList } from './FeatureList';
+
 
 function Feature({title, Svg, description}: FeatureItem) {
   return (
@@ -92,5 +53,5 @@ export default function HomepageFeatures(): JSX.Element {
         <h2><Link to="/docs/getting-started/"><span className="getting-started-link">Getting Started!</span></Link></h2>
       </div>
     </>
-);
+  );
 }
