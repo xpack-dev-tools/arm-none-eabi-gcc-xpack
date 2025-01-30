@@ -41,8 +41,6 @@ p.hero__code code  {
   color: var(--ifm-font-color-base)
 }
 
-
-
 hr.hero__hr {
   /* background-color: var(--ifm-color-primary); */
   height: 3px;

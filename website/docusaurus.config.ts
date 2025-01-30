@@ -29,6 +29,7 @@ const config: Config = {
   title: 'xPack GNU Arm Embedded GCC' +
     ((process.env.DOCUSAURUS_IS_PREVIEW === 'true') ? ' (preview)' : ''),
   tagline: 'A binary distribution of GNU Arm Embedded GCC',
+
   // Explicitly set in headTags.
   // favicon: '/img/favicon.ico',
 
@@ -61,54 +62,74 @@ const config: Config = {
     locales: ['en'],
   },
 
-  presets: [
-    [
-      'classic',
-      {
-        docs: {
-          sidebarPath: './sidebars.ts',
-          // Please change this to your repo.
-          // Remove this to remove the "edit this page" links.
-          editUrl:
-            'https://github.com/xpack-dev-tools/arm-none-eabi-gcc-xpack/edit/xpack/website/',
-          // showLastUpdateAuthor: true,
-          showLastUpdateTime: true,
-        },
-        blog: {
-          showReadingTime: true,
-          // Please change this to your repo.
-          // Remove this to remove the "edit this page" links.
-          editUrl:
-            'https://github.com/xpack-dev-tools/arm-none-eabi-gcc-xpack/edit/xpack/website/',
-          showLastUpdateTime: true,
-          blogSidebarCount: 8,
-        },
-        theme: {
-          customCss: './src/css/custom.css',
-        },
-        // https://docusaurus.io/docs/api/plugins/@docusaurus/plugin-sitemap
-        sitemap: {
-          lastmod: 'date',
-          changefreq: 'weekly',
-          priority: 0.5,
-          ignorePatterns: [
-            '/arm-none-eabi-gcc-xpack/blog/archive/**',
-            '/arm-none-eabi-gcc-xpack/blog/authors/**',
-            '/arm-none-eabi-gcc-xpack/blog/tags/**'
-          ],
-          filename: 'sitemap.xml',
-        },
-        // https://docusaurus.io/docs/api/plugins/@docusaurus/plugin-google-gtag
-        // https://tagassistant.google.com
-        gtag: {
-          trackingID: 'G-7QE5W7V05S',
-          anonymizeIP: false,
-        },
-      } satisfies Preset.Options,
-    ],
-  ],
-
   plugins: [
+    [
+      '@docusaurus/plugin-content-docs',
+      {
+        sidebarPath: './sidebars.ts',
+        // Please change this to your repo.
+        // Remove this to remove the "edit this page" links.
+        editUrl: 'https://github.com/xpack-dev-tools/arm-none-eabi-gcc-xpack/edit/website/website/',
+        // showLastUpdateAuthor: true,
+        showLastUpdateTime: true,
+      },
+    ],
+    [
+      // https://docusaurus.io/docs/api/plugins/@docusaurus/plugin-content-blog
+      '@docusaurus/plugin-content-blog',
+      {
+        showReadingTime: true,
+        blogSidebarCount: 8,
+        feedOptions: {
+          type: ['rss', 'atom'],
+          xslt: true,
+        },
+        // Please change this to your repo.
+        // Remove this to remove the "edit this page" links.
+        editUrl: 'https://github.com/xpack-dev-tools/arm-none-eabi-gcc-xpack/edit/website/website/',
+        // Useful options to enforce blogging best practices
+        onInlineTags: 'warn',
+        onInlineAuthors: 'warn',
+        onUntruncatedBlogPosts: 'warn',
+      },
+    ],
+    [
+      '@docusaurus/plugin-content-pages',
+      {}
+    ],
+    [
+      // https://docusaurus.io/docs/next/api/plugins/@docusaurus/plugin-client-redirects#redirects
+      '@docusaurus/plugin-client-redirects',
+      redirects,
+    ],
+    [
+      '@docusaurus/plugin-debug',
+      {}
+    ],
+    [
+      // https://docusaurus.io/docs/api/plugins/@docusaurus/plugin-google-gtag
+      // https://tagassistant.google.com
+      '@docusaurus/plugin-google-gtag',
+      {
+        trackingID: 'G-7QE5W7V05S',
+        anonymizeIP: false,
+      }
+    ],
+    [
+      // https://docusaurus.io/docs/api/plugins/@docusaurus/plugin-sitemap
+      '@docusaurus/plugin-sitemap',
+      {
+        lastmod: 'date',
+        changefreq: 'weekly',
+        priority: 0.5,
+        ignorePatterns: [
+          actualBaseUrl + 'blog/archive/**',
+          actualBaseUrl + 'blog/authors/**',
+          actualBaseUrl + 'blog/tags/**'
+        ],
+        filename: 'sitemap.xml',
+      }
+    ],
     [
       '@docusaurus/plugin-ideal-image',
       {
@@ -119,12 +140,25 @@ const config: Config = {
         disableInDev: false,
       },
     ],
-    [
-      // https://docusaurus.io/docs/next/api/plugins/@docusaurus/plugin-client-redirects#redirects
-      '@docusaurus/plugin-client-redirects',
-      redirects
-    ],
+
+    // Local plugins.
     './src/plugins/SelectReleasesPlugin',
+  ],
+
+  themes: [
+    [
+      '@docusaurus/theme-classic',
+      {
+        customCss: './src/css/custom.css',
+      }
+    ],
+    [
+      // Explicitly required when not using `preset-classic`.
+      // https://docusaurus.io/docs/search#using-algolia-docsearch
+      '@docusaurus/theme-search-algolia',
+      {
+      }
+    ],
   ],
 
   // https://docusaurus.io/docs/api/docusaurus-config#headTags
@@ -169,9 +203,6 @@ const config: Config = {
       }
     }
   ],
-
-  // No longer needed.
-  // themes: [ '@docusaurus/theme-search-algolia' ],
 
   // https://docusaurus.io/docs/seo
   themeConfig: {
@@ -241,9 +272,8 @@ const config: Config = {
               label: 'About',
               to: '/docs/project/about'
             },
-          ]
+          ],
         },
-        
         {
           type: 'dropdown',
           to: '/blog',
@@ -281,12 +311,12 @@ const config: Config = {
               href: `https://github.com/xpack-dev-tools/arm-none-eabi-gcc-xpack/`,
             },
             {
-              label: 'xpack-dev-tools org',
-              href: 'https://github.com/xpack-dev-tools/',
-            },
-            {
               label: 'xpack org',
               href: 'https://github.com/xpack/',
+            },
+            {
+              label: 'xpack-dev-tools org',
+              href: 'https://github.com/xpack-dev-tools/',
             },
           ]
         },
@@ -304,16 +334,16 @@ const config: Config = {
           title: 'Pages',
           items: [
             {
-              label: 'Install',
-              to: '/docs/install',
-            },
-            {
-              label: 'Support',
-              to: '/docs/support',
+              label: 'Getting Started',
+              to: '/docs/getting-started',
             },
             {
               label: 'Releases',
               to: '/docs/releases',
+            },
+            {
+              label: 'About',
+              to: '/docs/project/about',
             },
             {
               label: 'Blog',
@@ -334,7 +364,7 @@ const config: Config = {
             },
             {
               label: 'Discord',
-              href: 'https://discord.gg/kbzWaJerFG',
+              href: 'https://discord.com/invite/kbzWaJerFG',
             },
             {
               label: 'X/Twitter',
@@ -354,12 +384,12 @@ const config: Config = {
               href: 'https://github.com/xpack-dev-tools/arm-none-eabi-gcc-xpack/',
             },
             {
-              label: 'GitHub xpack-dev-tools org',
-              href: 'https://github.com/xpack-dev-tools/',
-            },
-            {
               label: 'GitHub xpack org',
               href: 'https://github.com/xpack/',
+            },
+            {
+              label: 'GitHub xpack-dev-tools org',
+              href: 'https://github.com/xpack-dev-tools/',
             },
           ],
         },

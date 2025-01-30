@@ -20,7 +20,10 @@
     "npm-install": "npm install",
     "npm-link-helpers": "npm link @xpack/docusaurus-template-liquid @xpack/npm-packages-helper",
     "npm-ci": "npm ci",
-    "deep-clean": "del-cli .docusaurus build node_modules package-lock.json"
+    "deep-clean": "del-cli .docusaurus build node_modules package-lock.json",
+    "import-website-releases": "bash node_modules/@xpack/docusaurus-template-liquid/maintenance-scripts/website-import-releases.sh",
+    "generate-website-blog-post": "bash node_modules/@xpack/docusaurus-template-liquid/maintenance-scripts/generate-blog-post.sh",
+    "generate-dependencies-details": "bash node_modules/@xpack/docusaurus-template-liquid/maintenance-scripts/generate-dependencies-details.sh"
   },
   "dependencies": {
     "@docusaurus/core": "3.6.3",
@@ -42,7 +45,7 @@
     "del-cli": "^6.0.0",
     "json": "^11.0.0",
     "liquidjs": "^10.20.1",
-    "typescript": "~5.2.2"
+    "typescript": "~5.6.3"
   },
   "$devDependenciesUrls": [
     "https://www.npmjs.com/package/del-cli",
