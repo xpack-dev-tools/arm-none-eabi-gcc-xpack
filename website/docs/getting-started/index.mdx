@@ -9,7 +9,6 @@ keywords:
   - xpack
   - arm-none-eabi-gcc
   - overview
-  - xpacks
   - features
   - benefits
   - compatibility
@@ -19,184 +18,34 @@ date: 2020-07-21 17:49:00 +0300
 
 ---
 
-import Link from '@docusaurus/Link';
-
-import Documentation from '../_shared/_documentation.mdx';
-
-import Overview from './_project/_overview.mdx';
-import OtherBenefits from './_project/_other-benefits.mdx';
-import UpgradeNotice from './_project/_upgrade-notice.mdx';
-import Compatibility from './_project/_compatibility.mdx';
-
+import UserDeveloperMaintainer from './_common/_user-developer-maintainer.mdx';
 import License from './_common/_license.mdx';
 import Credits from './_common/_credits.mdx';
-import MoreCredits from './_project/_more-credits.mdx';
 import EnjoyedUsing from './_common/_enjoyed-using.mdx';
+import SupportAndFeedback from './_common/_support-and-feedback.mdx';
+import ChangeLog from './_common/_change-log.mdx';
+import Releases from './_common/_releases.mdx';
 
+import Documentation from '../_shared/_documentation.mdx';
 import ReleaseSchedule from '../_shared/_release-schedule.mdx';
 
-{/* ------------------------------------------------------------------------ */}
+import MoreCredits from './_project/_more-credits.mdx';
+import Status from './_project/_status.mdx';
 
-# Getting Started with the xPack GNU Arm Embedded GCC
+import Content from './_common/_content.mdx';
+
+{/* ------------------------------------------------------------------------ */}
 
 [![license](https://img.shields.io/github/license/xpack-dev-tools/arm-none-eabi-gcc-xpack)](https://github.com/xpack-dev-tools/arm-none-eabi-gcc-xpack/blob/xpack/LICENSE)
 ![GitHub Repo stars](https://img.shields.io/github/stars/xpack-dev-tools/arm-none-eabi-gcc-xpack)
 
-## Overview
+# Getting Started with the xPack GNU Arm Embedded GCC
 
-**xPack GNU Arm Embedded GCC** is a
-standalone, cross-platform (Windows, macOS, GNU/Linux) binary
-distribution of GNU Arm Embedded GCC,
-aimed at reproducible builds.
+<UserDeveloperMaintainer />
 
-<details>
-<summary>What are reproducible builds?</summary>
+<Content />
 
-To be **reproducible**, an operation must remain stable over time and
-across different environments. In other words, if builds are repeated
-after some time, possibly on a different machine or platform, the
-resulting behaviour must be functionally equivalent.
-
-</details>
-
-<Overview/>
-
-The open source **xPack GNU Arm Embedded GCC** project is hosted on GitHub as
-[`xpack-dev-tools/arm-none-eabi-gcc-xpack`](https://github.com/xpack-dev-tools/arm-none-eabi-gcc-xpack/);
-it provides the platform specific binaries as
-[release assets](https://github.com/xpack-dev-tools/arm-none-eabi-gcc-xpack/releases).
-
-In addition to the binary archives and the package metadata,
-this project also includes the
-[build scripts](https://github.com/xpack-dev-tools/arm-none-eabi-gcc-xpack/tree/xpack/build-assets/scripts).
-
-<UpgradeNotice/>
-
-## What are xpm packages? (xPacks) {#xpm-packages}
-
-**xpm packages**, abbreviated as **xPacks**, are versatile,
-language-neutral software packages. They have been successfully
-utilised in C/C++ projects.
-
-<details>
-<summary>What the heck are xpm packages (xPacks)? Please, do not introduce another package format!</summary>
-
-Although the initial appearance may seem complex, utilising
-xpm packages is, in fact, straightforward.
-The design rationale is to automate frequent
-operations that occur during software development, such as the
-installation of
-dependencies, and to ensure reproducibility.
-
-These packages are managed by **[xpm](https://xpack.github.io/xpm/)**
-(the xPack Project Manager),
-a programme that complements the **[npm](https://docs.npmjs.com/cli/)** CLI
-(the popular JavaScript package manager), with new language-neutral features.
-
-The xPacks Framework **does NOT introduce a new package format**; instead,
-it uses **the same format as npm packages**, which is a collection of
-files/folders and a `package.json` file with the package metadata.
-
-**xpm** can install packages from the
-same repositories as **npm**, whether public or private.
-
-The packages (usually regular archives, but also git repositories),
-are extracted into separate folders within the project.
-
-Based on the content, there are two types of xpm packages:
-
-- packages with source libraries (**source** xpm packages)
-- packages with executables, usually platform-specific binary
-tools (**binary** xpm packages)
-
-**Source xpm packages** are regular npm packages that include **library
-source files**, typically in **C/C++**, though there are no language
-restrictions.
-
-**Binary xpm packages** are also regular npm packages, but with minimal
-content, typically just the `package.json` file. Since these packages
-provide executables for multiple platforms, some of which are quite
-large, it is not practical to include all binaries within the npm
-package itself. Instead, the `package.json` file contains references
-(URLs) to platform-specific binary archives (e.g., `.tar.gz` for Unix or
-`.zip` for Windows).
-
-These archives are also expanded along with the package metadata.
-Links/forwarders to
-these executables are created in a `.bin` folder,
-eliminating the need to add multiple folders to the `PATH`.
-
-In summary, xpm packages can enhance and automate the installation
-process for source libraries and tools.
-
-In summary, xpm packages can streamline and automate the installation
-process for source libraries and tools. Further details are available on the
-[xpm Concepts](https://xpack.github.io/xpm/docs/guide/concepts/) page.
-
-</details>
-
-## Features
-
-All binaries are:
-
-- **Self-contained** (include all required libraries).
-- **File-system relocatable** (can be installed in any location).
-- Built on slightly older systems (to ensure compatibility with both
-old and new systems).
-
-<details>
-<summary>Compatibility with older systems</summary>
-
-Given that most operating systems maintain significant compatibility
-with older versions, building an application on an older system ensures
-that the same binary can run on newer versions. Conversely, building an
-application on a newer system may utilize library features that are
-not available in older versions, making backward compatibility less
-feasible.
-
-</details>
-
-Similarly to [flatpacks](https://flatpak.org) or [snap](https://snapcraft.io),
-but significantly simpler, xpm packages include all dependent shared libraries
-within the distributed archives, making the binaries independent of
-any similar libraries installed on the system. This ensures they
-can run on any system without needing specific libraries to be
-installed.
-
-Also the builds are configured so that the binaries do not depend on
-being installed in specific folders, and can be installed in any
-location, including in user folders.
-
-## Benefits
-
-The main advantages of using the **xPack GNU Arm Embedded GCC** are:
-
-- A convenient, uniform and portable install/uninstall/upgrade
-  procedure; the same procedure is used for all major
-  platforms (**x64 Windows**, **x64 macOS**, **arm64 macOS**, **x64 GNU/Linux**, **arm64 GNU/Linux**, **arm GNU/Linux**).
-- Multiple versions of the same package can be installed at the same time on
-  the same system.
-- No need to worry about dependent libraries, they are all included.
-- Not affected by system updates that
-  might change the versions of the dependent libraries.
-- Significantly lighter and easier to use than Docker images that provide
-  similar functionality and are GNU/Linux centric.
-- Projects can be tied to specific tools versions; this provides a good
-  reproducibility, especially useful in **CI/CD** environments.
-
-<OtherBenefits/>
-
-<Compatibility/>
-
-## Install
-
-The executables and other related files can be installed automatically with
-**xpm** or manually by downloading the
-**platform specific archives**.
-
-The details of installing the **xPack GNU Arm Embedded GCC** on various platforms are
-presented in the
-[Install Guide](/docs/install/).
+<Status />
 
 ## Documentation
 
@@ -204,37 +53,13 @@ presented in the
 
 <ReleaseSchedule/>
 
-## Support & feedback
+<SupportAndFeedback />
 
-The quick advice for getting support and providing feedback is to use the
-[GitHub Discussions](https://github.com/xpack-dev-tools/arm-none-eabi-gcc-xpack/discussions).
+<ChangeLog />
 
-For additional information, please refer to the
-[Help Centre](/docs/support/) page.
-
-## Change log
-
-The release and change log is available in the repository
-[`CHANGELOG.md`](https://github.com/xpack-dev-tools/arm-none-eabi-gcc-xpack/blob/xpack/CHANGELOG.md) file.
-
-## Maintainer & Developer information
-
-For information on the workflow used to make releases, please see the
-[Maintainer Info](/docs/maintainer/) page.
-
-For information on how to build the binaries, please see the
-[Developer Info](/docs/developer/) page.
-
-However, the ultimate source for details are the build scripts themselves,
-all available from the
-[`arm-none-eabi-gcc-xpack.git/build-assets/scripts`](https://github.com/xpack-dev-tools/arm-none-eabi-gcc-xpack/tree/xpack/build-assets/scripts/)
-folder. The scripts include common code from the [`@xpack-dev-tools/xbb-helper`](https://github.com/xpack-dev-tools/xbb-helper-xpack) package.
+<Releases />
 
 <License />
-
-## Releases
-
-The list of releases is available in the [Releases](/docs/releases/) pages.
 
 <Credits />
 
