@@ -143,26 +143,6 @@ update the dependencies in `build-assets/package.json`.
 - use the new version, suffixed by `.pre`,
 like <code>14.2.1-1.1.1.pre</code>.
 
-### Update the `websiteConfig` in `website/package.json` (if necessary)
-
-Update the custom fields.
-
-### Update the website commons
-
-Run the `website-generate-commons` actions from `build-assets`.
-
-### Start the local web server
-
-Execute the npm script `clean` then `start` in the website sub-project,
-or run the following in a terminal:
-
-```sh
-(cd ~/Work/xpack-dev-tools/xbb-helper-xpack.git/website; npm run clean; npm run start)
-```
-
-Navigate to the **Maintainer Info** page,
-the **Increase the version and update VERSION** section.
-
 ### Increase the version and update VERSION
 
 Determine the version (like <code>14.2.1-1.1</code>)
@@ -175,7 +155,22 @@ is <code>14.2.1-1.1</code>.
 ### Update the `websiteConfig` in `website/package.json` (if necessary)
 
 - update the release specific properties (if any)
-- restart the local web server
+
+### Update the website commons
+
+Run the `website-generate-commons` actions from `website`.
+
+### Start the local web server
+
+Execute the npm script `clean` then `start` in the website sub-project,
+or run the following in a terminal:
+
+```sh
+(cd ~/Work/xpack-dev-tools/xbb-helper-xpack.git/website; npm run clean; npm run start)
+```
+
+Navigate to the **Maintainer Info** page,
+the **Increase the version and update VERSION** section.
 
 <UpdateVersionSpecific/>
 
@@ -271,7 +266,7 @@ sudo systemctl restart docker
 
 ### Check if both projects are pushed
 
-Check if both the current project and the helper are
+Check if both the **current project** and the **helper** are
 on the `xpack-development` branch and the latest
 commits are pushed to GitHub.
 
@@ -378,7 +373,7 @@ caffeinate ssh xbbla32
 
 ### Update the durations of the development builds
 
-In `website/docs/maintainer/_development-durations.mdx`, update
+In `website/docs/maintainer/_shared/_development-durations.mdx`, update
 the durations of the builds.
 
 Commit with the message _**website: update development durations**_.
@@ -388,9 +383,9 @@ Commit with the message _**website: update development durations**_.
 Copy the trees displayed at the end of the test builds and paste to
 **Folder hierarchy** section in the web file:
 
-- `website/docs/install/_folders-hierarchies-linux.mdx`
-- `website/docs/install/_folders-hierarchies-macos.mdx`
-- `website/docs/install/_folders-hierarchies-windows.mdx`
+- `website/docs/install/_project/_folders-hierarchies-linux.mdx`
+- `website/docs/install/_project/_folders-hierarchies-macos.mdx`
+- `website/docs/install/_project/_folders-hierarchies-windows.mdx`
 
 If present, replace the actual version
 (like **14.2.1**) with the following expression:
@@ -406,6 +401,7 @@ macOS does not have a `tree` command; either compile it from
 via HomeBrew, and make a link to `/usr/local/bin`.
 
 :::
+
 
 Commit with the message _**website: update folder hierarchies**_.
 
@@ -445,6 +441,9 @@ place them in the XBB cache (`Work/cache`) and restart the build.
 The automation is provided by GitHub Actions and three self-hosted runners.
 
 ### Start the self-hosted runners
+
+If the runners expired (more than 2 weeks since last use), run the
+`github-runner-configure.sh` script to reconfigure them
 
 - on the development machine (`wksi`) open
 ssh sessions to the build machines (`xbbli`, `xbbmi`, `xbbma`, `xbbla`, `xbbla32`):
@@ -499,15 +498,14 @@ The status of all self-hosted runners is available at the [GitHub Runners](https
 
 Publish a new release of the helper on **npmjs**.
 
-### Update the dependency to the new helper
+### In `npm-packages-helper.git`, update the dependency to the new helper
 
-In `build-assets/package.json`, update the reference
-to `"@xpack-dev-tools/xbb-helper":`
-(possibly in all xPack projects).
+In `templates/_xpack-dev-tools/build-assets/package-merge-liquid.json`, update the reference
+to `"@@xpack-dev-tools/xbb-helper":`.
 
 ### Commit the changes to `build-assets/package.json`
 
-Commit with the message _**build-assets/package.json: bump deps**_.
+Commit with the message _**template: build-assets/package-merge-liquid.json: bump deps**_.
 
 ### Check for disk space
 
@@ -554,11 +552,11 @@ rm -rf ~/Work/xpack-dev-tools/*/build-assets/build
 
 ### Generate the GitHub workflows
 
-Run the **generate-workflows** xpm/xPack action to update the
+Run the top **generate-top-commons** npm script to update the
 GitHub workflow files.
 
 ```sh
-xpm run generate-workflows -C ~/Work/xpack-dev-tools/arm-none-eabi-gcc-xpack.git/build-assets
+npm run generate-workflows -C ~/Work/xpack-dev-tools/arm-none-eabi-gcc-xpack.git
 ```
 
 ### Commit and push
@@ -605,7 +603,7 @@ These commands use the `xpack-development` branch of this repo.
 The workflow results and logs are available from the
 [GitHub Actions](https://github.com/xpack-dev-tools/arm-none-eabi-gcc-xpack/actions) page.
 
-Update the values in `website/docs/maintainer/_github-actions-durations.mdx`
+Update the values in `website/docs/_shared/_github-actions-durations.mdx`
 with those shown by GitHub Actions.
 
 Commit with the message _**website: update actions durations**_.
@@ -748,8 +746,8 @@ xpm run generate-website-blog-post -C ~/Work/xpack-dev-tools/arm-none-eabi-gcc-x
 ### Update the web install page
 
 - check and possibly update the output of the `--version` runs in
-  - `website/docs/install/_automatic-install-quick-test.mdx`
-  - `website/docs/install/_manual-install-quick-test.mdx`
+  - `website/docs/install/_project/_automatic-install-quick-test.mdx`
+  - `website/docs/install/_project/_manual-install-quick-test.mdx`
 - commit with the message _**website: update quick tests**_
 
 ### Check the list of links in top package.json
