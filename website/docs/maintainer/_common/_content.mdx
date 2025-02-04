@@ -170,7 +170,7 @@ or run the following in a terminal:
 ```
 
 Navigate to the **Maintainer Info** page,
-the **Increase the version and update VERSION** section.
+the **Update the version specific code** section.
 
 <UpdateVersionSpecific/>
 
@@ -373,7 +373,7 @@ caffeinate ssh xbbla32
 
 ### Update the durations of the development builds
 
-In `website/docs/maintainer/_shared/_development-durations.mdx`, update
+In `website/docs/_shared/_development-durations.mdx`, update
 the durations of the builds.
 
 Commit with the message _**website: update development durations**_.
@@ -443,7 +443,9 @@ The automation is provided by GitHub Actions and three self-hosted runners.
 ### Start the self-hosted runners
 
 If the runners expired (more than 2 weeks since last use), run the
-`github-runner-configure.sh` script to reconfigure them
+`github-runner-configure.sh` script to reconfigure them. This scripts
+is available in the `xbb-helper` and
+requires `GITHUB_API_XPACK_DEV_TOOLS_RUNNERS_TOKEN` to be present.
 
 - on the development machine (`wksi`) open
 ssh sessions to the build machines (`xbbli`, `xbbmi`, `xbbma`, `xbbla`, `xbbla32`):
@@ -472,7 +474,21 @@ For `xbbli` & `xbbla`, which have more memory, start two runners:
 ~/actions-runners/xpack-dev-tools/2/run.sh &
 ```
 
-On all other machines start a single runner:
+For the macOS x64 runners, be sure the deployment target is defined:
+
+```sh
+unset WORK_FOLDER_PATH
+export XBB_ENVIRONMENT_MACOSX_DEPLOYMENT_TARGET="10.13"
+~/actions-runners/xpack-dev-tools/run.sh &
+```
+
+```sh
+unset WORK_FOLDER_PATH
+export XBB_ENVIRONMENT_MACOSX_DEPLOYMENT_TARGET="11.0"
+~/actions-runners/xpack-dev-tools/run.sh &
+```
+
+On all other machines start the runner with:
 
 ```sh
 ~/actions-runners/xpack-dev-tools/run.sh &
@@ -498,14 +514,23 @@ The status of all self-hosted runners is available at the [GitHub Runners](https
 
 Publish a new release of the helper on **npmjs**.
 
-### In `npm-packages-helper.git`, update the dependency to the new helper
+### In the npm packages helper, update the dependency to the new helper
 
 In `templates/_xpack-dev-tools/build-assets/package-merge-liquid.json`, update the reference
-to `"@@xpack-dev-tools/xbb-helper":`.
+to `"@xpack-dev-tools/xbb-helper":`.
 
-### Commit the changes to `build-assets/package.json`
+### Generate the top commons
 
-Commit with the message _**template: build-assets/package-merge-liquid.json: bump deps**_.
+Run the top **generate-top-commons** npm script to update the
+`build-assets/package.json` and the GitHub workflow files.
+
+```sh
+npm run generate-top-commons -C ~/Work/xpack-dev-tools/arm-none-eabi-gcc-xpack.git
+```
+
+### Commit the changes
+
+Commit with the message _**re-generate top commons**_.
 
 ### Check for disk space
 
@@ -548,15 +573,6 @@ This is equivalent to running a wide `rm` to remove the `build` folders:
 
 ```sh
 rm -rf ~/Work/xpack-dev-tools/*/build-assets/build
-```
-
-### Generate the GitHub workflows
-
-Run the top **generate-top-commons** npm script to update the
-GitHub workflow files.
-
-```sh
-npm run generate-workflows -C ~/Work/xpack-dev-tools/arm-none-eabi-gcc-xpack.git
 ```
 
 ### Commit and push
@@ -851,6 +867,7 @@ npm run build -C website
 
 ### Publish the website
 
+- open https://xpack-dev-tools.github.io/arm-none-eabi-gcc-xpack/docs/maintainer/#publish-the-website in a separate window
 - stop the local web server
 - select the `website` branch
 - merge `xpack-development` into `website`
@@ -858,6 +875,7 @@ npm run build -C website
   :::info
   At this moment an automated GitHub Action will generate and publish the website.
   :::
+- add a new tag like `web-YYYYMMDD`
 - the new release blog post is
 in https://xpack-dev-tools.github.io/arm-none-eabi-gcc-xpack/blog/
 - remember the post URL, since it must be used to update the release page
