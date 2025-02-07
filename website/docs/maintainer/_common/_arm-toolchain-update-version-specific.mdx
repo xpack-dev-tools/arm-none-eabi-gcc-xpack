@@ -17,22 +17,22 @@ With a Git client:
 
 - checkout the branch mentioned in the release notes
   (like <code>users/ARM/binutils-2_43-branch</code>)
-- push it to origin with the same name
+- **push** it to origin with the same name
 - enable a filter on the current branch
 - identify the commit ID from release notes or manifest.txt (search back in time)
 - add a tag like <code>binutils-2.43-arm-none-eabi-{versionMajor()}.{versionMinor()}.rel1</code>
-- push the tag to origin
+- **push** the tag to origin
 - check the tag at https://github.com/xpack-dev-tools/binutils-gdb/tags/
 
 Similarly for GDB:
 
 - checkout the branch mentioned in the release notes
   (like <code>gdb-15-branch</code>)
-- push it to origin with the same name
+- **push** it to origin with the same name
 - enable a filter on the current branch
 - identify the commit ID from release notes or manifest.txt (search back in time)
 - add a tag like <code>gdb-15-arm-none-eabi-{versionMajor()}.{versionMinor()}.rel1</code>
-- push the tag to origin
+- **push** the tag to origin
 - check the tag at https://github.com/xpack-dev-tools/binutils-gdb/tags/
 
 ### Update the local gcc fork (optional, normally the archive is used)
@@ -41,15 +41,15 @@ With a Git client:
 
 - checkout the branch mentioned in the release notes
   (like <code>ARM/arm-{versionMajor()}</code>)
-- push it to origin with the same name
+- **push** it to origin with the same name
 - enable a filter on the current branch
 - identify the commit ID from release notes or manifest.txt (search back in time)
 - create a branch like <code>arm-{versionMajor()}-arm-none-eabi-{versionMajor()}.{versionMinor()}.rel1-xpack</code>
 - create a tag like <code>arm-{versionMajor()}-arm-none-eabi-{versionMajor()}.{versionMinor()}.rel1</code>
-- push the tag to origin
+- **push** the tag to origin
 - check the tag at https://github.com/xpack-dev-tools/gcc/tags/
 - cherry pick the `system.h: do not define abort() on mingw` commit
-- push the *-xpack branch to origin
+- **push** the *-xpack branch to origin
 - save as Patches into the helper `patches` folder
 - rename as <code>gcc-14.2.1-cross.git.patch</code>
 
@@ -58,11 +58,11 @@ With a Git client:
 With a Git client:
 
 - pull from the `master` branch (none mentioned in the release notes)
-- push it to origin with the same name
+- **push** it to origin with the same name
 - enable a filter on the current branch
 - identify the commit ID from release notes or manifest.txt (search back in time)
 - create a tag like <code>newlib-4.4.0-arm-none-eabi-{versionMajor()}.{versionMinor()}.rel1</code>
-- push the tag to origin
+- **push** the tag to origin
 - check the tag at https://github.com/xpack-dev-tools/newlib-cygwin/tags/
 
 ### Update the gdb-*-cross.git.patch in helper
