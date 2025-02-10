@@ -153,7 +153,14 @@ function application_build_versioned_components()
     XBB_LIBICONV_VERSION="1.15" # Arm
 
     # https://zlib.net/fossils/
-    XBB_ZLIB_VERSION="1.2.13" # "1.2.12"
+    if [[ "${XBB_RELEASE_VERSION}" =~ 14[.]2[.]1-1[.]2 ]]
+    then
+      # Required for clang > 17, otherwise:
+      # /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/stdio.h:220:7: error: expected identifier or '('
+      XBB_ZLIB_VERSION="1.3.1" # "1.2.13" # "1.2.12"
+    else
+      XBB_ZLIB_VERSION="1.2.13" # "1.2.12"
+    fi
 
     # https://gmplib.org/download/gmp/
     # Arm: In `gmp-h.in` search for `__GNU_MP_VERSION`.
