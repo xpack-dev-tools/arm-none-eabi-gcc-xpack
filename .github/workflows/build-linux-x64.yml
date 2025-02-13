@@ -81,7 +81,7 @@ jobs:
     timeout-minutes: 5760 # 4 days
     runs-on: [self-hosted, linux, x64, xbblix]
     container:
-      image: ilegeul/ubuntu:amd64-18.04-xbb-v5.2.1
+      image: ilegeul/debian:amd64-10-xbb-v6.0.0
     defaults:
       run:
         shell: bash
