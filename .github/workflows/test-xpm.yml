@@ -223,7 +223,8 @@ jobs:
 
   linux-arm64-test:
     name: 'linux-arm64 GNU Arm Embedded GCC@${{github.event.inputs.version}} test'
-    runs-on: [self-hosted, linux, arm64, xbbla]
+    # runs-on: [self-hosted, linux, arm64, xbbla]
+    runs-on: ubuntu-24.04-arm
 
     steps:
       - name: 'Show environment'
