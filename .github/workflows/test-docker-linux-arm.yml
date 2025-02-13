@@ -84,7 +84,8 @@ jobs:
   # The ubuntu:12.04 image fails to update.
   ubuntu-arm64:
     name: 'arm64 arm-none-eabi-gcc ${{github.event.inputs.version}} test on Ubuntu stable'
-    runs-on: [self-hosted, linux, arm64, xbbla]
+    # runs-on: [self-hosted, linux, arm64, xbbla]
+    runs-on: ubuntu-24.04-arm
 
     steps:
       - name: 'Show environment'
@@ -114,6 +115,13 @@ jobs:
           path: build-assets/xpacks/@xpack-dev-tools/xbb-helper
           ref: ${{github.event.inputs.helper-git-ref}}
           fetch-depth: 3
+
+      # https://hub.docker.com/_/ubuntu
+      - name: 'Ubuntu 24.04 arm64'
+        uses: docker://ubuntu:24.04
+        with:
+          entrypoint: /bin/bash
+          args: /github/workspace/build-assets/scripts/test.sh --image ubuntu:24.04 --version ${{github.event.inputs.version}} --base-url ${{github.event.inputs.base_url}}
 
       - name: 'Ubuntu 22.04 arm64'
         uses: docker://ubuntu:22.04
@@ -127,17 +135,12 @@ jobs:
           entrypoint: /bin/bash
           args: /github/workspace/build-assets/scripts/test.sh --image ubuntu:20.04 --version ${{github.event.inputs.version}} --base-url ${{github.event.inputs.base_url}}
 
-      - name: 'Ubuntu 18.04 arm64'
-        uses: docker://ubuntu:18.04
-        with:
-          entrypoint: /bin/bash
-          args: /github/workspace/build-assets/scripts/test.sh --image ubuntu:18.04 --version ${{github.event.inputs.version}} --base-url ${{github.event.inputs.base_url}}
-
   # https://en.wikipedia.org/wiki/Debian_version_history
   # https://hub.docker.com/_/debian
   debian-arm64:
     name: 'arm64 arm-none-eabi-gcc ${{github.event.inputs.version}} test on Debian stable'
-    runs-on: [self-hosted, linux, arm64, xbbla]
+    # runs-on: [self-hosted, linux, arm64, xbbla]
+    runs-on: ubuntu-24.04-arm
 
     steps:
       - name: 'Show environment'
@@ -168,24 +171,31 @@ jobs:
           ref: ${{github.event.inputs.helper-git-ref}}
           fetch-depth: 3
 
-      - name: 'Debian 11 arm64'
-        uses: docker://debian:bullseye
+      # https://hub.docker.com/_/debian
+      - name: 'Debian 12 arm64'
+        uses: docker://debian:12
         with:
           entrypoint: /bin/bash
-          args: /github/workspace/build-assets/scripts/test.sh --image debian:bullseye --version ${{github.event.inputs.version}} --base-url ${{github.event.inputs.base_url}}
+          args: /github/workspace/build-assets/scripts/test.sh --image debian:12 --version ${{github.event.inputs.version}} --base-url ${{github.event.inputs.base_url}}
+
+      - name: 'Debian 11 arm64'
+        uses: docker://debian:11
+        with:
+          entrypoint: /bin/bash
+          args: /github/workspace/build-assets/scripts/test.sh --image debian:11 --version ${{github.event.inputs.version}} --base-url ${{github.event.inputs.base_url}}
 
       - name: 'Debian 10 arm64'
-        uses: docker://debian:buster
+        uses: docker://debian:10
         with:
           entrypoint: /bin/bash
-          args: /github/workspace/build-assets/scripts/test.sh --image debian:buster --version ${{github.event.inputs.version}} --base-url ${{github.event.inputs.base_url}}
-
+          args: /github/workspace/build-assets/scripts/test.sh --image debian:10 --version ${{github.event.inputs.version}} --base-url ${{github.event.inputs.base_url}}
 
   # https://hub.docker.com/r/redhat/ubi8
   # For `-static` to work, explicit static packages must be present.
   redhat-arm64:
     name: 'arm64 arm-none-eabi-gcc ${{github.event.inputs.version}} test on RedHat stable'
-    runs-on: [self-hosted, linux, arm64, xbbla]
+    # runs-on: [self-hosted, linux, arm64, xbbla]
+    runs-on: ubuntu-24.04-arm
 
     steps:
       - name: 'Show environment'
@@ -227,7 +237,8 @@ jobs:
   # For `-static` to work, explicit static packages must be present.
   fedora-arm64:
     name: 'arm64 arm-none-eabi-gcc ${{github.event.inputs.version}} test on Fedora stable'
-    runs-on: [self-hosted, linux, arm64, xbbla]
+    # runs-on: [self-hosted, linux, arm64, xbbla]
+    runs-on: ubuntu-24.04-arm
 
     steps:
       - name: 'Show environment'
@@ -258,6 +269,13 @@ jobs:
           ref: ${{github.event.inputs.helper-git-ref}}
           fetch-depth: 3
 
+      # Every fourth release. 29, 33, 37, 41, 45, 49...
+      - name: 'Fedora 41 arm64'
+        uses: docker://fedora:41
+        with:
+          entrypoint: /bin/bash
+          args: /github/workspace/build-assets/scripts/test.sh --image fedora:41 --version ${{github.event.inputs.version}} --base-url ${{github.event.inputs.base_url}}
+
       - name: 'Fedora 37 arm64'
         uses: docker://fedora:37
         with:
@@ -281,7 +299,8 @@ jobs:
   # `-static` disabled, there is no static libc.a.
   opensuse-arm64:
     name: 'arm64 arm-none-eabi-gcc ${{github.event.inputs.version}} test on OpenSUSE stable'
-    runs-on: [self-hosted, linux, arm64, xbbla]
+    # runs-on: [self-hosted, linux, arm64, xbbla]
+    runs-on: ubuntu-24.04-arm
 
     steps:
       - name: 'Show environment'
@@ -328,7 +347,8 @@ jobs:
 
   ubuntu-arm64-latest:
     name: 'arm64 arm-none-eabi-gcc ${{github.event.inputs.version}} test on Ubuntu latest'
-    runs-on: [self-hosted, linux, arm64, xbbla]
+    # runs-on: [self-hosted, linux, arm64, xbbla]
+    runs-on: ubuntu-24.04-arm
 
     steps:
       - name: 'Show environment'
@@ -359,16 +379,18 @@ jobs:
           ref: ${{github.event.inputs.helper-git-ref}}
           fetch-depth: 3
 
+      # https://hub.docker.com/_/ubuntu
       - name: 'Ubuntu latest arm64'
-        uses: docker://ubuntu:22.04
+        uses: docker://ubuntu:latest
         with:
           entrypoint: /bin/bash
-          args: /github/workspace/build-assets/scripts/test.sh --image ubuntu:22.04 --version ${{github.event.inputs.version}} --base-url ${{github.event.inputs.base_url}}
+          args: /github/workspace/build-assets/scripts/test.sh --image ubuntu:latest --version ${{github.event.inputs.version}} --base-url ${{github.event.inputs.base_url}}
       # ubuntu:rolling fails during update
 
   debian-arm64-latest:
     name: 'arm64 arm-none-eabi-gcc ${{github.event.inputs.version}} test on Debian latest'
-    runs-on: [self-hosted, linux, arm64, xbbla]
+    # runs-on: [self-hosted, linux, arm64, xbbla]
+    runs-on: ubuntu-24.04-arm
 
     steps:
       - name: 'Show environment'
@@ -416,7 +438,8 @@ jobs:
   # `-static` disabled, there is no static libc.a.
   fedora-arm64-latest:
     name: 'arm64 arm-none-eabi-gcc ${{github.event.inputs.version}} test on Fedora latest'
-    runs-on: [self-hosted, linux, arm64, xbbla]
+    # runs-on: [self-hosted, linux, arm64, xbbla]
+    runs-on: ubuntu-24.04-arm
 
     steps:
       - name: 'Show environment'
@@ -456,7 +479,8 @@ jobs:
   # - https://hub.docker.com/r/opensuse/tumbleweed
   opensuse-arm64-latest:
     name: 'arm64 arm-none-eabi-gcc ${{github.event.inputs.version}} test on OpenSUSE latest'
-    runs-on: [self-hosted, linux, arm64, xbbla]
+    # runs-on: [self-hosted, linux, arm64, xbbla]
+    runs-on: ubuntu-24.04-arm
 
     steps:
       - name: 'Show environment'
@@ -493,12 +517,11 @@ jobs:
           entrypoint: /bin/bash
           args: /github/workspace/build-assets/scripts/test.sh --image opensuse/tumbleweed --version ${{github.event.inputs.version}} --base-url ${{github.event.inputs.base_url}}
 
-
-
-  # https://hub.docker.com/r/arm32v7/ubuntu/
-  ubuntu-arm:
-    name: 'arm arm-none-eabi-gcc ${{github.event.inputs.version}} test on Ubuntu stable'
-    runs-on: [self-hosted, linux, arm, xbbla32]
+  # - https://hub.docker.com/_/archlinux
+  arch-arm64-latest:
+    name: 'arm64 arm-none-eabi-gcc ${{github.event.inputs.version}} test on Arch latest'
+    # runs-on: [self-hosted, linux, arm64, xbbla]
+    runs-on: ubuntu-24.04
 
     steps:
       - name: 'Show environment'
@@ -509,11 +532,6 @@ jobs:
           echo "pwd: $(pwd)"
           ls -lLA
           env | sort | grep -E '^[^ \t]+='
-
-      - name: 'Clean working area' # Mandatory for self-hosted runners.
-        run: |
-          chmod -Rf a+w * || true
-          rm -rf * .git*
 
       # https://github.com/actions/checkout
       - name: 'Checkout project'
@@ -529,201 +547,12 @@ jobs:
           ref: ${{github.event.inputs.helper-git-ref}}
           fetch-depth: 3
 
-      - name: 'Ubuntu 22.04 arm'
-        uses: docker://arm32v7/ubuntu:22.04
-        with:
-          entrypoint: /bin/bash # /usr/bin/linux32
-          args: /github/workspace/build-assets/scripts/test.sh --image arm32v7/ubuntu:22.04 --version ${{github.event.inputs.version}} --base-url ${{github.event.inputs.base_url}}
-
-      - name: 'Ubuntu 20.04 arm'
-        uses: docker://arm32v7/ubuntu:20.04
-        with:
-          entrypoint: /bin/bash # /usr/bin/linux32
-          args: /github/workspace/build-assets/scripts/test.sh --image arm32v7/ubuntu:20.04 --version ${{github.event.inputs.version}} --base-url ${{github.event.inputs.base_url}}
-
-      - name: 'Ubuntu 18.04 arm'
-        uses: docker://arm32v7/ubuntu:18.04
-        with:
-          entrypoint: /bin/bash # /usr/bin/linux32
-          args: /github/workspace/build-assets/scripts/test.sh --image arm32v7/ubuntu:18.04 --version ${{github.event.inputs.version}} --base-url ${{github.event.inputs.base_url}}
-
-  # https://hub.docker.com/r/arm32v7/debian
-  debian-arm:
-    name: 'arm arm-none-eabi-gcc ${{github.event.inputs.version}} test on Debian stable'
-    runs-on: [self-hosted, linux, arm, xbbla32]
-
-    steps:
-      - name: 'Show environment'
-        run: |
-          uname -a
-          lsb_release -sd
-          echo "whoami: $(whoami)"
-          echo "pwd: $(pwd)"
-          ls -lLA
-          env | sort | grep -E '^[^ \t]+='
-
-      - name: 'Clean working area' # Mandatory for self-hosted runners.
-        run: |
-          chmod -Rf a+w * || true
-          rm -rf * .git*
-
-      # https://github.com/actions/checkout
-      - name: 'Checkout project'
-        uses: actions/checkout@v4
-        with:
-          fetch-depth: 3
-
-      - name: 'Checkout helper ${{github.event.inputs.helper-git-ref}}'
-        uses: actions/checkout@v4
-        with:
-          repository: xpack-dev-tools/xbb-helper-xpack
-          path: build-assets/xpacks/@xpack-dev-tools/xbb-helper
-          ref: ${{github.event.inputs.helper-git-ref}}
-          fetch-depth: 3
-
-      - name: 'Debian 11 arm'
-        uses: docker://arm32v7/debian:bullseye
-        with:
-          entrypoint: /bin/bash # /usr/bin/linux32
-          args: /github/workspace/build-assets/scripts/test.sh --image arm32v7/debian:bullseye --version ${{github.event.inputs.version}} --base-url ${{github.event.inputs.base_url}}
-
-      - name: 'Debian 10 arm'
-        uses: docker://arm32v7/debian:buster
-        with:
-          entrypoint: /bin/bash # /usr/bin/linux32
-          args: /github/workspace/build-assets/scripts/test.sh --image arm32v7/debian:buster --version ${{github.event.inputs.version}} --base-url ${{github.event.inputs.base_url}}
-
-  # https://hub.docker.com/r/arm32v7/ubuntu/
-  ubuntu-arm-latest:
-    name: 'arm arm-none-eabi-gcc ${{github.event.inputs.version}} test on Ubuntu latest'
-    runs-on: [self-hosted, linux, arm, xbbla32]
-
-    steps:
-      - name: 'Show environment'
-        run: |
-          uname -a
-          lsb_release -sd
-          echo "whoami: $(whoami)"
-          echo "pwd: $(pwd)"
-          ls -lLA
-          env | sort | grep -E '^[^ \t]+='
-
-      - name: 'Clean working area' # Mandatory for self-hosted runners.
-        run: |
-          chmod -Rf a+w * || true
-          rm -rf * .git*
-
-      # https://github.com/actions/checkout
-      - name: 'Checkout project'
-        uses: actions/checkout@v4
-        with:
-          fetch-depth: 3
-
-      - name: 'Checkout helper ${{github.event.inputs.helper-git-ref}}'
-        uses: actions/checkout@v4
-        with:
-          repository: xpack-dev-tools/xbb-helper-xpack
-          path: build-assets/xpacks/@xpack-dev-tools/xbb-helper
-          ref: ${{github.event.inputs.helper-git-ref}}
-          fetch-depth: 3
-
-      - name: 'Ubuntu latest arm'
-        uses: docker://arm32v7/ubuntu:22.04
-        with:
-          entrypoint: /bin/bash # /usr/bin/linux32
-          args: /github/workspace/build-assets/scripts/test.sh --image arm32v7/ubuntu:22.04 --version ${{github.event.inputs.version}} --base-url ${{github.event.inputs.base_url}}
-
-  # # https://hub.docker.com/r/arm32v7/debian
-  # debian-arm-latest:
-  #   name: 'arm arm-none-eabi-gcc ${{github.event.inputs.version}} test on Debian latest'
-  #   runs-on: [self-hosted, linux, arm, xbbla32]
-
-  #   steps:
-  #     - name: 'Show environment'
-  #       run: |
-  #         uname -a
-  #         lsb_release -sd
-  #         echo "whoami: $(whoami)"
-  #         echo "pwd: $(pwd)"
-  #         ls -lLA
-  #         env | sort | grep -E '^[^ \t]+='
-
-  #     - name: 'Clean working area' # Mandatory for self-hosted runners.
-  #       run: |
-  #         chmod -Rf a+w * || true
-  #         rm -rf * .git*
-
-  #     # https://github.com/actions/checkout
-  #     - name: 'Checkout project'
-  #       uses: actions/checkout@v4
-  #       with:
-  #         fetch-depth: 3
-
-  #     - name: 'Checkout helper ${{github.event.inputs.helper-git-ref}}'
-  #       uses: actions/checkout@v4
-  #       with:
-  #         repository: xpack-dev-tools/xbb-helper-xpack
-  #         path: build-assets/xpacks/@xpack-dev-tools/xbb-helper
-  #         ref: ${{github.event.inputs.helper-git-ref}}
-  #         fetch-depth: 3
-
-  #     - name: 'Debian testing arm'
-  #       uses: docker://arm32v7/debian:testing
-  #       with:
-  #         entrypoint: /bin/bash # /usr/bin/linux32
-  #         args: /github/workspace/build-assets/scripts/test.sh --image arm32v7/debian:testing --version ${{github.event.inputs.version}} --base-url ${{github.event.inputs.base_url}}
-
-  #     - name: 'Debian latest arm'
-  #       uses: docker://arm32v7/debian:latest
-  #       with:
-  #         entrypoint: /bin/bash # /usr/bin/linux32
-  #         args: /github/workspace/build-assets/scripts/test.sh --image arm32v7/debian:latest --version ${{github.event.inputs.version}} --base-url ${{github.event.inputs.base_url}}
-
-  # https://en.wikipedia.org/wiki/Fedora_version_history
-  # https://hub.docker.com/r/arm32v7/fedora
-  # `-static` disabled, there is no static libc.a.
-  fedora-arm-latest:
-    name: 'arm arm-none-eabi-gcc ${{github.event.inputs.version}} test on Fedora latest'
-    runs-on: [self-hosted, linux, arm, xbbla32]
-
-    steps:
-      - name: 'Show environment'
-        run: |
-          uname -a
-          lsb_release -sd
-          echo "whoami: $(whoami)"
-          echo "pwd: $(pwd)"
-          ls -lLA
-          env | sort | grep -E '^[^ \t]+='
-
-      - name: 'Clean working area' # Mandatory for self-hosted runners.
-        run: |
-          chmod -Rf a+w * || true
-          rm -rf * .git*
-
-      # https://github.com/actions/checkout
-      - name: 'Checkout project'
-        uses: actions/checkout@v4
-        with:
-          fetch-depth: 3
-
-      - name: 'Checkout helper ${{github.event.inputs.helper-git-ref}}'
-        uses: actions/checkout@v4
-        with:
-          repository: xpack-dev-tools/xbb-helper-xpack
-          path: build-assets/xpacks/@xpack-dev-tools/xbb-helper
-          ref: ${{github.event.inputs.helper-git-ref}}
-          fetch-depth: 3
-
-      - name: 'Fedora latest arm'
-        uses: docker://arm32v7/fedora:latest
+      - name: 'Arch latest arm64'
+        uses: docker://archlinux:latest
         with:
           entrypoint: /bin/bash
-          args: /github/workspace/build-assets/scripts/test.sh --image arm32v7/fedora:latest --version ${{github.event.inputs.version}} --base-url ${{github.event.inputs.base_url}}
+          args: /github/workspace/build-assets/scripts/test.sh --image archlinux:latest --version ${{github.event.inputs.version}} --base-url ${{github.event.inputs.base_url}}
 
-  # - https://hub.docker.com/r/arm32v7/opensuse
-  # arm32v7/opensuse:latest is leap 42.3 and fails due to http: URLs
-  # (zypper lr -u)
 
 
 # -----------------------------------------------------------------------------

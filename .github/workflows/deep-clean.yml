@@ -102,27 +102,6 @@ jobs:
 
 
 
-  linux-arm:
-    name: 'linux-arm arm-none-eabi-gcc ${{github.event.inputs.version}} clean'
-    timeout-minutes: 2880 # 2 days
-    runs-on: [self-hosted, linux, arm, xbbla32]
-
-    steps:
-      - name: 'Show environment'
-        run: |
-          uname -a
-          lsb_release -sd
-          echo "whoami: $(whoami)"
-          echo "pwd: $(pwd)"
-          ls -lLA
-          env | sort | grep -E '^[^ \t]+='
-
-      - name: 'Clean working area' # Mandatory for self-hosted runners.
-        run: |
-          chmod -Rf a+w * || true
-          rm -rf * .git*
-
-
 
 
 

@@ -223,7 +223,8 @@ jobs:
 
   linux-arm64-test:
     name: 'linux-arm64 GNU Arm Embedded GCC@${{github.event.inputs.version}} test'
-    runs-on: [self-hosted, linux, arm64, xbbla]
+    # runs-on: [self-hosted, linux, arm64, xbbla]
+    runs-on: ubuntu-24.04-arm
 
     steps:
       - name: 'Show environment'
@@ -258,49 +259,6 @@ jobs:
         uses: docker://node:lts-slim # Currently based on debian:12-slim
         with:
           entrypoint: /bin/bash
-          args: /github/workspace/build-assets/scripts/test.sh --image debian --package-version ${{github.event.inputs.package-version}} --version ${{github.event.inputs.version}} --xpm
-
-
-
-
-
-  linux-arm-test:
-    name: 'linux-arm GNU Arm Embedded GCC@${{github.event.inputs.version}} test'
-    runs-on: [self-hosted, linux, arm, xbbla32]
-
-    steps:
-      - name: 'Show environment'
-        run: |
-          uname -a
-          lsb_release -sd
-          echo "whoami: $(whoami)"
-          echo "pwd: $(pwd)"
-          ls -lLA
-          env | sort | grep -E '^[^ \t]+='
-
-      - name: 'Clean working area' # Mandatory for self-hosted runners.
-        run: |
-          chmod -Rf a+w * || true
-          rm -rf * .git*
-
-      # https://github.com/actions/checkout
-      - name: 'Checkout project'
-        uses: actions/checkout@v4
-        with:
-          fetch-depth: 3
-
-      - name: 'Checkout helper ${{github.event.inputs.helper-git-ref}}'
-        uses: actions/checkout@v4
-        with:
-          repository: xpack-dev-tools/xbb-helper-xpack
-          path: build-assets/xpacks/@xpack-dev-tools/xbb-helper
-          ref: ${{github.event.inputs.helper-git-ref}}
-          fetch-depth: 3
-
-      - name: 'Run ${{github.event.inputs.version}} xpm docker test'
-        uses: docker://arm32v7/node:lts-slim # Currently based on debian:12-slim
-        with:
-          entrypoint: /bin/bash # /usr/bin/linux32
           args: /github/workspace/build-assets/scripts/test.sh --image debian --package-version ${{github.event.inputs.package-version}} --version ${{github.event.inputs.version}} --xpm
 
 
