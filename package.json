@@ -35,7 +35,7 @@
   },
   "license": "MIT",
   "xpack": {
-    "minimumXpmRequired": "0.16.3",
+    "minimumXpmRequired": "0.20.5",
     "binaries": {
       "destination": "./.content",
       "baseUrl": "https://github.com/xpack-dev-tools/arm-none-eabi-gcc-xpack/releases/download/v14.2.1-1.1",
@@ -63,7 +63,7 @@
         }
       }
     },
-    "bin": {
+    "executables": {
       "arm-none-eabi-addr2line": "./.content/bin/arm-none-eabi-addr2line",
       "arm-none-eabi-ar": "./.content/bin/arm-none-eabi-ar",
       "arm-none-eabi-as": "./.content/bin/arm-none-eabi-as",
