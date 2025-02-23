@@ -1,0 +1,59 @@
+---
+
+# DO NOT EDIT!
+# Automatically generated from docusaurus-template-liquid/templates/docusaurus.
+
+title: The project was upgraded to use XBB v6.0.0
+seo_title: Upgrade to XBB v6.0.0
+description: The project was upgraded to use XBB v6.0.0 based on Debian 10 and macOS 11.0.
+keywords:
+  - xpack
+  - arm-none-eabi-gcc
+  - website
+
+date:  2025-02-13 13:21:00 +0300
+
+authors: ilg-ul
+
+tags:
+  - xbb
+
+---
+
+import {PageMetadata} from '@docusaurus/theme-common';
+
+The project configuration was upgraded to use **XBB v6.0.0** based
+on **Debian 10** and **macOS 11**
+and **support for Arm 32-bit was discontinued**.
+
+Therefore, all future builds will use XBB v6.0.0 or later.
+
+<!--truncate-->
+
+<PageMetadata title={frontMatter.seo_title} />
+
+## GLIBC 2.28
+
+The GNU/Linux base was raised to GLIBC 2.28, with builds performed on **Debian 10**.
+The resulting binaries should run on Ubuntu 20 or later, RedHat 8 or later,
+Fedora 29 or later, etc.
+
+## MacOS 11.0
+
+The macOS base was raised to 11.0, with builds performed on** macOS 11.7** with
+`MACOSX_DEPLOYMENT_TARGET="11.0"`. The resulting binaries, both x64 and arm64,
+should run on any macOS 11 or later.
+
+## Support for Arm 32-bit discontinued
+
+With regret for the inconvenience caused to some Raspberry Pi users,
+due to the extremely high burdon on maintenance (toolchain builds took
+more than half a day), support for Arm 32-bit GNU/Linux had to be discontinued.
+
+This allowed all arm64 GNU/Linux builds to be performed on the Oracle Ampere
+machine, which is many times faster than the Raspberry Pi 4 machines.
+
+## Website updates
+
+The website was also updated to reflect the new changes, and references to
+**arm GNU/Linux**, **linux-arm** and **xbbla32**  were removed.

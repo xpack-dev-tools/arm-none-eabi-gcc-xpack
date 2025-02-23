@@ -179,7 +179,7 @@ or run the following in a terminal:
 ```
 
 Navigate to the **Maintainer Info** page,
-the **[Update the version specific code](http://localhost:3000/openocd-xpack/docs/maintainer/#update-the-version-specific-code)** section.
+the **[Update the version specific code](http://localhost:3000/arm-none-eabi-gcc-xpack/docs/maintainer/#update-the-version-specific-code)** section.
 
 <UpdateVersionSpecific/>
 
@@ -238,7 +238,7 @@ will build again the previous release!
 
 ## Run the development builds
 
-The builds currently run on 5 dedicated machines (x64 GNU/Linux, x64 macOS, arm64 macOS, arm64 GNU/Linux, arm GNU/Linux).
+The builds currently run on 4 dedicated machines (x64 GNU/Linux, x64 macOS, arm64 macOS, arm64 GNU/Linux).
 
 Before the real build, run test/development builds on all platforms.
 
@@ -273,7 +273,7 @@ commits are pushed to GitHub.
 
 :::caution
 
-This is particularly crucial for extensive projects; otherwise,
+This is particularly crucial for large projects; otherwise,
 the build may proceed with the previous version.
 
 :::
@@ -359,25 +359,14 @@ caffeinate ssh xbbli
 
 ### Build the arm64 GNU/Linux binaries
 
-Run the docker build on the production machine (`xbbla`);
+Run the docker build on the production machine (`ampere`);
 start a VS Code remote session, or connect with a terminal:
 
 ```sh
-caffeinate ssh xbbla
+caffeinate ssh ampere
 ```
 
 <PlatformDockerBuild platform="linux-arm64"/>
-
-### Build the arm GNU/Linux (32-bit) binaries
-
-Run the docker build on the production machine (`xbbla32`);
-start a VS Code remote session, or connect with a terminal:
-
-```sh
-caffeinate ssh xbbla32
-```
-
-<PlatformDockerBuild platform="linux-arm"/>
 
 ### Update the durations of the development builds
 
@@ -456,14 +445,13 @@ is available in the `xbb-helper` and
 requires `GITHUB_API_XPACK_DEV_TOOLS_RUNNERS_TOKEN` to be present.
 
 - on the development machine (`wksi`) open
-ssh sessions to the build machines (`xbbli`, `xbbmi`, `xbbma`, `xbbla`, `xbbla32`):
+ssh sessions to the build machines (`xbbli`, `xbbmi`, `xbbma`, `ampere`):
 
 ```sh
 caffeinate ssh xbbli
 caffeinate ssh xbbmi
 caffeinate ssh xbbma
-caffeinate ssh xbbla
-caffeinate ssh xbbla32
+caffeinate ssh ampere
 ```
 
 Create a `screen` session, to provide a persistent standard output for
@@ -475,7 +463,7 @@ screen -S ga
 
 To quit it, use `# Ctrl-a Ctrl-d`.
 
-For `xbbli` & `xbbla`, which have more memory, start two runners:
+For `xbbli` & `ampere`, which have more memory, start two runners:
 
 ```sh
 ~/actions-runners/xpack-dev-tools/1/run.sh &
@@ -486,7 +474,7 @@ For the macOS x64 runners, be sure the deployment target is defined:
 
 ```sh
 unset WORK_FOLDER_PATH
-export XBB_ENVIRONMENT_MACOSX_DEPLOYMENT_TARGET="10.13"
+export XBB_ENVIRONMENT_MACOSX_DEPLOYMENT_TARGET="11.0"
 ~/actions-runners/xpack-dev-tools/run.sh &
 ```
 
@@ -576,6 +564,13 @@ rm -rf ~/Work/xpack-dev-tools/*/build-assets/build
 
 - **push** the `xpack-development` branch to GitHub
 
+:::caution
+
+This is particularly crucial for large projects; otherwise,
+the build may proceed with the previous version.
+
+:::
+
 ### Check if the helper is pushed and published
 
 The helper `xpack` branch must be updated and the npm package published.
@@ -591,7 +586,6 @@ To trigger the GitHub Actions builds, use the xpm actions:
 - **trigger-workflow-build-linux-x64**
 - **trigger-workflow-build-win32-x64**
 - **trigger-workflow-build-linux-arm64**
-- **trigger-workflow-build-linux-arm**
 
 
 ```sh
@@ -600,7 +594,6 @@ xpm run trigger-workflow-build-darwin-arm64 -C ~/Work/xpack-dev-tools/arm-none-e
 xpm run trigger-workflow-build-linux-x64 -C ~/Work/xpack-dev-tools/arm-none-eabi-gcc-xpack.git/build-assets
 xpm run trigger-workflow-build-win32-x64 -C ~/Work/xpack-dev-tools/arm-none-eabi-gcc-xpack.git/build-assets
 xpm run trigger-workflow-build-linux-arm64 -C ~/Work/xpack-dev-tools/arm-none-eabi-gcc-xpack.git/build-assets
-xpm run trigger-workflow-build-linux-arm -C ~/Work/xpack-dev-tools/arm-none-eabi-gcc-xpack.git/build-assets
 ```
 
 The scripts behind these actions require the `GITHUB_API_DISPATCH_TOKEN`
@@ -653,13 +646,6 @@ in the environment.
 These actions use the `xpack-development` branch of this repo and the
 [pre-releases/test](https://github.com/xpack-dev-tools/pre-releases/releases/tag/test/)
 binaries.
-
-:::caution
-
-Some of the `docker-linux-arm` tests have an issue on Debian and the
-**Clean working area** step fails.
-
-:::
 
 The tests results are available from the
 [GitHub Actions](https://github.com/xpack-dev-tools/arm-none-eabi-gcc-xpack/actions) page.
@@ -733,10 +719,6 @@ with all binaries attached.
 
 - edit the draft and be sure it is attached to the `xpack-development` branch (important!)
 - perform the final edits (maintenance vs. new release) and check if everything is fine
-- add entries in the **Bug fixes**; use the following syntax
-  ```
-  - [[#N](https://github.com/xpack-dev-tools/arm-none-eabi-gcc-xpack/issues/N)]:
-  ```
 - **keep the pre-release button enabled**
 - do **not** enable Discussions yet
 - click the **Publish release** button
@@ -758,6 +740,10 @@ this will add a file in the `website/blog` folder:
   ```
 - edit the `description` property in the post front matter
 - select the correct summary (maintenance vs. new release)
+- add entries in the **Bug fixes**; use the following syntax
+  ```
+  - [[#N](https://github.com/xpack-dev-tools/arm-none-eabi-gcc-xpack/issues/N)]:
+  ```
 - copy/paste the folders hierarchies from the install guide
 - **commit** with the message _**website: blog post release 14.2.1-1.1 published**_
 
