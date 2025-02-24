@@ -9,14 +9,14 @@ import TabItem from '@theme/TabItem';
 
 ### Quick test
 
-To check if the {props.longName} installed by **xpm** starts properly, use something like:
+To check if the {props.descriptiveName} installed by **xpm** starts properly, use something like:
 
 <Tabs groupId="operating-systems">
 
 <TabItem value="windows" label="Windows" default>
 
 <CodeBlock language="console"> {
-`C:\\> %USERPROFILE%\\AppData\\Roaming\\xPacks\\@xpack-dev-tools\\${props.shortName}\\14.2.1-1.1.1\\.content\\bin\\${props.programName}.exe --version
+`C:\\> %USERPROFILE%\\AppData\\Roaming\\xPacks\\@xpack-dev-tools\\${props.permalinkName}\\14.2.1-1.1.1\\.content\\bin\\${props.programName}.exe --version
 ${props.branding}14.2.1
 `} </CodeBlock>
 
@@ -25,7 +25,7 @@ ${props.branding}14.2.1
 <TabItem value="macos" label="macOS">
 
 <CodeBlock language="console"> {
-`% ~/Library/xPacks/@xpack-dev-tools/${props.shortName}/14.2.1-1.1.1/.content/bin/${props.programName} --version
+`% ~/Library/xPacks/@xpack-dev-tools/${props.permalinkName}/14.2.1-1.1.1/.content/bin/${props.programName} --version
 ${props.branding}14.2.1
 `} </CodeBlock>
 
@@ -34,7 +34,7 @@ ${props.branding}14.2.1
 <TabItem value="linux" label="GNU/Linux">
 
 <CodeBlock language="console"> {
-`$ ~/.local/xPacks/@xpack-dev-tools/${props.shortName}/14.2.1-1.1.1/.content/bin/${props.programName} --version
+`$ ~/.local/xPacks/@xpack-dev-tools/${props.permalinkName}/14.2.1-1.1.1/.content/bin/${props.programName} --version
 ${props.branding}14.2.1
 `} </CodeBlock>
 
