@@ -154,7 +154,10 @@ build*/
 Thumbs.db
 .DS_Store
 
+tests/top
+
 website/.docusaurus
 website/build
+website/html
 
 # ----- end -----

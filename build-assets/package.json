@@ -13,14 +13,14 @@
   "xpack": {
     "minimumXpmRequired": "0.20.5",
     "devDependencies": {
-      "@xpack-dev-tools/xbb-helper": "^3.1.8"
+      "@xpack-dev-tools/xbb-helper": "^3.1.13"
     },
     "properties": {
       "platforms": "all",
       "buildFolderRelativePath": "{{'build' | path_join: configuration.name | to_filename | downcase}}",
       "buildFolderRelativePathPosix": "{{'build' | path_posix_join: configuration.name | downcase}}",
       "commandBashBuild": "bash {{properties.dbg}} scripts/build.sh --target {{configuration.name}} --build-folder {{properties.buildFolderRelativePathPosix}}",
-      "xpm-version": "0.18.0",
+      "xpm-version": "0.20.5",
       "xpm-install-loglevel": "info",
       "dbg": ""
     },

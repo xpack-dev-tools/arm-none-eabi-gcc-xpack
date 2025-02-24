@@ -27,8 +27,6 @@
 # -----------------------------------------------------------------------------
 
 
-
-
 name: 'Build xPack GNU Arm Embedded GCC linux-arm64'
 
 on:
@@ -68,22 +66,10 @@ on:
         default: 'xpack-development'
 
 jobs:
-
-
-
-
-
-
-
-
-
-
   linux-arm64-build:
     name: 'linux-arm64 arm-none-eabi-gcc ${{github.event.inputs.version}} build'
     timeout-minutes: 2880 # 2 days
     runs-on: [self-hosted, linux, arm64, xbbla, xbblax]
-    container:
-      image: ilegeul/debian:arm64v8-10-xbb-v6.0.0
     defaults:
       run:
         shell: bash
@@ -116,37 +102,14 @@ jobs:
           npm install --location=global xpm@${{github.event.inputs.xpm_version}}
           xpm --version
 
-      - name: 'Install project dependencies'
-        timeout-minutes: 1440
-        run: xpm install --loglevel ${{github.event.inputs.xpm_install_loglevel}} ${{github.event.inputs.xpm_install_options}} -C build-assets
-
       - name: 'Build linux-arm64 binaries'
         timeout-minutes: 1440
         run: |
-          xpm install --config linux-arm64 --loglevel ${{github.event.inputs.xpm_install_loglevel}} ${{github.event.inputs.xpm_install_options}} -C build-assets
-          xpm run build --config linux-arm64 -C build-assets
-
-  linux-arm64-upload:
-    name: 'linux-arm64 arm-none-eabi-gcc ${{github.event.inputs.version}} upload'
-    timeout-minutes: 2880 # 2 days
-    runs-on: [self-hosted, linux, arm64, xbbla, xbblax]
-    container:
-    defaults:
-      run:
-        shell: bash
-    needs: [linux-arm64-build]
-
-    steps:
-      - name: 'Show environment'
-        run: |
-          uname -a
-          lsb_release -sd
-          echo "whoami: $(whoami)"
-          echo "pwd: $(pwd)"
-          echo "node: $(node --version)"
-          echo "npm: $(npm --version)"
-          ls -lLA
-          env | sort | grep -E '^[^ \t]+='
+          xpm install --loglevel ${{github.event.inputs.xpm_install_loglevel}} ${{github.event.inputs.xpm_install_options}} -C build-assets
+          xpm run docker-prepare --config linux-arm64 --loglevel ${{github.event.inputs.xpm_install_loglevel}} ${{github.event.inputs.xpm_install_options}} -C build-assets
+          xpm run docker-build --config linux-arm64 -C build-assets
+          ls -l build-assets/build/linux-arm64/application
+          ls -l build-assets/build/linux-arm64/deploy
 
       - name: Upload platform artefacts
         uses: actions/upload-artifact@v4
@@ -181,8 +144,8 @@ jobs:
 
   linux-arm64-test:
     name: 'linux-arm64 arm-none-eabi-gcc ${{github.event.inputs.version}} test'
-    runs-on: [self-hosted, linux, arm64, xbbla, xbblax]
-    needs: [linux-arm64-upload]
+    runs-on: ubuntu-24.04-arm
+    needs: [linux-arm64-build]
 
     steps:
       - name: 'Show environment'
@@ -193,11 +156,6 @@ jobs:
           echo "pwd: $(pwd)"
           ls -lLA
           env | sort | grep -E '^[^ \t]+='
-
-      - name: 'Clean working area' # Mandatory for self-hosted runners.
-        run: |
-          chmod -Rf a+w * || true
-          rm -rf * .git*
 
       # https://github.com/actions/checkout
       - name: 'Checkout project'
@@ -213,11 +171,5 @@ jobs:
           ref: ${{github.event.inputs.helper-git-ref}}
           fetch-depth: 3
 
-      - name: 'Run ${{github.event.inputs.version}} docker test'
-        uses: docker://node:lts-slim # Currently based on debian:12-slim
-        with:
-          entrypoint: /bin/bash
-          args: /github/workspace/build-assets/scripts/test.sh --image debian --version ${{github.event.inputs.version}} --base-url pre-release
-
-
-
+      - name: 'Run ${{github.event.inputs.version}} native test'
+        run: bash build-assets/scripts/test.sh --image github-actions-ubuntu-latest --version ${{github.event.inputs.version}} --base-url pre-release
