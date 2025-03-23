@@ -25,6 +25,12 @@
     "generate-website-blog-post": "bash node_modules/@xpack/docusaurus-template-liquid/maintenance-scripts/generate-blog-post.sh --xpack-dev-tools",
     "generate-dependencies-details": "bash node_modules/@xpack/docusaurus-template-liquid/maintenance-scripts/generate-dependencies-details.sh --xpack-dev-tools"
   },
+  "author": {
+    "name": "Liviu Ionescu",
+    "email": "ilg@livius.net",
+    "url": "https://github.com/ilg-ul"
+  },
+  "license": "MIT",
   "dependencies": {
     "@docusaurus/core": "3.6.3",
     "@docusaurus/plugin-client-redirects": "3.6.3",
