@@ -55,6 +55,7 @@ tests/
 README-*.md
 LICENSE-*
 !LICENSE-XPACK
+!LICENSE-liquid
 CONTRIBUTING**
 NOTES.md
 
@@ -68,7 +69,6 @@ lib/**/*.ts
 **/tsconfig*.json
 typedoc.json
 tsconfig.tsbuildinfo
-
 src/
 xpacks/
 node_modules/
@@ -87,5 +87,6 @@ docs/
 build-assets/
 wrappers/
 extras/
+inspiration/
 
 #end

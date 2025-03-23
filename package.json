@@ -108,6 +108,7 @@
   "topConfig": {
     "descriptiveName": "GNU Arm Embedded GCC",
     "permalinkName": "arm-none-eabi-gcc",
+    "skipCiTests": "true",
     "useSelfHostedRunners": "true"
   },
   "engines": {
