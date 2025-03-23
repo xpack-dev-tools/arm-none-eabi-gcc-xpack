@@ -4,32 +4,58 @@
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 
-import CodeBlock from '@theme/CodeBlock';
-
 import customField from '@site/src/libs/customField';
 import isXpackSubversionDouble from '@site/src/libs/isXpackSubversionDouble';
 import dateYYYYMMDD from '@site/src/libs/dateYYYYMMDD';
 
-import ReleaseSchedule from '../../_shared/_release-schedule.mdx';
-import GitHubActionsDurations from '../../_shared/_github-actions-durations.mdx';
-import {developmentDurations} from '../../_shared/_development-durations.mdx';
+import ProjectReleaseSchedule from '@site/docs/_project/_release-schedule.mdx';
+import ProjectGitHubActionsDurations from '@site/docs/_project/_github-actions-durations.mdx';
+import {developmentDurations} from '@site/docs/_project/_development-durations.mdx';
 
-import PlatformNativeBuild from '../_common/_platform-native-build.mdx';
-import PlatformDockerBuild from '../_common/_platform-docker-build.mdx';
-import GenerateTopCommons from '../_common/_generate-top-commons.mdx';
+import CommonGetProjectSources from '@site/docs/_common/_get-project-sources.mdx';
+import CommonGetHelperSources from '@site/docs/_common/_get-helper-sources-details.mdx';
+import CommonGenerateTopCommons from '@site/docs/_common/_generate-top-commons.mdx';
+import CommonGenerateWebsiteCommons from '@site/docs/_common/_generate-website-commons.mdx';
+import CommonPublishWebsite from '@site/docs/_common/_publish-website.mdx';
+import CommonBuildWebsiteLocally from '@site/docs/_common/_build-website-locally.mdx';
 
-import MoreRepos from '../_project/_more-repos.mdx';
-import CheckUpstreamRelease from '../_project/_check-upstream-release.mdx';
-import UpdateVersionSpecific from '../_project/_update-version-specific.mdx';
-import MoreTests from '../_project/_more-tests.mdx';
-import ShareCustom from '../_project/_share-custom.mdx';
-import FirstDevelopmentRun from '../_project/_first-development-run.mdx';
-import FirstProductionRun from '../_project/_first-production-run.mdx';
-import Patches from '../_project/_patches.mdx';
+import CommonStartLocalWebServer from '@site/docs/_common/_start-local-web-server.mdx';
+
+import CommonCheckGit from '../_common/_check-git.mdx';
+import CommonIncreaseVersion from '../_common/_increase-version.mdx';
+import CommonUpdateWebsiteConfig from '../_common/_update-website-config.mdx';
+
+import CommonFixOpenIssues from '../_common/_fix-open-issues.mdx';
+import CommonUpdateChangelog from '../_common/_update-changelog.mdx';
+import CommonCloseOpenIssues from '../_common/_close-open-issues.mdx';
+import CommonUpdateMainBranch from '../_common/_update-main-branch.mdx';
+import CommonPrepareNewBlogPost from '../_common/_prepare-new-blog-post.mdx'
+import CommonTagNpmLatest from '../_common/_tag-npm-latest.mdx';
+import CommonPrepareRelease from '../_common/_prepare-release.mdx'
+import CommonPublishRelease from '../_common/_publish-release.mdx';
+import CommonSetNewVersion from '../_common/_set-new-version.mdx';
+
+import CommonShareOnTwitter from '../_common/_share-on-twitter.mdx'
+import CommonAnalytics from '../_common/_analytics.mdx';
+
+import CommonPlatformNativeBuild from '../_common/_platform-native-build.mdx';
+import CommonPlatformDockerBuild from '../_common/_platform-docker-build.mdx';
+
+import ProjectMoreRepos from '../_project/_more-repos.mdx';
+import ProjectCheckUpstreamRelease from '../_project/_check-upstream-release.mdx';
+import ProjectUpdateVersionSpecific from '../_project/_update-version-specific.mdx';
+
+import ProjectMoreTests from '../_project/_more-tests.mdx';
+import ProjectShareCustom from '../_project/_share-custom.mdx';
+import ProjectFirstDevelopmentRun from '../_project/_first-development-run.mdx';
+import ProjectFirstProductionRun from '../_project/_first-production-run.mdx';
+import ProjectPatches from '../_project/_patches.mdx';
 
 {/* ------------------------------------------------------------------------ */}
 
 ## Prerequisites
+
+**@xpack-dev-tools/arm-none-eabi-gcc** is an xpm package that packs platform specific archives, built with the [xPack Build Box (XBB)](https://xpack.github.io/xpack-build-box/).
 
 The build scripts run on GNU/Linux and macOS.
 The Windows binaries are
@@ -39,68 +65,15 @@ For details on installing the prerequisites, please read the
 [Build Prerequisites](https://xpack-dev-tools.github.io/docs/developer/install/prerequisites/)
 page.
 
-## Get project sources
+<CommonGetProjectSources />
 
-The project is hosted on GitHub:
+<CommonGetHelperSources helperOrganizationName="xpack-dev-tools"  helperProjectName="xbb-helper-xpack" helperBranchName="xpack-development" />
 
-- https://github.com/xpack-dev-tools/arm-none-eabi-gcc-xpack.git
+<ProjectMoreRepos/>
 
-To clone the **stable** branch (`xpack`), run the following commands in a
-terminal (on Windows use the _Git Bash_ console):
+<ProjectReleaseSchedule/>
 
-```sh
-rm -rf ~/Work/xpack-dev-tools/arm-none-eabi-gcc-xpack.git && \
-git clone https://github.com/xpack-dev-tools/arm-none-eabi-gcc-xpack.git \
-  ~/Work/xpack-dev-tools/arm-none-eabi-gcc-xpack.git
-```
-
-For **development** purposes, clone the `xpack-development` branch:
-
-```sh
-rm -rf ~/Work/xpack-dev-tools/arm-none-eabi-gcc-xpack.git && \
-mkdir -p ~/Work/xpack-dev-tools && \
-git clone \
-  --branch xpack-development \
-  https://github.com/xpack-dev-tools/arm-none-eabi-gcc-xpack.git \
-  ~/Work/xpack-dev-tools/arm-none-eabi-gcc-xpack.git
-```
-
-Or, if the repo was already cloned:
-
-```sh
-git -C ~/Work/xpack-dev-tools/arm-none-eabi-gcc-xpack.git pull
-```
-
-## Get the writable helper sources
-
-The project has a dependency to a common **helper**, that is
-normally installed as a read-only dependency; for **development
-purposes**, to be able to make changes to the scripts located inside the helper,
-clone the `xpack-development` branch and link it to
-the user global xPacks store:
-
-```sh
-rm -rf ~/Work/xpack-dev-tools/xbb-helper-xpack.git && \
-mkdir -p ~/Work/xpack-dev-tools && \
-git clone \
-  --branch xpack-development \
-  https://github.com/xpack-dev-tools/xbb-helper-xpack.git \
-  ~/Work/xpack-dev-tools/xbb-helper-xpack.git && \
-xpm link -C ~/Work/xpack-dev-tools/xbb-helper-xpack.git
-```
-
-Or, if the repo was already cloned:
-
-```sh
-git -C ~/Work/xpack-dev-tools/xbb-helper-xpack.git pull
-xpm link -C ~/Work/xpack-dev-tools/xbb-helper-xpack.git
-```
-
-<MoreRepos/>
-
-<ReleaseSchedule/>
-
-## Prepare the new releases
+## Prepare a new release
 
 Before starting the build, perform some checks and tweaks.
 
@@ -113,116 +86,43 @@ Git repo.
 To download them on a new machine, clone the `xpack-development` branch,
 as seen above.
 
-### Check Git
-
-In the `xpack-dev-tools/arm-none-eabi-gcc-xpack` Git repo:
-
-- switch to the `xpack-development` branch
-- pull new changes
-- if necessary, **merge** the `xpack` branch
-- if necessary, **merge** the `website` branch
-
-:::caution
-
-This is really important, otherwise the next steps will build again the previous release!
-
-:::
-
-The `xpack` branch should be unchanged since the previous release
-and will be updated when the new release is out.
+<CommonCheckGit />
 
 ### Update helper & other dependencies
 
 Check the latest versions at https://github.com/xpack-dev-tools/ and
 update the dependencies in `build-assets/package.json`.
 
-<CheckUpstreamRelease/>
+<ProjectCheckUpstreamRelease/>
 
-### Increase the version and update it in the top `package.json`
+<CommonIncreaseVersion />
 
-- determine the version (like <code>14.2.1-1.1.1</code>)
-- update the version in top `package.json`
-- use the new version, suffixed by `.pre`,
-like <code>14.2.1-1.1.1.pre</code>.
+### Update VERSION
 
-### Increase the version and update VERSION
-
-Determine the version (like <code>14.2.1-1.1</code>)
-and update the `build-assets/scripts/VERSION` file; the format
+Update the `build-assets/scripts/VERSION` file; the format
 is <code>14.2.1-1.1</code>.
 {isXpackSubversionDouble() ?
 'The fourth & fifth numbers are the xPack release number of this version. A sixth' :
 'The fourth number is the xPack release number of this version. A fifth'} number will be added to the version in `package.json` when the package is published to the `npm` server.
 
-### Update the `websiteConfig` in `website/package.json` (if necessary)
+<CommonUpdateWebsiteConfig />
 
-- update the release specific properties (if any)
+<CommonGenerateTopCommons />
 
-<GenerateTopCommons />
-
-### Update the website commons
-
-Run the **generate-website-commons** npm script from `website/package.json`.
+<CommonGenerateWebsiteCommons />
 
 ### Commit the website changes
 
 - **stage** `website` and top `README.md`
 - **commit** with the message _**website: re-generate commons**_
 
-### Start the local web server
+<CommonStartLocalWebServer />
 
-Execute the npm script **clean** then **start** in the website sub-project,
-or run the following in a terminal:
+<ProjectUpdateVersionSpecific/>
 
-```sh
-(cd ~/Work/xpack-dev-tools/xbb-helper-xpack.git/website; npm run clean; npm run start)
-```
+<CommonFixOpenIssues />
 
-Navigate to the **Maintainer Info** page,
-the **[Update the version specific code](http://localhost:3000/arm-none-eabi-gcc-xpack/docs/maintainer/#update-the-version-specific-code)** section.
-
-<UpdateVersionSpecific/>
-
-### Fix possible open issues
-
-Check GitHub issues and pull requests:
-
-- https://github.com/xpack-dev-tools/arm-none-eabi-gcc-xpack/issues
-- https://github.com/xpack-dev-tools/arm-none-eabi-gcc-xpack/pulls
-
-and fix them; assign them to a milestone (like <code>14.2.1-1.1</code>).
-
-### Update `CHANGELOG.md`
-
-- open the `CHANGELOG.md` file
-- check if all previous fixed issues are in
-- check the latest commits `xpm run git-log`; if necessary, copy/paste lines,
-  group by dates and edit them using the below regular expressions
-- to turn the dates into headings, change from:
-  ```txt
-
-
-  ([0-9][0-9][0-9][0-9]-[0-9][0-9]-[0-9][0-9]) [*]
-  ```
-  to:
-  ```txt
-
-
-  ## $1
-
-  *
-  ```
-- to remove the rest of the dates, change from:
-  ```txt
-  ^[0-9][0-9][0-9][0-9]-[0-9][0-9]-[0-9][0-9] [*]
-  ```
-  to:
-  ```txt
-  *
-  ```
-- add a new entry like _**\* v14.2.1-1.1 prepared**_
-- **commit** with the message _**prepare v14.2.1-1.1**_
-
+<CommonUpdateChangelog />
 
 ### Push the changes to the `xpack-development` branch
 
@@ -242,7 +142,7 @@ The builds currently run on 4 dedicated machines (x64 GNU/Linux, x64 macOS, arm6
 
 Before the real build, run test/development builds on all platforms.
 
-<FirstDevelopmentRun/>
+<ProjectFirstDevelopmentRun/>
 
 ### Visual Studio Code extension
 
@@ -250,7 +150,7 @@ All actions are defined as **xpm/xPack actions** and can be conveniently
 triggered via the VS Code graphical interface, using the
 [xPack C/C++ Managed Build Tools extension](https://marketplace.visualstudio.com/items?itemName=ilg-vscode.xpack).
 
-<Patches/>
+<ProjectPatches/>
 
 ### Restart the docker daemons
 
@@ -288,7 +188,7 @@ export XBB_ENVIRONMENT_SKIP_CHECKS="y"
 ```
 
 ```sh
-rm -f ~/Work/xpack-dev-tools/arm-none-eabi-gcc-xpack.git/build-assets/package-lock.json
+rm -rf ~/Work/xpack-dev-tools/arm-none-eabi-gcc-xpack.git/build-assets/package-lock.json
 git -C ~/Work/xpack-dev-tools/arm-none-eabi-gcc-xpack.git pull
 
 xpm run install -C ~/Work/xpack-dev-tools/arm-none-eabi-gcc-xpack.git/build-assets
@@ -321,7 +221,7 @@ start a VS Code remote session, or connect with a terminal:
 caffeinate ssh xbbmi
 ```
 
-<PlatformNativeBuild platform="darwin-x64"/>
+<CommonPlatformNativeBuild platform="darwin-x64"/>
 
 ### Build the arm64 macOS binaries
 
@@ -333,7 +233,7 @@ start a VS Code remote session, or connect with a terminal:
 caffeinate ssh xbbma
 ```
 
-<PlatformNativeBuild platform="darwin-arm64"/>
+<CommonPlatformNativeBuild platform="darwin-arm64"/>
 
 ### Build the x64 GNU/Linux binaries
 
@@ -344,7 +244,7 @@ start a VS Code remote session, or connect with a terminal:
 caffeinate ssh xbbli
 ```
 
-<PlatformDockerBuild platform="linux-x64"/>
+<CommonPlatformDockerBuild platform="linux-x64"/>
 
 ### Build the x64 Windows binaries
 
@@ -355,7 +255,7 @@ start a VS Code remote session, or connect with a terminal:
 caffeinate ssh xbbli
 ```
 
-<PlatformDockerBuild platform="win32-x64"/>
+<CommonPlatformDockerBuild platform="win32-x64"/>
 
 ### Build the arm64 GNU/Linux binaries
 
@@ -366,7 +266,7 @@ start a VS Code remote session, or connect with a terminal:
 caffeinate ssh ampere
 ```
 
-<PlatformDockerBuild platform="linux-arm64"/>
+<CommonPlatformDockerBuild platform="linux-arm64"/>
 
 ### Update the durations of the development builds
 
@@ -515,7 +415,7 @@ Publish a new release of the helper on **npmjs**.
 In `templates/_xpack-dev-tools/build-assets/package-merge-liquid.json`, update the reference
 to `"@xpack-dev-tools/xbb-helper":`.
 
-<GenerateTopCommons />
+<CommonGenerateTopCommons />
 
 ### Check for disk space
 
@@ -575,7 +475,7 @@ the build may proceed with the previous version.
 
 The helper `xpack` branch must be updated and the npm package published.
 
-<FirstProductionRun/>
+<ProjectFirstProductionRun/>
 
 ### Manually trigger the build GitHub Actions
 
@@ -607,7 +507,7 @@ These commands use the `xpack-development` branch of this repo.
 
 ### Durations & resulting binaries
 
-<GitHubActionsDurations/>
+<ProjectGitHubActionsDurations/>
 
 The workflow results and logs are available from the
 [GitHub Actions](https://github.com/xpack-dev-tools/arm-none-eabi-gcc-xpack/actions) page.
@@ -692,7 +592,7 @@ On macOS, remove the `com.apple.quarantine` flag:
 xattr -cr ${HOME}/Downloads/xpack-*
 ```
 
-<MoreTests/>
+<ProjectMoreTests/>
 
 ## Publish the release
 
@@ -730,22 +630,7 @@ watching the arm-none-eabi-gcc-xpack project.
 
 :::
 
-### Prepare a new blog post
-
-- check and possibly update the `website/blog/_templates/blog-post-release-part-[12]-liquid.md`
-- run the **generate-website-blog-post** xpm action;
-this will add a file in the `website/blog` folder:
-  ```sh
-  xpm run generate-website-blog-post -C ~/Work/xpack-dev-tools/arm-none-eabi-gcc-xpack.git/build-assets
-  ```
-- edit the `description` property in the post front matter
-- select the correct summary (maintenance vs. new release)
-- add entries in the **Bug fixes**; use the following syntax
-  ```
-  - [[#N](https://github.com/xpack-dev-tools/arm-none-eabi-gcc-xpack/issues/N)]:
-  ```
-- copy/paste the folders hierarchies from the install guide
-- **commit** with the message _**website: blog post release 14.2.1-1.1 published**_
+<CommonPrepareNewBlogPost />
 
 ### Update the web install page
 
@@ -777,33 +662,11 @@ this will add a file in the `website/blog` folder:
 - **commit** all changes with the message
   _**package.json: update urls for 14.2.1-1.1.1 release**_
 
-### Publish on the npmjs.com server
+<CommonPrepareRelease />
 
-- select the `xpack-development` branch
-- check the latest commits `xpm run git-log`
-- update `CHANGELOG.md`, add a line like _**\* v14.2.1-1.1.1 published on npmjs.com**_
-- **commit** with the message _**CHANGELOG: publish npm v14.2.1-1.1.1**_
-- `npm pack` and check the content of the archive, which should list
-  only the `package.json`, the `README.md`, `LICENSE` and `CHANGELOG.md`;
-  possibly adjust `.npmignore`
-- configure the version; the first 4 numbers are the same as the
-  GitHub release; the fifth number is the npm specific version:
-  ```sh
-  npm version 14.2.1-1.1.1
-  ```
-- the commits and the tag should have been pushed by the `postversion` script;
-  if not, push them with `git push origin --tags` to GitHub
-- publish and add the `test` tag:
-  ```sh
-  npm publish --tag test
-  ```
-- when publishing for the first time, use:
-  ```sh
-  npm publish --access public
-  ```
+<CommonSetNewVersion />
 
-After a few moments the version will be visible at
-<a href="https://www.npmjs.com/package/@xpack-dev-tools/arm-none-eabi-gcc?activeTab=versions">npmjs.com</a>.
+<CommonPublishRelease />
 
 ### Test if the binaries can be installed with xpm
 
@@ -818,71 +681,13 @@ This will install the package via `xpm install` on all supported platforms.
 The tests results are available from the
 [GitHub Actions](https://github.com/xpack-dev-tools/arm-none-eabi-gcc-xpack/actions) page.
 
-### Tag the npm package as `latest`
+<CommonTagNpmLatest />
 
-When the release is considered stable, promote it as `latest`:
+<CommonBuildWebsiteLocally />
 
-<CodeBlock language="sh"> {
-`npm dist-tag add @xpack-dev-tools/arm-none-eabi-gcc@14.2.1-1.1.1 latest
-`} </CodeBlock>
+<CommonPublishWebsite />
 
-Check the result:
-
-<CodeBlock language="sh"> {
-`npm dist-tag ls @xpack-dev-tools/arm-none-eabi-gcc
-`} </CodeBlock>
-
-In case the release proves problematic and needs to be unpublished:
-
-<CodeBlock language="sh"> {
-`npm unpublish @xpack-dev-tools/arm-none-eabi-gcc@14.2.1-1.1.1
-`} </CodeBlock>
-
-### Build the static website locally
-
-Validate the web site content in a local build via the npm `build` script:
-
-```sh
-(cd website; npm run build)
-```
-
-### Publish the website
-
-- open https://xpack-dev-tools.github.io/arm-none-eabi-gcc-xpack/docs/maintainer/#publish-the-website in a separate window
-- stop the local web server
-- select the `website` branch
-- **merge** `xpack-development` into `website`
-- **push** the `website` branch to GitHub
-  :::info
-  At this moment an automated GitHub Action will generate and publish the website.
-  :::
-- if already there from a previous run, delete the <code>web-{dateYYYYMMDD()}</code> tag, including from remote
-- add a new tag like <code>web-{dateYYYYMMDD()}</code> and push it to remote
-- checkout the `xpack-development` branch
-- wait for the publish to complete
-- refresh the web page
-- the new release blog post is
-in https://xpack-dev-tools.github.io/arm-none-eabi-gcc-xpack/blog/
-- remember the post URL, since it must be used to update the release page
-and the X/Twitter announcement
-
-The `website` branch may be subsequently updated, as long as the
-version in the top `package.json` is not changed.
-
-### Update the `xpack` branch
-
-In this Git repo:
-
-- select the `xpack` branch
-- **merge** `xpack-development` into `xpack`
-- **push** the `xpack` branch to GitHub
-- checkout the `xpack-development` branch
-
-:::note
-
-Avoid further updates to the `xpack` branch until the next release.
-
-:::
+<CommonUpdateMainBranch />
 
 ### Create the final GitHub release
 
@@ -898,7 +703,7 @@ Avoid further updates to the `xpack` branch until the next release.
 
 - https://sourceforge.net/projects/arm-none-eabi-gcc-xpack/files/
 
-## Cleanups
+## Clean-ups
 
 ### Remove the pre-release binaries
 
@@ -918,40 +723,10 @@ This will remove the build folders on all self-hosted runners.
 The results are available from the
 [GitHub Actions](https://github.com/xpack-dev-tools/arm-none-eabi-gcc-xpack/actions) page.
 
-### Close possible open issues
+<CommonCloseOpenIssues />
 
-Check GitHub issues and pull requests:
+<CommonShareOnTwitter />
 
-- https://github.com/xpack-dev-tools/arm-none-eabi-gcc-xpack/issues
-- https://github.com/xpack-dev-tools/arm-none-eabi-gcc-xpack/pulls
+<ProjectShareCustom/>
 
-Close those that were addressed.
-
-## Share on Twitter
-
-- in a separate browser windows, open [X/Twitter](https://twitter.com)
-- using the **`@xpack_project`** account
-- paste the release name like _**xPack GNU Arm Embedded GCC v14.2.1-1.1 released**_
-- paste the link to the blog post
-  [release](https://github.com/xpack-dev-tools/arm-none-eabi-gcc-xpack/releases)
-- click the **Tweet** button
-
-<ShareCustom/>
-
-## Analytics
-
-- GitHub [`xpack-dev-tools/arm-none-eabi-gcc-xpack`](https://github.com/xpack-dev-tools/arm-none-eabi-gcc-xpack/) repo
-  - latest xPack release
-[![Github All Releases](https://img.shields.io/github/downloads/xpack-dev-tools/arm-none-eabi-gcc-xpack/latest/total)](https://github.com/xpack-dev-tools/arm-none-eabi-gcc-xpack/releases)
-  - all xPack releases [![Github All Releases](https://img.shields.io/github/downloads/xpack-dev-tools/arm-none-eabi-gcc-xpack/total)](https://github.com/xpack-dev-tools/arm-none-eabi-gcc-xpack/releases)
-  - previous GNU MCU Eclipse all releases [![Github All Releases](https://img.shields.io/github/downloads/gnu-mcu-eclipse/arm-none-eabi-gcc/total)](https://github.com/gnu-mcu-eclipse/arm-none-eabi-gcc/releases)
-  - [individual file counters](https://somsubhra.github.io/github-release-stats/?username=xpack-dev-tools&repository=arm-none-eabi-gcc-xpack) (grouped by release)
-- npmjs.com [`@xpack-dev-tools/arm-none-eabi-gcc`](https://www.npmjs.com/package/@xpack-dev-tools/arm-none-eabi-gcc/) xPack
-  - latest release, per month
-[![NPM Version](https://img.shields.io/npm/v/%40xpack-dev-tools%2Farm-none-eabi-gcc?color=green)](https://www.npmjs.com/package/@xpack-dev-tools/arm-none-eabi-gcc/)
-[![NPM Downloads](https://img.shields.io/npm/dm/%40xpack-dev-tools%2Farm-none-eabi-gcc)](https://www.npmjs.com/package/@xpack-dev-tools/arm-none-eabi-gcc/)
-  - all releases [![NPM Downloads](https://img.shields.io/npm/dt/%40xpack-dev-tools%2Farm-none-eabi-gcc)](https://www.npmjs.com/package/@xpack-dev-tools/arm-none-eabi-gcc/)
-
-Credit to [Shields IO](https://shields.io) for the badges and to
-[Somsubhra/github-release-stats](https://github.com/Somsubhra/github-release-stats)
-for the individual file counters.
+<CommonAnalytics />

@@ -1,0 +1,48 @@
+{/* DO NOT EDIT! */}
+{/* Automatically generated from docusaurus-template-liquid/templates/docusaurus. */}
+
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+import CodeBlock from '@theme/CodeBlock';
+
+import LinksVsForwarders from '@site/src/components/LinksVsForwarders';
+
+import CommonXpmCleanUps from '@site/docs/_common/_xpm-clean-ups.mdx';
+
+{/* ------------------------------------------------------------------------ */}
+
+### Uninstall
+
+The xpm binaries do not use any form of system installer; instead they
+are distributed as
+portable (<code>.zip</code> or <code>.tar.gz</code>) archives;
+therefore they do not require to run any uninstaller; simply removing the
+links and possibly the user's global xPacks store folder and
+the user xPack cache folder is enough.
+
+To remove the links created by
+**xpm** in the current project,
+go to the project folder:
+
+```sh
+cd my-project
+```
+
+and ask **xpm** to uninstall the package:
+
+<CodeBlock language="sh"> {
+`xpm uninstall @xpack-dev-tools/arm-none-eabi-gcc --verbose
+`} </CodeBlock>
+
+To completely remove the package from the user's global xPacks store:
+
+<CodeBlock language="sh"> {
+`xpm uninstall --global @xpack-dev-tools/arm-none-eabi-gcc --verbose
+`} </CodeBlock>
+
+<details>
+<summary>Clean-ups</summary>
+
+<CommonXpmCleanUps />
+
+</details>

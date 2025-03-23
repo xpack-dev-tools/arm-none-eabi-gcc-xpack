@@ -1,0 +1,46 @@
+{/* DO NOT EDIT! */}
+{/* Automatically generated from docusaurus-template-liquid/templates/docusaurus. */}
+
+import CodeBlock from '@theme/CodeBlock';
+
+{/* ------------------------------------------------------------------------ */}
+
+<details>
+<summary>Reproducibility and `devDependencies`</summary>
+
+To ensure reproducibility, it is essential for each project to always
+use the exact desired versions of the required tools, regardless of the
+tools installed in the system.
+
+To achieve this goal, **xpm** records all locally installed binary packages
+as development dependencies in the project `package.json` file.
+
+The result looks like this:
+
+<CodeBlock language="json"> {
+`  "xpack": {
+    "minimumXpmRequired": "0.20.7",
+    "dependencies": {},
+    "devDependencies": {
+      "@xpack-dev-tools/arm-none-eabi-gcc": {
+        "specifier": "14.2.1-1.1.1",
+        "local": "link",
+        "platforms": "all"
+      }
+    },
+    "properties": {},
+    "actions": {},
+    "buildConfigurations": {}
+  }
+`} </CodeBlock>
+
+If the `package.json` is saved in the revision system, the above
+definition acts as a hard reference to the specific version of
+the xPack GNU Arm Embedded GCC.
+
+After cloning the project into a different location, the command `xpm install`
+can be used to install all development dependencies.
+
+This is particularly useful for CI/CD environments.
+
+</details>

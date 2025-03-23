@@ -6,13 +6,14 @@
 
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
-import CodeBlock from '@theme/CodeBlock';
 
-import PlatformNativeSection from '../_common/_platform-native-section.mdx';
-import PlatformDockerSection from '../_common/_platform-docker-section.mdx';
+import CommonGetProjectSources from '@site/docs/_common/_get-project-sources.mdx';
 
-import OtherRepositories from '../_project/_other-repositories.mdx';
-import More from '../_project/_more.mdx';
+import CommonPlatformNativeSection from '../_common/_platform-native-section.mdx';
+import CommonPlatformDockerSection from '../_common/_platform-docker-section.mdx';
+
+import ProjectOtherRepositories from '../_project/_other-repositories.mdx';
+import ProjectMore from '../_project/_more.mdx';
 
 {/* ------------------------------------------------------------------------ */}
 
@@ -174,63 +175,7 @@ For details on installing the prerequisites, please read the
 [Build Prerequisites](https://xpack-dev-tools.github.io/docs/developer/install/prerequisites/)
 page.
 
-## Get project sources
-
-The project is hosted on GitHub:
-
-- https://github.com/xpack-dev-tools/arm-none-eabi-gcc-xpack.git
-
-<details>
-<summary>Branches</summary>
-
-Apart from the unused `master` branch, there are three active branches:
-
-- `xpack`, with the latest stable version (default)
-- `xpack-development`, with the current development version
-- `website`, with the current content of the website
-
-All development is done in the `xpack-development` branch, and contributions via
-Pull Requests should be directed to this branch.
-
-When new releases are published, the `xpack-development` branch is merged
-into `xpack`.
-
-Pushes to the `website` branch trigger a GitHub Action to generate
-and publish the project web site.
-
-</details>
-
-To clone the stable branch (`xpack`), run the following commands in a
-terminal (on Windows use the _Git Bash_ console):
-
-```sh
-rm -rf ~/Work/xpack-dev-tools/arm-none-eabi-gcc-xpack.git && \
-git clone https://github.com/xpack-dev-tools/arm-none-eabi-gcc-xpack.git \
-  ~/Work/xpack-dev-tools/arm-none-eabi-gcc-xpack.git
-```
-
-<details>
-<summary>For development purposes, clone the `xpack-development` branch.</summary>
-
-```sh
-rm -rf ~/Work/xpack-dev-tools/arm-none-eabi-gcc-xpack.git && \
-mkdir -p ~/Work/xpack-dev-tools && \
-git clone \
-  --branch xpack-development \
-  https://github.com/xpack-dev-tools/arm-none-eabi-gcc-xpack.git \
-  ~/Work/xpack-dev-tools/arm-none-eabi-gcc-xpack.git
-```
-
-</details>
-
-:::tip
-
-To contribute Pull Requests, fork the project and be sure the **Copy the master branch only** is **disabled**.
-
-Use the `xpack-development` branch and be sure you contribute the
-Pull Requests back to the `xpack-development` branch.
-
-:::
+<CommonGetProjectSources />
 
 <details>
 <summary>Get the writable helper sources (optional, for development purposes)</summary>
@@ -239,7 +184,7 @@ The project has a dependency to a common **helper**, that is
 normally installed as a read-only dependency; **for development
 purposes**, to be able to make changes to the scripts located inside the helper,
 clone the `xpack-development` branch and link it to
-the user global xPacks store:
+the user's global xPacks store:
 
 ```sh
 rm -rf ~/Work/xpack-dev-tools/xbb-helper-xpack.git && \
@@ -257,7 +202,7 @@ For more details the how a writable helper can be used via
 
 </details>
 
-<OtherRepositories/>
+<ProjectOtherRepositories/>
 
 ## How to build
 
@@ -285,23 +230,23 @@ git -C ~/Work/xpack-dev-tools/xbb-helper-xpack.git pull
 <Tabs groupId="platforms">
 
 <TabItem value="win32-x64" label="Windows" default>
-<PlatformDockerSection platform="win32-x64"/>
+<CommonPlatformDockerSection platform="win32-x64"/>
 </TabItem>
 
 <TabItem value="darwin-x64" label="macOS x64" default>
-<PlatformNativeSection platform="darwin-x64"/>
+<CommonPlatformNativeSection platform="darwin-x64"/>
 </TabItem>
 
 <TabItem value="darwin-arm64" label="macOS arm64" default>
-<PlatformNativeSection platform="darwin-arm64"/>
+<CommonPlatformNativeSection platform="darwin-arm64"/>
 </TabItem>
 
 <TabItem value="linux-x64" label="GNU/Linux x64" default>
-<PlatformDockerSection platform="linux-x64"/>
+<CommonPlatformDockerSection platform="linux-x64"/>
 </TabItem>
 
 <TabItem value="linux-arm64" label="GNU/Linux arm64" default>
-<PlatformDockerSection platform="linux-arm64"/>
+<CommonPlatformDockerSection platform="linux-arm64"/>
 </TabItem>
 
 </Tabs>
@@ -328,4 +273,4 @@ locations (like
 https://github.com/xpack-dev-tools/files-cache/tree/master/libs),
 place them in the XBB cache (`Work/cache`) and restart the build.
 
-<More/>
+<ProjectMore/>

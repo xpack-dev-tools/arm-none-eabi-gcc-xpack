@@ -1,0 +1,18 @@
+{/* DO NOT EDIT! */}
+{/* Automatically generated from docusaurus-template-liquid/templates/docusaurus. */}
+
+{/* ------------------------------------------------------------------------ */}
+
+### Prepare the release
+
+
+- switch to the `xpack-development` branch
+- if there are changes, **commit** all changes into the `xpack-development` branch
+- check the latest commits `npm run git-log`
+- update `CHANGELOG.md`, add a line like _**\* v14.2.1-1.1.1 published on npmjs.com**_
+- **commit** with the message _**CHANGELOG: publish npm v14.2.1-1.1.1**_
+- check the list of files included in the npm package:
+  ```sh
+  npm run pack
+  ```
+- possibly update `.npmignore`

@@ -8,15 +8,20 @@ import Admonition from '@theme/Admonition';
 
 import LinksVsForwarders from '@site/src/components/LinksVsForwarders';
 
-import FoldersHierarchiesLinux from '../../_shared/_folders-hierarchies-linux.mdx';
-import FoldersHierarchiesWindows from '../../_shared/_folders-hierarchies-windows.mdx';
-import FoldersHierarchiesMacOS from '../../_shared/_folders-hierarchies-macos.mdx';
+import ProjectFoldersHierarchiesLinux from '@site/docs/_project/_folders-hierarchies-linux.mdx';
+import ProjectFoldersHierarchiesWindows from '@site/docs/_project/_folders-hierarchies-windows.mdx';
+import ProjectFoldersHierarchiesMacOS from '@site/docs/_project/_folders-hierarchies-macos.mdx';
 
-import AutomaticInstallQuickTest from '../_common/_automatic-install-quick-test.mdx';
-import ManualInstallQuickTest from '../_common/_manual-install-quick-test.mdx';
+import CommonXpmPackageRefresher from '../_common/_xpm-package-refresher.mdx';
+import CommonInitialiseTheProject from '../_common/_initialise-the-project.mdx';
+import CommonInstallationDetails from '../_common/_installation-details.mdx';
+import CommonReproducibilityAndDependencies from '../_common/_reproducibility-and-dependencies.mdx';
+import CommonUninstall from '../_common/_uninstall.mdx';
 
-import Miscellaneous from '../_project/_miscellaneous.mdx';
-import Testing from '../_project/_testing.mdx';
+import ProjectAutomaticInstallQuickTest from '../_project/_automatic-install-quick-test.mdx';
+import ProjectManualInstallQuickTest from '../_project/_manual-install-quick-test.mdx';
+import ProjectMiscellaneous from '../_project/_miscellaneous.mdx';
+import ProjectTesting from '../_project/_testing.mdx';
 
 {/* ------------------------------------------------------------------------ */}
 
@@ -31,25 +36,7 @@ is via **xpm** and the package available
 as <a href={`https://www.npmjs.com/package/@xpack-dev-tools/arm-none-eabi-gcc`}><code>@xpack-dev-tools/arm-none-eabi-gcc</code></a> from
 the [`npmjs.com`](https://www.npmjs.com) registry.
 
-<details>
-<summary>xpm packages (xPacks) refresher</summary>
-
-**xpm packages**, abbreviated as **xPacks**, are general-purpose,
-language-neutral software packages.
-They use **the same format as npm packages**,
-which is a collection of files/folders
-and a `package.json` file with the package metadata.
-
-**xpm** can install source and binary packages.
-Binary packages include references to regular archives with the platform
-specific binaries (such as `.tar.gz` for Unix or `.zip` for Windows).
-These archives are unpacked and links/forwarders to
-the executables are created in a `.bin` folder.
-
-For more details, please see the previous explanation in the
-[Getting Started](/docs/getting-started/#xpm-packages) page.
-
-</details>
+<CommonXpmPackageRefresher />
 
 ### Prerequisites
 
@@ -200,6 +187,8 @@ mandatory to identify the package as an **xpm package**.
 
 </details>
 
+<CommonInitialiseTheProject />
+
 ### Install into the project
 
 The next step is to install the
@@ -299,83 +288,15 @@ export PATH=<...project-path...>/xpacks/.bin:$PATH
 
 </Tabs>
 
-<details>
-<summary>Installation details</summary>
+<CommonInstallationDetails />
 
-The above `xpm install` command will do the following:
-
-* identify the platform specific archive for the latest available version
-  of GNU Arm Embedded GCC, download it into a cache and unpack
-  it into a versioned folder
-  in the **user global xPacks store** (if not already there);
-  check the output of the `xpm install` command for the actual
-  folder used on your platform;
-* create a local symbolic link
-  like <code>xpacks/@xpack-dev-tools/arm-none-eabi-gcc</code> pointing to the
-  versioned folder in the user global xPacks store
-* add links/forwarders into
-  the local `xpacks/.bin` folder, referring to the binaries in
-  <code>xpacks/@xpack-dev-tools/arm-none-eabi-gcc/.content/bin</code>;
-* add <code>@xpack-dev-tools/arm-none-eabi-gcc</code> to
-  `package.json` as a
-  development dependency; this associates a specific version of xPack GNU Arm Embedded GCC with
-  the current project (details below).
-
-:::tip
-
-The install location can be configured using the
-`XPACKS_STORE_FOLDER` environment variable; for more details please check the
-[xpm folders](https://xpack.github.io/xpm/folders/) page.
-
-:::
-
-</details>
-
-<details>
-<summary>Reproducibility and `devDependencies`</summary>
-
-To ensure reproducibility, it is essential for each project to always
-use the exact desired versions of the required tools, regardless of the
-tools installed in the system.
-
-To achieve this goal, **xpm** records all locally installed binary packages
-as development dependencies in the project `package.json` file.
-
-The result looks like this:
-
-<CodeBlock language="json"> {
-`  "xpack": {
-    "minimumXpmRequired": "0.19.1",
-    "dependencies": {},
-    "devDependencies": {
-      "@xpack-dev-tools/arm-none-eabi-gcc": {
-        "specifier": "14.2.1-1.1.1",
-        "local": "link",
-        "platforms": "all"
-      }
-    },
-    "properties": {},
-    "actions": {},
-    "buildConfigurations": {}
-  }
-`} </CodeBlock>
-
-If the `package.json` is saved in the revision system, the above
-definition acts as a hard reference to the specific version of
-**xPack GNU Arm Embedded GCC**.
-
-After cloning the project into a different location, the command `xpm install`
-can be used to install all development dependencies.
-
-This is particularly useful for CI/CD environments.
-
-</details>
+<CommonReproducibilityAndDependencies />
 
 ### Install globally
 
 For older development environments,
 it is also possible to install xPack GNU Arm Embedded GCC only globally in
-the **user global xPacks store**, without any
+the **user's global xPacks store**, without any
 local links/forwarders; it
 is the developer's responsibility to configure the path to the tools.
 
@@ -388,7 +309,7 @@ No other files are installed in any system folders or other locations.
 :::note
 
 Installing packages locally into a project always installs the
-packages in the **user global xPacks store**; subsequent attempts to
+packages in the **user's global xPacks store**; subsequent attempts to
 install the packages globally will fail with _already installed_.
 
 :::
@@ -397,7 +318,7 @@ install the packages globally will fail with _already installed_.
 <summary>PATH setup</summary>
 
 In order to access the xPack GNU Arm Embedded GCC binaries installed in
-the user global xPacks store,
+the user's global xPacks store,
 the project build configurations need a PATH adjustment:
 
 <Tabs groupId="operating-systems">
@@ -405,7 +326,7 @@ the project build configurations need a PATH adjustment:
 <TabItem value="windows" label="Windows" default>
 
 <CodeBlock language="sh"> {
-`export PATH=$HOME/AppData/Roaming/xPacks/\@pack-dev-tools/arm-none-eabi-gcc/14.2.1-1.1.1/.content/bin:$PATH
+`export PATH=$HOME/AppData/Roaming/xPacks/xpack-dev-tools/arm-none-eabi-gcc/14.2.1-1.1.1/.content/bin:$PATH
 `} </CodeBlock>
 
 :::tip
@@ -420,7 +341,7 @@ corresponding shell.
 <TabItem value="macos" label="macOS">
 
 <CodeBlock language="sh"> {
-`export PATH=$HOME/Library/xPacks/\@pack-dev-tools/arm-none-eabi-gcc/14.2.1-1.1.1/.content/bin:$PATH
+`export PATH=$HOME/Library/xPacks/xpack-dev-tools/arm-none-eabi-gcc/14.2.1-1.1.1/.content/bin:$PATH
 `} </CodeBlock>
 
 </TabItem>
@@ -428,7 +349,7 @@ corresponding shell.
 <TabItem value="linux" label="GNU/Linux">
 
 <CodeBlock language="sh"> {
-`export PATH=$HOME/.local/xPacks/@xpack-dev-tools/arm-none-eabi-gcc/14.2.1-1.1.1/.content/bin:$PATH
+`export PATH=$HOME/.local/xPacks/xpack-dev-tools/arm-none-eabi-gcc/14.2.1-1.1.1/.content/bin:$PATH
 `} </CodeBlock>
 
 </TabItem>
@@ -437,74 +358,9 @@ corresponding shell.
 
 </details>
 
-### Uninstall
+<CommonUninstall isWindows={props.isWindows} />
 
-The binaries do not use any form of installer; instead they
-are distributed as
-portable {props.isWindows ? <code>.zip</code> : <code>.tar.gz</code>} archives;
-therefore they do not require to run any uninstaller; simply removing the
-links and possibly the user global xPacks store folder and
-the user xPack cache folder is enough.
-
-To remove the <LinksVsForwarders isWindows={props.isWindows}/> created by
-**xpm** in the current project,
-go to the project folder:
-
-```sh
-cd my-project
-```
-
-and ask **xpm** to uninstall the package:
-
-<CodeBlock language="sh"> {
-`xpm uninstall @xpack-dev-tools/arm-none-eabi-gcc --verbose
-`} </CodeBlock>
-
-To completely remove the package from the user global xPacks store:
-
-<CodeBlock language="sh"> {
-`xpm uninstall --global @xpack-dev-tools/arm-none-eabi-gcc --verbose
-`} </CodeBlock>
-
-<details>
-<summary>Clean-ups</summary>
-
-For a thorough clean-up, please note that **xpm** uses only two folders:
-
-<Tabs groupId="operating-systems">
-
-<TabItem value="windows" label="Windows" default>
-
-- `%APPDATA%\Roaming\xPacks`
-- `%APPDATA%\Local\Caches\xPacks`
-
-</TabItem>
-
-<TabItem value="macos" label="macOS">
-
-- `${HOME}/Library/xPacks`
-- `${HOME}/Library/Caches/xPacks`
-
-</TabItem>
-
-<TabItem value="linux" label="GNU/Linux">
-
-- `${HOME}/.local/xPacks`
-- `${HOME}/.cache/xPacks`
-
-</TabItem>
-
-</Tabs>
-
-They can be removed at any time and space reclaimed;
-**xpm** will recreate them on new installs.
-
-However, projects linking to the user global xPacks store will fail with
-broken paths.
-
-</details>
-
-<AutomaticInstallQuickTest/>
+<ProjectAutomaticInstallQuickTest/>
 
 ## Manual install
 
@@ -633,7 +489,7 @@ and `.content` to store the unpacked archive.
 
 :::
 
-<ManualInstallQuickTest/>
+<ProjectManualInstallQuickTest/>
 
 ## Folders hierarchy
 
@@ -644,24 +500,24 @@ After install, the package creates a hierarchy of folders like the following
 
 <TabItem value="windows" label="Windows" default>
 
-<FoldersHierarchiesWindows />
+<ProjectFoldersHierarchiesWindows />
 
 </TabItem>
 
 <TabItem value="macos" label="macOS">
 
-<FoldersHierarchiesMacOS />
+<ProjectFoldersHierarchiesMacOS />
 
 </TabItem>
 
 <TabItem value="linux" label="GNU/Linux">
 
-<FoldersHierarchiesLinux />
+<ProjectFoldersHierarchiesLinux />
 
 </TabItem>
 
 </Tabs>
 
-<Miscellaneous/>
+<ProjectMiscellaneous/>
 
-<Testing/>
+<ProjectTesting/>

@@ -1,0 +1,40 @@
+{/* DO NOT EDIT! */}
+{/* Automatically generated from docusaurus-template-liquid/templates/docusaurus. */}
+
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+
+{/* ------------------------------------------------------------------------ */}
+
+For a thorough clean-up, please note that **xpm** uses only two folders:
+
+<Tabs groupId="operating-systems">
+
+<TabItem value="windows" label="Windows" default>
+
+- `%APPDATA%\Roaming\xPacks`
+- `%APPDATA%\Local\Caches\xPacks`
+
+</TabItem>
+
+<TabItem value="macos" label="macOS">
+
+- `${HOME}/Library/xPacks`
+- `${HOME}/Library/Caches/xPacks`
+
+</TabItem>
+
+<TabItem value="linux" label="GNU/Linux">
+
+- `${HOME}/.local/xPacks`
+- `${HOME}/.cache/xPacks`
+
+</TabItem>
+
+</Tabs>
+
+They can be removed at any time and space reclaimed;
+**xpm** will recreate them on new installs.
+
+However, projects linking to the user's global xPacks store will fail with
+broken paths.

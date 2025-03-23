@@ -1,0 +1,34 @@
+{/* DO NOT EDIT! */}
+{/* Automatically generated from docusaurus-template-liquid/templates/docusaurus. */}
+
+import CodeBlock from '@theme/CodeBlock';
+
+{/* ------------------------------------------------------------------------ */}
+
+### Check npm package tags
+
+Run the following command in a terminal:
+
+```sh
+npm dist-tag ls @xpack-dev-tools/arm-none-eabi-gcc
+```
+
+### Tag the npm package as `latest`
+
+When the release is considered stable, promote it as `latest`:
+
+<CodeBlock language="sh"> {
+`npm dist-tag add @xpack-dev-tools/arm-none-eabi-gcc@14.2.1-1.1.1 latest
+`} </CodeBlock>
+
+Check the result:
+
+<CodeBlock language="sh"> {
+`npm dist-tag ls @xpack-dev-tools/arm-none-eabi-gcc
+`} </CodeBlock>
+
+In case the release proves problematic and needs to be unpublished:
+
+<CodeBlock language="sh"> {
+`npm unpublish @xpack-dev-tools/arm-none-eabi-gcc@14.2.1-1.1.1
+`} </CodeBlock>

@@ -1,0 +1,39 @@
+{/* DO NOT EDIT! */}
+{/* Automatically generated from docusaurus-template-liquid/templates/docusaurus. */}
+
+import CodeBlock from '@theme/CodeBlock';
+
+{/* ------------------------------------------------------------------------ */}
+
+<details>
+<summary>Get the writable helper sources (optional, for development purposes)</summary>
+
+The project has a dependency to a common helper, that is normally installed
+as a read-only dependency; for development purposes, to be able to make
+changes to the scripts located inside the helper, clone the
+<code>{props.helperBranchName}</code> branch and link it to the
+user's global xPacks store:
+
+<CodeBlock language="sh"> {
+`rm -rf ~/Work/${props.helperOrganizationName}/${props.helperProjectName}.git && \\
+mkdir -p ~/Work/${props.helperOrganizationName} && \\
+git clone \\
+\  --branch ${props.helperBranchName} \\
+\  https://github.com/${props.helperOrganizationName}/${props.helperProjectName}.git \\
+\  ~/Work/${props.helperOrganizationName}/${props.helperProjectName}.git \
+`} </CodeBlock>
+
+Or, if the repo was already cloned:
+
+<CodeBlock language="sh"> {
+`git -C ~/Work/${props.helperOrganizationName}/${props.helperProjectName}.git pull
+`} </CodeBlock>
+
+If a writable instance of this library is needed in another project,
+add a link from the user's global xPacks store to it:
+
+<CodeBlock language="sh"> {
+`xpm link -C ~/Work/${props.helperOrganizationName}/${props.helperProjectName}.git
+`} </CodeBlock>
+
+</details>

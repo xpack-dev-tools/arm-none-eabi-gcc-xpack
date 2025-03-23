@@ -9,7 +9,7 @@
  * for any purpose is hereby granted, under the terms of the MIT license.
  *
  * If a copy of the license was not distributed with this file, it can
- * be obtained from https://opensource.org/licenses/MIT/.
+ * be obtained from https://opensource.org/licenses/MIT.
  */
 
 import React from 'react';
@@ -38,7 +38,9 @@ function HomepageHeader() {
         </span>
         </p>
         <div className={styles.installWithCopy}>
-          <InstallWithCopy>xpm install @xpack-dev-tools/arm-none-eabi-gcc@14.2.1-1.1.1 --verbose</InstallWithCopy>
+          <InstallWithCopy>xpm install @xpack-dev-tools/arm-none-eabi-gcc@14.2.1-1.1.1 --verbose
+          </InstallWithCopy>
+
         </div>
       </div>
     </header>

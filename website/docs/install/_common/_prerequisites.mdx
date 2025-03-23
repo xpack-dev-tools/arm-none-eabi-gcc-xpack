@@ -1,0 +1,128 @@
+{/* DO NOT EDIT! */}
+{/* Automatically generated from docusaurus-template-liquid/templates/docusaurus. */}
+
+{/* ------------------------------------------------------------------------ */}
+
+### Prerequisites
+
+The only requirement for an automated install is a recent
+[xpm](https://xpack.github.io/xpm/), which is a portable
+[Node.js](https://nodejs.org) command line application
+that complements [npm](https://docs.npmjs.com)
+with several extra features specific to
+**C/C++ projects**.
+
+To install **xpm**,
+follow the instructions in the
+[xpm install](https://xpack.github.io/xpm/install/) page.
+
+If already installed, it is always a good idea to update it to the
+latest version with:
+
+```sh
+npm install --location=global xpm@latest
+```
+
+:::tip
+
+Although not mandated by **xpm**, it is also a good idea to upgrade
+**npm** to the latest version, and
+**node** to a reasonably recent version (currently **npm** requires
+a **node** >=18.17.0).
+
+:::
+
+<details>
+<summary>Local installs</summary>
+
+One of the xPack design goals is to allow each project to
+choose the exact versions of the tools it requires.
+
+Similarly to **npm** being able to install specific versions of the
+JavaScript tools into each project,
+**xpm** was also designed to be able to install specific versions of the
+required binary tools locally into each project.
+
+Therefore, similarly to the way **npm** installs the JavaScript packages into
+`node_modules`, **xpm** installs the binary tools into
+`xpacks`. Here there will be separate folders with the installed
+packages, for example
+<code>xpacks/@xpack-dev-tools/arm-none-eabi-gcc</code>.
+
+Each such folder includes the `package.json` file with the
+project metadata and a sub-folder `.content` with the extracted
+binary archive. The executables are usually in `.content/bin`.
+
+:::tip
+
+On some platforms, names starting with `.` (dot) might be hidden for
+normal browsing, and seeing them requires
+separate options (like `ls -A`) or, in file browsers, to enable
+settings like **Show Hidden Files**.
+
+:::
+
+</details>
+
+<details>
+<summary>The `xpacks/.bin` folder</summary>
+
+If multiple binary packages are installed, in order to allow
+the executables to be accessed, one possible solution is to add
+all `<package>/.content/bin` folders to the `PATH`.
+
+To simplify things, **npm** employs a separate `<project>/node_modules/.bin` folder
+where it places links/forwarders
+pointing to the actual executable files.
+
+Similarly, **xpm** adds links/forwarders into
+a separate `<project>/xpacks/.bin` folder.
+
+With this setup, the project needs to prepend only this `.bin` folder
+to the `PATH`, and all the required tools are accessible
+and preferred to possible system tools.
+
+</details>
+
+<details>
+<summary>Global installs and the user's global xPacks store</summary>
+
+Given that some binary tools (such as toolchains) can be very large
+(hundreds of megabytes or more), it is impractical to keep multiple
+copies of these tools, one for each project.
+
+Instead, **xpm** installs the binary packages only once
+into a user's global xPacks store (a platform-dependent folder
+within the home folder), thereby conserving disk space when the same
+tools are used across multiple projects.
+
+In order to allow the projects to access the binary tools installed in the
+user's global xPacks store, instead of unpacking the archives in `xpacks`,
+**xpm** adds symbolic links pointing to the **user's global xPacks store**.
+
+The outcome is functionally equivalent to installing the tools into
+each project, but without the wasted disk space.
+
+:::tip
+
+It is possible to force a local install into a project
+by passing `--copy` to `xpm install`.
+
+:::
+
+if necessary, it is also possible to install packages only globally, without
+creating local links/forwarders (see below).
+
+</details>
+
+<details>
+<summary>The user xPacks cache</summary>
+
+To save download time, all archives are first stored in a
+cache, and all subsequent downloads are replaced with the
+cached content.
+
+Therefore all published archives should be read-only and
+it is not allowed to replace them at a later time.
+
+</details>

@@ -1,0 +1,35 @@
+{/* DO NOT EDIT! */}
+{/* Automatically generated from docusaurus-template-liquid/templates/docusaurus. */}
+
+{/* ------------------------------------------------------------------------ */}
+
+### Update `CHANGELOG.md`
+
+- open the `CHANGELOG.md` file
+- check if all previous fixed issues are in
+- check the latest commits `npm run git-log`; if necessary, copy/paste lines,
+  group by dates and edit them using the below regular expressions
+- to turn the dates into headings, change from:
+  ```txt
+
+
+  ([0-9][0-9][0-9][0-9]-[0-9][0-9]-[0-9][0-9]) [*]
+  ```
+  to:
+  ```txt
+
+
+  ## $1
+
+  *
+  ```
+- to remove the rest of the dates, change from:
+  ```txt
+  ^[0-9][0-9][0-9][0-9]-[0-9][0-9]-[0-9][0-9] [*]
+  ```
+  to:
+  ```txt
+  *
+  ```
+- add a new entry like _**\* v14.2.1-1.1 prepared**_
+- **commit** with the message _**prepare v14.2.1-1.1**_
