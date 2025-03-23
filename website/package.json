@@ -86,7 +86,8 @@
     "binutilsVersionMajor": "2",
     "binutilsVersionMinor": "43",
     "pythonVersion": "3.12.8",
-    "newlibVersion": "4.4.0"
+    "newlibVersion": "4.4.0",
+    "shareOnTwitter": "true"
   },
   "engines": {
     "node": ">=18.0"
