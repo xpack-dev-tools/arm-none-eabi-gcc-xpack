@@ -47,19 +47,30 @@
             name="arm-none-eabi-gcc"
             threshold=16383 # (50%)
 
-            download_sourceforge_2023 "${name}" "14.2.1-1.1"  ${threshold}
-            download_sourceforge_2023 "${name}" "13.3.1-1.1"  ${threshold}
-            download_sourceforge_2023 "${name}" "13.2.1-1.1"  ${threshold}
-            download_sourceforge_2023 "${name}" "12.3.1-1.2"  ${threshold}
-            download_sourceforge_2023 "${name}" "12.2.1-1.2"  ${threshold}
+            # 2024
+            platforms="win32-x64,linux-x64,linux-arm64,linux-arm,darwin-x64,darwin-arm64"
+            download_sourceforge "${name}" "14.2.1-1.1" ${threshold} "${platforms}"
+            download_sourceforge "${name}" "13.3.1-1.1" ${threshold} "${platforms}"
 
-            download_sourceforge_2022 "${name}" "11.3.1-1.1"  ${threshold}
-            download_sourceforge_2022 "${name}" "11.2.1-1.2"  ${threshold}
+            # 2023
+            platforms="win32-x64,linux-x64,linux-arm64,linux-arm,darwin-x64,darwin-arm64"
+            download_sourceforge "${name}" "13.2.1-1.1" ${threshold} "${platforms}"
+            download_sourceforge "${name}" "12.3.1-1.2" ${threshold} "${platforms}"
+            download_sourceforge "${name}" "12.2.1-1.2" ${threshold} "${platforms}"
 
-            download_sourceforge_2020 "${name}" "10.3.1-2.3"  ${threshold}
-            download_sourceforge_2020 "${name}" "10.2.1-1.1"  ${threshold}
-            download_sourceforge_2020 "${name}" "9.3.1-1.4"  ${threshold}
+            # 2022
+            platforms="win32-x64,linux-x64,linux-arm64,linux-arm,darwin-x64,darwin-arm64"
+            download_sourceforge_2022 "${name}" "11.3.1-1.1" ${threshold} "${platforms}"
+            download_sourceforge_2022 "${name}" "11.2.1-1.2" ${threshold} "${platforms}"
 
-            download_sourceforge_2019 "${name}" "9.2.1-1.1"  ${threshold}
-            download_sourceforge_2019 "${name}" "8.3.1-1.4"  ${threshold}
-            download_sourceforge_2019 "${name}" "7.3.1-1.2"  ${threshold}
+            # 2020
+            platforms="win32-x64,win32-ia32,linux-x64,linux-ia32,linux-arm64,linux-arm,darwin-x64"
+            download_sourceforge "${name}" "10.3.1-2.3" ${threshold} "${platforms}"
+            download_sourceforge "${name}" "10.2.1-1.1" ${threshold} "${platforms}"
+            download_sourceforge "${name}" "9.3.1-1.4" ${threshold} "${platforms}"
+
+            # 2019
+            platforms="win32-x64,win32-x32,linux-x64,linux-x32,darwin-x64"
+            download_sourceforge "${name}" "9.2.1-1.1" ${threshold} "${platforms}"
+            download_sourceforge "${name}" "8.3.1-1.4" ${threshold} "${platforms}"
+            download_sourceforge "${name}" "7.3.1-1.2" ${threshold} "${platforms}"
