@@ -1,0 +1,65 @@
+# -----------------------------------------------------------------------------
+#
+# This file is part of the xPack project (http://xpack.github.io).
+# Copyright (c) 2025 Liviu Ionescu. All rights reserved.
+#
+# Permission to use, copy, modify, and/or distribute this software
+# for any purpose is hereby granted, under the terms of the MIT license.
+#
+# If a copy of the license was not distributed with this file, it can
+# be obtained from https://opensource.org/licenses/MIT.
+#
+# -----------------------------------------------------------------------------
+
+  name: 'Test SourceForge downloads'
+
+  on:
+    schedule:
+      - cron: '55 9 * * 5' # '42 1 * * 6' # every Sunday
+    workflow_dispatch:
+
+  jobs:
+    test:
+      runs-on: ubuntu-latest
+      steps:
+        - name: Checkout
+          uses: actions/checkout@v2
+          with:
+            repository: xpack-dev-tools/xbb-helper-xpack
+            ref: 'xpack-development'
+
+        - name: Show environment
+          run: |
+            ls -lLA
+            env | sort | grep -E '^[^ \t]+='
+
+        - name: Run test
+          run: |
+            #!/usr/bin/env bash
+            set -e
+
+            # The script is in the xbb-helper-xpack repo.
+            source maintenance-scripts/download-sourceforge-source.sh
+
+            date
+
+            # https://sourceforge.net/projects/arm-none-eabi-gcc-xpack/files/
+            name="arm-none-eabi-gcc"
+            threshold=00000
+
+            download_sourceforge_2023 "${name}" "14.2.1-1.1"  ${threshold}
+            download_sourceforge_2023 "${name}" "13.3.1-1.1"  ${threshold}
+            download_sourceforge_2023 "${name}" "13.2.1-1.1"  ${threshold}
+            download_sourceforge_2023 "${name}" "12.3.1-1.2"  ${threshold}
+            download_sourceforge_2023 "${name}" "12.2.1-1.2"  ${threshold}
+
+            download_sourceforge_2022 "${name}" "11.3.1-1.1"  ${threshold}
+            download_sourceforge_2022 "${name}" "11.2.1-1.2"  ${threshold}
+
+            download_sourceforge_2020 "${name}" "10.3.1-2.3"  ${threshold}
+            download_sourceforge_2020 "${name}" "10.2.1-1.1"  ${threshold}
+            download_sourceforge_2020 "${name}" "9.3.1-1.4"  ${threshold}
+
+            download_sourceforge_2019 "${name}" "9.2.1-1.1"  ${threshold}
+            download_sourceforge_2019 "${name}" "8.3.1-1.4"  ${threshold}
+            download_sourceforge_2019 "${name}" "7.3.1-1.2"  ${threshold}
