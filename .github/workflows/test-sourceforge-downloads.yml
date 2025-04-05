@@ -15,7 +15,7 @@
 
   on:
     schedule:
-      - cron: '55 9 * * 5' # '42 1 * * 6' # every Sunday
+      - cron: '42 5 * * 6' # every Sunday
     workflow_dispatch:
 
   jobs:
@@ -45,7 +45,7 @@
 
             # https://sourceforge.net/projects/arm-none-eabi-gcc-xpack/files/
             name="arm-none-eabi-gcc"
-            threshold=00000
+            threshold=16383 # (50%)
 
             download_sourceforge_2023 "${name}" "14.2.1-1.1"  ${threshold}
             download_sourceforge_2023 "${name}" "13.3.1-1.1"  ${threshold}
