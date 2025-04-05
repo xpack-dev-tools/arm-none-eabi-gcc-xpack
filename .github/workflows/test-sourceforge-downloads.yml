@@ -47,18 +47,18 @@
             name="arm-none-eabi-gcc"
             threshold=16383 # (50%)
 
-            # download_sourceforge_2023 "${name}" "14.2.1-1.1"  ${threshold}
-            # download_sourceforge_2023 "${name}" "13.3.1-1.1"  ${threshold}
-            # download_sourceforge_2023 "${name}" "13.2.1-1.1"  ${threshold}
-            # download_sourceforge_2023 "${name}" "12.3.1-1.2"  ${threshold}
-            # download_sourceforge_2023 "${name}" "12.2.1-1.2"  ${threshold}
+            download_sourceforge_2023 "${name}" "14.2.1-1.1"  ${threshold}
+            download_sourceforge_2023 "${name}" "13.3.1-1.1"  ${threshold}
+            download_sourceforge_2023 "${name}" "13.2.1-1.1"  ${threshold}
+            download_sourceforge_2023 "${name}" "12.3.1-1.2"  ${threshold}
+            download_sourceforge_2023 "${name}" "12.2.1-1.2"  ${threshold}
 
-            # download_sourceforge_2022 "${name}" "11.3.1-1.1"  ${threshold}
-            # download_sourceforge_2022 "${name}" "11.2.1-1.2"  ${threshold}
+            download_sourceforge_2022 "${name}" "11.3.1-1.1"  ${threshold}
+            download_sourceforge_2022 "${name}" "11.2.1-1.2"  ${threshold}
 
-            # download_sourceforge_2020 "${name}" "10.3.1-2.3"  ${threshold}
-            # download_sourceforge_2020 "${name}" "10.2.1-1.1"  ${threshold}
-            # download_sourceforge_2020 "${name}" "9.3.1-1.4"  ${threshold}
+            download_sourceforge_2020 "${name}" "10.3.1-2.3"  ${threshold}
+            download_sourceforge_2020 "${name}" "10.2.1-1.1"  ${threshold}
+            download_sourceforge_2020 "${name}" "9.3.1-1.4"  ${threshold}
 
             download_sourceforge_2019 "${name}" "9.2.1-1.1"  ${threshold}
             download_sourceforge_2019 "${name}" "8.3.1-1.4"  ${threshold}
