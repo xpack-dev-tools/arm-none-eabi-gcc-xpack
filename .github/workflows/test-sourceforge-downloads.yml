@@ -77,4 +77,3 @@
 
             download_sourceforge "${name}" "9.2.1-1.1" ${threshold} "${platforms}"
             download_sourceforge "${name}" "8.3.1-1.4" ${threshold} "${platforms}"
-            download_sourceforge "${name}" "7.3.1-1.2" ${threshold} "${platforms}"
