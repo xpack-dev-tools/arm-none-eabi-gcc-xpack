@@ -58,8 +58,8 @@
             download_sourceforge "${name}" "13.2.1-1.1" ${threshold} "${platforms}"
             download_sourceforge "${name}" "12.3.1-1.2" ${threshold} "${platforms}"
             download_sourceforge "${name}" "12.2.1-1.2" ${threshold} "${platforms}"
-            download_sourceforge_2022 "${name}" "11.3.1-1.1" ${threshold} "${platforms}"
-            download_sourceforge_2022 "${name}" "11.2.1-1.2" ${threshold} "${platforms}"
+            download_sourceforge "${name}" "11.3.1-1.1" ${threshold} "${platforms}"
+            download_sourceforge "${name}" "11.2.1-1.2" ${threshold} "${platforms}"
 
             # 2021
             platforms="win32-x64,win32-ia32,linux-x64,linux-ia32,linux-arm64,linux-arm,darwin-x64"
