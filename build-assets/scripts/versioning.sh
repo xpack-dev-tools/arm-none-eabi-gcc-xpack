@@ -185,10 +185,10 @@ function application_build_versioned_components()
     # https://github.com/facebook/zstd/tags
     XBB_ZSTD_VERSION="1.5.6" # "1.5.5"
 
-    # https://ftp.gnu.org/gnu/ncurses/
+    # https://ftpmirror.gnu.org/gnu/ncurses/
     XBB_NCURSES_VERSION="6.5" # "6.4"
 
-    # https://ftp.gnu.org/gnu/texinfo/
+    # https://ftpmirror.gnu.org/gnu/texinfo/
     # 7.2 fails on x64 linux with
     # /bin/bash: parsetexi/Parsetexi.xsc: No such file or directory
     # Makefile:5576: recipe for target 'parsetexi/Parsetexi.c' failed
@@ -202,7 +202,7 @@ function application_build_versioned_components()
     # https://developer.arm.com/tools-and-software/open-source-software/developer-tools/gnu-toolchain/downloads-1
     XBB_EXPAT_VERSION="2.2.5" # Arm
 
-    # https://ftp.gnu.org/gnu/libunistring/
+    # https://ftpmirror.gnu.org/gnu/libunistring/
     XBB_LIBUNISTRING_VERSION="1.3" # "1.1"
 
     # https://ftp.gnu.org/pub/gnu/gettext/
@@ -215,7 +215,7 @@ function application_build_versioned_components()
     # https://github.com/xpack-dev-tools/gpm/tags
     XBB_GPM_VERSION="1.20.7-1"
 
-    # https://ftp.gnu.org/gnu/readline/
+    # https://ftpmirror.gnu.org/gnu/readline/
     XBB_READLINE_VERSION="8.2"
 
     # https://sourceware.org/pub/bzip2/
@@ -451,10 +451,10 @@ function application_build_versioned_components()
     # https://github.com/facebook/zstd/tags
     XBB_ZSTD_VERSION="1.5.5" # "1.5.2"
 
-    # https://ftp.gnu.org/gnu/ncurses/
+    # https://ftpmirror.gnu.org/gnu/ncurses/
     XBB_NCURSES_VERSION="6.4" # "6.3"
 
-    # https://ftp.gnu.org/gnu/texinfo/
+    # https://ftpmirror.gnu.org/gnu/texinfo/
     XBB_TEXINFO_VERSION="7.0.3"
 
     # -------------------------------------------------------------------------
@@ -465,7 +465,7 @@ function application_build_versioned_components()
     # https://developer.arm.com/tools-and-software/open-source-software/developer-tools/gnu-toolchain/downloads-1
     XBB_EXPAT_VERSION="2.2.5" # Arm
 
-    # https://ftp.gnu.org/gnu/libunistring/
+    # https://ftpmirror.gnu.org/gnu/libunistring/
     XBB_LIBUNISTRING_VERSION="1.1"
 
     # https://ftp.gnu.org/pub/gnu/gettext/
@@ -475,7 +475,7 @@ function application_build_versioned_components()
     # https://github.com/xpack-dev-tools/gpm/tags
     XBB_GPM_VERSION="1.20.7-1"
 
-    # https://ftp.gnu.org/gnu/readline/
+    # https://ftpmirror.gnu.org/gnu/readline/
     XBB_READLINE_VERSION="8.2"
 
     # https://sourceware.org/pub/bzip2/
@@ -705,7 +705,7 @@ function application_build_versioned_components()
     # https://developer.arm.com/tools-and-software/open-source-software/developer-tools/gnu-toolchain/downloads-1
     XBB_EXPAT_VERSION="2.2.5"
 
-    # https://ftp.gnu.org/gnu/libunistring/
+    # https://ftpmirror.gnu.org/gnu/libunistring/
     XBB_LIBUNISTRING_VERSION="1.1"
 
     # https://ftp.gnu.org/pub/gnu/gettext/
@@ -715,10 +715,10 @@ function application_build_versioned_components()
     # https://github.com/xpack-dev-tools/gpm/tags
     XBB_GPM_VERSION="1.20.7-1"
 
-    # https://ftp.gnu.org/gnu/ncurses/
+    # https://ftpmirror.gnu.org/gnu/ncurses/
     XBB_NCURSES_VERSION="6.4" # "6.3"
 
-    # https://ftp.gnu.org/gnu/readline/
+    # https://ftpmirror.gnu.org/gnu/readline/
     XBB_READLINE_VERSION="8.2" # "8.1"
 
     # https://sourceware.org/pub/bzip2/
@@ -944,10 +944,10 @@ function application_build_versioned_components()
     # https://github.com/xpack-dev-tools/gpm/tags
     XBB_GPM_VERSION="1.20.7-1"
 
-    # https://ftp.gnu.org/gnu/ncurses/
+    # https://ftpmirror.gnu.org/gnu/ncurses/
     XBB_NCURSES_VERSION="6.3"
 
-    # https://ftp.gnu.org/gnu/readline/
+    # https://ftpmirror.gnu.org/gnu/readline/
     XBB_READLINE_VERSION="8.1"
 
     # https://sourceware.org/pub/bzip2/

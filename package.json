@@ -106,12 +106,13 @@
     "liquidjs": "^10.19.1"
   },
   "topConfig": {
-    "descriptiveName": "GNU Arm Embedded GCC",
+    "descriptiveName": "xPack GNU Arm Embedded GCC",
+    "upstreamDescriptiveName": "GNU Arm Embedded GCC",
     "permalinkName": "arm-none-eabi-gcc",
     "skipCiTests": "true",
     "useSelfHostedRunners": "true"
   },
   "engines": {
-    "node": " >=18.0.0"
+    "node": " >=20.0"
   }
 }

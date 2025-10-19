@@ -3,13 +3,13 @@
 # Automatically generated from npm-packages-helper/templates/*.
 #
 # This file is part of the xPack project (http://xpack.github.io).
-# Copyright (c) 2021 Liviu Ionescu. All rights reserved.
+# Copyright (c) 2021-2025 Liviu Ionescu. All rights reserved.
 #
 # Permission to use, copy, modify, and/or distribute this software
 # for any purpose is hereby granted, under the terms of the MIT license.
 #
 # If a copy of the license was not distributed with this file, it can
-# be obtained from https://opensource.org/licenses/MIT.
+# be obtained from https://opensource.org/licenses/mit.
 #
 # -----------------------------------------------------------------------------
 
@@ -70,14 +70,14 @@ jobs:
     steps:
       - name: Checkout
         # https://github.com/actions/checkout
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
         with:
           # The full history, required to compute lastUpdatedAt
           fetch-depth: 0
 
       - name: Use Nodejs
         # https://github.com/actions/setup-node
-        uses: actions/setup-node@v4
+        uses: actions/setup-node@v5
         with:
           # Node LTS version.
           node-version: 20
@@ -94,7 +94,7 @@ jobs:
 
       - name: Upload Pages artifact
         # https://github.com/actions/upload-pages-artifact
-        uses: actions/upload-pages-artifact@v3
+        uses: actions/upload-pages-artifact@v4
         with:
           # Upload entire repository
           path: './website/build'

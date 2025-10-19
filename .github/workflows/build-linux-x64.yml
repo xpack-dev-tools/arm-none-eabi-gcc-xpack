@@ -3,13 +3,13 @@
 # Automatically generated from npm-packages-helper/templates/*.
 #
 # This file is part of the xPack project (http://xpack.github.io).
-# Copyright (c) 2021 Liviu Ionescu. All rights reserved.
+# Copyright (c) 2021-2025 Liviu Ionescu. All rights reserved.
 #
 # Permission to use, copy, modify, and/or distribute this software
 # for any purpose is hereby granted, under the terms of the MIT license.
 #
 # If a copy of the license was not distributed with this file, it can
-# be obtained from https://opensource.org/licenses/MIT.
+# be obtained from https://opensource.org/licenses/mit.
 #
 # -----------------------------------------------------------------------------
 
@@ -79,12 +79,22 @@ jobs:
         run: |
           uname -a
           lsb_release -sd
+          df -BG -H /
           echo "whoami: $(whoami)"
           echo "pwd: $(pwd)"
-          echo "node: $(node --version)"
-          echo "npm: $(npm --version)"
           ls -lLA
           env | sort | grep -E '^[^ \t]+='
+
+      - name: 'Install xpm'
+        timeout-minutes: 1440
+        run: |
+          npm install --location=global xpm@${{github.event.inputs.xpm_version}}
+
+      - name: 'Verify Node.js, npm and xpm'
+        run: |
+          echo "$(which node): $(node --version)"
+          echo "$(which npm): $(npm --version)"
+          echo "$(which xpm): $(xpm --version)"
 
       - name: 'Clean working area' # Mandatory for self-hosted runners.
         run: |
@@ -96,18 +106,15 @@ jobs:
         with:
           fetch-depth: 3
 
-      - name: 'Install xpm'
-        timeout-minutes: 1440
-        run: |
-          npm install --location=global xpm@${{github.event.inputs.xpm_version}}
-          xpm --version
-
       - name: 'Build linux-x64 binaries'
         timeout-minutes: 1440
         run: |
           xpm install --loglevel ${{github.event.inputs.xpm_install_loglevel}} ${{github.event.inputs.xpm_install_options}} -C build-assets
           xpm run docker-prepare --config linux-x64 --loglevel ${{github.event.inputs.xpm_install_loglevel}} ${{github.event.inputs.xpm_install_options}} -C build-assets
           xpm run docker-build --config linux-x64 -C build-assets
+
+      - name: 'Show results'
+        run: |
           ls -l build-assets/build/linux-x64/application
           ls -l build-assets/build/linux-x64/deploy
 
@@ -152,6 +159,7 @@ jobs:
         run: |
           uname -a
           lsb_release -sd
+          df -BG -H /
           echo "whoami: $(whoami)"
           echo "pwd: $(pwd)"
           ls -lLA
@@ -159,12 +167,12 @@ jobs:
 
       # https://github.com/actions/checkout
       - name: 'Checkout project'
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
         with:
           fetch-depth: 3
 
       - name: 'Checkout helper ${{github.event.inputs.helper-git-ref}}'
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
         with:
           repository: xpack-dev-tools/xbb-helper-xpack
           path: build-assets/xpacks/@xpack-dev-tools/xbb-helper

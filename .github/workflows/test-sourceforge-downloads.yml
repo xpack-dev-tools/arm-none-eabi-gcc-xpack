@@ -56,6 +56,8 @@
             download_sourceforge "${name}" "14.2.1-1.1" ${threshold} "${platforms}"
             download_sourceforge "${name}" "13.3.1-1.1" ${threshold} "${platforms}"
             download_sourceforge "${name}" "13.2.1-1.1" ${threshold} "${platforms}"
+
+            platforms="win32-x64,linux-x64,linux-arm64,linux-arm,darwin-x64,darwin-arm64"
             download_sourceforge "${name}" "12.3.1-1.2" ${threshold} "${platforms}"
             download_sourceforge "${name}" "12.2.1-1.2" ${threshold} "${platforms}"
             download_sourceforge "${name}" "11.3.1-1.1" ${threshold} "${platforms}"

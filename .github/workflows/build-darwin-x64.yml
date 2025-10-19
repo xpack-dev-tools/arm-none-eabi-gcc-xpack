@@ -3,13 +3,13 @@
 # Automatically generated from npm-packages-helper/templates/*.
 #
 # This file is part of the xPack project (http://xpack.github.io).
-# Copyright (c) 2021 Liviu Ionescu. All rights reserved.
+# Copyright (c) 2021-2025 Liviu Ionescu. All rights reserved.
 #
 # Permission to use, copy, modify, and/or distribute this software
 # for any purpose is hereby granted, under the terms of the MIT license.
 #
 # If a copy of the license was not distributed with this file, it can
-# be obtained from https://opensource.org/licenses/MIT.
+# be obtained from https://opensource.org/licenses/mit.
 #
 # -----------------------------------------------------------------------------
 
@@ -77,6 +77,7 @@ jobs:
         run: |
           uname -a
           sw_vers
+          df -gH /
           ls -lA /Library/Developer/CommandLineTools/SDKs || true
           ls -lA /Applications
           xcode-select --print-path
@@ -85,10 +86,32 @@ jobs:
           ls -l /Library/Developer/CommandLineTools/usr/include || true
           echo "pwd: $(pwd)"
           echo "whoami: $(whoami)"
-          echo "node: $(node --version)"
-          echo "npm: $(npm --version)"
           ls -lLA
           env | sort | grep -E '^[^ \t]+='
+
+      - name: 'Remove Homebrew'
+        uses: xpack/remove-homebrew-action@v1
+
+      - name: 'Install Python packages'
+        run: |
+          pip3 install distlib
+
+      - name: 'Setup Node.js'
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          check-latest: true
+
+      - name: 'Install xpm'
+        timeout-minutes: 1440
+        run: |
+          npm install --location=global xpm@${{github.event.inputs.xpm_version}}
+
+      - name: 'Verify Node.js, npm and xpm'
+        run: |
+          echo "$(which node): $(node --version)"
+          echo "$(which npm): $(npm --version)"
+          echo "$(which xpm): $(xpm --version)"
 
       - name: 'Clean working area' # Mandatory for self-hosted runners.
         run: |
@@ -100,18 +123,15 @@ jobs:
         with:
           fetch-depth: 3
 
-      - name: 'Install xpm'
-        timeout-minutes: 1440
-        run: |
-          npm install --location=global xpm@${{github.event.inputs.xpm_version}}
-          xpm --version
-
       - name: 'Build darwin-x64 binaries'
         timeout-minutes: 1440
         run: |
           xpm install --loglevel ${{github.event.inputs.xpm_install_loglevel}} ${{github.event.inputs.xpm_install_options}} -C build-assets
           xpm install --config darwin-x64 --loglevel ${{github.event.inputs.xpm_install_loglevel}} ${{github.event.inputs.xpm_install_options}} -C build-assets
           xpm run build --config darwin-x64 -C build-assets
+
+      - name: 'Show results'
+        run: |
           ls -l build-assets/build/darwin-x64/application
           ls -l build-assets/build/darwin-x64/deploy
 
@@ -148,8 +168,8 @@ jobs:
 
   darwin-x64-test:
     name: 'darwin-x64 arm-none-eabi-gcc ${{github.event.inputs.version}} test'
-    # https://github.com/actions/runner-images/blob/main/images/macos/macos-13-Readme.md
-    runs-on: macos-13
+    # https://github.com/actions/runner-images/blob/main/images/macos/macos-15-Readme.md
+    runs-on: macos-15-intel
     needs: [darwin-x64-build]
 
     steps:
@@ -157,9 +177,10 @@ jobs:
         run: |
           uname -a
           sw_vers
+          df -gH /
           ls -lA /Library/Developer/CommandLineTools/SDKs || true
           ls -lA /Applications
-          sudo xcode-select --switch /Applications/Xcode_14.2.app
+          sudo xcode-select --switch /Applications/Xcode_16.4.app
           xcode-select --print-path
           xcodebuild -version || true
           pkgutil --pkg-info=com.apple.pkg.CLTools_Executables || true
@@ -169,14 +190,17 @@ jobs:
           ls -lLA
           env | sort | grep -E '^[^ \t]+='
 
+      - name: 'Remove Homebrew'
+        uses: xpack/remove-homebrew-action@v1
+
       # https://github.com/actions/checkout
       - name: 'Checkout project'
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
         with:
           fetch-depth: 3
 
       - name: 'Checkout helper ${{github.event.inputs.helper-git-ref}}'
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
         with:
           repository: xpack-dev-tools/xbb-helper-xpack
           path: build-assets/xpacks/@xpack-dev-tools/xbb-helper
