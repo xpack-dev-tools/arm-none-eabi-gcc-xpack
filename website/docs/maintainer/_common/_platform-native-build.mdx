@@ -13,7 +13,7 @@ To check the available space:
 xpm run check-space -C ~/Work/xpack-dev-tools/arm-none-eabi-gcc-xpack.git/build-assets
 ```
 
-To free the space used by all previous builds of all `xpack-dev-tools` packages:
+To free the space utilised by all previous builds of all `xpack-dev-tools` packages:
 
 ```sh
 xpm run clear-all-projects-builds -C ~/Work/xpack-dev-tools/arm-none-eabi-gcc-xpack.git/build-assets
@@ -23,6 +23,7 @@ To update the build scripts and build the development binaries:
 
 <CodeBlock language="sh"> {
 `export XBB_ENVIRONMENT_MACOSX_DEPLOYMENT_TARGET='11.0' && \\
+rm -rf ~/Work/xpack-dev-tools/arm-none-eabi-gcc-xpack.git/package-lock.json && \\
 rm -rf ~/Work/xpack-dev-tools/arm-none-eabi-gcc-xpack.git/build-assets/package-lock.json && \\
 git -C ~/Work/xpack-dev-tools/arm-none-eabi-gcc-xpack.git pull && \\
 xpm run install -C ~/Work/xpack-dev-tools/arm-none-eabi-gcc-xpack.git/build-assets && \\
@@ -47,6 +48,7 @@ To update the build scripts and build the release binaries:
 <CodeBlock language="sh"> {
 `export XBB_ENVIRONMENT_MACOSX_DEPLOYMENT_TARGET='11.0' && \\
 rm -rf ~/Work/xpack-dev-tools/arm-none-eabi-gcc-xpack.git/package-lock.json && \\
+rm -rf ~/Work/xpack-dev-tools/arm-none-eabi-gcc-xpack.git/build-assets/package-lock.json && \\
 git -C ~/Work/xpack-dev-tools/arm-none-eabi-gcc-xpack.git pull && \\
 xpm run install -C ~/Work/xpack-dev-tools/arm-none-eabi-gcc-xpack.git/build-assets && \\
 \\

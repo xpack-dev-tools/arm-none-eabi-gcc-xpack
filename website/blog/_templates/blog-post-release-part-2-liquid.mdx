@@ -1,4 +1,78 @@
 
+## Folders hierarchy
+
+After install, the package creates a hierarchy of folders like the following
+(only the first two depth levels are shown):
+
+{%- assign platforms_array = platforms | split: "," %}
+
+{%- assign names_array = "" | split: "" %}
+
+{%- for platform in platforms_array %}
+{%- case platform %}
+{%- when "win32-x64" %}
+{%- assign names_array = names_array | concat: "Windows" %}
+{%- when "darwin-x64", "darwin-arm64" %}
+{%- assign names_array = names_array | concat: "macOS" %}
+{%- when "linux-x64", "linux-arm64", "linux-arm" %}
+{%- assign names_array = names_array | concat: "GNU/Linux" %}
+{%- endcase %}
+{%- endfor %}
+
+{%- assign names_array = names_array | uniq %}
+
+<Tabs groupId="operating-systems">
+
+{%- for name in names_array %}
+{%- case name %}
+{%- when "Windows" %}
+
+<TabItem value="windows" label="Windows" default>
+
+<CodeBlock language="console"> {
+`C:\> tree /f %USERPROFILE%\\AppData\\Roaming\\xPacks\\@{{packageScope}}\\{{packageName}}\\${frontMatter.version}.${frontMatter.npm_subversion}\\.content
+Folder PATH listing
+Volume serial number is B02D-925C
+├── README.md
+├── bin
+TODO
+`} </CodeBlock>
+
+</TabItem>
+
+{%- when "macOS" %}
+
+<TabItem value="macos" label="macOS">
+
+<CodeBlock language="console"> {
+`$ tree -L 2 ~/Library/xPacks/\{{packageScopedName}}/${frontMatter.version}.${frontMatter.npm_subversion}/.content/
+/Users/ilg/Library/xPacks/\{{packageScopedName}}/${frontMatter.version}.${frontMatter.npm_subversion}/.content/
+├── README.md
+├── bin
+TODO
+`} </CodeBlock>
+
+</TabItem>
+
+{%- when "GNU/Linux" %}
+
+<TabItem value="linux" label="GNU/Linux">
+
+<CodeBlock language="console"> {
+`$ tree -L 2 ~/.local/xPacks/\{{packageScopedName}}/${frontMatter.version}.${frontMatter.npm_subversion}/.content/
+/home/ilg/.local/xPacks/\{{packageScopedName}}/${frontMatter.version}.${frontMatter.npm_subversion}/.content/
+├── README.md
+├── bin
+TODO
+`} </CodeBlock>
+
+</TabItem>
+
+{%- endcase %}
+{%- endfor %}
+
+</Tabs>
+
 <DeprecationNotices/>
 
 <DownloadAnalytics version={frontMatter.version}/>

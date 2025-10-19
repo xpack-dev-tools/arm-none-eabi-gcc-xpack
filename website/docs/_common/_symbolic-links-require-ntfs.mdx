@@ -1,0 +1,15 @@
+{/* DO NOT EDIT! */}
+{/* Automatically generated from docusaurus-template-liquid/templates/docusaurus. */}
+
+{/* ------------------------------------------------------------------------ */}
+
+By design, xpm utilises symbolic links to folders (junction points on
+NTFS) to facilitate the sharing of common packages across projects. Any
+attempt to install packages on a drive that does not support symbolic
+links will result in an error:
+
+```
+error: volume X: does not support links, it might not be NTFS, or it might be a remote resource
+```
+
+Utilise a recent version of Windows and format the drive as NTFS.

@@ -14,5 +14,16 @@ Support for Ubuntu 18 was dropped in 2025.
 
 ### 32-bit support
 
-Support for 32-bit x86 GNU/Linux and x86 Windows was
+Support for 32-bit x64 GNU/Linux and x64 Windows was
 dropped in 2022 and for 32-bit Arm GNU/Linux in 2025.
+
+### Pre-deprecation notice for x64 macOS
+
+Apple has discontinued support for the x64 (Intel) architecture.
+GitHub will no longer support this architecture on macOS after the
+macOS 15 runner image is retired in **November 2027**; building
+and testing x64 macOS binaries will become more difficult, requiring
+a self-hosted runner, and cannot be guaranteed in the long term.
+
+You should begin migrating your projects to arm64-based (Apple Silicon)
+binaries to prepare for this possible deprecation.

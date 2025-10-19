@@ -13,22 +13,22 @@ import CommonXpmCleanUps from '@site/docs/_common/_xpm-clean-ups.mdx';
 
 ### Uninstall
 
-The xpm binaries do not use any form of system installer; instead they
+The xpm binaries do not utilise any form of system installer; instead they
 are distributed as
 portable (<code>.zip</code> or <code>.tar.gz</code>) archives;
-therefore they do not require to run any uninstaller; simply removing the
+therefore they do not require the execution of any uninstaller; simply removing the
 links and possibly the user's global xPacks store folder and
-the user xPack cache folder is enough.
+the user xPack cache folder is sufficient.
 
 To remove the links created by
 **xpm** in the current project,
-go to the project folder:
+navigate to the project folder:
 
 ```sh
 cd my-project
 ```
 
-and ask **xpm** to uninstall the package:
+and request **xpm** to uninstall the package:
 
 <CodeBlock language="sh"> {
 `xpm uninstall @xpack-dev-tools/arm-none-eabi-gcc --verbose

@@ -8,35 +8,35 @@ import versionMinor from '@site/src/libs/versionMinor';
 
 ### Check the latest upstream release
 
-The latest releases must have been announced in
+The latest releases must have been announced on
 [Arm GNU Toolchain Downloads](https://developer.arm.com/downloads/-/arm-gnu-toolchain-downloads).
 Compare the latest Arm release with the latest xPack
 [release](https://github.com/xpack-dev-tools/arm-none-eabi-gcc-xpack/releases).
-If necessary, update the triplet, otherwise increase the fourth & fifth numbers,
+If necessary, update the triplet; otherwise increase the fourth & fifth numbers,
 as below.
 
 ### Update to the latest Arm release
 
-- download the new _Source code_ archive (like
+- Download the new _Source code_ archive (such as
 <code>arm-gnu-toolchain-src-snapshot-{versionMajor()}.{versionMinor()}.rel1.tar.xz</code>) from
 [Arm GNU Toolchain Downloads](https://developer.arm.com/downloads/-/arm-gnu-toolchain-downloads/)
-- unpack the archive
-- the GCC version is in `gcc/gcc/BASE-VER`
-- the binutils version is in `binutils-gdb/bfd/version.m4`
-- the GDB version is in `binutils-gdb--gdb/gdb/version.in`
-- the newlib version is in `newlib-cygwin/newlib/configure`, search for `VERSION=`
-- download the latest **macOS (x86_64) hosted cross toolchains** archive (like
+- Unpack the archive
+- The GCC version is within `gcc/gcc/BASE-VER`
+- The binutils version is within `binutils-gdb/bfd/version.m4`
+- The GDB version is within `binutils-gdb--gdb/gdb/version.in`
+- The newlib version is within `newlib-cygwin/newlib/configure`; search for `VERSION=`
+- Download the latest **macOS (x86_64) hosted cross toolchains** archive (such as
 <code>arm-gnu-toolchain-{versionMajor()}.{versionMinor()}.rel1-darwin-x86_64-arm-none-eabi.tar.xz</code>)
-- unpack the archive
-- create a folder <code>build-assets/extras/{versionMajor()}.{versionMinor()}.rel1</code>
-- copy the file with the configurations
-(<code>{versionMajor()}.{versionMinor()}.rel1-darwin-x86_64-arm-none-eabi-manifest.txt</code>) to the new folder in extras
-- download the manifest.txt with the individual source URLs
+- Unpack the archive
+- Create a folder <code>build-assets/extras/{versionMajor()}.{versionMinor()}.rel1</code>
+- Copy the file with the configurations
+(<code>{versionMajor()}.{versionMinor()}.rel1-darwin-x86_64-arm-none-eabi-manifest.txt</code>) to the new folder within extras
+- Download the manifest.txt with the individual source URLs
 (<code>arm-gnu-toolchain-src-snapshot-{versionMajor()}.{versionMinor()}.rel1-manifest.txt</code>)
-- copy to the new folder in extras
+- Copy to the new folder within extras
 
 :::info
 
-Starting with 14.2.Rel1 there is a link to a [README](https://gitlab.arm.com/tooling/gnu-devtools-for-arm/-/blob/main/README.md) explaining the new build scripts.
+Starting with 14.2.Rel1, there is a link to a [README](https://gitlab.arm.com/tooling/gnu-devtools-for-arm/-/blob/main/README.md) explaining the new build scripts.
 
 :::

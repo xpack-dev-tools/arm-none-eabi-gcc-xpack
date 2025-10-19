@@ -2,7 +2,7 @@
 
 title: xPack {{packageConfig.descriptiveName}} v{{xpackVersion}} released
 seo_title: Version {{xpackVersion}} released
-description: Version {{xpackVersion}} is a TODO new/maintenance release.
+description: Version {{xpackVersion}} is a TODO maintenance/new release.
 keywords:
   - xpack
   - {{packageConfig.permalinkName}}
@@ -37,9 +37,13 @@ download_url: https://github.com/xpack-dev-tools/arm-none-eabi-gcc-xpack/release
 import {PageMetadata} from '@docusaurus/theme-common';
 import Image from '@theme/IdealImage';
 import CodeBlock from '@theme/CodeBlock';
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
 
-import Prerequisites from './_common/_prerequisites-glib-2.27.mdx';
-import DeprecationNotices from './_common/_deprecation-notices-glib-2.27.mdx';
+import customField from '@site/src/libs/customField';
+
+import Prerequisites from './_common/_prerequisites-glib-2.28.mdx';
+import DeprecationNotices from './_common/_deprecation-notices-glib-2.28.mdx';
 import DownloadAnalytics from './_common/_download-analytics.mdx';
 
 TODO: select one summary
@@ -58,13 +62,13 @@ is a standalone cross-platform binary distribution of
 
 There are separate binaries for **Windows** (x64),
 **macOS** (x64 and arm64)
-and **GNU/Linux** (x64, arm64 and arm).
+and **GNU/Linux** (x64 and arm64).
 
 :::note Raspberry Pi
 
 The main targets for the GNU/Linux Arm
-binaries are the **Raspberry Pi** class devices (armv7l and aarch64;
-armv6 is not supported).
+binaries are the **Raspberry Pi** class devices (aarch64 only;
+armv6 and armv7l are no longer supported).
 
 :::
 
@@ -187,7 +191,6 @@ Before publishing, a set of simple tests were performed on an exhaustive
 set of platforms. The results are available from:
 
 - [GitHub Actions](https://github.com/xpack-dev-tools/arm-none-eabi-gcc-xpack/actions/)
-- [Travis CI](https://app.travis-ci.com/github/xpack-dev-tools/arm-none-eabi-gcc-xpack/builds/)
 
 ## Tests
 
