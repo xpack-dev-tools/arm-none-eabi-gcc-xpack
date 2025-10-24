@@ -252,17 +252,6 @@ caffeinate ssh xbbli
 
 <CommonPlatformDockerBuild platform="linux-x64"/>
 
-### Build the x64 Windows binaries
-
-Execute the Docker build on the production machine (`xbbli`);
-start a VS Code remote session, or connect with a terminal:
-
-```sh
-caffeinate ssh xbbli
-```
-
-<CommonPlatformDockerBuild platform="win32-x64"/>
-
 ### Build the ARM64 GNU/Linux binaries
 
 Execute the Docker build on the production machine (`ampere`);
@@ -273,6 +262,17 @@ caffeinate ssh ampere
 ```
 
 <CommonPlatformDockerBuild platform="linux-arm64"/>
+
+### Build the x64 Windows binaries
+
+Execute the Docker build on the production machine (`xbbli`);
+start a VS Code remote session, or connect with a terminal:
+
+```sh
+caffeinate ssh xbbli
+```
+
+<CommonPlatformDockerBuild platform="win32-x64"/>
 
 ### Update the durations of the development builds
 

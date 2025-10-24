@@ -51,7 +51,7 @@
     "@docusaurus/types": "3.9.2",
     "del-cli": "^7.0.0",
     "json": "^11.0.0",
-    "liquidjs": "^10.20.1",
+    "liquidjs": "^10.23.0",
     "typescript": "~5.9.3"
   },
   "$devDependenciesUrls": [
