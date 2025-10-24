@@ -23,7 +23,7 @@
       "@xpack-dev-tools/xbb-helper": "github:xpack-dev-tools/xbb-helper-xpack#v4.3.15"
     },
     "properties": {
-      "platforms": "all",
+      "platforms": "win32-x64,darwin-x64,darwin-arm64,linux-x64,linux-arm64",
       "buildFolderRelativePath": "{{'build' | path_join: configuration.name | to_filename | downcase}}",
       "buildFolderRelativePathPosix": "{{'build' | path_posix_join: configuration.name | downcase}}",
       "commandBashBuild": "bash {{properties.dbg}} scripts/build.sh --target {{configuration.name}} --build-folder {{properties.buildFolderRelativePathPosix}}",
