@@ -103,7 +103,7 @@
   "devDependencies": {
     "del-cli": "^7.0.0",
     "json": "^11.0.0",
-    "liquidjs": "^10.22.0"
+    "liquidjs": "^10.23.0"
   },
   "topConfig": {
     "descriptiveName": "xPack GNU Arm Embedded GCC",

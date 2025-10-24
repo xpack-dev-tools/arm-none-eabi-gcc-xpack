@@ -83,7 +83,26 @@ jobs:
           ref: ${{github.event.inputs.helper-git-ref}}
           fetch-depth: 3
 
+      - name: 'Move workspace to short path for MinGW compatibility'
+        run: |
+          echo Creating D:\t short name folder...
+          mkdir D:\t
+
+          echo Moving workspace to D:\t...
+          robocopy "%GITHUB_WORKSPACE%" "D:\t" /E /MOVE /NFL /NDL /NJH /NJS /NC /NS
+
+          if %ERRORLEVEL% LEQ 3 (
+            echo ✓ Workspace successfully moved to D:\t
+            dir D:\t
+          ) else (
+            echo ✗ Failed to move workspace, robocopy exit code: %ERRORLEVEL%
+            exit /b 1
+          )
+        shell: cmd
+
       - name: 'Run ${{github.event.inputs.version}} native test'
+        working-directory: D:\t
+        # Run the test from the short path
         run: bash build-assets/scripts/test.sh --version ${{github.event.inputs.version}} --base-url ${{github.event.inputs.base_url}}
 
 
