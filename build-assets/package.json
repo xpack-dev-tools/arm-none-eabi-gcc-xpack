@@ -33,7 +33,7 @@
     },
     "actions": {
       "deep-clean": [
-        "del-cli build xpacks node_modules package-lock.json",
+        "del-cli build xpacks package-lock.json",
         "del-cli --force ${HOME}/Work/xpack-dev-tools-build/arm-none-eabi-gcc-[0-9]*-*"
       ],
       "install": [
