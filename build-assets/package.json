@@ -20,7 +20,7 @@
   "xpack": {
     "minimumXpmRequired": "0.20.5",
     "devDependencies": {
-      "@xpack-dev-tools/xbb-helper": "github:xpack-dev-tools/xbb-helper-xpack#v4.3.15"
+      "@xpack-dev-tools/xbb-helper": "github:xpack-dev-tools/xbb-helper-xpack#v5.0.0"
     },
     "properties": {
       "platforms": "win32-x64,darwin-x64,darwin-arm64,linux-x64,linux-arm64",
@@ -208,7 +208,7 @@
         "devDependencies": {
           "@xpack-dev-tools/gcc": "15.2.0-1.1",
           "@xpack-dev-tools/mingw-w64-gcc": "15.2.0-2.1",
-          "@xpack-dev-tools/wine": "10.0.0-1.1"
+          "@xpack-dev-tools/wine": "10.0.0-2.1"
         },
         "properties": {
           "dockerImage": "ilegeul/debian:amd64-10-xbb-v6.0.0"
