@@ -54,7 +54,7 @@
       "trigger-workflow-test-docker-linux-x64": "bash xpacks/@xpack-dev-tools/xbb-helper/github-actions/trigger-workflow-test-docker-linux-x64.sh",
       "trigger-workflow-test-docker-linux-arm64": "bash xpacks/@xpack-dev-tools/xbb-helper/github-actions/trigger-workflow-test-docker-linux-arm.sh",
       "trigger-workflow-publish-release": "bash xpacks/@xpack-dev-tools/xbb-helper/github-actions/trigger-workflow-publish-release.sh",
-      "generate-website-blog-post": "cd ../website; npm run generate-website-blog-post",
+      "generate-website-blog-post": "npm --prefix ../website run generate-website-blog-post",
       "update-package-binaries": "bash xpacks/@xpack-dev-tools/xbb-helper/github-actions/update-package-binaries.sh",
       "trigger-workflow-test-xpm": "bash xpacks/@xpack-dev-tools/xbb-helper/github-actions/trigger-workflow-test-xpm.sh",
       "trigger-workflow-deep-clean": "bash xpacks/@xpack-dev-tools/xbb-helper/github-actions/trigger-workflow-deep-clean.sh",
@@ -151,7 +151,7 @@
           "common-actions-native"
         ],
         "devDependencies": {
-          "@xpack-dev-tools/clang": "19.1.7-1.1",
+          "@xpack-dev-tools/clang": "20.1.8-1.1",
           "@xpack-dev-tools/realpath": "9.8.0-1.1",
           "@xpack-dev-tools/sed": "4.9.0-3.1"
         },
