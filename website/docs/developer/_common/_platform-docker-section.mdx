@@ -14,7 +14,8 @@ import {developmentDurations} from '@site/docs/_project/_development-durations.m
 To prepare the docker build:
 
 <CodeBlock language="sh"> {
-`xpm run install -C ~/Work/xpack-dev-tools/arm-none-eabi-gcc-xpack.git/build-assets && \\
+`npm --prefix ~/Work/xpack-dev-tools/arm-none-eabi-gcc-xpack.git/build-assets  install && \\
+xpm install -C ~/Work/xpack-dev-tools/arm-none-eabi-gcc-xpack.git/build-assets && \\
 xpm run docker-prepare --config ${props.platform} -C ~/Work/xpack-dev-tools/arm-none-eabi-gcc-xpack.git/build-assets
 `} </CodeBlock>
 
@@ -22,7 +23,8 @@ xpm run docker-prepare --config ${props.platform} -C ~/Work/xpack-dev-tools/arm-
 <summary>... or, with the writable helper ...</summary>
 
 <CodeBlock language="sh"> {
-`xpm run install -C ~/Work/xpack-dev-tools/arm-none-eabi-gcc-xpack.git/build-assets && \\
+`npm --prefix ~/Work/xpack-dev-tools/arm-none-eabi-gcc-xpack.git/build-assets  install && \\
+xpm install -C ~/Work/xpack-dev-tools/arm-none-eabi-gcc-xpack.git/build-assets && \\
 xpm run link-deps -C ~/Work/xpack-dev-tools/arm-none-eabi-gcc-xpack.git/build-assets && \\
 xpm run docker-prepare --config ${props.platform} -C ~/Work/xpack-dev-tools/arm-none-eabi-gcc-xpack.git/build-assets && \\
 xpm run docker-link-deps --config ${props.platform} -C ~/Work/xpack-dev-tools/arm-none-eabi-gcc-xpack.git/build-assets

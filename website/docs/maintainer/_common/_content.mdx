@@ -197,7 +197,8 @@ rm -rf ~/Work/xpack-dev-tools/arm-none-eabi-gcc-xpack.git/package-lock.json
 rm -rf ~/Work/xpack-dev-tools/arm-none-eabi-gcc-xpack.git/build-assets/package-lock.json
 git -C ~/Work/xpack-dev-tools/arm-none-eabi-gcc-xpack.git pull
 
-xpm run install -C ~/Work/xpack-dev-tools/arm-none-eabi-gcc-xpack.git/build-assets
+npm --prefix ~/Work/xpack-dev-tools/arm-none-eabi-gcc-xpack.git/build-assets install
+xpm install -C ~/Work/xpack-dev-tools/arm-none-eabi-gcc-xpack.git/build-assets
 
 git -C ~/Work/xpack-dev-tools/xbb-helper-xpack.git pull
 xpm link -C ~/Work/xpack-dev-tools/xbb-helper-xpack.git
@@ -555,7 +556,8 @@ and execute the tests, utilise:
 
 ```sh
 git -C ~/Work/xpack-dev-tools/arm-none-eabi-gcc-xpack.git pull
-xpm run install -C ~/Work/xpack-dev-tools/arm-none-eabi-gcc-xpack.git/build-assets
+npm --prefix ~/Work/xpack-dev-tools/arm-none-eabi-gcc-xpack.git/build-assets install
+xpm install -C ~/Work/xpack-dev-tools/arm-none-eabi-gcc-xpack.git/build-assets
 xpm run test-pre-release -C ~/Work/xpack-dev-tools/arm-none-eabi-gcc-xpack.git/build-assets
 ```
 

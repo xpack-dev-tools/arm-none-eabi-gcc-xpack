@@ -9,7 +9,7 @@ Execute the top **generate-top-commons** npm script to update the
 `build-assets/package.json` and the GitHub workflow files.
 
 ```sh
-npm run generate-top-commons -C ~/Work/xpack-dev-tools/arm-none-eabi-gcc-xpack.git
+npm --prefix ~/Work/xpack-dev-tools/arm-none-eabi-gcc-xpack.git run generate-top-commons
 ```
 
 ### Commit the top changes

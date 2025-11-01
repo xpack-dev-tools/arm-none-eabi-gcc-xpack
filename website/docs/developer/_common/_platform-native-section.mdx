@@ -12,7 +12,8 @@ import {developmentDurations} from '@site/docs/_project/_development-durations.m
 To prepare the native build:
 
 <CodeBlock language="sh"> {
-`xpm run install -C ~/Work/xpack-dev-tools/arm-none-eabi-gcc-xpack.git/build-assets && \\
+`npm --prefix ~/Work/xpack-dev-tools/arm-none-eabi-gcc-xpack.git/build-assets  install && \\
+xpm install -C ~/Work/xpack-dev-tools/arm-none-eabi-gcc-xpack.git/build-assets && \\
 xpm install --config ${props.platform} -C ~/Work/xpack-dev-tools/arm-none-eabi-gcc-xpack.git/build-assets
 `} </CodeBlock>
 
@@ -20,7 +21,8 @@ xpm install --config ${props.platform} -C ~/Work/xpack-dev-tools/arm-none-eabi-g
 <summary>... or, with the writable helper ...</summary>
 
 <CodeBlock language="sh"> {
-`xpm run install -C ~/Work/xpack-dev-tools/arm-none-eabi-gcc-xpack.git/build-assets && \\
+`npm --prefix ~/Work/xpack-dev-tools/arm-none-eabi-gcc-xpack.git/build-assets  install && \\
+xpm install -C ~/Work/xpack-dev-tools/arm-none-eabi-gcc-xpack.git/build-assets && \\
 xpm run link-deps -C ~/Work/xpack-dev-tools/arm-none-eabi-gcc-xpack.git/build-assets && \\
 xpm install --config ${props.platform} -C ~/Work/xpack-dev-tools/arm-none-eabi-gcc-xpack.git/build-assets
 `} </CodeBlock>
