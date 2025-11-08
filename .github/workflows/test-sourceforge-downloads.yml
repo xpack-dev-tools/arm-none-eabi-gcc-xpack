@@ -7,75 +7,75 @@
 # for any purpose is hereby granted, under the terms of the MIT license.
 #
 # If a copy of the license was not distributed with this file, it can
-# be obtained from https://opensource.org/licenses/MIT.
+# be obtained from https://opensource.org/licenses/mit.
 #
 # -----------------------------------------------------------------------------
 
-  name: 'Test SourceForge downloads'
+name: 'Test SourceForge downloads'
 
-  on:
-    schedule:
-      - cron: '29 5 * * 6' # every Saturday
-    workflow_dispatch:
+on:
+  schedule:
+    - cron: '29 5 * * 6' # every Saturday
+  workflow_dispatch:
 
-  jobs:
-    test:
-      runs-on: ubuntu-latest
-      steps:
-        - name: Checkout
-          uses: actions/checkout@v2
-          with:
-            repository: xpack-dev-tools/xbb-helper-xpack
-            ref: 'xpack-development'
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+        with:
+          repository: xpack-dev-tools/xbb-helper-xpack
+          ref: 'xpack-development'
 
-        - name: Show environment
-          run: |
-            ls -lLA
-            env | sort | grep -E '^[^ \t]+='
+      - name: Show environment
+        run: |
+          ls -lLA
+          env | sort | grep -E '^[^ \t]+='
 
-        - name: Run test
-          run: |
-            #!/usr/bin/env bash
-            set -e
+      - name: Run test
+        run: |
+          #!/usr/bin/env bash
+          set -e
 
-            # The script is in the xbb-helper-xpack repo.
-            source maintenance-scripts/download-sourceforge-source.sh
+          # The script is in the xbb-helper-xpack repo.
+          source maintenance-scripts/download-sourceforge-source.sh
 
-            date
+          date
 
-            # https://sourceforge.net/projects/arm-none-eabi-gcc-xpack/files/
-            name="arm-none-eabi-gcc"
-            threshold=16383 # (50%)
+          # https://sourceforge.net/projects/arm-none-eabi-gcc-xpack/files/
+          name="arm-none-eabi-gcc"
+          threshold=16383 # (50%)
 
-            # 2025
-            platforms="win32-x64,linux-x64,linux-arm64,darwin-x64,darwin-arm64"
+          # 2025
+          platforms="win32-x64,linux-x64,linux-arm64,darwin-x64,darwin-arm64"
 
-            # 2024-2022
-            platforms="win32-x64,linux-x64,linux-arm64,linux-arm,darwin-x64,darwin-arm64"
+          # 2024-2022
+          platforms="win32-x64,linux-x64,linux-arm64,linux-arm,darwin-x64,darwin-arm64"
 
-            download_sourceforge "${name}" "14.2.1-1.1" ${threshold} "${platforms}"
-            download_sourceforge "${name}" "13.3.1-1.1" ${threshold} "${platforms}"
-            download_sourceforge "${name}" "13.2.1-1.1" ${threshold} "${platforms}"
+          download_sourceforge "${name}" "14.2.1-1.1" ${threshold} "${platforms}"
+          download_sourceforge "${name}" "13.3.1-1.1" ${threshold} "${platforms}"
+          download_sourceforge "${name}" "13.2.1-1.1" ${threshold} "${platforms}"
 
-            platforms="win32-x64,linux-x64,linux-arm64,linux-arm,darwin-x64,darwin-arm64"
-            download_sourceforge "${name}" "12.3.1-1.2" ${threshold} "${platforms}"
-            download_sourceforge "${name}" "12.2.1-1.2" ${threshold} "${platforms}"
-            download_sourceforge "${name}" "11.3.1-1.1" ${threshold} "${platforms}"
-            download_sourceforge "${name}" "11.2.1-1.2" ${threshold} "${platforms}"
+          platforms="win32-x64,linux-x64,linux-arm64,linux-arm,darwin-x64,darwin-arm64"
+          download_sourceforge "${name}" "12.3.1-1.2" ${threshold} "${platforms}"
+          download_sourceforge "${name}" "12.2.1-1.2" ${threshold} "${platforms}"
+          download_sourceforge "${name}" "11.3.1-1.1" ${threshold} "${platforms}"
+          download_sourceforge "${name}" "11.2.1-1.2" ${threshold} "${platforms}"
 
-            # 2021
-            platforms="win32-x64,win32-ia32,linux-x64,linux-ia32,linux-arm64,linux-arm,darwin-x64"
+          # 2021
+          platforms="win32-x64,win32-ia32,linux-x64,linux-ia32,linux-arm64,linux-arm,darwin-x64"
 
-            download_sourceforge "${name}" "10.3.1-2.3" ${threshold} "${platforms}"
-            download_sourceforge "${name}" "10.2.1-1.1" ${threshold} "${platforms}"
+          download_sourceforge "${name}" "10.3.1-2.3" ${threshold} "${platforms}"
+          download_sourceforge "${name}" "10.2.1-1.1" ${threshold} "${platforms}"
 
-            # 2020
-            platforms="win32-x64,win32-x32,linux-x64,linux-x32,linux-arm64,linux-arm,darwin-x64"
+          # 2020
+          platforms="win32-x64,win32-x32,linux-x64,linux-x32,linux-arm64,linux-arm,darwin-x64"
 
-            download_sourceforge "${name}" "9.3.1-1.4" ${threshold} "${platforms}"
+          download_sourceforge "${name}" "9.3.1-1.4" ${threshold} "${platforms}"
 
-            # 2019
-            platforms="win32-x64,win32-x32,linux-x64,linux-x32,darwin-x64"
+          # 2019
+          platforms="win32-x64,win32-x32,linux-x64,linux-x32,darwin-x64"
 
-            download_sourceforge "${name}" "9.2.1-1.1" ${threshold} "${platforms}"
-            download_sourceforge "${name}" "8.3.1-1.4" ${threshold} "${platforms}"
+          download_sourceforge "${name}" "9.2.1-1.1" ${threshold} "${platforms}"
+          download_sourceforge "${name}" "8.3.1-1.4" ${threshold} "${platforms}"
