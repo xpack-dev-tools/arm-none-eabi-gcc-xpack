@@ -1,0 +1,41 @@
+# -----------------------------------------------------------------------------
+#
+# This file is part of the xPack project (http://xpack.github.io).
+# Copyright (c) 2025 Liviu Ionescu. All rights reserved.
+#
+# Permission to use, copy, modify, and/or distribute this software
+# for any purpose is hereby granted, under the terms of the MIT license.
+#
+# If a copy of the license was not distributed with this file, it can
+# be obtained from https://opensource.org/licenses/mit.
+#
+# -----------------------------------------------------------------------------
+
+name: 'Keep Alive'
+
+on:
+  schedule:
+    - cron: '0 0 1 * *' # Monthly on the 1st at midnight UTC
+  workflow_dispatch:
+
+jobs:
+  keepalive:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Update keepalive timestamp
+        run: |
+          echo "Last keepalive: $(date -u)" > .github/keepalive
+          git config --local user.email "action@github.com"
+          git config --local user.name "GitHub Action"
+          git add .github/keepalive
+          if git diff --staged --quiet; then
+            echo "No changes to commit"
+          else
+            git commit -m "chore: update keepalive timestamp [skip ci]"
+            git push
+          fi
