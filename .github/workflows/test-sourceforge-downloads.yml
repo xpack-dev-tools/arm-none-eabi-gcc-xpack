@@ -47,7 +47,13 @@ jobs:
           # https://github.com/xpack-dev-tools/arm-none-eabi-gcc-xpack/tags
           # https://sourceforge.net/projects/arm-none-eabi-gcc-xpack/files/
           name="arm-none-eabi-gcc"
-          threshold=100
+
+          if [ "${GITHUB_REF_NAME}" == "xpack-development" ]
+          then
+            threshold=100
+          else
+            threshold=66
+          fi
 
           # 2025
           platforms="win32-x64,linux-x64,linux-arm64,darwin-x64,darwin-arm64"
