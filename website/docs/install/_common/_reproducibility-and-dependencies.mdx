@@ -9,13 +9,13 @@ import CodeBlock from '@theme/CodeBlock';
 <summary>Reproducibility and `devDependencies`</summary>
 
 To ensure reproducibility, it is essential for each project to always
-use the exact desired versions of the required tools, regardless of the
+utilise the exact desired versions of the required tools, regardless of the
 tools installed in the system.
 
-To achieve this goal, **xpm** records all locally installed binary packages
+To achieve this objective, **xpm** records all locally installed binary packages
 as development dependencies in the project `package.json` file.
 
-The result looks like this:
+The result appears as follows:
 
 <CodeBlock language="json"> {
 `  "xpack": {
@@ -35,11 +35,11 @@ The result looks like this:
 `} </CodeBlock>
 
 If the `package.json` is saved in the revision system, the above
-definition acts as a hard reference to the specific version of
-the xPack GNU Arm Embedded GCC.
+definition acts as a firm reference to the specific version of
+xPack GNU Arm Embedded GCC.
 
 After cloning the project into a different location, the command `xpm install`
-can be used to install all development dependencies.
+may be used to install all development dependencies.
 
 This is particularly useful for CI/CD environments.
 

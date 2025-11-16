@@ -101,17 +101,18 @@
     }
   },
   "devDependencies": {
-    "del-cli": "^6.0.0",
+    "del-cli": "^7.0.0",
     "json": "^11.0.0",
-    "liquidjs": "^10.19.1"
+    "liquidjs": "^10.23.0"
   },
   "topConfig": {
-    "descriptiveName": "GNU Arm Embedded GCC",
+    "descriptiveName": "xPack GNU Arm Embedded GCC",
+    "upstreamDescriptiveName": "GNU Arm Embedded GCC",
     "permalinkName": "arm-none-eabi-gcc",
     "skipCiTests": "true",
     "useSelfHostedRunners": "true"
   },
   "engines": {
-    "node": " >=18.0.0"
+    "node": " >=20.0"
   }
 }

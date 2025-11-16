@@ -7,30 +7,30 @@
 
 All binaries are:
 
-- **Self-contained** (include all required libraries).
-- **File-system relocatable** (can be installed in any location).
+- **Self-contained** (include all required libraries)
+- **File-system relocatable** (may be installed in any location)
 - Built on slightly older systems (to ensure compatibility with both
-old and new systems).
+old and new systems)
 
 <details>
 <summary>Compatibility with older systems</summary>
 
 Given that most operating systems maintain significant compatibility
 with older versions, building an application on an older system ensures
-that the same binary can run on newer versions. Conversely, building an
-application on a newer system may utilize library features that are
+that the same binary may execute on newer versions. Conversely, building an
+application on a newer system may utilise library features that are
 not available in older versions, making backward compatibility less
 feasible.
 
 </details>
 
-Similarly to [flatpacks](https://flatpak.org) or [snap](https://snapcraft.io),
+Similarly to [Flatpak](https://flatpak.org) or [Snap](https://snapcraft.io),
 but significantly simpler, xpm packages include all dependent shared libraries
 within the distributed archives, making the binaries independent of
 any similar libraries installed on the system. This ensures they
-can run on any system without needing specific libraries to be
+may execute on any system without requiring specific libraries to be
 installed.
 
-Also the builds are configured so that the binaries do not depend on
-being installed in specific folders, and can be installed in any
-location, including in user folders.
+Additionally, the builds are configured so that the binaries do not depend on
+being installed in specific folders, and may be installed in any
+location, including within user folders.

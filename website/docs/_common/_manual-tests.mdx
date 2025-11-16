@@ -7,47 +7,47 @@ import CommonXpmCleanUps from '@site/docs/_common/_xpm-clean-ups.mdx';
 
 ### Manual tests
 
-There are predefined xpm actions available to manually run various
+There are predefined xpm actions available to manually execute various
 tests on the local development machine.
 
-It is recommended to begin by performing some clean-ups (not necessary
-after the initial `git clone`):
+It is recommended to commence by performing some clean-ups (not necessary
+following the initial `git clone`):
 
 ```sh
-npm install -C ~/Work/xpack-dev-tools/arm-none-eabi-gcc-xpack.git/tests
+npm --prefix ~/Work/xpack-dev-tools/arm-none-eabi-gcc-xpack.git/tests install
 xpm run deep-clean -C ~/Work/xpack-dev-tools/arm-none-eabi-gcc-xpack.git/tests
 ```
 
 :::tip
 
-During the initial run, the installation step may take a considerable
+During the initial execution, the installation step may require a considerable
 amount of time, as it needs to download the toolchain archives, which
 can be relatively large, up to several hundred megabytes.
 
 :::
 
-To run the tests with the system compiler (usually not available on Windows):
+To execute the tests with the system compiler (usually not available on Windows):
 
 ```sh
 xpm run install -C ~/Work/xpack-dev-tools/arm-none-eabi-gcc-xpack.git/tests
 xpm run test -C ~/Work/xpack-dev-tools/arm-none-eabi-gcc-xpack.git/tests
 ```
 
-To run a selection of tests with the latest versions of toolchains:
+To execute a selection of tests with the latest versions of toolchains:
 
 ```sh
 xpm run install-selected -C ~/Work/xpack-dev-tools/arm-none-eabi-gcc-xpack.git/tests
 xpm run test-selected -C ~/Work/xpack-dev-tools/arm-none-eabi-gcc-xpack.git/tests
 ```
 
-To run all tests with the latest versions of toolchains:
+To execute all tests with the latest versions of toolchains:
 
 ```sh
 xpm run install-latest -C ~/Work/xpack-dev-tools/arm-none-eabi-gcc-xpack.git/tests
 xpm run test-latest -C ~/Work/xpack-dev-tools/arm-none-eabi-gcc-xpack.git/tests
 ```
 
-To run all tests with all toolchain versions:
+To execute all tests with all toolchain versions:
 
 ```sh
 xpm run install-all -C ~/Work/xpack-dev-tools/arm-none-eabi-gcc-xpack.git/tests
@@ -56,17 +56,17 @@ xpm run test-all -C ~/Work/xpack-dev-tools/arm-none-eabi-gcc-xpack.git/tests
 
 ### Clean-ups
 
-Running all tests may require several gigabytes of space.
+Executing all tests may require several gigabytes of space.
 
-To clean up the tests folder, use:
+To clean up the tests folder, utilise:
 
 ```sh
-npm install -C ~/Work/xpack-dev-tools/arm-none-eabi-gcc-xpack.git/tests
+npm --prefix ~/Work/xpack-dev-tools/arm-none-eabi-gcc-xpack.git/tests install
 xpm run deep-clean -C ~/Work/xpack-dev-tools/arm-none-eabi-gcc-xpack.git/tests
 ```
 
-A considerable amount of space may also be used by the toolchains.
-When no longer needed, they can be removed with `xpm uninstall`.
+A considerable amount of space may also be utilised by the toolchains.
+When no longer required, they can be removed with `xpm uninstall`.
 
 <details>
 <summary>xpm clean-ups</summary>

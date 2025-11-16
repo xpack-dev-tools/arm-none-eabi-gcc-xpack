@@ -6,26 +6,26 @@
 ### Publish the website
 
 The website deployment is performed automatically when pushing to the
-`website` branch, by a dedicated workflow in
+`website` branch, utilising a dedicated workflow in
 [GitHub Actions](https://github.com/xpack-dev-tools/arm-none-eabi-gcc-xpack/actions/workflows/publish-github-pages.yml).
 
-- open https://xpack-dev-tools.github.io/arm-none-eabi-gcc-xpack/docs/maintainer/#publish-the-website in a separate window
-- stop the local web server
-- switch to the `website` branch
-- **merge** the `xpack-development` branch into the `website` branch
-- **push** the `website` branch to GitHub
+- Open https://xpack-dev-tools.github.io/arm-none-eabi-gcc-xpack/docs/maintainer/#publish-the-website in a separate window
+- **Stop** the local web server
+- Switch to the `website` branch
+- **Merge** the `xpack-development` branch into the `website` branch
+- **Push** the `website` branch to GitHub
   :::info
-  At this moment an automated GitHub Action will generate and publish the website.
+  At this point, an automated GitHub Action will generate and publish the website.
   :::
-- checkout the `xpack-development` branch
-- wait for the publish to complete
-- refresh the web page
-- the new release blog post is
-in https://xpack-dev-tools.github.io/arm-none-eabi-gcc-xpack/blog/
-- remember the post URL, since it must be used to update the release page
+- Check out the `xpack-development` branch
+- **Wait** for the publication to complete
+- **Refresh** the web page
+- The new release blog post is available
+at https://xpack-dev-tools.github.io/arm-none-eabi-gcc-xpack/blog/
+- Record the post URL, as it must be used to update the release page
 and the X/Twitter announcement
 
-The `website` branch may be subsequently updated, as long as the
-version in `package.json` is not changed.
+The `website` branch may be subsequently updated, provided the
+version in `package.json` remains unchanged.
 
-Check the result at https://xpack-dev-tools.github.io/arm-none-eabi-gcc-xpack/.
+Verify the result at https://xpack-dev-tools.github.io/arm-none-eabi-gcc-xpack/.

@@ -3,11 +3,16 @@
 
 {/* ------------------------------------------------------------------------ */}
 
-### Update the website commons
+### Generate the website commons
 
-Run the **generate-website-commons** npm script from `website/package.json`
-in the project folder.
+Execute the **generate-website-commons** npm script from `website/package.json`
+within the project folder.
 
 ```sh
-npm run generate-website-commons -C website
+npm --prefix ~/Work/xpack-dev-tools/arm-none-eabi-gcc-xpack.git/website run generate-website-commons
 ```
+
+### Commit the website changes
+
+- Stage the `website` folder and top `README.md`
+- **Commit** with the message _**re-generate website commons**_

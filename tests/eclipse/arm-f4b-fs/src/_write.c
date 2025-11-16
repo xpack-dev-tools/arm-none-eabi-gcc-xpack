@@ -1,12 +1,12 @@
 /*
  * This file is part of the µOS++ project (http://micro-os-plus.github.io).
- * Copyright (c) 2014 Liviu Ionescu. All rights reserved.
+ * Copyright (c) 2014-2025 Liviu Ionescu. All rights reserved.
  *
  * Permission to use, copy, modify, and/or distribute this software
  * for any purpose is hereby granted, under the terms of the MIT license.
  *
  * If a copy of the license was not distributed with this file, it can
- * be obtained from https://opensource.org/licenses/MIT.
+ * be obtained from https://opensource.org/licenses/mit.
  */
 
 // Do not include on semihosting and when freestanding

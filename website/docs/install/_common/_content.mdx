@@ -25,13 +25,13 @@ import ProjectTesting from '../_project/_testing.mdx';
 
 {/* ------------------------------------------------------------------------ */}
 
-The **xPack GNU Arm Embedded GCC** can be installed automatically, using the `xpm` command
+The **xPack GNU Arm Embedded GCC** may be installed automatically, utilising the `xpm` command
 (the recommended method), or manually, by downloading and unpacking one of the
-platform specific archives.
+platform-specific archives.
 
-## Automated install
+## Automated installation
 
-The easiest (and recommended) way to install xPack GNU Arm Embedded GCC
+The easiest (and recommended) method to install xPack GNU Arm Embedded GCC
 is via **xpm** and the package available
 as <a href={`https://www.npmjs.com/package/@xpack-dev-tools/arm-none-eabi-gcc`}><code>@xpack-dev-tools/arm-none-eabi-gcc</code></a> from
 the [`npmjs.com`](https://www.npmjs.com) registry.
@@ -40,18 +40,18 @@ the [`npmjs.com`](https://www.npmjs.com) registry.
 
 ### Prerequisites
 
-The only requirement for an automated install is a recent
+The only requirement for an automated installation is a recent
 [xpm](https://xpack.github.io/xpm/), which is a portable
 [Node.js](https://nodejs.org) command line application
 that complements [npm](https://docs.npmjs.com)
-with several extra features specific to
+with several additional features specific to
 **C/C++ projects**.
 
 To install **xpm**,
-follow the instructions in the
+follow the instructions on the
 [xpm install](https://xpack.github.io/xpm/install/) page.
 
-If already installed, it is always a good idea to update it to the
+If already installed, it is always advisable to update it to the
 latest version with:
 
 ```sh
@@ -60,7 +60,7 @@ npm install --location=global xpm@latest
 
 :::tip
 
-Although not mandated by **xpm**, it is also a good idea to upgrade
+Although not mandated by **xpm**, it is also advisable to upgrade
 **npm** to the latest version, and
 **node** to a reasonably recent version (currently **npm** requires
 a **node** >=18.17.0).
@@ -68,10 +68,10 @@ a **node** >=18.17.0).
 :::
 
 <details>
-<summary>Local installs</summary>
+<summary>Local installations</summary>
 
 One of the xPack design goals is to allow each project to
-choose the exact versions of the tools it requires.
+select the exact versions of the tools it requires.
 
 Similarly to **npm** being able to install specific versions of the
 JavaScript tools into each project,
@@ -86,14 +86,14 @@ packages, for example
 
 Each such folder includes the `package.json` file with the
 project metadata and a sub-folder `.content` with the extracted
-binary archive. The executables are usually in `.content/bin`.
+binary archive. The executables are usually within `.content/bin`.
 
 :::tip
 
-On some platforms, names starting with `.` (dot) might be hidden for
-normal browsing, and seeing them requires
-separate options (like `ls -A`) or, in file browsers, to enable
-settings like **Show Hidden Files**.
+On some platforms, names beginning with `.` (dot) might be hidden for
+normal browsing, and viewing them requires
+separate options (such as `ls -A`) or, in file browsers, to enable
+settings such as **Show Hidden Files**.
 
 :::
 
@@ -106,7 +106,7 @@ If multiple binary packages are installed, in order to allow
 the executables to be accessed, one possible solution is to add
 all `<package>/.content/bin` folders to the `PATH`.
 
-To simplify things, **npm** employs a separate `<project>/node_modules/.bin` folder
+To simplify matters, **npm** employs a separate `<project>/node_modules/.bin` folder
 where it places links/forwarders
 pointing to the actual executable files.
 
@@ -115,23 +115,23 @@ a separate `<project>/xpacks/.bin` folder.
 
 With this setup, the project needs to prepend only this `.bin` folder
 to the `PATH`, and all the required tools are accessible
-and preferred to possible system tools.
+and preferred over possible system tools.
 
 </details>
 
 <details>
-<summary>Global installs and the user global xPacks store</summary>
+<summary>Global installations and the user global xPacks store</summary>
 
-Given that some binary tools (such as toolchains) can be very large
-(hundreds of megabytes or more), it is impractical to keep multiple
+Given that some binary tools (such as toolchains) may be very large
+(hundreds of megabytes or more), it is impractical to maintain multiple
 copies of these tools, one for each project.
 
 Instead, **xpm** installs the binary packages only once
 into a user global store (a platform-dependent folder
 within the home folder), thereby conserving disk space when the same
-tools are used across multiple projects.
+tools are utilised across multiple projects.
 
-In order to allow the projects to access the binary tools installed in the
+In order to allow the projects to access the binary tools installed within the
 user global store, instead of unpacking the archives in `xpacks`,
 **xpm** adds symbolic links pointing to the **user global xPacks store**.
 
@@ -140,12 +140,12 @@ each project, but without the wasted disk space.
 
 :::tip
 
-It is possible to force a local install into a project
+It is possible to force a local installation into a project
 by passing `--copy` to `xpm install`.
 
 :::
 
-if necessary, it is also possible to install packages only globally, without
+If necessary, it is also possible to install packages only globally, without
 creating local links/forwarders (see below).
 
 </details>
@@ -153,21 +153,21 @@ creating local links/forwarders (see below).
 <details>
 <summary>The user xPacks cache</summary>
 
-To save download time, all archives are first stored in a
+To save download time, all archives are first stored within a
 cache, and all subsequent downloads are replaced with the
 cached content.
 
-Therefore all published archives should be read-only and
-it is not allowed to replace them at a later time.
+Therefore, all published archives should be read-only and
+it is not permitted to replace them at a later time.
 
 </details>
 
 ### Initialise the project
 
-Upon initial use, ensure that a `package.json` file is present in the
+Upon initial use, ensure that a `package.json` file is present within the
 project root folder.
 
-This can be achieved by running `xpm init` in the desired project folder
+This may be achieved by executing `xpm init` in the desired project folder
 (substitute `my-project` accordingly):
 
 ```sh
@@ -178,18 +178,18 @@ xpm init
 <details>
 <summary>Under the hood</summary>
 
-The main purpose of `xpm init` is to create a `package.json` file, if not
+The primary purpose of `xpm init` is to create a `package.json` file, if not
 already present.
 
 In addition to `name` & `version`, the minimal `package.json` must
-include a property named `xpacks`, even empty. This property is
+include a property named `xpacks`, even if empty. This property is
 mandatory to identify the package as an **xpm package**.
 
 </details>
 
 <CommonInitialiseTheProject />
 
-### Install into the project
+### Installation within the project
 
 The next step is to install the
 **arm-none-eabi-gcc** package into the project.
@@ -222,8 +222,8 @@ the `.bin` folder:
 <details>
 <summary>PATH setup</summary>
 
-With all binary tools installed in `xpacks/.bin`, the project build
-configurations need only a single PATH adjustment:
+With all binary tools installed within `xpacks/.bin`, the project build
+configurations require only a single PATH adjustment:
 
 ```sh
 export PATH=<...project-path...>/xpacks/.bin:$PATH
@@ -253,8 +253,8 @@ the `.bin` folder:
 <details>
 <summary>PATH setup</summary>
 
-With all binary tools installed in `xpacks/.bin`, the project build
-configurations need only a single PATH adjustment:
+With all binary tools installed within `xpacks/.bin`, the project build
+configurations require only a single PATH adjustment:
 
 ```sh
 export PATH=<...project-path...>/xpacks/.bin:$PATH
@@ -276,8 +276,8 @@ the `.bin` folder:
 <details>
 <summary>PATH setup</summary>
 
-With all binary tools installed in `xpacks/.bin`, the project build
-configurations need only a single PATH adjustment:
+With all binary tools installed within `xpacks/.bin`, the project build
+configurations require only a single PATH adjustment:
 
 ```sh
 export PATH=<...project-path...>/xpacks/.bin:$PATH
@@ -292,7 +292,7 @@ export PATH=<...project-path...>/xpacks/.bin:$PATH
 
 <CommonReproducibilityAndDependencies />
 
-### Install globally
+### Installation globally
 
 For older development environments,
 it is also possible to install xPack GNU Arm Embedded GCC only globally in
@@ -326,7 +326,7 @@ the project build configurations need a PATH adjustment:
 <TabItem value="windows" label="Windows" default>
 
 <CodeBlock language="sh"> {
-`export PATH=$HOME/AppData/Roaming/xPacks/xpack-dev-tools/arm-none-eabi-gcc/14.2.1-1.1.1/.content/bin:$PATH
+`export PATH=$HOME/AppData/Roaming/xPacks/@xpack-dev-tools/arm-none-eabi-gcc/14.2.1-1.1.1/.content/bin:$PATH
 `} </CodeBlock>
 
 :::tip
@@ -341,7 +341,7 @@ corresponding shell.
 <TabItem value="macos" label="macOS">
 
 <CodeBlock language="sh"> {
-`export PATH=$HOME/Library/xPacks/xpack-dev-tools/arm-none-eabi-gcc/14.2.1-1.1.1/.content/bin:$PATH
+`export PATH=$HOME/Library/xPacks/@xpack-dev-tools/arm-none-eabi-gcc/14.2.1-1.1.1/.content/bin:$PATH
 `} </CodeBlock>
 
 </TabItem>
@@ -349,7 +349,7 @@ corresponding shell.
 <TabItem value="linux" label="GNU/Linux">
 
 <CodeBlock language="sh"> {
-`export PATH=$HOME/.local/xPacks/xpack-dev-tools/arm-none-eabi-gcc/14.2.1-1.1.1/.content/bin:$PATH
+`export PATH=$HOME/.local/xPacks/@xpack-dev-tools/arm-none-eabi-gcc/14.2.1-1.1.1/.content/bin:$PATH
 `} </CodeBlock>
 
 </TabItem>
@@ -362,12 +362,12 @@ corresponding shell.
 
 <ProjectAutomaticInstallQuickTest/>
 
-## Manual install
+## Manual installation
 
 For all platforms, the **xPack GNU Arm Embedded GCC** binaries are released as portable
-archives that can be installed in any location.
+archives that may be installed in any location.
 
-The archives can be downloaded from
+The archives may be downloaded from
 the <a href={`https://github.com/xpack-dev-tools/arm-none-eabi-gcc-xpack/releases`}>GitHub Releases</a> pages.
 
 ### Download & unpack {#manual-install-download-and-unpack}
@@ -386,7 +386,7 @@ Download the latest version named like:
 
 :::note
 
-In case you wonder where the suffix comes
+In case you wonder where the suffix originates
 from, it is exactly the Node.js `process.platform` and `process.arch`.
 The `win32` part is confusing, but we have to live with it.
 
@@ -402,7 +402,7 @@ example <code>C:\\Users\\ilg\\AppData\\Roaming\\xPacks\\arm-none-eabi-gcc\\xpack
 :::note
 
 According to Microsoft, <code>AppData\\Roaming</code> is the recommended location for
-installing user specific packages.
+installing user-specific packages.
 
 :::
 
@@ -421,7 +421,7 @@ Download the latest version named like:
 
 :::note
 
-In case you wonder where the suffix comes
+In case you wonder where the suffix originates
 from, it is exactly the Node.js `process.platform` and `process.arch`.
 
 :::
@@ -456,7 +456,7 @@ Download the latest version named like:
 
 :::note
 
-In case you wonder where the suffix comes
+In case you wonder where the suffix originates
 from, it is exactly the Node.js `process.platform` and `process.arch`.
 
 :::
@@ -482,18 +482,18 @@ chmod -R -w xpack-arm-none-eabi-gcc-14.2.1-1.1
 
 :::info
 
-For manual installs, the recommended
-install location is slightly different then the folders created by `xpm install`,
-which use the `@xpack-dev-tools` scope to group different tools,
+For manual installations, the recommended
+installation location is slightly different from the folders created by `xpm install`,
+which utilise the `@xpack-dev-tools` scope to group different tools,
 and `.content` to store the unpacked archive.
 
 :::
 
 <ProjectManualInstallQuickTest/>
 
-## Folders hierarchy
+## Folder hierarchy
 
-After install, the package creates a hierarchy of folders like the following
+After installation, the package creates a hierarchy of folders such as the following
 (only the first two depth levels are shown):
 
 <Tabs groupId="operating-systems">

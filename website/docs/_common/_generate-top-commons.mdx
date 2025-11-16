@@ -5,14 +5,14 @@
 
 ### Generate the top commons
 
-Run the top **generate-top-commons** npm script to update the
+Execute the top **generate-top-commons** npm script to update the
 `build-assets/package.json` and the GitHub workflow files.
 
 ```sh
-(cd ~/Work/xpack-dev-tools/arm-none-eabi-gcc-xpack.git; npm run generate-top-commons)
+npm --prefix ~/Work/xpack-dev-tools/arm-none-eabi-gcc-xpack.git run generate-top-commons
 ```
 
 ### Commit the top changes
 
-- stage GitHub workflows and `package.json` files (top and from `build-assets`)
-- **commit** with the message _**re-generate top commons to bump deps**_
+- Stage GitHub workflows and `package.json` files (top and from `build-assets`)
+- **Commit** with the message _**re-generate top commons**_

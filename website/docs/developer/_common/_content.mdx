@@ -1,4 +1,3 @@
-
 {/* DO NOT EDIT! */}
 {/* Automatically generated from docusaurus-template-liquid/templates/docusaurus. */}
 
@@ -20,9 +19,9 @@ import ProjectMore from '../_project/_more.mdx';
 <details>
 <summary>The xPack Build Box</summary>
 
-The build scripts in this project use the **xPack Build Box** (**XBB**)
+The build scripts in this project utilise the **xPack Build Box** (**XBB**)
 tools, which require the usual native development tools
-(packed as a Docker image for GNU/Linux builds), complemented with
+(packaged as a Docker image for GNU/Linux builds), complemented with
 several binary packages, installed with `xpm` as development dependencies.
 
 For those interested in understanding how things work, a good starting point
@@ -66,13 +65,13 @@ for each platform:
 
 :::note
 
-In case you wonder where these names come
+In case you wonder where these names originate
 from, they are exactly the Node.js `process.platform` and `process.arch`
 for each platform.
 
 :::
 
-The build configurations are defined in the `package.json` file, in the
+The build configurations are defined in the `package.json` file, within the
 `xpack` section.
 
 
@@ -110,8 +109,8 @@ The build configurations are defined in the `package.json` file, in the
 ```
 
 
-To ask **xpm** to perform a specific action on a given build configuration,
-use the `--config <name>` option.
+To request **xpm** to perform a specific action on a given build configuration,
+utilise the `--config <name>` option.
 
 For example:
 
@@ -127,23 +126,22 @@ xpm run build --config darwin-x64
 
 The xpm actions are extensions of npm scripts, i.e. named sequences
 of commands that are invoked via `xpm run <name>` to perform specific
-operations.
-together in a sub-shell .
+operations together in a sub-shell.
 
 The commands are invoked in a sub-shell with an adjusted PATH,
 having the `xpacks/.bin`
 folder prepended. This ensures the locally installed tools are
 preferred to the system tools.
 
-Actions can be defined for the entire project or for a specific build
+Actions may be defined for the entire project or for a specific build
 configuration.
 
-The actions are defined in the `package.json` file, in the
+The actions are defined in the `package.json` file, within the
 `xpack` section, at the top or inside build configurations.
 
 :::tip
 
-For those who, for various reasons, can not use **xpm**, it is
+For those who, for various reasons, cannot utilise **xpm**, it is
 perfectly possible to manually adjust the PATH and to invoke the
 sequence of commands in order, just that it is more tedious,
 since multiple substitutions must be performed to compose the
@@ -159,7 +157,7 @@ commands.
 xpm/xPack actions and build configurations are supported in Visual Studio via the
 [xPack C/C++ Managed Build Tools](https://marketplace.visualstudio.com/items?itemName=ilg-vscode.xpack) extension.
 
-With this extension installed, xpm actions can be very conveniently
+With this extension installed, xpm actions may be very conveniently
 invoked via a single mouse click, for example:
 
 ![xpm actions](https://github.com/xpack/vscode-xpack-extension-ts/raw/master/assets/docs-images/xpack-actions.png)
@@ -168,8 +166,8 @@ invoked via a single mouse click, for example:
 
 ## Prerequisites
 
-The build scripts run on GNU/Linux and macOS. The Windows binaries are
-compiled on GNU/Linux, using [mingw-w64](https://mingw-w64.org).
+The build scripts execute on GNU/Linux and macOS. The Windows binaries are
+compiled on GNU/Linux, utilising [mingw-w64](https://mingw-w64.org).
 
 For details on installing the prerequisites, please read the
 [Build Prerequisites](https://xpack-dev-tools.github.io/docs/developer/install/prerequisites/)
@@ -180,9 +178,9 @@ page.
 <details>
 <summary>Get the writable helper sources (optional, for development purposes)</summary>
 
-The project has a dependency to a common **helper**, that is
+The project has a dependency on a common **helper**, that is
 normally installed as a read-only dependency; **for development
-purposes**, to be able to make changes to the scripts located inside the helper,
+purposes**, to be able to make changes to the scripts located within the helper,
 clone the `xpack-development` branch and link it to
 the user's global xPacks store:
 
@@ -196,8 +194,8 @@ git clone \
 xpm link -C ~/Work/xpack-dev-tools/xbb-helper-xpack.git
 ```
 
-For more details the how a writable helper can be used via
-`xpm link`, please see the
+For more details on how a writable helper may be utilised via
+`xpm link`, please refer to the
 [XBB](https://xpack.github.io/xbb/#writable-helper-scripts) documentation.
 
 </details>
@@ -210,7 +208,7 @@ The builds require dedicated machines for each platform
 (x64 GNU/Linux, armh64 GNU/Linux, arm GNU/Linux,
 x64 macOS and arm64 macOS).
 
-### Update the repo
+### Update the repository
 
 ```sh
 git -C ~/Work/xpack-dev-tools/arm-none-eabi-gcc-xpack.git pull
@@ -251,25 +249,25 @@ git -C ~/Work/xpack-dev-tools/xbb-helper-xpack.git pull
 
 </Tabs>
 
-### Compile with debug info
+### Compile with debug information
 
-In some cases it is necessary to run a debug session with the binaries.
+In some cases it is necessary to execute a debug session with the binaries.
 
 For these cases, the build script accepts the `--debug` options.
 
-There are also xpm actions that use this option (`build-development-debug`
+There are also xpm actions that utilise this option (`build-development-debug`
 and `docker-build-development-debug`).
 
-### Use a local cache
+### Utilise a local cache
 
-The XBB build scripts use a local cache such that files are downloaded only
-during the first run, later runs being able to use the cached files.
+The XBB build scripts utilise a local cache such that files are downloaded only
+during the first execution, later executions being able to utilise the cached files.
 
 However, occasionally some servers may not be available, and the builds
 may fail.
 
 The workaround is to manually download the files from alternate
-locations (like
+locations (such as
 https://github.com/xpack-dev-tools/files-cache/tree/master/libs),
 place them in the XBB cache (`Work/cache`) and restart the build.
 

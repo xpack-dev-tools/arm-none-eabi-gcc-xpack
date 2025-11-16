@@ -78,6 +78,7 @@ h2[class*="title"]
 .markdown h1:first-child {
   --ifm-h1-font-size: 2.5em
 }
+
 img.mac-stadium-img {
   float: right;
   width: 200px;
@@ -338,6 +339,38 @@ code {
 .margin-left-platforms::before {
   content: ' ';
   margin-left: 0.6em;
+}
+
+/* Make the sidebar not wrap and display ellipsis for long items */
+.menu__list-item-collapsible {
+  flex-wrap: nowrap;
+}
+
+.menu__list-item-collapsible .menu__link {
+  white-space: nowrap !important;
+  overflow: hidden !important;
+  text-overflow: ellipsis !important;
+  flex: 1 1 0% !important;  /* Allow the link to take available space and shrink */
+  min-width: 0 !important;  /* Allow flex item to shrink below content size */
+  display: block !important; /* Ensure it's a block element for ellipsis to work */
+  padding-right: 0px;
+}
+
+.menu__list-item-collapsible .menu__caret {
+  flex-shrink: 0;           /* Prevent the button from shrinking */
+  margin-left: 4px;         /* Add some space between text and button */
+}
+
+.menu__list-item {
+  overflow: hidden;         /* Hide overflowing content */
+}
+
+.menu__list-item .menu__link {
+  white-space: nowrap !important;
+  overflow: hidden !important;
+  text-overflow: ellipsis !important;
+  display: block !important; /* Ensure it's a block element for ellipsis to work */
+  margin-right: 0px;
 }
 
 /* ------------------------------------------------------------------------- */
