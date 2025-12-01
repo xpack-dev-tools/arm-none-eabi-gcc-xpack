@@ -29,6 +29,17 @@ jobs:
 
       - name: Update keepalive timestamp
         run: |
+          # Check if there are any commits in the last 30 days
+          last_commit_date=$(git log -1 --format=%ct)
+          current_date=$(date +%s)
+          days_since_commit=$(( (current_date - last_commit_date) / 86400 ))
+
+          if [ $days_since_commit -lt 30 ]; then
+            echo "Repository has commits within the last 30 days (${days_since_commit} days ago). Skipping keepalive update."
+            exit 0
+          fi
+
+          echo "No commits in the last ${days_since_commit} days. Updating keepalive timestamp."
           echo "Last keepalive: $(date -u)" > .github/keepalive
           git config --local user.email "action@github.com"
           git config --local user.name "GitHub Action"
@@ -37,5 +48,20 @@ jobs:
             echo "No changes to commit"
           else
             git commit -m "chore: update keepalive timestamp [skip ci]"
+
+            # Push to the default branch (xpack)
             git push
+
+            # Merge into xpack-development branch if it exists
+            if git ls-remote --heads origin xpack-development | grep -q xpack-development; then
+              echo "Merging keepalive update into xpack-development branch"
+              current_branch=$(git rev-parse --abbrev-ref HEAD)
+              git fetch origin xpack-development
+              git checkout xpack-development
+              git merge --no-edit ${current_branch}
+              git push origin xpack-development
+              git checkout ${current_branch}
+            else
+              echo "xpack-development branch does not exist, skipping merge"
+            fi
           fi
