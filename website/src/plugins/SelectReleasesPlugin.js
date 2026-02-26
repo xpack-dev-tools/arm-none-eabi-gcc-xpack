@@ -12,7 +12,7 @@
  * be obtained from https://opensource.org/licenses/mit.
  */
 
-import util from 'util';
+import util from 'util'
 
 // https://github.com/facebook/docusaurus/pull/9931
 

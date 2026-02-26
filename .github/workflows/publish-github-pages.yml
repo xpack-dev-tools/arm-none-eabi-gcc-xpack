@@ -34,7 +34,6 @@ on:
     # ... any of these files changes ...
     paths:
       - 'website/**'
-      - 'typedoc.json'
       - '**/tsconfig*.json'
       - 'src/**/*.ts'
       - 'README.md'
@@ -54,30 +53,29 @@ permissions:
 # Allow one concurrent deployment.
 # https://docs.github.com/en/actions/using-jobs/using-concurrency
 concurrency:
-  group: "pages"
+  group: 'pages'
   cancel-in-progress: true
 
 jobs:
   # Single deploy job since we're just deploying.
-  # https://docs.github.com/en/actions/using-github-hosted-runners/using-github-hosted-runners/about-github-hosted-runners#standard-github-hosted-runners-for-public-repositories
   deploy:
     environment:
       name: github-pages
       url: ${{steps.deployment.outputs.page_url}}
-    # https://docs.github.com/en/actions/using-github-hosted-runners/about-github-hosted-runners#supported-runners-and-hardware-resources
+    # https://github.com/actions/runner-images
     runs-on: ubuntu-24.04
 
     steps:
       - name: Checkout
         # https://github.com/actions/checkout
-        uses: actions/checkout@v5
+        uses: actions/checkout@v6.0.1
         with:
           # The full history, required to compute lastUpdatedAt
           fetch-depth: 0
 
       - name: Use Nodejs
         # https://github.com/actions/setup-node
-        uses: actions/setup-node@v5
+        uses: actions/setup-node@v6.2.0
         with:
           # Node LTS version.
           node-version: 20
@@ -90,13 +88,13 @@ jobs:
 
       - name: Setup Pages
         # https://github.com/actions/configure-pages
-        uses: actions/configure-pages@v5
+        uses: actions/configure-pages@v5.0.0
 
       - name: Upload Pages artifact
         # https://github.com/actions/upload-pages-artifact
-        uses: actions/upload-pages-artifact@v4
+        uses: actions/upload-pages-artifact@v4.0.0
         with:
-          # Upload entire repository
+          # Upload entire website
           path: './website/build'
 
       - name: Deploy to GitHub Pages

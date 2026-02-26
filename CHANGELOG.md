@@ -2,6 +2,12 @@
 
 Entries in this file are in reverse chronological order.
 
+## 2026-02-27
+
+* v15.2.1-1.1 prepared
+
+...
+
 ## 2024-12-31
 
 * v14.2.1-1.1 published on npmjs.com

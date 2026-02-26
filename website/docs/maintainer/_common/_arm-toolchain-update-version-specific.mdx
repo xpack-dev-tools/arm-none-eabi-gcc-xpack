@@ -15,23 +15,23 @@ import versionMinor from '@site/src/libs/versionMinor';
 
 With a Git client:
 
-- Check out the branch mentioned in the release notes
-  (such as <code>users/ARM/binutils-2_43-branch</code>)
+- Check out the upstream branch mentioned in the release notes
+  (such as <code>users/ARM/binutils-2_45-branch</code>)
 - **Push** it to origin with the same name
 - Enable a filter on the current branch
 - Identify the commit ID from release notes or manifest.txt (search back in time)
-- Add a tag such as <code>binutils-2.43-arm-none-eabi-{versionMajor()}.{versionMinor()}.rel1</code>
+- Add a tag such as <code>binutils-2.45-arm-none-eabi-{versionMajor()}.{versionMinor()}.rel1</code>
 - **Push** the tag to origin
 - Check the tag at https://github.com/xpack-dev-tools/binutils-gdb/tags/
 
 Similarly for GDB:
 
 - Check out the branch mentioned in the release notes
-  (such as <code>gdb-15-branch</code>)
+  (such as <code>gdb-16-branch</code>)
 - **Push** it to origin with the same name
 - Enable a filter on the current branch
 - Identify the commit ID from release notes or manifest.txt (search back in time)
-- Add a tag such as <code>gdb-15-arm-none-eabi-{versionMajor()}.{versionMinor()}.rel1</code>
+- Add a tag such as <code>gdb-16-arm-none-eabi-{versionMajor()}.{versionMinor()}.rel1</code>
 - **Push** the tag to origin
 - Check the tag at https://github.com/xpack-dev-tools/binutils-gdb/tags/
 
@@ -51,7 +51,7 @@ With a Git client:
 - Cherry-pick the `system.h: do not define abort() on mingw` commit
 - **Push** the *-xpack branch to origin
 - Save as Patches into the helper `patches` folder
-- Rename as <code>gcc-14.2.1-cross.git.patch</code>
+- Rename as <code>gcc-15.2.1-cross.git.patch</code>
 
 ### Update the local newlib-cygwin fork (optional, normally the archive is used)
 
@@ -61,7 +61,7 @@ With a Git client:
 - **Push** it to origin with the same name
 - Enable a filter on the current branch
 - Identify the commit ID from release notes or manifest.txt (search back in time)
-- Create a tag like <code>newlib-4.4.0-arm-none-eabi-{versionMajor()}.{versionMinor()}.rel1</code>
+- Create a tag like <code>newlib-4.5.0-arm-none-eabi-{versionMajor()}.{versionMinor()}.rel1</code>
 - **Push** the tag to origin
 - Check the tag at https://github.com/xpack-dev-tools/newlib-cygwin/tags/
 

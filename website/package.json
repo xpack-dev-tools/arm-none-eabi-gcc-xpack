@@ -20,6 +20,7 @@
     "npm-install": "npm install",
     "npm-link-helpers": "npm link @xpack/docusaurus-template-liquid @xpack/npm-packages-helper",
     "npm-ci": "npm ci",
+    "clean": "del-cli .docusaurus build",
     "deep-clean": "del-cli .docusaurus build node_modules package-lock.json",
     "import-website-releases": "bash node_modules/@xpack/docusaurus-template-liquid/maintenance-scripts/import-releases.sh --xpack-dev-tools",
     "generate-website-blog-post": "bash node_modules/@xpack/docusaurus-template-liquid/maintenance-scripts/generate-blog-post.sh --xpack-dev-tools",
@@ -38,12 +39,12 @@
     "@docusaurus/plugin-ideal-image": "3.9.2",
     "@docusaurus/preset-classic": "3.9.2",
     "@docusaurus/theme-search-algolia": "3.9.2",
-    "@mdx-js/react": "^3.0.0",
+    "@mdx-js/react": "^3.1.1",
     "clean-css": "~5.3.3",
     "clsx": "^2.0.0",
     "prism-react-renderer": "^2.3.0",
-    "react": "^19.0.0",
-    "react-dom": "^19.0.0"
+    "react": "^19.2.3",
+    "react-dom": "^19.2.3"
   },
   "devDependencies": {
     "@docusaurus/module-type-aliases": "3.9.2",
@@ -51,8 +52,10 @@
     "@docusaurus/types": "3.9.2",
     "del-cli": "^7.0.0",
     "json": "^11.0.0",
-    "liquidjs": "^10.23.0",
-    "typescript": "~5.9.3"
+    "liquidjs": "^10.24.0",
+    "typescript": "~5.9.3",
+    "@xpack/docusaurus-template-liquid": "github:xpack/docusaurus-template-liquid",
+    "@xpack/npm-packages-helper": "github:xpack/npm-packages-helper"
   },
   "$devDependenciesUrls": [
     "https://www.npmjs.com/package/del-cli",
@@ -79,15 +82,15 @@
     "isArmToolchain": "true",
     "showDeprecatedGnuMcuAnalytics": "true",
     "triplet": "arm-none-eabi",
-    "armMajorMinorRelease": "14.2",
+    "armMajorMinorRelease": "15.2",
     "armSubRelease": "1",
-    "armReleaseDate": "10 Dec 2024",
-    "gdbVersionMajor": "15",
-    "gdbVersionMinor": "2",
+    "armReleaseDate": "17 Dec 2025",
+    "gdbVersionMajor": "16",
+    "gdbVersionMinor": "3",
     "binutilsVersionMajor": "2",
-    "binutilsVersionMinor": "43",
-    "pythonVersion": "3.12.8",
-    "newlibVersion": "4.4.0",
+    "binutilsVersionMinor": "45",
+    "pythonVersion": "3.13.12",
+    "newlibVersion": "4.5.0",
     "shareOnTwitter": "true"
   },
   "engines": {

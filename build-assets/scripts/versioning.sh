@@ -53,7 +53,194 @@ function application_build_versioned_components()
   # Keep them in sync with the release manifest.txt file.
   # https://developer.arm.com/tools-and-software/open-source-software/developer-tools/gnu-toolchain/downloads
 
-  if [[ "${XBB_RELEASE_VERSION}" =~ 14[.].*[.].*-.* ]]
+  if [[ "${XBB_RELEASE_VERSION}" =~ 15[.].*[.].*-.* ]]
+  then
+
+    if [[ "${XBB_RELEASE_VERSION}" =~ 15[.]2[.]1-.* ]]
+    then
+
+      # https://developer.arm.com/-/media/Files/downloads/gnu/15.2.rel1/srcrel/arm-gnu-toolchain-src-snapshot-15.2.rel1-manifest.txt
+
+      XBB_ARM_RELEASE="15.2.rel1"
+      XBB_ARM_URL_BASE="https://developer.arm.com/-/media/Files/downloads/gnu/${XBB_ARM_RELEASE}/src"
+
+      # -----------------------------------------------------------------------
+
+      # Arm: release notes.
+      # Repository: git://sourceware.org/git/binutils-gdb.git
+      # Branch: binutils-2_45-branch
+      # Revision: cdfcefe12f172e8dfaeb352d068851af38e007e3 (from manifest.txt
+      # or release notes)
+
+      # https://github.com/xpack-dev-tools/binutils-gdb/tags
+
+      XBB_BINUTILS_VERSION="2.45"
+      XBB_BINUTILS_TAG_NAME="binutils-${XBB_BINUTILS_VERSION}-arm-none-eabi-${XBB_ARM_RELEASE}"
+
+      XBB_BINUTILS_SRC_FOLDER_NAME="binutils-gdb-${XBB_BINUTILS_TAG_NAME}"
+      XBB_BINUTILS_ARCHIVE_NAME="${XBB_BINUTILS_TAG_NAME}.tar.gz"
+      XBB_BINUTILS_ARCHIVE_URL="https://github.com/xpack-dev-tools/binutils-gdb/archive/refs/tags/${XBB_BINUTILS_ARCHIVE_NAME}"
+
+      XBB_BINUTILS_PATCH_FILE_NAME="binutils-${XBB_BINUTILS_VERSION}.patch"
+
+      # -----------------------------------------------------------------------
+
+      # Arm: release notes.
+      # Repository: git://sourceware.org/git/binutils-gdb.git
+      # Branch: gdb-16-branch
+      # Revision: 214bb42ce0e5a1c7599a3e697841bfc1c95b4a5a (from manifest.txt
+      # or release notes)
+
+      # https://github.com/xpack-dev-tools/binutils-gdb/tags/
+
+      # From `gdb/version.in`
+      XBB_GDB_VERSION="16.3"
+      XBB_GDB_TAG_NAME="gdb-16-arm-none-eabi-${XBB_ARM_RELEASE}"
+
+      XBB_GDB_SRC_FOLDER_NAME="binutils-gdb-${XBB_GDB_TAG_NAME}"
+      XBB_GDB_ARCHIVE_NAME="${XBB_GDB_TAG_NAME}.tar.gz"
+      XBB_GDB_ARCHIVE_URL="https://github.com/xpack-dev-tools/binutils-gdb/archive/refs/tags/${XBB_GDB_ARCHIVE_NAME}"
+
+      # Mandatory, otherwise gdb-py3 is not relocatable.
+      XBB_GDB_PATCH_FILE_NAME="gdb-${XBB_GDB_VERSION}-cross.git.patch"
+
+      # -----------------------------------------------------------------------
+
+      # Arm: release notes.
+      # Repository: git://gcc.gnu.org/git/gcc.git
+      # Branch: refs/vendors/ARM/heads/arm-15
+      # Revision: b0e3253dc990beb637b70d2e0c43e8ec586d169f (from manifest.txt
+      # or release notes)
+
+      # XBB_GCC_VERSION computer from XBB_RELEASE_VERSION
+      XBB_GCC_SRC_FOLDER_NAME="gcc"
+      XBB_GCC_ARCHIVE_NAME="gcc-arm-none-eabi-${XBB_ARM_RELEASE}.tar.xz"
+      XBB_GCC_ARCHIVE_URL="${XBB_ARM_URL_BASE}/gcc.tar.xz"
+
+      XBB_GCC_PATCH_FILE_NAME="gcc-${XBB_GCC_VERSION}-cross.git.patch"
+
+      XBB_GCC_MULTILIB_LIST="aprofile,rmprofile"
+
+      # -----------------------------------------------------------------------
+
+      # Arm: release notes.
+      # https://www.sourceware.org/newlib/
+      # Repository: git://sourceware.org/git/newlib-cygwin.git
+      # Revision: f49f54b00d80ec12d6875def9252afba37f51825
+
+      # From newlib/configure PACKAGE_VERSION=
+      XBB_NEWLIB_VERSION="4.5.0"
+      XBB_NEWLIB_SRC_FOLDER_NAME="newlib-cygwin"
+      XBB_NEWLIB_ARCHIVE_NAME="newlib-arm-none-eabi-${XBB_ARM_RELEASE}.tar.xz"
+      XBB_NEWLIB_ARCHIVE_URL="${XBB_ARM_URL_BASE}/newlib-cygwin.tar.xz"
+
+    else
+      echo "Unsupported ${XBB_APPLICATION_LOWER_CASE_NAME} version ${XBB_RELEASE_VERSION} in ${FUNCNAME[0]}()"
+      exit 1
+    fi
+
+    # https://www.python.org/ftp/python/
+    # Requires `scripts/helper/extras/python/pyconfig-win-3.13.12.h` &
+    # `python3-config.sh`
+
+    XBB_WITH_GDB_PY3="y"
+
+    export XBB_PYTHON3_VERSION="3.13.12" # "3.13.12"
+    export XBB_PYTHON3_VERSION_MAJOR=$(xbb_get_version_major "${XBB_PYTHON3_VERSION}" )
+    export XBB_PYTHON3_VERSION_MINOR=$(xbb_get_version_minor "${XBB_PYTHON3_VERSION}")
+
+    # Explicit, since it is also used in python3_copy_syslibs
+    export XBB_PYTHON3_SRC_FOLDER_NAME="Python-${XBB_PYTHON3_VERSION}"
+
+    # Fpr the library versions:
+    # https://developer.arm.com/downloads/-/arm-gnu-toolchain-downloads
+
+    # https://ftp.gnu.org/pub/gnu/libiconv/
+    XBB_LIBICONV_VERSION="1.15" # Arm
+
+    # https://zlib.net/fossils/
+    XBB_ZLIB_VERSION="1.3.2" # "1.3.1" 
+
+    # https://gmplib.org/download/gmp/
+    # Arm: In `gmp-h.in` search for `__GNU_MP_VERSION`.
+    XBB_GMP_VERSION="6.2.1" # Arm 6.2
+
+    # https://www.mpfr.org/history.html
+    # Arm: In `VERSION`.
+    XBB_MPFR_VERSION="3.1.6" # Arm
+
+    # https://www.multiprecision.org/mpc/download.html
+    # Arm: In `configure`, search for `VERSION=`.
+    XBB_MPC_VERSION="1.0.3" # Arm
+
+    # https://sourceforge.net/projects/libisl/files/
+    # Arm: In `configure`, search for `PACKAGE_VERSION=`.
+    XBB_ISL_VERSION="0.15" # arm
+
+    # https://sourceforge.net/projects/lzmautils/files/
+    # Avoid 5.6.[01]!
+    XBB_XZ_VERSION="5.8.2" # "5.6.3"
+
+    # https://github.com/facebook/zstd/tags
+    XBB_ZSTD_VERSION="1.5.7" # "1.5.6" 
+
+    # https://ftpmirror.gnu.org/gnu/ncurses/
+    XBB_NCURSES_VERSION="6.6" # "6.5"
+
+    # https://ftpmirror.gnu.org/gnu/texinfo/
+    # 7.2 fails on x64 linux with
+    # /bin/bash: parsetexi/Parsetexi.xsc: No such file or directory
+    # Makefile:5576: recipe for target 'parsetexi/Parsetexi.c' failed
+    XBB_TEXINFO_VERSION="7.2"  # "7.1.1"
+
+    # -------------------------------------------------------------------------
+    # GDB dependencies
+
+    # https://github.com/libexpat/libexpat/releases
+    # Arm: from release notes
+    # https://developer.arm.com/tools-and-software/open-source-software/developer-tools/gnu-toolchain/downloads-1
+    XBB_EXPAT_VERSION="2.7.1" # "2.2.5" # Arm
+
+    # https://ftpmirror.gnu.org/gnu/libunistring/
+    XBB_LIBUNISTRING_VERSION="1.4.2" # "1.3"
+
+    # https://ftp.gnu.org/pub/gnu/gettext/
+    # 0.23 fails on macOS with:
+    # gettext-tools/src/msgcmp.c:109:36: error: expected expression
+    # bindtextdomain ("bison-runtime", relocate (BISON_LOCALEDIR));
+    XBB_GETTEXT_VERSION="0.26" # "0.22"
+
+    # https://github.com/telmich/gpm/tags
+    # https://github.com/xpack-dev-tools/gpm/tags
+    XBB_GPM_VERSION="1.20.7-1"
+
+    # https://ftpmirror.gnu.org/gnu/readline/
+    XBB_READLINE_VERSION="8.3" # "8.2"
+
+    # https://sourceware.org/pub/bzip2/
+    XBB_BZIP2_VERSION="1.0.8"
+
+    # https://github.com/libffi/libffi/tags
+    XBB_LIBFFI_VERSION="3.5.2" # "3.4.6" # "3.4.4"
+
+    # https://www.bytereef.org/mpdecimal/download.html
+    XBB_MPDECIMAL_VERSION="2.5.1"
+
+    # Required by a Python 3 module.
+    # https://www.sqlite.org/download.html
+    XBB_SQLITE_VERSION="3510200" # "3470200"
+    XBB_SQLITE_YEAR="2026" # "2024"
+
+    # Replacement for the old libcrypt.so.1; required by Python 3.
+    # https://github.com/besser82/libxcrypt/tags
+    XBB_LIBXCRYPT_VERSION="4.5.2" # "4.4.36"
+
+    # https://www.openssl.org/source/
+    XBB_OPENSSL_VERSION="3.6.1" # "3.4.0"
+
+    gcc_cross_build_common
+
+  elif [[ "${XBB_RELEASE_VERSION}" =~ 14[.].*[.].*-.* ]]
   then
 
     if [[ "${XBB_RELEASE_VERSION}" =~ 14[.]2[.]1-.* ]]

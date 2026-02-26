@@ -15,7 +15,9 @@ The website deployment is performed automatically when pushing to the
 - **Merge** the `xpack-development` branch into the `website` branch
 - **Push** the `website` branch to GitHub
   :::info
-  At this point, an automated GitHub Action will generate and publish the website.
+  At this point, an automated forwarding GitHub Action will trigger 
+  a GitHub Action in the separate project to generate and publish 
+  the [website]https://xpack-dev-tools.github.io/arm-none-eabi-gcc-xpack/.
   :::
 - Check out the `xpack-development` branch
 - **Wait** for the publication to complete
