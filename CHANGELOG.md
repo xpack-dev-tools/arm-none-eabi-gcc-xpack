@@ -4,13 +4,237 @@ Entries in this file are in reverse chronological order.
 
 ## 2026-02-27
 
-* v15.2.1-1.1 prepared
+* 7484e30 extras add 15.2.rel1
+* e649f3f website: update folder hierarchies
+* 192a210 application.sh: enable multilib
+* 21a57cb development-durations update
+* 454dfa0 prepare v15.2.1-1.1 
 
-...
+## 2026-02-26
+
+* cbd5de1 copyright updates
+
+## 2026-02-01
+
+* 7809a4a chore: update keepalive timestamp [skip ci]
+* cbb305f chore: update keepalive timestamp [skip ci]
+* b1fba38 .github/workflows/keepalive.yml: update
+* a7787fa chore: update keepalive timestamp [skip ci]
+
+## 2025-11-16
+
+* 5a7453b test-sourceforge-downloads.yml update
+* cc07071 test-sourceforge-downloads.yml update
+* 427b307 Merge branch 'xpack-development' into xpack
+
+## 2025-11-08
+
+* abbcfe0 test-sourceforge-downloads.yml update
+* 3fe4297 add workflows/keepalive.yml
+* e5fce69 add workflows/keepalive.yml
+* 9e47e5d update copyright notices
+* 94a4dec update copyright notices
+
+## 2025-11-03
+
+* bd7086b package.json clang 19
+
+## 2025-11-01
+
+* d659082 website: re-generate commons
+* 489060a re-generate top commons
+* 46372f6 re-generate top commons
+
+## 2025-10-31
+
+* a6d2943 re-generate top commons
+
+## 2025-10-27
+
+* 221a81a build-assets/package.json clang 19.1.7
+* c685e79 build-assets/package.json clang 19.1.7
+
+## 2025-10-26
+
+* 2d89142 re-generate top commons
+
+## 2025-10-24
+
+* 4910c5d website: re-generate commons
+* f7d3143 re-generate top commons
+* cf5df38 re-generate top commons
+
+## 2025-10-19
+
+* 0c48575 website: re-generate commons
+* e059373 re-generate commons
+* bff132a re-generate commons
+
+## 2025-04-12
+
+* 46b80b7 test-sourceforge-download.yml update
+* 8027d1e test-sourceforge-download.yml update
+
+## 2025-04-09
+
+* 0cddad4 test-sourceforge*: on every Saturday
+
+## 2025-04-06
+
+* 03091a5 test-sourceforge-download.yml update
+
+## 2025-04-05
+
+* 4f9342e test-sourceforge-download.yml update
+* 2df8e92 test-sourceforge-download.yml update
+* a374347 test-sourceforge-download.yml update
+* 0056dd1 test-sourceforge-download.yml update
+* 6f28918 test-sourceforge-download.yml update
+* d19c1e2 test-sourceforge-download.yml update
+* 7e2621e add test-sourceforge-downloads.yml
+
+## 2025-03-23
+
+* 61ffc10 update /licenses/MIT
+* 1d41508 website: re-generate commons
+* b467b50 re-generate commons
+* f5fa09b website package.json shareOnTwitter update
+* b538e47 website package.json author update
+* a1ce848 website generate-website-commons update
+
+## 2025-02-24
+
+* 55bdb44 website: re-generate descriptive & permalink names
+* 4766586 re-generate descriptive & permalink names
+
+## 2025-02-23
+
+* 03aee28 website: re-generate commons
+* 923c565 re-generate commons
+
+## 2025-02-18
+
+* ac4ebb0 package.json: bump minimumXpmRequired 0.20.5
+* 3afa78c package.json: bump xpm 0.20.5
+
+## 2025-02-14
+
+* c680ce4 re-generate commons
+* 982edaf application.sh: WITHOUT_MULTILIB="y"
+* 3f332ea re-generate commons
+
+## 2025-02-13
+
+* acbd98c application.sh: WITHOUT_MULTILIB="y"
+* 90d146d re-generate commons
+* c699456 versioning.sh: ffi 3.4.7 on macOS
+* 594be65 package.json revert top version to release
+* 8ecdaf8 prepare 14.2.1-1.2 with new zlib for macos
+* b4b72d9 website: re-generate commons
+* bc6c91b website: re-generate commons
+* bd7a9a1 build-assets: update generate-website-blog-post
+* 210f99b build-assets: bump deps
+* 8c9e89d website: re-generate commons
+* 5924010 website: re-generate commons
+* a16056b website: re-generate commons
+
+## 2025-01-31
+
+* cd16b92 website: updates and final common rework
+
+## 2025-01-30
+
+* f15355d website: rework getting-started
+* e8365d2 website: more rework with commons
+
+## 2025-01-29
+
+* 8bbee71 website: more rework with commons
+
+## 2025-01-27
+
+* 2bf701f website: cosmetise imports
+
+## 2025-01-26
+
+* f671d11 website: rework with _project
+
+## 2025-01-23
+
+* f1a6550 website: re-generate commons
+
+## 2025-01-22
+
+* 0cfa617 website: update history
+* 4225998 website: re-generate commons
+
+## 2025-01-21
+
+* 5fe7b68 build-assets: cleanup actions
+* 94a177d website: re-generate commons
+* 3526fda website: re-generate commons
+* 692710f website: re-generate commons
+
+## 2025-01-20
+
+* 746b4a9 re-generate commons
+* 40f6dac website: re-generate commons
+
+## 2025-01-19
+
+* 62c1da6 website: remove unused customField.js
+* bf4ddf8 build-assets: move customFields to websiteConfig
+* 89639dc website: re-generate commons
+
+## 2025-01-17
+
+* c841b39 website: re-generate commons
+* 7f44b22 re-generate commons
+* 053dfc4 website: re-generate commons
+
+## 2025-01-16
+
+* 039d6d7 website: re-generate commons
+* 58dae3f re-generate commons
+
+## 2025-01-15
+
+* c74b668 website: updates
+* cda0721 re-generate commons
+
+## 2025-01-14
+
+* c9ef493 re-generate commons
+* 75636f5 re-generate commons
+
+## 2025-01-13
+
+* 81bdd31 re-generate workflows
+* 02648e9 copyright updates
+* 7be472e copyright updates
+
+## 2025-01-10
+
+* e69ed61 website: updates
+* 438a40b website: updates
+* 6af6084 website: updates
+
+## 2025-01-09
+
+* 4033a55 build-assets/package.json: bump deps
+* 69b584a website: updates
+
+## 2025-01-02
+
+* f6ce222 website/_xpack fix tools path
+* f6f1546 website: updates
+* 358b5e4 build-assets/package.json: bump deps
 
 ## 2024-12-31
 
-* v14.2.1-1.1 published on npmjs.com
+* fe30b01 website update
+* 1a27b19 14.2.1-1.1.1
+* bfc76f4 CHANGELOG: publish npm v14.2.1-1.1.1
 * 1f1ab03 package.json: update urls for 14.2.1-1.1.1 release
 * 20c412b website update
 * b8d2c69 blog post release 14.2.1-1.1 published
