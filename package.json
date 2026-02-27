@@ -86,6 +86,8 @@
       "arm-none-eabi-gdb-py3": "./.content/bin/arm-none-eabi-gdb-py3",
       "arm-none-eabi-gfortran": "./.content/bin/arm-none-eabi-gfortran",
       "arm-none-eabi-gprof": "./.content/bin/arm-none-eabi-gprof",
+      "arm-none-eabi-gstack": "./.content/bin/arm-none-eabi-gstack",
+      "arm-none-eabi-gstack-py3": "./.content/bin/arm-none-eabi-gstack-py3",
       "arm-none-eabi-ld": "./.content/bin/arm-none-eabi-ld",
       "arm-none-eabi-ld.bfd": "./.content/bin/arm-none-eabi-ld.bfd",
       "arm-none-eabi-ld.gold": "./.content/bin/arm-none-eabi-ld.gold",
