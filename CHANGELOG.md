@@ -2,13 +2,19 @@
 
 Entries in this file are in reverse chronological order.
 
+## 2026-03-02
+
+* v15.2.1-1.1 prepared
+* 2a7c101 package.json bump helper
+
 ## 2026-02-27
 
+* 0593581 CHANGELOG update
 * 7484e30 extras add 15.2.rel1
 * e649f3f website: update folder hierarchies
 * 192a210 application.sh: enable multilib
 * 21a57cb development-durations update
-* 454dfa0 prepare v15.2.1-1.1 
+* 454dfa0 prepare v15.2.1-1.1
 
 ## 2026-02-26
 
