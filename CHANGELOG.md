@@ -2,9 +2,16 @@
 
 Entries in this file are in reverse chronological order.
 
+## 2026-03-03
+
+* v15.2.1-1.1 released
+* e143412 website: update actions durations
+
 ## 2026-03-02
 
-* v15.2.1-1.1 prepared
+* e6e900a with multi-lib
+* bcf9064 application.sh: disable multilib
+* 58e4074 prepare v15.2.1-1.1
 * 2a7c101 package.json bump helper
 
 ## 2026-02-27
