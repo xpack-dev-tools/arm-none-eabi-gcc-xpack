@@ -1,0 +1,556 @@
+---
+
+title: xPack GNU Arm Embedded GCC v15.2.1-1.1 released
+seo_title: Version 15.2.1-1.1 released
+description: Version 15.2.1-1.1 is a new release.
+keywords:
+  - xpack
+  - arm-none-eabi-gcc
+  - release
+
+date: 2026-03-03 09:31:00 +0200
+
+authors: ilg-ul
+
+# To be listed in the Releases page.
+tags:
+  - releases
+
+# ----- Custom properties -----------------------------------------------------
+
+arm_version: "15.2.Rel1"
+arm_date: "17 Dec 2025"
+
+gcc_version: "15.2.1"
+binutils_version: "2.45"
+gdb_version: "16.3"
+newlib_version: "4.5.0"
+python_version: "3.13.12"
+
+version: "15.2.1-1.1"
+npm_subversion: "1"
+
+download_url: https://github.com/xpack-dev-tools/arm-none-eabi-gcc-xpack/releases/tag/v15.2.1-1.1/
+
+---
+
+import {PageMetadata} from '@docusaurus/theme-common';
+import Image from '@theme/IdealImage';
+import CodeBlock from '@theme/CodeBlock';
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+
+import customField from '@site/src/libs/customField';
+
+import Prerequisites from './_common/_prerequisites-glib-2.28.mdx';
+import DeprecationNotices from './_common/_deprecation-notices-glib-2.28.mdx';
+import DownloadAnalytics from './_common/_download-analytics.mdx';
+
+Version **15.2.1-1.1.1** is a new release; it follows the Arm release.
+
+<!-- truncate -->
+
+<PageMetadata title={frontMatter.seo_title} />
+
+The [xPack GNU Arm Embedded GCC](https://xpack-dev-tools.github.io/arm-none-eabi-gcc-xpack/)
+is a standalone cross-platform binary distribution of
+[Arm GNU Toolchain](https://developer.arm.com/Tools%20and%20Software/GNU%20Toolchain).
+
+There are separate binaries for **Windows** (x64),
+**macOS** (x64 and arm64)
+and **GNU/Linux** (x64 and arm64).
+
+:::note Raspberry Pi
+
+The main targets for the GNU/Linux Arm
+binaries are the **Raspberry Pi** class devices (aarch64 only;
+armv6 and armv7l are no longer supported).
+
+:::
+
+## Download
+
+The binary files are available from <a href={frontMatter.download_url}>GitHub Releases</a>.
+
+<Prerequisites/>
+
+## Install
+
+The easiest way to install this specific version, is by using **xpm**:
+
+<CodeBlock language="console"> {
+`xpm install @xpack-dev-tools/arm-none-eabi-gcc@${frontMatter.version}.${frontMatter.npm_subversion} -verbose
+`} </CodeBlock>
+
+Comprehensive instructions for installing **xPack xPack GNU Arm Embedded GCC** on different platforms
+can be found in the [Install Guide](/docs/install/).
+
+## Compliance
+
+The **xPack GNU Arm Embedded GCC** is based on the official
+[Arm GNU Toolchain](https://developer.arm.com/tools-and-software/open-source-software/developer-tools/gnu-toolchain/downloads/)
+releases.
+
+The current version is based on:
+
+- [Arm GNU Toolchain](https://developer.arm.com/downloads/-/arm-gnu-toolchain-downloads/)
+release **{frontMatter.arm_version}** from {frontMatter.arm_date}
+and uses the same sources. It includes:
+  - GCC {frontMatter.gcc_version}
+  - binutils {frontMatter.binutils_version}
+  - newlib {frontMatter.newlib_version}
+  - GDB {frontMatter.gdb_version}
+  - Python {frontMatter.python_version}
+
+## Supported libraries
+
+The supported libraries are:
+
+```console
+$ arm-none-eabi-gcc -print-multi-lib
+.;
+arm/v5te/softfp;@marm@march=armv5te+fp@mfloat-abi=softfp
+arm/v5te/hard;@marm@march=armv5te+fp@mfloat-abi=hard
+thumb/nofp;@mthumb@mfloat-abi=soft
+thumb/v7/nofp;@mthumb@march=armv7@mfloat-abi=soft
+thumb/v7+fp/softfp;@mthumb@march=armv7+fp@mfloat-abi=softfp
+thumb/v7+fp/hard;@mthumb@march=armv7+fp@mfloat-abi=hard
+thumb/v7-r+fp.sp/softfp;@mthumb@march=armv7-r+fp.sp@mfloat-abi=softfp
+thumb/v7-r+fp.sp/hard;@mthumb@march=armv7-r+fp.sp@mfloat-abi=hard
+thumb/v7-a/nofp;@mthumb@march=armv7-a@mfloat-abi=soft
+thumb/v7-a+fp/softfp;@mthumb@march=armv7-a+fp@mfloat-abi=softfp
+thumb/v7-a+fp/hard;@mthumb@march=armv7-a+fp@mfloat-abi=hard
+thumb/v7-a+simd/softfp;@mthumb@march=armv7-a+simd@mfloat-abi=softfp
+thumb/v7-a+simd/hard;@mthumb@march=armv7-a+simd@mfloat-abi=hard
+thumb/v7ve+simd/softfp;@mthumb@march=armv7ve+simd@mfloat-abi=softfp
+thumb/v7ve+simd/hard;@mthumb@march=armv7ve+simd@mfloat-abi=hard
+thumb/v8-a/nofp;@mthumb@march=armv8-a@mfloat-abi=soft
+thumb/v8-a+simd/softfp;@mthumb@march=armv8-a+simd@mfloat-abi=softfp
+thumb/v8-a+simd/hard;@mthumb@march=armv8-a+simd@mfloat-abi=hard
+thumb/v6-m/nofp;@mthumb@march=armv6s-m@mfloat-abi=soft
+thumb/v7-m/nofp;@mthumb@march=armv7-m@mfloat-abi=soft
+thumb/v7e-m/nofp;@mthumb@march=armv7e-m@mfloat-abi=soft
+thumb/v7e-m+fp/softfp;@mthumb@march=armv7e-m+fp@mfloat-abi=softfp
+thumb/v7e-m+fp/hard;@mthumb@march=armv7e-m+fp@mfloat-abi=hard
+thumb/v7e-m+dp/softfp;@mthumb@march=armv7e-m+fp.dp@mfloat-abi=softfp
+thumb/v7e-m+dp/hard;@mthumb@march=armv7e-m+fp.dp@mfloat-abi=hard
+thumb/v8-m.base/nofp;@mthumb@march=armv8-m.base@mfloat-abi=soft
+thumb/v8-m.main/nofp;@mthumb@march=armv8-m.main@mfloat-abi=soft
+thumb/v8-m.main+fp/softfp;@mthumb@march=armv8-m.main+fp@mfloat-abi=softfp
+thumb/v8-m.main+fp/hard;@mthumb@march=armv8-m.main+fp@mfloat-abi=hard
+thumb/v8-m.main+dp/softfp;@mthumb@march=armv8-m.main+fp.dp@mfloat-abi=softfp
+thumb/v8-m.main+dp/hard;@mthumb@march=armv8-m.main+fp.dp@mfloat-abi=hard
+thumb/v8.1-m.main+mve/hard;@mthumb@march=armv8.1-m.main+mve@mfloat-abi=hard
+thumb/v8.1-m.main+pacbti/bp/nofp;@mthumb@march=armv8.1-m.main+pacbti@mbranch-protection=standard@mfloat-abi=soft
+thumb/v8.1-m.main+pacbti+fp/bp/softfp;@mthumb@march=armv8.1-m.main+pacbti+fp@mbranch-protection=standard@mfloat-abi=softfp
+thumb/v8.1-m.main+pacbti+fp/bp/hard;@mthumb@march=armv8.1-m.main+pacbti+fp@mbranch-protection=standard@mfloat-abi=hard
+thumb/v8.1-m.main+pacbti+dp/bp/softfp;@mthumb@march=armv8.1-m.main+pacbti+fp.dp@mbranch-protection=standard@mfloat-abi=softfp
+thumb/v8.1-m.main+pacbti+dp/bp/hard;@mthumb@march=armv8.1-m.main+pacbti+fp.dp@mbranch-protection=standard@mfloat-abi=hard
+thumb/v8.1-m.main+pacbti+mve/bp/hard;@mthumb@march=armv8.1-m.main+pacbti+mve@mbranch-protection=standard@mfloat-abi=hard
+```
+
+## Changes
+
+Compared to the official Arm version, there should be no functional changes.
+
+## Bug fixes
+
+- none
+
+## Enhancements
+
+- none
+
+## Known problems
+
+- none
+
+## Documentation
+
+The original GNU Arm Embedded GCC documentation is available from the
+[GCC online documentation](https://gcc.gnu.org/onlinedocs/) web site.
+
+## Build
+
+The binaries for all supported platforms
+(Windows, macOS and GNU/Linux) were built using the
+[xPack Build Box (XBB)](https://xpack.github.io/xbb/), a set
+of build environments based on slightly older distributions, that should be
+compatible with most recent systems.
+
+For the prerequisites and more details on the build procedure, please see the
+[Maintainer Info](/docs/maintainer/) page.
+
+## CI tests
+
+Before publishing, a set of simple tests were performed on an exhaustive
+set of platforms. The results are available from:
+
+- [GitHub Actions](https://github.com/xpack-dev-tools/arm-none-eabi-gcc-xpack/actions/)
+
+## Tests
+
+The binaries were tested on a variety of platforms,
+but mainly to check the integrity of the
+build, not the compiler functionality.
+
+## Checksums
+
+The SHA-256 hashes for the files are:
+
+```txt
+574082d35e49a2bcbdc355836b2a3ae5e5bb3b9456c9f5e37177db2ab4aad870
+xpack-arm-none-eabi-gcc-15.2.1-1.1-darwin-arm64.tar.gz
+
+5be906a5194c3173e145a58048e5607ffff947773237802b93e55e23c415f1b6
+xpack-arm-none-eabi-gcc-15.2.1-1.1-darwin-x64.tar.gz
+
+67980c7990eba7bb7ffdf39699102effd70889f5ac427be19a8c8a6c5fab2972
+xpack-arm-none-eabi-gcc-15.2.1-1.1-linux-arm64.tar.gz
+
+da6a49ad4003944b823c6c93702a8787c922ab34bd7e918ec0eaf6933a9b1ff6
+xpack-arm-none-eabi-gcc-15.2.1-1.1-linux-x64.tar.gz
+
+bae6a3d1667697ce750c3b13d6d26d80973ecedc2cc87bf04869e83447fd93ea
+xpack-arm-none-eabi-gcc-15.2.1-1.1-win32-x64.zip
+
+```
+
+## Folders hierarchy
+
+After install, the package creates a hierarchy of folders like the following
+(only the first two depth levels are shown):
+
+<Tabs groupId="operating-systems">
+
+<TabItem value="windows" label="Windows" default>
+
+<CodeBlock language="console"> {
+`C:\> tree /f %USERPROFILE%\\AppData\\Roaming\\xPacks\\@xpack-dev-tools\\arm-none-eabi-gcc\\${frontMatter.version}.${frontMatter.npm_subversion}\\.content
+Folder PATH listing
+Volume serial number is B02D-925C
+├── README.md
+├── arm-none-eabi
+│   ├── bin
+│   ├── include
+│   ├── lib
+│   └── share
+├── bin
+│   ├── DLLs
+│   ├── arm-none-eabi-addr2line.exe
+│   ├── arm-none-eabi-ar.exe
+│   ├── arm-none-eabi-as.exe
+│   ├── arm-none-eabi-c++.exe
+│   ├── arm-none-eabi-c++filt.exe
+│   ├── arm-none-eabi-cpp.exe
+│   ├── arm-none-eabi-dwp.exe
+│   ├── arm-none-eabi-elfedit.exe
+│   ├── arm-none-eabi-g++.exe
+│   ├── arm-none-eabi-gcc-${customField('upstreamVersion')}.exe
+│   ├── arm-none-eabi-gcc-ar.exe
+│   ├── arm-none-eabi-gcc-nm.exe
+│   ├── arm-none-eabi-gcc-ranlib.exe
+│   ├── arm-none-eabi-gcc.exe
+│   ├── arm-none-eabi-gcov-dump.exe
+│   ├── arm-none-eabi-gcov-tool.exe
+│   ├── arm-none-eabi-gcov.exe
+│   ├── arm-none-eabi-gdb-add-index
+│   ├── arm-none-eabi-gdb-add-index-py3
+│   ├── arm-none-eabi-gdb-py3.exe
+│   ├── arm-none-eabi-gdb.exe
+│   ├── arm-none-eabi-gfortran.exe
+│   ├── arm-none-eabi-gprof.exe
+│   ├── arm-none-eabi-gstack
+│   ├── arm-none-eabi-gstack-py3
+│   ├── arm-none-eabi-ld.bfd.exe
+│   ├── arm-none-eabi-ld.exe
+│   ├── arm-none-eabi-ld.gold.exe
+│   ├── arm-none-eabi-lto-dump.exe
+│   ├── arm-none-eabi-nm.exe
+│   ├── arm-none-eabi-objcopy.exe
+│   ├── arm-none-eabi-objdump.exe
+│   ├── arm-none-eabi-ranlib.exe
+│   ├── arm-none-eabi-readelf.exe
+│   ├── arm-none-eabi-size.exe
+│   ├── arm-none-eabi-strings.exe
+│   ├── arm-none-eabi-strip.exe
+│   ├── libgcc_s_seh-1.dll
+│   ├── libgmp-10.dll
+│   ├── libmpc-3.dll
+│   ├── libmpfr-4.dll
+│   ├── libncursesw6.dll
+│   ├── libstdc++-6.dll
+│   ├── libzstd.dll
+│   ├── python313.dll
+│   └── python313.zip
+├── distro-info
+│   └── licenses
+├── include
+│   ├── gdb
+│   ├── gmp.h
+│   ├── gmpxx.h
+│   ├── iconv.h
+│   ├── isl
+│   ├── libcharset.h
+│   ├── localcharset.h
+│   ├── lzma
+│   ├── lzma.h
+│   ├── mpc.h
+│   ├── mpf2mpfr.h
+│   ├── mpfr.h
+│   ├── ncursesw
+│   ├── zconf.h
+│   ├── zdict.h
+│   ├── zlib.h
+│   ├── zstd.h
+│   └── zstd_errors.h
+├── lib
+│   ├── bfd-plugins
+│   ├── charset.alias
+│   ├── cmake
+│   ├── gcc
+│   ├── libcharset.a
+│   ├── libformw.a
+│   ├── libgmp.a
+│   ├── libgmpxx.a
+│   ├── libiconv.a
+│   ├── libisl.a
+│   ├── libisl.so.15.0.0-gdb.py
+│   ├── liblzma.a
+│   ├── libmenuw.a
+│   ├── libmpc.a
+│   ├── libmpfr.a
+│   ├── libncurses++w.a
+│   ├── libncursesw.a
+│   ├── libpanelw.a
+│   ├── libz.a
+│   ├── libzstd.a
+│   ├── libzstd.so.1.5.7
+│   ├── pkgconfig
+│   ├── preloadable_libiconv.so
+│   └── texi2any
+├── libexec
+│   └── gcc
+└── share
+    ├── doc
+    ├── gcc-${customField('upstreamVersion')}
+    ├── info
+    ├── man
+    ├── texi2any
+    └── texinfo
+
+29 directories, 80 files
+`} </CodeBlock>
+
+</TabItem>
+
+<TabItem value="macos" label="macOS">
+
+<CodeBlock language="console"> {
+`$ tree -L 2 ~/Library/xPacks/\@xpack-dev-tools/arm-none-eabi-gcc/${frontMatter.version}.${frontMatter.npm_subversion}/.content/
+/Users/ilg/Library/xPacks/\@xpack-dev-tools/arm-none-eabi-gcc/${frontMatter.version}.${frontMatter.npm_subversion}/.content/
+├── README.md
+├── arm-none-eabi
+│   ├── bin
+│   ├── include
+│   ├── lib
+│   └── share
+├── bin
+│   ├── arm-none-eabi-addr2line
+│   ├── arm-none-eabi-ar
+│   ├── arm-none-eabi-as
+│   ├── arm-none-eabi-c++
+│   ├── arm-none-eabi-c++filt
+│   ├── arm-none-eabi-cpp
+│   ├── arm-none-eabi-dwp
+│   ├── arm-none-eabi-elfedit
+│   ├── arm-none-eabi-g++
+│   ├── arm-none-eabi-gcc
+│   ├── arm-none-eabi-gcc-${customField('upstreamVersion')}
+│   ├── arm-none-eabi-gcc-ar
+│   ├── arm-none-eabi-gcc-nm
+│   ├── arm-none-eabi-gcc-ranlib
+│   ├── arm-none-eabi-gcov
+│   ├── arm-none-eabi-gcov-dump
+│   ├── arm-none-eabi-gcov-tool
+│   ├── arm-none-eabi-gdb
+│   ├── arm-none-eabi-gdb-add-index
+│   ├── arm-none-eabi-gdb-add-index-py3
+│   ├── arm-none-eabi-gdb-py3
+│   ├── arm-none-eabi-gfortran
+│   ├── arm-none-eabi-gprof
+│   ├── arm-none-eabi-gstack
+│   ├── arm-none-eabi-gstack-py3
+│   ├── arm-none-eabi-ld
+│   ├── arm-none-eabi-ld.bfd
+│   ├── arm-none-eabi-ld.gold
+│   ├── arm-none-eabi-lto-dump
+│   ├── arm-none-eabi-nm
+│   ├── arm-none-eabi-objcopy
+│   ├── arm-none-eabi-objdump
+│   ├── arm-none-eabi-ranlib
+│   ├── arm-none-eabi-readelf
+│   ├── arm-none-eabi-size
+│   ├── arm-none-eabi-strings
+│   └── arm-none-eabi-strip
+├── distro-info
+│   └── licenses
+├── include
+│   └── gdb
+├── lib
+│   ├── bfd-plugins
+│   ├── gcc
+│   ├── libcc1.0.so
+│   ├── libcc1.so -> libcc1.0.so
+│   └── python3.13
+├── libexec
+│   ├── gcc
+│   ├── libbz2.1.0.8.dylib
+│   ├── libc++.1.0.dylib
+│   ├── libc++abi.1.0.dylib
+│   ├── libcrypto.3.dylib
+│   ├── libexpat.1.10.2.dylib
+│   ├── libexpat.1.dylib -> libexpat.1.10.2.dylib
+│   ├── libffi.8.dylib
+│   ├── libgmp.10.dylib
+│   ├── libiconv.2.dylib
+│   ├── libisl.15.dylib
+│   ├── liblzma.5.dylib
+│   ├── libmpc.3.dylib
+│   ├── libmpdec.2.5.1.dylib
+│   ├── libmpfr.4.dylib
+│   ├── libncursesw.6.dylib
+│   ├── libpanelw.6.dylib
+│   ├── libpython3.13.dylib
+│   ├── libreadline.8.3.dylib
+│   ├── libreadline.8.dylib -> libreadline.8.3.dylib
+│   ├── libsqlite3.3.51.2.dylib
+│   ├── libsqlite3.dylib -> libsqlite3.3.51.2.dylib
+│   ├── libssl.3.dylib
+│   ├── libunwind.1.0.dylib
+│   ├── libz.1.3.2.dylib
+│   ├── libz.1.dylib -> libz.1.3.2.dylib
+│   ├── libzstd.1.5.7.dylib
+│   └── libzstd.1.dylib -> libzstd.1.5.7.dylib
+└── share
+    └── gcc-${customField('upstreamVersion')}
+
+19 directories, 67 files
+`} </CodeBlock>
+
+</TabItem>
+
+<TabItem value="linux" label="GNU/Linux">
+
+<CodeBlock language="console"> {
+`$ tree -L 2 ~/.local/xPacks/\@xpack-dev-tools/arm-none-eabi-gcc/${frontMatter.version}.${frontMatter.npm_subversion}/.content/
+/home/ilg/.local/xPacks/\@xpack-dev-tools/arm-none-eabi-gcc/${frontMatter.version}.${frontMatter.npm_subversion}/.content/
+├── README.md
+├── arm-none-eabi
+│   ├── bin
+│   ├── include
+│   ├── lib
+│   └── share
+├── bin
+│   ├── arm-none-eabi-addr2line
+│   ├── arm-none-eabi-ar
+│   ├── arm-none-eabi-as
+│   ├── arm-none-eabi-c++
+│   ├── arm-none-eabi-c++filt
+│   ├── arm-none-eabi-cpp
+│   ├── arm-none-eabi-dwp
+│   ├── arm-none-eabi-elfedit
+│   ├── arm-none-eabi-g++
+│   ├── arm-none-eabi-gcc
+│   ├── arm-none-eabi-gcc-${customField('upstreamVersion')}
+│   ├── arm-none-eabi-gcc-ar
+│   ├── arm-none-eabi-gcc-nm
+│   ├── arm-none-eabi-gcc-ranlib
+│   ├── arm-none-eabi-gcov
+│   ├── arm-none-eabi-gcov-dump
+│   ├── arm-none-eabi-gcov-tool
+│   ├── arm-none-eabi-gdb
+│   ├── arm-none-eabi-gdb-add-index
+│   ├── arm-none-eabi-gdb-add-index-py3
+│   ├── arm-none-eabi-gdb-py3
+│   ├── arm-none-eabi-gfortran
+│   ├── arm-none-eabi-gprof
+│   ├── arm-none-eabi-gstack
+│   ├── arm-none-eabi-gstack-py3
+│   ├── arm-none-eabi-ld
+│   ├── arm-none-eabi-ld.bfd
+│   ├── arm-none-eabi-ld.gold
+│   ├── arm-none-eabi-lto-dump
+│   ├── arm-none-eabi-nm
+│   ├── arm-none-eabi-objcopy
+│   ├── arm-none-eabi-objdump
+│   ├── arm-none-eabi-ranlib
+│   ├── arm-none-eabi-readelf
+│   ├── arm-none-eabi-size
+│   ├── arm-none-eabi-strings
+│   └── arm-none-eabi-strip
+├── distro-info
+│   └── licenses
+├── include
+│   └── gdb
+├── lib
+│   ├── bfd-plugins
+│   ├── gcc
+│   └── python3.13
+├── lib64
+│   ├── libcc1.so -> libcc1.so.0.0.0
+│   ├── libcc1.so.0 -> libcc1.so.0.0.0
+│   └── libcc1.so.0.0.0
+├── libexec
+│   ├── gcc
+│   ├── libcrypto.so.3
+│   ├── libexpat.so.1 -> libexpat.so.1.10.2
+│   ├── libexpat.so.1.10.2
+│   ├── libffi.so.8 -> libffi.so.8.2.0
+│   ├── libffi.so.8.2.0
+│   ├── libfl.so.2 -> libfl.so.2.0.0
+│   ├── libfl.so.2.0.0
+│   ├── libgcc_s.so.1
+│   ├── libgmp.so.10 -> libgmp.so.10.4.1
+│   ├── libgmp.so.10.4.1
+│   ├── libiconv.so.2 -> libiconv.so.2.6.0
+│   ├── libiconv.so.2.6.0
+│   ├── libisl.so.15 -> libisl.so.15.0.0
+│   ├── libisl.so.15.0.0
+│   ├── liblzma.so.5 -> liblzma.so.5.8.2
+│   ├── liblzma.so.5.8.2
+│   ├── libmpc.so.3 -> libmpc.so.3.0.0
+│   ├── libmpc.so.3.0.0
+│   ├── libmpdec.so.2.5.1
+│   ├── libmpdec.so.3 -> libmpdec.so.2.5.1
+│   ├── libmpfr.so.4 -> libmpfr.so.4.1.6
+│   ├── libmpfr.so.4.1.6
+│   ├── libncursesw.so.6 -> libncursesw.so.6.6
+│   ├── libncursesw.so.6.6
+│   ├── libpanelw.so.6 -> libpanelw.so.6.6
+│   ├── libpanelw.so.6.6
+│   ├── libpython3.13.so.1.0
+│   ├── libreadline.so.8 -> libreadline.so.8.3
+│   ├── libreadline.so.8.3
+│   ├── libsqlite3.so -> libsqlite3.so.3.51.2
+│   ├── libsqlite3.so.3.51.2
+│   ├── libssl.so.3
+│   ├── libstdc++.so.6 -> libstdc++.so.6.0.34
+│   ├── libstdc++.so.6.0.34
+│   ├── libz.so.1 -> libz.so.1.3.2
+│   ├── libz.so.1.3.2
+│   ├── libzstd.so.1 -> libzstd.so.1.5.7
+│   └── libzstd.so.1.5.7
+└── share
+    └── gcc-${customField('upstreamVersion')}
+
+19 directories, 79 files
+`} </CodeBlock>
+
+</TabItem>
+
+</Tabs>
+
+<DeprecationNotices/>
+
+<DownloadAnalytics version={frontMatter.version}/>
