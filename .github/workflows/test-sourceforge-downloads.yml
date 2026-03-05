@@ -57,6 +57,8 @@ jobs:
 
           # 2025
           platforms="win32-x64,linux-x64,linux-arm64,darwin-x64,darwin-arm64"
+          
+          download_sourceforge "${name}" "15.2.1-1.1" ${threshold} "${platforms}"
 
           # 2024-2022
           platforms="win32-x64,linux-x64,linux-arm64,linux-arm,darwin-x64,darwin-arm64"
