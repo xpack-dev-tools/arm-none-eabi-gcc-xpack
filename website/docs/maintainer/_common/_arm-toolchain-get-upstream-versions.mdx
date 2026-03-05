@@ -1,0 +1,33 @@
+{/* DO NOT EDIT! */}
+{/* Automatically generated from docusaurus-template-liquid/templates/docusaurus. */}
+
+import versionMajor from '@site/src/libs/versionMajor';
+import versionMinor from '@site/src/libs/versionMinor';
+
+{/* ------------------------------------------------------------------------ */}
+
+### Update to the latest Arm release
+
+- Download the new _Source code_ archive (such as
+<code>arm-gnu-toolchain-src-snapshot-{versionMajor()}.{versionMinor()}.rel1.tar.xz</code>) from
+[Arm GNU Toolchain Downloads](https://developer.arm.com/downloads/-/arm-gnu-toolchain-downloads/)
+- Unpack the archive
+- The GCC version is within `gcc/gcc/BASE-VER`
+- The binutils version is within `binutils-gdb/bfd/version.m4`
+- The GDB version is within `binutils-gdb--gdb/gdb/version.in`
+- The newlib version is within `newlib-cygwin/newlib/configure`; search for `VERSION=`
+- Download the latest **macOS (x86_64) hosted cross toolchains** archive (such as
+<code>arm-gnu-toolchain-{versionMajor()}.{versionMinor()}.rel1-darwin-arm64-arm-none-eabi.tar.xz</code>)
+- Unpack the archive
+- Create a folder <code>build-assets/extras/{versionMajor()}.{versionMinor()}.rel1</code>
+- Copy the file with the configurations
+(<code>{versionMajor()}.{versionMinor()}.rel1-darwin-x86_64-arm-none-eabi-manifest.txt</code>) to the new folder within extras
+- Download the manifest.txt with the individual source URLs
+(<code>arm-gnu-toolchain-src-snapshot-{versionMajor()}.{versionMinor()}.rel1-manifest.txt</code>)
+- Copy to the new folder within extras
+
+:::info
+
+Starting with 14.2.Rel1, there is a link to a [README](https://gitlab.arm.com/tooling/gnu-devtools-for-arm/-/blob/main/README.md) explaining the new build scripts.
+
+:::
