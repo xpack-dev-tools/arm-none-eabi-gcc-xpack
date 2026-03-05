@@ -70,7 +70,7 @@ jobs:
   linux-arm64-build:
     name: 'linux-arm64 arm-none-eabi-gcc ${{github.event.inputs.version}} build'
     timeout-minutes: 2880 # 2 days
-    runs-on: [self-hosted, linux, arm64, xbbla, xbblax]
+    runs-on: [self-hosted, linux, arm64, xbbla]
     defaults:
       run:
         shell: bash
