@@ -255,11 +255,11 @@ caffeinate ssh xbbli
 
 ### Build the ARM64 GNU/Linux binaries
 
-Execute the Docker build on the production machine (`berry5`);
+Execute the Docker build on the production machine (`ampere`);
 start a VS Code remote session, or connect with a terminal:
 
 ```sh
-caffeinate ssh berry5
+caffeinate ssh ampere
 ```
 
 <CommonPlatformDockerBuild platform="linux-arm64"/>
@@ -355,13 +355,13 @@ is available in the `xbb-helper` and
 requires `GITHUB_API_XPACK_DEV_TOOLS_RUNNERS_TOKEN` to be present.
 
 - On the development machine (`wksi`) open
-SSH sessions to the build machines (`xbbli`, `xbbmi`, `xbbma`, `berry5`):
+SSH sessions to the build machines (`xbbli`, `xbbmi`, `xbbma`, `ampere`):
 
 ```sh
 caffeinate ssh xbbli
 caffeinate ssh xbbmi
 caffeinate ssh xbbma
-caffeinate ssh berry5
+caffeinate ssh ampere
 ```
 
 Create a `screen` session, to provide a persistent standard output for
@@ -373,7 +373,7 @@ screen -S ga
 
 To exit it, use `# Ctrl-a Ctrl-d`.
 
-For `xbbli` & `berry5`, which have additional memory, start two runners:
+For `xbbli`, which has additional memory, and can run multiple jobs in parallel, start two runners:
 
 ```sh
 ~/actions-runners/xpack-dev-tools/1/run.sh &
@@ -676,9 +676,9 @@ The test results are available from the
 
 - https://sourceforge.net/projects/arm-none-eabi-gcc-xpack/files/
 
-### Add new entry in the SourceForge download test
+### Add a new entry in the SourceForge download test
 
-Edit the `.github/workflows/test-ai=ourceforge-downloads.yml` file
+Edit the `.github/workflows/test-sourceforge-downloads.yml` file
 and add one or more entries for the new release(s).
 
 ## Clean-ups
