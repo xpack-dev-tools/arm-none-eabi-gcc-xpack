@@ -13,15 +13,16 @@ The website deployment is performed automatically when pushing to the
 - **Stop** the local web server
 - Switch to the `website` branch
 - run the `npm install` command, to ensure `package-lock.json` is up to date
-- **Merge** the `xpack-development` branch into the `website` branch
+- **Rebase** the `xpack-development` branch onto the `website` branch
 - **Push** the `website` branch to GitHub
   :::info
   At this point, an automated forwarding GitHub Action will trigger 
   a GitHub Action in the separate project to generate and publish 
-  the [website]https://xpack-dev-tools.github.io/arm-none-eabi-gcc-xpack/.
+  the [website](https://xpack-dev-tools.github.io/arm-none-eabi-gcc-xpack/).
   :::
 - Check out the `xpack-development` branch
-- **Wait** for the publication to complete
+- **Wait** for the publication to complete 
+- check [GitHub Pages](https://github.com/xpack-dev-tools/arm-none-eabi-gcc-xpack/actions/workflows/publish-github-pages.yml) workflow
 - **Refresh** the web page
 - The new release blog post is available
 at https://xpack-dev-tools.github.io/arm-none-eabi-gcc-xpack/blog/

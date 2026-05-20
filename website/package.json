@@ -33,12 +33,12 @@
   },
   "license": "MIT",
   "dependencies": {
-    "@docusaurus/core": "3.9.2",
-    "@docusaurus/faster": "3.9.2",
-    "@docusaurus/plugin-client-redirects": "3.9.2",
-    "@docusaurus/plugin-ideal-image": "3.9.2",
-    "@docusaurus/preset-classic": "3.9.2",
-    "@docusaurus/theme-search-algolia": "3.9.2",
+    "@docusaurus/core": "3.10.1",
+    "@docusaurus/faster": "3.10.1",
+    "@docusaurus/plugin-client-redirects": "3.10.1",
+    "@docusaurus/plugin-ideal-image": "3.10.1",
+    "@docusaurus/preset-classic": "3.10.1",
+    "@docusaurus/theme-search-algolia": "3.10.1",
     "@mdx-js/react": "^3.1.1",
     "clean-css": "~5.3.3",
     "clsx": "^2.0.0",
@@ -46,23 +46,23 @@
     "react": "^19.2.3",
     "react-dom": "^19.2.3"
   },
+  "$dependenciesUrls": {
+    "del-cli": "https://www.npmjs.com/package/del-cli",
+    "json": "https://www.npmjs.com/package/json",
+    "liquidjs": "https://www.npmjs.com/package/liquidjs",
+    "typescript": "https://www.npmjs.com/package/typescript"
+  },
   "devDependencies": {
-    "@docusaurus/module-type-aliases": "3.9.2",
-    "@docusaurus/tsconfig": "3.9.2",
-    "@docusaurus/types": "3.9.2",
+    "@docusaurus/module-type-aliases": "3.10.1",
+    "@docusaurus/tsconfig": "3.10.1",
+    "@docusaurus/types": "3.10.1",
     "del-cli": "^7.0.0",
     "json": "^11.0.0",
-    "liquidjs": "^10.24.0",
+    "liquidjs": "^10.25.0",
     "typescript": "~5.9.3",
     "@xpack/docusaurus-template-liquid": "github:xpack/docusaurus-template-liquid",
     "@xpack/npm-packages-helper": "github:xpack/npm-packages-helper"
   },
-  "$devDependenciesUrls": [
-    "https://www.npmjs.com/package/del-cli",
-    "https://www.npmjs.com/package/json",
-    "https://www.npmjs.com/package/liquidjs",
-    "https://www.npmjs.com/package/typescript"
-  ],
   "browserslist": {
     "production": [
       ">0.5%",
@@ -75,7 +75,7 @@
       "last 5 safari version"
     ]
   },
-  "websiteConfig": {
+  "_websiteConfig": {
     "programName": "arm-none-eabi-gcc",
     "branding": "arm-none-eabi-gcc (xPack GNU Arm Embedded GCC x86_64) ",
     "isGccToolchain": "true",

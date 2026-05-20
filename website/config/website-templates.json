@@ -1,0 +1,18 @@
+{
+  "armMajorMinorRelease": "15.2",
+  "armReleaseDate": "17 Dec 2025",
+  "armSubRelease": "1",
+  "binutilsVersionMajor": "2",
+  "binutilsVersionMinor": "45",
+  "branding": "arm-none-eabi-gcc (xPack GNU Arm Embedded GCC x86_64) ",
+  "gdbVersionMajor": "16",
+  "gdbVersionMinor": "3",
+  "newlibVersion": "4.5.0",
+  "programName": "arm-none-eabi-gcc",
+  "pythonVersion": "3.13.12",
+  "triplet": "arm-none-eabi",
+  "isArmToolchain": true,
+  "isGccToolchain": true,
+  "shareOnTwitter": true,
+  "showDeprecatedGnuMcuAnalytics": true
+}

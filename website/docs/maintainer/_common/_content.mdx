@@ -118,7 +118,7 @@ update the dependencies in `build-assets/package.json`.
 Update the `build-assets/scripts/VERSION` file; the format
 is <code>15.2.1-1.1</code>.
 {isXpackSubversionDouble() ?
-'The fourth & fifth numbers are the xPack release number of this version. A sixth' :
+'The fourth and fifth numbers are the xPack release number of this version. A sixth' :
 'The fourth number is the xPack release number of this version. A fifth'} number will be added to the version in `package.json` when the package is published to the `npm` server.
 
 <CommonUpdateWebsiteConfig />
@@ -316,7 +316,7 @@ via Homebrew, and create a link to `/usr/local/bin`.
 
 Commit with the message _**website: update folder hierarchies**_
 
-### Update the list of links in top package.json
+### Update the list of links in the top `package.json`
 
 Copy and paste the complete list of links displayed at the end of the build, in
 sequence, for each platform (Windows, macOS, GNU/Linux),
@@ -337,7 +337,7 @@ and **docker-build-development-debug**).
 ### Files cache
 
 The XBB build scripts utilise a local cache such that files are downloaded only
-during the initial execution, with subsequent executions being able to utilise the cached files.
+during the initial execution, with subsequent executions utilising the cached files.
 
 However, occasionally some servers may not be available, and the builds
 may fail.
@@ -373,10 +373,10 @@ Create a `screen` session, to provide a persistent standard output for
 the runners:
 
 ```sh
-screen -S ga
+tmux new -s ga
 ```
 
-To exit it, use `# Ctrl-a Ctrl-d`.
+To exit it, use `Ctrl-b d`.
 
 For `xbbli`, which has additional memory, and can run multiple jobs in parallel, start two runners:
 
@@ -556,8 +556,12 @@ with previous runs.
 
 ### Manual tests
 
-To download the pre-released archive for the specific platform
-and execute the tests, utilise:
+Since the macOS builds were performed on more recent versions and rely on
+`MACOSX_DEPLOYMENT_TARGET`, it is recommended to also run the tests on an
+actual macOS 11 machine (like the `xbbmi11` virtual machine).
+
+To download the pre-release archive and execute the tests, utilise:
+
 
 ```sh
 git -C ~/Work/xpack-dev-tools/arm-none-eabi-gcc-xpack.git pull
@@ -610,14 +614,14 @@ with all binaries attached.
 
 :::info
 
-At this moment the system should send an email notification to all clients
+At this moment, the system should send an email notification to all clients
 watching the arm-none-eabi-gcc-xpack project.
 
 :::
 
 <CommonPrepareNewBlogPost />
 
-### Check the list of links in top package.json
+### Check the list of links in the top `package.json`
 
 - Open the top `package.json` file
 - Check if the links in the `xpack.executables` property cover the actual binaries
@@ -686,6 +690,8 @@ The test results are available from the
 Edit the `.github/workflows/test-sourceforge-downloads.yml` file
 and add one or more entries for the new release(s).
 
+Commit with the message _**test-sourceforge-downloads.yml update**_
+
 ## Clean-ups
 
 ### Remove the pre-release binaries
@@ -711,5 +717,20 @@ The results are available from the
 <CommonShareOnTwitter />
 
 <ProjectShareCustom/>
+
+### Test the released binaries at a later stage
+
+To test the released binaries at a later stage on any platform, using the stable project branch, use:
+
+```sh
+rm -rf ~/Work/xpack-dev-tools/arm-none-eabi-gcc-xpack.git && \
+mkdir -p ~/Work/xpack-dev-tools && \
+git clone \
+  https://github.com/xpack-dev-tools/arm-none-eabi-gcc-xpack.git \
+  ~/Work/xpack-dev-tools/arm-none-eabi-gcc-xpack.git && \
+npm --prefix ~/Work/xpack-dev-tools/arm-none-eabi-gcc-xpack.git/build-assets install && \
+xpm install -C ~/Work/xpack-dev-tools/arm-none-eabi-gcc-xpack.git/build-assets && \
+xpm run test-release -C ~/Work/xpack-dev-tools/arm-none-eabi-gcc-xpack.git/build-assets
+```
 
 <CommonAnalytics />
