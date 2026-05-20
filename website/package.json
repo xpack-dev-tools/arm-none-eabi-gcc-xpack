@@ -3,29 +3,6 @@
   "name": "website",
   "version": "0.0.0",
   "private": true,
-  "scripts": {
-    "generate-website-commons": "bash node_modules/@xpack/docusaurus-template-liquid/maintenance-scripts/generate-website-commons.sh --xpack-dev-tools",
-    "docusaurus": "docusaurus",
-    "start": "docusaurus start",
-    "build": "docusaurus build",
-    "swizzle": "docusaurus swizzle",
-    "deploy": "docusaurus deploy",
-    "clear": "docusaurus clear",
-    "serve": "docusaurus serve",
-    "write-translations": "docusaurus write-translations",
-    "write-heading-ids": "docusaurus write-heading-ids",
-    "generate-typedoc": "typedoc",
-    "typecheck": "tsc",
-    "npm-outdated": "npm outdated",
-    "npm-install": "npm install",
-    "npm-link-helpers": "npm link @xpack/docusaurus-template-liquid @xpack/npm-packages-helper",
-    "npm-ci": "npm ci",
-    "clean": "del-cli .docusaurus build",
-    "deep-clean": "del-cli .docusaurus build node_modules package-lock.json",
-    "import-website-releases": "bash node_modules/@xpack/docusaurus-template-liquid/maintenance-scripts/import-releases.sh --xpack-dev-tools",
-    "generate-website-blog-post": "bash node_modules/@xpack/docusaurus-template-liquid/maintenance-scripts/generate-blog-post.sh --xpack-dev-tools",
-    "generate-dependencies-details": "bash node_modules/@xpack/docusaurus-template-liquid/maintenance-scripts/generate-dependencies-details.sh --xpack-dev-tools"
-  },
   "author": {
     "name": "Liviu Ionescu",
     "email": "ilg@livius.net",
@@ -63,6 +40,29 @@
     "@xpack/docusaurus-template-liquid": "github:xpack/docusaurus-template-liquid",
     "@xpack/npm-packages-helper": "github:xpack/npm-packages-helper"
   },
+  "scripts": {
+    "generate-website-commons": "bash node_modules/@xpack/docusaurus-template-liquid/maintenance-scripts/generate-website-commons.sh --xpack-dev-tools",
+    "docusaurus": "docusaurus",
+    "start": "docusaurus start",
+    "build": "docusaurus build",
+    "swizzle": "docusaurus swizzle",
+    "deploy": "docusaurus deploy",
+    "clear": "docusaurus clear",
+    "serve": "docusaurus serve",
+    "write-translations": "docusaurus write-translations",
+    "write-heading-ids": "docusaurus write-heading-ids",
+    "generate-typedoc": "typedoc",
+    "typecheck": "tsc",
+    "npm-outdated": "npm outdated",
+    "npm-install": "npm install",
+    "npm-link-helpers": "npm link @xpack/docusaurus-template-liquid @xpack/npm-packages-helper",
+    "npm-ci": "npm ci",
+    "clean": "del-cli .docusaurus build",
+    "deep-clean": "del-cli .docusaurus build node_modules package-lock.json",
+    "import-website-releases": "bash node_modules/@xpack/docusaurus-template-liquid/maintenance-scripts/import-releases.sh --xpack-dev-tools",
+    "generate-website-blog-post": "bash node_modules/@xpack/docusaurus-template-liquid/maintenance-scripts/generate-blog-post.sh --xpack-dev-tools",
+    "generate-dependencies-details": "bash node_modules/@xpack/docusaurus-template-liquid/maintenance-scripts/generate-dependencies-details.sh --xpack-dev-tools"
+  },
   "browserslist": {
     "production": [
       ">0.5%",
@@ -74,24 +74,6 @@
       "last 3 firefox version",
       "last 5 safari version"
     ]
-  },
-  "_websiteConfig": {
-    "programName": "arm-none-eabi-gcc",
-    "branding": "arm-none-eabi-gcc (xPack GNU Arm Embedded GCC x86_64) ",
-    "isGccToolchain": "true",
-    "isArmToolchain": "true",
-    "showDeprecatedGnuMcuAnalytics": "true",
-    "triplet": "arm-none-eabi",
-    "armMajorMinorRelease": "15.2",
-    "armSubRelease": "1",
-    "armReleaseDate": "17 Dec 2025",
-    "gdbVersionMajor": "16",
-    "gdbVersionMinor": "3",
-    "binutilsVersionMajor": "2",
-    "binutilsVersionMinor": "45",
-    "pythonVersion": "3.13.12",
-    "newlibVersion": "4.5.0",
-    "shareOnTwitter": "true"
   },
   "engines": {
     "node": ">=20.0"
