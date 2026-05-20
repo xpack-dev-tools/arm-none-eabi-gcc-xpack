@@ -10,6 +10,12 @@
     "**/node_modules/*/**": true,
     "**/build/**": true
   },
+  "C_Cpp.intelliSenseExclude": {
+    "**/build-assets": true,
+    "**/website": true,
+    "**/node_modules": true,
+    "**/xpacks": true
+  },
   "markdownlint.config": {
     "MD041": false
   },

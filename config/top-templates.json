@@ -1,0 +1,8 @@
+{
+  "descriptiveName": "xPack GNU Arm Embedded GCC",
+  "permalinkName": "arm-none-eabi-gcc",
+  "preferredName": "xPack GNU Arm Embedded GCC",
+  "upstreamDescriptiveName": "GNU Arm Embedded GCC",
+  "skipCiTests": true,
+  "useSelfHostedRunners": true
+}

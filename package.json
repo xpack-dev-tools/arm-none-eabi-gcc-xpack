@@ -2,17 +2,6 @@
   "name": "@xpack-dev-tools/arm-none-eabi-gcc",
   "version": "15.2.1-1.1.1",
   "description": "A binary xpm package with the GNU Arm Embedded GCC toolchain executables",
-  "main": "",
-  "scripts": {
-    "generate-top-commons": "bash node_modules/@xpack/npm-packages-helper/maintenance-scripts/generate-top-commons.sh --xpack-dev-tools",
-    "npm-install": "npm install",
-    "npm-link-helpers": "npm link @xpack/npm-packages-helper @xpack/docusaurus-template-liquid",
-    "npm-outdated": "npm outdated",
-    "npm-pack": "npm pack",
-    "npm-link": "npm link",
-    "deep-clean": "del-cli node_modules package-lock.json *.tgz",
-    "postversion": "git push origin --all && git push origin --tags"
-  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/xpack-dev-tools/arm-none-eabi-gcc-xpack.git"
@@ -102,12 +91,27 @@
       "arm-none-eabi-strip": "./.content/bin/arm-none-eabi-strip"
     }
   },
+  "$dependenciesUrls": {
+    "del-cli": "https://www.npmjs.com/package/del-cli",
+    "json": "https://www.npmjs.com/package/json",
+    "liquidjs": "https://www.npmjs.com/package/liquidjs"
+  },
   "devDependencies": {
     "del-cli": "^7.0.0",
     "json": "^11.0.0",
-    "liquidjs": "^10.23.0"
+    "liquidjs": "^10.27.0"
   },
-  "topConfig": {
+  "scripts": {
+    "generate-top-commons": "bash node_modules/@xpack/npm-packages-helper/maintenance-scripts/generate-top-commons.sh --xpack-dev-tools",
+    "npm-install": "npm install",
+    "npm-link-helpers": "npm link @xpack/npm-packages-helper @xpack/docusaurus-template-liquid",
+    "npm-outdated": "npm outdated",
+    "npm-pack": "npm pack",
+    "npm-link": "npm link",
+    "deep-clean": "del-cli node_modules package-lock.json *.tgz",
+    "postversion": "git push origin --all && git push origin --tags"
+  },
+  "_topConfig": {
     "descriptiveName": "xPack GNU Arm Embedded GCC",
     "upstreamDescriptiveName": "GNU Arm Embedded GCC",
     "permalinkName": "arm-none-eabi-gcc",
